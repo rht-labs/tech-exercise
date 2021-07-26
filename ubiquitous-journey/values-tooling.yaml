@@ -7,26 +7,26 @@ applications:
     source_ref: "0.0.10"
     values:
       enabled: true
-      bindings: &binds # this labs-devs is the GROUP NAME in IDM
-        - name: labs-devs
+      bindings: &binds # this biscuits-devs is the GROUP NAME in IDM
+        - name: biscuits-devs
           kind: Group
           role: edit
-        # this labs-admins is the GROUP NAME in IDM
-        - name: labs-admins
+        # this biscuits-admins is the GROUP NAME in IDM
+        - name: biscuits-admins
           kind: Group
           role: admin
         - name: jenkins
           kind: ServiceAccount
           role: admin
-          namespace: labs-ci-cd
+          namespace: biscuits-ci-cd
       namespaces:
-        - name: labs-ci-cd
+        - name: biscuits-ci-cd
           bindings: *binds
-        - name: labs-dev
+        - name: biscuits-dev
           bindings: *binds
-        - name: labs-test
+        - name: biscuits-test
           bindings: *binds
-        - name: labs-staging
+        - name: biscuits-staging
           bindings: *binds
 
   # Sealed Secrets
