@@ -1,3 +1,5 @@
+
+## Deploy ArgoCD - our GitOps Controller
 ```bash
 # setup for commands
 echo TEAM_NAME="biscuits" >> ~/.bashrc
@@ -17,5 +19,5 @@ oc get pods -w -n ${TEAM_NAME}-ci-cd
 # open https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 
 helm upgrade --install .
-
 ```
+
