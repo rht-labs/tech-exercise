@@ -28,6 +28,9 @@ applications:
           bindings: *binds
         - name: biscuits-staging
           bindings: *binds
+      # serviceaccounts:
+      #   - name: jenkins
+      #     namespace: biscuits-ci-cd
 
   # Sealed Secrets
   
@@ -40,6 +43,7 @@ applications:
     values:
       service:
         name: nexus
+
   # Jenkins
   - name: jenkins
     enabled: true
