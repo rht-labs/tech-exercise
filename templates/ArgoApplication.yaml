@@ -4,6 +4,9 @@
 {{- $source := .Values.source }}
 {{- $team := .Values.team }}
 {{- range $app := .Values.applications }}
+{{- if $app.source }}
+{{- $source = $app.source }}
+{{- end }}
 {{- if $app.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
