@@ -22,7 +22,7 @@ metadata:
 {{- if contains .values.fullnameOverride .name }}
     app.kubernetes.io/instance: {{ .values.fullnameOverride }}
 {{- end }}
-{{- else -}}
+{{- else }}
     app.kubernetes.io/instance: {{ .name }}
 {{- end }}
 {{- end }}
