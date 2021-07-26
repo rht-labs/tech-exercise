@@ -1,25 +1,23 @@
-helm_repository: "http://nexus.labs-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
-source: "https://gitlab-ce.apps.ma.4wpo.p1.openshiftapps.com/user123/do500-tech.git"
-team: labs
+# source: "https://gitlab-ce.apps.cluster.example.com/user123/do500-tech.git"
+source: https://github.com/rht-labs/tech-exercise.git
+team: biscuits
+release: ci-cd
 
 applications:
   # Tooling to support CI/CD
   - name: ubiquitous-journey
     enabled: true
-    destination: labs-ci-cd
-    helm_values: 
-      - ubiquitous-journey/values.yaml
+    helm_values:
+      - ubiquitous-journey/values-tooling.yaml
 
   # Test app of app
   - name: test-app-of-pb
-    enabled: true
-    destination: labs-ci-cd
-    helm_values: 
+    enabled: false
+    helm_values:
       - pet-battle/test/values.yaml
 
   # Staging App of Apps
   - name: staging-app-of-pb
-    enabled: true
-    destination: labs-ci-cd
-    helm_values: 
-      - pet-battle/staging/values.yaml  
+    enabled: false
+    helm_values:
+      - pet-battle/staging/values.yaml

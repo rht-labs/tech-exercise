@@ -1,7 +1,36 @@
-release: "ci-cd"
-
-
 applications:
+  # Bootstrap Project
+  - name: bootstrap
+    enabled: true
+    source: https://redhat-cop.github.io/helm-charts
+    chart_name: bootstrap-project
+    source_ref: "0.0.10"
+    values:
+      enabled: true
+      bindings: &binds # this labs-devs is the GROUP NAME in IDM
+        - name: labs-devs
+          kind: Group
+          role: edit
+        # this labs-admins is the GROUP NAME in IDM
+        - name: labs-admins
+          kind: Group
+          role: admin
+        - name: jenkins
+          kind: ServiceAccount
+          role: admin
+          namespace: labs-ci-cd
+      namespaces:
+        - name: labs-ci-cd
+          bindings: *binds
+        - name: labs-dev
+          bindings: *binds
+        - name: labs-test
+          bindings: *binds
+        - name: labs-staging
+          bindings: *binds
+
+  # Sealed Secrets
+  
   # Nexus
   - name: nexus
     enabled: true

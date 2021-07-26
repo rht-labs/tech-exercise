@@ -11,7 +11,7 @@ kind: Application
 metadata:
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-{{- if $release }}
+{{- if ne $release "ci-cd" }}
   name: {{ $release }}-{{ .name }}
 {{- else }}
   name: {{ .name }}
