@@ -46,7 +46,7 @@ spec:
 {{- end }}
     path: {{ .source_path | default "." }}
     repoURL: {{ $helm_repo| default $source }}
-    targetRevision: {{ .source_ref | default "master" | quote }}
+    targetRevision: {{ .source_ref | default "main" | quote }}
     {{- if .chart_name }}
     chart: {{ .chart_name }}
     {{- end}}
