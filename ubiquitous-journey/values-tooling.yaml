@@ -6,15 +6,11 @@ applications:
     chart_name: bootstrap-project
     source_ref: "0.0.10"
     values:
-      enabled: true
-      bindings: &binds # this biscuits-devs is the GROUP NAME in IDM
-        - name: biscuits-devs
+      serviceaccounts: ""
+      bindings: &binds # do500-users is the GROUP NAME in IDM
+        - name: do500-users
           kind: Group
           role: edit
-        # this biscuits-admins is the GROUP NAME in IDM
-        - name: biscuits-admins
-          kind: Group
-          role: admin
         - name: jenkins
           kind: ServiceAccount
           role: admin
@@ -28,9 +24,6 @@ applications:
           bindings: *binds
         - name: biscuits-staging
           bindings: *binds
-      # serviceaccounts:
-      #   - name: jenkins
-      #     namespace: biscuits-ci-cd
 
   # Sealed Secrets
   
@@ -65,17 +58,15 @@ applications:
         # default names, versions, repo and paths set on the template
         - name: jenkins-agent-npm
         - name: jenkins-agent-mvn
-        - name: jenkins-agent-graalvm
         - name: jenkins-agent-helm
-        - name: jenkins-agent-argocd
       deployment:
         env_vars:
           - name: ARGOCD_CONFIG_REPO
-            value: github.com/petbattle/ubiquitous-journey.git
-          - name: GITHUB_ACCOUNT
-            value: 'petbattle'
-          - name: GITHUB_ORG
-            value: 'true'
+            value: github.com/rht-labs/tech-exercises.git
+          - name: GITLAB_HOST
+            value: ''
+          - name: GITLAB_GROUP_NAME
+            value: ''
       persistence: false
       source_secrets:
         - name: nexus-password
