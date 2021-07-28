@@ -90,7 +90,7 @@ team: <YOUR_TEAM_NAME>
 ```
 
 update your `ubiquitous-journey/values-tooling.yaml` to change <YOUR_TEAM_NAME> in the bootstrap section
-<pre>
+<pre class="language-yaml">
 ...
         - name: jenkins
           kind: ServiceAccount
