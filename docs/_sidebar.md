@@ -7,5 +7,6 @@
   * [🐉 Here Be Dragons!](1-the-manual-menace/666-here-be-dragons.md)
 * [2. Attack of the Pipelines](2-attack-of-the-pipelines/README.md)
   * [🕵🏻‍♂️ Sealed Secrets](2-attack-of-the-pipelines/1-sealed-secrets.md)
-  * [🙌🏻 App of Apps](2-attack-of-the-pipelines/2-app-of-apps.md)
+  * [🙌🏻 Application of Applications](2-attack-of-the-pipelines/2-app-of-apps.md)
+  * [🏃🏻‍♀️ The Pipelines](2-attack-of-the-pipelines/3-the-pipelines.md)
   * [🐉 Here Be Dragons!](2-attack-of-the-pipelines/666-here-be-dragons.md)
