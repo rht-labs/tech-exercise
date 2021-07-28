@@ -3,6 +3,7 @@
 - [] Add Intro to section
 - [] Add Learning Objectives
 - [] Add Big Picture?
+- [] Add learning objective and connection to the practices at EACH section
 
 ## 🔨 Tools used in this exercise!
 * [Helm](https://helm.sh/) - one line definition

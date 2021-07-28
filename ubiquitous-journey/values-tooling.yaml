@@ -4,7 +4,7 @@ applications:
     enabled: true
     source: https://redhat-cop.github.io/helm-charts
     chart_name: bootstrap-project
-    source_ref: "0.0.10"
+    source_ref: "1.0.0"
     values:
       serviceaccounts: ""
       bindings: &binds # do500-users is the GROUP NAME in IDM
