@@ -4,7 +4,7 @@
 ### 🏃‍♀️ Running the docs site
 ```
 npm i docsify-cli -g
-docsify serve ./instructions
+docsify serve ./docs
 ```
 
 

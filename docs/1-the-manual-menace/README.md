@@ -49,6 +49,7 @@ helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 
 ```bash
 helm upgrade --install argocd \
+  --namespace ${TEAM_NAME}-ci-cd \
   --set namespace=${TEAM_NAME}-ci-cd \
   --set argocd_cr.applicationInstanceLabelKey=rht-labs.com/${TEAM_NAME} \
   redhat-cop/argocd-operator
@@ -118,7 +119,7 @@ git push
 
 install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
 ```bash
-helm upgrade install .
+helm upgrade install --namespace ${TEAM_NAME}-ci-cd .
 ```
 show namespaces & Jenkins spinning up via ArgoCD 
 
