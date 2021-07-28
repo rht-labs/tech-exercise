@@ -41,7 +41,7 @@ Now let's enable app-of-apps definition for petbatlle deplopments in test and st
 </pre>
 
 
-our app is made up of n apps. We define the list of apps we want to deploy int ehapplications array. Let's add a keycloak service to this list by appending
+our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section
 
 ```yaml
 applications:
