@@ -23,6 +23,20 @@
 Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/staging/values.yaml` && `pet-battle/test/values.yaml`
 
 
+```yaml
+applications:
+  # Keycloak
+  keycloak:
+    name: keycloak
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-infra.git
+    source_path: 'keycloak'
+    source_ref: main # helm chart version
+    values:
+      app_domain: apps.cluster.region.com
+      operartor: false
+```
+
 
 
 ### 3 - The Pipelines 
