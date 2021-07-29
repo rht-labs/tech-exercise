@@ -8,6 +8,10 @@
 echo TEAM_NAME="biscuits" >> ~/.bashrc
 ```
 ```bash
+# setup for commands
+echo CLUSTER_DOMAIN="apps.example.region.rht-labs.com" >> ~/.bashrc
+```
+```bash
 source ~/.bashrc
 ```
 

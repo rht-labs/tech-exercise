@@ -9,4 +9,6 @@
   * [🕵🏻‍♂️ Sealed Secrets](2-attack-of-the-pipelines/1-sealed-secrets.md)
   * [🙌🏻 Application of Applications](2-attack-of-the-pipelines/2-app-of-apps.md)
   * [🏃🏻‍♀️ The Pipelines](2-attack-of-the-pipelines/3-the-pipelines.md)
+    * [🌸 Jenkins](2-attack-of-the-pipelines/3a-jenkins.md)
+    * [🐈 Tekton](2-attack-of-the-pipelines/3b-tekton.md)
   * [🐉 Here Be Dragons!](2-attack-of-the-pipelines/666-here-be-dragons.md)

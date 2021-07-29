@@ -50,15 +50,11 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   # Pet Battle API
   pet-battle:
     name: pet-battle
-    source: *helm_repo
     chart_name: pet-battle
-    source_ref: 1.0.0
+    source_ref: 1.0.0 # helm chart version
     values:
       fullnameOverride: pet-battle
-      image_repository: image-registry.openshift-image-registry.svc:5000
-      image_name: pet-battle
-      image_namespace: <YOUR_TEAM_NAME>-test
-      image_version: latest
+      image_version: latest # container image version
       config_map: "'http://pet-battle-api-labs-test.apps.<CLUSTER_URL>'"
 
   # Pet Battle Frontend
@@ -70,7 +66,6 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
     source_ref: 1.0.15
     values:
       fullnameOverride: pet-battle-api
-      image_repository: image-registry.openshift-image-registry.svc:5000
       image_name: pet-battle-api
       image_version: "1.0.1"
       istag:

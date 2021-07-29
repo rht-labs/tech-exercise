@@ -1,4 +1,12 @@
-### Jenkins Pipeline 
+### Tekton Pipeline 
+
+
+TODO
+
+
+🪄OBSERVE PIPELINE RUNNING :D 
+🪄
+
 
 Split into groups and each group does
 - we need to fork PetBattle (clone from GitHub and push to GitLab)

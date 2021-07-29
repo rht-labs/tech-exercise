@@ -59,10 +59,11 @@ applications:
         - name: jenkins-agent-npm
         - name: jenkins-agent-mvn
         - name: jenkins-agent-helm
+        - name: jenkins-agent-argocd
       deployment:
         env_vars:
           - name: ARGOCD_CONFIG_REPO
-            value: github.com/rht-labs/tech-exercises.git
+            value: ''
           - name: GITLAB_HOST
             value: ''
           - name: GITLAB_GROUP_NAME

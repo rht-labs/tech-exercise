@@ -3,6 +3,10 @@
 
 Add more tools to the UJ for ex, nexus for managing our artifacts
 
+ArgoCD has a cycle time of about 5ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. Let's add a webhook to connect ArgoCD to our ubiquitous-journey project. 
+
+* TODO - add docs & screeners for adding url to GitLab ...
+
 update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults 
 ```yaml
   # Nexus
