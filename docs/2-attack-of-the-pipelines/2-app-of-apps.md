@@ -60,14 +60,12 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   # Pet Battle Frontend
   pet-battle-api:
     name: pet-battle-api
-    enabled: true
-    source: *helm_repo
     chart_name: pet-battle-api
-    source_ref: 1.0.15
+    source_ref: 1.0.15 # helm chart version
     values:
       fullnameOverride: pet-battle-api
       image_name: pet-battle-api
-      image_version: "1.0.1"
+      image_version: latest # container image version
       istag:
         enabled: false
       deploymentConfig: false
