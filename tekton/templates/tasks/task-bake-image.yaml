@@ -1,0 +1,55 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: bake
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+    - name: TEST_NAMESPACE
+      description: Name of the test environment
+      type: string
+    - name: BUILD_NAMESPACE
+      description: Name of the build environment - CICD namespace
+      type: string
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: VERSION
+      description: Version of the application
+      type: string
+    - name: STATIC_REPO
+      description: "Static Repo" #make repos gobal params
+      default: "http://nexus.{{ .Values.team}}-ci-cd.svc.cluster.local:8081/repository/labs-static/"
+    - name: STATIC_REPO_USERNAME
+      description: "Static Repo Username" #set annotation in nexus secret def
+      default: "admin"
+    - name: STATIC_REPO_PASSWORD
+      description: "Static Repo Password"
+      default: "admin123"
+  steps:
+    - name: package-app #better name for it
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/openshift/origin-cli:4.8
+      script: |
+        #!/bin/sh
+        tar -zcvf $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz Dockerfile.jvm target/lib target/*-runner.jar #Dockerfile.jvm needs to change
+        curl -v -f -u $(params.STATIC_REPO_USERNAME):$(params.STATIC_REPO_PASSWORD) $(params.STATIC_REPO) --upload-file $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz
+    - name: openshift-build
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/openshift/origin-cli:4.8
+      script: |
+        # where is binary now?
+        #!/bin/sh
+        oc new-build --binary --name=$(params.APPLICATION_NAME) -l app=$(params.APPLICATION_NAME) --strategy=docker || rc=$?
+        oc start-build $(params.APPLICATION_NAME) --from-archive=$(params.APPLICATION_NAME)-$(params.VERSION).tar.gz --follow --wait
+    - name: tag-image
+      workingDir: $(workspaces.output.path)
+      image: quay.io/openshift/origin-cli:4.8
+      script: |
+        #!/bin/sh
+        oc tag $(params.BUILD_NAMESPACE)/$(params.APPLICATION_NAME):latest $(params.TEST_NAMESPACE)/$(params.APPLICATION_NAME):$(params.VERSION)

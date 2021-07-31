@@ -1,0 +1,50 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: helm-package
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+spec:
+  description: >-
+    This Task can be used to run hem lint & package.
+  workspaces:
+    - name: output
+  params:
+    - name: CHART_REPO
+      description: "Helm Chart Repo"
+      default: "http://nexus.{{ .Values.team}}-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
+    - name: CHART_REPO_USERNAME
+      description: "Helm Chart Repo Username"
+      default: "admin"
+    - name: CHART_REPO_PASSWORD
+      description: "Helm Chart Repo Password"
+      default: "admin123"
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+  results:
+    - name: CHART_VERSION
+      description: Version of the helm chart
+  steps:
+    - name: release-helm-chart
+      image: quay.io/redhat-cop/tekton-task-helm:v3.5.3
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      script: |
+        #!/bin/sh
+        helm lint chart
+        helm package --dependency-update chart/ 
+
+        echo "upload chart"
+        curl -v -f -u $(params.CHART_REPO_USERNAME):$(params.CHART_REPO_PASSWORD) $(params.CHART_REPO) --upload-file $(params.APPLICATION_NAME)-*.tgz
+    - name: get-helmchart-version
+      image: quay.io/redhat-cop/tekton-task-helm:v3.5.3
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      command: ["/bin/sh", "-c"]
+      args: 
+        - "helm show chart chart | grep version: | awk '{print $2}' | tee $(results.CHART_VERSION.path);"

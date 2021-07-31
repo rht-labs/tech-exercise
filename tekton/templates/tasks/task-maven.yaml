@@ -1,0 +1,55 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: maven
+  labels:
+    app.kubernetes.io/version: "0.1"
+  annotations:
+    tekton.dev/pipelines.minVersion: "0.12.1"
+    tekton.dev/tags: build-tool
+spec:
+  description: >-
+    This Task can be used to run a Maven build.
+  workspaces:
+    - name: output
+    - name: maven-settings
+    - name: maven-m2
+  params:
+    - name: MAVEN_IMAGE
+      type: string
+      description: Maven base image
+      default: gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
+    - name: GOALS
+      description: maven goals to run
+      type: array
+    - name: MAVEN_BUILD_OPTS
+      description: maven build options
+      type: array
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: MAVEN_MIRROR_URL
+      description: Something something MAVEN_MIRROR_URL
+      type: string
+    - name: MAVEN_OPTS
+      description: Something something MAVEN_OPTS
+      type: string
+  results:
+    - name: VERSION
+      description: Version of application
+  steps:
+    - name: mvn-goals
+      image: $(params.MAVEN_IMAGE)
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      command: ["/usr/bin/mvn"]
+      args:
+        - "-s"
+        - "$(workspaces.maven-settings.path)/settings.xml"
+        - "$(params.GOALS)"
+        - "$(params.MAVEN_BUILD_OPTS)"
+    - name: get-app-version
+      image: $(params.MAVEN_IMAGE)
+      command: ["/bin/sh", "-c"]
+      args:
+        - cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}' tee $(results.VERSION.path);

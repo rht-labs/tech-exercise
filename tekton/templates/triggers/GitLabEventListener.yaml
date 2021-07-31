@@ -1,0 +1,48 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: gitlab-webhook
+  labels:
+    app: gitlab
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: pet-battle-api-webhook-all-branches
+      interceptors: # fixme add secret.ref
+        - cel:
+            # only for master/main?
+            filter: >-
+              (header.match('X-Gitlab-Event', 'Push Hook') &&
+              body.project.path_with_namespace == 'biscuits/pet-battle-api' &&
+              body.ref.split('/')[2] == 'master')
+            overlays:
+            - key: truncated_sha
+              expression: "body.checkout_sha.truncate(7)"
+            - key: branch_name
+              expression: "body.ref.split('/')[2]"
+            - key: app_of_apps_key
+              expression: "body.repository.name"
+      bindings:
+      - kind: TriggerBinding
+        ref: gitlab-trigger-binding
+      template:
+        ref: pet-battle-api-trigger-template
+---
+# not necessary if using gitlab in cluster, could just use the service address on hook
+# nope it is necessary becaose of the error " Url is blocked: Requests to the local network are not allowed"
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: webhook
+  labels:
+    app.kubernetes.io/managed-by: EventListener
+    app.kubernetes.io/part-of: Triggers
+    eventlistener: gitlab-webhook
+spec:
+  port:
+    targetPort: http-listener
+  to:
+    kind: 'Service'
+    name: el-gitlab-webhook
+    weight: 100

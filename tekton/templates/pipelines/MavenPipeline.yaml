@@ -1,0 +1,185 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: maven-pipeline
+spec:
+  workspaces:
+    - name: shared-workspace
+    - name: maven-settings
+    - name: argocd-env-secret
+    - name: maven-m2
+    - name: git-auth-secret
+  params:
+  - name: APPLICATION_NAME
+    type: string
+    default: ""
+  - name: GIT_URL
+    type: string
+    default: ""
+  - name: GIT_REVISION
+    type: string
+    default: "master"
+  - name: GIT_REF
+    type: string
+    default: "refs/heads/master"
+  - name: GIT_SHORT_REVISION
+    type: string
+    default: ""
+  - name: GIT_BRANCH
+    type: string
+    default: "master"
+  - name: HELM_CHART_VERSION
+    type: string
+    default: ""
+  - name: MAVEN_MIRROR_URL
+    type: string
+    default: "http://repo1.maven.org/maven2"
+  - name: MAVEN_OPTS
+    type: string
+    default: ""
+  - name: MAVEN_BUILD_OPTS
+    description: maven build options
+    type: array
+    default: []
+  - name: BUILD_NAMESPACE
+    type: string
+    default: "{{ .Values.team }}-ci-cd"
+  - name: DEV_NAMESPACE
+    type: string
+    default: "{{ .Values.team }}-dev"
+  - name: TEST_NAMESPACE
+    type: string
+    default: "{{ .Values.team }}-test"
+  - name: STAGE_NAMESPACE
+    type: string
+    default: "{{ .Values.team }}-staging"
+  - name: APP_OF_APPS_DEV_KEY
+    type: string
+    default: ""
+  - name: APP_OF_APPS_TEST_KEY
+    type: string
+    default: ""
+  - name: APP_OF_APPS_STAGE_KEY
+    type: string
+    default: ""
+  tasks:
+    - name: fetch-app-repository
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "$(params.GIT_URL)"
+        - name: subdirectory
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+        - name: deleteExisting
+          value: "true"
+    - name: maven-run
+      taskRef:
+        name: maven
+      params:
+        - name: MAVEN_MIRROR_URL
+          value: "$(params.MAVEN_MIRROR_URL)"
+        - name: MAVEN_OPTS
+          value: "$(params.MAVEN_OPTS)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+        - name: GOALS
+          value:
+            - "package"
+        - name: MAVEN_BUILD_OPTS
+          value:
+            - "$(params.MAVEN_BUILD_OPTS)"
+      workspaces:
+        - name: maven-settings
+          workspace: maven-settings
+        - name: maven-m2
+          workspace: maven-m2
+        - name: output
+          workspace: shared-workspace
+      runAfter:
+        - fetch-app-repository
+    - name: bake
+      taskRef:
+        name: bake
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: revision
+          value: "$(params.GIT_REVISION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: BUILD_NAMESPACE
+          value: "$(params.BUILD_NAMESPACE)"
+        - name: TEST_NAMESPACE
+          value: "$(params.TEST_NAMESPACE)"
+        - name: VERSION
+          value: "$(tasks.maven.results.VERSION)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+      runAfter: 
+        - maven-run
+    - name: helm-package
+      taskRef:
+        name: helm-package
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+      runAfter: 
+        - bake
+    - name: fetch-argocd-configuration
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: "http://gitlab-ce.gitlab.svc.cluster.local/{{.Values.team }}/tech-exercise.git"
+        - name: revision
+          value: "main"
+        - name: subdirectory
+          value: "tech-exercise/main"
+        - name: deleteExisting
+          value: "true"
+      runAfter:
+        - helm-package
+    - name: deploy-test
+      taskRef:
+        name: deploy
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: WORK_DIRECTORY
+          value: "tech-exercise/main/pet-battle/"
+        - name: DEPLOY_ENVIRONMENT
+          value: "test"
+        - name: TEST_NAMESPACE
+          value: "$(params.TEST_NAMESPACE)"
+        - name: VERSION
+          value: "$(tasks.maven.results.VERSION)"
+        - name: CHART_VERSION
+          value: "$(tasks.helm-package.results.CHART_VERSION)"
+      runAfter: 
+        - fetch-argocd-configuration
+  results:
+    - name: VERSION
+      description: Version of the application
+      value: "$(tasks.maven.results.VERSION)"
+    - name: CHART_VERSION
+      description: Version of the helm chart
+      value: "$(tasks.helm-package.results.CHART_VERSION)"
+  

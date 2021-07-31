@@ -1,0 +1,19 @@
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: gitlab-trigger-binding
+spec:
+  params:
+    - name: git-repo-name
+      value: $(body.repository.name)
+    - name: git-revision
+      value: $(body.commits.id)
+    - name: git-ref
+      value: $(body.ref)
+    - name: git-branch
+      value: $(extensions.branch_name)
+    - name: git-short-revision
+      value: $(extensions.truncated_sha)
+    - name: git-app-of-apps-key
+      value: $(extensions.app_of_apps_key)

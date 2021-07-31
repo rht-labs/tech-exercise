@@ -1,0 +1,54 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: deploy
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+    - name: TEST_NAMESPACE
+      description: Name of the test environment
+      type: string
+    - name: BUILD_NAMESPACE
+      description: Name of the build environment - CICD namespace
+      type: string
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: DEPLOY_ENVIRONMENT
+      description: Environment to deploy the app
+      type: string
+    - name: TEST_NAMESPACE
+      description: Name of the test environment
+      type: string
+    - name: VERSION
+      description: Version of the application
+      type: string
+    - name: CHART_VERSION
+      description: Version of the helm chart
+      type: string
+  steps:
+    - name: deploy-test
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: # something-with-yq
+      script: |
+        #!/bin/sh
+
+        yq eval -i .applications.\\"$(params.APPLICATION_NAME)\\".source_ref=\\"$(params.CHART_VERSION)\\"  "$(DEPLOY_ENVIRONMENT)/values.yaml"
+        yq eval -i .applications.\\"$(params.APPLICATION_NAME)\\".values.image_version=\\"$(params.VERSION)\\" "$(DEPLOY_ENVIRONMENT)/values.yaml"
+        yq eval -i .applications.\\"$(params.APPLICATION_NAME)\\".values.image_namespace=\\"$(TEST_NAMESPACE)\\" "$(DEPLOY_ENVIRONMENT)/values.yaml"
+
+        # Commit the changes :P
+        git config --global user.email "tekton@rht-labs.bot.com"
+        git config --global user.name "Tekton the Peaceful Cat"
+        git config --global push.default simple
+        git add $(DEPLOY_ENVIRONMENT)/values.yaml
+        git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version ${VERSION} 🚀" || rc=$?
+        git remote set-url origin  https://${GIT_CREDS}@gitlab-ce.gitlab.svc.cluster.local/{{.Values.team }}/tech-exercise.git
+        git push -u origin main
+
+
