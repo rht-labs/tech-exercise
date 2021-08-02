@@ -17,21 +17,16 @@ spec:
   - Install the **Web Terminal** Operator if you want to use click to execute commands in the in-built Web Terminal. You can copy them if you dont have this operator.
   tasks:
     - description: >
-        ### Set HOME
-        Home is not where our projects are .. lets make it so ..
+        ### Set Your Shell
+        Check HOME and set shell
 
-        1. Export your HOME and set your shell
+        1. Check your HOME and set your shell
         ```
-         cd /projects
-         cp /home/jboss/.bashrc .
-         cp /home/jboss/.zshrc .
-         cp -Ra /home/jboss/.kube . && chmod -R 644 /home/jboss/.kube
-         ln -s /home/jboss/.oh-my-zsh .
-         export HOME=/projects
-         echo HOME=/projects | tee -a /projects/.bashrc /projects/.zshrc
+         echo ${HOME}
+         pwd
          zsh
         ```{{execute}}
-      title: Set Home
+      title: Set Your Shell
     - description: >
         ### Setup Your Environment
 
