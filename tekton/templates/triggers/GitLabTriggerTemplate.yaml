@@ -45,7 +45,7 @@ spec:
           - name: APPLICATION_NAME
             value: $(tt.params.git-repo-name)
           - name: GIT_URL
-            value: http://gitlab-ce.gitlab.svc.cluster.local/{{ .Values.team }}/$(tt.params.git-repo-name).git
+            value: http://gitlab-ce.do500-gitlab.svc.cluster.local/{{ .Values.team }}/$(tt.params.git-repo-name).git
           - name: GIT_REVISION
             value: $(tt.params.git-revision)
           - name: GIT_SHORT_REVISION
@@ -54,16 +54,8 @@ spec:
             value: $(tt.params.git-ref)
           - name: GIT_BRANCH
             value: $(tt.params.git-branch)
-          - name: MAVEN_MIRROR_URL
-            value: http://nexus:8081/repository/maven-public
-          - name: BUILD_NAMESPACE
-            value: "{{ .Values.team }}-ci-cd"
-          - name: DEV_NAMESPACE
-            value: "{{ .Values.team }}-dev"
-          - name: TEST_NAMESPACE
-            value: "{{ .Values.team }}-test"
-          - name: STAGE_NAMESPACE
-            value: "{{ .Values.team }}-staging"
+          - name: TEAM_NAME
+            value: "{{ .Values.team }}"
           - name: MAVEN_BUILD_OPTS
             value:
               - -DskipTests
@@ -74,12 +66,10 @@ spec:
         - name: maven-settings
           configmap:
             name: maven-settings
-        - name: argocd-env-secret
-          secret:
-            secretName: argocd-token
         - name: maven-m2
           persistentVolumeClaim:
             claimName: maven-m2
+        # TODO: how did the secret get here?
         - name: git-auth-secret
           secret:
             secretName: git-auth

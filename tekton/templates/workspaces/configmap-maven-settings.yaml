@@ -9,7 +9,7 @@ data:
       <mirrors>
         <mirror>
           <id>maven-public</id>
-          <url>http://nexus.{{ .Values.team}}-ci-cd.svc.cluster.local:8081/repository/maven-public/</url>
+          <url>http://nexus:8081/repository/maven-public/</url>
           <mirrorOf>*</mirrorOf>
         </mirror>
       </mirrors>
