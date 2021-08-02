@@ -6,7 +6,6 @@ spec:
   workspaces:
     - name: shared-workspace
     - name: maven-settings
-    - name: argocd-env-secret
     - name: maven-m2
     - name: git-auth-secret
   params:
@@ -18,16 +17,16 @@ spec:
     default: ""
   - name: GIT_REVISION
     type: string
-    default: "master"
+    default: "main"
   - name: GIT_REF
     type: string
-    default: "refs/heads/master"
+    default: "refs/heads/main"
   - name: GIT_SHORT_REVISION
     type: string
     default: ""
   - name: GIT_BRANCH
     type: string
-    default: "master"
+    default: ""
   - name: HELM_CHART_VERSION
     type: string
     default: ""
@@ -41,18 +40,9 @@ spec:
     description: maven build options
     type: array
     default: []
-  - name: BUILD_NAMESPACE
+  - name: TEAM_NAME
     type: string
-    default: "{{ .Values.team }}-ci-cd"
-  - name: DEV_NAMESPACE
-    type: string
-    default: "{{ .Values.team }}-dev"
-  - name: TEST_NAMESPACE
-    type: string
-    default: "{{ .Values.team }}-test"
-  - name: STAGE_NAMESPACE
-    type: string
-    default: "{{ .Values.team }}-staging"
+    default: "{{ .Values.team }}"
   - name: APP_OF_APPS_DEV_KEY
     type: string
     default: ""
@@ -73,11 +63,13 @@ spec:
       params:
         - name: url
           value: "$(params.GIT_URL)"
+        - name: revision
+          value: "main"
         - name: subdirectory
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: deleteExisting
           value: "true"
-    - name: maven-run
+    - name: maven
       taskRef:
         name: maven
       params:
@@ -109,20 +101,16 @@ spec:
         - name: output
           workspace: shared-workspace
       params:
-        - name: revision
-          value: "$(params.GIT_REVISION)"
         - name: APPLICATION_NAME
           value: "$(params.APPLICATION_NAME)"
-        - name: BUILD_NAMESPACE
-          value: "$(params.BUILD_NAMESPACE)"
-        - name: TEST_NAMESPACE
-          value: "$(params.TEST_NAMESPACE)"
+        - name: TEAM_NAME
+          value: "$(params.TEAM_NAME)"
         - name: VERSION
           value: "$(tasks.maven.results.VERSION)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter: 
-        - maven-run
+        - maven
     - name: helm-package
       taskRef:
         name: helm-package
@@ -145,7 +133,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: "http://gitlab-ce.gitlab.svc.cluster.local/{{.Values.team }}/tech-exercise.git"
+          value: "http://gitlab-ce.do500-gitlab.svc.cluster.local/{{ .Values.team }}/tech-exercise.git"
         - name: revision
           value: "main"
         - name: subdirectory
@@ -167,8 +155,8 @@ spec:
           value: "tech-exercise/main/pet-battle/"
         - name: DEPLOY_ENVIRONMENT
           value: "test"
-        - name: TEST_NAMESPACE
-          value: "$(params.TEST_NAMESPACE)"
+        - name: TEAM_NAME
+          value: "$(params.TEAM_NAME)"
         - name: VERSION
           value: "$(tasks.maven.results.VERSION)"
         - name: CHART_VERSION
