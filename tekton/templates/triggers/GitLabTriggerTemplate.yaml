@@ -54,8 +54,6 @@ spec:
             value: $(tt.params.git-ref)
           - name: GIT_BRANCH
             value: $(tt.params.git-branch)
-          - name: MAVEN_MIRROR_URL
-            value: http://nexus:8081/repository/maven-public
           - name: TEAM_NAME
             value: "{{ .Values.team }}"
           - name: MAVEN_BUILD_OPTS

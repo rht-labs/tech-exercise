@@ -34,7 +34,7 @@ spec:
       image: quay.io/openshift/origin-cli:4.8
       script: |
         #!/bin/sh
-        tar -zcvf $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz Dockerfile.jvm target/lib target/*-runner.jar #Dockerfile.jvm needs to change
+        tar -zcvf $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz Dockerfile.jvm target/lib target/*-runner.jar
         curl -v -f -u $(params.STATIC_REPO_USERNAME):$(params.STATIC_REPO_PASSWORD) $(params.STATIC_REPO) --upload-file $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz
     - name: openshift-build
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)

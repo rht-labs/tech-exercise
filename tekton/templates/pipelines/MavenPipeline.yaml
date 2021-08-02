@@ -30,12 +30,6 @@ spec:
   - name: HELM_CHART_VERSION
     type: string
     default: ""
-  - name: MAVEN_MIRROR_URL
-    type: string
-    default: "http://repo1.maven.org/maven2"
-  - name: MAVEN_OPTS
-    type: string
-    default: ""
   - name: MAVEN_BUILD_OPTS
     description: maven build options
     type: array
@@ -73,10 +67,6 @@ spec:
       taskRef:
         name: maven
       params:
-        - name: MAVEN_MIRROR_URL
-          value: "$(params.MAVEN_MIRROR_URL)"
-        - name: MAVEN_OPTS
-          value: "$(params.MAVEN_OPTS)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: GOALS

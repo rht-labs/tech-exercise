@@ -7,4 +7,4 @@ Split into groups and each group does
 - Update `pet-battle/staging/values.yaml` && `pet-battle/test/values.yaml` with services information. That's where two teams integrate their works.
 - By updating version files (pom.xml etc), kick the pipelines
 - Question: should we only leave 'master/main' branch deployment
-[TODO] decide what to leave out from Jenkinsfile
+[TODO] - add do500-sa to git repos to pull repos if repos not public

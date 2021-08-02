@@ -29,12 +29,6 @@ spec:
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
-    - name: MAVEN_MIRROR_URL
-      description: Something something MAVEN_MIRROR_URL
-      type: string
-    - name: MAVEN_OPTS
-      description: Something something MAVEN_OPTS
-      type: string
   results:
     - name: VERSION
       description: Version of application
