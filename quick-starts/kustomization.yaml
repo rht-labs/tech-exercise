@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+#- do500-stack-terminal.yaml
+- web-terminal-subscription.yaml
+- do500-1-the-basics.yaml
+- do500-1-argocd.yaml
+
+patchesJson6902:
+- target:
+    version: v1
+    kind: ConfigMap
+    name: devworkspace-controller
+    namespace: openshift-operators
+  path: web-terminal-cm-patch.yaml

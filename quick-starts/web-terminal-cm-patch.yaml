@@ -1,0 +1,13 @@
+---
+- op: add
+  path: /spec/data
+  value:
+    devworkspace.idle_timeout: 8h
+    devworkspace.default_dockerimage.redhat-developer.web-terminal: |
+        name: dev
+        image: quay.io/eformat/stack-do500:latest
+        memoryLimit: 512Mi
+        args: ["sleep", "infinity"]
+        env:
+        - name: DEVWORKSPACE_IDLE_TIMEOUT
+          value: 1hr
