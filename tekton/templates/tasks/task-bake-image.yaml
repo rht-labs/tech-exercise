@@ -10,11 +10,8 @@ spec:
     - name: APPLICATION_NAME
       description: Name of the application
       type: string
-    - name: TEST_NAMESPACE
-      description: Name of the test environment
-      type: string
-    - name: BUILD_NAMESPACE
-      description: Name of the build environment - CICD namespace
+    - name: TEAM_NAME
+      description: Name of the team that doing this exercise :)
       type: string
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
@@ -37,7 +34,7 @@ spec:
       image: quay.io/openshift/origin-cli:4.8
       script: |
         #!/bin/sh
-        tar -zcvf $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz Dockerfile.jvm target/lib target/*-runner.jar #Dockerfile.jvm needs to change
+        tar -zcvf $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz Dockerfile.jvm target/lib target/*-runner.jar
         curl -v -f -u $(params.STATIC_REPO_USERNAME):$(params.STATIC_REPO_PASSWORD) $(params.STATIC_REPO) --upload-file $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz
     - name: openshift-build
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
@@ -51,4 +48,4 @@ spec:
       image: quay.io/openshift/origin-cli:4.8
       script: |
         #!/bin/sh
-        oc tag $(params.BUILD_NAMESPACE)/$(params.APPLICATION_NAME):latest $(params.TEST_NAMESPACE)/$(params.APPLICATION_NAME):$(params.VERSION)
+        oc tag $(params.TEAM_NAME)-ci-cd/$(params.APPLICATION_NAME):latest $(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)

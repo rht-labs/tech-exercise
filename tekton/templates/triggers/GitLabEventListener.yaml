@@ -14,8 +14,8 @@ spec:
             # only for master/main?
             filter: >-
               (header.match('X-Gitlab-Event', 'Push Hook') &&
-              body.project.path_with_namespace == 'biscuits/pet-battle-api' &&
-              body.ref.split('/')[2] == 'master')
+              body.project.path_with_namespace == '{{ .Values.team }}/pet-battle-api' &&
+              body.ref.split('/')[2] == 'main')
             overlays:
             - key: truncated_sha
               expression: "body.checkout_sha.truncate(7)"
@@ -29,8 +29,6 @@ spec:
       template:
         ref: pet-battle-api-trigger-template
 ---
-# not necessary if using gitlab in cluster, could just use the service address on hook
-# nope it is necessary becaose of the error " Url is blocked: Requests to the local network are not allowed"
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
