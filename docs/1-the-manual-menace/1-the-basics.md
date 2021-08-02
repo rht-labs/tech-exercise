@@ -15,13 +15,13 @@ echo CLUSTER_DOMAIN="apps.example.region.rht-labs.com" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-3. Check you can connect to OpenShift
+3. Check if you can connect to OpenShift
 ```bash
-# check you can access the cluster
-oc login ..
+# check if you can access the cluster
+oc login --server=https://api.example.region.rht-labs.com -u <USERNAME> -p <PASSWORD>
 ```
 ```bash
-# check you have permissions to do stuff
+# verify your permissions
 oc new-project ${TEAM_NAME}-ci-cd
 ```
 
