@@ -39,7 +39,7 @@ export GITLAB_USER=<gitlab user>
 export GITLAB_PASSWORD=<gitlab password>
 ```
 
-Lets our git creds via a secret (**UJ this**)
+Lets put our git creds via a secret (**FIXME - Sealed Secrets - UJ this**)
 ```bash
 cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
 apiVersion: v1
@@ -65,7 +65,7 @@ data:
     - name: redhat-cop
       type: helm
       url: https://redhat-cop.github.io/helm-charts
-    - url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/team-excercise.git
+    - url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
       type: git
       insecure: false
       insecureIgnoreHostKey: true
@@ -115,7 +115,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   type: helm
   url: https://redhat-cop.github.io/helm-charts
 - name: do500-git
-  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/team-excercise.git
+  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
   type: git
   insecure: true
   insecureIgnoreHostKey: true
@@ -151,6 +151,6 @@ helm upgrade --install argocd \
   redhat-cop/argocd-operator
 ```
 
-### Deploy Microsite via ArgoCD (into new namespace?)
+### Deploy A Microsite via ArgoCD (into new namespace?)
 
 ^ this is all well and good, but we want to do GIT OPS !

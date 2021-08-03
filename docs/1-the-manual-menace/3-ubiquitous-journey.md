@@ -9,7 +9,7 @@ Extensible, traceable, auditable ...
 
 # setup the pre-cloned git repo in CRW
 git remote rename origin old-origin
-git remote add origin https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/team-excercise.git
+git remote add origin https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
 git push -u origin --all
 git push -u origin --tags
 ```
