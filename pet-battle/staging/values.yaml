@@ -6,14 +6,5 @@ helm_repository: "http://nexus:8081/repository/helm-charts/"
 #############
 applications:
   # Keycloak
-  keycloak:
-    name: keycloak
-    enabled: false
-    source: https://github.com/petbattle/pet-battle-infra.git
-    source_path: 'keycloak'
-    source_ref: main
-    values:
-      app_domain: apps.cluster.region.com
-      operartor: false
 
   # Pet Battle Apps
