@@ -1,4 +1,5 @@
 # Sealed Secrets
+[TODO] utilize helper chart for sealed secret
 
 Blah blah blah - soemthing about SS and why we use it....
 public repos with private secrets
@@ -65,17 +66,24 @@ cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
     username: AgAtnYz8U0AqIIaqYrj...
 </pre>
 
-In `ubiquitous-journey/values-tooling.yaml` create an entry in the values section of the Jenkins deployment for `sealed_secrets`. This can be added below the nexus secret as shown below. Copy the output of `username` and `password`  from the previous command and update the values.
+In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section of the `# Sealed Secrets`. Copy the output of `username` and `password`  from the previous command and update the values. Set the `enabled` flag to `true`
 ```yaml
 ...
-      source_secrets:
-        - name: nexus-password
-          username: admin
-          password: admin123
-      sealed_secrets:
+  # Sealed Secrets
+  - name: sealed-secrets
+    <strong>enabled: false</strong>
+    source: https://redhat-cop.github.io/helm-charts
+    chart_name: helper-sealed-secrets
+    source_ref: "1.0.1"
+    values:
+      secrets:
         - name: git-auth
-          password: AgAj3JQj+EP23pnzu...
-          username: AgAtnYz8U0AqIIaqYrj...
+          type: kubernetes.io/basic-auth
+          labels:
+            credential.sync.jenkins.openshift.io: "true"
+          data:
+            username: <YOUR_SEALED_SECRET_USERNAME>
+            password: <YOUR_SEALED_SECRET_PASSWORD>
 ```
 
 Now that we update the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
