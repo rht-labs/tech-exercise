@@ -51,13 +51,6 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-Connect ArgoCD to your Git Repository
-- Login ArgoCD WebUI
-- Settings -> Repository
-- Select the `+CONNECT REPO USING HTTPS`
-- Add you git repo, credentials, save.
-
-
 Install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
 ```bash
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .

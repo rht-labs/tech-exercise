@@ -5,6 +5,7 @@ applications:
     source: https://redhat-cop.github.io/helm-charts
     chart_name: bootstrap-project
     source_ref: "1.0.0"
+    operatorgroup: false # can refactor per project when https://github.com/redhat-cop/helm-charts/pull/183 merges
     values:
       serviceaccounts: ""
       bindings: &binds # do500-users is the GROUP NAME in IDM
