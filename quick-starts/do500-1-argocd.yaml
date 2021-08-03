@@ -78,14 +78,34 @@ spec:
           Select **Allow selected permissions** for OAuth.
 
         1. You should now be logged into ArgoCD WebUI.
-
-        1. Login your **argocd** command line now.
-        ```
-         argocd login $(oc -n ${TEAM_NAME}-ci-cd get route argocd-server --template='{{ .spec.host }}'):443 --grpc-web --insecure
-        ```{{execute}}
       title: Login to ArgoCD
+
+    - description: >
+        ### Deploy a Test Application using ArgoCD
+
+        1. Let's deploy a sample **nginx** kubernetes application using the ArgoCD Operator.
+        ```
+         cat << ' EOF' | oc apply -n ${TEAM_NAME}-ci-cd -f-
+         apiVersion: argoproj.io/v1alpha1
+         kind: Application
+         metadata:
+           name: guestbook
+         spec:
+           destination:
+             namespace: ateam-ci-cd ## FIXME grr.. heredocs
+             server: https://kubernetes.default.svc
+           project: default
+           source:
+             path: basic-nginx
+             repoURL: 'https://github.com/opdev/argocd-example-restricted-apps.git'
+             targetRevision: main
+         EOF
+        ```{{execute}}
+
+      title: Deploy a Test Application using ArgoCD
   conclusion: >-
     Congratulations! You successfully completed the DO500 Basic Setup quick start.
 
 
     Let's keep going !
+  nextQuickStart: ['']

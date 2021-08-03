@@ -7,9 +7,12 @@ oc apply -k .
 
 The quick start is now available under the *? -> Quick Starts* menu:
 
-For best experience when running the quick start, pre-install the **Web Terminal** Operator from RedHat at cluster scope.
+We install the **Web Terminal** Operator from RedHat at cluster scope
+- https://github.com/redhat-developer/web-terminal-operator
 
 ## Operator Config
+
+These 
 
 ```bash
 # set timeout to 8h (15m default)
