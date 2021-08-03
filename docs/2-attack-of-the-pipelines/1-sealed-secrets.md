@@ -1,6 +1,4 @@
 # Sealed Secrets
-[TODO] utilize helper chart for sealed secret
-
 Blah blah blah - soemthing about SS and why we use it....
 public repos with private secrets
 devops is hard, secure devops is harder....

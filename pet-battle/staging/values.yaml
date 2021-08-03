@@ -16,6 +16,4 @@ applications:
       app_domain: apps.cluster.region.com
       operartor: false
 
-  # Pet Battle API
-
-  # Pet Battle Frontend
+  # Pet Battle Apps

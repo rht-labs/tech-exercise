@@ -47,30 +47,72 @@ Now that the infra for PetBattle is up and running, let's deploy PetBattle itsel
 In your IDE, open up the `pet-battle/test/values.yaml` file and copy the following:
 
 ```yaml
-  # Pet Battle API
-  pet-battle:
-    name: pet-battle
-    chart_name: pet-battle
-    source_ref: 1.0.0 # helm chart version
-    values:
-      fullnameOverride: pet-battle
-      image_version: latest # container image version
-      config_map: "'http://pet-battle-api-labs-test.apps.<CLUSTER_URL>'"
-
-  # Pet Battle Frontend
+  # Pet Battle Apps
   pet-battle-api:
     name: pet-battle-api
     chart_name: pet-battle-api
     source_ref: 1.0.15 # helm chart version
     values:
-      fullnameOverride: pet-battle-api
       image_name: pet-battle-api
       image_version: latest # container image version
-      istag:
-        enabled: false
-      deploymentConfig: false
+      deploymentConfig: true
+
+  pet-battle:
+    name: pet-battle
+    chart_name: pet-battle
+    source_ref: 1.0.0 # helm chart version
+    values:
+      image_version: latest # container image version
 ```
 
-Repeat the same thing for `pet-battle/staging/values.yaml` file in order to deploy the staging environment.
+The front end needs to have some confiuration applied to it. This should be packaged up in the helm chart or baked into the image - butttt we should really apply configuration as *code*. We should build our apps once so they can be initialised in many environments with supplied configuration. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the defintion for the front end as such.
+```bash
+cat << EOF >> pet-battle/test/values.yaml
+
+      config_map: '{
+        "catsUrl": "https://pet-battle-api-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
+        "tournamentsUrl": "https://pet-battle-tournament-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
+        "matomoUrl": "https://matomo-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}/",
+        "keycloak": {
+          "url": "https://keycloak-${TEAM_NAME}-test.${CLUSTER_DOMAIN}/auth/",
+          "realm": "pbrealm",
+          "clientId": "pbclient",
+          "redirectUri": "http://localhost:4200/tournament",
+          "enableLogging": true
+        }
+      }'
+
+EOF
+```
+
+The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
+<pre>
+  # Pet Battle Frontend
+  pet-battle:
+    name: pet-battle
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-infra.git
+    source_ref: 1.0.0 # helm chart version
+    values:
+      image_version: latest # container image version
+      config_map: '{
+        "catsUrl": "https://pet-battle-api-biscuits-test.apps.example.com",
+        "tournamentsUrl": "https://pet-battle-tournament-biscuits-test.apps.example.com",
+        "matomoUrl": "https://matomo-biscuits-ci-cd.apps.example.com/",
+        "keycloak": {
+          "url": "https://keycloak-biscuits-test.apps.example.com/auth/",
+          "realm": "pbrealm",
+          "clientId": "pbclient",
+          "redirectUri": "http://localhost:4200/tournament",
+          "enableLogging": true
+        }
+      }'
+</pre>
+
+Repeat the same thing for `pet-battle/staging/values.yaml` file in order to deploy the staging environment, and push your changes to the repo.
+
+```bash
+git add ...
+```
 
 [TODO] Screenshots from ArgoCD
