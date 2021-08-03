@@ -51,13 +51,20 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
+Connect ArgoCD to your Git Repository
+- Login ArgoCD WebUI
+- Settings -> Repository
+- Select the `+CONNECT REPO USING HTTPS`
+- Add you git repo, credentials, save.
+
+
+Install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
 ```bash
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 show namespaces & Jenkins spinning up via ArgoCD 
 
-show resources in the cluster
+Show resources in the cluster
 ```bash
 oc get projects | grep ${TEAM_NAME}
 ```
