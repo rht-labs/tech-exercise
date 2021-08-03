@@ -7,7 +7,11 @@ Extensible, traceable, auditable ...
 
 # create a repo in GitLab in that group
 
-# clone repo to your IDE
+# setup the pre-cloned git repo in CRW
+git remote rename origin old-origin
+git remote add origin https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/team-excercise.git
+git push -u origin --all
+git push -u origin --tags
 ```
 
 Take a walk in values-tooling.yaml file...
@@ -17,7 +21,7 @@ Take a walk in values.yaml file... [pb enabled false]
 
 ```yaml
 # update your values.yaml in the root file accordingly
-source: "https://gitlab-ce.do500-gitlab.apps.cluster.example.com/<YOUR_TEAM_NAME>/tech-exercise.git"
+source: "https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git"
 team: <YOUR_TEAM_NAME>
 ```
 
@@ -47,13 +51,13 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
+Install all the tooling in UJ (only bootstrap, and Jenkins at this stage..)
 ```bash
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 show namespaces & Jenkins spinning up via ArgoCD 
 
-show resources in the cluster
+Show resources in the cluster
 ```bash
 oc get projects | grep ${TEAM_NAME}
 ```

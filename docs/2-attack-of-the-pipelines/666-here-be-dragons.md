@@ -1,4 +1,4 @@
 
 ## Here be dragons!
 
-![oh-look-a-dragon](../images/oh-look-a-dragon.png)
+![oh-look-another-dragon](../images/oh-look-another-dragon.png)
