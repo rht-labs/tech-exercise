@@ -26,10 +26,23 @@ spec:
     - name: CHART_VERSION
       description: Version of the helm chart
       type: string
+  results:
+    - name: PREVIOUS_CHART_VERSION
+      description: Version of currently applied chart
+    - name: PREVIOUS_VERSION
+      description: Version of currently running app
   steps:
+    - name: get-current-into
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
+      script: |
+        PREVIOUS_VERSION=$(yq eval .applications."$(params.APPLICATION_NAME)".values.image_version "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        PREVIOUS_CHART_VERSION=$(yq eval .applications."$(params.APPLICATION_NAME)".source_ref "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        echo -n ${PREVIOUS_VERSION} | tee $(results.PREVIOUS_VERSION.path)
+        echo -n ${PREVIOUS_CHART_VERSION} | tee $(results.PREVIOUS_CHART_VERSION.path)
     - name: patch-argo-conf
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      image: quay.io/springdo/tekton-task-helm:3.6.3
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       script: |
         #!/bin/sh
         yq eval -i .applications."$(params.APPLICATION_NAME)".source_ref=\"$(params.CHART_VERSION)\"  "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
@@ -47,7 +60,5 @@ spec:
         git checkout main
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
-        git remote set-url origin http://$(cat $(workspaces.git-auth.path)/username):$(cat $(workspaces.git-auth.path)/password)@gitlab-ce.do500-gitlab.svc.cluster.local/{{ .Values.team }}/tech-exercise.git
+        git remote set-url origin http://$(cat $(workspaces.git-auth.path)/username):$(cat $(workspaces.git-auth.path)/password)@gitlab-ce.do500-gitlab.svc.cluster.local/$(params.TEAM_NAME)/tech-exercise.git
         git push -u origin main
-
-

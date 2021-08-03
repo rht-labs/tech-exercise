@@ -36,7 +36,6 @@ spec:
     default: []
   - name: TEAM_NAME
     type: string
-    default: "{{ .Values.team }}"
   - name: APP_OF_APPS_DEV_KEY
     type: string
     default: ""
@@ -156,6 +155,31 @@ spec:
           value: "$(tasks.helm-package.results.CHART_VERSION)"
       runAfter: 
         - fetch-argocd-configuration
+    - name: verify-deployment
+      taskRef:
+        name: verify-deployment
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+        - name: git-auth
+          workspace: git-auth
+      params:
+        - name: WORK_DIRECTORY
+          value: "tech-exercise/main/pet-battle/"
+        - name: PREVIOUS_VERSION
+          value: "$(tasks.deploy-test.results.PREVIOUS_VERSION)"
+        - name: PREVIOUS_CHART_VERSION
+          value: "$(tasks.deploy-test.results.PREVIOUS_CHART_VERSION)"
+        - name: TEAM_NAME
+          value: "$(params.TEAM_NAME)"
+        - name: VERSION
+          value: "$(tasks.maven.results.VERSION)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: DEPLOY_ENVIRONMENT
+          value: "test"
+      runAfter:
+        - deploy-test
   results:
     - name: VERSION
       description: Version of the application
@@ -163,4 +187,9 @@ spec:
     - name: CHART_VERSION
       description: Version of the helm chart
       value: "$(tasks.helm-package.results.CHART_VERSION)"
-  
+    - name: PREVIOUS_CHART_VERSION
+      description: Version of currently applied chart
+      value: "$(tasks.deploy-test.results.PREVIOUS_CHART_VERSION)"
+    - name: PREVIOUS_VERSION
+      description: Version of currently running app
+      value: "$(tasks.deploy-test.results.PREVIOUS_VERSION)"
