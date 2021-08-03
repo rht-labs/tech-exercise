@@ -48,7 +48,7 @@ spec:
       image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       script: |
         #!/bin/sh
-        source rollback
+        source ./rollback
         if [[ $ROLLOUT_FAIL != '' ]]; then
           # TODO - check the roll back has not failed also...
           yq eval -i .applications."$(params.APPLICATION_NAME)".source_ref=\"$(params.PREVIOUS_CHART_VERSION)\"  "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
@@ -61,7 +61,7 @@ spec:
       image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       script: |
         #!/bin/sh
-        source rollback
+        source ./rollback
         if [[ $ROLLOUT_FAIL != '' ]]; then
           git config --global user.email "tekton@rht-labs.bot.com"
           git config --global user.name "🐈 Tekton 🐈"
