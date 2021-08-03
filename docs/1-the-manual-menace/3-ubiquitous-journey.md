@@ -17,32 +17,38 @@ git push -u origin --tags
 Take a walk in values-tooling.yaml file...
 * Boostrap projects 
 * Jenkins
-Take a walk in values.yaml file... [pb enabled false]
+* Tekton
 
+### Take a walk in values.yaml file... [pb enabled false]
+
+Update your `ubiquitous-journey/values-tooling.yaml`
+- change your `<TEAM_NAME>` in the bootstrap section
 ```yaml
-# update your values.yaml in the root file accordingly
-source: "https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git"
-team: <YOUR_TEAM_NAME>
-```
-
-update your `ubiquitous-journey/values-tooling.yaml` to change <YOUR_TEAM_NAME> in the bootstrap section
-<pre class="language-yaml">
-...
         - name: jenkins
           kind: ServiceAccount
           role: admin
-          namespace: biscuits-ci-cd
+          namespace: <TEAM_NAME>-ci-cd
       namespaces:
-        - name: biscuits-ci-cd
+        - name: <TEAM_NAME>-ci-cd
           bindings: *binds
-        - name: biscuits-dev
+        - name: <TEAM_NAME>-dev
           bindings: *binds
-        - name: biscuits-test
+        - name: <TEAM_NAME>-test
           bindings: *binds
-        - name: biscuits-staging
+        - name: <TEAM_NAME>-stage
           bindings: *binds
-...
-</pre>
+```
+- update  the `source` URL to be your `GITHUB_URL` 
+```yaml
+  # Tekton Pipelines
+  - name: tekton-pipeline
+    enabled: true
+    source: "https://gitlab-ce.do500-gitlab.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+    source_ref: main
+    source_path: tekton
+    values:
+      team: <TEAM_NAME>
+```
 
 ```bash
 # git add, commit, push your changes..

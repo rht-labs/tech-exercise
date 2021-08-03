@@ -25,7 +25,7 @@ applications:
         - name: biscuits-test
           bindings: *binds
           operatorgroup: true
-        - name: biscuits-staging
+        - name: biscuits-stage
           bindings: *binds
           operatorgroup: true
 
