@@ -61,14 +61,15 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   url: https://redhat-cop.github.io/helm-charts
 - name: do500-git
   url: https://gitlab-ce.apps.hivec.sandbox1243.opentlc.com/ateam/team-excercise.git
+  type: git
   insecure: true
-  insecureIgnoreHostKey: true 
+  insecureIgnoreHostKey: true
   passwordSecret:
     name: git-auth
     key: password
   usernameSecret:
     name: git-auth
-    key: username  
+    key: username
 EOF
 
 cat <<'EOF' > /tmp/initial-creds.yaml
