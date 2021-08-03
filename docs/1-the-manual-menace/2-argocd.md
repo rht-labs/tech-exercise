@@ -34,13 +34,18 @@ We can add `Git|Helm` repositories via `ssh|https`.
 
 Lets add out GitLab repo.
 
+```bash
+export GITLAB_USER=<gitlab user>
+export GITLAB_PASSWORD=<gitlab password>
+```
+
 Lets our git creds via a secret (**UJ this**)
 ```bash
 cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
 apiVersion: v1
 data:
-  password: <base64 encoded password>
-  username: <base64 encoded username>
+  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
+  username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
   annotations:
