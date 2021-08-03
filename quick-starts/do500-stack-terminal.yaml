@@ -1,0 +1,42 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claim-devworkspace
+  namespace: openshift-operators
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+  volumeMode: Filesystem
+---
+apiVersion: workspace.devfile.io/v1alpha1
+kind: DevWorkspace
+metadata:
+  name: do500-terminal
+  generateName: do500-terminal
+  labels:
+    console.openshift.io/terminal: 'true'
+  annotations:
+    controller.devfile.io/restricted-access: 'true'
+  namespace: openshift-operators
+spec:
+  routingClass: web-terminal
+  started: true
+  template:
+    components:
+      - plugin:
+          id: redhat-developer/web-terminal/4.5.0
+          name: web-terminal
+      - container:
+          name: dev
+          image: quay.io/eformat/stack-do500:latest
+          memoryLimit: 512Mi
+          args: ["sleep", "infinity"]
+          volumeMounts:
+            - name: claim-devworkspace
+              path: "/projects"
+      - volume:
+          name: claim-devworkspace
