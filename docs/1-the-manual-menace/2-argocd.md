@@ -60,7 +60,7 @@ data:
     - name: redhat-cop
       type: helm
       url: https://redhat-cop.github.io/helm-charts
-    - url: https://gitlab-ce.apps.hivec.sandbox1243.opentlc.com/ateam/team-excercise.git
+    - url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/ateam/team-excercise.git
       type: git
       insecure: false
       insecureIgnoreHostKey: true
@@ -95,7 +95,7 @@ type: kubernetes.io/basic-auth
 EOF
 ```
 
-Create our configuration:
+Create our configuration, be sure to use your `GITLAB_URL`.
 ```bash
 cat <<'EOF' > /tmp/initial-repos.yaml
 - name: ubiquitous-journey
@@ -104,7 +104,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   type: helm
   url: https://redhat-cop.github.io/helm-charts
 - name: do500-git
-  url: https://gitlab-ce.apps.hivec.sandbox1243.opentlc.com/ateam/team-excercise.git
+  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/ateam/team-excercise.git
   type: git
   insecure: true
   insecureIgnoreHostKey: true
@@ -125,7 +125,7 @@ cat <<'EOF' > /tmp/initial-creds.yaml
     name: git-auth
     key: username
   type: git
-  url: https://gitlab-ce.apps.hivec.sandbox1243.opentlc.com
+  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}
 EOF
 ```
 
