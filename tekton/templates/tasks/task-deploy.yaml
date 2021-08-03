@@ -34,7 +34,7 @@ spec:
         #!/bin/sh
         yq eval -i .applications."$(params.APPLICATION_NAME)".source_ref=\"$(params.CHART_VERSION)\"  "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_version=\"$(params.VERSION)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
-        yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_namespace="$(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT)" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
+        yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_namespace=\"$(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
     - name: commit-changes
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       image: quay.io/redhat-cop/ubi8-git:latest
@@ -44,9 +44,10 @@ spec:
         git config --global user.email "tekton@rht-labs.bot.com"
         git config --global user.name "🐈 Tekton 🐈"
         git config --global push.default simple
+        git checkout main
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
-        git remote set-url origin https://(cat $(workspaces.git-auth.path)/username):$(cat $(workspaces.git-auth.path)/password)@gitlab-ce.gitlab.svc.cluster.local/{{ .Values.team }}/tech-exercise.git
+        git remote set-url origin http://$(cat $(workspaces.git-auth.path)/username):$(cat $(workspaces.git-auth.path)/password)@gitlab-ce.do500-gitlab.svc.cluster.local/{{ .Values.team }}/tech-exercise.git
         git push -u origin main
 
 
