@@ -17,14 +17,18 @@ applications:
       operartor: false
 
   # Pet Battle API
-
-  # Pet Battle Frontend
-  pet_battle:
-    name: keycloak
+  pet-battle-api:
+    name: pet-battle
     enabled: true
-    source: https://github.com/petbattle/pet-battle-infra.git
-    source_path: 'keycloak'
     source_ref: main
     values:
       app_domain: apps.s47.core.rht-labs.com
-      operartor: false
+
+  # Pet Battle Frontend
+  pet-battle:
+    name: pet-battle
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-infra.git
+    source_ref: main
+    values:
+      app_domain: apps.s47.core.rht-labs.com

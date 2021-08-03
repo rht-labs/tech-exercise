@@ -12,12 +12,12 @@ applications:
 
   # Test app of app
   - name: test-app-of-pb
-    enabled: false
+    enabled: true
     helm_values:
       - pet-battle/test/values.yaml
 
   # Staging App of Apps
   - name: staging-app-of-pb
-    enabled: false
+    enabled: true
     helm_values:
       - pet-battle/staging/values.yaml

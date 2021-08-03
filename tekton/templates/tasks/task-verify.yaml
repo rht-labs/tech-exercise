@@ -38,7 +38,7 @@ spec:
         # verify the deployment by checking the VERSION against PREVIOUS_VERSION
         until [ "$label" == "$(params.VERSION)" ]; do
           echo "$(params.APPLICATION_NAME)-$(params.VERSION) version hasn't started to roll out"
-          label=$(oc get dc/$(params.APPLICATION_NAME) -n $(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT) --template='{{ index .metadata.labels "app.kubernetes.io/version"  }}')
+          label=$(oc get dc/$(params.APPLICATION_NAME) -n $(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT) --template='{{ "{{" }} index .metadata.labels "app.kubernetes.io/version" {{ "}}" }}')
           sleep 1
         done
         oc rollout status --timeout=2m dc/$(params.APPLICATION_NAME) -n $(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT) || rc1=$?
