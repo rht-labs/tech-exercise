@@ -31,7 +31,7 @@ spec:
         ### Setup Your Environment
 
 
-        1. Setup a new team name `echo TEAM_NAME="ateam" | tee -a ~/.bashrc -a ~/.zshrc`{{execute}} in the shell environment.
+        1. Setup a new team name `echo export TEAM_NAME="ateam" | tee -a ~/.bashrc -a ~/.zshrc`{{execute}} in the shell environment.
 
 
            If you don't want to use team **ateam** copy and paste this command and update with your alternate team name before running it.
@@ -40,8 +40,7 @@ spec:
         1. Get the existing cluster domain and set it in our .bashrc file and source it.
         ```
          CLUSTER_DOMAIN=$(oc get ingress.config/cluster -o 'jsonpath={.spec.domain}')
-         echo CLUSTER_DOMAIN=${CLUSTER_DOMAIN} >> ~/.bashrc
-         echo CLUSTER_DOMAIN=${CLUSTER_DOMAIN} >> ~/.zsh
+         echo export CLUSTER_DOMAIN=${CLUSTER_DOMAIN} | tee -a ~/.bashrc -a ~/.zshrc
          source ~/.bashrc
          echo ${CLUSTER_DOMAIN}
          echo ${TEAM_NAME}

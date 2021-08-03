@@ -12,4 +12,4 @@ docsify serve ./docs
 - [ ] ADD COMMENTS TO THE CHART AS IT'S getting CompleXOR
 - [ ] write find and replace scipty thingy for all `s/labs-/${TEAM_NAME}-/g` in yamls
 - [ ] Explore ArgoCD operator / GitOps operator as cluster-wide
-- [ ] fix all FIXME's in text
+- [ ] fix all `FIXME` and `TODO` in the text
