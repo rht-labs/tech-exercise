@@ -1,0 +1,6 @@
+# so we dont include these in our chart secret
+docs/
+pet-battle/
+tekton/
+quick-starts/
+README.md
