@@ -47,4 +47,4 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       command: ["/bin/sh", "-c"]
       args:
-        - cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}' | tee $(results.VERSION.path);
+        - cat pom.xml | grep "^    <version>.*</version>$" | awk -F'[><]' '{print $3}' | xargs echo -n | tee $(results.VERSION.path);

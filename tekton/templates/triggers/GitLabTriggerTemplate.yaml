@@ -56,9 +56,6 @@ spec:
             value: $(tt.params.git-branch)
           - name: TEAM_NAME
             value: "{{ .Values.team }}"
-          - name: MAVEN_BUILD_OPTS
-            value:
-              - -DskipTests
         workspaces:
         - name: shared-workspace
           persistentVolumeClaim:
@@ -70,6 +67,6 @@ spec:
           persistentVolumeClaim:
             claimName: maven-m2
         # TODO: how did the secret get here?
-        - name: git-auth-secret
+        - name: git-auth
           secret:
             secretName: git-auth

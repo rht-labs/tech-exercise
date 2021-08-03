@@ -7,7 +7,7 @@ spec:
     - name: shared-workspace
     - name: maven-settings
     - name: maven-m2
-    - name: git-auth-secret
+    - name: git-auth
   params:
   - name: APPLICATION_NAME
     type: string
@@ -74,7 +74,8 @@ spec:
             - "package"
         - name: MAVEN_BUILD_OPTS
           value:
-            - "$(params.MAVEN_BUILD_OPTS)"
+            - "-Dquarkus.package.type=fast-jar"
+            - "-DskipTests"
       workspaces:
         - name: maven-settings
           workspace: maven-settings
@@ -138,6 +139,8 @@ spec:
       workspaces:
         - name: output
           workspace: shared-workspace
+        - name: git-auth
+          workspace: git-auth
       params:
         - name: APPLICATION_NAME
           value: "$(params.APPLICATION_NAME)"
