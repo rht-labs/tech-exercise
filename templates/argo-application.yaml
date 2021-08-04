@@ -1,5 +1,4 @@
 {{- if .Values.applications }}
-{{- $helm_repo := .Values.helm_repository }}
 {{- $release := .Values.release }}
 {{- $source := .Values.source }}
 {{- $team := .Values.team }}
@@ -47,11 +46,13 @@ spec:
 {{- toYaml .values | nindent 8 }}
 {{- end }}
 {{- end }}
+    {{- if .source_path }}
     path: {{ .source_path | default "." }}
-    repoURL: {{ $helm_repo| default $source }}
+    {{- end }}
+    repoURL: {{ $source }}
     targetRevision: {{ .source_ref | default "main" | quote }}
-    {{- if .chart_name }}
-    chart: {{ .chart_name }}
+    {{- if not .source_path }}
+    chart: {{ .chart_name | default .name }}
     {{- end }}
   syncPolicy:
     automated:
