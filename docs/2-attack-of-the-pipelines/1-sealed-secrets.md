@@ -100,7 +100,7 @@ git push
 
 🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret
 
-You should notice that the `git-auth` secrets fails to sync:
+You might notice that the `git-auth` secrets fails to sync:
 
 > :warning: HEALTH DETAILS - failed update: Resource "git-auth" already exists and is not managed by SealedSecret
 
