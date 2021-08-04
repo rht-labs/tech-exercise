@@ -52,7 +52,7 @@ spec:
     targetRevision: {{ .source_ref | default "main" | quote }}
     {{- if .chart_name }}
     chart: {{ .chart_name | default .name }}
-    {{- end}}
+    {{- end }}
   syncPolicy:
     automated:
       prune: true
