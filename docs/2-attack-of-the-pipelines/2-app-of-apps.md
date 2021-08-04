@@ -51,7 +51,7 @@ With the values enabled, let's update the helm chart for our petbattle tooling a
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 
-`FIXME` - Now we Rinse and Repeat for the other infra components for `infinispan, grafana, cert-utils`
+Now we 🌊🌊 Rinse and Repeat 🌊🌊 for the other infra components for `infinispan, grafana`
 
 ```yaml
 applications:
@@ -74,6 +74,27 @@ git commit -m  "🐰 ADD - infinispan to test 🐰"
 git push 
 ```
 
+```yaml
+applications:
+  # Grafana
+  grafana:
+    name: grafana
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-infra
+    source_ref: main
+    source_path: grafana
+    values:
+      ignoreHelmHooks: true
+```
+
+Its not real unless its in git
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐰 ADD - grafana to test 🐰" 
+git push 
+```
+
 
 Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. 
 [TODO] some explanation for folder structure and test/staging env
@@ -85,7 +106,7 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   pet-battle-api:
     name: pet-battle-api
     enabled: true
-    source: http://nexus:8081/repository/helm-charts # https://petbattle.github.io/helm-charts/
+    source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts
     chart_name: pet-battle-api
     source_ref: 1.1.0 # helm chart version
     values:
@@ -95,7 +116,7 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   pet-battle:
     name: pet-battle
     enabled: true
-    source: http://nexus:8081/repository/helm-charts # https://petbattle.github.io/helm-charts/
+    source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts 
     chart_name: pet-battle
     source_ref: 1.0.6 # helm chart version
     values:
