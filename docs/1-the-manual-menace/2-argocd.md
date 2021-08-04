@@ -1,14 +1,29 @@
 ## 🐙 ArgoCD - GitOps Controller
-Blah blah blah stuff about ArgoCD and why we use it...
+Blah blah blah stuff GitOps and why we use it...
 
-blah blah blah stuff about Operators and what they provide us.
+blah blah blah stuff about Operators and Helm and what they provide us.
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 ```
+## Get your GitLab ready for GitOps
+Log into GitLab with your team with your credentials. We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
+
+![gitlab-initial-login](images/gitlab-initial-login.png)
+
+Put your <TEAM_NAME> as the group name, select `Public` for Visibility level, and hit Create. 
+![gitlab-create-group](images/gitlab-create-group.png)
+
+Now lets create a git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes :)
+
+From `New Project` button on the left hand side, and use `tech-exercise` as Project Name, select `Public` for Visibility level, and hit Create. 
+![gitlab-new-project](images/gitlab-new-project.png)
+![gitlab-new-project](images/gitlab-new-project-2.png)
+
+Now let's start our GitOps Journey!
 
 ## ArgoCD Basic install
-
+ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. 
 A basic install of ArgoCD
 ```bash
 helm upgrade --install argocd \
@@ -32,14 +47,14 @@ Post deployment, ArgoCD manages Repositories in a ConfigMap ```oc get cm argocd-
 
 We can add `Git|Helm` repositories via `ssh|https`.
 
-Lets add out GitLab repo.
+Lets add our GitLab repo.
 
 ```bash
 export GITLAB_USER=<your gitlab user>
 export GITLAB_PASSWORD=<your gitlab password>
 ```
 
-Lets put our git creds via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
+Lets put our git credentials via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
 ```bash
 cat <<EOF | oc apply -f -
 apiVersion: v1

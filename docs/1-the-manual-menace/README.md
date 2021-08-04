@@ -11,6 +11,16 @@
 * [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) - one line definition
 
 
+## 🦆 Conventions 🦆
+When running through the exercise, we're tried to call out where things need replacing. The key ones are anything inside an `<>` should be replaced. For example, if your team is called `biscuits` then in the instructions if you see `<TEAM_NAME>` this should be replaced with `biscuits` like so:
+```yaml
+name: <TEAM_NAME>
+
+# this becomes
+name: biscuits
+```
+
+
 ## Cartoon / funny exercise image / comic
 
 
