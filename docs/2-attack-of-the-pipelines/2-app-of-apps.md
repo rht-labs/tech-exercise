@@ -1,4 +1,6 @@
 ### Deploy App of Apps 
+Blah Blah .. this is what app of apps pattern is, what application sets are etc etc
+
 Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/staging/values.yaml` && `pet-battle/test/values.yaml`
 blah blah blah, this is keyclock required by PB for auth.... We will demonstrate deploying it using a GitOps parrtern which is repeatable
 
@@ -20,7 +22,7 @@ Now let's enable app-of-apps definition for petbatlle deplopments in test and st
 </pre>
 
 
-our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section
+our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. Make sure to replace <CLUSTER_DOMAIN> with your value.
 
 ```yaml
 applications:
@@ -28,12 +30,12 @@ applications:
   keycloak:
     name: keycloak
     enabled: true
-    source: https://github.com/petbattle/pet-battle-infra.git
-    source_path: 'keycloak'
-    source_ref: main # helm chart version
+    source: https://github.com/petbattle/pet-battle-infra
+    source_ref: main
+    source_path: keycloak
     values:
-      app_domain: apps.cluster.region.com
-      operator: false
+      app_domain: <CLUSTER_DOMAIN>
+      ignoreHelmHooks: true
 ```
 
 With the values enabled, let's update the helm chart for our petbattle tooling and now apps also.
