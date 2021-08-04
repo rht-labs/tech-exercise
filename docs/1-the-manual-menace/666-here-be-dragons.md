@@ -1,6 +1,6 @@
 ## Here be dragons!
 
-![oh-look-a-dragon](../images/oh-look-a-dragon.png)
+![oh-look-a-dragon](../images/oh-look-dragons.png)
 
 ### Extend 🔥🦄
 - Add $SOMETHING from the redhat-cop/helm-charts repo to the UJ eg Hoverfly, Zalenium or something else
