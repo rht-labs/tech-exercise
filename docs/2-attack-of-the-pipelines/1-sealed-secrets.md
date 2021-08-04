@@ -98,10 +98,18 @@ git push
 
 🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret
 
-HEALTH DETAILS
-failed update: Resource "git-auth" already exists and is not managed by SealedSecret
+You should notice that the `git-auth` secrets fails to sync:
 
-force resync
+> :warning: HEALTH DETAILS - failed update: Resource "git-auth" already exists and is not managed by SealedSecret
+
+Thats because we already created a `git-auth` secret manually in Excercise.1. Lets remove it now:
+```bash
+oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth
+```
+
+You may need to force sync your secret in argocd to get it to apply:
+
+![argocd-force-sync.png](images/argocd-force-sync.png)
 
 
 🪄 Log in to Jenkins -> Configuration -> Credentials to view git-auth credential is there.
