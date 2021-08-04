@@ -1,5 +1,4 @@
 {{- if .Values.applications }}
-{{- $helm_repo := .Values.helm_repository }}
 {{- $release := .Values.release }}
 {{- $team := .Values.team }}
 {{- range $app := .Values.applications }}
