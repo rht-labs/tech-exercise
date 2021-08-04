@@ -70,7 +70,7 @@ Its not real unless its in git
 ```bash
 # git add, commit, push your changes..
 git add .
-git commit -m  "🐰 ADD - keycloak to test 🐰" 
+git commit -m  "🐰 ADD - infinispan to test 🐰" 
 git push 
 ```
 
