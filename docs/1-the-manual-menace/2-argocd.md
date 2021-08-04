@@ -41,7 +41,7 @@ export GITLAB_PASSWORD=<gitlab password>
 
 Lets put our git creds via a secret (**FIXME - Sealed Secrets - UJ this**)
 ```bash
-cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+cat <<EOF | oc apply -f -
 apiVersion: v1
 data:
   password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
@@ -51,7 +51,6 @@ metadata:
   annotations:
     tekton.dev/git-0: https://gitlab-ce
   name: git-auth
-type: kubernetes.io/basic-auth
 EOF
 ```
 
