@@ -3,6 +3,7 @@
   * [🐌 The Basics](1-the-manual-menace/1-the-basics.md)
   * [🐙 ArgoCD](1-the-manual-menace/2-argocd.md)
   * [🔥🦄 Ubiquitous Journey](1-the-manual-menace/3-ubiquitous-journey.md)
+  * [🦜 Extend UJ](1-the-manual-menace/4-extend-uj.md)
   * [🏃🏻‍♀️ This is GitOps](1-the-manual-menace/5-this-is-gitops.md)
   * [🐉 Here Be Dragons!](1-the-manual-menace/666-here-be-dragons.md)
 * [2. Attack of the Pipelines](2-attack-of-the-pipelines/README.md)

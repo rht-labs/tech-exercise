@@ -14,14 +14,17 @@ update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some 
     enabled: true
     source: https://redhat-cop.github.io/helm-charts
     chart_name: sonatype-nexus
-    source_ref: "0.0.15"
+    source_ref: "1.0.0"
     values:
       service:
         name: nexus
 ```
 
 ```bash
-git add, commit, push..
+# git add, commit, push your changes..
+git add .
+git commit -m  "🦘 ADD - nexus repo manager 🦘" 
+git push 
 ```
 
 observe ArgoCD that nexus spins up and connect to Nexus itself to verify
