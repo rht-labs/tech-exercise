@@ -97,15 +97,14 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
     enabled: true
     source: http://nexus:8081/repository/helm-charts # https://petbattle.github.io/helm-charts/
     chart_name: pet-battle
-    source_ref: 1.0.0 # helm chart version
+    source_ref: 1.0.6 # helm chart version
     values:
       image_version: latest # container image version
 ```
 
-The front end needs to have some confiuration applied to it. This should be packaged up in the helm chart or baked into the image - butttt we should really apply configuration as *code*. We should build our apps once so they can be initialised in many environments with supplied configuration. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the defintion for the front end as such.
+The front end needs to have some configuration applied to it. This should be packaged up in the helm chart or baked into the image - butttt we should really apply configuration as *code*. We should build our apps once so they can be initialised in many environments with supplied configuration. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the definition for the front end as such.
 ```bash
 cat << EOF >> pet-battle/test/values.yaml
-
       config_map: '{
         "catsUrl": "https://pet-battle-api-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
         "tournamentsUrl": "https://pet-battle-tournament-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
@@ -118,7 +117,6 @@ cat << EOF >> pet-battle/test/values.yaml
           "enableLogging": true
         }
       }'
-
 EOF
 ```
 
