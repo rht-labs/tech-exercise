@@ -1,7 +1,12 @@
 {{- if .Values.applications }}
+{{- $helm_repo := .Values.helm_repository }}
 {{- $release := .Values.release }}
+{{- $source := .Values.source }}
 {{- $team := .Values.team }}
 {{- range $app := .Values.applications }}
+{{- if $app.source }}
+{{- $source = $app.source }}
+{{- end }}
 {{- if $app.enabled }}
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -12,7 +17,7 @@ metadata:
 {{- if ne $release "ci-cd" }}
   name: {{ $release }}-{{ .name }}
 {{- else }}
-  name: {{ $app.name }}
+  name: {{ .name }}
 {{- end }}
   labels:
 {{- if .values }}
@@ -21,32 +26,32 @@ metadata:
     app.kubernetes.io/instance: {{ .values.fullnameOverride }}
 {{- end }}
 {{- else }}
-    app.kubernetes.io/instance: {{ $app.name }}
+    app.kubernetes.io/instance: {{ .name }}
 {{- end }}
 {{- end }}
 spec:
   destination:
-    namespace: {{ $app.destination | default (printf "%s-%s" $team $release) }}
-    server: {{ $app.cluster_api | default "https://kubernetes.default.svc" }}
-  project: {{ $app.project | default "default" }}
+    namespace: {{ .destination | default (printf "%s-%s" $team $release) }}
+    server: {{ .cluster_api | default "https://kubernetes.default.svc" }}
+  project: {{ .project | default "default" }}
   source:
-{{- if not $app.no_helm }}
+{{- if not .no_helm }}
     helm:
-      releaseName: {{ $app.name }}
-{{- if $app.helm_values }}
+      releaseName: {{ .name }}
+{{- if .helm_values }}
       valueFiles:
-{{- toYaml $app.helm_values | nindent 8 }}
+{{- toYaml .helm_values | nindent 8 }}
 {{- end }}
-{{- if $app.values }}
+{{- if .values }}
       values: |
-{{- toYaml $app.values | nindent 8 }}
+{{- toYaml .values | nindent 8 }}
 {{- end }}
 {{- end }}
-    path: {{ $app.source_path | default "." }}
-    repoURL: {{ $app.source }}
-    targetRevision: {{ $app.source_ref | default "main" | quote }}
-    {{- if $app.chart_name }}
-    chart: {{ $app.chart_name }}
+    path: {{ .source_path | default "." }}
+    repoURL: {{ $helm_repo| default $source }}
+    targetRevision: {{ .source_ref | default "main" | quote }}
+    {{- if .chart_name }}
+    chart: {{ .chart_name }}
     {{- end }}
   syncPolicy:
     automated:
