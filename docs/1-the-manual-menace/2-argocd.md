@@ -13,6 +13,7 @@ helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 
 2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. However, things to be weary of with many ArgoCD instances in one shared cluster is the `applicationInstanceLabelKey`. This needs to be unique for each ArgoCD deployment otherwise funky things start happening.
 
+<!-- weird bug alert! having a newline here makes the docsify render happy, but having the commands starting with "--" and no new line causes it to run on  -->
 ```bash
 helm upgrade --install argocd \
   --namespace ${TEAM_NAME}-ci-cd \
@@ -26,7 +27,7 @@ helm upgrade --install argocd \
 </p>
 
 
-1. 
+1. Stuff here
 ```bash
 oc get pods -w -n ${TEAM_NAME}-ci-cd
 ```
@@ -43,10 +44,20 @@ Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
 You just logged into ArgoCD! Lets deploy a sample application through UI. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out. Set the folling:
-* Application Name: my-microsite 
-* Project: <TEAM_NAME>-ci-cd
+* Application Name: my-todolist 
+* Project: default
 * Sync Policy: Automatic
-*
-### Deploy A Microsite via ArgoCD (into new namespace?)
 
-^ this is all well and good, but we want to do GIT OPS !
+* Repository URL: https://rht-labs.com/todolist/
+    (and select Helm from the right drop down menu)
+* Chart: todolist
+* Version: 1.0.1 
+
+* Cluster URL: https://kubernetes.default.svc
+* Namespace: <TEAM_NAME>-ci-cd
+
+Your form should look like this:
+![argocd-create-application](images/argocd-create-application.png)
+
+After you hit create, you'll see `my=todolist` application is created and start deploying in your `${TEAM_NAME}-ci-cd` namespace.
+![argocd-todolist](images/argocd-todolist.png)
