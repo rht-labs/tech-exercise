@@ -5,20 +5,26 @@ devops is hard, secure devops is harder....
 
 these secrets are used by our pipeline in the next exercise.
 
-lets start by sealing our token for accessing git. Update the `<YOUR_USERNAME>` and `<YOUR_PASSWORD>` below with the ones provided by your instructor and run the command. This will generate a kube secret in `tmp`
+Lets start by sealing our token for accessing git.
 ```bash
-cat << EOF > /tmp/git-auth.yaml       
----
+export GITLAB_USER=<your gitlab user>
+export GITLAB_PASSWORD=<your gitlab password>
+```
+
+Run this command. This will generate a kube secret in `tmp`
+```bash
+cat << EOF > /tmp/git-auth.yaml
 apiVersion: v1
+data:
+  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
+  username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
-  name: git-auth
+  annotaion:
+    tekton.dev/git-0: https://gitlab-ce
   labels:
     credential.sync.jenkins.openshift.io: "true"
-type: "kubernetes.io/basic-auth"
-stringData:
-  password: "<YOUR_PASSWORD>"
-  username:  "<YOUR_USERNAME>"
+  name: git-auth
 EOF
 ```
 
@@ -28,7 +34,7 @@ tell people what kubeseal is
 # use kubeseal to seal the secret
 kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
     -n ${TEAM_NAME}-ci-cd \
-    --controller-namespace shared-do500 \
+    --controller-namespace do500-shared \
     --controller-name sealed-secrets \
     -o yaml
 ```
@@ -38,9 +44,7 @@ cat /tmp/sealed-git-auth.yaml
 ```
 
 We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
-[TODO] - mark this snipped as NOT TO BE COPIED
 <pre>
----
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -64,7 +68,7 @@ cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
     username: AgAtnYz8U0AqIIaqYrj...
 </pre>
 
-In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section of the `# Sealed Secrets`. Copy the output of `username` and `password`  from the previous command and update the values. Set the `enabled` flag to `true`
+In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section of the `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly. Now set the `enabled` flag to `true`.
 ```yaml
 ...
   # Sealed Secrets
@@ -93,5 +97,11 @@ git push
 ```
 
 🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret
+
+HEALTH DETAILS
+failed update: Resource "git-auth" already exists and is not managed by SealedSecret
+
+force resync
+
 
 🪄 Log in to Jenkins -> Configuration -> Credentials to view git-auth credential is there.

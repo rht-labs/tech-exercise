@@ -35,8 +35,8 @@ We can add `Git|Helm` repositories via `ssh|https`.
 Lets add out GitLab repo.
 
 ```bash
-export GITLAB_USER=<gitlab user>
-export GITLAB_PASSWORD=<gitlab password>
+export GITLAB_USER=<your gitlab user>
+export GITLAB_PASSWORD=<your gitlab password>
 ```
 
 Lets put our git creds via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
@@ -48,8 +48,10 @@ data:
   username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
-  annotations:
+  annotaion:
     tekton.dev/git-0: https://gitlab-ce
+  labels:
+    credential.sync.jenkins.openshift.io: "true"
   name: git-auth
 EOF
 ```
@@ -84,8 +86,8 @@ data:
 We can also add repositories at install time, be sure to use your `GITLAB_URL`.
 
 ```bash
-export GITLAB_USER=<gitlab user>
-export GITLAB_PASSWORD=<gitlab password>
+export GITLAB_USER=<your gitlab user>
+export GITLAB_PASSWORD=<your gitlab password>
 ```
 
 Lets our git creds via a secret (**UJ this**)
@@ -97,8 +99,10 @@ data:
   username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
-  annotations:
+  annotaion:
     tekton.dev/git-0: https://gitlab-ce
+  labels:
+    credential.sync.jenkins.openshift.io: "true"
   name: git-auth
 type: kubernetes.io/basic-auth
 EOF
