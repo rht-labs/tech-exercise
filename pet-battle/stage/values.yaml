@@ -1,4 +1,4 @@
-release: "staging"
+release: "stage"
 helm_repository: "http://nexus:8081/repository/helm-charts/"
 
 ##############

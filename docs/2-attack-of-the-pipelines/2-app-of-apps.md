@@ -1,7 +1,7 @@
 ### Deploy App of Apps 
 Blah Blah .. this is what app of apps pattern is, what application sets are etc etc
 
-Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/staging/values.yaml` && `pet-battle/test/values.yaml`
+Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
 blah blah blah, this is keyclock required by PB for auth.... We will demonstrate deploying it using a GitOps parrtern which is repeatable
 
 something something app of apps, what it is why we use it
@@ -18,7 +18,7 @@ Now let's enable app-of-apps definition for petbatlle deplopments in test and st
   - name: staging-app-of-pb
 <strong>    enabled: true</strong>
     helm_values:
-      - pet-battle/staging/values.yaml
+      - pet-battle/stage/values.yaml
 </pre>
 
 
@@ -120,7 +120,7 @@ The `pet-battle/test/values.yaml` file should now look something like this (but 
       }'
 </pre>
 
-Repeat the same thing for `pet-battle/staging/values.yaml` file in order to deploy the staging environment, and push your changes to the repo.
+Repeat the same thing for `pet-battle/stage/values.yaml` file in order to deploy the staging environment, and push your changes to the repo.
 
 Its not real unless its in git
 ```bash

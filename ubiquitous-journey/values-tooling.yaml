@@ -14,40 +14,20 @@ applications:
         - name: jenkins
           kind: ServiceAccount
           role: admin
-          namespace: biscuits-ci-cd
+          namespace: <TEAM_NAME>-ci-cd
       namespaces:
-        - name: biscuits-ci-cd
+        - name: <TEAM_NAME>-ci-cd
           bindings: *binds
           operatorgroup: false
-        - name: biscuits-dev
+        - name: <TEAM_NAME>-dev
           bindings: *binds
           operatorgroup: true
-        - name: biscuits-test
+        - name: <TEAM_NAME>-test
           bindings: *binds
           operatorgroup: true
-        - name: biscuits-stage
+        - name: <TEAM_NAME>-stage
           bindings: *binds
           operatorgroup: true
-
-  # Sealed Secrets
-  - name: sealed-secrets
-    enabled: false
-    source: https://redhat-cop.github.io/helm-charts
-    chart_name: helper-sealed-secrets
-    source_ref: "1.0.2"
-    values:
-      secrets:
-        - name: git-auth
-          type: kubernetes.io/basic-auth
-          annotations:
-            tekton.dev/git-0: http://gitlab-ce.do500-gitlab.svc.cluster.local
-          labels:
-            credential.sync.jenkins.openshift.io: "true"
-          data:
-            username: <YOUR_SEALED_SECRET_USERNAME>
-            password: <YOUR_SEALED_SECRET_PASSWORD>
-
-  # Nexus
 
   # Jenkins
   - name: jenkins
@@ -86,21 +66,10 @@ applications:
           username: admin
           password: admin123
 
+  # Nexus
+
+
+  # Sealed Secrets
+
+  
   # Tekton Pipelines
-  - name: tekton-pipeline
-    enabled: false
-    source: https://git-cd..../tech-exercise.git
-    source_ref: main
-    source_path: tekton
-    values:
-      team: biscuits
-
-
-# 2) we put this into the template for the ArgoApplication.yaml
-#     # Tekton
-#   - name: tekton-pipeline
-#     enabled: true
-#     source: https://git-cd..../tech-exercise.git
-#     source_ref: "0.0.15"
-#     helm_values:
-#       - ubiquitous-journey/values-tooling.yaml
