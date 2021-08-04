@@ -51,51 +51,6 @@ With the values enabled, let's update the helm chart for our petbattle tooling a
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 
-Now we 🌊🌊 Rinse and Repeat 🌊🌊 for the other infra components for `infinispan, grafana`
-
-```yaml
-applications:
-  # Infnispan
-  infinispan:
-    name: infinispan
-    enabled: true
-    source: https://github.com/petbattle/pet-battle-infra
-    source_ref: main
-    source_path: infinispan
-    values:
-      ignoreHelmHooks: true
-```
-
-Its not real unless its in git
-```bash
-# git add, commit, push your changes..
-git add .
-git commit -m  "🐰 ADD - infinispan to test 🐰" 
-git push 
-```
-
-```yaml
-applications:
-  # Grafana
-  grafana:
-    name: grafana
-    enabled: true
-    source: https://github.com/petbattle/pet-battle-infra
-    source_ref: main
-    source_path: grafana
-    values:
-      ignoreHelmHooks: true
-```
-
-Its not real unless its in git
-```bash
-# git add, commit, push your changes..
-git add .
-git commit -m  "🐰 ADD - grafana to test 🐰" 
-git push 
-```
-
-
 Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. 
 [TODO] some explanation for folder structure and test/staging env
 
