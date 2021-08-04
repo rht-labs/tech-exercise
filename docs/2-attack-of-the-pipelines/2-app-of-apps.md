@@ -91,7 +91,6 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
     values:
       image_name: pet-battle-api
       image_version: latest # container image version
-      deploymentConfig: true
 
   pet-battle:
     name: pet-battle
