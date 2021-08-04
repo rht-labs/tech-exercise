@@ -76,11 +76,13 @@ In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section
     <strong>enabled: false</strong>
     source: https://redhat-cop.github.io/helm-charts
     chart_name: helper-sealed-secrets
-    source_ref: "1.0.1"
+    source_ref: "1.0.2"
     values:
       secrets:
         - name: git-auth
           type: kubernetes.io/basic-auth
+          annotations:
+            tekton.dev/git-0: http://gitlab-ce.do500-gitlab.svc.cluster.local
           labels:
             credential.sync.jenkins.openshift.io: "true"
           data:
