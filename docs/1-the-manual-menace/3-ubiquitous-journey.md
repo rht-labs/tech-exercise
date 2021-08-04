@@ -7,13 +7,13 @@ Extensible, traceable, auditable ...
 1. Log into GitLab (url provided by your facilitator) with your credentials. We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
 ![gitlab-initial-login](images/gitlab-initial-login.png)
 
-2. Put your <TEAM_NAME> as the group name, select `Public` for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your <TEAM_NAME> as the group name, select `Internal` for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
 ![gitlab-create-group](images/gitlab-create-group.png)
 
 3. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions. Hit `Create a project` button on the left hand side
 ![gitlab-new-project](images/gitlab-new-project.png)
  
-4. On the new view, use `tech-exercise` as Project Name, select `Public` for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
+4. On the new view, use `tech-exercise` as Project Name, select `Internal` for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
 5. Back in your CodeReady Workspace, open a terminal if you have not got one open. Let's push our code to the GitLab server
