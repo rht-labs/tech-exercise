@@ -21,6 +21,14 @@ Take a walk in values-tooling.yaml file...
 
 ### Take a walk in values.yaml file... [pb enabled false]
 
+Update your `values.yaml`
+- update  the `source` URL to be your `GITHUB_URL`
+- change your `<TEAM_NAME>` in the bootstrap section
+```bash
+source: source: "https://gitlab-ce.do500-gitlab.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+team: <TEAM_NAME>
+```
+
 Update your `ubiquitous-journey/values-tooling.yaml`
 - change your `<TEAM_NAME>` in the bootstrap section
 ```yaml
@@ -38,7 +46,7 @@ Update your `ubiquitous-journey/values-tooling.yaml`
         - name: <TEAM_NAME>-stage
           bindings: *binds
 ```
-- update  the `source` URL to be your `GITHUB_URL` 
+- update  the `source` URL to be your `GITHUB_URL`
 ```yaml
   # Tekton Pipelines
   - name: tekton-pipeline

@@ -1,4 +1,4 @@
-# source: "https://gitlab-ce.apps.cluster.example.com/user123/do500-tech.git"
+# change source and team
 source: https://github.com/rht-labs/tech-exercise.git
 team: biscuits
 release: ci-cd

@@ -39,7 +39,7 @@ export GITLAB_USER=<gitlab user>
 export GITLAB_PASSWORD=<gitlab password>
 ```
 
-Lets put our git creds via a secret (**FIXME - Sealed Secrets - UJ this**)
+Lets put our git creds via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
 ```bash
 cat <<EOF | oc apply -f -
 apiVersion: v1
