@@ -146,8 +146,12 @@ The `pet-battle/test/values.yaml` file should now look something like this (but 
 
 Repeat the same thing for `pet-battle/staging/values.yaml` file in order to deploy the staging environment, and push your changes to the repo.
 
+Its not real unless its in git
 ```bash
-git add ...
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐩 ADD - pet battle apps 🐩" 
+git push 
 ```
 
 [TODO] Screenshots from ArgoCD
