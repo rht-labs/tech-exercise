@@ -38,10 +38,42 @@ applications:
       ignoreHelmHooks: true
 ```
 
+Its not real unless its in git
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐰 ADD - keycloak to test 🐰" 
+git push 
+```
+
 With the values enabled, let's update the helm chart for our petbattle tooling and now apps also.
 ```bash
-helm upgrade install --namespace ${TEAM_NAME}-ci-cd .
+helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
+
+`FIXME` - Now we Rinse and Repeat for the other infra components for `infinispan, grafana, cert-utils`
+
+```yaml
+applications:
+  # Infnispan
+  infinispan:
+    name: infinispan
+    enabled: true
+    source: https://github.com/petbattle/pet-battle-infra
+    source_ref: main
+    source_path: infinispan
+    values:
+      ignoreHelmHooks: true
+```
+
+Its not real unless its in git
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐰 ADD - keycloak to test 🐰" 
+git push 
+```
+
 
 Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. 
 [TODO] some explanation for folder structure and test/staging env
@@ -53,7 +85,7 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   pet-battle-api:
     name: pet-battle-api
     chart_name: pet-battle-api
-    source_ref: 1.0.15 # helm chart version
+    source_ref: 1.1.0 # helm chart version
     values:
       image_name: pet-battle-api
       image_version: latest # container image version
