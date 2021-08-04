@@ -84,6 +84,7 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
   # Pet Battle Apps
   pet-battle-api:
     name: pet-battle-api
+    source: http://nexus:8081/repository/helm-charts/
     chart_name: pet-battle-api
     source_ref: 1.1.0 # helm chart version
     values:
@@ -93,6 +94,7 @@ In your IDE, open up the `pet-battle/test/values.yaml` file and copy the followi
 
   pet-battle:
     name: pet-battle
+    source: http://nexus:8081/repository/helm-charts/
     chart_name: pet-battle
     source_ref: 1.0.0 # helm chart version
     values:
