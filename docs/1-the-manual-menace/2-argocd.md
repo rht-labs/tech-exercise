@@ -3,27 +3,31 @@ Blah blah blah stuff GitOps and why we use it...
 
 blah blah blah stuff about Operators and Helm and what they provide us.
 
-```bash
-helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-```
 ## Get your GitLab ready for GitOps
 Log into GitLab with your team with your credentials. We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
 
 ![gitlab-initial-login](images/gitlab-initial-login.png)
 
-Put your <TEAM_NAME> as the group name, select `Public` for Visibility level, and hit Create. 
+Put your <TEAM_NAME> as the group name, select `Public` for Visibility level, and hit Create group. 
 ![gitlab-create-group](images/gitlab-create-group.png)
 
 Now lets create a git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes :)
 
-From `New Project` button on the left hand side, and use `tech-exercise` as Project Name, select `Public` for Visibility level, and hit Create. 
+From `New Project` button on the left hand side, and use `tech-exercise` as Project Name, select `Public` for Visibility level, and hit Create project. 
 ![gitlab-new-project](images/gitlab-new-project.png)
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
 Now let's start our GitOps Journey!
 
 ## ArgoCD Basic install
-ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. 
+ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. ArgoCD is deployed as an 
+
+
+1. W
+```bash
+helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
+```
+
 A basic install of ArgoCD
 ```bash
 helm upgrade --install argocd \

@@ -19,18 +19,13 @@ echo "zsh" >> ~/.bashrc
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-1. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment
+5. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment
 ```bash
 # setup cluster domain
 echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
-3. Check if you can connect to OpenShift. The `<CLUSTER_DOMAIN>` should be provided by your facilitator. Update it and run the command below
-```bash
-# check if you can access the cluster
-oc login --server=https://api.${CLUSTER_DOMAIN}:6443 -u <USERNAME> -p <PASSWORD>
-```
 
-5. Verify the variables you have set
+6. Verify the variables you have set
 ```bash
 # verify variables
 source ~/.bashrc
@@ -38,16 +33,26 @@ echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
 ```
 
-6. Check your user permissions in OpenShift by creating your team's CICD project. 
+7. Check if you can connect to OpenShift. The `<CLUSTER_DOMAIN>` should be provided by your facilitator. Update it and run the command below. 
+```bash
+# check if you can access the cluster
+oc login --server=https://api.${CLUSTER_DOMAIN}:6443 -u <USERNAME> -p <PASSWORD>
+```
+
+8. Check your user permissions in OpenShift by creating your team's CICD project. 
 ```bash
 # verify your can create a project
 oc new-project ${TEAM_NAME}-ci-cd
 ```
-
+![new-project](./images/new-project.png)
 ### Helm 101
+[TODO]
+
 Helm is the package manager for Kubernetes. It provides a way to templatise the kubernetes yaml that make up our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service`.
 
 Let's deploy a simple application using helm.
+
+
 1. something something add a chart repository
 
 2. something something helm install it
