@@ -6,28 +6,32 @@ metadata:
   labels:
     app: gitlab
 spec:
+  namespaceSelector: {}
+  resources: {}
   serviceAccountName: pipeline
   triggers:
-    - name: pet-battle-api-webhook-all-branches
-      interceptors: # fixme add secret.ref
-        - cel:
-            # only for master/main?
-            filter: >-
-              (header.match('X-Gitlab-Event', 'Push Hook') &&
-              body.project.path_with_namespace == '{{ .Values.team }}/pet-battle-api' &&
-              body.ref.split('/')[2] == 'main')
-            overlays:
-            - key: truncated_sha
-              expression: "body.checkout_sha.truncate(7)"
-            - key: branch_name
-              expression: "body.ref.split('/')[2]"
-            - key: app_of_apps_key
-              expression: "body.repository.name"
-      bindings:
-      - kind: TriggerBinding
-        ref: gitlab-trigger-binding
-      template:
-        ref: pet-battle-api-trigger-template
+  - bindings:
+    - kind: TriggerBinding
+      ref: gitlab-trigger-binding
+    interceptors:
+    - params:
+      - name: filter
+        value: (header.match('X-Gitlab-Event', 'Push Hook') && body.project.path_with_namespace
+          == '{{ .Values.team }}/pet-battle-api' && body.ref.split('/')[2] == 'main')
+      - name: overlays
+        value:
+        - expression: body.checkout_sha.truncate(7)
+          key: truncated_sha
+        - expression: body.ref.split('/')[2]
+          key: branch_name
+        - expression: body.repository.name
+          key: app_of_apps_key
+      ref:
+        kind: ClusterInterceptor
+        name: cel
+    name: pet-battle-api-webhook-all-branches
+    template:
+      ref: pet-battle-api-trigger-template
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
