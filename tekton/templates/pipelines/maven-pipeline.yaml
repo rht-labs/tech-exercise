@@ -123,7 +123,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: "http://gitlab-ce.{{ .Values.cluster_domain }}/{{ .Values.team }}/tech-exercise.git"
+          value: "https://gitlab-ce.{{ .Values.cluster_domain }}/{{ .Values.team }}/tech-exercise.git"
         - name: revision
           value: "main"
         - name: subdirectory
