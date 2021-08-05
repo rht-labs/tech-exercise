@@ -1,0 +1,1 @@
+### Extend Jenkins Pipeline with Image Signing
