@@ -13,7 +13,7 @@
     * [🌸 Jenkins](2-attack-of-the-pipelines/3a-jenkins.md)
     * [🐈 Tekton](2-attack-of-the-pipelines/3b-tekton.md)
   * [🐉 Here Be Dragons!](2-attack-of-the-pipelines/666-here-be-dragons.md)
-* [2. Revenge of the Automated Testing](3-revenge-of-the-automated-testing/README.md)
+* [3. Revenge of the Automated Testing](3-revenge-of-the-automated-testing/README.md)
   * [✈️ Sonarqube](3-revenge-of-the-automated-testing/1-sonar-scanning.md)
     * [🌸 Jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/1b-tekton.md)
