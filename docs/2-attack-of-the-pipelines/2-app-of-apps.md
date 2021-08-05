@@ -1,6 +1,12 @@
-### Deploy App of Apps 
-Blah Blah .. this is what app of apps pattern is, what application sets are etc etc
+### Deploy App of Apps
+We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently of other apps.
 
+A developer can get the same experience and end result installing an application chart using a helm install as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, Kustomize, Helm, as well as just raw YAML files. Because
+Helm is a templating language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values.
+
+We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite! In PetBattle we generate the app-of-apps definitions using a Helm chart.
+
+#### Deploying Pet Battle
 Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
 blah blah blah, this is keyclock required by PB for auth.... We will demonstrate deploying it using a GitOps parrtern which is repeatable
 

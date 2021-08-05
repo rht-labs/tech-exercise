@@ -10,7 +10,9 @@
 - use the learnings from above to create a `uat` environment from code.
 
 ### 3. Make ArgoCD more secure
-- Use the chart Readme in ()[] to create a private repository group and secret to access charts from. 
+- Parent/Child argocd's
+- Restricting service accounts, least privilege.
+- Use the chart Readme in ()[] to create a private repository group and secret to access charts from.
 
 ### ArgoCD - Add Repositories at runtime
 

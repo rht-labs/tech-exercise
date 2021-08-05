@@ -3,7 +3,9 @@ Blah blah blah - soemthing about SS and why we use it....
 public repos with private secrets
 devops is hard, secure devops is harder....
 
-these secrets are used by our pipeline in the next exercise.
+These secrets are used by our pipeline in the next exercise.
+
+### Sealed Secrets in action
 
 Lets start by sealing our token for accessing git.
 ```bash
