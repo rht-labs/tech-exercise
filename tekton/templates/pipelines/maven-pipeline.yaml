@@ -62,6 +62,7 @@ spec:
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: deleteExisting
           value: "true"
+
     - name: maven
       taskRef:
         name: maven
@@ -84,6 +85,7 @@ spec:
           workspace: shared-workspace
       runAfter:
         - fetch-app-repository
+
     - name: bake
       taskRef:
         name: bake
@@ -101,6 +103,7 @@ spec:
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter: 
         - maven
+
     - name: helm-package
       taskRef:
         name: helm-package
@@ -132,6 +135,7 @@ spec:
           value: "true"
       runAfter:
         - helm-package
+
     - name: deploy-test
       taskRef:
         name: deploy
@@ -155,6 +159,7 @@ spec:
           value: "$(tasks.helm-package.results.CHART_VERSION)"
       runAfter: 
         - fetch-argocd-configuration
+
     - name: verify-deployment
       taskRef:
         name: verify-deployment
@@ -180,6 +185,7 @@ spec:
           value: "test"
       runAfter:
         - deploy-test
+
   results:
     - name: VERSION
       description: Version of the application
