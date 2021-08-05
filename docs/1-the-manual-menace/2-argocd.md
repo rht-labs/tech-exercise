@@ -85,7 +85,7 @@ oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
       * Cluster URL: https://kubernetes.default.svc
       * Namespace: <TEAM_NAME>-ci-cd
 
-Your form should look something like this:
+Your form should look like this:
 ![argocd-create-application](images/argocd-create-application.png)
 
 8. After you hit create, you'll see `our-todolist` application is created and should start deploying in your `${TEAM_NAME}-ci-cd` namespace.
@@ -98,6 +98,5 @@ Your form should look something like this:
 ```
 oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 ```
-
 
 🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy and application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
