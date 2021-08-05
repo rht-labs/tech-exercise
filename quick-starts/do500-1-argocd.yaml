@@ -83,28 +83,43 @@ spec:
     - description: >
         ### Deploy a Test Application using ArgoCD
 
-        1. Let's deploy a sample **nginx** kubernetes application using the ArgoCD Operator.
+        1. Let's deploy a sample **todolist** application using the ArgoCD Operator.
         ```
          cat << ' EOF' | oc apply -n ${TEAM_NAME}-ci-cd -f-
          apiVersion: argoproj.io/v1alpha1
          kind: Application
          metadata:
-           name: guestbook
+           name: todolist
          spec:
            destination:
-             namespace: ateam-ci-cd ## FIXME grr.. heredocs
+             namespace: ateam-ci-cd ## FIXME grr.. heredocs - https://github.com/openshift/console/issues/9723
              server: https://kubernetes.default.svc
            project: default
            source:
-             path: basic-nginx
-             repoURL: 'https://github.com/opdev/argocd-example-restricted-apps.git'
-             targetRevision: main
+             repoURL: https://rht-labs.com/todolist
+             targetRevision: 1.0.1
+             helm:
+               releaseName: todolist
+             chart: todolist
          EOF
         ```{{execute}}
 
+        1. You should see your application deploying in the ArgoCD WebUI.
+
+          Browse to the todolist Route in your ${TEAM-NAME}-ci-cd project.
+
       title: Deploy a Test Application using ArgoCD
+      review:
+        instructions: |-
+          Did you see the todolist OK ?
+
+        failedTaskHelp: This task isn’t verified yet. Try the task again.
+      summary:
+        success: >-
+          You have completed the basic setup.
+        failed: Try the steps again.
   conclusion: >-
-    Congratulations! You successfully completed the DO500 Basic Setup quick start.
+    Congratulations! You successfully completed the DO500 ArgoCD Setup quick start.
 
 
     Let's keep going !
