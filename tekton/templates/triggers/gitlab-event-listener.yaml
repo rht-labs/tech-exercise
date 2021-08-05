@@ -17,7 +17,7 @@ spec:
     - params:
       - name: filter
         value: (header.match('X-Gitlab-Event', 'Push Hook') && body.project.path_with_namespace
-          == '{{ .Values.team }}/pet-battle-api' && body.ref.split('/')[2] == 'main')
+          == '{{ .Values.team }}/pet-battle-api' && body.ref.split('/')[2] == 'master')
       - name: overlays
         value:
         - expression: body.checkout_sha.truncate(7)
