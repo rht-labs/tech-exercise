@@ -117,6 +117,7 @@ spec:
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
         - bake
+
     - name: fetch-argocd-configuration
       taskRef:
         name: git-clone
