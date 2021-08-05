@@ -24,14 +24,28 @@ When something is seen as not matching the required state in Git, an application
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 ```
 
-2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. However, things to be weary of with many ArgoCD instances in one shared cluster is the `applicationInstanceLabelKey`. This needs to be unique for each ArgoCD deployment otherwise funky things start happening.
-
+2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. However, things to be weary of with many ArgoCD instances in one shared cluster is the `applicationInstanceLabelKey`. This needs to be unique for each ArgoCD deployment otherwise funky things start happening. We're also going to configure ArgoCD to be allowed pull from our git repository using a secret but we'll configure this secret later 🔐.
 <!-- weird bug alert! having a newline here makes the docsify render happy, but having the commands starting with "--" and no new line causes it to run on  -->
+```bash
+cat << EOF > /project/tech-exercise/argocd-values.yaml
+namespace: ${TEAM_NAME}-ci-cd
+argocd_cr:
+  applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
+  repositoryCredentials: |
+    - url: https://gitlab-ce.apps.${CLUSTER_DOMAIN}
+      type: git
+      passwordSecret:
+        key: password
+        name: git-auth
+      usernameSecret:
+        key: username
+        name: git-auth
+EOF
+```
 ```bash
 helm upgrade --install argocd \
   --namespace ${TEAM_NAME}-ci-cd \
-  --set namespace=${TEAM_NAME}-ci-cd \
-  --set argocd_cr.applicationInstanceLabelKey=rht-labs.com/${TEAM_NAME} \
+  -f /project/tech-exercise/argocd-values.yaml \
   redhat-cop/argocd-operator
 ```
 
@@ -39,8 +53,7 @@ helm upgrade --install argocd \
 ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab
 </p>
 
-
-1. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
+3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
 ```bash
 oc get pods -w -n ${TEAM_NAME}-ci-cd
 ```
