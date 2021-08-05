@@ -98,4 +98,3 @@ git push
 ```bash
 VERSION=$(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
 ```
-- [ ] figure out the tekton annotation !! and mounting git-auth
