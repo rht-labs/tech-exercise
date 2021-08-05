@@ -1,12 +1,13 @@
 ### Jenkins Pipeline 
 
 Something something about automated pipelines
-Create a repo in GitLab under `<YOUR_TEAM_NAME>` group called `pet-battle` Then fork the PetBattle API and PetBattle Frontend
+Create a repo in GitLab under `<YOUR_TEAM_NAME>` group called `pet-battle` Then fork the PetBattle Frontend
 
 ```bash
 cd /projects
 git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
-git remote set-url https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle.git
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle.git
+git branch -M main
 git push -u origin main
 ```
 

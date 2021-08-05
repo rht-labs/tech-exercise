@@ -16,7 +16,7 @@ spec:
   params:
     - name: CHART_REPO
       description: "Helm Chart Repo"
-      default: "http://nexus.{{ .Values.team}}-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
+      default: "http://nexus.{{ .Values.team }}-ci-cd.svc.cluster.local:8081/repository/helm-charts/"
     - name: CHART_REPO_USERNAME
       description: "Helm Chart Repo Username"
       default: "admin"

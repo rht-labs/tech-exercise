@@ -21,7 +21,7 @@ spec:
       type: string
     - name: STATIC_REPO
       description: "Static Repo" #make repos gobal params
-      default: "http://nexus.{{ .Values.team}}-ci-cd.svc.cluster.local:8081/repository/labs-static/"
+      default: "http://nexus.{{ .Values.team }}-ci-cd.svc.cluster.local:8081/repository/labs-static/"
     - name: STATIC_REPO_USERNAME
       description: "Static Repo Username" #set annotation in nexus secret def
       default: "admin"

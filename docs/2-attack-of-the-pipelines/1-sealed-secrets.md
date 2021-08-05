@@ -21,7 +21,7 @@ data:
 kind: Secret
 metadata:
   annotaion:
-    tekton.dev/git-0: https://gitlab-ce
+    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
@@ -82,7 +82,7 @@ In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section
         - name: git-auth
           type: kubernetes.io/basic-auth
           annotations:
-            tekton.dev/git-0: http://gitlab-ce.do500-gitlab.svc.cluster.local
+            tekton.dev/git-0: http://gitlab-ce.${CLUSTER_DOMAIN}
           labels:
             credential.sync.jenkins.openshift.io: "true"
           data:

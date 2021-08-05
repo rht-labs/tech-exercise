@@ -1,21 +1,24 @@
 ### Tekton Pipeline 
-[TODO] Something something what is Tekton (and OpenShift Pipelines)
-[TODO] Explain what this Tekton pipeline is going to do
-[todo] - add TEkkers to the EF
+blah blah blah
 
-### structure of this exercise
-apply the tekton yaml files [argocd?]
-- show tasks sync'd in UI and OpenShift Pipelines view 
+- [TODO] Something something what is Tekton (and OpenShift Pipelines)
+- [TODO] Explain what this Tekton pipeline is going to do
+- [todo] - add TEkkers to the EF
 
-Add a task
-1 - sync it (git add) 
-2 - Fork PB-API to GitLab. Get EventListener URL and add it as webhook to ze Git
-3 - update the file
-4 - see it works
+#### Deploying the Tekton Objects
 
-pulled from other exercise ....
+1. Create a repo in GitLab under `<YOUR_TEAM_NAME>` group called `pet-battle-api`. Then fork the PetBattle API.
+
+```bash
+cd /projects
+git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle-api.git
+git branch -M main
+git push -u origin main
 ```
-- update  the `source` URL to be your `GITHUB_URL`
+
+2. Edit `ubiquitous-journey/values-tooling.yaml` deploy Tekton Pipelines code. Remeber to replace the `CLUSTER_DOMAIN` and `TEAM_NAME` with your own.
+
 ```yaml
   # Tekton Pipelines
   - name: tekton-pipeline
@@ -25,8 +28,43 @@ pulled from other exercise ....
     source_path: tekton
     values:
       team: <TEAM_NAME>
+      cluster_domain: <CLUSTER_DOMAIN>
 ```
+
+3. Update git
+```bash
+# git add, commit, push your changes..
+cd /projects/tech-exercise
+git add .
+git commit -m  "🍕 ADD - tekton pipelines config 🍕" 
+git push 
+```
+
+4. Add webhook to GitLab `pet-battle-project`
+- fill in the `URL` based on this route
+```bash
+oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
+```
+![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
+- select `Push Events`, leve the branch empty for now
+- select `SSL Verification`
+- Click `Add webhook` button.
+
+You can test the webhook works from GitLab.
+
+![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
+
+5. Trigger pipeline via webhook by checking in some code.
+
+>  You can enable debug log info for your tekton webhook pod by setting:
+>```bash
+> oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers
+>```
+> <pre>
+> // set log level
+> data:
+>   loglevel.eventlistener: debug
+> <pre>
 
 
 🪄 OBSERVE PIPELINE RUNNING :D 
-

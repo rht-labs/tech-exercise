@@ -35,7 +35,7 @@ data:
 kind: Secret
 metadata:
   annotaion:
-    tekton.dev/git-0: https://gitlab-ce
+    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
@@ -52,7 +52,7 @@ data:
     - name: redhat-cop
       type: helm
       url: https://redhat-cop.github.io/helm-charts
-    - url: https://gitlab-ce.do500-gitlab.apps.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
+    - url: https://gitlab-ce.apps.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
       type: git
       insecure: false
       insecureIgnoreHostKey: true
@@ -86,7 +86,7 @@ data:
 kind: Secret
 metadata:
   annotaion:
-    tekton.dev/git-0: https://gitlab-ce
+    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
@@ -104,7 +104,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   type: helm
   url: https://redhat-cop.github.io/helm-charts
 - name: do500-git
-  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
+  url: https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
   type: git
   insecure: true
   insecureIgnoreHostKey: true

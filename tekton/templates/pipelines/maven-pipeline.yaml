@@ -112,7 +112,7 @@ spec:
           value: "$(params.APPLICATION_NAME)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-      runAfter: 
+      runAfter:
         - bake
     - name: fetch-argocd-configuration
       taskRef:
@@ -123,7 +123,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: "http://gitlab-ce.do500-gitlab.svc.cluster.local/{{ .Values.team }}/tech-exercise.git"
+          value: "http://gitlab-ce.{{ .Values.cluster_domain }}/{{ .Values.team }}/tech-exercise.git"
         - name: revision
           value: "main"
         - name: subdirectory
