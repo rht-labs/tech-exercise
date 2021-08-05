@@ -48,3 +48,6 @@ spec:
     kind: 'Service'
     name: el-gitlab-webhook
     weight: 100
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
