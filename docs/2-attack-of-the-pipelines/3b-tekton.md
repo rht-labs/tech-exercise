@@ -23,7 +23,7 @@ git push -u origin main
   # Tekton Pipelines
   - name: tekton-pipeline
     enabled: true
-    source: "https://gitlab-ce.do500-gitlab.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+    source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
     source_ref: main
     source_path: tekton
     values:

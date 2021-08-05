@@ -127,7 +127,7 @@ cat <<'EOF' > /tmp/initial-creds.yaml
     name: git-auth
     key: username
   type: git
-  url: https://gitlab-ce.do500-gitlab.${CLUSTER_DOMAIN}
+  url: https://gitlab-ce.${CLUSTER_DOMAIN}
 EOF
 ```
 
