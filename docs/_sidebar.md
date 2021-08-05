@@ -35,4 +35,7 @@
   * [©️ Image Signing](3-revenge-of-the-automated-testing/7-image-signing.md)
     * [🌸 Jenkins](3-revenge-of-the-automated-testing/7a-jenkins.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/7b-tekton.md)
+  * [🏋️ Load Testing](3-revenge-of-the-automated-testing/8-load-testing.md)
+    * [🌸 Jenkins](3-revenge-of-the-automated-testing/8a-jenkins.md)
+    * [🐈 Tekton](3-revenge-of-the-automated-testing/8b-tekton.md)
   * [🐉 Here Be Dragons!](3-revenge-of-the-automated-testing/666-here-be-dragons.md)
