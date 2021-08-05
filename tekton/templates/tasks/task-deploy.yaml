@@ -23,6 +23,10 @@ spec:
     - name: VERSION
       description: Version of the application
       type: string
+    - name: REPOSITORY
+      description: Image Repository of the application
+      type: string
+      default: "image-registry.openshift-image-registry.svc:5000"
     - name: CHART_VERSION
       description: Version of the helm chart
       type: string
@@ -46,6 +50,7 @@ spec:
       script: |
         #!/bin/sh
         yq eval -i .applications."$(params.APPLICATION_NAME)".source_ref=\"$(params.CHART_VERSION)\"  "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
+        yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_repository=\"$(params.REPOSITORY)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_version=\"$(params.VERSION)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_namespace=\"$(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
     - name: commit-changes
