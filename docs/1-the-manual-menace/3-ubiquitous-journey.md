@@ -1,6 +1,18 @@
 ## 🔥🦄 Ubiquitous Journey
-blah blah what it is, why we use it
-Extensible, traceable, auditable ...
+
+At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CICD tooling to accelerate setup and onboarding. The code repository is called `Ubiquitous Journey` (UJ). We have forked a version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
+
+This repo is available on the Red Hat Labs GitHub organization – https://github.com/rht-labs/ubiquitous-journey. UJ allows us to plumb all of the pieces together in a developer friendly manner.
+
+- `Extensible` - Our codebase is a `tool box` of code that we can evolve and easily extended to support new tools and methodologies.
+- `Traceable` - We can easily see where changes have occured and most importantly trace exactly what git tag/commit is in which environment.
+- `Discoverable` - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
+- `Auditable` - Git logs and history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
+- `Reusable` - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. Its not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified. 
+- `Flexible` - Product teams often want to use both standard tools and be able to experiment with new ones. The `tool box` mentality helps a lot, so as a team you can work with the tools you are familiar with. We will see this in action with Jenkins and Tekton.
+
+All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
+
 ### Get GitLab Ready for GitOps
 > In this exercise we'll setup our git project to store our code and configuration. We will then connect argocd (out gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob!
  
