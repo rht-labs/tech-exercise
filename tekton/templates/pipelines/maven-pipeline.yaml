@@ -7,7 +7,6 @@ spec:
     - name: shared-workspace
     - name: maven-settings
     - name: maven-m2
-    - name: git-auth
   params:
   - name: APPLICATION_NAME
     type: string
@@ -143,8 +142,6 @@ spec:
       workspaces:
         - name: output
           workspace: shared-workspace
-        - name: git-auth
-          workspace: git-auth
       params:
         - name: APPLICATION_NAME
           value: "$(params.APPLICATION_NAME)"
@@ -167,8 +164,6 @@ spec:
       workspaces:
         - name: output
           workspace: shared-workspace
-        - name: git-auth
-          workspace: git-auth
       params:
         - name: WORK_DIRECTORY
           value: "tech-exercise/main/pet-battle/"

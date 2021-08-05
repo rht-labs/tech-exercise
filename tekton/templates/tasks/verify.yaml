@@ -6,7 +6,6 @@ metadata:
 spec:
   workspaces:
     - name: output
-    - name: git-auth
   params:
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
@@ -69,7 +68,7 @@ spec:
           git checkout main
           git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
           git commit -m "😢🤦🏻‍♀️ AUTOMATED COMMIT - $(params.APPLICATION_NAME) deployment is reverted to image $(params.PREVIOUS_VERSION) & chart $(params.PREVIOUS_CHART_VERSION) 😢🤦🏻‍♀️" || rc=$?
-          git remote set-url origin http://$(cat $(workspaces.git-auth.path)/username):$(cat $(workspaces.git-auth.path)/password)@gitlab-ce.do500-gitlab.svc.cluster.local/$(params.TEAM_NAME)/tech-exercise.git
+          git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/$(params.TEAM_NAME)/tech-exercise.git
           git push -u origin main
           exit $ROLLOUT_FAIL
         else
