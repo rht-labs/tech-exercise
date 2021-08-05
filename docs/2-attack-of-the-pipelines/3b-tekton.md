@@ -71,7 +71,7 @@ You can test the webhook works from GitLab.
 - Edit pet-battle-api `pom.xml` and update the `version` number
 ```xml
     <artifactId>pet-battle-api</artifactId>
-    <version>1.2.0</version>
+    <version>1.1.2</version>
 ```
 - Edit pet-battle-api `chart/Chart.yaml` and update the `version` and `appVersion` numbers
 ```yaml
