@@ -84,7 +84,7 @@ Update git
 # git add, commit, push your changes..
 cd /projects/pet-battle-api
 git add .
-git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.0 🍕" 
+git commit -m  "🍕 UPDATED - pet-battle-version to 1.1.2 🍕" 
 git push 
 ```
 
