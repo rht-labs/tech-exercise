@@ -18,19 +18,16 @@ echo "zsh" >> ~/.bashrc
 
 4. Setup your `<TEAM_NAME>` name in the environment of the CodeReadyWorkspace by replacing this and running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪:
 ```bash
-# setup for commands
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
 5. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment
 ```bash
-# setup cluster domain
 echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
 6. Verify the variables you have set
 ```bash
-# verify variables
 source ~/.bashrc
 echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
@@ -38,13 +35,11 @@ echo ${TEAM_NAME}
 
 7. Check if you can connect to OpenShift. The `<CLUSTER_DOMAIN>` should be provided by your facilitator. Update it and run the command below. 
 ```bash
-# check if you can access the cluster
 oc login --server=https://api.${CLUSTER_DOMAIN}:6443 -u <USERNAME> -p <PASSWORD>
 ```
 
 8. Check your user permissions in OpenShift by creating your team's CICD project. 
 ```bash
-# verify your can create a project
 oc new-project ${TEAM_NAME}-ci-cd
 ```
 ![new-project](./images/new-project.png)
@@ -75,14 +70,12 @@ oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 
 4.  You can overwrite the default values in a chart from the command line, let's upgrade our deployment to show this. We'll make a simple change to the values. By default we only have one replica of our app, let's use helm to set this to 5.
 ```bash
-# show only one pod for our my-todolist-1 release
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
 ```bash
 helm upgrade my do500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
 ```
 ```bash
-# show five pods for our my-todolist-2 release
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
 
@@ -90,8 +83,8 @@ oc get pods -n ${TEAM_NAME}-ci-cd
 ```bash
 helm uninstall my --namespace ${TEAM_NAME}-ci-cd
 ```
+verify the clean up
 ```bash
-# verify the clean up
 oc get pods | grep todolist
 ```
 
