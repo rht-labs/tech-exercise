@@ -113,3 +113,6 @@ where:
     * thinking add some random chart / website / app eg Residency Microsite? 
     * change values eg defaults and then override on the command line
     * show values changed?
+
+If the workspace has not been set up for you, you can create one from this devfile
+- https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
