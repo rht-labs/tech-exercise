@@ -112,6 +112,8 @@ spec:
       params:
         - name: APPLICATION_NAME
           value: "$(params.APPLICATION_NAME)"
+        - name: VERSION
+          value: "$(tasks.maven.results.VERSION)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:

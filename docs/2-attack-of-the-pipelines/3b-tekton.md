@@ -73,11 +73,7 @@ You can test the webhook works from GitLab.
     <artifactId>pet-battle-api</artifactId>
     <version>1.1.2</version>
 ```
-- Edit pet-battle-api `chart/Chart.yaml` and update the `version` and `appVersion` numbers
-```yaml
-version: 1.1.2
-appVersion: 1.1.2
-```
+The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
 Update git
 ```bash

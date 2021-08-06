@@ -29,22 +29,27 @@ spec:
     - name: APPLICATION_NAME
       description: Name of the application
       type: string
+    - name: VERSION
+      description: Version of the application
+      type: string
   results:
     - name: CHART_VERSION
       description: Version of the helm chart
   steps:
     - name: release-helm-chart
-      image: quay.io/redhat-cop/tekton-task-helm:v3.5.3
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       script: |
         #!/bin/sh
         helm lint chart
-        helm package --dependency-update chart/ 
-
+        echo "aligning versions - updating Chart.yaml - $(params.VERSION)"
+        yq eval -i .version=\"$(params.VERSION)\" "chart/Chart.yaml"
+        yq eval -i .appVersion=\"$(params.VERSION)\" "chart/Chart.yaml"
+        helm package --dependency-update chart/
         echo "upload chart"
         curl -v -f -u $(params.CHART_REPO_USERNAME):$(params.CHART_REPO_PASSWORD) $(params.CHART_REPO) --upload-file $(params.APPLICATION_NAME)-*.tgz
     - name: get-helmchart-version
-      image: quay.io/redhat-cop/tekton-task-helm:v3.5.3
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       command: ["/bin/sh", "-c"]
       args: 
