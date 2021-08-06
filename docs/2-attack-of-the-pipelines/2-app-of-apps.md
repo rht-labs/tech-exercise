@@ -31,7 +31,6 @@ Now let's enable app-of-apps definition for petbatlle deplopments in test and st
 our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. Make sure to replace <CLUSTER_DOMAIN> with your value.
 
 ```yaml
-applications:
   # Keycloak
   keycloak:
     name: keycloak
@@ -48,7 +47,7 @@ Its not real unless its in git
 ```bash
 # git add, commit, push your changes..
 git add .
-git commit -m  "🐰 ADD - keycloak to test 🐰" 
+git commit -m  "🐰 ADD - app-of-apps and keycloak to test 🐰" 
 git push 
 ```
 
@@ -136,4 +135,5 @@ git commit -m  "🐩 ADD - pet battle apps 🐩"
 git push 
 ```
 
-[TODO] Screenshots from ArgoCD
+You should see the two Pet Battle apps deployed in ArgoCD:
+![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
