@@ -6,25 +6,5 @@ source: "http://nexus:8081/repository/helm-charts/"
 #############
 applications:
   # Keycloak
-  - name: bootstrap111
-    enabled: true
-    source: https://redhat-cop.github.io/helm-charts
-    source_ref: "1.0.1"
-    values:
-      serviceaccounts: ""
-
+  
   # Pet Battle apps
-  - name: test1232222
-    enabled: true
-    source_ref: "1.0.1"
-    values:
-      serviceaccounts: ""
-
-  # Pet Battle apps
-  - name: test234
-    enabled: true
-    source: //github.com/redhat-cop/helm-charts.git
-    source_path: bootstrap-project
-    source_ref: "1.0.1"
-    values:
-      serviceaccounts: ""
