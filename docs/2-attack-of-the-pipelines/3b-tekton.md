@@ -1,9 +1,9 @@
 ### Tekton Pipeline 
 blah blah blah
 
-- [TODO] Something something what is Tekton (and OpenShift Pipelines)
-- [TODO] Explain what this Tekton pipeline is going to do
-- [todo] - add TEkkers to the EF
+`TODO`
+- [ ] Something something what is Tekton (and OpenShift Pipelines)
+- [ ] Explain what this Tekton pipeline is going to do
 
 #### Deploying the Tekton Objects
 
@@ -88,9 +88,4 @@ git push
 🪄 OBSERVE PIPELINE RUNNING :D 
 
 #### TODO
-
-- [ ] sync is slow .. should we do the ArgoCD webhook?
-- [ ] maven versions - consider using this and only update version in pom.xml
-```bash
-VERSION=$(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
-```
+- [ ] add in full explanations of all the steps

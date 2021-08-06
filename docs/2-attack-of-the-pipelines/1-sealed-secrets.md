@@ -83,7 +83,7 @@ In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`.
         - name: git-auth
           type: kubernetes.io/basic-auth
           annotations:
-            tekton.dev/git-0: http://gitlab-ce.${CLUSTER_DOMAIN}
+            tekton.dev/git-0: http://gitlab-ce.<CLUSTER_DOMAIN>
           labels:
             credential.sync.jenkins.openshift.io: "true"
           data:
