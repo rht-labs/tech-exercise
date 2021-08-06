@@ -3,7 +3,8 @@
 
 Let's try it out!
 1. Make a change in the OpenShift UI and have it overwritten - GOOO GOOOO GITOPS 💪
-In OpenShift UI, go to your `*-ci-cd` project. Navigate to `Workloads > DeploymentConfigs > jenkins`.  On the `Environment` tab, add a new variable. For example, click `➕ Add more` and on the text box put in something new or random for example `BISCUITS` with a value of `jaffa-cakes`. Hit save!
+
+  In OpenShift UI, go to your `<TEAM_NAME>-ci-cd` project. Navigate to `Workloads > DeploymentConfigs > jenkins`.  On the `Environment` tab, add a new variable. For example, click `➕ Add more` and on the text box put in something new or random for example `BISCUITS` with a value of `jaffa-cakes`. Hit save!
 ![jenkins-new-var](./images/jenkins-new-var.png)
 
 Then, refresh the page and WHERE IS THE BISCUITS!?!
