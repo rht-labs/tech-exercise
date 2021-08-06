@@ -11,20 +11,25 @@ git branch -M main
 git push -u origin main
 ```
 
-blah blah blah seed-job.... to make this work. Let's connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in openshift BUTTTTTT this is GITOPS! :muscle: :nerd:
+blah blah blah seed-job.... to make this work. Let's connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in openshift BUTTTTTT this is GITOPS! :muscle: :gun:
 update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values 
 <pre>
 ...
       deployment:
         env_vars:
           - name: GITLAB_HOST
-            value: '<YOUR_GITLAB_HOST>'
+            value: https://gitlab.<CLUSTER_DOMAIN>
           - name: GITLAB_GROUP_NAME
-            value: '<YOUR_TEAM_NAME>'
+            value: '<TEAM_NAME>'
 </pre>
 
+Update git
 ```bash
-git push ... stuff
+# git add, commit, push your changes..
+cd /projects/tech-exercise
+git add .
+git commit -m  "🍕 ADD - jenkins pipelines config 🍕" 
+git push
 ```
 
 ^ when this deploys we should see the seed job has scaffolded out our pipeline but it will fail on the first execution, this is expected as we're going write some stuff to fix it ...
@@ -79,12 +84,4 @@ git push
 🪄OBSERVE PIPELINE RUNNING :D 
 🪄
 
-
-Split into groups and each group does
-- we need to fork PetBattle (clone from GitHub and push to GitLab)
-- Update Jenkinsfile / Tekton task to leave out some stuff for participants
-- Add webhook into GitLab repositories for triggering jobs
-- Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. That's where two teams integrate their works.
-- By updating version files (pom.xml etc), kick the pipelines
-- Question: should we only leave 'master/main' branch deployment
 [TODO] decide what to leave out from Jenkinsfile
