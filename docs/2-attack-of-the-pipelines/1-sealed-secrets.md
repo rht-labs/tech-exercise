@@ -70,12 +70,11 @@ cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
     username: AgAtnYz8U0AqIIaqYrj...
 </pre>
 
-In `ubiquitous-journey/values-tooling.yaml` edit the entry in the values section of the `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly. Now set the `enabled` flag to `true`.
+In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 ```yaml
-...
   # Sealed Secrets
   - name: sealed-secrets
-    <strong>enabled: false</strong>
+    enabled: true
     source: https://redhat-cop.github.io/helm-charts
     chart_name: helper-sealed-secrets
     source_ref: "1.0.2"
