@@ -36,3 +36,5 @@ git push
 
 4. In OpenShift, we should now see the variable is persisted!
 ![jenkins-argocd-new-var](./images/jenkins-argocd-new-var.png)
+
+You've just experienced how great and powerful the GitOps is! Let's advance to see how we utilize it in our application development!

@@ -1,11 +1,8 @@
 ## Extend UJ with a another tool, eg Nexus 
-- (emphasize IF IT'S NOT GIT, IT'S NOT REAL!!! mantra)
-
-Add more tools to the UJ for ex, nexus for managing our artifacts, webhooks to speed deployment.
+Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to manage and store our artifacts. Nexus is here to help! We can use Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
 #### Add Nexus in our tool box
-
-update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults 
+Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. Copy the following into the file:
 ```yaml
   # Nexus
   - name: nexus
@@ -18,14 +15,19 @@ update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some 
         name: nexus
 ```
 
+Now push the changes into your git repository. 
 ```bash
-# git add, commit, push your changes..
 git add .
 git commit -m  "🦘 ADD - nexus repo manager 🦘" 
 git push 
 ```
+ArgoCD will detect the change in `values-tooling.yaml` and deploy Nexus on our behalf in order to match what is in git also in the cluster. You can see it also in ArgoCD UI.
+![argocd-nexus](images/argocd-nexus.png)
 
-observe ArgoCD that nexus spins up and connect to Nexus itself to verify
+It can take a few minutes to become available. You can verify it by connecting the Nexus URL:
+```bash
+oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+```
 
 #### Add ArgoCD Webhook from GitLab
 

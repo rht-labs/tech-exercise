@@ -21,12 +21,12 @@ echo "zsh" >> ~/.bashrc
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-5. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment
+5. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment:
 ```bash
 echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-6. Verify the variables you have set
+6. Verify the variables you have set:
 ```bash
 source ~/.bashrc
 echo ${CLUSTER_DOMAIN}
@@ -44,16 +44,16 @@ oc new-project ${TEAM_NAME}-ci-cd
 ```
 ![new-project](./images/new-project.png)
 ### Helm 101
-> Helm is the package manager for Kubernetes. It provides a way to templatise the kubernetes yaml that make up our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by suppling `values` to the templates. In helm land there are a few ways to do this. A package containing the templates and their default values is called a chart. 
+> Helm is the package manager for Kubernetes. It provides a way to templatise the Kubernetes YAML that make up our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
-Let's deploy a simple application using helm.
+Let's deploy a simple application using Helm.
 
 1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts aswell as the tar file the chart is packaged as.
-```
+```bash
 helm repo add do500 https://rht-labs.com/todolist/
 ```
 
-2. Let's install a chart from this repo. First search the repositories to see what is available, then install the latest version. Helm likes to give each install a release, for conenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
+2. Let's install a chart from this repo. First search the repositories to see what is available, then install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
 ```bash
 helm search repo todolist
 ```
@@ -68,7 +68,7 @@ oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 ![todolist](./images/todolist.png)
 
 
-4.  You can overwrite the default values in a chart from the command line, let's upgrade our deployment to show this. We'll make a simple change to the values. By default we only have one replica of our app, let's use helm to set this to 5.
+4.  You can overwrite the default values in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
@@ -85,10 +85,10 @@ helm uninstall my --namespace ${TEAM_NAME}-ci-cd
 ```
 verify the clean up
 ```bash
-oc get pods | grep todolist
+oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
 
-6. For those who are really interested, this is the annatomy of our helm chart. It can be [found here](https://github.com/rht-labs/todolist), but the basic structure is as follows
+6. For those who are really interested, this is the anatomy of our Helm chart. It can be [found here](https://github.com/rht-labs/todolist), but the basic structure is as follows:
 <pre>
 todolist/chart
 ├── Chart.yaml
@@ -101,11 +101,8 @@ todolist/chart
 </pre>
 where:
 * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
-* `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can over write these values on the command line
-* `templates/*.yaml` - there are our k8s resources. 
+* `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can over write these values on the command line.
+* `templates/*.yaml` - they are our k8s resources. 
 * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
 
-### TODO - Familiarise yourself with some basic helm...
-    * thinking add some random chart / website / app eg Residency Microsite? 
-    * change values eg defaults and then override on the command line
-    * show values changed?
+Now, let's continue with even more exiting tool!

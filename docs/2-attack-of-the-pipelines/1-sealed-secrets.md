@@ -1,19 +1,16 @@
 # Sealed Secrets
-Blah blah blah - soemthing about SS and why we use it....
-public repos with private secrets
-devops is hard, secure devops is harder....
+We say GitOps, we say 'if it's not in Git, it's NOT REAL' but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - any anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
 
-These secrets are used by our pipeline in the next exercise.
-
+Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 ### Sealed Secrets in action
 
-Lets start by sealing our token for accessing git.
+Lets start by sealing our Git credentials:
 ```bash
 export GITLAB_USER=<your gitlab user>
 export GITLAB_PASSWORD=<your gitlab password>
 ```
 
-Run this command. This will generate a kube secret in `tmp`
+Run this command. This will generate a Kubernetes secret object in `tmp`
 ```bash
 cat << EOF > /tmp/git-auth.yaml
 apiVersion: v1
@@ -30,18 +27,17 @@ metadata:
 EOF
 ```
 
-with the non-sealed secret local, let's seal up. 
-tell people what kubeseal is
+Use `kubeseal` commandline to seal the secret definition.
 ```bash
-# use kubeseal to seal the secret
 kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
     -n ${TEAM_NAME}-ci-cd \
     --controller-namespace do500-shared \
     --controller-name sealed-secrets \
     -o yaml
 ```
+
+Verify that secret is sealed:
 ```bash
-# verify its results
 cat /tmp/sealed-git-auth.yaml 
 ```
 
@@ -60,7 +56,7 @@ spec:
 ...
 </pre>
 
-We want to grab the results of this sealing activity, in particular the `encryptedData`
+We want to grab the results of this sealing activity, in particular the `encryptedData`.
 
 ```bash
 cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
@@ -99,7 +95,7 @@ git commit -m "🕵🏻‍♂️ Sealed secret of Git user creds is added 🔎"
 git push
 ```
 
-🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret
+🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret.
 
 You might notice that the `git-auth` secrets fails to sync:
 

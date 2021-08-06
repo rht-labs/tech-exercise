@@ -54,7 +54,7 @@ helm upgrade --install argocd \
 ```
 
 <p class="tip">
-⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab
+⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab.
 </p>
 
 3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
@@ -75,7 +75,7 @@ oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through UI. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out by setting the folling:
+7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through UI. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`
@@ -99,7 +99,7 @@ Your form should look like this:
 ![argocd-todolist-detail](images/argocd-todolist-detail.png)
 
 10. You can verify the application is running and behaving as expected by navigating to the url of the app, same way we did for the previous helm deploy.
-```
+```bash
 oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 ```
 
