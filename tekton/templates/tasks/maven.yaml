@@ -47,4 +47,4 @@ spec:
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       command: ["/bin/sh", "-c"]
       args:
-        - echo -n $(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout)
+        - echo -n $(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout) | xargs echo -n | tee $(results.VERSION.path)
