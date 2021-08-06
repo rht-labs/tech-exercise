@@ -31,7 +31,28 @@ git push -u origin main
       cluster_domain: <CLUSTER_DOMAIN>
 ```
 
-3. Update git
+3. We also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the nexus chart repository in OpenShift:
+<pre>
+  # Pet Battle Apps
+  pet-battle-api:
+    name: pet-battle-api
+    enabled: true
+    source: <strong>http://nexus:8081/repository/helm-charts</strong>
+    chart_name: pet-battle-api
+    source_ref: 1.1.0 # helm chart version
+    values:
+      image_name: pet-battle-api
+      image_version: latest # container image version
+
+  pet-battle:
+    name: pet-battle
+    enabled: true
+    source: <strong>http://nexus:8081/repository/helm-charts</strong>
+    chart_name: pet-battle
+    source_ref: 1.0.6 # helm chart version
+</pre>
+
+4. Update git
 ```bash
 # git add, commit, push your changes..
 cd /projects/tech-exercise
@@ -40,7 +61,7 @@ git commit -m  "🍕 ADD - tekton pipelines config 🍕"
 git push 
 ```
 
-4. Add webhook to GitLab `pet-battle-project`
+5. Add webhook to GitLab `pet-battle-project`
 - fill in the `URL` based on this route
 ```bash
 oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
@@ -66,7 +87,7 @@ You can test the webhook works from GitLab.
 > <pre>
 
 
-5. Trigger pipeline via webhook by checking in some code for Pet Battle API. Lets change the application versions.
+6. Trigger pipeline via webhook by checking in some code for Pet Battle API. Lets change the application versions.
 
 - Edit pet-battle-api `pom.xml` and update the `version` number
 ```xml
