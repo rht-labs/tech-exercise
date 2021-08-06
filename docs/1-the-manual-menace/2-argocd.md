@@ -31,6 +31,8 @@ Configure our secret:
 cat << EOF > /projects/tech-exercise/argocd-values.yaml
 namespace: ${TEAM_NAME}-ci-cd
 argocd_cr:
+  namespaceRoleBinding:
+    enabled: true
   applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
   repositoryCredentials: |
     - url: https://gitlab-ce.${CLUSTER_DOMAIN}
