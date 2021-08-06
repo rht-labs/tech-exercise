@@ -33,9 +33,9 @@ echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
 ```
 
-7. Check if you can connect to OpenShift. The `<CLUSTER_DOMAIN>` should be provided by your facilitator. Update it and run the command below. 
+7. Check if you can connect to OpenShift. The `<SERVER_API>` should be provided by your facilitator. Update it and run the command below. 
 ```bash
-oc login --server=https://api.${CLUSTER_DOMAIN}:6443 -u <USERNAME> -p <PASSWORD>
+oc login --server=https://api.${SERVER_API}:6443 -u <USERNAME> -p <PASSWORD>
 ```
 
 8. Check your user permissions in OpenShift by creating your team's CICD project. 
