@@ -64,5 +64,5 @@ spec:
         git checkout main
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
-        git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/password)@gitlab-ce.do500-gitlab.svc.cluster.local/$(params.TEAM_NAME)/tech-exercise.git
+        git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/password)/$(params.TEAM_NAME)/tech-exercise.git
         git push -u origin main
