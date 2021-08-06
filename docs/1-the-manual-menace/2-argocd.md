@@ -24,10 +24,11 @@ When something is seen as not matching the required state in Git, an application
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 ```
 
-2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. However, things to be weary of with many ArgoCD instances in one shared cluster is the `applicationInstanceLabelKey`. This needs to be unique for each ArgoCD deployment otherwise funky things start happening. We're also going to configure ArgoCD to be allowed pull from our git repository using a secret but we'll configure this secret later 🔐.
-<!-- weird bug alert! having a newline here makes the docsify render happy, but having the commands starting with "--" and no new line causes it to run on  -->
+2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. When deploying many instances of ArgoCD in one shared cluster we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment otherwise funky things start happening. We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret that we'll configure later 🔐.
+
+Configure our secret:
 ```bash
-cat << EOF > /project/tech-exercise/argocd-values.yaml
+cat << EOF > /projects/tech-exercise/argocd-values.yaml
 namespace: ${TEAM_NAME}-ci-cd
 argocd_cr:
   applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
@@ -42,10 +43,11 @@ argocd_cr:
         name: git-auth
 EOF
 ```
+Deploy ArgoCD:
 ```bash
 helm upgrade --install argocd \
   --namespace ${TEAM_NAME}-ci-cd \
-  -f /project/tech-exercise/argocd-values.yaml \
+  -f /projects/tech-exercise/argocd-values.yaml \
   redhat-cop/argocd-operator
 ```
 
@@ -83,7 +85,7 @@ oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
       * Version: `1.0.1` 
    * On the "DESTINATION" box
       * Cluster URL: https://kubernetes.default.svc
-      * Namespace: <TEAM_NAME>-ci-cd
+      * Namespace: `<TEAM_NAME>`-ci-cd
 
 Your form should look like this:
 ![argocd-create-application](images/argocd-create-application.png)
@@ -96,7 +98,7 @@ Your form should look like this:
 
 10. You can verify the application is running and behaving as expected by navigating to the url of the app, same way we did for the previous helm deploy.
 ```
-oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
+oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 ```
 
 🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy and application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
