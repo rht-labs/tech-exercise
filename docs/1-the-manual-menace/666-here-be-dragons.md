@@ -54,7 +54,7 @@ data:
     - name: redhat-cop
       type: helm
       url: https://redhat-cop.github.io/helm-charts
-    - url: https://gitlab-ce.apps.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
+    - url: https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
       type: git
       insecure: false
       insecureIgnoreHostKey: true
@@ -106,7 +106,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   type: helm
   url: https://redhat-cop.github.io/helm-charts
 - name: do500-git
-  url: https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-excercise.git
+  url: https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
   type: git
   insecure: true
   insecureIgnoreHostKey: true

@@ -33,7 +33,7 @@ namespace: ${TEAM_NAME}-ci-cd
 argocd_cr:
   applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
   repositoryCredentials: |
-    - url: https://gitlab-ce.apps.${CLUSTER_DOMAIN}
+    - url: https://gitlab-ce.${CLUSTER_DOMAIN}
       type: git
       passwordSecret:
         key: password

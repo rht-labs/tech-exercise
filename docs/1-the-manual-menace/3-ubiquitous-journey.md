@@ -33,7 +33,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 cd /projects/tech-exercise
 ```
 ```bash
-git remote set-url origin https://gitlab-ce.apps.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
 ```
 ```bash
 git push -u origin --all
@@ -46,7 +46,7 @@ With our git project created and our configuration pushed to it - let's start ou
 
 1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in. But let's get right into it - update your `values.yaml` file to reference the git repo you just created and your team name. This is the default values that will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (services, deployments & routes) but an ArgoCD application definition, just like we manually created in the previous exercise.
 ```yaml
-source: "https://gitlab-ce.apps.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
 team: <TEAM_NAME>
 ```
 
@@ -69,7 +69,6 @@ team: <TEAM_NAME>
 
 3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 ```bash
-# git add, commit, push your changes..
 git add .
 git commit -m  "🦆 ADD - correct project names 🦆" 
 git push 
