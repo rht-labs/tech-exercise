@@ -4,8 +4,8 @@
 1. Login to your CodeReadyWorkspace Editor. The link to this will be provided by your instructor.
 ![crw](./images/crw.png)
 
-If the workspace has not been set up for you, you can create one from this devfile:
-- https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
+  If the workspace has not been set up for you, you can create one from this devfile:
+    - https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
 
 2. In your IDE, open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
 ![new-terminal](./images/new-terminal.png)
