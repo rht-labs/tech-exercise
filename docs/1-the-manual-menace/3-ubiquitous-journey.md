@@ -74,30 +74,30 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-:warning: `FIXME` - Step 4 - fails cause git-auth not setup yet. At a Minimum we need ??
+  :warning: `FIXME` - Step 4 - fails cause git-auth not setup yet. At a Minimum we need ??
 
-Set these variables:
-```bash
-export GITLAB_USER=<your gitlab user>
-export GITLAB_PASSWORD=<your gitlab password>
-```
+  Set these variables:
+  ```bash
+  export GITLAB_USER=<your gitlab user>
+  export GITLAB_PASSWORD=<your gitlab password>
+  ```
 
-For now configure our secret using Kubernetes:
-```bash
-cat <<EOF | oc apply -f -
-apiVersion: v1
-data:
-  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
-  username: "$(printf ${GITLAB_USER} | base64 -w0)"
-kind: Secret
-metadata:
-  annotaion:
-    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
-  labels:
-    credential.sync.jenkins.openshift.io: "true"
-  name: git-auth
-EOF
-```
+  For now configure our secret using Kubernetes:
+  ```bash
+  cat <<EOF | oc apply -f -
+  apiVersion: v1
+  data:
+    password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
+    username: "$(printf ${GITLAB_USER} | base64 -w0)"
+  kind: Secret
+  metadata:
+    annotaion:
+      tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
+    labels:
+      credential.sync.jenkins.openshift.io: "true"
+    name: git-auth
+  EOF
+  ```
 
 
 4. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
