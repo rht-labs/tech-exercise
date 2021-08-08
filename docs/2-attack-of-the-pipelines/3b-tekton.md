@@ -61,7 +61,7 @@ git commit -m  "🍕 ADD - tekton pipelines config 🍕"
 git push 
 ```
 
-5. Add webhook to GitLab `pet-battle-project`
+5. Add webhook to GitLab `pet-battle-api` project
 - fill in the `URL` based on this route
 ```bash
 oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
@@ -92,7 +92,7 @@ You can test the webhook works from GitLab.
 - Edit pet-battle-api `pom.xml` and update the `version` number
 ```xml
     <artifactId>pet-battle-api</artifactId>
-    <version>1.1.2</version>
+    <version>1.2.1</version>
 ```
 The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
