@@ -84,7 +84,7 @@ git push
 
   For now configure our secret using Kubernetes:
   ```bash
-  cat <<EOF | oc apply -f -
+  cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
   apiVersion: v1
   data:
     password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
