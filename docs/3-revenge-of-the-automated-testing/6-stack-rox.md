@@ -62,7 +62,7 @@ spec:
     scannerComponent: Enabled
 ```
 
-4. Once deployed you can connect to the ACS WebUI Route using the `admin` credentials
+4. Once deployed you can connect to the ACS WebUI Route using the `admin` credentials - `https://central-stackrox.<CLUSTER_DOMAIN>`
 ```bash
 oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}'
 ```
