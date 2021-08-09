@@ -7,4 +7,4 @@ source: "http://nexus:8081/repository/helm-charts/"
 applications:
   # Keycloak
   
-  # Pet Battle apps
+  # Test app of app
