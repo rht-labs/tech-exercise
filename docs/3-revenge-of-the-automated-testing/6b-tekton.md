@@ -4,7 +4,7 @@
 
 We are going to make use of the `roxctl` CLI to integrate ACS with out Pipelines. 
 
-### roxctl
+#### roxctl
 
 Export these environment variables:
 ```bash
@@ -125,6 +125,96 @@ cd /projects/pet-battle-api
 payload="$( mktemp )"
 helm template -s templates/deployment.yaml -s templates/pdb.yaml -s templates/hpa.yaml -s templates/service.yaml . > $payload
 roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payload
+```
+
+#### kube-linter
+
+Need cluster Task:
+```bash
+oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
+```
+
+`kube-linter` CLI
+```bash
+wget https://github.com/stackrox/kube-linter/releases/download/0.2.2/kube-linter-linux.tar.gz
+```
+
+Can try it out locally on `chart` folder
+```bash
+cd /project/pet-battle-api
+kube-linter lint chart/
+```
+
+List of checks
+```bash
+kube-linter checks list | grep Name
+```
+```json
+Name: cluster-admin-role-binding
+Name: dangling-service
+Name: default-service-account
+Name: deprecated-service-account-field
+Name: docker-sock
+Name: drop-net-raw-capability
+Name: env-var-secret
+Name: exposed-services
+Name: host-ipc
+Name: host-network
+Name: host-pid
+Name: mismatching-selector
+Name: no-anti-affinity
+Name: no-extensions-v1beta
+Name: no-liveness-probe
+Name: no-read-only-root-fs
+Name: no-readiness-probe
+Name: non-existent-service-account
+Name: privilege-escalation-container
+Name: privileged-container
+Name: privileged-ports
+Name: required-annotation-email
+Name: required-label-owner
+Name: run-as-non-root
+Name: sensitive-host-mounts
+Name: ssh-port
+Name: unsafe-proc-mount
+Name: unsafe-sysctls
+Name: unset-cpu-requirements
+Name: unset-memory-requirements
+Name: writable-host-mount
+```
+
+Run with all default checks in pipeline
+```yaml
+    - name: kube-linter
+      runAfter:
+      - fetch-app-repository
+      taskRef:
+        name: kube-linter
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: manifest
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
+```
+
+Run with selected checks
+```yaml
+    - name: kube-linter
+      runAfter:
+      - fetch-app-repository
+      taskRef:
+        name: kube-linter
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+      params:
+        - name: manifest
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
+        - name: default_option
+          value: do-not-auto-add-defaults
+        - name: includelist
+          value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
 ```
 
 #### Pipeline Tasks
