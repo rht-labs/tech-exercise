@@ -105,6 +105,7 @@ oc -n stackrox create -f sandbox1350-cluster-init-secrets.yaml
 10. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
 
 ![images/acs-cluster-import.png](images/acs-cluster-import.png)
+![images/acs-dashboard.png](images/acs-dashboard.png)
 ![images/acs-compliance-graphs.png](images/acs-compliance-graphs.png)
 
 11. `FIXME` to make `roxctl` cli work on internal images i needed to manually add a registry. There is autmatically discovered registries there so it should be automatic using the ServiceAccount ?
