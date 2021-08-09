@@ -107,7 +107,7 @@ oc -n stackrox create -f sandbox1350-cluster-init-secrets.yaml
 ![images/acs-cluster-import.png](images/acs-cluster-import.png)
 ![images/acs-compliance-graphs.png](images/acs-compliance-graphs.png)
 
-11. `FIXME` to make roxctl cli work on internal images i needed to manually add a registry. There is autmatically discovered registries there so it should be automatic using the ServiceAccount ?
+11. `FIXME` to make `roxctl` cli work on internal images i needed to manually add a registry. There is autmatically discovered registries there so it should be automatic using the ServiceAccount ?
 ```bash
 # Platform Configurations -> Generic Docker Registry
 # add image-registry.openshift-image-registry.svc:5000 -> $(oc whoami --show-token)
@@ -120,13 +120,15 @@ Now we can use ACS to help move security `LEFT` in our build pipeline. In each g
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 - [ ] Configure a StackRox kubelinter - to check resources prior to packaging with [helm](https://hub.tekton.dev/tekton/task/kube-linter)
 - [ ] Configure a `Lifecycle Stage:Build` policy in [ACS](https://docs.openshift.com/acs/integration/integrate-with-ci-systems.html#integrate-ci-check-existing-build-phase-policies_integrate-with-ci-systems)
-- [ ] Configure you pipeline to `check and scan` images
-- [ ] Configure you pipeline to report any `Policy` failures
-- [6a-jenkins.md](6a-jenkins.md)
+- [ ] Configure you pipeline to `check` build time policy violations
+- [ ] Configure you pipeline to `scan` images for CVE/CVSS
+- [ ] Configure you pipeline to test `deployment` configuration files
+- [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
 - [ ] Configure a StackRox kubelinter - to check resources prior to packaging with [helm](https://hub.tekton.dev/tekton/task/kube-linter)
 - [ ] Configure a `Lifecycle Stage:Build` policy in [ACS](https://docs.openshift.com/acs/integration/integrate-with-ci-systems.html#integrate-ci-check-existing-build-phase-policies_integrate-with-ci-systems)
-- [ ] Configure you pipeline to `check and scan` images
-- [ ] Configure you pipeline to report any `Policy` failures
-- [6a-tekton.md](6a-tekton.md)
+- [ ] Configure you pipeline to `check` build time policy violations
+- [ ] Configure you pipeline to `scan` images for CVE/CVSS
+- [ ] Configure you pipeline to test `deployment` configuration files
+- [tekton](3-revenge-of-the-automated-testing/6b-tekton.md)
