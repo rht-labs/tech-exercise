@@ -1,31 +1,35 @@
 ### Extend Tekton Pipeline with Stackrox
 
-👷🏼👷🏼👷🏼 `WIP` 👷🏼👷🏼👷🏼
+👷🏼👷🏼👷🏼 **WIP** 👷🏼👷🏼👷🏼
 
-We are going to make use of the `roxctl` CLI to integrate ACS with out Pipelines. 
+We are going to make use of the **roxctl** CLI to integrate ACS with out Pipelines.
 
 #### roxctl
 
 Export these environment variables:
+
 ```bash
 export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
 export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
 ```
 
-Lets grab the `roxctl` CLI:
+Lets grab the **roxctl** CLI:
+
 ```bash
-curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl"
+curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl > /dev/null; echo "Getting roxctl"
 chmod +x ./roxctl  > /dev/null
 ```
 
-The following command checks `build-time` violations of your security policies in images.
+The following command checks **build-time** violations of your security policies in images.
 
-We can run a `check` on our `pet-battle` image by doing:
+We can run a **check** on our **pet-battle** image by doing:
+
 ```bash
 ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )'
 ```
 
 This returns a Policy error that should look something like this:
+
 ```json
 Error: Violated a policy with CI enforcement set
 {
@@ -76,14 +80,16 @@ Error: Violated a policy with CI enforcement set
 
 You can also check the scan results for specific images.
 
-We can also perform image `scans` directly. Try:
+We can also perform image **scans** directly. Try:
+
 ```bash
 ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --format pretty
 ```
 
-We can run the `scan` command with a format of `json, csv, and pretty. default "json"`.
+We can run the **scan** command with a format of *json, csv, and pretty. default "json"*.
 
-We can try this on the `pet-battle-api` image we built using:
+We can try this on the **pet-battle-api** image we built using:
+
 ```bash
 ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
   image-registry.openshift-image-registry.svc:5000/ateam-test/pet-battle-api@sha256:cf2ccbf8d117c2ea98425f9b70b2b937001ccb9b3cdbd4ab10b42ba8a082caf7
@@ -104,6 +110,7 @@ We can try this on the `pet-battle-api` image we built using:
 ```
 
 You can check the shell result of this command:
+
 ```bash
 if [ $? -eq 0 ]; then
  echo "🦸 no issues found 🦸"; 
@@ -113,6 +120,7 @@ fi
 ```
 
 We can also check other external images:
+
 ```bash
 ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle-api:latest
 ```
@@ -130,25 +138,30 @@ roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payl
 #### kube-linter
 
 Need cluster Task:
+
 ```bash
 oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
 ```
 
-`kube-linter` CLI
+Fetch the **kube-linter** CLI
+
 ```bash
 wget https://github.com/stackrox/kube-linter/releases/download/0.2.2/kube-linter-linux.tar.gz
 ```
 
-Can try it out locally on `chart` folder
+Can try it out locally on the **chart** folder
+
 ```bash
 cd /project/pet-battle-api
 kube-linter lint chart/
 ```
 
-List of checks
+List of checks the linter performs
+
 ```bash
 kube-linter checks list | grep Name
 ```
+
 ```json
 Name: cluster-admin-role-binding
 Name: dangling-service
@@ -183,7 +196,8 @@ Name: unset-memory-requirements
 Name: writable-host-mount
 ```
 
-Run with all default checks in pipeline
+Run with all default checks in pipeline (this will fail the build)
+
 ```yaml
     - name: kube-linter
       runAfter:
@@ -198,7 +212,8 @@ Run with all default checks in pipeline
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
 ```
 
-Run with selected checks
+Run with selected checks (this should succeed)
+
 ```yaml
     - name: kube-linter
       runAfter:
@@ -219,52 +234,148 @@ Run with selected checks
 
 #### Pipeline Tasks
 
+Lets start by sealing our StackRox credentials:
+
+Run this command. This will generate a Kubernetes secret object in `tmp`
+
+```bash
+cat << EOF > /tmp/rox-auth.yaml
+apiVersion: v1
+data:
+  password: "$(printf ${ROX_API_TOKEN} | base64 -w0)"
+  username: "$(printf ${ROX_ENDPOINT} | base64 -w0)"
+kind: Secret
+metadata:
+  name: rox-auth
+EOF
+```
+
+Use `kubeseal` commandline to seal the secret definition.
+
+```bash
+kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
+    -n ${TEAM_NAME}-ci-cd \
+    --controller-namespace do500-shared \
+    --controller-name sealed-secrets \
+    -o yaml
+```
+
+We want to grab the results of this sealing activity, in particular the `encryptedData`.
+
+```bash
+cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
+```
+<pre>
+    username: AgAj3JQj+EP23pnzu...
+    password: AgAtnYz8U0AqIIaqYrj...
+</pre>
+
+In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+```yaml
+  # Sealed Secrets
+  - name: sealed-secrets
+    enabled: true
+    source: https://redhat-cop.github.io/helm-charts
+    chart_name: helper-sealed-secrets
+    source_ref: "1.0.2"
+    values:
+      secrets:
+        - name: rox-auth
+          type: kubernetes.io/basic-auth
+          data:
+            password: BASE64_ROX_API_TOKEN
+            username: BASE64_ROX_ENDPOINT
+```
+
 Add tasks for
 
-- [ ] `scan` image results
-- [ ] `check` build time violations
-- [ ] `deployment` configuration checks
+- [ ] **scan** image results
 
-```yaml
+```bash
+cd /projects/tech-exercise
+cat <<'EOF' > tekton/templates/tasks/rox-image-scan.yaml
 apiVersion: tekton.dev/v1beta1
-kind: ClusterTask
+kind: Task
 metadata:
   name: rox-image-scan
-  namespace: pipeline-demo
 spec:
+  workspaces:
+    - name: output
   params:
-    - name: rox_central_endpoint
+    - name: ROX_SECRET
       type: string
-      description: Secret containing the address:port tuple for StackRox Central (example - rox.stackrox.io:443)
-    - name: rox_api_token
-      type: string
-      description: Secret containing the StackRox API token with CI permissions
-    - name: image
+      description: Secret containing the Stackrox endpoint and token as (username and password)
+      default: rox-auth
+    - name: IMAGE
       type: string
       description: Full name of image to scan (example -- gcr.io/rox/sample:5.0-rc1)
-    - name: output_format
+    - name: OUTPUT_FORMAT
       type: string
       description:  Output format (json | csv | pretty)
       default: json
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
   steps:
     - name: rox-image-scan
-      image: centos:8
+      image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       env:
         - name: ROX_API_TOKEN
           valueFrom:
             secretKeyRef:
-              name: $(params.rox_api_token)
-              key: rox_api_token
-        - name: ROX_CENTRAL_ENDPOINT
+              name: $(params.ROX_SECRET)
+              key: password
+        - name: ROX_ENDPOINT
           valueFrom:
             secretKeyRef:
-              name: $(params.rox_central_endpoint)
-              key: rox_central_endpoint
+              name: $(params.ROX_SECRET)
+              key: username
       script: |
         #!/usr/bin/env bash
         set +x
         export NO_COLOR="True"
-        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_CENTRAL_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl" 
+        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl" 
         chmod +x ./roxctl > /dev/null
-        ./roxctl image scan --insecure-skip-tls-verify -e $ROX_CENTRAL_ENDPOINT --image $(params.image) --format $(params.output_format) 
+        ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
+EOF
 ```
+
+Its not real unless its in git
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐡 ADD - rox-image-scan-task 🐡" 
+git push 
+```
+
+Reinstall our App-of-Apps helm chart with the new definition.
+```bash
+helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+```
+
+Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
+
+```yaml
+    - name: image-scan
+      runAfter:
+      - bake
+      taskRef:
+        name: rox-image-scan
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: IMAGE
+          value: "$(tasks.bake.results.IMAGE)"
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+        - name: OUTPUT_FORMAT
+          value: pretty
+```
+
+
+
+- [ ] **check** build time violations
+- [ ] **deployment** configuration checks
+
