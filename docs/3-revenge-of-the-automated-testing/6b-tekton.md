@@ -374,8 +374,55 @@ Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definit
           value: pretty
 ```
 
-
-
 - [ ] **check** build time violations
-- [ ] **deployment** configuration checks
 
+?> **Tip** We could extend the previous check by changing the output format to **json** and installing and using the **jq** command. For example, to check the image scan output and return a results when the **riskScore** and **topCvss** are below a certain value say. These are better handled as *Build Policy* within ACS which we can check next.
+
+Lets add another step to our **rox-image-scan** task to check for any build time violations.
+
+```bash
+cd /projects/tech-exercise
+cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
+    - name: rox-image-check
+      image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      env:
+        - name: ROX_API_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: $(params.ROX_SECRET)
+              key: password
+        - name: ROX_ENDPOINT
+          valueFrom:
+            secretKeyRef:
+              name: $(params.ROX_SECRET)
+              key: username
+      script: |
+        #!/usr/bin/env bash
+        set +x
+        export NO_COLOR="True"
+        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl" 
+        chmod +x ./roxctl > /dev/null
+        ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
+        if [ $? -eq 0 ]; then
+          echo "🦕 no issues found 🦕"; 
+          exit 0;
+        else
+          echo "🛑 image checks failed 🛑";
+          exit 1;
+        fi
+EOF
+```
+
+Its not real unless its in git
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐡 ADD - rox-image-check-task 🐡" 
+git push
+```
+
+Out Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
+
+![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
