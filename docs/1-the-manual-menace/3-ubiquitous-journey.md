@@ -74,7 +74,7 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-  :warning: `FIXME` - Step 4 - fails cause git-auth not setup yet. At a Minimum we need ??
+!> `FIXME` - Step 4 - fails cause git-auth not setup yet. At a Minimum we need ??
 
   Set these variables:
   ```bash

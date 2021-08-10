@@ -76,15 +76,15 @@ You can test the webhook works from GitLab.
 ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
 
->  You can enable debug log info for your tekton webhook pod by setting:
->```bash
-> oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers
->```
-> <pre>
-> // set log level
-> data:
->   loglevel.eventlistener: debug
-> <pre>
+?> **Tip** You can enable debug log info for your tekton webhook pod by setting
+```bash
+oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers
+```
+<pre>
+// set log level
+data:
+  loglevel.eventlistener: debug
+</pre>
 
 
 6. Trigger pipeline via webhook by checking in some code for Pet Battle API. Lets change the application versions.

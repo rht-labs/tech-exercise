@@ -99,7 +99,7 @@ git push
 
 You might notice that the `git-auth` secrets fails to sync:
 
-> :warning: HEALTH DETAILS - failed update: Resource "git-auth" already exists and is not managed by SealedSecret
+!> HEALTH DETAILS - failed update: Resource `"git-auth"` already exists and is not managed by SealedSecret
 
 Thats because we already created a `git-auth` secret manually in Excercise.1. Lets remove it now:
 ```bash
