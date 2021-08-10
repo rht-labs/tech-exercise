@@ -48,4 +48,4 @@
   * [📈 Autoscaling](5-the-deployments-strike-back/1-autoscaling.md)
   * [🔵🟩 Blue/Green Deployments ](5-the-deployments-strike-back/2-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
-  * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)    
+  * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)

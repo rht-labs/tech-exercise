@@ -54,6 +54,8 @@ applications:
         - name: jenkins-agent-argocd
       deployment:
         env_vars:
+          - name: BUILD_NAMESPACE
+            value: ''
           - name: ARGOCD_CONFIG_REPO
             value: ''
           - name: GITLAB_HOST

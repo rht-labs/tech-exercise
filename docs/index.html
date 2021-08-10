@@ -10,9 +10,49 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
 </head>
 <body>
+  <div class="team-name-form">
+      <div class="team-inputs">
+        <label for="tname">Team Name</label>
+        <input type="text" id="tname" name="teamname" placeholder="Your team name..">        
+      </div>
+
+      <div class="team-inputs">
+        <label for="cdomain">Cluster Domain</label>
+        <input type="text" id="cdomain" name="clusterdomain" placeholder="Your cluster domain..">
+      </div>
+
+      <div class="">
+        <button class="storage-btns" onclick="setNamesInStorage()">Save</button>
+        <button class="storage-btns" onclick="clearStorage()">Clear Store</button>
+      </div>
+  </div>
+
   <div id="app"></div>
+  
+  
   <script>
+    document.getElementById("tname").value = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '';
+    document.getElementById("cdomain").value = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '';
+
+    function setNamesInStorage () {
+      let tname = document.getElementById('tname').value.toLowerCase();
+      let cdomain = document.getElementById('cdomain').value.toLowerCase();
+      console.info('INFO - setting team and cluster to :', tname, cdomain)
+      localStorage.setItem('TEAM_NAME', tname);
+      localStorage.setItem('CLUSTER_DOMAIN', cdomain);
+    }
+
+    function clearStorage () {
+      console.info('INFO - clearing team and cluster');
+      localStorage.removeItem('TEAM_NAME');
+      localStorage.removeItem('CLUSTER_DOMAIN');
+      document.getElementById('tname').value = '';
+      document.getElementById('cdomain').value = '';
+    }
+
     window.$docsify = {
+      auto2top: true,
+      executeScript: true,
       name: 'DevOps Culture & Practice Lab Exercises',
       repo: 'https://github.com/rht-labs/tech-exercise',
       loadSidebar: true,
@@ -25,13 +65,41 @@
         buttonText : '✂️',
         errorText  : '😔',
         successText: '💚 copied'
-      }
+      },
+      plugins: [
+        function(hook) {
+          hook.beforeEach(function(content) {
+            // Invoked each time before parsing the Markdown file.
+            const teamName = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '<TEAM_NAME>';
+            const clusterDomain = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '<CLUSTER_DOMAIN>';
+            return content.replaceAll('<TEAM_NAME>', teamName)
+                    .replaceAll('<CLUSTER_DOMAIN>', clusterDomain);
+          });
+
+          const footer = `<hr/>
+            <footer>
+            <span><a href="https://www.redhat.com/en/services/consulting/open-innovation-labs">Red Hat Open Innovation Labs</a>. </span>
+            <span>Proudly published with <a href="https://github.com/docsifyjs/docsify" target="_blank">docsify</a>.</span>
+            </footer>
+            `;
+          
+          hook.afterEach(function(html) {
+            return html + footer;
+          });
+        }
+      ],
+      vueComponents: { },
     }
+
+    
   </script>
+
   <!-- Docsify v4 -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script> -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script>
@@ -39,6 +107,48 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
 
   <style>
+    input,label {
+      font-size: 12px;
+      display: block;
+    }
+    input[type=text] {
+      padding: 8px 12px;
+      /* display: inline-block; */
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    input[type=text]:focus {
+      outline: none !important;
+      border: 2px solid #F5606D;
+    }
+    
+    .team-name-form {
+      margin-left: 0%;
+      background-color: #f3f3f3;
+      padding-left: 20%;
+      padding-right: 20%;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .team-inputs {
+      flex: 1;
+    }
+    .team-inputs:first-child {
+      /* margin-right: 30%; */
+    }
+    .storage-btns {
+      font-size: 12px;
+      margin: 10px;
+      padding: 10px;
+      cursor: pointer;
+      background-color: #FAB6B6;
+      color: black;
+      border: 2px solid #FAB6B6; 
+      width: 130px; 
+      text-align: center;
+    }
     p.tip {
       border-left-color: #4D4D4D;
     }
