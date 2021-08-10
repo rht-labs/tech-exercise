@@ -1,13 +1,13 @@
 ## 🐌 The Basics - CRW, OCP & Helm
 ## CodeReady Workspaces setup
 
-1. Login to your CodeReadyWorkspace Editor. The link to this will be provided by your instructor.
+1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
 ![crw](./images/crw.png)
 
-  If the workspace has not been set up for you, you can create one from this devfile:
+  If the workspace has not been set up for you, you can create one from this devfile. On Code Ready Workspaces, `Create Workspace > Custom Workspace`. Enter this URL to load the DO500 stack:
     - https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
 
-2. In your IDE, open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
+2. In your IDE (it may take some time to open ... ⏰), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
 ![new-terminal](./images/new-terminal.png)
 
 <!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->

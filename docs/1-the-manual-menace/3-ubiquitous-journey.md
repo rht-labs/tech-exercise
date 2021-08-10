@@ -36,13 +36,17 @@ cd /projects/tech-exercise
 git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
 ```
 ```bash
+git add .
+git commit -am "🐙 ADD - argocd values file 🐙"
+```
+```bash
 git push -u origin --all
 ```
 
 With our git project created and our configuration pushed to it - let's start our GitOps Journey 🧙‍♀️🦄!
 
 ### Deploy Ubiquitous Journey 🔥🦄
-> something something what UJ is .... and what we're using it for in this exercise.
+> and what we're using it for in this exercise.
 
 1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in. But let's get right into it - update your `values.yaml` file to reference the git repo you just created and your team name. This is the default values that will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (services, deployments & routes) but an ArgoCD application definition, just like we manually created in the previous exercise.
 ```yaml
@@ -74,17 +78,14 @@ git commit -m  "🦆 ADD - correct project names 🦆"
 git push 
 ```
 
-!> **FIXME** - Step 4 - fails cause git-auth not setup yet. At a Minimum we need ??
-
-  Set these variables:
-  ```bash
-  export GITLAB_USER=<your gitlab user>
-  export GITLAB_PASSWORD=<your gitlab password>
-  ```
-
-  For now configure our secret using Kubernetes:
-  ```bash
-  cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. Set these variables on your terminal:
+```bash
+export GITLAB_USER=<YOUR_GITLAB_USER>
+export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
+```
+Add the Secret to the cluster:
+```bash
+cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
   apiVersion: v1
   data:
     password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
@@ -96,17 +97,16 @@ git push
     labels:
       credential.sync.jenkins.openshift.io: "true"
     name: git-auth
-  EOF
-  ```
+EOF
+```
 
-
-4. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
+5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
 ```bash
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 
-5. As ArgoCD sync's the resources we can see them in the cluster:
+6. As ArgoCD sync's the resources we can see them in the cluster:
 ```bash
 oc get projects | grep ${TEAM_NAME}
 ```
