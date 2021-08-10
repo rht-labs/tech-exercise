@@ -1,10 +1,10 @@
 ### Extend Tekton Pipeline with Stackrox
 
-👷🏼👷🏼👷🏼 **WIP** 👷🏼👷🏼👷🏼
-
-We are going to make use of the **roxctl** CLI to integrate ACS with out Pipelines.
+We are going to make use of the **roxctl** CLI to integrate ACS with our Pipelines.
 
 #### roxctl
+
+Let's learn how to use the **roxctl** command line.
 
 Export these environment variables:
 
@@ -137,7 +137,9 @@ roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payl
 
 #### kube-linter
 
-Need cluster Task:
+Let's enable the **kube-linter** task in our pipeline.
+
+Add the cluster Task:
 
 ```bash
 oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
@@ -423,6 +425,140 @@ git commit -m  "🐡 ADD - rox-image-check-task 🐡"
 git push
 ```
 
-Out Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
+Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
 
 ![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
+
+### Breaking the Build
+
+Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
+
+```yaml
+        - name: includelist
+          value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner"
+```
+
+Check in these changes.
+
+```bash
+cd /projects/tech-exercise
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡" 
+git push
+```
+
+Wait for the pipeline to sync and trigger a **pet-battle-api** build. This should now fail.
+![images/acs-lint-fail.png](images/acs-lint-fail.png)
+
+We can take a look at the error and replicate it on the command line:
+```bash
+cd /projects/pet-battle-api
+
+kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner --json | jq .Reports
+```
+```json
+Error: found 2 lint errors
+[
+  {
+    "Diagnostic": {
+      "Message": "no label matching \"owner=<any>\" found"
+    },
+    "Check": "required-label-owner",
+    "Remediation": "Add an email annotation to your object with the name of the object's owner.",
+    "Object": {
+      "Metadata": {
+        "FilePath": "pet-battle-api/templates/mongodb-persistent.yaml"
+      },
+      "K8sObject": {
+        "Namespace": "",
+        "Name": "test-release-mongodb",
+        "GroupVersionKind": {
+          "Group": "apps.openshift.io",
+          "Version": "v1",
+          "Kind": "DeploymentConfig"
+        }
+      }
+    }
+  },
+  {
+    "Diagnostic": {
+      "Message": "no label matching \"owner=<any>\" found"
+    },
+    "Check": "required-label-owner",
+    "Remediation": "Add an email annotation to your object with the name of the object's owner.",
+    "Object": {
+      "Metadata": {
+        "FilePath": "pet-battle-api/templates/deployment.yaml"
+      },
+      "K8sObject": {
+        "Namespace": "",
+        "Name": "test-release-pet-battle-api",
+        "GroupVersionKind": {
+          "Group": "apps",
+          "Version": "v1",
+          "Kind": "Deployment"
+        }
+      }
+    }
+  }
+]
+```
+
+Let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
+
+```yaml
+owner: <TEAM_NAME>
+```
+
+Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two place - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
+
+```json
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+owner: {{ .Values.team }}
+```
+
+We can check the **kube-linter** command again and check these changes in:
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐊 ADD - kube-linter owner labels 🐊" 
+git push
+```
+
+The Pipeline should now proceed OK.
+
+Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
+
+Edit the `pet-battle-api/Dockerfile.jvm` and add the following line near the top of the file:
+
+```bash
+EXPOSE 22
+```
+
+Check in this change and watch the build that is triggered.
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐉 Expose port 22 🐉" 
+git push
+```
+
+This should now fail on the **image-scan/rox-image-check** task.
+
+![images/acs-image-fail.png](images/acs-image-fail.png)
+
+Back in ACS we can also see the failure in the *Violations* view.
+
+![images/acs-violations.png](images/acs-violations.png)
+
+Remove the `EXPOSE 22` from the `Dockerfile.jvm` and check it in to make the build pass.
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐧 FIX - Security violation, remove port 22 exposure 🐧" 
+git push
+```
