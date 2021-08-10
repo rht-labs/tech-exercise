@@ -4,7 +4,8 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
 #### Add Nexus in our tool box
 > Add sonatype's Nexus repository manager to our tooling!
 
-1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. Copy the following into the file:
+1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. Copy the following into the file
+
 ```yaml
   # Nexus
   - name: nexus
