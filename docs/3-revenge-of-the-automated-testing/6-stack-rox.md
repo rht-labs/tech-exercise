@@ -135,7 +135,7 @@ Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
 
 ![images/acs-policy-done.png](images/acs-policy-done.png)
 
-#### Task per group
+#### Tasks per group
 
 Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will do the following:
 
