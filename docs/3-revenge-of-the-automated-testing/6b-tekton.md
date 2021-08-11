@@ -1,6 +1,6 @@
 ### Extend Tekton Pipeline with Stackrox
 
-We are going to make use of the ACS to move security checks into our pipeline. We will look at:
+We are going to make use of ACS to move security checks into our pipeline. We will look at:
 
 - **roxctl** - using the ACS/StackRox CLI
 - **kube-linter** - adding the ACS/StackRox kube linter Task to check deployment configurations
