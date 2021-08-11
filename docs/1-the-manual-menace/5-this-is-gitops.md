@@ -39,6 +39,11 @@ git push
 ```
 ![argocd-new-var](./images/argocd-new-var.png)
 
+?> **TIP** Often, we want to trigger GitOps but have nothing to commit ! We can use an *empty commit* instead ! 🙉
+```bash
+git commit -m "empty-commit" --allow-empty && git push
+```
+
 4. In OpenShift, we should now see the variable is persisted!
 ![jenkins-argocd-new-var](./images/jenkins-argocd-new-var.png)
 
