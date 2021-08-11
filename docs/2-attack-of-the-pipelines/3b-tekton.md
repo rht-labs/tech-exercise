@@ -31,7 +31,7 @@ git push -u origin main
       cluster_domain: <CLUSTER_DOMAIN>
 ```
 
-3. We also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the nexus chart repository in OpenShift:
+3. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 <pre>
   # Pet Battle Apps
   pet-battle-api:
@@ -43,13 +43,6 @@ git push -u origin main
     values:
       image_name: pet-battle-api
       image_version: latest # container image version
-
-  pet-battle:
-    name: pet-battle
-    enabled: true
-    source: <strong>http://nexus:8081/repository/helm-charts</strong>
-    chart_name: pet-battle
-    source_ref: 1.0.6 # helm chart version
 </pre>
 
 4. Update git

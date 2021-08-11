@@ -1,0 +1,3 @@
+#### Aggregated Logging
+> OpenShift's built in logging .... 
+
