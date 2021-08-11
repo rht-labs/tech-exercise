@@ -1,8 +1,12 @@
 ### Extend Tekton Pipeline with Stackrox
 
-We are going to make use of the **roxctl** CLI to integrate ACS with our Pipelines.
+We are going to make use of the ACS to move security checks into our pipeline. We will look at:
 
-#### roxctl
+- **roxctl** - using the ACS/StackRox CLI
+- **kube-linter** - adding the ACS/StackRox kube linter Task to check deployment configurations
+- **scan,check** - container image scanning and policy checking as part of our pipeline using ACS/StackRox
+
+#### roxctl command line
 
 Let's learn how to use the **roxctl** command line.
 
@@ -135,7 +139,7 @@ helm template -s templates/deployment.yaml -s templates/pdb.yaml -s templates/hp
 roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payload
 ```
 
-#### kube-linter
+#### kube-linter Task
 
 Let's enable the **kube-linter** task in our pipeline.
 
@@ -164,7 +168,7 @@ List of checks the linter performs
 kube-linter checks list | grep Name
 ```
 
-```json
+<pre>
 Name: cluster-admin-role-binding
 Name: dangling-service
 Name: default-service-account
@@ -196,11 +200,12 @@ Name: unsafe-sysctls
 Name: unset-cpu-requirements
 Name: unset-memory-requirements
 Name: writable-host-mount
-```
+</pre>
 
-Run with all default checks in pipeline (this will fail the build)
 
-```yaml
+We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
+
+<pre>
     - name: kube-linter
       runAfter:
       - fetch-app-repository
@@ -212,9 +217,9 @@ Run with all default checks in pipeline (this will fail the build)
       params:
         - name: manifest
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
-```
+</pre>
 
-Run with selected checks (this should succeed)
+Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
 
 ```yaml
     - name: kube-linter
@@ -234,7 +239,17 @@ Run with selected checks (this should succeed)
           value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
 ```
 
-#### Pipeline Tasks
+Check our changes into git.
+
+```bash
+cd /projects/tech-exercise
+# git add, commit, push your changes..
+git add .
+git commit -m  "🐡 ADD - kube-linter checks 🐡" 
+git push
+```
+
+#### StackRox Tasks
 
 Lets start by sealing our StackRox credentials:
 
