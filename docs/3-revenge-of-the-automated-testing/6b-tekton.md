@@ -249,6 +249,8 @@ git commit -m  "🐡 ADD - kube-linter checks 🐡"
 git push
 ```
 
+🪄 Watch the pipeline run with the **kube-linter** task.
+
 #### StackRox scan,check Tasks
 
 Lets start by sealing our StackRox credentials:
@@ -304,9 +306,11 @@ In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`.
             username: BASE64_ROX_ENDPOINT
 ```
 
-Add tasks for
+🪄 You should be able to see a **rox-auth** secret in your <TEAM_NAME>-ci-cd namespace.
 
-- [ ] **scan** image results
+#### **Scan** Images
+
+Add a task into our codebase to scan our built images.
 
 ```bash
 cd /projects/tech-exercise
@@ -391,7 +395,9 @@ Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definit
           value: pretty
 ```
 
-- [ ] **check** build time violations
+🪄 Obeserve the **pet-battle-api** pipeline running with the **image-scan** task.
+
+#### **Check** Build/Deploy Time Violations
 
 ?> **Tip** We could extend the previous check by changing the output format to **json** and installing and using the **jq** command. For example, to check the image scan output and return a results when the **riskScore** and **topCvss** are below a certain value say. These are better handled as *Build Policy* within ACS which we can check next.
 
@@ -443,6 +449,8 @@ git push
 Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
 
 ![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
+
+🪄 Obeserve the **pet-battle-api** pipeline running with the **image-scan** task.
 
 ### Breaking the Build
 
@@ -577,3 +585,5 @@ git add .
 git commit -m  "🐧 FIX - Security violation, remove port 22 exposure 🐧" 
 git push
 ```
+
+🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
