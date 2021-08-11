@@ -40,6 +40,7 @@
       console.info('INFO - setting team and cluster to :', tname, cdomain)
       localStorage.setItem('TEAM_NAME', tname);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
+      location.reload();
     }
 
     function clearStorage () {
@@ -48,6 +49,7 @@
       localStorage.removeItem('CLUSTER_DOMAIN');
       document.getElementById('tname').value = '';
       document.getElementById('cdomain').value = '';
+      location.reload();
     }
 
     window.$docsify = {
