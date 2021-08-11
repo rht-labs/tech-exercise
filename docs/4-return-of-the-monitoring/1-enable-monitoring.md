@@ -24,19 +24,19 @@ OpenShift gathers the base metrics to see how our pods are doing. In order to ge
 
 **Example** ServiceMonitor object:
 <pre>
-    ---
-    apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
-    metadata:
-      name: my-app
-    spec:
-      endpoints:
-        - interval: 30s
-          port: tcp-8080 <span style="color:green;" >#port that metrics are exposed</span>
-          scheme: http
-      selector:
-        matchLabels:
-          app: my-app
+  ---
+  <span style="color:#0077AA;">apiVersion:</span> monitoring.coreos.com/v1
+  <span style="color:#0077AA;">kind:</span> ServiceMonitor
+  <span style="color:#0077AA;">metadata:</span>
+    <span style="color:#0077AA;">name:</span> my-app
+  <span style="color:#0077AA;">spec:</span>
+    <span style="color:#0077AA;">endpoints:</span>
+      <span style="color:#0077AA;">- interval:</span> 30s
+        <span style="color:#0077AA;">port:</span> tcp-8080 <span style="color:green;" >#port that metrics are exposed</span>
+        <span style="color:#0077AA;">scheme:</span> http
+    <span style="color:#0077AA;">selector:</span>
+      <span style="color:#0077AA;">matchLabels:</span>
+        <span style="color:#0077AA;">app:</span> my-app
 </pre>
 
 Now, let's create ServiceMonitor for our PetBattle apps! Of course, we will do it through ArgoCD because this is GITOPS!!
@@ -57,7 +57,7 @@ If you want to verify the objects:
 oc get servicemonitor -n ${TEAM_NAME}-test
 ```
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
+1. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
 ```yaml
   - name: grafana
     enabled: true
