@@ -249,7 +249,7 @@ git commit -m  "🐡 ADD - kube-linter checks 🐡"
 git push
 ```
 
-#### StackRox Tasks
+#### StackRox scan,check Tasks
 
 Lets start by sealing our StackRox credentials:
 
