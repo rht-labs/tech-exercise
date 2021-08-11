@@ -137,22 +137,20 @@ Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
 
 #### Task per group
 
-Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will:
+Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will do the following:
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 
 - [ ] Configure a StackRox kubelinter - to check resources prior to packaging with [helm](https://hub.tekton.dev/tekton/task/kube-linter)
-- [ ] Configure a `Lifecycle Stage:Build` policy in [ACS](https://docs.openshift.com/acs/integration/integrate-with-ci-systems.html#integrate-ci-check-existing-build-phase-policies_integrate-with-ci-systems)
-- [ ] Configure you pipeline to `check` build time policy violations
-- [ ] Configure you pipeline to `scan` images for CVE/CVSS
-- [ ] Configure you pipeline to test `deployment` configuration files
+- [ ] Configure your pipeline to `check` build time policy violations
+- [ ] Configure your pipeline to `scan` images for CVE/CVSS
+- [ ] Break/Fix your pipeline
 - [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
 
 - [ ] Configure a StackRox kubelinter - to check resources prior to packaging with [helm](https://hub.tekton.dev/tekton/task/kube-linter)
-- [ ] Configure a `Lifecycle Stage:Build` policy in [ACS](https://docs.openshift.com/acs/integration/integrate-with-ci-systems.html#integrate-ci-check-existing-build-phase-policies_integrate-with-ci-systems)
-- [ ] Configure you pipeline to `check` build time policy violations
-- [ ] Configure you pipeline to `scan` images for CVE/CVSS
-- [ ] Configure you pipeline to test `deployment` configuration files
+- [ ] Configure your pipeline to `check` build time policy violations
+- [ ] Configure your pipeline to `scan` images for CVE/CVSS
+- [ ] Break/Fix your pipeline
 - [tekton](3-revenge-of-the-automated-testing/6b-tekton.md)
