@@ -1,5 +1,6 @@
 ### Image Security
-> what is it why important
+
+!> **DEPRECATED SECTION** This is covered now in StackRox section
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 - do xyz
