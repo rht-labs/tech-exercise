@@ -82,16 +82,16 @@ export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
 export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
 ```
 
-6. Download the **roxctl** client for your local machine. You can aslo download directly from ACS WebUI
+6. Download the **roxctl** client for your local machine. You can also download it directly from ACS WebUI or via ACS API.
 
 ```bash
-curl -O https://mirror.openshift.com/pub/rhacs/assets/3.63.0/bin/Linux/roxctl && chmod 755 ./roxctl
+curl -O https://mirror.openshift.com/pub/rhacs/assets/3.63.0/bin/Linux/roxctl && chmod 755 roxctl
 ```
 
 7. Test that **roxctl** works by running
 
 ```bash
-./roxctl central whoami --insecure-skip-tls-verify -e $ROX_ENDPOINT:443
+roxctl central whoami --insecure-skip-tls-verify -e $ROX_ENDPOINT:443
 ```
 
 8. Generate the init bundle to connect the current cluster (or any other cluster!) to ACS. This can be done from the ACS WebUI or by downloading the Kubernetes secrets file and applying
@@ -106,7 +106,7 @@ oc -n stackrox create -f sandbox1350-cluster-init-secrets.yaml
 
 ```yaml
   centralEndpoint: 'central.stackrox:443'
-  clusterName: sandbox1350
+  clusterName: <CLUSTER_DOMAIN>
 ```
 
 ![images/acs-secured-cluster.png](images/acs-secured-cluster.png)

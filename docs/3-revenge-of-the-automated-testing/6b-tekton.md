@@ -17,19 +17,12 @@ export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
 export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
 ```
 
-Lets grab the **roxctl** CLI:
-
-```bash
-curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl > /dev/null; echo "Getting roxctl"
-chmod +x ./roxctl  > /dev/null
-```
-
 The following command checks **build-time** violations of your security policies in images.
 
 We can run a **check** on our **pet-battle** image by doing:
 
 ```bash
-./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )'
+roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )'
 ```
 
 This returns a Policy error that should look something like this:
@@ -87,18 +80,19 @@ You can also check the scan results for specific images.
 We can also perform image **scans** directly. Try:
 
 ```bash
-./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --format pretty
+roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --format pretty
 ```
 
 We can run the **scan** command with a format of *json, csv, and pretty. default "json"*.
 
-We can try this on the **pet-battle-api** image we built using:
+We can try this on the **pet-battle-api** image we built using the image reference (this is printed out in the **bake** stage of our pipeline)
 
 ```bash
-./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
+roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
   image-registry.openshift-image-registry.svc:5000/ateam-test/pet-battle-api@sha256:cf2ccbf8d117c2ea98425f9b70b2b937001ccb9b3cdbd4ab10b42ba8a082caf7
+```
 
-
+<pre>
 ✗ Image image-registry.openshift-image-registry.svc:5000/ateam-test/pet-battle-api@sha256:cf2ccbf8d117c2ea98425f9b70b2b937001ccb9b3cdbd4ab10b42ba8a082caf7 failed policy 'Red Hat Package Manager in Image' 
 - Description:
     ↳ Alert on deployments with components of the Red Hat/Fedora/CentOS package
@@ -111,7 +105,7 @@ We can try this on the **pet-battle-api** image we built using:
       *hawkey*) $(rpm -qa yum*)` in the image build for production containers.
 - Violations:
     - Image includes component 'rpm' (version 4.14.3-14.el8_4.x86_64)
-```
+</pre>
 
 You can check the shell result of this command:
 
@@ -126,7 +120,7 @@ fi
 We can also check other external images:
 
 ```bash
-./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle-api:latest
+roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle-api:latest
 ```
 
 The following command checks build-time and deploy-time violations of your security policies in YAML deployment files.
@@ -355,9 +349,9 @@ spec:
         #!/usr/bin/env bash
         set +x
         export NO_COLOR="True"
-        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl" 
-        chmod +x ./roxctl > /dev/null
-        ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
+        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl" 
+        chmod +x roxctl > /dev/null
+        roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
 EOF
 ```
 
@@ -424,9 +418,9 @@ cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
         #!/usr/bin/env bash
         set +x
         export NO_COLOR="True"
-        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output ./roxctl  > /dev/null; echo "Getting roxctl" 
-        chmod +x ./roxctl > /dev/null
-        ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
+        curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl" 
+        chmod +x roxctl > /dev/null
+        roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
         if [ $? -eq 0 ]; then
           echo "🦕 no issues found 🦕"; 
           exit 0;
