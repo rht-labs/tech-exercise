@@ -12,7 +12,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
     enabled: true
     source: https://redhat-cop.github.io/helm-charts
     chart_name: sonatype-nexus
-    source_ref: "1.0.0"
+    source_ref: "1.1.0"
     values:
       service:
         name: nexus
