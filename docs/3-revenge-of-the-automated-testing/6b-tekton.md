@@ -476,11 +476,12 @@ git push
 ![images/acs-lint-fail.png](images/acs-lint-fail.png)
 
 4. We can take a look at the error and replicate it on the command line:
+
 ```bash
 cd /projects/pet-battle-api
-
 kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner --json | jq .Reports
 ```
+
 ```json
 Error: found 2 lint errors
 [
@@ -535,7 +536,7 @@ Error: found 2 lint errors
 owner: <TEAM_NAME>
 ```
 
-6. Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two place - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
+6. Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
 
 ```json
 app.kubernetes.io/managed-by: {{ .Release.Service }}
@@ -552,6 +553,13 @@ git push
 ```
 
 8. The Pipeline should now proceed OK.
+
+```bash
+cd /project/pet-battle-api
+git commit -m "Test kube-linter fix" --allow-empty && git push
+```
+
+🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
 
 #### Build policy violation
 
@@ -588,5 +596,13 @@ git add .
 git commit -m  "🐧 FIX - Security violation, remove port 22 exposure 🐧" 
 git push
 ```
+
+7. The Pipeline should now proceed OK.
+
+```bash
+cd /project/pet-battle-api
+git commit -m "Test kube-linter fix" --allow-empty && git push
+```
+
 
 🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
