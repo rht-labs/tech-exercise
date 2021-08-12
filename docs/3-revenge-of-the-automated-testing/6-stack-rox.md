@@ -69,21 +69,23 @@ oc -n stackrox create -f cluster_init_bundle.yaml
 ![images/acs-dashboard.png](images/acs-dashboard.png)
 ![images/acs-compliance-graphs.png](images/acs-compliance-graphs.png)
 
+9. OpenShift internal registry fix.
+
 !> **FIXME** to make **roxctl** cli work on internal OpenShift images i needed to manually add a registry. There is automatically discovered registries there so it should be automatic using the ServiceAccount? *Platform Configurations -> Generic Docker Registry* add **image-registry.openshift-image-registry.svc:5000** -- password --> `$(oc sa get-token pipeline)`
 
-9. As a group we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
+10. As a group we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
 
 ![images/acs-find-policy.png](images/acs-find-policy.png)
 
-Select and *Edit* this policy. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
+11. Select and *Edit* this policy. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
 
 ![images/acs-policy-criteria.png](images/acs-policy-criteria.png)
 
-Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
+12. Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
 
 ![images/acs-policy-enforcement.png](images/acs-policy-enforcement.png)
 
-*Save* the policy. It should look like this now.
+13. *Save* the policy. It should look like this now.
 
 ![images/acs-policy-done.png](images/acs-policy-done.png)
 

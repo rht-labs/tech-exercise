@@ -10,14 +10,14 @@ We are going to make use of ACS to move security checks into our pipeline. We wi
 
 Let's learn how to use the **roxctl** command line.
 
-Export these environment variables:
+1. Export these environment variables:
 
 ```bash
 export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
 export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
 ```
 
-The following command checks **build-time** violations of your security policies in images.
+2. The following command checks **build-time** violations of your security policies in images.
 
 We can run a **check** on our **pet-battle** image by doing:
 
@@ -77,7 +77,7 @@ Error: Violated a policy with CI enforcement set
 
 You can also check the scan results for specific images.
 
-We can also perform image **scans** directly. Try:
+3. We can also perform image **scans** directly. Try:
 
 ```bash
 roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --format pretty
@@ -85,7 +85,7 @@ roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.i
 
 We can run the **scan** command with a format of *json, csv, and pretty. default "json"*.
 
-We can try this on the **pet-battle-api** image we built using the image reference (this is printed out in the **bake** stage of our pipeline)
+4. We can try this on the **pet-battle-api** image we built using the image reference (this is printed out in the **bake** stage of our pipeline)
 
 ```bash
 roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
@@ -117,13 +117,13 @@ else
 fi
 ```
 
-We can also check other external images:
+5. We can also check other external images:
 
 ```bash
 roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle-api:latest
 ```
 
-The following command checks build-time and deploy-time violations of your security policies in YAML deployment files.
+6. The following command checks build-time and deploy-time violations of your security policies in YAML deployment files.
 
 Use this command to validate Kubernetes resources in our helm template
 ```
@@ -137,26 +137,26 @@ roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payl
 
 Let's enable the **kube-linter** task in our pipeline.
 
-Add the cluster Task:
+1. Add the cluster Task:
 
 ```bash
 oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
 ```
 
-Fetch the **kube-linter** CLI
+2. Fetch the **kube-linter** CLI
 
 ```bash
 wget https://github.com/stackrox/kube-linter/releases/download/0.2.2/kube-linter-linux.tar.gz
 ```
 
-Can try it out locally on the **chart** folder
+3. Can try it out locally on the **chart** folder
 
 ```bash
 cd /project/pet-battle-api
 kube-linter lint chart/
 ```
 
-List of checks the linter performs
+4. List of checks the linter performs
 
 ```bash
 kube-linter checks list | grep Name
@@ -197,7 +197,7 @@ Name: writable-host-mount
 </pre>
 
 
-We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
+5. We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
 
 <pre>
     - name: kube-linter
@@ -213,7 +213,7 @@ We could run the **kube-linter** task with all default checks in our pipeline. T
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
 </pre>
 
-Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
+6. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
 
 ```yaml
     - name: kube-linter
@@ -233,7 +233,7 @@ Let's run with a restricted set of checks. Add the following step in our `maven-
           value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
 ```
 
-Check our changes into git.
+7. Check our changes into git.
 
 ```bash
 cd /projects/tech-exercise
@@ -247,9 +247,9 @@ git push
 
 #### StackRox scan,check Tasks
 
-Lets start by sealing our StackRox credentials:
+Lets start by sealing our StackRox credentials.
 
-Run this command. This will generate a Kubernetes secret object in `tmp`
+1. Run this command. This will generate a Kubernetes secret object in `tmp`
 
 ```bash
 cat << EOF > /tmp/rox-auth.yaml
@@ -263,7 +263,7 @@ metadata:
 EOF
 ```
 
-Use `kubeseal` commandline to seal the secret definition.
+2. Use `kubeseal` commandline to seal the secret definition.
 
 ```bash
 kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
@@ -273,7 +273,7 @@ kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
     -o yaml
 ```
 
-We want to grab the results of this sealing activity, in particular the `encryptedData`.
+3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
 
 ```bash
 cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
@@ -283,7 +283,8 @@ cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
     password: AgAtnYz8U0AqIIaqYrj...
 </pre>
 
-In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+4. In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
 ```yaml
   # Sealed Secrets
   - name: sealed-secrets
@@ -304,7 +305,7 @@ In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`.
 
 #### **Scan** Images
 
-Add a task into our codebase to scan our built images.
+1. Add a task into our codebase to scan our built images.
 
 ```bash
 cd /projects/tech-exercise
@@ -355,7 +356,7 @@ spec:
 EOF
 ```
 
-Its not real unless its in git
+2. Its not real unless its in git
 
 ```bash
 # git add, commit, push your changes..
@@ -364,12 +365,12 @@ git commit -m  "🐡 ADD - rox-image-scan-task 🐡"
 git push 
 ```
 
-Reinstall our App-of-Apps helm chart with the new definition.
+3. Reinstall our App-of-Apps helm chart with the new definition.
 ```bash
 helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 ```
 
-Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
+4. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
 
 ```yaml
     - name: image-scan
@@ -395,7 +396,7 @@ Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definit
 
 ?> **Tip** We could extend the previous check by changing the output format to **json** and installing and using the **jq** command. For example, to check the image scan output and return a results when the **riskScore** and **topCvss** are below a certain value say. These are better handled as *Build Policy* within ACS which we can check next.
 
-Lets add another step to our **rox-image-scan** task to check for any build time violations.
+1. Lets add another step to our **rox-image-scan** task to check for any build time violations.
 
 ```bash
 cd /projects/tech-exercise
@@ -431,7 +432,7 @@ cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
 EOF
 ```
 
-Its not real unless its in git
+2. Its not real unless its in git
 
 ```bash
 # git add, commit, push your changes..
@@ -440,7 +441,7 @@ git commit -m  "🐡 ADD - rox-image-check-task 🐡"
 git push
 ```
 
-Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
+3. Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
 
 ![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
 
@@ -448,14 +449,20 @@ Our Pipeline should look like this now with the addition of the **kube-linter** 
 
 ### Breaking the Build
 
-Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
+We will run through two break/fix scenarios.
+- kube-linter
+- build policy violation
+
+#### kube-linter
+
+1. Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
 
 ```yaml
         - name: includelist
           value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner"
 ```
 
-Check in these changes.
+2. Check in these changes.
 
 ```bash
 cd /projects/tech-exercise
@@ -465,10 +472,10 @@ git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡"
 git push
 ```
 
-Wait for the pipeline to sync and trigger a **pet-battle-api** build. This should now fail.
+3. Wait for the pipeline to sync and trigger a **pet-battle-api** build. This should now fail.
 ![images/acs-lint-fail.png](images/acs-lint-fail.png)
 
-We can take a look at the error and replicate it on the command line:
+4. We can take a look at the error and replicate it on the command line:
 ```bash
 cd /projects/pet-battle-api
 
@@ -522,20 +529,20 @@ Error: found 2 lint errors
 ]
 ```
 
-Let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
+5. Let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
 
 ```yaml
 owner: <TEAM_NAME>
 ```
 
-Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two place - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
+6. Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two place - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
 
 ```json
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 owner: {{ .Values.team }}
 ```
 
-We can check the **kube-linter** command again and check these changes in:
+7. We can check the **kube-linter** command again and check these changes in:
 
 ```bash
 # git add, commit, push your changes..
@@ -544,17 +551,19 @@ git commit -m  "🐊 ADD - kube-linter owner labels 🐊"
 git push
 ```
 
-The Pipeline should now proceed OK.
+8. The Pipeline should now proceed OK.
 
-Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
+#### Build policy violation
 
-Edit the `pet-battle-api/Dockerfile.jvm` and add the following line near the top of the file:
+1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
+
+2. Edit the `pet-battle-api/Dockerfile.jvm` and add the following line near the top of the file:
 
 ```bash
 EXPOSE 22
 ```
 
-Check in this change and watch the build that is triggered.
+3. Check in this change and watch the build that is triggered.
 
 ```bash
 # git add, commit, push your changes..
@@ -563,15 +572,15 @@ git commit -m  "🐉 Expose port 22 🐉"
 git push
 ```
 
-This should now fail on the **image-scan/rox-image-check** task.
+4. This should now fail on the **image-scan/rox-image-check** task.
 
 ![images/acs-image-fail.png](images/acs-image-fail.png)
 
-Back in ACS we can also see the failure in the *Violations* view.
+5. Back in ACS we can also see the failure in the *Violations* view.
 
 ![images/acs-violations.png](images/acs-violations.png)
 
-Remove the `EXPOSE 22` from the `Dockerfile.jvm` and check it in to make the build pass.
+6. Remove the `EXPOSE 22` from the `Dockerfile.jvm` and check it in to make the build pass.
 
 ```bash
 # git add, commit, push your changes..
