@@ -101,5 +101,11 @@ git push
 
 🪄 OBSERVE PIPELINE RUNNING :D 
 
+?> **TIP** You can use the **tkn** command line to observer pipeline run logs as well as watching the Web UI.
+
+```bash
+tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
+```
+
 #### TODO
 - [ ] add in full explanations of all the steps
