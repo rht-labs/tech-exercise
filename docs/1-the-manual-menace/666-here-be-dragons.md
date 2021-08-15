@@ -10,9 +10,13 @@
 - use the learnings from above to create a `uat` environment from code.
 
 ### 3. Make ArgoCD more secure
+
+`FIXME` - write about these topics with some examples.
+
+- Using ArgoCD RBAC, Projects
+- Using Red Hat GitOps Operator + Keycloak RBAC
 - Parent/Child argocd's
 - Restricting service accounts, least privilege.
-- Use the chart Readme in ()[] to create a private repository group and secret to access charts from.
 
 ### ArgoCD - Add Repositories at runtime
 
