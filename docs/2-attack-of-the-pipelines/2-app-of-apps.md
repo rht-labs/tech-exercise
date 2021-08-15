@@ -136,4 +136,15 @@ git push
 ```
 
 You should see the two Pet Battle apps deployed in ArgoCD:
+
 ![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
+
+🪄 Goto OpenShift -> Developer View -> Topology and select your `<TEAM_NAME>-test` project.
+
+You should be able to see the Pet Battle Applications running.
+
+![test-pet-battle-apps-topology.png](images/test-pet-battle-apps-topology.png)
+
+😻😻 Select the Pet Battle URL link highlighted above and you should see ... 😻😻
+
+![test-pet-battle-apps-first.png](images/test-pet-battle-apps-first.png)
