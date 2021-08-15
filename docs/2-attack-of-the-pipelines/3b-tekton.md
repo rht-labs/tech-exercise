@@ -45,7 +45,7 @@ git push -u origin main
       image_version: latest # container image version
 </pre>
 
-4. Update git
+4. Update git and wait for our tekton piplines to deploy out in ArgoCD.
 ```bash
 # git add, commit, push your changes..
 cd /projects/tech-exercise
@@ -94,14 +94,15 @@ Update git
 # git add, commit, push your changes..
 cd /projects/pet-battle-api
 git add .
-git commit -m  "🍕 UPDATED - pet-battle-version to 1.1.2 🍕" 
+git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
 git push 
 ```
 
+🪄 Observe Pipeline Running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
-🪄 OBSERVE PIPELINE RUNNING :D 
+![images/tekton-pipeline-running.png](images/tekton-pipeline-running.png)
 
-?> **TIP** You can use the **tkn** command line to observer pipeline run logs as well as watching the Web UI.
+?> **TIP** You can use the **tkn** command line to observer pipeline run logs as well.
 
 ```bash
 tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
