@@ -209,7 +209,7 @@ Name: writable-host-mount
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
 </pre>
 
-5. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
+5. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`. Be sure to adjust the `maven` Task as well so it runs **after** the `kube-linter` Task.
 
 ```yaml
     # Kube-linter
@@ -240,7 +240,17 @@ git commit -m  "🐡 ADD - kube-linter checks 🐡"
 git push
 ```
 
+8. Trigger a pipeline build.
+
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🐡 test kube-linter step 🐡"
+git push
+```
+
 🪄 Watch the pipeline run with the **kube-linter** task.
+
+![images/acs-kube-linter-task.png](images/acs-kube-linter-task.png)
 
 #### StackRox scan,check Tasks
 
@@ -298,6 +308,16 @@ cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
             username: BASE64_ROX_ENDPOINT
 ```
 
+5. Check our changes into git.
+
+```bash
+cd /projects/tech-exercise
+# git add, commit, push your changes..
+git add .
+git commit -m  "🔒 ADD - stackrox sealed secret 🔒" 
+git push
+```
+
 🪄 You should be able to see a **rox-auth** secret in your <TEAM_NAME>-ci-cd namespace.
 
 #### **Scan** Images
@@ -349,7 +369,7 @@ spec:
         export NO_COLOR="True"
         curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl" 
         chmod +x roxctl > /dev/null
-        roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
+        ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
 EOF
 ```
 
@@ -370,6 +390,7 @@ helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 4. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
 
 ```yaml
+    # Image Scan
     - name: image-scan
       runAfter:
       - bake
@@ -385,6 +406,23 @@ helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: OUTPUT_FORMAT
           value: pretty
+```
+
+5. Check in these changes.
+
+```bash
+# git add, commit, push your changes..
+git add .
+git commit -m  "🔑 ADD - image-scan step to pipeline 🔑" 
+git push 
+```
+
+6. Trigger a pipeline build.
+
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🩴 test image-scan step 🩴"
+git push
 ```
 
 🪄 Obeserve the **pet-battle-api** pipeline running with the **image-scan** task.
@@ -418,7 +456,7 @@ cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
         export NO_COLOR="True"
         curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl" 
         chmod +x roxctl > /dev/null
-        roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
+        ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
         if [ $? -eq 0 ]; then
           echo "🦕 no issues found 🦕"; 
           exit 0;
@@ -438,7 +476,15 @@ git commit -m  "🐡 ADD - rox-image-check-task 🐡"
 git push
 ```
 
-3. Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
+3. Trigger a pipeline run
+
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🩴 test image-check step 🩴"
+git push
+```
+
+4. Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
 
 ![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
 
@@ -452,14 +498,14 @@ We will run through two break/fix scenarios.
 
 #### kube-linter
 
-1. Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
+1. Edit `maven-pipeline.yaml` and Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
 
 ```yaml
         - name: includelist
           value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner"
 ```
 
-2. Check in these changes.
+2. Check in these changes and trigger a pipeline run.
 
 ```bash
 cd /projects/tech-exercise
@@ -469,63 +515,24 @@ git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡"
 git push
 ```
 
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🩴 test required-label-owner check 🩴"
+git push
+```
+
 3. Wait for the pipeline to sync and trigger a **pet-battle-api** build. This should now fail.
+
 ![images/acs-lint-fail.png](images/acs-lint-fail.png)
 
 4. We can take a look at the error and replicate it on the command line:
 
 ```bash
 cd /projects/pet-battle-api
-kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner --json | jq .Reports
+kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner
 ```
 
-```json
-Error: found 2 lint errors
-[
-  {
-    "Diagnostic": {
-      "Message": "no label matching \"owner=<any>\" found"
-    },
-    "Check": "required-label-owner",
-    "Remediation": "Add an email annotation to your object with the name of the object's owner.",
-    "Object": {
-      "Metadata": {
-        "FilePath": "pet-battle-api/templates/mongodb-persistent.yaml"
-      },
-      "K8sObject": {
-        "Namespace": "",
-        "Name": "test-release-mongodb",
-        "GroupVersionKind": {
-          "Group": "apps.openshift.io",
-          "Version": "v1",
-          "Kind": "DeploymentConfig"
-        }
-      }
-    }
-  },
-  {
-    "Diagnostic": {
-      "Message": "no label matching \"owner=<any>\" found"
-    },
-    "Check": "required-label-owner",
-    "Remediation": "Add an email annotation to your object with the name of the object's owner.",
-    "Object": {
-      "Metadata": {
-        "FilePath": "pet-battle-api/templates/deployment.yaml"
-      },
-      "K8sObject": {
-        "Namespace": "",
-        "Name": "test-release-pet-battle-api",
-        "GroupVersionKind": {
-          "Group": "apps",
-          "Version": "v1",
-          "Kind": "Deployment"
-        }
-      }
-    }
-  }
-]
-```
+![images/acs-owner-label-fail.png](images/acs-owner-label-fail.png)
 
 5. Let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
 
@@ -543,17 +550,10 @@ owner: {{ .Values.team }}
 7. We can check the **kube-linter** command again and check these changes in:
 
 ```bash
-# git add, commit, push your changes..
+cd /project/pet-battle-api
 git add .
 git commit -m  "🐊 ADD - kube-linter owner labels 🐊" 
 git push
-```
-
-8. The Pipeline should now proceed OK.
-
-```bash
-cd /project/pet-battle-api
-git commit -m "Test kube-linter fix" --allow-empty && git push
 ```
 
 🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
@@ -562,7 +562,7 @@ git commit -m "Test kube-linter fix" --allow-empty && git push
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
 
-2. Edit the `pet-battle-api/Dockerfile.jvm` and add the following line near the top of the file:
+2. Edit the `pet-battle-api/Dockerfile.jvm` and add the following line:
 
 ```bash
 EXPOSE 22
@@ -588,18 +588,10 @@ git push
 6. Remove the `EXPOSE 22` from the `Dockerfile.jvm` and check it in to make the build pass.
 
 ```bash
-# git add, commit, push your changes..
+cd /project/pet-battle-api
 git add .
 git commit -m  "🐧 FIX - Security violation, remove port 22 exposure 🐧" 
 git push
 ```
-
-7. The Pipeline should now proceed OK.
-
-```bash
-cd /project/pet-battle-api
-git commit -m "Test kube-linter fix" --allow-empty && git push
-```
-
 
 🪄 Obeserve the **pet-battle-api** pipeline running successfully again.

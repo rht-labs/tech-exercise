@@ -105,6 +105,8 @@ spec:
       runAfter: 
         - maven
 
+    # Image Scan
+
     - name: helm-package
       taskRef:
         name: helm-package
