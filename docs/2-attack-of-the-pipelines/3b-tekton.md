@@ -55,48 +55,51 @@ git push
 ```
 
 5. Add webhook to GitLab `pet-battle-api` project
-- fill in the `URL` based on this route
-```bash
-oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
-```
-![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
-- select `Push Events`, leve the branch empty for now
-- select `SSL Verification`
-- Click `Add webhook` button.
 
-You can test the webhook works from GitLab.
+    - fill in the `URL` based on this route
 
-![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
+    ```bash
+    oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
+    ```
+
+    ![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
+    - select `Push Events`, leve the branch empty for now
+    - select `SSL Verification`
+    - Click `Add webhook` button.
+
+    You can test the webhook works from GitLab.
+
+    ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
 
-?> **Tip** You can enable debug log info for your tekton webhook pod by setting
-```bash
-oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers
-```
+?> **Tip** You can enable debug log info for your tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```.
 <pre>
 // set log level
 data:
-  loglevel.eventlistener: debug
+loglevel.eventlistener: debug
 </pre>
 
 
 6. Trigger pipeline via webhook by checking in some code for Pet Battle API. Lets change the application versions.
 
-- Edit pet-battle-api `pom.xml` and update the `version` number
-```xml
-    <artifactId>pet-battle-api</artifactId>
-    <version>1.2.1</version>
-```
-The pipeline will update the `chart/Chart.yaml` with these versions for us.
+    Edit pet-battle-api `pom.xml` and update the `version` number
 
-Update git
-```bash
-# git add, commit, push your changes..
-cd /projects/pet-battle-api
-git add .
-git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
-git push 
-```
+    ```xml
+        <artifactId>pet-battle-api</artifactId>
+        <version>1.2.1</version>
+    ```
+
+    The pipeline will update the `chart/Chart.yaml` with these versions for us.
+
+    Update git
+
+    ```bash
+    # git add, commit, push your changes..
+    cd /projects/pet-battle-api
+    git add .
+    git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
+    git push 
+    ```
 
 🪄 Observe Pipeline Running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
