@@ -21,9 +21,12 @@ oc -n stackrox get route central --template='{{ .spec.host }}'
 oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}'
 ```
 
-2. Create an **API Token** from the ***PlatformConfiguration - Integration** ACS WebUI page.
+2. Create an **API Token** from the **PlatformConfiguration - Integrations** ACS WebUI page.
+
+Name it `do500` and give it `Admin` permissions.
 
 ![images/acs-api-token.png](images/acs-api-token2.png)
+![images/acs-api-token.png](images/acs-api-token-gen.png)
 ![images/acs-api-token.png](images/acs-api-token.png)
 
 3. **Save** this token somewhere safe, we will need of later on. Export these environment variables:
@@ -63,7 +66,7 @@ roxctl -e "${ROX_ENDPOINT}:443" central init-bundles generate do500 --output-sec
 oc -n stackrox create -f cluster_init_bundle.yaml
 ```
 
-8. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
+8. It may take 5-10 min for the collector pods in the `stackrox` project to become ready. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
 
 ![images/acs-cluster-import.png](images/acs-cluster-import.png)
 ![images/acs-dashboard.png](images/acs-dashboard.png)
@@ -71,7 +74,9 @@ oc -n stackrox create -f cluster_init_bundle.yaml
 
 9. OpenShift internal registry fix.
 
-!> **FIXME** to make **roxctl** cli work on internal OpenShift images i needed to manually add a registry. There is automatically discovered registries there so it should be automatic using the ServiceAccount? *Platform Configurations -> Generic Docker Registry* add **image-registry.openshift-image-registry.svc:5000** -- password --> `$(oc sa get-token pipeline)`
+!> **FIXME** to make **roxctl** cli work on internal OpenShift images i needed to manually add a registry. There is automatically discovered registries there so it should be automatic using the ServiceAccount? *Platform Configurations -> Generic Docker Registry* add **image-registry.openshift-image-registry.svc:5000** -- password --> `$(oc -n <TEAM_NAME>-ci-cd sa get-token pipeline)`
+
+![images/acs-internal-registry.png](images/acs-internal-registry.png)
 
 10. As a group we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
 

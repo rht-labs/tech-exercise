@@ -10,7 +10,7 @@ We are going to make use of ACS to move security checks into our pipeline. We wi
 
 Let's learn how to use the **roxctl** command line.
 
-1. Export these environment variables:
+1. Export these environment variables, your facilitator will give you these from the group exercise.
 
 ```bash
 export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
@@ -117,7 +117,7 @@ else
 fi
 ```
 
-5. We can also check other external images:
+5. We can also check other external images. This may take a minute to download and scan the image:
 
 ```bash
 roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle-api:latest
@@ -126,12 +126,14 @@ roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.
 6. The following command checks build-time and deploy-time violations of your security policies in YAML deployment files.
 
 Use this command to validate Kubernetes resources in our helm template
-```
-cd /projects/pet-battle-api
+```bash
+cd /projects/pet-battle-api/chart
 payload="$( mktemp )"
-helm template -s templates/deployment.yaml -s templates/pdb.yaml -s templates/hpa.yaml -s templates/service.yaml . > $payload
+helm template -s templates/deployment.yaml -s templates/pdb.yaml -s templates/service.yaml . > $payload
 roxctl deployment check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 -f $payload
 ```
+
+![images/acs-scan-deployment-cli.png](images/acs-scan-deployment-cli.png)
 
 #### kube-linter Task
 
@@ -143,20 +145,14 @@ Let's enable the **kube-linter** task in our pipeline.
 oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
 ```
 
-2. Fetch the **kube-linter** CLI
-
-```bash
-wget https://github.com/stackrox/kube-linter/releases/download/0.2.2/kube-linter-linux.tar.gz
-```
-
-3. Can try it out locally on the **chart** folder
+2. Let's try StackRox **kube-linter** out locally on the **chart** folder
 
 ```bash
 cd /project/pet-battle-api
 kube-linter lint chart/
 ```
 
-4. List of checks the linter performs
+3. List of checks the linter performs
 
 ```bash
 kube-linter checks list | grep Name
@@ -197,7 +193,7 @@ Name: writable-host-mount
 </pre>
 
 
-5. We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
+4. We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
 
 <pre>
     - name: kube-linter
@@ -213,9 +209,10 @@ Name: writable-host-mount
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
 </pre>
 
-6. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
+5. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`.
 
 ```yaml
+    # Kube-linter
     - name: kube-linter
       runAfter:
       - fetch-app-repository

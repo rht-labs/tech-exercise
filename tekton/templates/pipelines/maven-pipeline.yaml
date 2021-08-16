@@ -62,6 +62,8 @@ spec:
         - name: deleteExisting
           value: "true"
 
+    # Kube-linter
+
     - name: maven
       taskRef:
         name: maven
