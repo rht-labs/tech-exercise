@@ -39,9 +39,15 @@ Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooli
 ```
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] Configure your pipeline to run code analysis
+- [ ] Configure your pipeline to check the quality gate
+- [ ] Improve your application code quality
+- [jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] Configure your pipeline to run code analysis
+- [ ] Configure your pipeline to check the quality gate
+- [ ] Improve your application code quality
+- [tekton](3-revenge-of-the-automated-testing/1b-tekton.md)
