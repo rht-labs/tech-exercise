@@ -8,6 +8,5 @@ Install **Allure**, a test repository manager. Edit `ubiquitous-journey/value-to
     enabled: true
     source: https://github.com/eformat/allure.git
     source_path: "chart"
-    source_ref: "main:
+    source_ref: "main"
 ```
-
