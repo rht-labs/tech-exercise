@@ -183,3 +183,6 @@ Allure new test added, test trend shown.
 - [ ] Document the steps
 - [ ] Allure Task should this be in repo already?
 - [ ] Allure Annotations, Add a new test, Historical test results
+- [ ] DevUI: `mvn quarkus:dev` mode - would need mongodb running in image
+
+![images/quarkus-dev-mode.png](images/quarkus-dev-mode.png)
