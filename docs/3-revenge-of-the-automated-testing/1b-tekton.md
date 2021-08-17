@@ -61,8 +61,59 @@ Add `code-analysis-check` step to our pipeline.
       - code-analysis
 ```
 
-![images/sonar-pb-code-quality.png](images/sonar-pb-code-quality.png)
+![images/sonar-pb-api-code-quality.png](images/sonar-pb-api-code-quality.png)
+
+Code Exercise to fix up **Security HotSpots** and improve quality.
+
+![images/sonar-pb-api-hotspots.png](images/sonar-pb-api-hotspots.png)
+
+```java
+diff --git a/src/main/java/app/petbattle/Cat.java b/src/main/java/app/petbattle/Cat.java
+index c9dad23..a5bcbed 100644
+--- a/src/main/java/app/petbattle/Cat.java
++++ b/src/main/java/app/petbattle/Cat.java
+@@ -85,7 +85,7 @@ public class Cat extends ReactivePanacheMongoEntity {
+                     .encodeToString(baos.toByteArray());
+             setImage("data:image/jpeg;base64," + encodedString);
+         } catch (IOException e) {
+-            e.printStackTrace();
++            // do nothing
+         }
+     }
+ 
+diff --git a/src/main/java/app/petbattle/CatResource.java b/src/main/java/app/petbattle/CatResource.java
+index 5b194b5..c9ed55c 100644
+--- a/src/main/java/app/petbattle/CatResource.java
++++ b/src/main/java/app/petbattle/CatResource.java
+@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
+ import javax.ws.rs.core.Response;
+ import java.io.IOException;
+ import java.io.InputStream;
++import java.security.SecureRandom;
+ import java.time.Duration;
+ import java.util.*;
+ 
+@@ -216,7 +217,7 @@ public class CatResource {
+             try {
+                 InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(tc);
+                 Cat cat = new Cat();
+-                cat.setCount(new Random().nextInt(5) + 1);
++                cat.setCount(new SecureRandom().nextInt(5) + 1);
+                 cat.setVote(false);
+                 byte[] fileContent = new byte[0];
+                 fileContent = is.readAllBytes();
+@@ -229,7 +230,7 @@ public class CatResource {
+                 cat.persistOrUpdate().await().indefinitely();
+ 
+             } catch (IOException e) {
+-                e.printStackTrace();
++                // do nothing
+             }
+         }
+     }
+```
+
+![images/sonar-pb-api-better-quality.png](images/sonar-pb-api-better-quality.png)
 
 `TODO`
-- [ ] Code Exercise to fix up Security HotSpots and improve quality
-- [ ] Document steps
+- [ ] Document the steps
