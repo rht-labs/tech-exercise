@@ -34,6 +34,22 @@ Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add t
           workspace: shared-workspace
 ```
 
+Git add, commit, push your changes
+
+```bash
+git add .
+git commit -m  "🥽 ADD - code-analysis step 🥽" 
+git push 
+```
+
+Trigger a pipeline build
+
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🧦 test code-analysis step 🧦"
+git push
+```
+
 Browse to Sonarqube URL
 
 ![images/sonar-pb-api.png](images/sonar-pb-api.png)
@@ -59,6 +75,22 @@ Add `code-analysis-check` step to our pipeline.
         value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
       runAfter:
       - code-analysis
+```
+
+Git add, commit, push your changes
+
+```bash
+git add .
+git commit -m  "🥽 ADD - analysis-check step 🥽" 
+git push 
+```
+
+Trigger a pipeline build
+
+```bash
+cd /projects/pet-battle-api
+git commit --allow-empty -m "🧦 test analysis-check step 🧦"
+git push
 ```
 
 ![images/sonar-pb-api-code-quality.png](images/sonar-pb-api-code-quality.png)
@@ -113,7 +145,18 @@ index 5b194b5..c9ed55c 100644
      }
 ```
 
+Git add, commit, push your changes
+
+```bash
+cd /projects/pet-battle-api
+git add .
+git commit -m  "💍 FIX Security HotSpots 💍" 
+git push 
+```
+
+
 ![images/sonar-pb-api-better-quality.png](images/sonar-pb-api-better-quality.png)
 
 `TODO`
 - [ ] Document the steps
+- [ ] Sonar Task should this be in repo already?

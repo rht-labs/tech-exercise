@@ -62,6 +62,12 @@ spec:
         - name: deleteExisting
           value: "true"
 
+    # Code Analysis
+
+    # Save Test Results
+
+    # Code Analysis Check
+
     # Kube-linter
 
     - name: maven
