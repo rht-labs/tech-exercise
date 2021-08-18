@@ -54,15 +54,13 @@ applications:
         - name: jenkins-agent-argocd
       deployment:
         env_vars:
-          - name: BUILD_NAMESPACE
-            value: ''
+          - name: GITLAB_DEFAULT_BRANCH
+            value: 'main'
           - name: ARGOCD_CONFIG_REPO
             value: ''
           - name: GITLAB_HOST
             value: ''
           - name: GITLAB_GROUP_NAME
-            value: ''
-          - name: GITLAB_TOKEN
             value: ''
       persistence: false
       source_secrets:
