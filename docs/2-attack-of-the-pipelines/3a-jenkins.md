@@ -1,11 +1,37 @@
 ### Jenkins Pipeline 
 > Something something about automated pipelines and Jenkins. Pipeline as code, blah blah blah.
 
+<!---
+#### Jenkins access to GitLab
+Jenkins needs to access repositories to see Jenkinsfile. There are multiple options to use ie username/password, SSH Keys and token (which we will going to use)
+
+1. Login to GitLab and click on your avatar from upper left corner > Settings.
+![gitlab-settings](images/gitlav-settings.png)
+2. Click on Access Token and generate one.
+![gitlab-access-token](images/gitlab-access-token.png)
+3. Copy the newly generated token and update `ubiquitous-journey/values-tooling.yaml`
+![gitlab-access-token-2](images/gitlab-access-token-2.png)
+
+```bash
+...
+...
+          - name: GITLAB_TOKEN
+            value: ''
+...
+```
+
+```bash
+git add ubiquitous-journey/values-tooling.yaml
+git commit -m "🥔 Gitlab Token is added 🥔"
+git push
+```
+--->
 
 #### Setup Pet Battle Git Repo
 1. Create a repo in GitLab under `<YOUR_TEAM_NAME>` group called `pet-battle` Then fork the PetBattle Frontend.
 TODO - add screenshot
 ![screener]()
+
 
 2. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with ArgoCD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 ```bash
@@ -30,7 +56,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
       deployment:
         env_vars:
           - name: GITLAB_HOST
-            value: https://gitlab.<CLUSTER_DOMAIN>
+            value: https://gitlab-ce.<CLUSTER_DOMAIN>
           - name: GITLAB_GROUP_NAME
             value: '<TEAM_NAME>'
 </pre>

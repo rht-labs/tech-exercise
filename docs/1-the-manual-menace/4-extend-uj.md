@@ -43,4 +43,4 @@ oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
 ```bash
 echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook)
 ```
-Make sure you untick `Enable SSL verification` and then click `Add webhook`.
+Make sure you **untick** `Enable SSL verification` and then click `Add webhook`.
