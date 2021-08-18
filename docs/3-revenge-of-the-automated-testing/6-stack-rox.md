@@ -66,7 +66,7 @@ roxctl -e "${ROX_ENDPOINT}:443" central init-bundles generate do500 --output-sec
 oc -n stackrox create -f cluster_init_bundle.yaml
 ```
 
-8. It may take 5-10 min for the collector pods in the `stackrox` project to become ready. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
+8. It may take a few min for the collector pods in the `stackrox` project to become ready. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
 
 ![images/acs-cluster-import.png](images/acs-cluster-import.png)
 ![images/acs-dashboard.png](images/acs-dashboard.png)
