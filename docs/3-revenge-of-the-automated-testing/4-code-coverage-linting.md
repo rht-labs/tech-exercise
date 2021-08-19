@@ -1,10 +1,15 @@
 # Code Coverage & Linting
 > what is it why important
 
+
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] code coverage
+- [ ] linting
+- [jenkins](3-revenge-of-the-automated-testing/4a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] code coverage
+- [ ] linting
+- [tekton](3-revenge-of-the-automated-testing/4b-tekton.md)
