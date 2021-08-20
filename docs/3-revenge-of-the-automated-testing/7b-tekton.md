@@ -134,7 +134,7 @@ spec:
 
         podman login -u openshift -p $(cat /run/secrets/kubernetes.io/serviceaccount/token) default-route-openshift-image-registry.apps.hivec.sandbox941.opentlc.com --authfile ~/.docker/config.json
         echo $COSIGN_PRIVATE_KEY |   sed -E 's/(-+(BEGIN|END) ENCRYPTED COSIGN PRIVATE KEY-+) *| +/\1\n/g' > /tmp/cosign.key
-        /tmp/cosign sign -key cosign.key $(params.IMAGE)
+        /tmp/cosign sign -key /tmp/cosign.key $(params.IMAGE)
 EOF
 ```
 
