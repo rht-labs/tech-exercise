@@ -193,6 +193,8 @@ spec:
           value: "test"
       runAfter:
         - deploy-test
+     
+    # COSIGN IMAGE SIGN 
 
   results:
     - name: VERSION
