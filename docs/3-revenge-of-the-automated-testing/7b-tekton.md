@@ -92,11 +92,11 @@ git push
 
 ```bash
 cd /projects/tech-exercise
-cat <<'EOF' > tekton/templates/tasks/cosign-image-sign.yaml
+cat <<'EOF' > tekton/templates/tasks/image-signing.yaml
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: cosign-image-sign
+  name: image-signing
 spec:
   workspaces:
     - name: output
@@ -113,8 +113,8 @@ spec:
       description: Version of cosign CLI
       default: 1.0.0
   steps:
-    - name: cosign-image-sign
-      image: quay.io/podman/stable:latest
+    - name: image-signing
+      image: quay.io/openshift/origin-cli:4.8
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       env:
         - name: COSIGN_PASSWORD
@@ -129,11 +129,12 @@ spec:
               key: cosign.key
       script: |
         #!/usr/bin/env bash
+        set +x
         curl -skL -o /tmp/cosign https://github.com/sigstore/cosign/releases/download/v$(params.COSIGN_VERSION)/cosign-linux-amd64
         chmod -R 775 /tmp/cosign
 
-        podman login -u openshift -p $(cat /run/secrets/kubernetes.io/serviceaccount/token) default-route-openshift-image-registry.apps.hivec.sandbox941.opentlc.com --authfile ~/.docker/config.json
-        echo $COSIGN_PRIVATE_KEY |   sed -E 's/(-+(BEGIN|END) ENCRYPTED COSIGN PRIVATE KEY-+) *| +/\1\n/g' > /tmp/cosign.key
+        oc registry login
+        echo $COSIGN_PRIVATE_KEY | sed -E 's/(-+(BEGIN|END) ENCRYPTED COSIGN PRIVATE KEY-+) *| +/\1\n/g' > /tmp/cosign.key
         /tmp/cosign sign -key /tmp/cosign.key $(params.IMAGE)
 EOF
 ```
@@ -143,11 +144,11 @@ EOF
 
 ```yaml
     # COSIGN IMAGE SIGN 
-    - name: image-sign
+    - name: image-signing
       runAfter:
       - bake
       taskRef:
-        name: cosign-image-sign
+        name: image-signing
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -158,16 +159,16 @@ EOF
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
 ```
 
-3. Its not real unless its in git
+3. It's not real unless it's in git, right?
 
 ```bash
 # git add, commit, push your changes..
 git add .
-git commit -m  "👨‍🎤 ADD - cosign-image-sign-task 👨‍🎤" 
+git commit -m  "👨‍🎤 ADD - image-signing-task 👨‍🎤" 
 git push
 ```
 
-4. Store the public key in `pet-battle-api` repo for anyone who would like to verify our images. This push will also trigger the pipeline.
+4. Store the public key in `pet-battle-api` repository for anyone who would like to verify our images. This push will also trigger the pipeline.
 
 ```bash
 mv cosign.pub /projects/pet-battle-api
@@ -178,7 +179,26 @@ git commit -m  "🪑 ADD - cosign public key for image verification 🪑"
 git push
 ```
 
-🪄 Obeserve the **pet-battle-api** pipeline running with the **image-sign** task.
+🪄 Observe the **pet-battle-api** pipeline running with the **image-sign** task.
 
 After the task succesfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sig` which shows you that this is image signed. 
 ![cosign-image-signing](images/cosign-image-signing.png)
+
+5. Let's verify the signed image with the public key:
+
+```bash
+cd /projects/pet-battle-api
+oc registry login
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api
+```
+
+The output should be like:
+
+```bash
+Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+  - Any certificates were verified against the Fulcio roots.
+{"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
+```
