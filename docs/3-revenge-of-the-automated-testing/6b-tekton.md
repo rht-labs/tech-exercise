@@ -141,7 +141,14 @@ Let's enable the **kube-linter** task in our pipeline.
 1. Add the cluster Task:
 
 ```bash
-oc apply -f https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
+curl -sLo /projects/tech-exercise/tekton/templates/tasks/kube-linter.yaml https://raw.githubusercontent.com/tektoncd/catalog/main/task/kube-linter/0.1/kube-linter.yaml
+```
+
+```bash
+cd /projects/tech-exercise
+git add .
+git commit -m  "☎️ ADD - kube-linter task ☎️" 
+git push
 ```
 
 2. Let's try StackRox **kube-linter** out locally on the **chart** folder

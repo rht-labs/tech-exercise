@@ -22,6 +22,15 @@ Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooli
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
 ```
 
+Git add, commit, push your changes
+
+```bash
+cd /projects/tech-exercise
+git add .
+git commit -m  "⚜️ ADD - sonarqube ⚜️" 
+git push 
+```
+
 `TODO`
 - [ ] SealedSecrets for sonar username/password
 - [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
