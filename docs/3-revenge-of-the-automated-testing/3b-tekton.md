@@ -1,1 +1,0 @@
-### Extend Tekton Pipeline with Image Security Scan

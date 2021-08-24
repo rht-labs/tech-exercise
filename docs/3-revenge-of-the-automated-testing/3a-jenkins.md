@@ -1,1 +1,0 @@
-### Extend Jenkins Pipeline with Image Security Scan 
