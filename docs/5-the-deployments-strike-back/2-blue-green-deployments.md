@@ -53,69 +53,82 @@ oc get svc -l blue_green=inactive --no-headers -n ${TEAM_NAME}-test
 oc get svc -l blue_green=active --no-headers -n ${TEAM_NAME}-test
 ```
 
-4. Let's verify if we can switch the traffic from Blue to Green. First grab each `INACTIVE` and `ACTIVE` endpoint from the service labels 
-```bash
-export INACTIVE=$(oc get svc -l blue_green=inactive --no-headers -n ${TEAM_NAME} | cut -d' ' -f 1)
-export ACTIVE=$(oc get svc -l blue_green=active --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
-echo "INACTIVE == ${INACTIVE} / ACTIVE == ${ACTIVE}"
-```
-
-5. Patch the deployment with a new image version
-
-4. Let's Update the `Jenkinsfile` to do the deployment for the `inactive` one - and in this case, it is Blue. Jenkins will run some tests (🪞💨) and verify the Blue environment working fine and switch the traffic to it. Green will become inactive and wait ready to switch back in case of an unwanted result.
-
-In order to do that, add the below stage in the right placeholder:
-
-<p class="tip">
-⛷️ <b>NOTE</b> ⛷️ - There is always room for improvement :D 
-</p>
-
+4. With both deployed, let's Update the `Jenkinsfile` to do the deployment for the `inactive` one. Jenkins will over write the currently labelled `inactive` deployment. Jenkins will then run some tests (🪞💨) and verify things working fine. Finally he will switch the traffic to it and swap the labels so this becomes the active service. The other svc will be labelled `inactive` and wait ready to switch back in case of an unwanted result.
+To do this, add the below stage in the right placeholder:
 ```groovy
+// 💥🔨 BLUE / GREEN DEPLOYMENT GOES HERE 
 stage("🔷✅ Blue Green Deploy") {
-			agent {
-				label "jenkins-agent-argocd"
-			}
-			steps {
-				echo '### set env to test against ###'
-				sh '''
-					export INACTIVE=$(oc get svc -l blue_green=inactive --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
-					export ACTIVE=$(oc get svc -l blue_green=active --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
+	agent {
+		label "jenkins-agent-argocd"
+	}
+	steps {
+		echo '### set env to test against ###'
+		sh '''
+			#🌻 1. Get the current active / inactive
+			export INACTIVE=$(oc get svc -l blue_green=inactive --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
+			export ACTIVE=$(oc get svc -l blue_green=active --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
 
-					printenv
-					git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
-					cd config-repo
-					git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
+			#🌻 2. Deploy the new changes to hte current `inactive`
+			printenv
+			git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
+			cd config-repo
+			git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
+			yq eval -i .applications.\\"${INACTIVE}\\".source_ref=\\"${CHART_VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
+			yq eval -i .applications.\\"${INACTIVE}\\".values.image_version=\\"${VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
+			# Commit the changes :P
+			git config --global user.email "jenkins@rht-labs.bot.com"
+			git config --global user.name "Jenkins"
+			git config --global push.default simple
+			git add ${ARGOCD_CONFIG_REPO_PATH}
+			git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
+			git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
+			git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
 
-					yq eval -i .applications.\\"${INACTIVE}\\".source_ref=\\"${CHART_VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
-					yq eval -i .applications.\\"${INACTIVE}\\".values.image_version=\\"${VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
+			#🌻 3. do some kind of verification of the deployment  
+			sleep 10
+			echo "🪞💨 TODO - some kinda test to validate blue or green is working as expected ... 🪞💨"
+			curl -L -f $(oc get route --no-headers ${INACTIVE//_/-} -n $DESTINATION_NAMESPACE | cut -d' ' -f 4) 
 
-					# Commit the changes :P
-					git config --global user.email "jenkins@rht-labs.bot.com"
-					git config --global user.name "Jenkins"
-					git config --global push.default simple
-					git add ${ARGOCD_CONFIG_REPO_PATH}
-					git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
-					git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
-					git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
+			#🌻 4. If "tests" have passed swap inactive to active to and vice versa
+			yq eval -i .applications.\\"${INACTIVE}\\".values.blue_green=\\"active\\" "${ARGOCD_CONFIG_REPO_PATH}"
+			yq eval -i .applications.\\"${ACTIVE}\\".values.blue_green=\\"inactive\\" "${ARGOCD_CONFIG_REPO_PATH}"
 
-					sleep 10
-					echo "🪞💨 TODO - some kinda test to validate blue or green is working as expected ... 🪞💨"
-					curl -L -f $(oc get route --no-headers ${INACTIVE//_/-} -n $DESTINATION_NAMESPACE | cut -d' ' -f 4) 
-
-					# IF "tests" have passed swap blue to green or vice versaw
-					yq eval -i .applications.\\"${INACTIVE}\\".values.blue_green=\\"active\\" "${ARGOCD_CONFIG_REPO_PATH}"
-					yq eval -i .applications.\\"${ACTIVE}\\".values.blue_green=\\"inactive\\" "${ARGOCD_CONFIG_REPO_PATH}"
-
-					# # 5 update the 'prod' route to point to $INACTIVE
-					export NEW_ACTIVE=${INACTIVE//_/-}
-					echo "🐥 - ${NEW_ACTIVE}"
-					yq eval -i .applications.blue-pet-battle.values.prod_route_svc_name=\\"${NEW_ACTIVE}\\" "${ARGOCD_CONFIG_REPO_PATH}"
-					
-					git add ${ARGOCD_CONFIG_REPO_PATH}
-					git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
-					git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
-					git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
-        '''
-			}
-		}
+			#🌻 5. update the 'prod' route to point to the new active svc
+			export NEW_ACTIVE=${INACTIVE//_/-}
+			echo "🐥 - ${NEW_ACTIVE}"
+			yq eval -i .applications.blue-pet-battle.values.prod_route_svc_name=\\"${NEW_ACTIVE}\\" "${ARGOCD_CONFIG_REPO_PATH}"
+			git add ${ARGOCD_CONFIG_REPO_PATH}
+			git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
+			git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
+			git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
+		'''
+	}
+}
 ```
+
+5. Before we commit the changes to the Jenkinsfile, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` under the `<!-- PB - Purple -->` comment and remove the line above it so it appears like this:
+```html
+<header>
+    <!-- PB - Purple -->
+    <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #563D7C;">
+```
+
+6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
+<pre>
+"name": "pet-battle",
+"version": <strong>"1.6.1"</strong>,
+"private": true,
+"scripts": ...
+</pre>
+
+7. Commit all these changes:
+```bash
+cd /projects/pet-battle
+git add .
+git commit -m "🔵 ADD - Blue / Green deployment to pipeline 🟩"
+```
+
+8. When Jenkins executes, you should see things progress and the blue green deployment happen automatically. 
+![jenkins-blue-green](./images/jenkins-blue-green.png)
+
+This is simple example to show how we can automate a blue green deployment using gitops. However, we did not remove the previous deployment of pet-battle, in the real world we would do this.
