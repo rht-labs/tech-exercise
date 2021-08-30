@@ -2,7 +2,7 @@
 
 > What are we going to do
 
-Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add this step before the `maven` build step:
+Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add this step before the `maven` build step and adjust the `maven` build step `runAfter` to be `code-analysis`;
 
 ```yaml
     # Code Analysis
@@ -37,6 +37,7 @@ Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add t
 Git add, commit, push your changes
 
 ```bash
+cd /projects/tech-exercise
 git add .
 git commit -m  "🥽 ADD - code-analysis step 🥽" 
 git push 
@@ -59,7 +60,7 @@ Add the `sonarqube-quality-gate-check.yaml` Task
 curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-check.yaml https://raw.githubusercontent.com/petbattle/ubiquitous-journey/main/tekton/tasks/sonarqube-quality-gate-check.yaml
 ```
 
-Add `code-analysis-check` step to our pipeline.
+Add `code-analysis-check` step to our pipeline and adjust the `maven` build step `runAfter` to be `analysis-check`.
 
 ```yaml
     # Code Analysis Check
@@ -80,6 +81,7 @@ Add `code-analysis-check` step to our pipeline.
 Git add, commit, push your changes
 
 ```bash
+cd /projects/tech-exercise
 git add .
 git commit -m  "🥽 ADD - analysis-check step 🥽" 
 git push 
