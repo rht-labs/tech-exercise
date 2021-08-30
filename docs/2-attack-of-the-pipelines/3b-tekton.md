@@ -59,7 +59,7 @@ git push
     - fill in the `URL` based on this route
 
     ```bash
-    oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'
+    echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
     ```
 
     ![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
