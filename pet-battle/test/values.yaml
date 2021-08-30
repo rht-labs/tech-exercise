@@ -1,6 +1,5 @@
 release: "test"
 source: "http://nexus:8081/repository/helm-charts/"
-
 ##############
 # Argo Apps declaration
 #############

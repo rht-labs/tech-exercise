@@ -1,6 +1,6 @@
 ### Blue/Green Deployments
 > Something something blue green deployment
-
+[TODO] configmap - URL update
 
 [OpenShift Docs](https://docs.openshift.com/container-platform/4.8/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies) is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GITOPS! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
