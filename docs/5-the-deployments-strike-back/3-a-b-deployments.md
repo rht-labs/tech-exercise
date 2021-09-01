@@ -22,7 +22,7 @@ cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
     values:
       image_version: latest # container image version
       fullnameOverride: pet-battle-a
-      # this config will decide how much of the traffic will be routed for the alternate new version
+      # %% this config will decide how much of the traffic will be routed for the alternate new version
       a_b_deploy:
         weight: 50
         svc_name: pet-battle-b
@@ -84,12 +84,57 @@ git commit -m  "💯 service B weight increased to 100 💯"
 git push
 ```
 
-8. Now that we verify that this is working - we can look for embedd this approach into our pipelines. The steps would be like:
+8. Now that we verify that this is working - we can look for automating this process. The steps would be like:
 
-- deploy the new service
+- deploy the new service (B)
 - run tests on it
-- if successfull, increase the traffic by XX%
+- if successfull, increase the traffic with a given percentage, let's say 20% by updating the values in values.yaml (because this is GitOps!)
 - run more tests / validate customer activity on the new service
-- if successfull, increase the traffic by XX%
-- repeat
-- profit!
+- if successfull, increase the traffic by 20% more
+- repeat until you decide to shift 100% of the traffic to B
+- profit! 🪄
+
+
+<!-------
+An example Jenkins step could be like this:
+```groovy
+// 💥🔨 A/B DEPLOYMENT GOES HERE 
+stage("🪄 A/B Deployment") {
+	agent {
+		label "jenkins-agent-argocd"
+	}
+	steps {
+		echo '### set env to test against ###'
+		sh '''
+			#🌻 1. Let's define the service names, weight distributions and the increase we would like to see.
+      export SERVICE=$(oc get route ${APP_NAME} -o json | jq ".spec.to.name")
+      export WEIGHT=$(oc get route  ${APP_NAME} -o json | jq ".spec.to.weight")
+      export ALTERNATIVE_SERVICE=$(oc get route pet-battle-a  -o json | jq ".spec.alternateBackends[0].name")
+      export INCREASE="20"
+
+			#🌻 2. Increase traffic until the all traffic switches to 'B'
+
+			git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
+			cd config-repo
+			git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
+      git config --global user.email "jenkins@rht-labs.bot.com"
+			git config --global user.name "Jenkins"
+			git config --global push.default simple
+      git remote set-url origin  https://dev yagmur basladi bra${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
+      while [ $weight -ne 0 ]
+      do
+        WEIGHT="$((${WEIGHT}-${INCREASE}))"
+        yq eval -i .applications.\\"${SERVICE}\\".values.a_b_deploy.weight=\\"${WEIGHT}\\" pet-battle/test/values.yaml 
+        # Commit the changes :P
+        git add ${ARGOCD_CONFIG_REPO_PATH}
+        git commit -m "🚀 AUTOMATED COMMIT - ${SERVICE} traffic weight is ${WEIGHT}🚀" || rc1=$?
+        git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
+        # do some kind of verification of the new service
+        echo "🪞💨 TODO - some kinda test to validate A and B are working as expected ... 🪞💨"
+      done
+		'''
+	}
+}
+```
+
+---->
