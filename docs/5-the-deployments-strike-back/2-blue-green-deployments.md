@@ -24,6 +24,18 @@ cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
       # we controll the prod route via the "blue" chart for simplicity
       prod_route: true
       prod_route_svc_name: blue-pet-battle
+      config_map: '{
+        "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
+        "keycloak": {
+          "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
+          "realm": "pbrealm",
+          "clientId": "pbclient",
+          "redirectUri": "http://localhost:4200/tournament",
+          "enableLogging": true
+        }
+      }'
 
   # Pet Battle UI Green
   green-pet-battle:
@@ -36,6 +48,18 @@ cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
       image_version: latest # container image version
       fullnameOverride: green-pet-battle
       blue_green: inactive
+      config_map: '{
+        "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
+        "keycloak": {
+          "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
+          "realm": "pbrealm",
+          "clientId": "pbclient",
+          "redirectUri": "http://localhost:4200/tournament",
+          "enableLogging": true
+        }
+      }'
 EOF
 ```
 
@@ -49,8 +73,8 @@ git push
 
 3. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`. Our pipeline will push new deployments to the inactive one before switching the labels around:
 ```bash
-oc get svc -l blue_green=inactive --no-headers -n ${TEAM_NAME}-test
-oc get svc -l blue_green=active --no-headers -n ${TEAM_NAME}-test
+oc get svc -l blue_green=inactive --no-headers -n <TEAM_NAME>-test
+oc get svc -l blue_green=active --no-headers -n <TEAM_NAME>-test
 ```
 
 4. With both deployed, let's Update the `Jenkinsfile` to do the deployment for the `inactive` one. Jenkins will over write the currently labelled `inactive` deployment. Jenkins will then run some tests (🪞💨) and verify things working fine. Finally he will switch the traffic to it and swap the labels so this becomes the active service. The other svc will be labelled `inactive` and wait ready to switch back in case of an unwanted result.

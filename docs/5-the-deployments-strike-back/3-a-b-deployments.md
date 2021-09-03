@@ -6,28 +6,13 @@
 
 [TODO - ADD the DIAGRAM for what's happening]
 
-1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. One will have `a` suffix and the other will have `b` suffix. `a` is for currently running on production app, and `b` is for the one you are planning to direct the load gradually. A
+0. Let's explore `route` definition.
+[TODO - Insert existing route definition and introduce alternateBackends]
 
-dd 2 new application in `tech-exercise/pet-battle/test/values.yaml`.
-
+1. First let's deploy our experiment we want to compare -  let's call this `A` and we'll use our existing Pet Battle deployment as `B`
 ```bash
 cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
-  # Pet Battle UI - A
-  pet-battle-a:
-    name: pet-battle-a
-    enabled: true
-    source: http://nexus:8081/repository/helm-charts
-    chart_name: pet-battle
-    source_ref: 1.1.0 # helm chart version
-    values:
-      image_version: latest # container image version
-      fullnameOverride: pet-battle-a
-      # %% this config will decide how much of the traffic will be routed for the alternate new version
-      a_b_deploy:
-        weight: 50
-        svc_name: pet-battle-b
-
-  # Pet Battle UI - B
+  # Pet Battle UI - experiment
   pet-battle-b:
     name: pet-battle-b
     enabled: true
@@ -38,10 +23,46 @@ cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
       image_version: latest # container image version
       fullnameOverride: pet-battle-b
       route: false
+      config_map: '{
+        "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
+        "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
+        "keycloak": {
+          "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
+          "realm": "pbrealm",
+          "clientId": "pbclient",
+          "redirectUri": "http://localhost:4200/tournament",
+          "enableLogging": true
+        }
+      }'
 EOF
 ```
 
-2. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
+2. Extend the cofiguration for the Pet Battle deployment by adding the `a_b_deploy` properties to the values section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
+```yaml
+      a_b_deploy:
+        a_weight: 80
+        b_weight: 20 # 20% of the traffic will be directed to 'a'
+        svc_name: pet-battle-b
+```
+The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different)
+<pre>
+  pet-battle:
+    name: pet-battle
+    enabled: true
+    source: http://nexus:8081/repository/helm-charts 
+    chart_name: pet-battle
+    source_ref: 1.0.6 # helm chart version
+    values:
+      image_version: latest # container image version  
+      <strong>a_b_deploy:
+        a_weight: 80
+        b_weight: 20 <span style="color:green;" ># 20% of the traffic will be directed to 'b'</span>
+        svc_name: pet-battle-b</strong>
+      config_map: ...
+</pre>
+
+3. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
 ```bash
 cd /projects/tech-exercise
 git add pet-battle/test/values.yaml
@@ -49,92 +70,71 @@ git commit -m  "🍿 ADD - A & B environments 🍿"
 git push
 ```
 
-3. Verify if you have the both service definition.
+4. Verify if you have the both service definition.
 ```bash
-oc get svc -l app.kubernetes.io/name=pet-battle-a -n ${TEAM_NAME}-test
+oc get svc -l app.kubernetes.io/name=pet-battle -n ${TEAM_NAME}-test
 oc get svc -l app.kubernetes.io/name=pet-battle-b -n ${TEAM_NAME}-test
 ```
 
-4. If you open up `pet-battle-a` in your browser, half of the traffic is going to `A`, and the half of the traffic is going to `B`.
-```bash
-oc get route/pet-battle-a -n ${TEAM_NAME}-test --template='{{.spec.host}}'
+5. Before verify the traffic redirection, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` HTML Tag under the `<!-- Green #009B00 -->`.
+
+<strong>Remove the line</strong> for the original `<nav class="navbar navbar-expand-lg navbar-dark bg-dark">`. It appears like this:
+```html
+<header>
+    <!-- Green #009B00 -->
+    <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #009B00;">
 ```
 
-5. Now let's redirect 80% of the traffic to `B`, that means that only 20% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/test/values.yaml` file. 
-And as always, push it to the Git. Because if it's not in Git, it's not real!
+6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
+<pre>
+"name": "pet-battle",
+"version": <strong>"1.6.1"</strong>,
+"private": true,
+"scripts": ...
+</pre>
+
+7. Commit all these changes:
+```bash
+cd /projects/pet-battle
+git add .
+git commit -m "🫒 ADD - Green banner 🫒"
+```
+
+8. When Jenkins executes, it'll bump the version in ArgoCD configuration. ArgoCD triggers the new version deployment while `pet-battle-b` is still running in the previous version. 
+
+If you open up `pet-battle` in your browser, 20 percent of the traffic is going to `b`. You have a little chance to see the green banner.
+```bash
+oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
+```
+
+6. Now let's redirect 50% of the traffic to `B`, that means that only 50% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/test/values.yaml` file.
+And as always, push it to the Git repository - <strong>Because if it's not in Git, it's not real!</strong>
 ```bash
 cd /projects/tech-exercise
-yq eval -i .applications.pet-battle-a.values.a_b_deploy.weight='20' pet-battle/test/values.yaml
+yq eval -i .applications.pet-battle-a.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
+yq eval -i .applications.pet-battle-a.values.a_b_deploy.b_weight='100' pet-battle/test/values.yaml
 git add pet-battle/test/values.yaml
 git commit -m  "🏋️‍♂️ service B weight increased to 80 🏋️‍♂️"
 git push
 ```
 
-6. Open an incognito browser and connect to the same URL. You'll get response from service `B` mostly.
+7. Open an incognito browser and connect to the same URL. You'll have 50% chance to get a green banner.
 ```bash
-oc get route/pet-battle-a -n ${TEAM_NAME}-test --template='{{.spec.host}}'
+oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
 ```
 
-7. Lastly, let's redirect all traffic to service `B`. Yes, for that we need to make weight 0 for service `A`. 
+8. Apparently people like green banner on PetBattle UI! Let's redirect all traffic to service `A`. Yes, for that we need to make weight 0 for service `B`. If you refresh the page, you should only see the green banner.
 ```bash
 cd /projects/tech-exercise
-yq eval -i .applications.pet-battle-a.values.a_b_deploy.weight='0' pet-battle/test/values.yaml
+yq eval -i .applications.pet-battle-a.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
+yq eval -i .applications.pet-battle-a.values.a_b_deploy.b_weight='0' pet-battle/test/values.yaml
 git add pet-battle/test/values.yaml
 git commit -m  "💯 service B weight increased to 100 💯"
 git push
 ```
+### A/B and Analytics
+> something somethign matomo / google analytics
 
-8. Now that we verify that this is working - we can look for automating this process. The steps would be like:
-
-- deploy the new service (B)
-- run tests on it
-- if successfull, increase the traffic with a given percentage, let's say 20% by updating the values in values.yaml (because this is GitOps!)
-- run more tests / validate customer activity on the new service
-- if successfull, increase the traffic by 20% more
-- repeat until you decide to shift 100% of the traffic to B
-- profit! 🪄
-
-
-<!-------
-An example Jenkins step could be like this:
-```groovy
-// 💥🔨 A/B DEPLOYMENT GOES HERE 
-stage("🪄 A/B Deployment") {
-	agent {
-		label "jenkins-agent-argocd"
-	}
-	steps {
-		echo '### set env to test against ###'
-		sh '''
-			#🌻 1. Let's define the service names, weight distributions and the increase we would like to see.
-      export SERVICE=$(oc get route ${APP_NAME} -o json | jq ".spec.to.name")
-      export WEIGHT=$(oc get route  ${APP_NAME} -o json | jq ".spec.to.weight")
-      export ALTERNATIVE_SERVICE=$(oc get route pet-battle-a  -o json | jq ".spec.alternateBackends[0].name")
-      export INCREASE="20"
-
-			#🌻 2. Increase traffic until the all traffic switches to 'B'
-
-			git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
-			cd config-repo
-			git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
-      git config --global user.email "jenkins@rht-labs.bot.com"
-			git config --global user.name "Jenkins"
-			git config --global push.default simple
-      git remote set-url origin  https://dev yagmur basladi bra${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
-      while [ $weight -ne 0 ]
-      do
-        WEIGHT="$((${WEIGHT}-${INCREASE}))"
-        yq eval -i .applications.\\"${SERVICE}\\".values.a_b_deploy.weight=\\"${WEIGHT}\\" pet-battle/test/values.yaml 
-        # Commit the changes :P
-        git add ${ARGOCD_CONFIG_REPO_PATH}
-        git commit -m "🚀 AUTOMATED COMMIT - ${SERVICE} traffic weight is ${WEIGHT}🚀" || rc1=$?
-        git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
-        # do some kind of verification of the new service
-        echo "🪞💨 TODO - some kinda test to validate A and B are working as expected ... 🪞💨"
-      done
-		'''
-	}
-}
-```
-
----->
+1. Deploy matomo via our argocd stuff
+2. make app change for the experiment we want to run eg upvote / downvote
+3. show data in the matomo server
