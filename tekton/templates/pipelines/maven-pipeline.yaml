@@ -196,6 +196,8 @@ spec:
      
     # COSIGN IMAGE SIGN 
 
+    # LOAD TESTING
+
   results:
     - name: VERSION
       description: Version of the application

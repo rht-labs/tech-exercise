@@ -112,6 +112,9 @@ spec:
       type: string
       description: Version of cosign CLI
       default: 1.0.0
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
   steps:
     - name: image-signing
       image: quay.io/openshift/origin-cli:4.8
@@ -146,7 +149,7 @@ EOF
     # COSIGN IMAGE SIGN 
     - name: image-signing
       runAfter:
-      - bake
+      - verify-deployment
       taskRef:
         name: image-signing
       workspaces:
