@@ -192,7 +192,7 @@ After the task succesfully finish, go to OpenShift UI > Builds > ImageStreams an
 ```bash
 cd /projects/pet-battle-api
 oc registry login
-cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle-api
 ```
 
 The output should be like:

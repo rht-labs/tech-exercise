@@ -150,7 +150,7 @@ After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStream
 ```bash
 cd /projects/pet-battle
 oc registry login
-cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle
 ```
 
 The output should be like:
