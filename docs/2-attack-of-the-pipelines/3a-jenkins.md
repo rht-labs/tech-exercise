@@ -44,15 +44,8 @@ git push -u origin main
 # handy command to generate the url needed for the webhook :P
 echo "\n https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
 ```
-[TODO] add screenshots and guidance for it
 
-3. Commit the `pet-battle` application to the repository you just created:
-```bash
-cd /projects
-git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
-git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle.git
-git push -u origin main
-```
+![gitlab-webhook-trigger-fe.png](images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
 3. blah blah blah seed-job.... to make this work. Let's connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in openshift BUTTTTTT this is GITOPS! :muscle: :gun:
