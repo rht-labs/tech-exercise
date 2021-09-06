@@ -34,7 +34,7 @@ applications:
     enabled: true
     source: https://github.com/redhat-cop/helm-charts.git
     source_path: charts/jenkins
-    source_ref: "jenkins-1.0.4"
+    source_ref: "jenkins-1.0.6"
     values:
       buildconfigs:
         # Jenkins S2I from Red Hat Labs
