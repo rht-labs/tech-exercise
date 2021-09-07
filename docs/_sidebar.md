@@ -44,7 +44,7 @@
   * [🛎️ Create Alerts](4-return-of-the-monitoring/2-create-alerts.md)
   * [🪵 Logging](4-return-of-the-monitoring/3-logging.md)
   * [🐉 Here Be Dragons!](4-return-of-the-monitoring/666-here-be-dragons.md)  
-* [5. The Deployments Stike Back](5-the-5-the-deployments-strike-back/README.md)
+* [5. The Deployments Stike Back](5-the-deployments-strike-back/README.md)
   * [📈 Autoscaling](5-the-deployments-strike-back/1-autoscaling.md)
   * [🔵🟩 Blue/Green Deployments](5-the-deployments-strike-back/2-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)

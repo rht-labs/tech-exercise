@@ -1,4 +1,4 @@
-# Exercise 4 - The Deployments Strike Back
+# Exercise 5 - The Deployments Strike Back
 
 - [ ] Add Intro to section
 - [ ] Add Learning Objectives
