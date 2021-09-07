@@ -33,7 +33,7 @@ echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
 ```
 
-7. Check if you can connect to OpenShift. The `<SERVER_API>` should be provided by your facilitator. Update it and run the command below. 
+7. Check if you can connect to OpenShift. Run the command below. 
 ```bash
 oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
