@@ -50,6 +50,9 @@ And add a stage in to the pipeline where <span style="color:green;" >// SONARQUB
         // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
 		stage("🌞 Sonar Scanning") {
 			agent { label "jenkins-agent-npm" }
+      when {
+				expression { GIT_BRANCH.startsWith("master") || GIT_BRANCH.startsWith("main") }
+			}
 			steps {
 				script {
                     sh '''
