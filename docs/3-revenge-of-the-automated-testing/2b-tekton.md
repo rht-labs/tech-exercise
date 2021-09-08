@@ -27,26 +27,35 @@ spec:
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
-    - name: ALLURE_USERNAME
-      description: "Allure Username"
-      default: "admin"
-    - name: ALLURE_PASSWORD
-      description: "Allure Password"
-      default: "password"
     - name: ALLURE_HOST
       description: "Allure Host"
       default: "http://allure:5050"
+    - name: ALLURE_SECRET
+      type: string
+      description: Secret containing Allure credentials
+      default: allure-auth
   steps:
     - name: save-tests
       image: $(params.IMAGE)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      env:
+        - name: ALLURE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: $(params.ALLURE_SECRET)
+              key: username
+        - name: ALLURE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $(params.ALLURE_SECRET)
+              key: password
       script: |
         #!/bin/bash
         curl -sLo send_results.sh https://raw.githubusercontent.com/eformat/allure/main/scripts/send_results.sh && chmod 755 send_results.sh
         ./send_results.sh $(params.APPLICATION_NAME) \
           $(workspaces.output.path)/$(params.WORK_DIRECTORY) \
-          $(params.ALLURE_USERNAME) \
-          $(params.ALLURE_PASSWORD) \
+          ${ALLURE_USERNAME} \
+          ${ALLURE_PASSWORD} \
           $(params.ALLURE_HOST)
 EOF
 ```

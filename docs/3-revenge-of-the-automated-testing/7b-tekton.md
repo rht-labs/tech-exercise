@@ -69,10 +69,6 @@ cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
 ```yaml
         - name: <TEAM_NAME>-cosign
           type: Opaque
-          annotations:
-            tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
-          labels:
-            credential.sync.jenkins.openshift.io: "true"
           data:
             cosign.key: AgBH...
             password: AgA1bg...

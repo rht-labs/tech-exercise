@@ -2,7 +2,7 @@
 
 > What are we going to do
 
-Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add this step before the `maven` build step and adjust the `maven` build step `runAfter` to be `code-analysis`;
+1. Add `code-analysis` step to our pipeline. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file, add this step before the `maven` build step and adjust the `maven` build step `runAfter` to be `code-analysis`;
 
 ```yaml
     # Code Analysis
@@ -32,9 +32,12 @@ Add `code-analysis` step to our pipeline. Edit `maven-pipeline.yaml` file, add t
           workspace: maven-m2
         - name: output
           workspace: shared-workspace
+        # - name: sonarqube-auth
+        #   secret:
+        #     secretName: sonarqube-auth
 ```
 
-Git add, commit, push your changes
+Git add, commit, push your changes:
 
 ```bash
 cd /projects/tech-exercise
@@ -43,17 +46,6 @@ git commit -m  "🥽 ADD - code-analysis step 🥽"
 git push 
 ```
 
-Trigger a pipeline build
-
-```bash
-cd /projects/pet-battle-api
-git commit --allow-empty -m "🧦 test code-analysis step 🧦"
-git push
-```
-
-Browse to Sonarqube URL
-
-![images/sonar-pb-api.png](images/sonar-pb-api.png)
 
 Add the `sonarqube-quality-gate-check.yaml` Task
 ```bash
@@ -96,6 +88,11 @@ git push
 ```
 
 ![images/sonar-pb-api-code-quality.png](images/sonar-pb-api-code-quality.png)
+
+Browse to Sonarqube URL
+
+![images/sonar-pb-api.png](images/sonar-pb-api.png)
+
 
 Code Exercise to fix up **Security HotSpots** and improve quality.
 

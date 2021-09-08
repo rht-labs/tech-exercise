@@ -11,8 +11,6 @@ data:
   username: "$(password | base64 -w0)"
 kind: Secret
 metadata:
-  annotaion:
-    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: allure-auth

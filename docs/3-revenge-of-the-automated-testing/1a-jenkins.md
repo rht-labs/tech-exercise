@@ -55,11 +55,11 @@ And add a stage in to the pipeline where <span style="color:green;" >// SONARQUB
 			}
 			steps {
 				script {
-                    sh '''
+            sh '''
 					    export SONAR_USERNAME = ${SONARQUBE_CREDS_USR}
 					    export SONAR_PASSWORD = ${SONARQUBE_CREDS_PSW}
-						npm run sonar
-                    '''
+					  	npm run sonar
+            '''
 				}
 			}
 		}
@@ -78,4 +78,3 @@ git push
 
 ** Update the screenshots **
 ![images/sonar-pb-api.png](images/sonar-pb-api.png)
-
