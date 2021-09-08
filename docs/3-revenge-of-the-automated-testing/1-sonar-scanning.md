@@ -22,7 +22,7 @@ Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooli
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
 ```
 
-Git add, commit, push your changes
+Git add, commit, push your changes:
 
 ```bash
 cd /projects/tech-exercise
@@ -31,8 +31,80 @@ git commit -m  "⚜️ ADD - sonarqube ⚜️"
 git push 
 ```
 
+2. Save Sonarqube credentials as SealedSecrets in git repository _(yes, because it is GitOps!)_ and also that pipelines can leverage the secret.
+
+```bash
+cat << EOF > /tmp/sonarqube-auth.yaml
+apiVersion: v1
+data:
+  password: "$(admin | base64 -w0)"
+  username: "$(admin123 | base64 -w0)"
+kind: Secret
+metadata:
+  annotaion:
+    tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
+  labels:
+    credential.sync.jenkins.openshift.io: "true"
+  name: sonarqube-auth
+EOF
+```
+
+Use `kubeseal` commandline to seal the secret definition.
+
+```bash
+kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
+    -n ${TEAM_NAME}-ci-cd \
+    --controller-namespace do500-shared \
+    --controller-name sealed-secrets \
+    -o yaml
+```
+
+We want to grab the results of this sealing activity, in particular the `encryptedData`.
+```bash
+cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
+```
+
+Output would be like:
+<pre>
+    username: AgAj3JQj+EP23pnzu...
+    password: AgAtnYz8U0AqIIaqYrj...
+</pre>
+
+Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
+```yaml
+        - name: sonarqube-auth
+          type: Opaque
+          annotations:
+            tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
+          labels:
+            credential.sync.jenkins.openshift.io: "true"
+          data:
+            username: AgAj3JQj+EP23pnzu...
+            password: AgAtnYz8U0AqIIaqYrj...
+  ```
+..and push the changes:
+
+```bash
+cd /projects/tech-exercise
+git add ubiquitous-journey/values-tooling.yaml
+git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳" 
+git push
+```
+
+Verify that you have the secret definition:
+```bash
+oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
+```
+
+3. Connect to Sonarqube UI to verify if the installation is successfull:
+```bash
+oc get route sonarqube-sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+```
+`TODO` 
+- add screenshot
+
 `TODO`
-- [ ] SealedSecrets for sonar username/password
 - [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
 ```yaml
   # Sonarqube setup

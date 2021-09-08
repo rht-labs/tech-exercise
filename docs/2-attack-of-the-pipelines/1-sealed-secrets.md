@@ -78,6 +78,7 @@ In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`.
     source_ref: "1.0.2"
     values:
       secrets:
+        # Additional secrets will be added to this list along the exercises.
         - name: git-auth
           type: kubernetes.io/basic-auth
           annotations:
