@@ -5,19 +5,19 @@
 _You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
 
 In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercises/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
-```bash
+```yaml
         - name: jenkins-agent-python
 ```
 
 You should have a list similar this now:
 <pre>
-        # Jenkins agents for running builds etc
-        # default names, versions, repo and paths set on the template
-        - name: jenkins-agent-npm
-        - name: jenkins-agent-mvn
-        - name: jenkins-agent-helm
-        - name: jenkins-agent-argocd
-        - name: jenkins-agent-python
+        <span style="color:green;" ># Jenkins agents for running builds etc</span>
+        <span style="color:green;" ># default names, versions, repo and paths set on the template</span>
+         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-npm</span>
+         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-mvn</span>
+         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-helm</span>
+         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-argocd</span>
+         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-python</span>
 </pre>
 
 Commit the changes to the Git repository:
@@ -70,8 +70,8 @@ EOF
 			steps {
 				script {
                     sh '''
-                    pip3 install locust
-                    locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}-<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary 
+                      pip3 install locust
+                      locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}-<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary 
                     '''
 				}
 			}
