@@ -35,7 +35,7 @@ echo ${TEAM_NAME}
 
 7. Check if you can connect to OpenShift. Run the command below. 
 ```bash
-oc login --server=https://api.<CLUSTER_DOMAIN##apps.>:6443 -u <USERNAME> -p <PASSWORD>
+oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
 
 8. Check your user permissions in OpenShift by creating your team's CICD project. 

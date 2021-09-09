@@ -56,8 +56,6 @@ applications:
         env_vars:
           - name: GITLAB_DEFAULT_BRANCH
             value: 'main'
-          - name: ARGOCD_CONFIG_REPO
-            value: ''
           - name: GITLAB_HOST
             value: ''
           - name: GITLAB_GROUP_NAME

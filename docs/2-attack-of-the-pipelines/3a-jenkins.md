@@ -28,8 +28,11 @@ git push
 --->
 
 #### Setup Pet Battle Git Repo
-1. Create a repo in GitLab under `<YOUR_TEAM_NAME>` group called `pet-battle` Then fork the PetBattle Frontend.
+1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as public.
 
+![pet-battle-git-repo](images/pet-battle-git-repo.png)
+
+2. Push the PetBattle Frontend code to this new repository.
 ```bash
 cd /projects
 git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
@@ -38,14 +41,14 @@ git branch -M main
 git push -u origin main
 ```
 
+3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with ArgoCD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 
-2. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with ArgoCD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 ```bash
 # handy command to generate the url needed for the webhook :P
 echo "\n https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
 ```
 
-![gitlab-webhook-trigger-fe.png](images/gitlab-webhook-trigger-fe.png)
+![gitlab-webhook-trigger-fe.png](./images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
 3. blah blah blah seed-job.... to make this work. Let's connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in openshift BUTTTTTT this is GITOPS! :muscle: :gun:
@@ -54,8 +57,10 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
 ...
       deployment:
         env_vars:
+          - name: GITLAB_DEFAULT_BRANCH
+            value: 'main'
           - name: GITLAB_HOST
-            value: https://gitlab-ce.<CLUSTER_DOMAIN>
+            value: 'https://gitlab-ce.<CLUSTER_DOMAIN>'
           - name: GITLAB_GROUP_NAME
             value: '<TEAM_NAME>'
 </pre>
@@ -88,7 +93,7 @@ git push
 # to get the Jenkins route on your terminal
 echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 ```
-[TODO - screeenshot of Jenkins UI]
+![jenkins-ui](images/jenkins-ui.png)
 
 7. With Jenkins now scanning our gitlab project for new repositories and git setup to trigger a build on jenkins, now let's update our pipeline....
 [TODO] a bit summary of what the pipeline does

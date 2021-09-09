@@ -1,6 +1,6 @@
 ### Extend Tekton Pipeline with Automated Testing
 
-1. Add the `allure-post-report.yaml` Task
+1. Add the `allure-post-report.yaml` Task to the  
 ```yaml
 cd /projects/tech-exercise
 cat <<'EOF' > tekton/templates/tasks/allure-post-report.yaml
@@ -10,7 +10,6 @@ metadata:
   name: allure-post-report
   labels:
     app.kubernetes.io/version: "0.2"
-    rht-labs.com/uj: ubiquitous-journey
 spec:
   description: >-
     This task used for uploading test reports to allure

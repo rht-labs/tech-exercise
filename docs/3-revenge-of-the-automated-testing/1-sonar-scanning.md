@@ -1,7 +1,14 @@
 # Sonar Scanning
-> what is it why important
+> what is it why important, activity, acceptance createria
 
+### Feature - SonarQube
+| Feature Area |  Non functionals  |
+| :----------: | ----------- |
+| 📚 Description  | Configure the pipelines (Tekton / Jenkins) with to scan our code for quality analysis |
+| ✅ Acceptance Criteria | * Deploy SonarQube using GitOps <br>Setip password as a secret using GitOps <br>Extend the Pipeline with static code analysis </li> </ul>|
+| 👕 T-Shirt Size | Medium |
 
+### Task
 Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file, add:
 
 ```yaml
@@ -37,8 +44,8 @@ git push
 cat << EOF > /tmp/sonarqube-auth.yaml
 apiVersion: v1
 data:
-  password: "$(admin | base64 -w0)"
-  username: "$(admin123 | base64 -w0)"
+  password: "$(echo admin | base64 -w0)"
+  username: "$(echo admin123 | base64 -w0)"
 kind: Secret
 metadata:
   labels:
@@ -97,7 +104,7 @@ oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
 
 3. Connect to Sonarqube UI to verify if the installation is successfull:
 ```bash
-oc get route sonarqube-sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
 ```
 `TODO` 
 - add screenshot

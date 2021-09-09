@@ -1,7 +1,7 @@
 # Automated Testing
 > what is it why important
 
-1. For this exercise, we will use a tool called **Allure**, a test repository manager, but first let's create SealedSecrets object for username and password:
+1. For this exercise, we will use a tool called **Allure**, a test repository manager for Java, but first let's create SealedSecrets object for username and password:
 
 ```bash
 cat << EOF > /tmp/allure-auth.yaml
@@ -50,7 +50,7 @@ Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secr
           data:
             username: AgAj3JQj+EP23pnzu...
             password: AgAtnYz8U0AqIIaqYrj...
-  ```
+```
 
 
 2. Install Allure through `ubiquitous-journey/value-tooling.yaml` file, add:
