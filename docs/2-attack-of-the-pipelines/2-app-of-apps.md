@@ -11,7 +11,9 @@ Deploy an piece of supporting tech or "infra" for PB - keycloak in `pet-battle/s
 blah blah blah, this is keyclock required by PB for auth.... We will demonstrate deploying it using a GitOps parrtern which is repeatable
 
 something something app of apps, what it is why we use it
-Now let's enable app-of-apps definition for petbatlle deplopments in test and staging. Open `values.yaml` file at the root of this project and swap `enabled: false` to `enabled: true` as shown below:
+Now let's enable app-of-apps definition for petbatlle deplopments in test and staging. 
+
+Open `values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below:
 
 <pre>
   # Test app of app
@@ -28,7 +30,7 @@ Now let's enable app-of-apps definition for petbatlle deplopments in test and st
 </pre>
 
 
-our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. Make sure to replace <CLUSTER_DOMAIN> with your value.
+Our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. Make sure to replace <CLUSTER_DOMAIN> with your value.
 
 ```yaml
   # Keycloak
@@ -42,8 +44,8 @@ our app is made up of N apps. We define the list of apps we want to deploy in th
       app_domain: <CLUSTER_DOMAIN>
       ignoreHelmHooks: true
 ```
-
-Its not real unless its in git
+*Please make sure your text is aligned with the existing placeholder comments.*
+It's not real unless its in git!
 ```bash
 # git add, commit, push your changes..
 git add .
@@ -139,7 +141,7 @@ You should see the two Pet Battle apps deployed in ArgoCD:
 
 ![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
 
-🪄 Goto OpenShift -> Developer View -> Topology and select your `<TEAM_NAME>-test` project.
+🪄 Go to OpenShift -> Developer View -> Topology and select your `<TEAM_NAME>-test` project.
 
 You should be able to see the Pet Battle Applications running.
 

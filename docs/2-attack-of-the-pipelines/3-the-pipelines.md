@@ -1,5 +1,5 @@
 ### Pipelines
-Split into 2 groups within your team. Choose you own adventure ! Each group will get to perform similar tasks:
+Split into 2 groups within your team. Choose you own adventure! Each group will get to perform similar tasks:
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 - we need to fork PetBattle (clone from GitHub and push to GitLab)

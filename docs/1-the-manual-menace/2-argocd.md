@@ -63,6 +63,8 @@ oc get pods -w -n ${TEAM_NAME}-ci-cd
 ```
 ![argocd-pods](images/argocd-pods.png)
 
+*You can do Control+C to break the 'watch' mode*
+
 4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab. 
 ```bash
 echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  

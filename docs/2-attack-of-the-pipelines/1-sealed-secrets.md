@@ -6,12 +6,11 @@ Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called 
 
 Lets start by sealing our Git credentials:
 ```bash
-export GITLAB_USER=<your gitlab user>
+export GITLAB_USER=<YOUR_GITLAB_USER>
 ```
 ```bash
-export GITLAB_PASSWORD=<your gitlab password>
+export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
 ```
-
 Run this command. This will generate a Kubernetes secret object in `tmp`
 ```bash
 cat << EOF > /tmp/git-auth.yaml

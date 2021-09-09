@@ -16,7 +16,11 @@ All of these traits lead to one outcome - the ability to build and release quali
 ### Get GitLab Ready for GitOps
 > In this exercise we'll setup our git project to store our code and configuration. We will then connect argocd (out gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob!
  
-1. Log into GitLab (url provided by your facilitator) with your credentials. We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
+1. Log into GitLab with your credentials. GitLab URL:
+```
+https://gitlab-ce.<CLUSTER_DOMAIN>
+```
+We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
 ![gitlab-initial-login](images/gitlab-initial-login.png)
 
 2. Put your <TEAM_NAME> as the group name, select **Internal** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
@@ -54,7 +58,7 @@ source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
 team: <TEAM_NAME>
 ```
 
-2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `<TEAM_NAME>` in the bootstrap section appropriately
+2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `<TEAM_NAME>` in the bootstrap section appropriately.
 ```yaml
         - name: jenkins
           kind: ServiceAccount
@@ -81,6 +85,8 @@ git push
 4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. Set these variables on your terminal:
 ```bash
 export GITLAB_USER=<YOUR_GITLAB_USER>
+```
+```bash
 export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
 ```
 Add the Secret to the cluster:

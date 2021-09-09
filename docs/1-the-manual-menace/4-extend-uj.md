@@ -36,11 +36,11 @@ oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
 #### Add ArgoCD Webhook from GitLab
 > ArgoCD has a cycle time of about 5ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. 
 
-1. Let's add a webhook to connect ArgoCD to our ubiquitous-journey project.
-![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
-
-2. Go to `tech-exercise` git repository in UI. From left panel, go to `Settings > Integrations`. Add URL:
+1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 ```bash
 echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook)
 ```
+
+2. Go to `tech-exercise` git repository in UI. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal.
+![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
 Make sure you **untick** `Enable SSL verification` and then click `Add webhook`.
