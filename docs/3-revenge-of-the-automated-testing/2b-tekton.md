@@ -1,6 +1,78 @@
 ### Extend Tekton Pipeline with Automated Testing
 
-1. Add the `allure-post-report.yaml` Task to the  
+1. For this exercise, we will use a tool called **Allure**, a test repository manager for Java, but first let's create SealedSecrets object for username and password:
+
+```bash
+cat << EOF > /tmp/allure-auth.yaml
+apiVersion: v1
+data:
+  password: "$(echo admin | base64 -w0)"
+  username: "$(echo password | base64 -w0)"
+kind: Secret
+metadata:
+  name: allure-auth
+EOF
+```
+
+Use `kubeseal` commandline to seal the secret definition.
+
+```bash
+kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
+    -n ${TEAM_NAME}-ci-cd \
+    --controller-namespace do500-shared \
+    --controller-name sealed-secrets \
+    -o yaml
+```
+
+Grab the `encryptedData`:
+```bash
+cat /tmp/sealed-allure-auth.yaml| grep -E 'username|password'
+```
+
+Output would be like:
+<pre>
+    username: AgAj3JQj+EP23pnzu...
+    password: AgAtnYz8U0AqIIaqYrj...
+</pre>
+
+Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
+```yaml
+        - name: allure-auth
+          type: Opaque
+          annotations:
+            tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
+          labels:
+            credential.sync.jenkins.openshift.io: "true"
+          data:
+            username: AgAj3JQj+EP23pnzu...
+            password: AgAtnYz8U0AqIIaqYrj...
+```
+
+
+2. Install Allure through `ubiquitous-journey/value-tooling.yaml` file, add:
+
+```yaml
+  # Allure
+  - name: allure
+    enabled: true
+    source: https://github.com/eformat/allure.git
+    source_path: "chart"
+    source_ref: "main"
+    values:
+      security:
+        secret: allure-auth
+```
+
+And push the changes to the repository:
+```bash
+cd /projects/tech-exercise
+git add ubiquitous-journey/value-tooling.yaml
+git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭" 
+git push 
+```
+
+2. Add the `allure-post-report.yaml` Task to the  
 ```yaml
 cd /projects/tech-exercise
 cat <<'EOF' > tekton/templates/tasks/allure-post-report.yaml
@@ -59,7 +131,7 @@ spec:
 EOF
 ```
 
-Add the `save-test-results` step to our pipeline.
+3. Add the `save-test-results` step to our pipeline.
 
 ```yaml
     # Save Test Results
@@ -78,7 +150,7 @@ Add the `save-test-results` step to our pipeline.
           workspace: shared-workspace
 ```
 
-Git add, commit, push your changes
+4. Git add, commit, push your changes
 
 ```bash
 git add .
@@ -94,7 +166,7 @@ git commit --allow-empty -m "🧦 test save-test-results step 🧦"
 git push
 ```
 
-Browse to uploaded test results in Allure:
+5. Browse to uploaded test results in Allure:
 
 ```bash
 https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
@@ -112,74 +184,3 @@ Drill down to test body attachments.
 
 ![images/allure-behaviours.png](images/allure-behaviours.png)
 
-### Continuous Testing
-
-- https://quarkus.io/guides/continuous-testing
-
-<pre>
-The following commands are available:
-[r] - Re-run all tests
-[f] - Re-run failed tests
-[b] - Toggle 'broken only' mode, where only failing tests are run (disabled)
-[v] - Print failures from the last test run
-[p] - Pause tests
-[o] - Toggle test output (disabled)
-[i] - Toggle instrumentation based reload (disabled)
-[l] - Toggle live reload (enabled)
-[s] - Force restart
-[h] - Display this help
-[q] - Quit
-</pre>
-
-Run tests.
-
-```bash
-mvn quarkus:test
-```
-
-Add a new failing test.
-
-```java
-    @Test
-    @Story("Test me")
-    void testMe() {
-        Assert.assertFalse(false);
-    }
-```
-
-![images/quarkus-continuous-test-fail.png](images/quarkus-continuous-test-fail.png)
-
-Switch to **broken only mode** by pressing `b`
-
-![images/quarkus-continuous-test-broken-only.png](images/quarkus-continuous-test-broken-only.png)
-
-Make the test pass.
-
-```java
-    @Test
-    @Story("Test me")
-    void testMe() {
-        Assert.assertFalse(true);
-    }
-```
-
-![images/quarkus-continuous-test-fix.png](images/quarkus-continuous-test-fix.png)
-
-```bash
-git add .
-git commit -m  "⛑️ ADD - new test ⛑️" 
-git push 
-```
-
-Allure new test added, test trend shown.
-
-![images/allure-new-test-add.png](images/allure-new-test-add.png)
-
-`TODO`
-
-- [ ] Document the steps
-- [ ] Allure Task should this be in repo already?
-- [ ] Allure Annotations, Add a new test, Historical test results
-- [ ] DevUI: `mvn quarkus:dev` mode - would need mongodb running in image
-
-![images/quarkus-dev-mode.png](images/quarkus-dev-mode.png)

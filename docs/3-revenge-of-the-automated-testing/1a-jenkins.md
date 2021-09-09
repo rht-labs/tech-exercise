@@ -11,8 +11,8 @@ scanner(
   {
     serverUrl: 'http://sonarqube-sonarqube:9000',
     options: {
-      'sonar.login': process.env.SONAR_USERNAME,
-      'sonar.password': process.env.SONAR_PASSWORD,
+      'sonar.login': process.env.SONARQUBE_CREDS_USR,
+      'sonar.password': process.env.SONARQUBE_CREDS_PSW,
       'sonar.projectName': 'Pet Battle',
       'sonar.projectDescription': 'Pet Battle UI',
       'sonar.sources': 'src',
@@ -44,25 +44,12 @@ You'll have:
 		SONAR_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-sonar-auth"</span>)
 </pre>
 
-And add a stage in to the pipeline where <span style="color:green;" >// SONARQUBE SCANNING</span> placeholder is. This needs to be happen before the build.
+And add a shell step in to `build` stage of the pipeline where <span style="color:green;" >// SONARQUBE SCANNING</span> placeholder is. This needs to be happen before the build.
 
-```groovy
+```bash
         // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
-		stage("🌞 Sonar Scanning") {
-			agent { label "jenkins-agent-npm" }
-      when {
-				expression { GIT_BRANCH.startsWith("master") || GIT_BRANCH.startsWith("main") }
-			}
-			steps {
-				script {
-            sh '''
-					    export SONAR_USERNAME = ${SONARQUBE_CREDS_USR}
-					    export SONAR_PASSWORD = ${SONARQUBE_CREDS_PSW}
-					  	npm run sonar
-            '''
-				}
-			}
-		}
+        echo '### Running SonarQube ###'
+        sh 'npm run sonar'
 ```
 
 3. Push the changes to the git repository, which also will trigger a new build.
@@ -74,7 +61,7 @@ git commit -m "🧦 test code-analysis step 🧦"
 git push
 ```
 
-4. Observe the pipeline and when Sonar Scanning stage is completed, browse the Sonarqube UI to see the details.
+4. Observe the pipeline and when scanning is completed, browse the Sonarqube UI to see the details.
 
 ** Update the screenshots **
 ![images/sonar-pb-api.png](images/sonar-pb-api.png)

@@ -20,7 +20,7 @@
   * [🧪 Testing](3-revenge-of-the-automated-testing/2-automated-testing.md)
     * [🌸 Jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/2b-tekton.md)
-  * [🧤 Coverage & Lint](3-revenge-of-the-automated-testing/4-code-coverage-linting.md)
+  * [🧤 Code Linting](3-revenge-of-the-automated-testing/4-code-linting.md)
     * [🌸 Jenkins](3-revenge-of-the-automated-testing/4a-jenkins.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/4b-tekton.md)
   * [🐝 OWASP Zap Scanning](3-revenge-of-the-automated-testing/5-zap-security.md)

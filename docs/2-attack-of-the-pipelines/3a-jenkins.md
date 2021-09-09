@@ -60,7 +60,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
           - name: GITLAB_DEFAULT_BRANCH
             value: 'main'
           - name: GITLAB_HOST
-            value: 'https://gitlab-ce.<CLUSTER_DOMAIN>'
+            value: 'gitlab-ce.<CLUSTER_DOMAIN>'
           - name: GITLAB_GROUP_NAME
             value: '<TEAM_NAME>'
 </pre>
@@ -69,7 +69,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
 <pre>
   # Pet Battle Apps
   pet-battle-api:
-		...
+        ...
 
   pet-battle:
     name: pet-battle
@@ -101,30 +101,41 @@ blah blah blah structure of the Jenkinsfile...
 
 Now that we've gone through that this stuff does, let's update the `Jenkinsfile` by adding a new `stage` which will run our builds for us. Add the following below the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 ```groovy
-		// 💥🔨 PIPELINE EXERCISE GOES HERE 
-		stage("🧰 Build (Compile App)") {
-			agent { label "jenkins-agent-npm" }
-			steps {
-				script {
-					env.VERSION = sh(returnStdout: true, script: "npm run version --silent").trim()
-					env.PACKAGE = "${APP_NAME}-${VERSION}.tar.gz"
-				}
-				sh 'printenv'
+        // 💥🔨 PIPELINE EXERCISE GOES HERE 
+        stage("🧰 Build (Compile App)") {
+            agent { label "jenkins-agent-npm" }
+            steps {
+                script {
+                    env.VERSION = sh(returnStdout: true, script: "npm run version --silent").trim()
+                    env.PACKAGE = "${APP_NAME}-${VERSION}.tar.gz"
+                }
+                sh 'printenv'
 
-				echo '### Install deps ###'
-				sh 'npm ci --registry http://nexus:8081/repository/labs-npm'
+                echo '### Install deps ###'
+                sh 'npm ci --registry http://nexus:8081/repository/labs-npm'
 
-				echo '### Running build ###'
-				sh 'npm run build '
+                // 💅 Lint exercise here
+                echo '### Running Linting ###'
 
-				echo '### Packaging App for Nexus ###'
-				sh '''
-					tar -zcvf ${PACKAGE} dist Dockerfile nginx.conf
-					curl -v -f -u ${NEXUS_CREDS} --upload-file ${PACKAGE} \
-						http://nexus:8081/repository/${NEXUS_REPO_NAME}/${APP_NAME}/${PACKAGE}
-				'''
-			}
-		}
+                // 🃏 Jest Testing
+                echo '### Running Jest Testing ###'
+
+
+                echo '### Running build ###'
+                sh 'npm run build '
+
+                // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
+                echo '### Running SonarQube ###'
+
+
+                echo '### Packaging App for Nexus ###'
+                sh '''
+                    tar -zcvf ${PACKAGE} dist Dockerfile nginx.conf
+                    curl -v -f -u ${NEXUS_CREDS} --upload-file ${PACKAGE} \
+                        http://nexus:8081/repository/${NEXUS_REPO_NAME}/${APP_NAME}/${PACKAGE}
+                '''
+            }
+        }
 ```
 
 8. Push the changes to git:

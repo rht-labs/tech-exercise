@@ -5,7 +5,7 @@
 | Feature Area |  Non functionals  |
 | :----------: | ----------- |
 | 📚 Description  | Configure the pipelines (Tekton / Jenkins) with to scan our code for quality analysis |
-| ✅ Acceptance Criteria | * Deploy SonarQube using GitOps <br>Setip password as a secret using GitOps <br>Extend the Pipeline with static code analysis </li> </ul>|
+| ✅ Acceptance Criteria | * Deploy SonarQube using GitOps <br> * Setip password as a secret using GitOps <br> * Extend the Pipeline with static code analysis  <br>|
 | 👕 T-Shirt Size | Medium |
 
 ### Task
@@ -34,7 +34,7 @@ Git add, commit, push your changes:
 ```bash
 cd /projects/tech-exercise
 git add .
-git commit -m  "⚜️ ADD - sonarqube ⚜️" 
+git commit -m  "🦇 ADD - sonarqube 🦇" 
 git push 
 ```
 

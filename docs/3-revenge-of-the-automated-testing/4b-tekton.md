@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Code Coverage & Linting Task
+### Extend Tekton Pipeline with Code Linting Task
 
 > Why are we doing this
 
