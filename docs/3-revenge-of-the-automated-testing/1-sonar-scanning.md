@@ -44,8 +44,8 @@ git push
 cat << EOF > /tmp/sonarqube-auth.yaml
 apiVersion: v1
 data:
-  password: "$(echo admin | base64 -w0)"
-  username: "$(echo admin123 | base64 -w0)"
+  username: "$(printf admin | base64 -w0)"
+  password: "$(printf admin123 | base64 -w0)"
 kind: Secret
 metadata:
   labels:
@@ -80,8 +80,6 @@ Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secr
 ```yaml
         - name: sonarqube-auth
           type: Opaque
-          annotations:
-            tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
           labels:
             credential.sync.jenkins.openshift.io: "true"
           data:

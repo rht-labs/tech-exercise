@@ -11,8 +11,8 @@ scanner(
   {
     serverUrl: 'http://sonarqube-sonarqube:9000',
     options: {
-      'sonar.login': process.env.SONARQUBE_CREDS_USR,
-      'sonar.password': process.env.SONARQUBE_CREDS_PSW,
+      'sonar.login': process.env.SONARQUBE_USERNAME,
+      'sonar.password': process.env.SONARQUBE_PASSWORD,
       'sonar.projectName': 'Pet Battle',
       'sonar.projectDescription': 'Pet Battle UI',
       'sonar.sources': 'src',
@@ -21,8 +21,8 @@ scanner(
       'sonar.test.inclusions': 'src/**/*.spec.js,src/**/*.spec.ts,src/**/*.spec.jsx,src/**/*.test.js,src/**/*.test.jsx',
       'sonar.exclusions': '**/node_modules/**',
       //'sonar.test.exclusions': 'src/app/core/*.spec.ts',
-      'sonar.javascript.lcov.reportPaths': 'reports/lcov.info',
-      'sonar.testExecutionReportPaths': 'coverage/test-reporter.xml'
+      // 'sonar.javascript.lcov.reportPaths': 'reports/lcov.info',
+      // 'sonar.testExecutionReportPaths': 'coverage/test-reporter.xml'
     }
   },
   () => process.exit()
@@ -49,7 +49,11 @@ And add a shell step in to `build` stage of the pipeline where <span style="colo
 ```bash
         // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
         echo '### Running SonarQube ###'
-        sh 'npm run sonar'
+        sh '''
+          export SONARQUBE_USERNAME=${SONARQUBE_CREDS_USR}
+          export SONARQUBE_PASSWORD=${SONARQUBE_CREDS_PSW}
+          npm run sonar
+        '''
 ```
 
 3. Push the changes to the git repository, which also will trigger a new build.
@@ -64,4 +68,4 @@ git push
 4. Observe the pipeline and when scanning is completed, browse the Sonarqube UI to see the details.
 
 ** Update the screenshots **
-![images/sonar-pb-api.png](images/sonar-pb-api.png)
+![sonar-pb-ui](images/sonar-pb-ui.png)
