@@ -12,4 +12,4 @@ The time between software being written and tested, till it is deployed in produ
 * ADD Tools used
 
 ## 🖼️ Big Picture
-- [ ] Add Big Picture?
+![big-picture-complete](images/big-picture-complete.jpg)

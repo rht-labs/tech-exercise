@@ -18,4 +18,4 @@ of issues
 * [Prometheus](https://prometheus.io/): - one line definition
 
 ## 🖼️ Big Picture
-- [ ] Add Big Picture?
+![big-picture-monitoring](images/big-picture-monitoring.jpg)

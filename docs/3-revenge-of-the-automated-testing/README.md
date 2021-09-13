@@ -25,4 +25,4 @@ There are lots of things we can do under the heading of `Quality Gates`, so deci
 ## 🔮 Learning Outcomes
 - [ ] Add Learning Objectives
 ## 🖼️ Big Picture
-![big-picture-complete](images/big-picture-complete.jpg)
+![big-picture-pipeline-complete](images/big-picture-pipeline-complete.jpg)
