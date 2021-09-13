@@ -15,4 +15,4 @@
 * [Tekton](https://tekton.dev/) - one line definition
 
 ## 🖼️ Big Picture
-- [ ] Add Big Picture?
+![big-picture-first-pipeline](images/big-picture-first-pipeline.jpg)
