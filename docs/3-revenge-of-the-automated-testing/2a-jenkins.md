@@ -32,11 +32,19 @@
 			}
 ```
 
+<p class="tip">
+⛷️ <b>NOTE</b> ⛷️ - If you have completed `Sonar Scanning` step, you can include code coverage result into Sonarqube as well. Open up `/projects/pet-battle/sonar-project.js` file and uncomment below line by removing `//` at the beginning:
+</p>
+
+```bash
+	//'sonar.javascript.lcov.reportPaths': 'reports/lcov.info',
+```
+
 3. Push the changes to the git repository, which also will trigger a new build.
 
 ```bash
 cd /projects/pet-battle
-git add Jenkinsfile
+git add .
 git commit -m "🍊 ADD - save test results 🍊"
 git push
 ```

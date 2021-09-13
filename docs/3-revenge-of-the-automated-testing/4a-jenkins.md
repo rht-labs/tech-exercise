@@ -8,5 +8,5 @@
 ```groovy
       //💅 Lint exercise here
       echo '### Running Jest Testing ###'
-      sh 'npm run lint'```
+      sh 'npm run lint'
 ```
