@@ -1,106 +1,163 @@
-### Extend Jenkins Pipeline with Load Testing
+### Extend Jenkins Pipeline with Image Signing
 
-1. For load testing, we will use a Python-based open source tool called [`locust`](https://docs.locust.io/en/stable/index.html). Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
+1. Generate a keypair to use for signing images. It expects you to enter a password for private key. Feel free to select something but make sure to remember for the next steps :) 
 
-_You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
-
-In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercises/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
-```yaml
-        - name: jenkins-agent-python
+```bash
+cosign generate-key-pair
 ```
 
-You should have a list similar this now:
 <pre>
-        <span style="color:green;" ># Jenkins agents for running builds etc</span>
-        <span style="color:green;" ># default names, versions, repo and paths set on the template</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-npm</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-mvn</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-helm</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-argocd</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-python</span>
+$ cosign generate-key-pair
+Enter password for private key: 
+Enter again: 
+Private key written to cosign.key
+Public key written to cosign.pub
 </pre>
 
-Commit the changes to the Git repository:
+Now you generated two files (one private key, one public key). Private key is used to sign the image and public key is used to verify. You need to share your public key for people to verify images but private one should be kept in a vault or at least sealed before storing publicly.
+
+For this exercise, we can use SealedSecret approach that we used in the first exercise. 
+
+2. Run below command to generate a secret template with your private key and your password. Open up a new file in your IDE and copy this content. 
+
+```bash
+sed -i -e 's/^/    /' cosign.key 
+export COSIGN_PRIVATE_KEY=`cat cosign.key` 
+```
+
+```bash
+export COSIGN_PASSWORD=<YOUR_COSIGN_PASSWORD>
+```
+
+
+```bash
+cat << EOF > /tmp/cosign-private-key.yaml
+apiVersion: v1
+stringData:
+  cosign.key: |-
+${COSIGN_PRIVATE_KEY}
+  password: ${COSIGN_PASSWORD}
+kind: Secret
+metadata:
+  name: ${TEAM_NAME}-cosign
+type: Opaque
+EOF
+```
+
+2. Use `kubeseal` commandline to seal the secret definition.
+
+```bash
+kubeseal < /tmp/cosign-private-key.yaml > /tmp/sealed-cosign-private-key.yaml \
+    -n ${TEAM_NAME}-ci-cd \
+    --controller-namespace do500-shared \
+    --controller-name sealed-secrets \
+    -o yaml
+```
+
+3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
+
+```bash
+cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
+```
+<pre>
+    cosign.key: AgAj3JQj+EP23pnzu...
+    password: AgAtnYz8U0AqIIaqYrj...
+</pre>
+
+4. In `ubiquitous-journey/values-tooling.yaml` extend the Sealed Secrets entry. Copy the output of `cosign.key` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
+```yaml
+        - name: <TEAM_NAME>-cosign
+          type: Opaque
+          labels:
+            credential.sync.jenkins.openshift.io: "true"
+          data:
+            cosign.key: AgAj3JQj+EP23pnzu...
+            password: AgAtnYz8U0AqIIaqYrj...
+  ```
+
+..and push the changes:
+
 ```bash
 cd /projects/tech-exercise
 git add ubiquitous-journey/values-tooling.yaml
-git commit -m  "🐍 ADD - Python Jenkins Agent 🐍" 
+git commit -m  "🔒 ADD - cosign private key sealed secret 🔒" 
 git push
 ```
 
-2. We need to create a `locustfile.py` for testing scenario and save it in the application repository. 
+### Sign Images
+1. Add a new Jenkins agent with `cosign` commandline in it. Open up `ubiquitous-journey/values-tooling.yaml` and under `Jenkins` add `jenkins-agent-cosign` to the list.
 
-Below scenario calls `/cat` endpoint and fails the test if:
-- 1% of /cats calls are not 200 (OK)
-- Total average response time to /cats endpoint is more than 200 ms
-- The max response time in 90 percentile is higher than 800 ms
+```yaml
+        # default names, versions, repo and paths set on the template
+        - name: jenkins-agent-npm
+        - name: jenkins-agent-mvn
+        - name: jenkins-agent-helm
+        - name: jenkins-agent-argocd
+        - name: jenkins-agent-cosign # add this one
+```
 
 ```bash
-cat << EOF > /projects/pet-battle/locustfile.py
-
-import logging
-from locust import HttpUser, task, events
-
-class getCat(HttpUser):
-    @task
-    def cat(self):
-        self.client.get("/cats")
-
-@events.quitting.add_listener
-def _(environment, **kw):
-    if environment.stats.total.fail_ratio > 0.01:
-        logging.error("Test failed due to failure ratio > 1%")
-        environment.process_exit_code = 1
-    elif environment.stats.total.avg_response_time > 200:
-        logging.error("Test failed due to average response time ratio > 200 ms")
-        environment.process_exit_code = 1
-    elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-        logging.error("Test failed due to 95th percentile response time > 800 ms")
-        environment.process_exit_code = 1
-    else:
-        environment.process_exit_code = 0
-EOF
+cd /projects/tech-exercise
+git add ubiquitous-journey/values-tooling.yaml
+git commit -m  "🔒 ADD - Cosign Jenkins Agent 🔒" 
+git push
 ```
-2. Create a stage which uses `jenkins-agent-python` agent and triggers the load test. Copy the below code to the placeholder in `/project/pet-battle/Jenkinsfile`:
+
+
+3. Add a new stage into Jenkinsfile with cosign steps. Image signing should run after image build. Copy the below block into the right placeholder:
 
 ```groovy
-        // LOADTESTING
-		stage("🏋🏻‍♀️ Load Testing") {
-			agent { label "jenkins-agent-python" }
+		stage("🔏 Image Signing") {
+			agent { label "jenkins-agent-cosign" }
 			steps {
 				script {
                     sh '''
-                      pip3 install locust
-                      locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}-<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary 
+                    set +x
+                    oc registry login
+                    export COSIGN_PASSWORD=`oc get secret magic-cosign -o go-template --template="{{.data.password |base64decode}}" `
+                    oc get secret magic-cosign -o go-template --template='{{index .data "cosign.key" | base64decode}}' > /tmp/cosign.key
+                    cosign sign -key /tmp/cosign.key ${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
                     '''
 				}
 			}
 		}
-```
-Above command will install locust cli and then start requests of 10 users at the same time for one minute. Then either fail or keep the pipeline going. 
 
-Now that we update the Jenkinsfile, we need to push the changes which also starts the pipeline.
+```
+
+4. Store the public key in `pet-battle` repo for anyone who would like to verify our images, alongside the Jenkinsfile changes. This push will trigger a Jenkins job for build as well.
 
 ```bash
+mv cosign.pub /projects/pet-battle
+rm cosign.key
 cd /projects/pet-battle
-git add Jenkinsfile locustfile.py
-git commit -m  "🌀 ADD - load testing stage and locustfile 🌀"
+git add  cosign.pub Jenkinsfile
+git commit -m  "⛹️ ADD - cosign public key for image verification and Jenkinsfile updated ⛹️"
 git push
 ```
 
-🪄 Obeserve the **pet-battle** pipeline running with the **load testing** stage.
+🪄 Obeserve the **pet-battle** pipeline running with the **image-sign** stage.
 
-If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed. 
+![cosign-image-signing](images/cosign-image-signing.png)
 
-```py
-    if environment.stats.total.fail_ratio > 0.01:
-        logging.error("Test failed due to failure ratio > 1%")
-        environment.process_exit_code = 1
-    elif environment.stats.total.avg_response_time > 200:
-        logging.error("Test failed due to average response time ratio > 200 ms")
-        environment.process_exit_code = 1
-    elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-        logging.error("Test failed due to 95th percentile response time > 800 ms")
-        environment.process_exit_code = 1
+[TODO] update the screenshot
 
+5. Let's verify the signed image with the public key:
+
+```bash
+cd /projects/pet-battle
+oc registry login
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle
+```
+
+The output should be like:
+
+```bash
+Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+  - Any certificates were verified against the Fulcio roots.
+{"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
 ```

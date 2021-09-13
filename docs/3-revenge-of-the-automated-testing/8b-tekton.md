@@ -1,127 +1,203 @@
-### Extend Tekton Pipeline with Load Testing
+### Extend Tekton Pipeline with Image Signing
 
-1. For load testing, we will use a Python-based open source tool called [`locust`](https://docs.locust.io/en/stable/index.html). Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
-
-We need to create a `locustfile.py` for testing scenario and save it in the application repository. 
-
-Below scenario calls `/` endpoint and fails the test if:
-- 1% of calls are not 200 (OK)
-- Total average response time to `/` endpoint is more than 200 ms
-- The max response time in 90 percentile is higher than 800 ms
-
-_You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
+1. Generate a keypair to use for signing images. It expects you to enter a password for private key. Feel free to select something but make sure to remember for the next steps :) 
 
 ```bash
-cat << EOF > /projects/pet-battle/locustfile.py
+cosign generate-key-pair
+```
 
-import logging
-from locust import HttpUser, task, events
+<pre>
+$ cosign generate-key-pair
+Enter password for private key: 
+Enter again: 
+Private key written to cosign.key
+Public key written to cosign.pub
+</pre>
 
-class getCat(HttpUser):
-    @task
-    def cat(self):
-        self.client.get("/")
+Now you generated two files (one private key, one public key). Private key is used to sign the image and public key is used to verify. You need to share your public key for people to verify images but private one should be kept in a vault or at least sealed before storing publicly.
 
-@events.quitting.add_listener
-def _(environment, **kw):
-    if environment.stats.total.fail_ratio > 0.01:
-        logging.error("Test failed due to failure ratio > 1%")
-        environment.process_exit_code = 1
-    elif environment.stats.total.avg_response_time > 200:
-        logging.error("Test failed due to average response time ratio > 200 ms")
-        environment.process_exit_code = 1
-    elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-        logging.error("Test failed due to 95th percentile response time > 800 ms")
-        environment.process_exit_code = 1
-    else:
-        environment.process_exit_code = 0
+For this exercise, we can use SealedSecret approach that we used in the first exercise. 
 
+2. Run below command to generate a secret template with your private key and your password. Open up a new file in your IDE and copy this content. 
+
+```bash
+sed -i -e 's/^/    /' cosign.key 
+export COSIGN_PRIVATE_KEY=`cat cosign.key` 
+```
+
+```bash
+export COSIGN_PASSWORD=<YOUR_COSIGN_PASSWORD>
+```
+
+
+```bash
+cat << EOF > /tmp/cosign-private-key.yaml
+apiVersion: v1
+stringData:
+  cosign.key: |-
+${COSIGN_PRIVATE_KEY}
+  password: ${COSIGN_PASSWORD}
+kind: Secret
+metadata:
+  name: ${TEAM_NAME}-cosign
+type: Opaque
 EOF
 ```
 
-2. Add a task to the tekton pipeline for running the load testing:
+2. Use `kubeseal` commandline to seal the secret definition.
+
+```bash
+kubeseal < /tmp/cosign-private-key.yaml > /tmp/sealed-cosign-private-key.yaml \
+    -n ${TEAM_NAME}-ci-cd \
+    --controller-namespace do500-shared \
+    --controller-name sealed-secrets \
+    -o yaml
+```
+
+3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
+
+```bash
+cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
+```
+<pre>
+    cosign.key: AgAj3JQj+EP23pnzu...
+    password: AgAtnYz8U0AqIIaqYrj...
+</pre>
+
+4. In `ubiquitous-journey/values-tooling.yaml` extend the Sealed Secrets entry. Copy the output of `cosign.key` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
+```yaml
+        - name: <TEAM_NAME>-cosign
+          type: Opaque
+          data:
+            cosign.key: AgBH...
+            password: AgA1bg...
+  ```
+
+..and push the changes:
+
 ```bash
 cd /projects/tech-exercise
-cat <<'EOF' > tekton/templates/tasks/load-testing.yaml
+git add ubiquitous-journey/values-tooling.yaml
+git commit -m  "🔒 ADD - cosign private key sealed secret 🔒" 
+git push
+```
+
+### Sign Images
+1. Add a task into our codebase to sign our built images.
+
+```bash
+cd /projects/tech-exercise
+cat <<'EOF' > tekton/templates/tasks/image-signing.yaml
 apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
-  name: load-testing
+  name: image-signing
 spec:
   workspaces:
     - name: output
   params:
-    - name: APPLICATION_NAME
-      description: Name of the application
+    - name: COSIGN_SECRET
       type: string
-    - name: TEAM_NAME
-      description: Name of the team that doing this exercise :)
+      description: Secret containing the private key and password for image signing
+      default: <TEAM_NAME>-cosign
+    - name: IMAGE
       type: string
+      description: Full name of image to sign (example -- gcr.io/rox/sample:5.0-rc1)
+    - name: COSIGN_VERSION
+      type: string
+      description: Version of cosign CLI
+      default: 1.0.0
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
   steps:
-    - name: load-testing
-      image: quay.io/centos7/python-38-centos7:latest
+    - name: image-signing
+      image: quay.io/openshift/origin-cli:4.8
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      env:
+        - name: COSIGN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $(params.COSIGN_SECRET)
+              key: password
+        - name: COSIGN_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: $(params.COSIGN_SECRET)
+              key: cosign.key
       script: |
         #!/usr/bin/env bash
-        pip3 install locust
-        locust --headless --users 10 --spawn-rate 1 -H https://$(params.APPLICATION_NAME)-$(params.TEAM_NAME)-test-{{ .Values.cluster_domain }} --run-time 1m --loglevel INFO --only-summary 
+        set +x
+        curl -skL -o /tmp/cosign https://github.com/sigstore/cosign/releases/download/v$(params.COSIGN_VERSION)/cosign-linux-amd64
+        chmod -R 775 /tmp/cosign
+
+        oc registry login
+        echo $COSIGN_PRIVATE_KEY | sed -E 's/(-+(BEGIN|END) ENCRYPTED COSIGN PRIVATE KEY-+) *| +/\1\n/g' > /tmp/cosign.key
+        /tmp/cosign sign -key /tmp/cosign.key $(params.IMAGE)
 EOF
 ```
-3. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+
+
+2. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
 ```yaml
-    # LOAD TESTING
-    - name: load-testing
+    # COSIGN IMAGE SIGN 
+    - name: image-signing
       runAfter:
       - verify-deployment
       taskRef:
-        name: load-testing
+        name: image-signing
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: APPLICATION_NAME
-          value: "$(params.APPLICATION_NAME)"
-        - name: TEAM_NAME
-          value: "$(params.TEAM_NAME)"
+        - name: IMAGE
+          value: "$(tasks.bake.results.IMAGE)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
 ```
 
-4. Remember -  if it's not in git, it's not real.
+3. It's not real unless it's in git, right?
 
 ```bash
-cd /projects/tech-exercise/tekton
+# git add, commit, push your changes..
 git add .
-git commit -m  "🌀 ADD - load testing task 🌀" 
+git commit -m  "👨‍🎤 ADD - image-signing-task 👨‍🎤" 
 git push
 ```
 
-5. Now let's trigger the pet-battle-api pipeline by pushing `locustfile.py` for verifying if the load testing task works as expected.
+4. Store the public key in `pet-battle-api` repository for anyone who would like to verify our images. This push will also trigger the pipeline.
+
+```bash
+mv cosign.pub /projects/pet-battle-api
+rm cosign.key
+cd /projects/pet-battle-api
+git add  cosign.pub
+git commit -m  "🪑 ADD - cosign public key for image verification 🪑"
+git push
+```
+
+🪄 Observe the **pet-battle-api** pipeline running with the **image-sign** task.
+
+After the task succesfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sig` which shows you that this is image signed. 
+![cosign-image-signing](images/cosign-image-signing.png)
+
+5. Let's verify the signed image with the public key:
 
 ```bash
 cd /projects/pet-battle-api
-git add locustfile.py
-git commit -m  "🌀 ADD - locustfile for load testing 🌀"
-git push
+oc registry login
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle-api
 ```
 
-🪄 Observe the **pet-battle-api** pipeline running with the **load-testing** task.
+The output should be like:
 
-If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
-
-```py
-    if environment.stats.total.fail_ratio > 0.01:
-        logging.error("Test failed due to failure ratio > 1%")
-        environment.process_exit_code = 1
-    elif environment.stats.total.avg_response_time > 200:
-        logging.error("Test failed due to average response time ratio > 200 ms")
-        environment.process_exit_code = 1
-    elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-        logging.error("Test failed due to 95th percentile response time > 800 ms")
-        environment.process_exit_code = 1
-
+```bash
+Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api --
+The following checks were performed on each of these signatures:
+  - The cosign claims were validated
+  - The signatures were verified against the specified public key
+  - Any certificates were verified against the Fulcio roots.
+{"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
 ```
