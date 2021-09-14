@@ -454,6 +454,7 @@ EXPOSE 22
 
 ```bash
 # git add, commit, push your changes..
+cd /projects/pet-battle-api
 git add .
 git commit -m  "🐉 Expose port 22 🐉" 
 git push
