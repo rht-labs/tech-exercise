@@ -65,12 +65,12 @@ helm install my do500/todolist --namespace ${TEAM_NAME}-ci-cd
 
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
 ```bash
-oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
+echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
 ``` 
 ![todolist](./images/todolist.png)
 
 
-4.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+1.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
