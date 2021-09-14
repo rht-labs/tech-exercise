@@ -19,14 +19,15 @@ When something is seen as not matching the required state in Git, an application
 ### ArgoCD Basic Install
 > ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can then configure it to do things based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
 
-1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal, add the redhat-cop helm charts repository. This is a collection of charts used by consultants in the field. Pull requests welcomed :P
+1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests welcomed :P
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 ```
 
-2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our usecase. When deploying many instances of ArgoCD in one shared cluster we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment otherwise funky things start happening. We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret that we'll configure later 🔐.
+2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case however when deploying many instances of ArgoCD in one shared cluster we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each argocd instance seeing the others resources.... 
+We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
-Configure our secret:
+A) Configure our ArgoCD instance with a secret and unique applicationInstanceLabelKey by creating a small bit of yaml 😋:
 ```bash
 cat << EOF > /projects/tech-exercise/argocd-values.yaml
 namespace: ${TEAM_NAME}-ci-cd
@@ -45,7 +46,8 @@ argocd_cr:
         name: git-auth
 EOF
 ```
-Deploy ArgoCD:
+
+B) Deploy ArgoCD using helm and this piece of yaml:
 ```bash
 helm upgrade --install argocd \
   --namespace ${TEAM_NAME}-ci-cd \
@@ -57,7 +59,7 @@ helm upgrade --install argocd \
 ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab.
 </p>
 
-3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
+1. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
 ```bash
 oc get pods -w -n ${TEAM_NAME}-ci-cd
 ```
@@ -77,7 +79,7 @@ echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEA
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through UI. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out by setting the following:
+7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the todolist app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`
@@ -88,8 +90,8 @@ echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEA
       * Chart: `todolist`
       * Version: `1.0.1` 
    * On the "DESTINATION" box
-      * Cluster URL: https://kubernetes.default.svc
-      * Namespace: `<TEAM_NAME>`-ci-cd
+      * Cluster URL: `https://kubernetes.default.svc`
+      * Namespace: `<TEAM_NAME>-ci-cd`
 
 Your form should look like this:
 ![argocd-create-application](images/argocd-create-application.png)
@@ -102,7 +104,7 @@ Your form should look like this:
 
 10. You can verify the application is running and behaving as expected by navigating to the url of the app, same way we did for the previous helm deploy.
 ```bash
-oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
+echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
 ```
 
 🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy and application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
