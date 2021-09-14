@@ -1,20 +1,20 @@
 ## 🔥🦄 Ubiquitous Journey
 
-At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CICD tooling to accelerate setup and onboarding. The code repository is called **Ubiquitous Journey** (UJ). We have forked a version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
+At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CICD tooling to accelerate setup and onboarding. The code repository is called **Ubiquitous Journey** (🔥🦄). We have created a lite version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
 
-This repo is available on the Red Hat Labs GitHub organization – https://github.com/rht-labs/ubiquitous-journey. UJ allows us to plumb all of the pieces together in a developer friendly manner.
+This repo is available on the Red Hat Labs GitHub organization – https://github.com/rht-labs/ubiquitous-journey. Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
 - **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extended to support new tools and methodologies.
 - **Traceable** - We can easily see where changes have occured and most importantly trace exactly what git tag/commit is in which environment.
 - **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
 - **Auditable** - Git logs and history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
-- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. Its not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified. 
+- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. Its not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
 - **Flexible** - Product teams often want to use both standard tools and be able to experiment with new ones. The *tool box* mentality helps a lot, so as a team you can work with the tools you are familiar with. We will see this in action with Jenkins and Tekton.
 
 All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
 
 ### Get GitLab Ready for GitOps
-> In this exercise we'll setup our git project to store our code and configuration. We will then connect argocd (out gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob!
+> In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
  
 1. Log into GitLab with your credentials. GitLab URL:
 ```
@@ -23,16 +23,16 @@ https://gitlab-ce.<CLUSTER_DOMAIN>
 We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
 ![gitlab-initial-login](images/gitlab-initial-login.png)
 
-2. Put your <TEAM_NAME> as the group name, select **Internal** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Internal** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
 ![gitlab-create-group](images/gitlab-create-group.png)
 
-3. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions. Hit `Create a project` button on the left hand side
+3. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
 ![gitlab-new-project](images/gitlab-new-project.png)
  
 4. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
-5. Back in your CodeReady Workspace, open a terminal if you have not got one open. Let's push our code to the GitLab server
+5. Let's push our code to the GitLab server. Back in your CodeReady Workspace, open a terminal if you have not got one open.
 ```bash
 cd /projects/tech-exercise
 ```
