@@ -4,19 +4,22 @@
 1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
 ![crw](./images/crw.png)
 
-  If the workspace has not been set up for you, you can create one from this devfile. On Code Ready Workspaces, `Create Workspace > Custom Workspace`. Enter this URL to load the DO500 stack:
-    - https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
+<p class="tip">
+If the workspace has not been set up for you, you can create one from this devfile. On Code Ready Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
+https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
+</p>
 
-2. In your IDE (it may take some time to open ... ⏰), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
 ![new-terminal](./images/new-terminal.png)
 
 <!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
-3. <strong>OPTIONAL</strong> - if you want to use `zsh` as opposed to `sh`, you can set it as the default shell by running. `zsh` is swish and all the cool kids are using it 😎!
+3. <strong>OPTIONAL</strong> - if you want to use `zsh` as opposed to `sh`, you can set it as the default shell by running. `zsh` is swish has neat shortcuts and plugins plus all the cool kids are using it 😎!
 ```bash
 echo "zsh" >> ~/.bashrc
+source ~/.bashrc
 ```
 
-4. Setup your `<TEAM_NAME>` name in the environment of the CodeReadyWorkspace by replacing this and running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
+4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by replacing this and running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
 ```bash
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
@@ -28,7 +31,6 @@ echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 
 6. Verify the variables you have set:
 ```bash
-source ~/.bashrc
 echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
 ```
@@ -38,7 +40,7 @@ echo ${TEAM_NAME}
 oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
 
-8. Check your user permissions in OpenShift by creating your team's CICD project. 
+8. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 ```bash
 oc new-project ${TEAM_NAME}-ci-cd
 ```
@@ -68,7 +70,7 @@ oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}'
 ![todolist](./images/todolist.png)
 
 
-4.  You can overwrite the default values in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+4.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
@@ -105,4 +107,4 @@ where:
 * `templates/*.yaml` - they are our k8s resources. 
 * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
 
-Now, let's continue with even more exiting tool!
+Now, let's continue with even more exiting tool...!
