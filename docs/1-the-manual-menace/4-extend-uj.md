@@ -2,9 +2,9 @@
 Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to manage and store our artifacts. Nexus is here to help! We can use Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
 #### Add Nexus in our tool box
-> Add sonatype's Nexus repository manager to our tooling!
+> In this exercise we'll add Sonatype's Nexus repository manager to our tooling - this tool will be used to host our application binaries! We'll add it to 
 
-1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. Copy the following into the file
+1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. In this example we're just pointing our ArgoCD config to a helm chart. Add the following into the file under the `# Nexus` placeholder
 
 ```yaml
   # Nexus
