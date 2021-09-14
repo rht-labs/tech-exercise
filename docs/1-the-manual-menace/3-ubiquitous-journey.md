@@ -50,15 +50,15 @@ git push -u origin --all
 With our git project created and our configuration pushed to it - let's start our GitOps Journey 🧙‍♀️🦄!
 
 ### Deploy Ubiquitous Journey 🔥🦄
-> and what we're using it for in this exercise.
+> In this exercise, we'll create our first namespaces and tooling using a repeatable pattern - GitOps.
 
-1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in. But let's get right into it - update your `values.yaml` file to reference the git repo you just created and your team name. This is the default values that will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (services, deployments & routes) but an ArgoCD application definition, just like we manually created in the previous exercise.
+1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in to create App of Apps in ArgoCD. Let's get right into it - in the your IDE, Open the `values.yaml` file in the root of the project. Update it to reference the git repo you just created and your team name. This values file is the default ones for the chart and will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (`services`, `deployments` & `routes`) but an ArgoCD application definition, just like the one we manually created in the previous exercise when we deployed an app in the UI of ArgoCD.
 ```yaml
 source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
 team: <TEAM_NAME>
 ```
 
-2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `<TEAM_NAME>` in the bootstrap section appropriately.
+2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
 ```yaml
         - name: jenkins
           kind: ServiceAccount
