@@ -56,8 +56,7 @@ spec:
         set -x
         echo "Make the wrk directory available to save the reports"
         cd /zap
-        mkdir -p /zap/wrk /zap/target
-        ln -s /zap/wrk target/allure-results
+        mkdir -p /zap/wrk
         echo "🪰🪰🪰 Starting the pen test..."
         /zap/zap-baseline.py -t $(params.APP_URL) -r $PIPELINERUN_NAME.html
         ls -lart target/allure-results/
@@ -80,7 +79,8 @@ spec:
         /zap \
         ${ALLURE_USERNAME} \
         ${ALLURE_PASSWORD} \
-        $(params.ALLURE_HOST)
+        $(params.ALLURE_HOST) \
+        wrk
 EOF
 ```
 
