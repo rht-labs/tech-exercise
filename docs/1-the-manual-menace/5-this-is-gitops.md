@@ -18,7 +18,6 @@ That's right, they've been over written by ArgoCD who's taken the configuration 
 It should look something like this now in your `ubiquitous-journey/values-tooling.yaml`
 <pre>
 # more yaml ...
-<br/>
       deployment:
         env_vars:
           - name: GITLAB_DEFAULT_BRANCH
@@ -29,7 +28,6 @@ It should look something like this now in your `ubiquitous-journey/values-toolin
             value: ''
           - name: BISCUITS
             value: 'jaffa-cakes🍪'
-<br/>
 # more yaml ...
 </pre>
 
