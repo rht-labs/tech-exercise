@@ -11,7 +11,7 @@ Tekton is made up of number of YAML files each with a different purpose such as 
 
 ![pet-battle-api-git-repo](images/pet-battle-api-git-repo.png)
 
-1. Back in your CodeReady Workspace, we'll fork the PetBattle API code to this newly created repository on git.
+2. Back in your CodeReady Workspace, we'll fork the PetBattle API code to this newly created repository on git.
 
 ```bash
 cd /projects
@@ -55,7 +55,7 @@ Some of the key things to note above are:
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & resuable set of activities.
    * `triggers` folder stores the configuration for the webhooks. We will add WebHooks from gitlab to trigger our pipeline, using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
-1. Seeing as Tekton piplines are just YAML, we can have ArgoCD sync the pipelines to the cluster so our apps can use them. To deploy them - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list.
+4. Seeing as Tekton piplines are just YAML, we can have ArgoCD sync the pipelines to the cluster so our code can use them. To deploy the pipeline defintions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
 
 ```yaml
   # Tekton Pipelines
@@ -69,7 +69,7 @@ Some of the key things to note above are:
       cluster_domain: <CLUSTER_DOMAIN>
 ```
 
-3. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
+5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 <pre>
   # Pet Battle Apps
   pet-battle-api:
@@ -83,71 +83,63 @@ Some of the key things to note above are:
       image_version: latest # container image version
 </pre>
 
-4. Update git and wait for our tekton piplines to deploy out in ArgoCD.
+6. Update git and wait for our tekton piplines to deploy out in ArgoCD.
+
 ```bash
-# git add, commit, push your changes..
 cd /projects/tech-exercise
 git add .
 git commit -m  "🍕 ADD - tekton pipelines config 🍕" 
 git push 
 ```
-
-5. Add webhook to GitLab `pet-battle-api` project
-
-    - fill in the `URL` based on this route
-
-    ```bash
-    echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
-    ```
-
-    ![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
-    - select `Push Events`, leve the branch empty for now
-    - select `SSL Verification`
-    - Click `Add webhook` button.
-
-    You can test the webhook works from GitLab.
-
-    ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
+![uj-and-tekkers](./images/uj-and-tekkers.png)
 
 
-?> **Tip** You can enable debug log info for your tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```.
+7. With our piplines definitions sync'd to the cluster (thanks ArgoCD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
+
+```bash
+echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
+```
+
+8. Once you have the URL, over on GitLab go to `pet-battle-api > Settings > Integrations` to add the webhook:
+- select `Push Events`, leve the branch empty for now
+- select `SSL Verification`
+- Click `Add webhook` button.
+![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
+
+You can test the webhook works from GitLab.
+![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
+
+
+?> **Tip** You can enable debug log info for your tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```
 <pre>
 // set log level
 data:
-loglevel.eventlistener: debug
+  loglevel.eventlistener: debug
 </pre>
 
 
-6. Trigger pipeline via webhook by checking in some code for Pet Battle API. Lets change the application versions.
+9. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
-    Edit pet-battle-api `pom.xml` and update the `version` number
+```xml
+    <artifactId>pet-battle-api</artifactId>
+    <version>1.2.1</version>
+```
+ 
+10.  As always, push the code to git ...
 
-    ```xml
-        <artifactId>pet-battle-api</artifactId>
-        <version>1.2.1</version>
-    ```
-
-    The pipeline will update the `chart/Chart.yaml` with these versions for us.
-
-    Update git
-
-    ```bash
-    # git add, commit, push your changes..
-    cd /projects/pet-battle-api
-    git add .
-    git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
-    git push 
-    ```
+```bash
+cd /projects/pet-battle-api
+git add .
+git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
+git push 
+```
 
 🪄 Observe Pipeline Running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
 ![images/tekton-pipeline-running.png](images/tekton-pipeline-running.png)
 
-?> **TIP** You can use the **tkn** command line to observer pipeline run logs as well.
+?> **TIP** You can use the **tkn** command line to observe ```PipelineRun`` logs as well:
 
 ```bash
 tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
 ```
-
-#### TODO
-- [ ] add in full explanations of all the steps
