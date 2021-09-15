@@ -62,6 +62,19 @@ spec:
         /zap/zap-baseline.py -t $(params.APP_URL) -r $PIPELINERUN_NAME.html
         ls -lart target/allure-results/
         echo "🛸🛸🛸 Saving results..."
+        # FIXME for now this works, move to script+image
+        pip install pytest allure-pytest --user
+        cat > test.py <<EOF
+        import allure
+        import glob
+        import os
+        def test_zap_scan_results():
+            for file in list(glob.glob('/zap/target/allure-results/*.html')):     
+                allure.attach.file(file, attachment_type=allure.attachment_type.HTML)    
+            pass
+        EOF
+        export PATH=/tekton/home/.local/bin:$PATH
+        pytest test.py --alluredir=/zap/target/allure-results
         curl -sLo send_results.sh https://raw.githubusercontent.com/eformat/allure/main/scripts/send_results.sh && chmod 755 send_results.sh
         ./send_results.sh $(params.APPLICATION_NAME) \
         /zap \
