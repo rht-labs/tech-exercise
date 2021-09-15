@@ -67,7 +67,7 @@ Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secr
 And push the changes to the repository:
 ```bash
 cd /projects/tech-exercise
-git add ubiquitous-journey/value-tooling.yaml
+git add ubiquitous-journey/values-tooling.yaml
 git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭" 
 git push 
 ```
