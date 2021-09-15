@@ -18,29 +18,30 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
         name: nexus
 ```
 
-2. Now push the changes into your git repository!
+2. Now push the changes into your git repository for it to be automatically rolled out by ArgoCD!
 ```bash
 git add .
 git commit -m  "🦘 ADD - nexus repo manager 🦘" 
 git push 
 ```
 
-3. ArgoCD will detect the change in `values-tooling.yaml` and deploy Nexus on our behalf in order to match what is in git also in the cluster. You can see it also in ArgoCD UI.
+3. ArgoCD will detect the change in `ubiquitous-journey/values-tooling.yaml` and deploy Nexus on our behalf in order to match what is in git also in the cluster. You can see it also in ArgoCD UI.
 ![argocd-nexus](images/argocd-nexus.png)
 
-4. It can take a few minutes to become available. You can verify it by opening the Nexus URL in a new tab:
+4. It can take a few minutes to become available. But you can verify it is all working by opening the Nexus URL in a new tab:
 ```bash
-oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 ```
+![nexus](images/nexus.png)
 
 #### Add ArgoCD Webhook from GitLab
 > ArgoCD has a cycle time of about 5ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. 
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 ```bash
-echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook)
+echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
 ```
 
-2. Go to `tech-exercise` git repository in UI. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal.
-![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
+1. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄.
 Make sure you **untick** `Enable SSL verification` and then click `Add webhook`.
+![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)

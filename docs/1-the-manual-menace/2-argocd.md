@@ -8,6 +8,7 @@ us. Enter ArgoCD.
 
 From ArgoCD's website, it is described as a tool that:
 
+<div class="highlight" style="background: #f7f7f7">
 <pre>
     automates the deployment of the desired application states in the specified target
     environments. Application deployments can track updates to branches, tags, or be pinned

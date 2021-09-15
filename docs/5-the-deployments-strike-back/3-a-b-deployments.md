@@ -6,7 +6,7 @@
 
 [TODO - ADD the DIAGRAM for what's happening]
 
-0. Let's explore `route` definition.
+- Let's explore `route` definition.
 [TODO - Insert existing route definition and introduce alternateBackends]
 
 1. First let's deploy our experiment we want to compare -  let's call this `A` and we'll use our existing Pet Battle deployment as `B`
@@ -46,7 +46,8 @@ EOF
         svc_name: pet-battle-b
 ```
 The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different)
-<pre>
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
   pet-battle:
     name: pet-battle
     enabled: true
@@ -57,10 +58,10 @@ The `pet-battle` definition in `test/values.yaml` should look something like thi
       image_version: latest # container image version  
       <strong>a_b_deploy:
         a_weight: 80
-        b_weight: 20 <span style="color:green;" ># 20% of the traffic will be directed to 'b'</span>
+        b_weight: 20 # 20% of the traffic will be directed to 'b'
         svc_name: pet-battle-b</strong>
       config_map: ...
-</pre>
+</code></pre></div>
 
 3. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
 ```bash
@@ -86,12 +87,13 @@ oc get svc -l app.kubernetes.io/name=pet-battle-b -n ${TEAM_NAME}-test
 ```
 
 6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
-<pre>
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
 "name": "pet-battle",
-"version": <strong>"1.6.1"</strong>,
+"version": "1.6.1", <- bump this
 "private": true,
 "scripts": ...
-</pre>
+</code></pre></div>
 
 7. Commit all these changes:
 ```bash
@@ -107,7 +109,7 @@ If you open up `pet-battle` in your browser, 20 percent of the traffic is going 
 oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
 ```
 
-6. Now let's redirect 50% of the traffic to `B`, that means that only 50% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/test/values.yaml` file.
+9. Now let's redirect 50% of the traffic to `B`, that means that only 50% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/test/values.yaml` file.
 And as always, push it to the Git repository - <strong>Because if it's not in Git, it's not real!</strong>
 ```bash
 cd /projects/tech-exercise
@@ -118,12 +120,12 @@ git commit -m  "🏋️‍♂️ service B weight increased to 80 🏋️‍♂�
 git push
 ```
 
-7. Open an incognito browser and connect to the same URL. You'll have 50% chance to get a green banner.
+10. Open an incognito browser and connect to the same URL. You'll have 50% chance to get a green banner.
 ```bash
 oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
 ```
 
-8. Apparently people like green banner on PetBattle UI! Let's redirect all traffic to service `A`. Yes, for that we need to make weight 0 for service `B`. If you refresh the page, you should only see the green banner.
+11. Apparently people like green banner on PetBattle UI! Let's redirect all traffic to service `A`. Yes, for that we need to make weight 0 for service `B`. If you refresh the page, you should only see the green banner.
 ```bash
 cd /projects/tech-exercise
 yq eval -i .applications.pet-battle-a.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml

@@ -1,16 +1,12 @@
 ### Image Signing
 > what is it why important
 
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
+### Task
+![task-image-signing](./images/task-image-signing.png)
 
-- [ ] A
-- [ ] B
-- [ ] C
-- [jenkins](3-revenge-of-the-automated-testing/8a-jenkins.md)
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-🐅 `Tekton Group` 🐅
-
-- [ ] A
-- [ ] B
-- [ ] C
-- [tekton](3-revenge-of-the-automated-testing/8b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| *  | *  |
+| [jenkins](3-revenge-of-the-automated-testing/8a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/8b-tekton.md) |

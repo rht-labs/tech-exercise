@@ -1,18 +1,15 @@
 # Automated Testing
-> what is it why important
+> Testing testing .... is this thing on?
 
-1. 
+Continuous Delivery needs rapid and reliable feedback. Investing in continuous testing is a worthwhile activity.
 
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
+![images/continuous-testing.png](images/continuous-testing.png)
+### Task
+![task-testing](./images/task-testing.png)
 
-- [ ] A
-- [ ] B
-- [ ] C
-- [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-🐅 `Tekton Group` 🐅
-
-- [ ] A
-- [ ] B
-- [ ] C
-- [tekton](3-revenge-of-the-automated-testing/2b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| * Add Jest Testing to the pipeline | * Add Junit and Alure test reporting to the pipeline |
+|  [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/2b-tekton.md) |

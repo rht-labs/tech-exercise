@@ -70,7 +70,7 @@ echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spe
 ![todolist](./images/todolist.png)
 
 
-1.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+4.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
@@ -91,7 +91,8 @@ oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
 
 6. For those who are really interested, this is the anatomy of our Helm chart. It can be [found here](https://github.com/rht-labs/todolist), but the basic structure is as follows:
-<pre>
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-bash">
 todolist/chart
 ├── Chart.yaml
 ├── templates
@@ -100,7 +101,7 @@ todolist/chart
 │   ├── route.yaml
 │   └── service.yaml
 └── values.yaml
-</pre>
+</code></pre></div>
 where:
 * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
 * `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can over write these values on the command line.

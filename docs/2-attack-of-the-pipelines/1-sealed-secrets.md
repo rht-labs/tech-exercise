@@ -1,24 +1,27 @@
 # Sealed Secrets
-We say GitOps, we say 'if it's not in Git, it's NOT REAL' but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - any anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
+We say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - any anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
 
 Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 ### Sealed Secrets in action
 
-Lets start by sealing our Git credentials:
+1. The observant amoung you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git.... Lets start by fixing this and sealing our Git credentials so they can be safely checked in to the code. First we'll create the secret in a tmp directory. replace `<YOUR_GITLAB_USER>` and `<YOUR_GITLAB_PASSWORD>` accordingly if not already set in your enviroment:
+
 ```bash
 export GITLAB_USER=<YOUR_GITLAB_USER>
 ```
 ```bash
 export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
 ```
-Run this command. This will generate a Kubernetes secret object in `tmp`
+
+2. Run this command to generate a Kubernetes secret object in `tmp` with the right labels needed for Tekton and Jenkins later.
+
 ```bash
 cat << EOF > /tmp/git-auth.yaml
+kind: Secret
 apiVersion: v1
 data:
-  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
   username: "$(printf ${GITLAB_USER} | base64 -w0)"
-kind: Secret
+  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
 metadata:
   annotaion:
     tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
@@ -28,7 +31,8 @@ metadata:
 EOF
 ```
 
-Use `kubeseal` commandline to seal the secret definition.
+3. Use `kubeseal` commandline to seal the secret definition. This will encrypt it using a certificate stored in the controller running in kubernetes. This has already been deployed for you as only one instance can exist per cluster.
+
 ```bash
 kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
     -n ${TEAM_NAME}-ci-cd \
@@ -37,13 +41,14 @@ kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
     -o yaml
 ```
 
-Verify that secret is sealed:
+4. Verify that secret is sealed:
+
 ```bash
 cat /tmp/sealed-git-auth.yaml 
 ```
-
 We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
-<pre>
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -52,22 +57,24 @@ metadata:
   namespace: biscuits-ci-cd
 spec:
   encryptedData:
-    password: AgAj3JQj+EP23pnzu...
     username: AgAtnYz8U0AqIIaqYrj...
+    password: AgAj3JQj+EP23pnzu...
 ...
-</pre>
+</code></pre></div>
 
-We want to grab the results of this sealing activity, in particular the `encryptedData`.
+5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a [helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets) that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
 
 ```bash
 cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
 ```
-<pre>
-    password: AgAj3JQj+EP23pnzu...
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
     username: AgAtnYz8U0AqIIaqYrj...
-</pre>
+    password: AgAj3JQj+EP23pnzu...
+</code></pre></div>
 
-In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+6. In `ubiquitous-journey/values-tooling.yaml` add an entry for this helper chart under `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values accordingly. **Make sure you indent the data correctly**.
+
 ```yaml
   # Sealed Secrets
   - name: sealed-secrets
@@ -89,7 +96,7 @@ In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`.
             password: <YOUR_SEALED_SECRET_PASSWORD>
 ```
 
-Now that we update the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
+7. Now that we update the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
 
 ```bash
 git add ubiquitous-journey/values-tooling.yaml
@@ -97,20 +104,26 @@ git commit -m "🕵🏻‍♂️ Sealed secret of Git user creds is added 🔎"
 git push
 ```
 
-🪄 Log in to ArgoCD - you should now see the SealedSecret unsealed as a regular k8s secret.
+🪄 🪄 Log in to ArgoCD - you should now see the SealedSecret chart in ArgoCD UI. It is attempting to unsealed as a regular k8s secret 🪄 🪄 
+![argocd-ss.png](images/argocd-ss.png)
 
-You might notice that the `git-auth` secrets fails to sync:
+
+8. If you drill into the `SealedSecret` on ArgoCD's UI - you'll might notice that the `git-auth` secrets fails to sync:
+![argocd-degraded.png](images/argocd-degraded.png)
 
 !> HEALTH DETAILS - failed update: Resource `"git-auth"` already exists and is not managed by SealedSecret
 
-Thats because we already created a `git-auth` secret manually in Excercise.1. Lets remove it now:
+Thats because we already created a `git-auth` secret manually in Excercise 1. Lets remove it now and resync ArgoCD:
 ```bash
 oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth
 ```
 
-You may need to force sync your secret in argocd to get it to apply:
-
+9. You may need to force sync your secret in argocd to get it to apply:
 ![argocd-force-sync.png](images/argocd-force-sync.png)
 
 
-🪄 Log in to Jenkins -> Configuration -> Credentials to view git-auth credential is there.
+🪄 You can verify it's been synced to Jenkins now by opening `Jenkins -> Configuration -> Credentials` to view `<TEAM_NAME>-ci-cd-git-auth` credential is there
+```bash
+echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+```
+![jenkins-sync.png](images/jenkins-sync.png)

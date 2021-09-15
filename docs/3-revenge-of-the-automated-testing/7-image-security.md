@@ -1,6 +1,9 @@
 ### Image Security (Stack Rox)
 > what is it why important
 
+### Task
+![task-image-security](./images/task-image-security.png)
+
 #### Group Exercise
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator should already be deployed in the cluster.

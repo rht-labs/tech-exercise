@@ -23,21 +23,22 @@ sum(container_memory_working_set_bytes{container!='',namespace='pants-test'}) by
 OpenShift gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or active users etc) alongside the base ones, we need another object: _ServiceMonitor_. ServiceMonitor will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
 **Example** ServiceMonitor object:
-<pre>
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
   ---
-  <span style="color:#0077AA;">apiVersion:</span> monitoring.coreos.com/v1
-  <span style="color:#0077AA;">kind:</span> ServiceMonitor
-  <span style="color:#0077AA;">metadata:</span>
-    <span style="color:#0077AA;">name:</span> my-app
-  <span style="color:#0077AA;">spec:</span>
-    <span style="color:#0077AA;">endpoints:</span>
-      - <span style="color:#0077AA;">interval:</span> 30s
-        <span style="color:#0077AA;">port:</span> tcp-8080 <span style="color:green;" >#port that metrics are exposed</span>
-        <span style="color:#0077AA;">scheme:</span> http
-    <span style="color:#0077AA;">selector:</span>
-      <span style="color:#0077AA;">matchLabels:</span>
-        <span style="color:#0077AA;">app:</span> my-app
-</pre>
+  apiVersion: monitoring.coreos.com/v1
+  kind: ServiceMonitor
+  metadata:
+    name: my-app
+  spec:
+    endpoints:
+      - interval: 30s
+        port: tcp-8080 # port that metrics are exposed
+        scheme: http
+    selector:
+      matchLabels:
+        app: my-app
+</code></pre></div>
 
 Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/staging/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
