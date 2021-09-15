@@ -1,8 +1,8 @@
 ### Extend Tekton Pipeline with Sonar Scanning
 
-> What are we going to do
+> In this exercise, we're going to edit the tekton `Pipeline` to run code-analysis using sonar of the API and add an additional `Task` to analyse the results
 
-1. Add `code-analysis` step to our pipeline. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file, add this step before the `maven` build step and adjust the `maven` build step `runAfter` to be `code-analysis`;
+1. Add `code-analysis` step to our `Pipeline`. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file, add this step before the `maven` build step. We don't need to create a new task here, we can just supply some new parameters to the existing `maven` task giving us great reusability of Tekton components.
 
 ```yaml
     # Code Analysis
@@ -37,22 +37,14 @@
         #     secretName: sonarqube-auth
 ```
 
-Git add, commit, push your changes:
+2. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image. 
 
 ```bash
-cd /projects/tech-exercise
-git add .
-git commit -m  "🥽 ADD - code-analysis step 🥽" 
-git push 
+curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-check.yaml \
+    https://raw.githubusercontent.com/petbattle/ubiquitous-journey/main/tekton/tasks/sonarqube-quality-gate-check.yaml
 ```
 
-
-Add the `sonarqube-quality-gate-check.yaml` Task
-```bash
-curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-check.yaml https://raw.githubusercontent.com/petbattle/ubiquitous-journey/main/tekton/tasks/sonarqube-quality-gate-check.yaml
-```
-
-Add `code-analysis-check` step to our pipeline and adjust the `maven` build step `runAfter` to be `analysis-check`.
+3. Let's add this task to our pipleine. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
 
 ```yaml
     # Code Analysis Check
@@ -70,92 +62,57 @@ Add `code-analysis-check` step to our pipeline and adjust the `maven` build step
       - code-analysis
 ```
 
-Git add, commit, push your changes
+4. In Tekton, we can control flow by using `runAfter` to organize the structure of the pipeline. Adjust the `maven` build step's `runAfter` to be `analysis-check` so the static analysis steps happen before we even compile the app!
+
+<pre>
+    - name: maven
+      taskRef:
+        name: maven
+      params:
+        - name: WORK_DIRECTORY
+          value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+        - name: GOALS
+          value:
+            - "package"
+        - name: MAVEN_BUILD_OPTS
+          value:
+            - "-Dquarkus.package.type=fast-jar"
+            - "-DskipTests"
+      workspaces:
+        - name: maven-settings
+          workspace: maven-settings
+        - name: maven-m2
+          workspace: maven-m2
+        - name: output
+          workspace: shared-workspace
+      <strong>runAfter:
+        - analysis-check</strong>
+</pre>
+
+5. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:
 
 ```bash
 cd /projects/tech-exercise
 git add .
-git commit -m  "🥽 ADD - analysis-check step 🥽" 
+git commit -m  "🥽 ADD - code-analysis & check steps 🥽" 
 git push 
 ```
 
-Trigger a pipeline build
+6. Now let's trigger a pipeline build - we can push an empty commit to the repo to trigger the pipeline:
 
 ```bash
 cd /projects/pet-battle-api
-git commit --allow-empty -m "🧦 test analysis-check step 🧦"
+git commit --allow-empty -m "🧦 TEST - running code analysis steps 🧦"
 git push
 ```
 
-![images/sonar-pb-api-code-quality.png](images/sonar-pb-api-code-quality.png)
+?> **TIP** - If we didn't want to add a commit to the repo, we could always go to GitLab and trigger the WebHook directly from there which would also kick the pipeline but leave no trace in the git history 🧙‍♀️✨🧙‍♀️.
 
-Browse to Sonarqube URL
+![images/sonar-pb-api-code-quality](images/sonar-pb-api-code-quality.png)
 
-![images/sonar-pb-api.png](images/sonar-pb-api.png)
-
-
-Code Exercise to fix up **Security HotSpots** and improve quality.
-
-![images/sonar-pb-api-hotspots.png](images/sonar-pb-api-hotspots.png)
-
-```java
-diff --git a/src/main/java/app/petbattle/Cat.java b/src/main/java/app/petbattle/Cat.java
-index c9dad23..a5bcbed 100644
---- a/src/main/java/app/petbattle/Cat.java
-+++ b/src/main/java/app/petbattle/Cat.java
-@@ -85,7 +85,7 @@ public class Cat extends ReactivePanacheMongoEntity {
-                     .encodeToString(baos.toByteArray());
-             setImage("data:image/jpeg;base64," + encodedString);
-         } catch (IOException e) {
--            e.printStackTrace();
-+            // do nothing
-         }
-     }
- 
-diff --git a/src/main/java/app/petbattle/CatResource.java b/src/main/java/app/petbattle/CatResource.java
-index 5b194b5..c9ed55c 100644
---- a/src/main/java/app/petbattle/CatResource.java
-+++ b/src/main/java/app/petbattle/CatResource.java
-@@ -26,6 +26,7 @@ import javax.ws.rs.core.MediaType;
- import javax.ws.rs.core.Response;
- import java.io.IOException;
- import java.io.InputStream;
-+import java.security.SecureRandom;
- import java.time.Duration;
- import java.util.*;
- 
-@@ -216,7 +217,7 @@ public class CatResource {
-             try {
-                 InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(tc);
-                 Cat cat = new Cat();
--                cat.setCount(new Random().nextInt(5) + 1);
-+                cat.setCount(new SecureRandom().nextInt(5) + 1);
-                 cat.setVote(false);
-                 byte[] fileContent = new byte[0];
-                 fileContent = is.readAllBytes();
-@@ -229,7 +230,7 @@ public class CatResource {
-                 cat.persistOrUpdate().await().indefinitely();
- 
-             } catch (IOException e) {
--                e.printStackTrace();
-+                // do nothing
-             }
-         }
-     }
-```
-
-Git add, commit, push your changes
+7. When the pipeline has complete - we can inspect the results in SonarQube UI. Browse to Sonarqube URL
 
 ```bash
-cd /projects/pet-battle-api
-git add .
-git commit -m  "💍 FIX Security HotSpots 💍" 
-git push 
+echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 ```
-
-
-![images/sonar-pb-api-better-quality.png](images/sonar-pb-api-better-quality.png)
-
-`TODO`
-- [ ] Document the steps
-- [ ] Sonar Task should this be in repo already?
+![images/sonar-pb-api.png](images/sonar-pb-api.png)

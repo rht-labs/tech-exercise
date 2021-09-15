@@ -92,11 +92,13 @@ git push
 ```
 
 6. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
+
 ```bash
 oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
 ```
 
 7. Connect to Sonarqube UI to verify if the installation is successful (username `admin` & password `admin123`):
+
 ```bash
 echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 ```
