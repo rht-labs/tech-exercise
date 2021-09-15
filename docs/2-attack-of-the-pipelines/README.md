@@ -7,7 +7,9 @@
 ## 🖼️ Big Picture
 ![big-picture-first-pipeline](images/big-picture-first-pipeline.jpg)
 ## 🔮 Learning Outcomes
-- [ ] Add Learning Objectives
+- Can manage App Config via git
+- Can automatically build / bake / deploy software Jenkins or Tekton
+- Can store secrets used by my pipline securely in git
 
 ## 🔨 Tools used in this exercise!
 * [SealedSecrets](https://github.com/bitnami-labs/sealed-secrets): Helps you to encrypt your secrets to store safely, even to a public repository.
