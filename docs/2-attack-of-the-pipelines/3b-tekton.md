@@ -3,7 +3,15 @@
 
 There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. [Tekton Hub](https://hub.tekton.dev/) is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
-Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file and a Workspace to create an instance of a pipeline:
+Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline
+
+![simple-tekkers-pipeline](./images/simple-tekkers-pipeline.png)
+
+In this snippet of the pipeline used in this exercise, we define:
+* `workspaces` used by the pipeline (config maps, and shared workspaces for each task to use). 
+* `params` are the inputs to the run of the `pipeline` eg the application name or the git revision to build. 
+* `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, are also supplied parameters and workspaces if required.  
+
 
 #### Deploying the Tekton Objects
 
