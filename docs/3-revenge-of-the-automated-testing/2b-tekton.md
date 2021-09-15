@@ -169,7 +169,7 @@ git push
 5. Browse to uploaded test results in Allure:
 
 ```bash
-https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
+echo https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
 ```
 
 Can also find these from Allure swagger api.
@@ -183,4 +183,3 @@ Browse Test results + behaviours.
 Drill down to test body attachments.
 
 ![images/allure-behaviours.png](images/allure-behaviours.png)
-
