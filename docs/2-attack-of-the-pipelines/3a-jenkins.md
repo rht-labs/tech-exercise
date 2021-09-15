@@ -104,19 +104,18 @@ _^✋ INFO - If after Jenkins restarts you do not see the job run, feel free to 
 5. With Jenkins now scanning our gitlab project for new repositories and git setup to trigger a build on jenkins, now let's explore our pipeline. A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is setup a lot like this :
 
 ![jenkins-pipe](images/jenkins-pipe.png)
+
 Some of the key things to note above are:
- * `pipeline {}` is how all declarative Jenkins pipelines begin.
- * `environment {}` defines environment variables to be used across all build stages
- * `options {}` contains specific Job specs you want to run globally across the jobs e.g. setting the terminal colour
- * `stage {}` all jobs must have one stage. This is the logical part of the build that will be executed e.g. `bake-image`
- * `steps {}` each `stage` has one or more steps involved. These could be execute shell or git checkout etc.
- * `agent {}` specifies the node the build should be run on e.g. `jenkins-agent-npm`
- * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow
- * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. e.g. when branch is master; deploy to `test` environment.
-    
+   * `pipeline {}` is how all declarative Jenkins pipelines begin.
+   * `environment {}` defines environment variables to be used across all build stages
+   * `options {}` contains specific Job specs you want to run globally across the jobs e.g. setting the terminal colour
+   * `stage {}` all jobs must have one stage. This is the logical part of the build that will be executed e.g. `bake-image`
+   * `steps {}` each `stage` has one or more steps involved. These could be execute shell or git checkout etc.
+   * `agent {}` specifies the node the build should be run on e.g. `jenkins-agent-npm`
+   * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow
+   * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. e.g. when branch is master; deploy to `test` environment.
 
-
-6. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job you'll see it's not able to find anythin in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
+1. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job you'll see it's not able to find anythin in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
 ```groovy
         // 💥🔨 PIPELINE EXERCISE GOES HERE 
