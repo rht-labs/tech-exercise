@@ -23,7 +23,7 @@ https://gitlab-ce.<CLUSTER_DOMAIN>
 We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
 ![gitlab-initial-login](images/gitlab-initial-login.png)
 
-2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Internal** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
 ![gitlab-create-group](images/gitlab-create-group.png)
 
 3. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
