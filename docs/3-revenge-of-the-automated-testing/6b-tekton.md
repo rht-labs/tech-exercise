@@ -68,19 +68,19 @@ spec:
         import glob
         import os
         def test_zap_scan_results():
-            for file in list(glob.glob('/zap/target/allure-results/*.html')):
+            for file in list(glob.glob('/zap/wrk/allure-results/*.html')):
                 allure.attach.file(file, attachment_type=allure.attachment_type.HTML)
             pass
         EOF
         export PATH=/tekton/home/.local/bin:$PATH
-        pytest test.py --alluredir=/zap/target/allure-results
+        pytest test.py --alluredir=/zap/wrk/allure-results
         curl -sLo send_results.sh https://raw.githubusercontent.com/eformat/allure/main/scripts/send_results.sh && chmod 755 send_results.sh
         ./send_results.sh $(params.APPLICATION_NAME) \
         /zap \
         ${ALLURE_USERNAME} \
         ${ALLURE_PASSWORD} \
         $(params.ALLURE_HOST) \
-        wrk
+        wrk/allure-results
 EOF
 ```
 
