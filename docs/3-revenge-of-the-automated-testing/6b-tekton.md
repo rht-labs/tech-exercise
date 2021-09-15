@@ -125,16 +125,7 @@ git push
 echo https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/zap-scan/reports/latest/index.html
 ```
 
-
-
-Can also find these from Allure swagger api.
-
-![images/allure-api.png](images/allure-api.png)
-
-Browse Test results + behaviours.
-
-![images/allure-test-suite.png](images/allure-test-suite.png)
-
 Drill down to test body attachments.
 
-![images/allure-behaviours.png](images/allure-behaviours.png)
+![images/allure-zap-report-attachment.png](images/allure-zap-report-attachment.png)
+![images/allure-zap-report.png](images/allure-zap-report.png)
