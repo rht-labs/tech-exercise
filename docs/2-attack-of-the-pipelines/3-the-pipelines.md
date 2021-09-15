@@ -1,6 +1,17 @@
 ### Pipelines
-Split into 2 groups within your team. Choose you own adventure! Each group will get to perform similar tasks:
 
+Why create pipelines:
+* Assurance - drive up code quality and remove the need for dedicated deployment / release management teams
+* Freedom - allow developers to take ownership of how and when code gets built and shipped
+* Reliability - pipelines are a bit boring; they execute the same way each and every time they're run!
+* A pathway to production:
+    - Puts the product in the hands of the customer quicker
+    - Enables seamless and repeatable deploys
+    - More prod like infrastructure increases assurance
+    - “We have already done it” behavior de-risks go live
+
+### Choose your own adventure
+Split into 2 groups within your team. Choose you own adventure! Each group will get to perform similar tasks:
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 - we need to fork PetBattle (clone from GitHub and push to GitLab)
 - Update Jenkinsfile task to leave out some stuff for participants
@@ -15,6 +26,6 @@ Split into 2 groups within your team. Choose you own adventure! Each group will 
 - Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.)
 - By updating version files (pom.xml etc), kick the pipelines
 
-🐈 `Expected Outcome`: Working pipelines that build the Pet Battle applications - yes .. Cats !! 🐈
+🐈 `Expected Outcome`: Working pipelines that build the Pet Battle applications (front end and back) - yes .. Cats !! 🐈
 
 ![daisy-cat.png](images/daisy-cat.png)
