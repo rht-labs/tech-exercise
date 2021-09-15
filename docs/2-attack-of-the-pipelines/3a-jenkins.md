@@ -79,7 +79,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
   pet-battle:
     name: pet-battle
     enabled: true
-    source: <strong>http://nexus:8081/repository/helm-charts</strong>
+    source: http://nexus:8081/repository/helm-charts
     source_ref: 1.0.6 # helm chart version
     ...
 </code></pre>

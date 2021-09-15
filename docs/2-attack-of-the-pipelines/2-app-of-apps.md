@@ -13,14 +13,14 @@ We deploy each of our applications using an Argo CD `application` definition. We
 <pre><code class="language-yaml">
   # Test app of app
   - name: test-app-of-pb
-    <strong>enabled: true</strong>
+    enabled: true
     source_path: "."
     helm_values:
       - pet-battle/test/values.yaml
 
   # Staging App of Apps
   - name: staging-app-of-pb
-    <strong>enabled: true</strong>
+    enabled: true
     source_path: "."
     helm_values:
       - pet-battle/stage/values.yaml

@@ -55,9 +55,9 @@ metadata:
   name: git-auth
   namespace: biscuits-ci-cd
 spec:
-  <strong>encryptedData:
+  encryptedData:
     username: AgAtnYz8U0AqIIaqYrj...
-    password: AgAj3JQj+EP23pnzu...</strong>
+    password: AgAj3JQj+EP23pnzu...
 ...
 </code></pre>
 

@@ -32,7 +32,7 @@ OpenShift gathers the base metrics to see how our pods are doing. In order to ge
   spec:
     endpoints:
       - interval: 30s
-        port: tcp-8080 <span style="color:green;" >#port that metrics are exposed
+        port: tcp-8080 # port that metrics are exposed
         scheme: http
     selector:
       matchLabels:

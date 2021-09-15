@@ -17,7 +17,7 @@ That's right, they've been over written by ArgoCD who's taken the configuration 
 ```
 It should look something like this now in your `ubiquitous-journey/values-tooling.yaml`
 <pre><code class="language-yaml">
-  <i># more yaml ...</i>
+  # more yaml ...
         - name: jenkins-agent-helm
         - name: jenkins-agent-argocd
       deployment:
@@ -28,10 +28,10 @@ It should look something like this now in your `ubiquitous-journey/values-toolin
             value: ''
           - name: GITLAB_GROUP_NAME
             value: ''
-          <strong>- name: BISCUITS
-            value: 'jaffa-cakes🍪'</strong>
+          - name: BISCUITS
+            value: 'jaffa-cakes🍪'
       persistence: false
-  <i># more yaml ...</i>
+  # more yaml ...
 </code></pre>
 
 4. Git commit that change and open the ArgoCD UI to see the new variable syncrhonised.

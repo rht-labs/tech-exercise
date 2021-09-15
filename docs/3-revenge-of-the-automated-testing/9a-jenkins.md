@@ -13,11 +13,11 @@ You should have a list similar this now:
 <pre><code class="language-yaml">
         # Jenkins agents for running builds etc
         # default names, versions, repo and paths set on the template
-         - name: <span style="color:orange;" >jenkins-agent-npm
-         - name: <span style="color:orange;" >jenkins-agent-mvn
-         - name: <span style="color:orange;" >jenkins-agent-helm
-         - name: <span style="color:orange;" >jenkins-agent-argocd
-         - name: <span style="color:orange;" >jenkins-agent-python
+         - name: jenkins-agent-npm
+         - name: jenkins-agent-mvn
+         - name: jenkins-agent-helm
+         - name: jenkins-agent-argocd
+         - name: jenkins-agent-python
 </code></pre>
 
 Commit the changes to the Git repository:
