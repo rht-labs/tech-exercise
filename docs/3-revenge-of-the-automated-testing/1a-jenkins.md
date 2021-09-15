@@ -3,7 +3,7 @@
 
 1. Open the CodeReadyWorkspace and create a sonar file in the root of the `pet-battle` project. This file contains the information of Sonarqube instance and other properties for the scanner to use while assessing the code base.
 
-```bash
+```javascript
 cd /projects/pet-battle
 cat << EOF > sonar-project.js
 const scanner = require('sonarqube-scanner');
