@@ -4,16 +4,9 @@
 ### Task
 ![task-system-test](./images/task-system-test.png)
 
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-- [ ] A
-- [ ] B
-- [ ] C
-- [jenkins](3-revenge-of-the-automated-testing/10a-jenkins.md)
-
-🐅 `Tekton Group` 🐅
-
-- [ ] A
-- [ ] B
-- [ ] C
-- [tekton](3-revenge-of-the-automated-testing/10b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| *  | *  |
+| [jenkins](3-revenge-of-the-automated-testing/10a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/10b-tekton.md) |

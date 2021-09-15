@@ -7,11 +7,9 @@ Continuous Delivery needs rapid and reliable feedback. Investing in continuous t
 ### Task
 ![task-testing](./images/task-testing.png)
 
-In your groups pick the tool you'd like to integrate the pipeline with:
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- [ ] Add Jest Testing to the pipeline
-- [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-🐅 `Tekton Group` 🐅
-- [ ] Add Junit and Alure test reporting to the pipeline
-- [tekton](3-revenge-of-the-automated-testing/2b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| * Add Jest Testing to the pipeline | * Add Junit and Alure test reporting to the pipeline |
+|  [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/2b-tekton.md) |

@@ -7,18 +7,9 @@ For this exercise, we will use a tool called "OWASP Zed Attack Proxy" or ZAP in 
 ### Task
 ![task-owasp](./images/task-owasp.png)
 
-In your groups pick the tool you'd like to integrate the pipeline with:
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
-
-- [ ] A
-- [ ] B
-- [ ] C
-- [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md)
-
-🐅 `Tekton Group` 🐅
-
-- [ ] A
-- [ ] B
-- [ ] C
-- [tekton](3-revenge-of-the-automated-testing/6b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| *  | *  |
+| [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/6b-tekton.md) |

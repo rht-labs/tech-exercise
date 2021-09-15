@@ -105,16 +105,13 @@ echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NA
 ![sonary-alive](./images/sonary-alive.png)
 
 
-Now that we have the tool deployed - in your groups pick the tool you'd like to integrate the pipeline with:
+Now that we have the tool deployed... 
 
-🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- [ ] Configure your pipeline to run code analysis
-- [ ] Configure your pipeline to check the quality gate
-- [ ] Improve your application code quality
-- [jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md)
+#### In your groups pick the tool you'd like to integrate the pipeline with:
 
-🐅 `Tekton Group` 🐅
-- [ ] Configure your pipeline to run code analysis
-- [ ] Configure your pipeline to check the quality gate
-- [ ] Improve your application code quality
-- [tekton](3-revenge-of-the-automated-testing/1b-tekton.md)
+| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
+|-----------------------|----------------------------|
+| * Configure your pipeline to run code analysis | * Configure your pipeline to run code analysis |
+| * Configure your pipeline to check the quality gate | * Configure your pipeline to check the quality gate |
+| * Improve your application code quality | * Improve your application code quality |
+| [jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/1b-tekton.md) |
