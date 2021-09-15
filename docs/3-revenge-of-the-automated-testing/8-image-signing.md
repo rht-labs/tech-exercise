@@ -2,9 +2,15 @@
 > what is it why important
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] A
+- [ ] B
+- [ ] C
+- [jenkins](3-revenge-of-the-automated-testing/8a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-- do xyz
-- ![link-to-exercise](todo...)
+
+- [ ] A
+- [ ] B
+- [ ] C
+- [tekton](3-revenge-of-the-automated-testing/8b-tekton.md)

@@ -4,9 +4,15 @@
 1. 
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-- do xyz
-- [link-to-exercise]()
+
+- [ ] A
+- [ ] B
+- [ ] C
+- [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-- do xyz
-- [link-to-exercise]()
+
+- [ ] A
+- [ ] B
+- [ ] C
+- [tekton](3-revenge-of-the-automated-testing/2b-tekton.md)
