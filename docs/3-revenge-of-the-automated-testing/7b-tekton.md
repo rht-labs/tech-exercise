@@ -374,73 +374,7 @@ git push
 
 ### Breaking the Build
 
-We will run through two break/fix scenarios.
-- kube-linter
-- build policy violation
-
-#### kube-linter
-
-1. Edit `maven-pipeline.yaml` and Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
-
-```yaml
-        - name: includelist
-          value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner"
-```
-
-2. Check in these changes and trigger a pipeline run.
-
-```bash
-cd /projects/tech-exercise
-# git add, commit, push your changes..
-git add .
-git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡" 
-git push
-```
-
-```bash
-cd /projects/pet-battle-api
-git commit --allow-empty -m "🩴 test required-label-owner check 🩴"
-git push
-```
-
-3. Wait for the pipeline to sync and trigger a **pet-battle-api** build. This should now fail.
-
-![images/acs-lint-fail.png](images/acs-lint-fail.png)
-
-4. We can take a look at the error and replicate it on the command line:
-
-```bash
-cd /projects/pet-battle-api
-kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount,required-label-owner
-```
-
-![images/acs-owner-label-fail.png](images/acs-owner-label-fail.png)
-
-5. Let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
-
-```yaml
-owner: <TEAM_NAME>
-```
-
-6. Now edit `pet-battle-api/chart/_helpers.tpl` and add this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"**
-
-```json
-app.kubernetes.io/managed-by: {{ .Release.Service }}
-owner: {{ .Values.team }}
-```
-
-7. We can check the **kube-linter** command again and check these changes in:
-
-```bash
-cd /project/pet-battle-api
-git add .
-git commit -m  "🐊 ADD - kube-linter owner labels 🐊" 
-git push
-```
-
-🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
-
-#### Build policy violation
+Let's run through a scenario where we break/fix the build using a build policy violation.
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
 
