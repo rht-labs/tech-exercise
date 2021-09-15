@@ -1,15 +1,10 @@
 # Sonar Scanning
-> what is it why important, activity, acceptance createria
-
-### Feature - SonarQube
-| Feature Area |  Non functionals  |
-| :----------: | ----------- |
-| 📚 Description  | Configure the pipelines (Tekton / Jenkins) with to scan our code for quality analysis |
-| ✅ Acceptance Criteria | * Deploy SonarQube using GitOps <br> * Setip password as a secret using GitOps <br> * Extend the Pipeline with static code analysis  <br>|
-| 👕 T-Shirt Size | Medium |
+> Sonarqube is  tool that performs static code analyis. It looks for pitfals in coding and reports them. It's great tool for catching vulnerabilities
 
 ### Task
-Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file, add:
+![task-sonar](./images/task-sonar.png)
+### Deploy Sonarqube using GitOps
+1. Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file in your IDE  and add to the `applications` list:
 
 ```yaml
   # Sonarqube
@@ -29,7 +24,7 @@ Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooli
           - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
 ```
 
-Git add, commit, push your changes:
+2. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive
 
 ```bash
 cd /projects/tech-exercise
@@ -37,8 +32,9 @@ git add .
 git commit -m  "🦇 ADD - sonarqube 🦇" 
 git push 
 ```
+![argocd-sonar](./images/argocd-sonar.png)
 
-2. Save Sonarqube credentials as SealedSecrets in git repository _(yes, because it is GitOps!)_ and also that pipelines can leverage the secret.
+3. Let's save the Sonarqube credentials as SealedSecrets in git repository _(yes, because it is GitOps!)_ so that the pipelines can leverage the secrets when executing.
 
 ```bash
 cat << EOF > /tmp/sonarqube-auth.yaml
@@ -54,7 +50,7 @@ metadata:
 EOF
 ```
 
-Use `kubeseal` commandline to seal the secret definition.
+4. Just as before, use `kubeseal` command line to seal the secret definition just created.
 
 ```bash
 kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
@@ -69,13 +65,13 @@ We want to grab the results of this sealing activity, in particular the `encrypt
 cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
 ```
 
-Output would be like:
+The output should look like this with massively long nonsense strings:
 <pre>
     username: AgAj3JQj+EP23pnzu...
     password: AgAtnYz8U0AqIIaqYrj...
 </pre>
 
-Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+5. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
 ```yaml
         - name: sonarqube-auth
@@ -95,42 +91,27 @@ git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳"
 git push
 ```
 
-Verify that you have the secret definition:
+6. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
 ```bash
 oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
 ```
 
-3. Connect to Sonarqube UI to verify if the installation is successfull:
+7. Connect to Sonarqube UI to verify if the installation is successful (username `admin` & password `admin123`):
 ```bash
-oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
 ```
-`TODO` 
-- add screenshot
+![sonary-alive](./images/sonary-alive.png)
 
-`TODO`
-- [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
-```yaml
-  # Sonarqube setup
-  - name: sonarqube-setup
-    enabled: true
-    source: https://github.com/eformat/sonarqube-jobs
-    source_path: charts/quality-gate
-    source_ref: main
-    values:
-      qualityGate:
-        new_coverage:
-          enabled: false
-```
+
+Now that we have the tool deployed - in your groups pick the tool you'd like to integrate the pipeline with:
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-
 - [ ] Configure your pipeline to run code analysis
 - [ ] Configure your pipeline to check the quality gate
 - [ ] Improve your application code quality
 - [jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-
 - [ ] Configure your pipeline to run code analysis
 - [ ] Configure your pipeline to check the quality gate
 - [ ] Improve your application code quality

@@ -6,6 +6,22 @@
 - Something something TestContainers
 - Continuous Test
 
+
+### Sonar Quality Gates
+- [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
+```yaml
+  # Sonarqube setup
+  - name: sonarqube-setup
+    enabled: true
+    source: https://github.com/eformat/sonarqube-jobs
+    source_path: charts/quality-gate
+    source_ref: main
+    values:
+      qualityGate:
+        new_coverage:
+          enabled: false
+```
+
 ### Continuous Testing
 
 - https://quarkus.io/guides/continuous-testing
