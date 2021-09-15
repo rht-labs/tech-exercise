@@ -70,7 +70,7 @@ echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spe
 ![todolist](./images/todolist.png)
 
 
-1.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+4.  You can overwrite the default [values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml) in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
