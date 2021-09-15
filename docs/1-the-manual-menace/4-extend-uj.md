@@ -39,7 +39,7 @@ echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 ```bash
-echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook)
+echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
 ```
 
 1. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄.
