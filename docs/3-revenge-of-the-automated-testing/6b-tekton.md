@@ -68,7 +68,7 @@ spec:
         import glob
         import os
         def test_zap_scan_results():
-            for file in list(glob.glob('/zap/wrk/allure-results/*.html')):
+            for file in list(glob.glob('/zap/wrk/*.html')):
                 allure.attach.file(file, attachment_type=allure.attachment_type.HTML)
             pass
         EOF
