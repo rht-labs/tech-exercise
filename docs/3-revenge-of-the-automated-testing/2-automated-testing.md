@@ -1,18 +1,14 @@
 # Automated Testing
-> what is it why important
+> Testing testing .... is this thing on?
 
-1. 
+### Task
+![task-testing](./images/task-testing.png)
 
+In your groups pick the tool you'd like to integrate the pipeline with:
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
-
-- [ ] A
-- [ ] B
-- [ ] C
+- [ ] Add Jest Testing to the pipeline
 - [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)
 
 🐅 `Tekton Group` 🐅
-
-- [ ] A
-- [ ] B
-- [ ] C
+- [ ] Add Junit and Alure test reporting to the pipeline
 - [tekton](3-revenge-of-the-automated-testing/2b-tekton.md)

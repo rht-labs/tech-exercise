@@ -1,4 +1,11 @@
 # Kube Linting
+> something something
+
+
+### Task
+![task-kube-lint](./images/task-kube-lint.png)
+
+In your groups pick the tool you'd like to integrate the pipeline with:
 
 🐈‍⬛ `Jenkins Group` 🐈‍⬛
 
