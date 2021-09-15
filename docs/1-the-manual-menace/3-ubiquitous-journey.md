@@ -68,14 +68,17 @@ team: <TEAM_NAME>
         - name: <TEAM_NAME>-ci-cd
           bindings: *binds
         - name: <TEAM_NAME>-dev
+          operatorgroup: true
           bindings: *binds
         - name: <TEAM_NAME>-test
+          operatorgroup: true
           bindings: *binds
         - name: <TEAM_NAME>-stage
+          operatorgroup: true
           bindings: *binds
 ```
 
-3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
+1. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 ```bash
 git add .
 git commit -m  "🦆 ADD - correct project names 🦆" 
