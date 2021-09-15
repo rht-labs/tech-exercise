@@ -59,7 +59,7 @@ spec:
         mkdir -p /zap/wrk
         echo "🪰🪰🪰 Starting the pen test..."
         /zap/zap-baseline.py -t $(params.APP_URL) -r $PIPELINERUN_NAME.html
-        ls -lart target/allure-results/
+        ls -lart /zap/wrk
         echo "🛸🛸🛸 Saving results..."
         # FIXME for now this works, move to script+image
         pip install pytest allure-pytest --user
