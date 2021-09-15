@@ -69,8 +69,8 @@ spec:
         import glob
         import os
         def test_zap_scan_results():
-            for file in list(glob.glob('/zap/target/allure-results/*.html')):     
-                allure.attach.file(file, attachment_type=allure.attachment_type.HTML)    
+            for file in list(glob.glob('/zap/target/allure-results/*.html')):
+                allure.attach.file(file, attachment_type=allure.attachment_type.HTML)
             pass
         EOF
         export PATH=/tekton/home/.local/bin:$PATH
