@@ -1,6 +1,7 @@
 ### Extend Jenkins Pipeline with Sonar Scanning
+> In this exercise, we'll connect our code base to Sonar for quality metrics
 
-1. Create a sonar file in the root of the project. This file contains the information of Sonarqube instance.
+1. Open the CodeReadyWorkspace and create a sonar file in the root of the `pet-battle` project. This file contains the information of Sonarqube instance and other properties for the scanner to use while assessing the code base.
 
 ```bash
 cd /projects/pet-battle
@@ -30,21 +31,27 @@ scanner(
 EOF
 ```
 
-2. Then we need to introduce SonarQube credentials to Jenkinsfile. Add the followings to the beginning of the file in `environment` block.
+2. Then we need to introduce SonarQube credentials to `Jenkinsfile` - these are already being sychronized to the cluster from Git, we just have to tell our pipeline to use them. Add the followings to the list of other `CREDS` in the `environment {}` block in the `Jenkinsfile`.
 
 ```groovy
 		SONARQUBE_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonarqube-auth")
 ```
-You'll have:
+You'll have something like this afterwards:
 
 <pre>
+  environment {
+    // .. other stuff ...
+
 		<span style="color:green;" >// Credentials bound in OpenShift</span>
 		GIT_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-git-auth"</span>)
 		NEXUS_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-nexus-password"</span>)
 		SONAR_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-sonar-auth"</span>)
+
+    // .. more stuff ...
+  }
 </pre>
 
-And add a shell step in to `build` stage of the pipeline where <span style="color:green;" >// SONARQUBE SCANNING</span> placeholder is. This needs to be happen before the build.
+3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where <span style="color:green;" >// SONARQUBE SCANNING</span> placeholder is. This needs to be happen before the build.
 
 ```bash
         // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
@@ -56,7 +63,7 @@ And add a shell step in to `build` stage of the pipeline where <span style="colo
         '''
 ```
 
-3. Push the changes to the git repository, which also will trigger a new build.
+4. Push the changes to the git repository, which also will trigger a new build.
 
 ```bash
 cd /projects/pet-battle
@@ -67,5 +74,4 @@ git push
 
 4. Observe the pipeline and when scanning is completed, browse the Sonarqube UI to see the details.
 
-** Update the screenshots **
 ![sonar-pb-ui](images/sonar-pb-ui.png)
