@@ -6,8 +6,8 @@
 cat << EOF > /tmp/allure-auth.yaml
 apiVersion: v1
 data:
-  password: "$(echo admin | base64 -w0)"
-  username: "$(echo password | base64 -w0)"
+  password: "$(echo password | base64 -w0)"
+  username: "$(echo admin | base64 -w0)"
 kind: Secret
 metadata:
   name: allure-auth
