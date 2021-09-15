@@ -66,10 +66,10 @@ cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
 ```
 
 The output should look like this with massively long nonsense strings:
-<pre>
+<pre><code class="language-yaml">
     username: AgAj3JQj+EP23pnzu...
     password: AgAtnYz8U0AqIIaqYrj...
-</pre>
+</code></pre>
 
 5. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 

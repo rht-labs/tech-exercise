@@ -91,7 +91,7 @@ roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
   image-registry.openshift-image-registry.svc:5000/ateam-test/pet-battle-api@sha256:cf2ccbf8d117c2ea98425f9b70b2b937001ccb9b3cdbd4ab10b42ba8a082caf7
 ```
 
-<pre>
+<pre><code class="language-yaml">
 ✗ Image image-registry.openshift-image-registry.svc:5000/ateam-test/pet-battle-api@sha256:cf2ccbf8d117c2ea98425f9b70b2b937001ccb9b3cdbd4ab10b42ba8a082caf7 failed policy 'Red Hat Package Manager in Image' 
 - Description:
     ↳ Alert on deployments with components of the Red Hat/Fedora/CentOS package
@@ -104,7 +104,7 @@ roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
       *hawkey*) $(rpm -qa yum*)` in the image build for production containers.
 - Violations:
     - Image includes component 'rpm' (version 4.14.3-14.el8_4.x86_64)
-</pre>
+</code></pre>
 
 You can check the shell result of this command:
 
@@ -167,10 +167,10 @@ kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
 ```bash
 cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
 ```
-<pre>
+<pre><code class="language-yaml">
     username: AgAj3JQj+EP23pnzu...
     password: AgAtnYz8U0AqIIaqYrj...
-</pre>
+</code></pre>
 
 4. In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 

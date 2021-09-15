@@ -9,7 +9,7 @@
 
 - https://quarkus.io/guides/continuous-testing
 
-<pre>
+<pre><code class="language-yaml">
 The following commands are available:
 [r] - Re-run all tests
 [f] - Re-run failed tests
@@ -22,7 +22,7 @@ The following commands are available:
 [s] - Force restart
 [h] - Display this help
 [q] - Quit
-</pre>
+</code></pre>
 
 Run tests.
 

@@ -64,7 +64,7 @@ curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-
 
 4. In Tekton, we can control flow by using `runAfter` to organize the structure of the pipeline. Adjust the `maven` build step's `runAfter` to be `analysis-check` so the static analysis steps happen before we even compile the app!
 
-<pre>
+<code class="language-yaml">
     - name: maven
       taskRef:
         name: maven
@@ -87,7 +87,7 @@ curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-
           workspace: shared-workspace
       <strong>runAfter:
         - analysis-check</strong>
-</pre>
+</code></pre>
 
 5. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:
 

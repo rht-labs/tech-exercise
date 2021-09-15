@@ -138,12 +138,12 @@ stage("🔷✅ Blue Green Deploy") {
 ```
 
 6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
-<pre>
+<pre><code class="language-yaml">
 "name": "pet-battle",
-"version": <strong>"1.6.1"</strong>,
-"private": true,
+"version": "1.6.1",
+"private": true, <- bump this
 "scripts": ...
-</pre>
+</code></pre>
 
 7. Commit all these changes:
 ```bash

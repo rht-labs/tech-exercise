@@ -30,7 +30,7 @@ git push -u origin main
 ```
 
 3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as Helm Chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
-<pre>
+<pre><code class="language-bash">
 tekton
 ├── Chart.yaml
 ├── templates
@@ -55,7 +55,7 @@ tekton
 │       ├── pv-build-images.yaml
 │       └── pv-maven-m2.yaml
 └── values.yaml
-</pre>
+</code></pre>
 Some of the key things to note above are:
    * `Workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
@@ -78,7 +78,7 @@ Some of the key things to note above are:
 ```
 
 5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
-<pre>
+<code class="language-yaml">
   # Pet Battle Apps
   pet-battle-api:
     name: pet-battle-api
@@ -89,7 +89,7 @@ Some of the key things to note above are:
     values:
       image_name: pet-battle-api
       image_version: latest # container image version
-</pre>
+</code></pre>
 
 6. Update git and wait for our tekton piplines to deploy out in ArgoCD.
 
@@ -119,11 +119,11 @@ You can test the webhook works from GitLab.
 
 
 ?> **Tip** You can enable debug log info for your tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```
-<pre>
+<pre><code class="language-yaml">
 // set log level
 data:
   loglevel.eventlistener: debug
-</pre>
+</code></pre>
 
 
 9. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.

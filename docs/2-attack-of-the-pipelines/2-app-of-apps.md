@@ -10,7 +10,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 1. In your IDE - open `values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
 
-<pre>
+<pre><code class="language-yaml">
   # Test app of app
   - name: test-app-of-pb
     <strong>enabled: true</strong>
@@ -24,7 +24,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     source_path: "."
     helm_values:
       - pet-battle/stage/values.yaml
-</pre>
+</code></pre>
 
 
 2. Our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. *Please make sure your text is aligned with the existing placeholder comments.*

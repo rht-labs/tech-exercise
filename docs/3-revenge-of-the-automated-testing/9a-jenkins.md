@@ -10,15 +10,15 @@ In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open u
 ```
 
 You should have a list similar this now:
-<pre>
-        <span style="color:green;" ># Jenkins agents for running builds etc</span>
-        <span style="color:green;" ># default names, versions, repo and paths set on the template</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-npm</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-mvn</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-helm</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-argocd</span>
-         <span style="color:blue;" >- name:</span> <span style="color:orange;" >jenkins-agent-python</span>
-</pre>
+<pre><code class="language-yaml">
+        # Jenkins agents for running builds etc
+        # default names, versions, repo and paths set on the template
+         - name: <span style="color:orange;" >jenkins-agent-npm
+         - name: <span style="color:orange;" >jenkins-agent-mvn
+         - name: <span style="color:orange;" >jenkins-agent-helm
+         - name: <span style="color:orange;" >jenkins-agent-argocd
+         - name: <span style="color:orange;" >jenkins-agent-python
+</code></pre>
 
 Commit the changes to the Git repository:
 ```bash

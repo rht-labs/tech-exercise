@@ -47,7 +47,7 @@ kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
 cat /tmp/sealed-git-auth.yaml 
 ```
 We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
-<pre>
+<pre><code class="language-yaml">
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
 metadata:
@@ -59,17 +59,17 @@ spec:
     username: AgAtnYz8U0AqIIaqYrj...
     password: AgAj3JQj+EP23pnzu...</strong>
 ...
-</pre>
+</code></pre>
 
 5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a [helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets) that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
 
 ```bash
 cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
 ```
-<pre>
+<pre><code class="language-yaml">
     username: AgAtnYz8U0AqIIaqYrj...
     password: AgAj3JQj+EP23pnzu...
-</pre>
+</code></pre>
 
 6. In `ubiquitous-journey/values-tooling.yaml` add an entry for this helper chart under `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values accordingly. **Make sure you indent the data correctly**.
 

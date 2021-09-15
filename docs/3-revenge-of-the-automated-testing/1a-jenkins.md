@@ -38,20 +38,20 @@ EOF
 ```
 You'll have something like this afterwards:
 
-<pre>
+<pre><code class="language-groovy">
   environment {
     // .. other stuff ...
 
-		<span style="color:green;" >// Credentials bound in OpenShift</span>
-		GIT_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-git-auth"</span>)
-		NEXUS_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-nexus-password"</span>)
-		SONAR_CREDS = credentials(<span style="color:orange;" >"</span>${OPENSHIFT_BUILD_NAMESPACE}<span style="color:orange;" >-sonar-auth"</span>)
+		// Credentials bound in OpenShift
+		GIT_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-git-auth")
+		NEXUS_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-nexus-password")
+		SONAR_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonar-auth")
 
     // .. more stuff ...
   }
-</pre>
+</code></pre>
 
-3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where <span style="color:green;" >// SONARQUBE SCANNING</span> placeholder is. This needs to be happen before the build.
+3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where // SONARQUBE SCANNING placeholder is. This needs to be happen before the build.
 
 ```bash
         // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
