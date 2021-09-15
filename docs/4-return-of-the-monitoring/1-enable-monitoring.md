@@ -23,6 +23,7 @@ sum(container_memory_working_set_bytes{container!='',namespace='pants-test'}) by
 OpenShift gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or active users etc) alongside the base ones, we need another object: _ServiceMonitor_. ServiceMonitor will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
 **Example** ServiceMonitor object:
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
   ---
   apiVersion: monitoring.coreos.com/v1
@@ -37,7 +38,7 @@ OpenShift gathers the base metrics to see how our pods are doing. In order to ge
     selector:
       matchLabels:
         app: my-app
-</code></pre>
+</code></pre></div>
 
 Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/staging/values.yaml` files. Update `values` for `pet-battle-api` with adding following:

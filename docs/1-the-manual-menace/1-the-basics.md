@@ -91,6 +91,7 @@ oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
 
 6. For those who are really interested, this is the anatomy of our Helm chart. It can be [found here](https://github.com/rht-labs/todolist), but the basic structure is as follows:
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-bash">
 todolist/chart
 ├── Chart.yaml
@@ -100,7 +101,7 @@ todolist/chart
 │   ├── route.yaml
 │   └── service.yaml
 └── values.yaml
-</code></pre>
+</code></pre></div>
 where:
 * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
 * `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can over write these values on the command line.

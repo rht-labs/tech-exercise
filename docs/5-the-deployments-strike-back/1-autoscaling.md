@@ -8,6 +8,7 @@
 
 1. The Pet Battle API helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
 # Source: pet-battle-api/templates/hpa.yaml
 apiVersion: autoscaling/v2beta2
@@ -34,7 +35,7 @@ spec:
         target:
           type: AverageValue
           averageValue: 300Mi
-</code></pre>
+</code></pre></div>
 
 2.  Often we only enable the HPA in the staging or prod environments so being able to configure it on / off when testing is useful. To turn it on in a given environment, we can simply supply new values to our application config. Update the `tech-exercise/pet-battle/test/values.yaml` by setting the `hpa` to `enabled:true`
 ```yaml

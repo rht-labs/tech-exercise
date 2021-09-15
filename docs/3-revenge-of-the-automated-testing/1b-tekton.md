@@ -87,7 +87,7 @@ curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-
           workspace: shared-workspace
       <strong>runAfter:
         - analysis-check</strong>
-</code></pre>
+</code></pre></div>
 
 5. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:
 

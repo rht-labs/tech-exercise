@@ -38,6 +38,7 @@ EOF
 ```
 You'll have something like this afterwards:
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-groovy">
   environment {
     // .. other stuff ...
@@ -49,7 +50,7 @@ You'll have something like this afterwards:
 
     // .. more stuff ...
   }
-</code></pre>
+</code></pre></div>
 
 3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where // SONARQUBE SCANNING placeholder is. This needs to be happen before the build.
 

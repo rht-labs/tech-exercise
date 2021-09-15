@@ -28,6 +28,7 @@ kube-linter lint chart/
 kube-linter checks list | grep Name
 ```
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
 Name: cluster-admin-role-binding
 Name: dangling-service
@@ -60,11 +61,12 @@ Name: unsafe-sysctls
 Name: unset-cpu-requirements
 Name: unset-memory-requirements
 Name: writable-host-mount
-</code></pre>
+</code></pre></div>
 
 
 4. We could run the **kube-linter** task with all default checks in our pipeline. This would fail the build.
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
     - name: kube-linter
       runAfter:
@@ -77,7 +79,7 @@ Name: writable-host-mount
       params:
         - name: manifest
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
-</code></pre>
+</code></pre></div>
 
 5. Let's run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml`. Be sure to adjust the `maven` Task as well so it runs **after** the `kube-linter` Task.
 

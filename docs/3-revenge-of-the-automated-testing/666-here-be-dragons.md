@@ -9,6 +9,7 @@
 
 - https://quarkus.io/guides/continuous-testing
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
 The following commands are available:
 [r] - Re-run all tests
@@ -22,7 +23,7 @@ The following commands are available:
 [s] - Force restart
 [h] - Display this help
 [q] - Quit
-</code></pre>
+</code></pre></div>
 
 Run tests.
 

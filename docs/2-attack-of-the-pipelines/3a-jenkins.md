@@ -72,6 +72,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
 
 2. Jenkins will push changes to our Helm Chart to Nexus as part of the pipeline. Previously we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle-api`:
 
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
   # Pet Battle Apps
   pet-battle-api:
@@ -82,7 +83,7 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
     source: http://nexus:8081/repository/helm-charts
     source_ref: 1.0.6 # helm chart version
     ...
-</code></pre>
+</code></pre></div>
 
 3. Commit these changes to git so ArgoCD can sync them.
 ```bash

@@ -46,6 +46,7 @@ EOF
         svc_name: pet-battle-b
 ```
 The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different)
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
   pet-battle:
     name: pet-battle
@@ -60,7 +61,7 @@ The `pet-battle` definition in `test/values.yaml` should look something like thi
         b_weight: 20 # 20% of the traffic will be directed to 'b'
         svc_name: pet-battle-b</strong>
       config_map: ...
-</code></pre>
+</code></pre></div>
 
 3. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
 ```bash
@@ -86,12 +87,13 @@ oc get svc -l app.kubernetes.io/name=pet-battle-b -n ${TEAM_NAME}-test
 ```
 
 6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
 "name": "pet-battle",
 "version": "1.6.1", <- bump this
 "private": true,
 "scripts": ...
-</code></pre>
+</code></pre></div>
 
 7. Commit all these changes:
 ```bash

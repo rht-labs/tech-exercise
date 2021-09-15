@@ -16,6 +16,7 @@ That's right, they've been over written by ArgoCD who's taken the configuration 
             value: 'jaffa-cakes🍪'
 ```
 It should look something like this now in your `ubiquitous-journey/values-tooling.yaml`
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
   # more yaml ...
         - name: jenkins-agent-helm
@@ -32,7 +33,7 @@ It should look something like this now in your `ubiquitous-journey/values-toolin
             value: 'jaffa-cakes🍪'
       persistence: false
   # more yaml ...
-</code></pre>
+</code></pre></div>
 
 4. Git commit that change and open the ArgoCD UI to see the new variable syncrhonised.
 ```bash

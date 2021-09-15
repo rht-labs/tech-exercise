@@ -12,7 +12,7 @@ Enter password for private key:
 Enter again: 
 Private key written to cosign.key
 Public key written to cosign.pub
-</code></pre>
+</code></pre></div>
 
 Now you generated two files (one private key, one public key). Private key is used to sign the image and public key is used to verify. You need to share your public key for people to verify images but private one should be kept in a vault or at least sealed before storing publicly.
 
@@ -59,10 +59,11 @@ kubeseal < /tmp/cosign-private-key.yaml > /tmp/sealed-cosign-private-key.yaml \
 ```bash
 cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
 ```
+<div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-bash">
     cosign.key: AgAj3JQj+EP23pnzu...
     password: AgAtnYz8U0AqIIaqYrj...
-</code></pre>
+</code></pre></div>
 
 4. In `ubiquitous-journey/values-tooling.yaml` extend the Sealed Secrets entry. Copy the output of `cosign.key` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
