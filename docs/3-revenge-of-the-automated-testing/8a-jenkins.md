@@ -1,93 +1,5 @@
 ### Extend Jenkins Pipeline with Image Signing
 
-1. Generate a keypair to use for signing images. It expects you to enter a password for private key. Feel free to select something but make sure to remember for the next steps :) 
-
-```bash
-cosign generate-key-pair
-```
-
-<div class="highlight" style="background: #f7f7f7">
-<pre><code class="language-bash">
-$ cosign generate-key-pair
-Enter password for private key: 
-Enter again: 
-Private key written to cosign.key
-Public key written to cosign.pub
-</code></pre></div>
-
-Now you generated two files (one private key, one public key). Private key is used to sign the image and public key is used to verify. You need to share your public key for people to verify images but private one should be kept in a vault or at least sealed before storing publicly.
-
-For this exercise, we can use SealedSecret approach that we used in the first exercise. 
-
-2. Run below command to generate a secret template with your private key and your password. Open up a new file in your IDE and copy this content. 
-
-```bash
-sed -i -e 's/^/    /' cosign.key 
-export COSIGN_PRIVATE_KEY=`cat cosign.key` 
-```
-
-```bash
-export COSIGN_PASSWORD=<YOUR_COSIGN_PASSWORD>
-```
-
-
-```bash
-cat << EOF > /tmp/cosign-private-key.yaml
-apiVersion: v1
-stringData:
-  cosign.key: |-
-${COSIGN_PRIVATE_KEY}
-  password: ${COSIGN_PASSWORD}
-kind: Secret
-metadata:
-  name: ${TEAM_NAME}-cosign
-type: Opaque
-EOF
-```
-
-2. Use `kubeseal` commandline to seal the secret definition.
-
-```bash
-kubeseal < /tmp/cosign-private-key.yaml > /tmp/sealed-cosign-private-key.yaml \
-    -n ${TEAM_NAME}-ci-cd \
-    --controller-namespace do500-shared \
-    --controller-name sealed-secrets \
-    -o yaml
-```
-
-3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
-
-```bash
-cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
-```
-<div class="highlight" style="background: #f7f7f7">
-<pre><code class="language-yaml">
-    cosign.key: AgAj3JQj+EP23pnzu...
-    password: AgAtnYz8U0AqIIaqYrj...
-</code></pre></div>
-
-4. In `ubiquitous-journey/values-tooling.yaml` extend the Sealed Secrets entry. Copy the output of `cosign.key` and `password` from the previous command and update the values. Make sure you indent the data correctly.
-
-```yaml
-        - name: <TEAM_NAME>-cosign
-          type: Opaque
-          labels:
-            credential.sync.jenkins.openshift.io: "true"
-          data:
-            cosign.key: AgAj3JQj+EP23pnzu...
-            password: AgAtnYz8U0AqIIaqYrj...
-  ```
-
-..and push the changes:
-
-```bash
-cd /projects/tech-exercise
-git add ubiquitous-journey/values-tooling.yaml
-git commit -m  "🔒 ADD - cosign private key sealed secret 🔒" 
-git push
-```
-
-### Sign Images
 1. Add a new Jenkins agent with `cosign` commandline in it. Open up `ubiquitous-journey/values-tooling.yaml` and under `Jenkins` add `jenkins-agent-cosign` to the list.
 
 ```yaml
@@ -115,11 +27,8 @@ git push
 			steps {
 				script {
                     sh '''
-                    set +x
                     oc registry login
-                    export COSIGN_PASSWORD=`oc get secret magic-cosign -o go-template --template="{{.data.password |base64decode}}" `
-                    oc get secret magic-cosign -o go-template --template='{{index .data "cosign.key" | base64decode}}' > /tmp/cosign.key
-                    cosign sign -key /tmp/cosign.key ${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
+                    cosign sign -key k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
                     '''
 				}
 			}
@@ -130,10 +39,9 @@ git push
 4. Store the public key in `pet-battle` repo for anyone who would like to verify our images, alongside the Jenkinsfile changes. This push will trigger a Jenkins job for build as well.
 
 ```bash
-mv cosign.pub /projects/pet-battle
-rm cosign.key
+cp /tmp/cosign.pub /projects/pet-battle/
 cd /projects/pet-battle
-git add  cosign.pub Jenkinsfile
+git add cosign.pub Jenkinsfile
 git commit -m  "⛹️ ADD - cosign public key for image verification and Jenkinsfile updated ⛹️"
 git push
 ```

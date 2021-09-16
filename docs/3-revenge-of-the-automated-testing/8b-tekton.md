@@ -1,90 +1,6 @@
 ### Extend Tekton Pipeline with Image Signing
 
-1. Generate a keypair to use for signing images. It expects you to enter a password for private key. Feel free to select something but make sure to remember for the next steps :) 
 
-```bash
-cosign generate-key-pair
-```
-
-<code class="language-bash">
-$ cosign generate-key-pair
-Enter password for private key: 
-Enter again: 
-Private key written to cosign.key
-Public key written to cosign.pub
-</code></pre></div>
-
-Now you generated two files (one private key, one public key). Private key is used to sign the image and public key is used to verify. You need to share your public key for people to verify images but private one should be kept in a vault or at least sealed before storing publicly.
-
-For this exercise, we can use SealedSecret approach that we used in the first exercise. 
-
-2. Run below command to generate a secret template with your private key and your password. Open up a new file in your IDE and copy this content. 
-
-```bash
-sed -i -e 's/^/    /' cosign.key 
-export COSIGN_PRIVATE_KEY=`cat cosign.key` 
-```
-
-```bash
-export COSIGN_PASSWORD=<YOUR_COSIGN_PASSWORD>
-```
-
-
-```bash
-cat << EOF > /tmp/cosign-private-key.yaml
-apiVersion: v1
-stringData:
-  cosign.key: |-
-${COSIGN_PRIVATE_KEY}
-  password: ${COSIGN_PASSWORD}
-kind: Secret
-metadata:
-  name: ${TEAM_NAME}-cosign
-type: Opaque
-EOF
-```
-
-2. Use `kubeseal` commandline to seal the secret definition.
-
-```bash
-kubeseal < /tmp/cosign-private-key.yaml > /tmp/sealed-cosign-private-key.yaml \
-    -n ${TEAM_NAME}-ci-cd \
-    --controller-namespace do500-shared \
-    --controller-name sealed-secrets \
-    -o yaml
-```
-
-3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
-
-```bash
-cat /tmp/sealed-cosign-private-key.yaml | grep -E 'cosign.key|password'
-```
-<div class="highlight" style="background: #f7f7f7">
-<pre><code class="language-bash">
-    cosign.key: AgAj3JQj+EP23pnzu...
-    password: AgAtnYz8U0AqIIaqYrj...
-</code></pre></div>
-
-4. In `ubiquitous-journey/values-tooling.yaml` extend the Sealed Secrets entry. Copy the output of `cosign.key` and `password` from the previous command and update the values. Make sure you indent the data correctly.
-
-```yaml
-        - name: <TEAM_NAME>-cosign
-          type: Opaque
-          data:
-            cosign.key: AgBH...
-            password: AgA1bg...
-  ```
-
-..and push the changes:
-
-```bash
-cd /projects/tech-exercise
-git add ubiquitous-journey/values-tooling.yaml
-git commit -m  "🔒 ADD - cosign private key sealed secret 🔒" 
-git push
-```
-
-### Sign Images
 1. Add a task into our codebase to sign our built images.
 
 ```bash
@@ -98,13 +14,15 @@ spec:
   workspaces:
     - name: output
   params:
-    - name: COSIGN_SECRET
+    - name: APPLICATION_NAME
+      description: Name of the application
       type: string
-      description: Secret containing the private key and password for image signing
-      default: <TEAM_NAME>-cosign
-    - name: IMAGE
+    - name: TEAM_NAME
+      description: Name of the team that doing this exercise :)
       type: string
-      description: Full name of image to sign (example -- gcr.io/rox/sample:5.0-rc1)
+    - name: VERSION
+      description: Version of the application
+      type: string
     - name: COSIGN_VERSION
       type: string
       description: Version of cosign CLI
@@ -116,26 +34,13 @@ spec:
     - name: image-signing
       image: quay.io/openshift/origin-cli:4.8
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      env:
-        - name: COSIGN_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: $(params.COSIGN_SECRET)
-              key: password
-        - name: COSIGN_PRIVATE_KEY
-          valueFrom:
-            secretKeyRef:
-              name: $(params.COSIGN_SECRET)
-              key: cosign.key
       script: |
         #!/usr/bin/env bash
-        set +x
         curl -skL -o /tmp/cosign https://github.com/sigstore/cosign/releases/download/v$(params.COSIGN_VERSION)/cosign-linux-amd64
         chmod -R 775 /tmp/cosign
 
         oc registry login
-        echo $COSIGN_PRIVATE_KEY | sed -E 's/(-+(BEGIN|END) ENCRYPTED COSIGN PRIVATE KEY-+) *| +/\1\n/g' > /tmp/cosign.key
-        /tmp/cosign sign -key /tmp/cosign.key $(params.IMAGE)
+        /tmp/cosign sign -key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
 EOF
 ```
 
@@ -153,8 +58,12 @@ EOF
         - name: output
           workspace: shared-workspace
       params:
-        - name: IMAGE
-          value: "$(tasks.bake.results.IMAGE)"
+        - name: APPLICATION_NAME
+          value: "$(params.APPLICATION_NAME)"
+        - name: TEAM_NAME
+          value: "$(params.TEAM_NAME)"
+        - name: VERSION
+          value: "$(tasks.maven.results.VERSION)"
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
 ```
@@ -171,10 +80,9 @@ git push
 4. Store the public key in `pet-battle-api` repository for anyone who would like to verify our images. This push will also trigger the pipeline.
 
 ```bash
-mv cosign.pub /projects/pet-battle-api
-rm cosign.key
+cp cosign.pub /projects/pet-battle-api/
 cd /projects/pet-battle-api
-git add  cosign.pub
+git add cosign.pub
 git commit -m  "🪑 ADD - cosign public key for image verification 🪑"
 git push
 ```
