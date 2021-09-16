@@ -38,4 +38,4 @@ git commit -m "💅 ADD - linting to the pipeline 💅"
 git push
 ```
 
-6. On Jenkins you should see a new build trigger and the linting running.
+6. On Jenkins you should see a new build has been triggered and the linter running as part of it.
