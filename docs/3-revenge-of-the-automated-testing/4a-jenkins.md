@@ -35,6 +35,7 @@ npm run lint:fix
 ```
 git add .
 git commit -m "💅 ADD - linting to the pipeline 💅"
+git push
 ```
 
 6. On Jenkins you should see a new build trigger and the linting running.
