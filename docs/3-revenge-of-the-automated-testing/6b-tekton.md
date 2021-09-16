@@ -1,8 +1,9 @@
 ### Extend Tekton Pipeline with OWASP Zap Security Scanning
 
-> What is [owasp zed attack proxy]([https://www.zaproxy.org/)
+> What is [owasp zed attack proxy]([https://www.zaproxy.org/)? 
 
-Note: You will need to have *Allure* deployed from the testing step to run this task.
+<p class="tip"> You will need to have *Allure* deployed from the testing exercise to run this task. If you did not do this task when prioritising your work, no big deal, just [head over here](/3-revenge-of-the-automated-testing/2b-tekton?id=part-1-allure) and do <strong>Part 1 only</strong>.
+</p>
 
 1. Add a task into our codebase to zap scan our deployed app in test
 

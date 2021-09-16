@@ -1,6 +1,8 @@
 ### Extend Tekton Pipeline with Automated Testing
+> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
 
-1. For this exercise, we will use a tool called **Allure**, a test repository manager for Java, but first let's create SealedSecrets object for username and password:
+#### Part 1 - Allure 
+1. For this exercise, we will use a tool called **Allure**, a test repository manager for Java, but first let's create SealedSecrets object for username and password we'll use for this tool. This process should be pretty familiar by now 🃏🃏🃏
 
 ```bash
 cat << EOF > /tmp/allure-auth.yaml
@@ -14,7 +16,7 @@ metadata:
 EOF
 ```
 
-Use `kubeseal` commandline to seal the secret definition.
+2. Use `kubeseal` commandline to seal the secret definition.
 
 ```bash
 kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
@@ -24,19 +26,19 @@ kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
     -o yaml
 ```
 
-Grab the `encryptedData`:
+3. Grab the `encryptedData`:
 ```bash
 cat /tmp/sealed-allure-auth.yaml| grep -E 'username|password'
 ```
 
-Output would be like:
+Output should look something like this:
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
     username: AgAj3JQj+EP23pnzu...
     password: AgAtnYz8U0AqIIaqYrj...
 </code></pre></div>
 
-Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
 ```yaml
         - name: allure-auth
@@ -50,8 +52,7 @@ Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secr
             password: AgAtnYz8U0AqIIaqYrj...
 ```
 
-
-2. Install Allure through `ubiquitous-journey/value-tooling.yaml` file, add:
+5. While in the `ubiquitous-journey/value-tooling.yaml` file - install Allure by adding it's helm chart:
 
 ```yaml
   # Allure
@@ -65,7 +66,8 @@ Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secr
         secret: allure-auth
 ```
 
-And push the changes to the repository:
+6.  Finally - push the changes to the repository:
+
 ```bash
 cd /projects/tech-exercise
 git add ubiquitous-journey/values-tooling.yaml
@@ -73,7 +75,21 @@ git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭"
 git push 
 ```
 
-2. Add the `allure-post-report.yaml` Task to the  
+7. You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
+
+```bash
+echo https://$(oc get route allure --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/allure-docker-service/projects/default/reports/latest/index.html
+```
+![allure-up](./images/allure-up.png)
+
+
+</br>
+</br>
+
+#### Part 2 - Testing Tasks
+
+1. In our IDE, let's create a tekton task to push our test scores to allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder  
+
 ```yaml
 cd /projects/tech-exercise
 cat <<'EOF' > tekton/templates/tasks/allure-post-report.yaml
@@ -132,7 +148,7 @@ spec:
 EOF
 ```
 
-3. Add the `save-test-results` step to our pipeline.
+2. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and add the `save-test-results` step to our pipeline.
 
 ```yaml
     # Save Test Results
@@ -151,36 +167,38 @@ EOF
           workspace: shared-workspace
 ```
 
-4. Git add, commit, push your changes
+3. Git add, commit, push your changes
 
 ```bash
+cd /projects/tech-exercise
 git add .
 git commit -m  "🥽 ADD - save-test-results step 🥽" 
 git push 
 ```
 
-Trigger a pipeline build
+4. Trigger a new `PipelineRun` with an empty commit and head over to OpenShift Pipelines to see the execution:
 
 ```bash
 cd /projects/pet-battle-api
 git commit --allow-empty -m "🧦 test save-test-results step 🧦"
 git push
 ```
+![allure-tekkers](./images/allure-tekkers.png)
 
-5. Browse to uploaded test results in Allure:
+5. Browse to the uploaded test results from the pipeline in Allure:
 
 ```bash
-echo https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
+echo https://$(oc get route allure --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
 ```
 
-Can also find these from Allure swagger api.
-
-![images/allure-api.png](images/allure-api.png)
-
-Browse Test results + behaviours.
+From here you can browse Test results + behaviours.
 
 ![images/allure-test-suite.png](images/allure-test-suite.png)
 
-Drill down to test body attachments.
+and even drill down to test body attachments.
 
 ![images/allure-behaviours.png](images/allure-behaviours.png)
+
+?> TIP! You can also find the available projects and test reports from Allure swagger api by navigating to https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/
+
+![images/allure-api.png](images/allure-api.png)
