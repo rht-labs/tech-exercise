@@ -13,7 +13,7 @@ From ArgoCD's website, it is described as a tool that:
     automates the deployment of the desired application states in the specified target
     environments. Application deployments can track updates to branches, tags, or be pinned
     to a specific version of manifests at a Git commit.
-</pre>
+</pre></div>
 
 When something is seen as not matching the required state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then resync the changes to apply whatever is in Git immediately or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
 
