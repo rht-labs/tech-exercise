@@ -1,10 +1,10 @@
 # Sealed Secrets
-We say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - any anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
+We say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
 
 Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 ### Sealed Secrets in action
 
-1. The observant amoung you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git.... Lets start by fixing this and sealing our Git credentials so they can be safely checked in to the code. First we'll create the secret in a tmp directory. replace `<YOUR_GITLAB_USER>` and `<YOUR_GITLAB_PASSWORD>` accordingly if not already set in your enviroment:
+1. The observant among you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git...😳 Lets start by fixing this and sealing our Git credentials so they can be safely checked in to the code. First, we'll create the secret in a tmp directory. Replace `<YOUR_GITLAB_USER>` and `<YOUR_GITLAB_PASSWORD>` accordingly if not already set in your enviroment:
 
 ```bash
 export GITLAB_USER=<YOUR_GITLAB_USER>
@@ -13,7 +13,7 @@ export GITLAB_USER=<YOUR_GITLAB_USER>
 export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
 ```
 
-2. Run this command to generate a Kubernetes secret object in `tmp` with the right labels needed for Tekton and Jenkins later.
+2. Run this command to generate a Kubernetes secret object in `/tmp` with the right labels needed for Tekton and Jenkins later.
 
 ```bash
 cat << EOF > /tmp/git-auth.yaml
@@ -31,7 +31,7 @@ metadata:
 EOF
 ```
 
-3. Use `kubeseal` commandline to seal the secret definition. This will encrypt it using a certificate stored in the controller running in kubernetes. This has already been deployed for you as only one instance can exist per cluster.
+3. Use `kubeseal` commandline to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
 
 ```bash
 kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \

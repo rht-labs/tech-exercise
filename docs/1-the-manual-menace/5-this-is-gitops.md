@@ -6,7 +6,7 @@
 2. On the `Environment` tab, add a new variable. For example, click `➕ Add more` and on the text box put in something new or random for example `BISCUITS` with a value of `jaffa-cakes`. Hit save!
 ![jenkins-new-var](./images/jenkins-new-var.png)
 
-If you wait a few seconds (or if like me you're lazy you could refresh the page) you'll say to yourself *WHERE IS THE BISCUITS VARIABLE GONE*!?!😱😱😱
+If you wait a few seconds (or if like me you're lazy, you could refresh the page) you'll say to yourself *WHERE IS THE BISCUITS VARIABLE GONE*!?!😱😱😱
 
 That's right, they've been over written by ArgoCD who's taken the configuration in git and applied it on top. The `BISCUITS` variable was **not** in git so it was removed. If we want to persist the variable, we can of course add it to out git repo!
 

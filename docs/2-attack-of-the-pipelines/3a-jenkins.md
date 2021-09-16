@@ -1,5 +1,5 @@
 ### Jenkins Pipeline 
-> Jenkins is tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool. 
+> Jenkins is a tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool. 
 
 <!---
 #### Jenkins access to GitLab
@@ -42,7 +42,7 @@ git branch -M main
 git push -u origin main
 ```
 
-3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with ArgoCD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
+3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 
 ```bash
 echo "\n https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
@@ -51,10 +51,11 @@ Once you have the URL, over on GitLab go to `pet-battle > Settings > Integration
 ![gitlab-webhook-trigger-fe.png](./images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
-> Jenkins is preloaded with a simple job called a `seed-multibranch-pipeline`. This is a small bit of groovy scripting that will automatically scaffold out our piplines from each repositories `Jenkinsfile`. The logic of this script is simple, it checks a group for a given GitLab instance for any projects that contain Jenkinsfile. If it finds one, it will scaffold a pipleine from it, and it not, it will skip.
+> Jenkins is preloaded with a simple job called a `seed-multibranch-pipeline`. This is a small bit of groovy scripting that will automatically scaffold out our pipelines from each repositories `Jenkinsfile`. The logic of this script is simple; it checks a group for a given GitLab instance for any projects that contain Jenkinsfile. If it finds one, it will scaffold a pipelene from it, and if not, it will skip.
 
-1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in openshift BUTTTTTT this is GITOPS! :muscle: :gun:
-update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values 
+1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in OpenShift BUTTTTTT this is GITOPS! :muscle: :gun:
+
+Update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values 
 
 ```yaml
       #... more jenkins configuration here
@@ -80,12 +81,12 @@ update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
   pet-battle:
     name: pet-battle
     enabled: true
-    source: http://nexus:8081/repository/helm-charts
+    source: http://nexus:8081/repository/helm-charts #<- update this
     source_ref: 1.0.6 # helm chart version
     ...
 </code></pre></div>
 
-3. Commit these changes to git so ArgoCD can sync them.
+3. Commit these changes to git so Argo CD can sync them.
 ```bash
 cd /projects/tech-exercise
 git add .
@@ -93,7 +94,7 @@ git commit -m  "🍕 ADD - jenkins pipelines config 🍕"
 git push
 ```
 
-4. When this change rolls out we should see the seed job has scaffolded out a pipleine for the frontend in the Jenkins UI. It's done this by looking in the pet-battle repo where it found the `Jenkinsfile` (our pipeline's definition). However it will fail on the first execution, this is expected as we're going write some stuff to fix it ...
+4. When this change rolls out we should see the seed job has scaffolded out a pipeline for the frontend in the Jenkins UI. It's done this by looking in the pet-battle repo where it found the `Jenkinsfile` (our pipeline definition). However it will fail on the first execution. This is expected as we're going write some stuff to fix it!
 ```bash
 # to get the Jenkins route on your terminal
 echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
@@ -102,7 +103,7 @@ echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME
 _^✋ INFO - If after Jenkins restarts you do not see the job run, feel free to manually trigger it to get it going_
 
 
-5. With Jenkins now scanning our gitlab project for new repositories and git setup to trigger a build on jenkins, now let's explore our pipeline. A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is setup a lot like this :
+5. With Jenkins now scanning our GitLab project for new repositories and git setup to trigger a build on Jenkins, let's explore our pipeline! A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is setup a lot like this :
 
 ![jenkins-pipe](images/jenkins-pipe.png)
 
@@ -116,7 +117,7 @@ Some of the key things to note above are:
    * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow
    * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. e.g. when branch is master; deploy to `test` environment.
 
-1. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job you'll see it's not able to find anythin in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
+1. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
 ```groovy
         // 💥🔨 PIPELINE EXERCISE GOES HERE 
@@ -155,7 +156,7 @@ Some of the key things to note above are:
         }
 ```
 
-7. Push the changes to git
+7. Push the changes to git.
 
 ```bash
 cd /projects/pet-battle
@@ -164,7 +165,7 @@ git commit -m "🌸 Jenkinsfile updated with build stage 🌸"
 git push
 ```
 
-8. Back on Jenkins we should now see the pipeline running. If you swap to the Blue Ocean view, you get a lovely graph of  what it looks like in execution.
+8. Back on Jenkins we should now see the pipeline is running. If you swap to the Blue Ocean view, you get a lovely graph of what it looks like in execution.
 
 ![jenkins-blue-ocean](./images/jenkins-blue-ocean.png)
 

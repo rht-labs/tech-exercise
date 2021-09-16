@@ -3,7 +3,7 @@
 
 There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. [Tekton Hub](https://hub.tekton.dev/) is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
-Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline
+Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline.
 
 ![simple-tekkers-pipeline](./images/simple-tekkers-pipeline.png)
 
@@ -58,13 +58,14 @@ tekton
 └── values.yaml
 </code></pre></div>
 Some of the key things to note above are:
+
    * `Workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
    * `secrets` - secure things used by the pipeline
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & resuable set of activities.
    * `triggers` folder stores the configuration for the webhooks. We will add WebHooks from gitlab to trigger our pipeline, using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
-4. Seeing as Tekton piplines are just YAML, we can have ArgoCD sync the pipelines to the cluster so our code can use them. To deploy the pipeline defintions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
+4. Seeing as Tekton pipelines are just YAML, we can have Argo CD sync the pipelines to the cluster so our code can use them. To deploy the pipeline defintions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
 
 ```yaml
   # Tekton Pipelines
@@ -79,12 +80,14 @@ Some of the key things to note above are:
 ```
 
 5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
-<code class="language-yaml">
+
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
   # Pet Battle Apps
   pet-battle-api:
     name: pet-battle-api
     enabled: true
-    source: <strong>http://nexus:8081/repository/helm-charts</strong>
+    source: http://nexus:8081/repository/helm-charts #<- update this
     chart_name: pet-battle-api
     source_ref: 1.1.0 # helm chart version
     values:
@@ -92,7 +95,7 @@ Some of the key things to note above are:
       image_version: latest # container image version
 </code></pre></div>
 
-6. Update git and wait for our tekton piplines to deploy out in ArgoCD.
+6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD.
 
 ```bash
 cd /projects/tech-exercise
@@ -103,7 +106,7 @@ git push
 ![uj-and-tekkers](./images/uj-and-tekkers.png)
 
 
-7. With our piplines definitions sync'd to the cluster (thanks ArgoCD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
+7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
 
 ```bash
 echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
@@ -119,7 +122,7 @@ You can test the webhook works from GitLab.
 ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
 
-?> **Tip** You can enable debug log info for your tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```
+?> **Tip** You can enable debug log info for your Tekton webhook pod by setting ```oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers```
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
 // set log level
@@ -144,7 +147,7 @@ git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕"
 git push 
 ```
 
-🪄 Observe Pipeline Running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
+🪄 Observe Pipeline running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
 ![images/tekton-pipeline-running.png](images/tekton-pipeline-running.png)
 

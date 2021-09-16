@@ -1,7 +1,7 @@
 ### Deploy App of Apps
-We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently of other apps.
+We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
-A developer can get the same experience and end result installing an application chart using a helm install as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a templating language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
+A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a templating language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
 
 We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In PetBattle we generate the app-of-apps definitions using a Helm chart.
 
@@ -18,7 +18,6 @@ We deploy each of our applications using an Argo CD `application` definition. We
     source_path: "."
     helm_values:
       - pet-battle/test/values.yaml
-
   # Staging App of Apps
   - name: staging-app-of-pb
     enabled: true
@@ -62,7 +61,7 @@ helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
 
 
 #### Deploying Pet Battle
-> Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. Each environment folder (test / stage) contains hte configuration for the corresponding projects in OCP. All we need to do is extend or edit the list of `applications` for the changes to be syncd to the cluster. We can also separate test environment config from staging or even prod using this method
+> Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. Each environment folder (test / stage) contains the configuration for the corresponding projects in OpenShift. All we need to do is extend or edit the list of `applications` for the changes to be syncd to the cluster. We can also separate test environment config from staging or even prod using this method.
 
 
 1. In your IDE, open up the `pet-battle/test/values.yaml` file and copy the following:
@@ -133,7 +132,7 @@ EOF
       }'
 ```
 
-1. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontends configuration) in order to deploy the staging environment, and push your changes to the repo. _Its not real unless its in git_
+1. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _Its not real unless its in git_
 
 ```bash
 git add .

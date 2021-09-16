@@ -4,7 +4,7 @@ GitOps can be seen as a developer-centric approach to Ops. It teaches developers
 When practicing GitOps ideally, every action should be idempotent. Every action or operation can be applied multiple times, producing the exact same result. This is a very useful property in many situations, as it means that an operation can be repeated or retried as often as necessary without causing unintended effects. Configuration should be created declaratively. That is to say, you write the configuration to describe the desired state of an application or set of apps.
 
 To implement a GitOps approach to our Helm charts, all we need to do is connect a tool to the Git repository, which can be alerted or watch for changes coming through. When those changes arrive, this tool can assess the difference between what the current state is and what state is desired and apply the changes automatically for
-us. Enter ArgoCD.
+us.
 
 From ArgoCD's website, it is described as a tool that:
 
@@ -20,12 +20,13 @@ When something is seen as not matching the required state in Git, an application
 ### ArgoCD Basic Install
 > ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can then configure it to do things based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
 
-1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests welcomed :P
+1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests are welcomed :P
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 ```
 
-2. Let's perform a basic install of basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case however when deploying many instances of ArgoCD in one shared cluster we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each argocd instance seeing the others resources.... 
+2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case. However when deploying many instances of ArgoCD in one shared cluster, we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each argocd instance seeing the others' resources.
+ 
 We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
 A) Configure our ArgoCD instance with a secret and unique applicationInstanceLabelKey by creating a small bit of yaml 😋:
@@ -108,4 +109,4 @@ Your form should look like this:
 echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
 ```
 
-🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy and application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
+🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄

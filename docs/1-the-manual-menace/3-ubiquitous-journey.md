@@ -59,7 +59,8 @@ team: <TEAM_NAME>
 ```
 
 2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
-```yaml
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-yaml">
         - name: jenkins
           kind: ServiceAccount
           role: admin
@@ -76,7 +77,7 @@ team: <TEAM_NAME>
         - name: <TEAM_NAME>-stage
           operatorgroup: true
           bindings: *binds
-```
+</code></pre></div>
 
 1. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 ```bash
@@ -123,4 +124,4 @@ oc get projects | grep ${TEAM_NAME}
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
 
-🪄🪄 Magic! You've now deployed an app of apps to scaffold our our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄
+🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄
