@@ -21,59 +21,66 @@ When something is seen as not matching the required state in Git, an application
 > ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can then configure it to do things based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
 
 1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests are welcomed :P
-```bash
-helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-```
+
+    ```bash
+    helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
+    ```
 
 2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case. However when deploying many instances of ArgoCD in one shared cluster, we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each argocd instance seeing the others' resources.
  
-We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
+    We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
-A) Configure our ArgoCD instance with a secret and unique applicationInstanceLabelKey by creating a small bit of yaml 😋:
-```bash
-cat << EOF > /projects/tech-exercise/argocd-values.yaml
-namespace: ${TEAM_NAME}-ci-cd
-argocd_cr:
-  namespaceRoleBinding:
-    enabled: true
-  applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
-  repositoryCredentials: |
-    - url: https://gitlab-ce.${CLUSTER_DOMAIN}
-      type: git
-      passwordSecret:
-        key: password
-        name: git-auth
-      usernameSecret:
-        key: username
-        name: git-auth
-EOF
-```
+    A) Configure our ArgoCD instance with a secret and unique applicationInstanceLabelKey by creating a small bit of yaml 😋:
 
-B) Deploy ArgoCD using helm and this piece of yaml:
-```bash
-helm upgrade --install argocd \
-  --namespace ${TEAM_NAME}-ci-cd \
-  -f /projects/tech-exercise/argocd-values.yaml \
-  redhat-cop/argocd-operator
-```
+    ```bash
+    cat << EOF > /projects/tech-exercise/argocd-values.yaml
+    namespace: ${TEAM_NAME}-ci-cd
+    argocd_cr:
+      namespaceRoleBinding:
+        enabled: true
+      applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
+      repositoryCredentials: |
+        - url: https://gitlab-ce.${CLUSTER_DOMAIN}
+          type: git
+          passwordSecret:
+            key: password
+            name: git-auth
+          usernameSecret:
+            key: username
+            name: git-auth
+    EOF
+    ```
 
-<p class="tip">
-⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab.
-</p>
+    B) Deploy ArgoCD using helm and this piece of yaml:
 
-1. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
-```bash
-oc get pods -w -n ${TEAM_NAME}-ci-cd
-```
-![argocd-pods](images/argocd-pods.png)
+    ```bash
+    helm upgrade --install argocd \
+      --namespace ${TEAM_NAME}-ci-cd \
+      -f /projects/tech-exercise/argocd-values.yaml \
+      redhat-cop/argocd-operator
+    ```
 
-*You can do Control+C to break the 'watch' mode*
+    <p class="tip">
+    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a> exercise at the end of this lab.
+    </p>
 
-4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab. 
-```bash
-echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  
-```
-![argocd-route](./images/argocd-route.png)
+3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
+
+    ```bash
+    oc get pods -w -n ${TEAM_NAME}-ci-cd
+    ```
+
+    ![argocd-pods](images/argocd-pods.png)
+
+    *You can do Control+C to break the 'watch' mode*
+
+4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab.
+
+    ```bash
+    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  
+    ```
+
+    ![argocd-route](./images/argocd-route.png)
 
 5. Login to ArgoCD by clicking `Log in via OpenShift` and use the OpenShift credentials provided.
 ![argocd-login](images/argocd-login.png)
@@ -95,8 +102,8 @@ echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEA
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TEAM_NAME>-ci-cd`
 
-Your form should look like this:
-![argocd-create-application](images/argocd-create-application.png)
+    Your form should look like this:
+    ![argocd-create-application](images/argocd-create-application.png)
 
 8. After you hit create, you'll see `our-todolist` application is created and should start deploying in your `${TEAM_NAME}-ci-cd` namespace.
 ![argocd-todolist](images/argocd-todolist.png)
@@ -105,8 +112,9 @@ Your form should look like this:
 ![argocd-todolist-detail](images/argocd-todolist-detail.png)
 
 10. You can verify the application is running and behaving as expected by navigating to the url of the app, same way we did for the previous helm deploy.
-```bash
-echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
-```
 
-🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
+    ```bash
+    echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
+    ```
+
+    🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
