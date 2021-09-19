@@ -4,9 +4,9 @@
 1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
 ![crw](./images/crw.png)
 
-<p class="tip">
+<p class="warn">
 If the workspace has not been set up for you, you can create one from this devfile. On Code Ready Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
-https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml
+<a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a>
 </p>
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > do500-stack` from the menu.
@@ -108,4 +108,4 @@ where:
 * `templates/*.yaml` - they are our k8s resources. 
 * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
 
-Now, let's continue with even more exiting tool...!
+🪄🪄 Now, let's continue with even more exiting tool... !🪄🪄

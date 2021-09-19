@@ -32,6 +32,7 @@ export GITLAB_PASSWORD=<your gitlab password>
 ```
 
 Lets put our git credentials via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
+
 ```bash
 cat <<EOF | oc apply -f -
 apiVersion: v1
@@ -49,6 +50,7 @@ EOF
 ```
 
 Patch the repository list, be sure to use your `GITLAB_URL`
+
 ```bash
 oc -n ${TEAM_NAME}-ci-cd patch cm argocd-cm --patch "
 data:
@@ -83,6 +85,7 @@ export GITLAB_PASSWORD=<your gitlab password>
 ```
 
 Lets our git creds via a secret (**UJ this**)
+
 ```bash
 cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
 apiVersion: v1
@@ -100,8 +103,8 @@ type: kubernetes.io/basic-auth
 EOF
 ```
 
-
 Create our configuration, be sure to use your `GITLAB_URL`.
+
 ```bash
 cat <<'EOF' > /tmp/initial-repos.yaml
 - name: ubiquitous-journey
@@ -136,6 +139,7 @@ EOF
 ```
 
 Reinstall ArgoCD using new initial settings:
+
 ```bash
 helm upgrade --install argocd \
   --namespace ${TEAM_NAME}-ci-cd \

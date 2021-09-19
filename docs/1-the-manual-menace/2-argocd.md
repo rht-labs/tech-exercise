@@ -117,4 +117,4 @@ When something is seen as not matching the required state in Git, an application
     echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
     ```
 
-    🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
+🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄

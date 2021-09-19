@@ -139,4 +139,4 @@ All of these traits lead to one outcome - the ability to build and release quali
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
-    🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄
+🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄
