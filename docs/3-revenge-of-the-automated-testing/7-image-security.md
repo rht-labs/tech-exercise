@@ -89,15 +89,19 @@ listed as `unreconcileable`, delete and recreate it from the ACS operator in the
 
 ![images/acs-find-policy.png](images/acs-find-policy.png)
 
-12. Select and *Edit* this policy. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
+12. Clone this Policy so we can edit it, give it a new name.
+
+![images/acs-clone-policy.png](images/acs-clone-policy.png)
+
+13. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
 
 ![images/acs-policy-criteria.png](images/acs-policy-criteria.png)
 
-13. Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
+14. Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
 
 ![images/acs-policy-enforcement.png](images/acs-policy-enforcement.png)
 
-14. *Save* the policy. It should look like this now.
+15. *Save* the policy. It should look like this now.
 
 ![images/acs-policy-done.png](images/acs-policy-done.png)
 
