@@ -16,7 +16,6 @@ https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadywo
 3. <strong>OPTIONAL</strong> - if you want to use `zsh` as opposed to `sh`, you can set it as the default shell by running. `zsh` is swish has neat shortcuts and plugins plus all the cool kids are using it 😎!
 ```bash
 echo "zsh" >> ~/.bashrc
-source ~/.bashrc
 ```
 
 4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by replacing this and running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
@@ -31,6 +30,7 @@ echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 
 6. Verify the variables you have set:
 ```bash
+source ~/.bashrc
 echo ${CLUSTER_DOMAIN}
 echo ${TEAM_NAME}
 ```
