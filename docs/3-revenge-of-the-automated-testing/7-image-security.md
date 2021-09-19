@@ -11,6 +11,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 As **cluster-admin** perform the setup of Stackrox as a class together.
 
 1. Connect to the ACS WebUI Route using the **admin** credentials:
+
 ```bash
 # get web url
 echo https://$(oc -n stackrox get route central --template='{{ .spec.host }}')
@@ -30,17 +31,20 @@ Name it `do500` and give it `Admin` permissions.
 ![images/acs-api-token.png](images/acs-api-token.png)
 
 3. **Save** this token somewhere safe, we will need of later on. Export these environment variables:
+
 ```bash
 export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
 export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
 ```
 
 4. Download the **roxctl** client to your local machine. You can also download it directly from ACS WebUI or via ACS API.
+
 ```bash
 curl -O https://mirror.openshift.com/pub/rhacs/assets/3.63.0/bin/Linux/roxctl && chmod 755 roxctl
 ```
 
 5. Test that **roxctl** works by running
+
 ```bash
 roxctl central whoami --insecure-skip-tls-verify -e $ROX_ENDPOINT:443
 ```
@@ -58,6 +62,7 @@ roxctl -e "${ROX_ENDPOINT}:443" central init-bundles generate do500 --output-sec
 ![images/acs-generate-bundle-init.png](images/acs-generate-bundle-init.png)
 
 7. Download the Kubernetes secrets file and apply it to the cluster.
+
 ```bash
 oc -n stackrox create -f cluster_init_bundle.yaml
 ```
