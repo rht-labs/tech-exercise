@@ -1,108 +1,103 @@
 ### Extend Tekton Pipeline with Code Linting Task
 
-> Why are we doing this
+1. Code formatting as part of the maven build lifecycle
+    - https://code.revelc.net/formatter-maven-plugin/usage.html
 
+    ```bash
+    mvn formatter:format
+    ```
 
-Code formatting as part of the maven build lifecycle
-- https://code.revelc.net/formatter-maven-plugin/usage.html
+2. Edit a java class file add some TAB/spaces
 
-```bash
-mvn formatter:format
-```
+    ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
 
-Edit a java class file add some TAB/spaces
+    Then rerun the `formatting:format` maven command:
 
-![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
+    ![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
 
-Then rerun the `formatting:format` maven command:
+    Your changes should be removed !
 
-![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
+3. Linting and Formatting using Checkstyle (`checkstyle.xml`)
 
-Your changes should be removed !
+    - install an IDE extensions for realtime feedback
 
+    ![images/checkstyle-extension.png](images/checkstyle-extension.png)
 
-Linting and Formatting using Checkstyle (`checkstyle.xml`)
+    For VSCode IDE .. there is a great help page here:
 
-- install an IDE extensions for realtime feedback
+    - https://code.visualstudio.com/docs/java/java-linting
 
-![images/checkstyle-extension.png](images/checkstyle-extension.png)
+4. There is a Sonar Lint Extension for realtime checking in your IDE
 
-For VSCode IDE .. there is a great help page here:
+    - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
 
-- https://code.visualstudio.com/docs/java/java-linting
+5. Lets have a look at how we use these tools from the command line.
 
-There is a Sonar Lint Extension for realtime checking in your IDE
+    - Sonar build and pipeline feedback
+    - mvn command line
 
-- https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
+    By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. So we will only see this on the command line:
 
-Lets have a look at how we use these tools from the command line.
+    ```bash
+    mvn checkstyle:check
+    ```
 
-- Sonar build and pipeline feedback
-- mvn command line
+6. Let's set an individual severity of **error** in our configuration for the **EmptyCatchBlock** check
+    - https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock
 
-By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. So we will only see this on the command line:
+    ```xml
+            <module name="EmptyCatchBlock">
+                <property name="severity" value="error"/>
+                <property name="exceptionVariableName" value="expected"/>
+            </module>
+    ```
 
-```bash
-mvn checkstyle:check
+    We can turn on checkstyle debugging by adding `consoleOutput` true to our pom.xml
 
-[INFO] You have 0 Checkstyle violations.
-```
+    ```xml
+                    <configuration>
+                        <configLocation>checkstyle.xml</configLocation>
+                        <consoleOutput>true</consoleOutput>
+                    </configuration>
+    ```
 
-Let's set an individual severity of **error** in our configuration for the **EmptyCatchBlock** check
-- https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock
+7. Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
 
-```xml
-        <module name="EmptyCatchBlock">
-            <property name="severity" value="error"/>
-            <property name="exceptionVariableName" value="expected"/>
-        </module>
-```
+    ![images/codestyle-violation.png](images/codestyle-violation.png)
 
-We can turn on checkstyle debugging by adding `consoleOutput` true to our pom.xml
-```xml
-                <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
-                    <consoleOutput>true</consoleOutput>
-                </configuration>
-```
+    Now when we run the check we should get a hard error telling us we have an empty code block.
 
-Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
+    ```bash
+    mvn checkstyle:check
+    ```
 
-![images/codestyle-violation.png](images/codestyle-violation.png)
+    ![images/checkstyle-error.png](images/checkstyle-error.png)
 
-Now when we run the check we should get a hard error telling us we have an empty code block.
+8. These types of checks (as well as tests) are included in the Maven lifecycle phase called **verify**
 
-```bash
-mvn checkstyle:check
-```
+    ```bash
+    mvn verify
+    ```
 
-![images/checkstyle-error.png](images/checkstyle-error.png)
+9. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
 
+    A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
 
-These types of checks (as well as tests) are included in the Maven lifecycle phase called **verify**
-```bash
-mvn verify
-```
+    Here are some of the most important phases in the default build lifecycle:
 
-In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
+    - clean: remove all files generated by the previous build
+    - validate: check if all information necessary for the build is available
+    - compile: compile the source code
+    - verify: run any checks to verify the package is valid and meets quality criteria
+    - test: run unit tests
 
-A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
+    We use these phases in out build pipeline. The full lifecycle reference is here
+    - https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
 
-Here are some of the most important phases in the default build lifecycle:
+    We use the checkstyle plugin in Sonarqube which is found under **Rues** - **Java** language, **Repository**
 
-- clean: remove all files generated by the previous build
-- validate: check if all information necessary for the build is available
-- compile: compile the source code
-- verify: run any checks to verify the package is valid and meets quality criteria
-- test: run unit tests
+    ![images/checkstyle-sonar.png](images/checkstyle-sonar.png)
 
-We use these phases in out build pipeline. The full lifecycle reference is here
-- https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+    Sonarqube reports warnings under **Code Smells*.
 
-We use the checkstyle plugin in Sonarqube which is found under **Rues** - **Java** language, **Repository**
-
-![images/checkstyle-sonar.png](images/checkstyle-sonar.png)
-
-Sonarqube reports warnings under **Code Smells*.
-
-![images/sonar-code-smells.png](images/sonar-code-smells.png)
+    ![images/sonar-code-smells.png](images/sonar-code-smells.png)
