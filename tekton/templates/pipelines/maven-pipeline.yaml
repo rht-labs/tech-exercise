@@ -7,6 +7,8 @@ spec:
     - name: shared-workspace
     - name: maven-settings
     - name: maven-m2
+    - name: sonarqube-auth
+      optional: true
   params:
   - name: APPLICATION_NAME
     type: string
@@ -77,12 +79,9 @@ spec:
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: GOALS
-          value:
-            - "package"
+          value: "package"
         - name: MAVEN_BUILD_OPTS
-          value:
-            - "-Dquarkus.package.type=fast-jar"
-            - "-DskipTests"
+          value: "-Dquarkus.package.type=fast-jar -DskipTests"
       workspaces:
         - name: maven-settings
           workspace: maven-settings
@@ -90,6 +89,9 @@ spec:
           workspace: maven-m2
         - name: output
           workspace: shared-workspace
+        - name: sonarqube-auth
+          secret:
+            secretName: sonarqube-auth
       runAfter:
         - fetch-app-repository
 

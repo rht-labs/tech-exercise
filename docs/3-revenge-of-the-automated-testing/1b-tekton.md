@@ -13,16 +13,9 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
             - name: GOALS
-              value:
-                - test
-                # - org.owasp:dependency-check-maven:check
-                - sonar:sonar
+              value: "test sonar:sonar"  # - org.owasp:dependency-check-maven:check
             - name: MAVEN_BUILD_OPTS
-              value:
-                - '-Dsonar.host.url=http://sonarqube-sonarqube:9000'
-                - '-Dsonar.userHome=/tmp/sonar'
-                - '-Dsonar.login=admin'
-                - '-Dsonar.password=admin123'
+              value: "-Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.userHome=/tmp/sonar"
           runAfter:
             - fetch-app-repository
           workspaces:
@@ -32,16 +25,82 @@
               workspace: maven-m2
             - name: output
               workspace: shared-workspace
-            # - name: sonarqube-auth
-            #   secret:
-            #     secretName: sonarqube-auth
+            - name: sonarqube-auth
+              secret:
+                secretName: sonarqube-auth
     ```
 
 2. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image.
 
     ```bash
-    curl -sLo /projects/tech-exercise/tekton/templates/tasks/sonarqube-quality-gate-check.yaml \
-        https://raw.githubusercontent.com/petbattle/ubiquitous-journey/main/tekton/tasks/sonarqube-quality-gate-check.yaml
+    cd /projects/tech-exercise
+    cat <<'EOF' >> tekton/templates/tasks/sonarqube-quality-gate-check.yaml
+    apiVersion: tekton.dev/v1beta1
+    kind: Task
+    metadata:
+      name: sonarqube-quality-gate-check
+    spec:
+      description: >-
+        This Task can be used to check sonarqube quality gate
+      workspaces:
+        - name: output
+        - name: sonarqube-auth
+          optional: true
+      params:
+        - name: WORK_DIRECTORY
+          description: Directory to start build in (handle multiple branches)
+          type: string
+        - name: IMAGE
+          description: the image to use
+          type: string
+          default: "quay.io/eformat/openshift-helm:latest"
+      steps:
+      - name: check
+        image: $(params.IMAGE)
+        script: |
+          #!/bin/sh
+          test -f $(workspaces.sonarqube-auth.path) || export SONAR_USER="$(cat $(workspaces.sonarqube-auth.path)/username):$(cat $(workspaces.sonarqube-auth.path)/password)"
+      
+          cd $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+          TASKFILE=$(find . -type f -name report-task.txt)
+          if [ -z ${TASKFILE} ]; then
+            echo "Task File not found"
+            exit 1
+          fi
+          echo ${TASKFILE}
+
+          TASKURL=$(cat ${TASKFILE} | grep ceTaskUrl)
+          TURL=${TASKURL##ceTaskUrl=}
+          if [ -z ${TURL} ]; then
+            echo "Task URL not found"
+            exit 1
+          fi
+          echo ${TURL}
+
+          AID=$(curl -u ${SONAR_USER} -s $TURL | jq -r .task.analysisId)
+          if [ -z ${AID} ]; then
+            echo "Analysis ID not found"
+            exit 1
+          fi
+          echo ${AID}
+
+          SERVERURL=$(cat ${TASKFILE} | grep serverUrl)
+          SURL=${SERVERURL##serverUrl=}
+          if [ -z ${SURL} ]; then
+            echo "Server URL not found"
+            exit 1
+          fi
+          echo ${SURL}
+
+          BUILDSTATUS=$(curl -u ${SONAR_USER} -s $SURL/api/qualitygates/project_status?analysisId=${AID} | jq -r .projectStatus.status)
+          if [ "${BUILDSTATUS}" != "OK" ]; then
+            echo "Failed Quality Gate - please check - $SURL/api/qualitygates/project_status?analysisId=${AID}"
+            exit 1
+          fi
+
+          echo "Quality Gate Passed OK - $SURL/api/qualitygates/project_status?analysisId=${AID}"
+          exit 0
+    EOF
     ```
 
 3. Let's add this task to our pipleine. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
@@ -55,6 +114,8 @@
           workspaces:
             - name: output
               workspace: shared-workspace
+            - name: sonarqube-auth
+              workspace: sonarqube-auth
           params:
           - name: WORK_DIRECTORY
             value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
@@ -72,12 +133,9 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
             - name: GOALS
-              value:
-                - "package"
+              value: "package"
             - name: MAVEN_BUILD_OPTS
-              value:
-                - "-Dquarkus.package.type=fast-jar"
-                - "-DskipTests"
+              value: "-Dquarkus.package.type=fast-jar -DskipTests"
           workspaces:
             - name: maven-settings
               workspace: maven-settings

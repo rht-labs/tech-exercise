@@ -8,38 +8,7 @@
 
 ## Deploy Sonarqube using GitOps
 
-1. Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file in your IDE  and add to the `applications` list:
-
-    ```yaml
-      # Sonarqube
-      - name: sonarqube
-        enabled: true
-        source: https://github.com/redhat-cop/helm-charts.git
-        source_path: "charts/sonarqube"
-        source_ref: "sonarqube-0.0.15"
-        values:
-          account:
-            adminPassword: admin123
-            currentAdminPassword: admin
-          initContainers: true
-          plugins:
-            install:
-              - https://github.com/checkstyle/sonar-checkstyle/releases/download/8.40/checkstyle-sonar-plugin-8.40.jar
-              - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
-    ```
-
-2. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive.
-
-    ```bash
-    cd /projects/tech-exercise
-    git add .
-    git commit -m  "🦇 ADD - sonarqube 🦇"
-    git push 
-    ```
-
-    ![argocd-sonar](./images/argocd-sonar.png)
-
-3. Let's save the Sonarqube credentials as SealedSecrets in git repository _(yes, because it is GitOps!)_ so that the pipelines can leverage the secrets when executing.
+1. Create a SealedSecrets in our git repository for the Sonarqube admin user _(yes, because it is GitOps!)_ so that the deployment and pipeline can leverage the secret when executing.
 
     ```bash
     cat << EOF > /tmp/sonarqube-auth.yaml
@@ -47,6 +16,7 @@
     data:
       username: "$(printf admin | base64 -w0)"
       password: "$(printf admin123 | base64 -w0)"
+      currentAdminPassword: "$(printf admin | base64 -w0)"
     kind: Secret
     metadata:
       labels:
@@ -55,7 +25,7 @@
     EOF
     ```
 
-4. Just as before, use `kubeseal` command line to seal the secret definition just created.
+2. Just as before, use `kubeseal` command line to seal the secret definition just created.
 
     ```bash
     kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
@@ -68,7 +38,7 @@
     We want to grab the results of this sealing activity, in particular the `encryptedData`.
 
     ```bash
-    cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
+    cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password|currentAdminPassword'
     ```
 
     The output should look like this with massively long nonsense strings:
@@ -76,9 +46,10 @@
     <pre><code class="language-yaml">
         username: AgAj3JQj+EP23pnzu...
         password: AgAtnYz8U0AqIIaqYrj...
+        currentPassword: 
     </code></pre></div>
 
-5. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+3. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
     ```yaml
             - name: sonarqube-auth
@@ -99,11 +70,41 @@
     git push
     ```
 
-6. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
+4. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
 
     ```bash
     oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
     ```
+
+5. Install **Sonarqube**, the code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file in your IDE  and add to the `applications` list:
+
+    ```yaml
+      # Sonarqube
+      - name: sonarqube
+        enabled: true
+        source: https://redhat-cop.github.io/helm-charts
+        chart_name: sonarqube
+        source_ref: "0.0.16"
+        values:
+          account:
+            existingSecret: sonarqube-auth
+          initContainers: true
+          plugins:
+            install:
+              - https://github.com/checkstyle/sonar-checkstyle/releases/download/8.40/checkstyle-sonar-plugin-8.40.jar
+              - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
+    ```
+
+6. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive.
+
+    ```bash
+    cd /projects/tech-exercise
+    git add .
+    git commit -m  "🦇 ADD - sonarqube 🦇"
+    git push 
+    ```
+
+    ![argocd-sonar](./images/argocd-sonar.png)
 
 7. Connect to Sonarqube UI to verify if the installation is successful (username `admin` & password `admin123`):
 

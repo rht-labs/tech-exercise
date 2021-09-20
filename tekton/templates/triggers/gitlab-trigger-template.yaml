@@ -36,11 +36,6 @@ spec:
         serviceAccountName: pipeline
         pipelineRef:
           name: maven-pipeline
-        # podTemplate:
-          # securityContext:
-          #   runAsNonRoot: true
-          #   runAsUser: 1001
-          #   fsGroup: 0
         params:
           - name: APPLICATION_NAME
             value: $(tt.params.git-repo-name)
@@ -66,7 +61,10 @@ spec:
         - name: maven-m2
           persistentVolumeClaim:
             claimName: maven-m2
-        # TODO: how did the secret get here?
         - name: git-auth
           secret:
             secretName: git-auth
+        - name: sonarqube-auth
+          secret:
+            secretName: sonarqube-auth
+          optional: true

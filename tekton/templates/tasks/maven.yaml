@@ -15,6 +15,8 @@ spec:
     - name: output
     - name: maven-settings
     - name: maven-m2
+    - name: sonarqube-auth
+      optional: true
   params:
     - name: MAVEN_IMAGE
       type: string
@@ -22,10 +24,10 @@ spec:
       default: gcr.io/cloud-builders/mvn@sha256:57523fc43394d6d9d2414ee8d1c85ed7a13460cbb268c3cd16d28cfb3859e641
     - name: GOALS
       description: maven goals to run
-      type: array
+      type: string
     - name: MAVEN_BUILD_OPTS
       description: maven build options
-      type: array
+      type: string
     - name: WORK_DIRECTORY
       description: Directory to start build in (handle multiple branches)
       type: string
@@ -36,12 +38,11 @@ spec:
     - name: mvn-goals
       image: $(params.MAVEN_IMAGE)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      command: ["/usr/bin/mvn"]
-      args:
-        - "-s"
-        - "$(workspaces.maven-settings.path)/settings.xml"
-        - "$(params.GOALS)"
-        - "$(params.MAVEN_BUILD_OPTS)"
+      script: |
+         #!/usr/bin/bash
+         set +x
+         test -f $(workspaces.sonarqube-auth.path) || export EXTRA_ARGS="-Dsonar.login=$(cat $(workspaces.sonarqube-auth.path)/username) -Dsonar.password=$(cat $(workspaces.sonarqube-auth.path)/password)"
+         /usr/bin/mvn -s $(workspaces.maven-settings.path)/settings.xml $(params.GOALS) $(params.MAVEN_BUILD_OPTS) ${EXTRA_ARGS}
     - name: get-app-version
       image: $(params.MAVEN_IMAGE)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
