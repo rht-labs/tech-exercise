@@ -86,7 +86,7 @@
 2. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition for `pentesting-test`. Remember to adjust the `runAfter` to match the current state of your pipeline:
 
     ```yaml
-        # PEN TESTING
+        # Pen Testing
         - name: pentesting-test
           taskRef:
             name: zap-proxy

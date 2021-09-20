@@ -75,7 +75,7 @@
 3. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
     ```yaml
-        # LOAD TESTING
+        # Load Testing
         - name: load-testing
           runAfter:
           - verify-deployment

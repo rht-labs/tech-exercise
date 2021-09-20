@@ -196,11 +196,11 @@ spec:
       runAfter:
         - deploy-test
      
-    # COSIGN IMAGE SIGN 
+    # Cosign Image Sign
 
-    # PEN TESTING
+    # Pen Testing
 
-    # LOAD TESTING
+    # Load Testing
 
   results:
     - name: VERSION

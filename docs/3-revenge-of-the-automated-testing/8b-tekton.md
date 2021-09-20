@@ -48,7 +48,7 @@ EOF
 2. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
 ```yaml
-    # COSIGN IMAGE SIGN 
+    # Cosign Image Sign
     - name: image-signing
       runAfter:
       - verify-deployment
