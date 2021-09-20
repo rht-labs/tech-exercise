@@ -10,5 +10,5 @@
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * Add new jenkins agent to our list | * Add a task from Tekton Hub to our pipeline |
-| * run kube-lint in the pipeline | * Run kube-lint when code is built in the pipeline |
+| * Run kube-lint in the pipeline | * Run kube-lint when code is built in the pipeline |
 | [jenkins](3-revenge-of-the-automated-testing/5a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/5b-tekton.md) |

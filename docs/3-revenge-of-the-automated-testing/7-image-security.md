@@ -1,6 +1,5 @@
 # Image Security (Stack Rox)
-> what is it why important
-
+> We use some ready container images to build our own application images. We use them as base and add our app binaries, or install packages on top of them. We need to protect our containers from errors and vulnerabilities in public registry images, or outdated packages and libraries. Image security step in our pipeline helps us to discover them before moving images to production.
 ## Task
 
 ![task-image-security](./images/task-image-security.png)

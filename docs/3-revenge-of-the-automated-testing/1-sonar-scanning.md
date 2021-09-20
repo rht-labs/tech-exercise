@@ -1,6 +1,6 @@
 # Sonar Scanning
 
-> Sonarqube is  tool that performs static code analysis. It looks for pitfalls in coding and reports them. It's great tool for catching vulnerabilities
+> Sonarqube is a tool that performs static code analysis. It looks for pitfalls in coding and reports them. It's great tool for catching vulnerabilities!
 
 ## Task
 

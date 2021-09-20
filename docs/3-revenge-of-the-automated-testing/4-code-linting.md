@@ -9,5 +9,5 @@
 
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
-| * use ESlint to analyse the codebase | * Use maven check-style to analyse the code |
+| * Use ESlint to analyse the codebase | * Use maven check-style to analyse the code |
 | [jenkins](3-revenge-of-the-automated-testing/4a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/4b-tekton.md) |
