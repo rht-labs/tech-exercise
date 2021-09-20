@@ -1,10 +1,5 @@
 ### Autoscaling
-> something something HPA ... 
-
-1. Set up HPA on the helm chart (set )
-2. Create some load and observe the scaling
-3. profit
-
+Horizontal pod autoscaler (HPA) helps us to specify how OpenShift should automatically increase or decrease the scale of an application, based on metrics collected from the pods. After we define an HPA (based on CPU and/or memory usage metrics), the platform calculates the current usage and compare it with the desired utilization, then scales pods up or down accordingly.
 
 1. The Pet Battle API helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
 
