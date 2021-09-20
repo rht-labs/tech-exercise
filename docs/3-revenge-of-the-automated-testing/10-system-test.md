@@ -1,7 +1,7 @@
-### System Tests
+# System Tests
 > Validate the sum of the parts of the system are behaving as expected before moving them on to the next stage.
 
-### Task
+## Task
 ![task-system-test](./images/task-system-test.png)
 
 #### In your groups pick the tool you'd like to integrate the pipeline with:

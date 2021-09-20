@@ -1,11 +1,12 @@
-## Here be dragons!
+# Here be dragons!
 
 ![oh-look-another-dragon](../images/oh-look-dragons.png)
 
-## Testing Extensions
+### Testing Extensions
+
 - Something something TestContainers
 
-#### Continuous Testing
+### Continuous Testing
 
 - https://quarkus.io/guides/continuous-testing
 
@@ -78,7 +79,8 @@ Allure new test added, test trend shown.
 
 ![images/quarkus-dev-mode.png](images/quarkus-dev-mode.png)
 
-## Sonar Quality Gates
+### Sonar Quality Gates
+
 - [ ] Code Exercise to fix up **Security HotSpots** and improve quality.
 
 ![images/sonar-pb-api-hotspots.png](images/sonar-pb-api-hotspots.png)
@@ -138,9 +140,7 @@ git commit -m  "💍 FIX Security HotSpots 💍"
 git push 
 ```
 
-
 ![images/sonar-pb-api-better-quality.png](images/sonar-pb-api-better-quality.png)
-
 
 - [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
 ```yaml
@@ -156,6 +156,4 @@ git push
           enabled: false
 ```
 
-
-## Linting Extensions
-
+### Linting Extensions
