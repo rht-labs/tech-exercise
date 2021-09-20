@@ -1,6 +1,5 @@
 ### A/B Deployments
-> Something something A/B deployment
-[TODO] configmap - URL update
+> A/B deployments generally imply running two (or more) versions of the application at the same time for testing or experimentation purposes.
 
 [OpenShift Docs](https://docs.openshift.com/container-platform/4.8/applications/deployments/route-based-deployment-strategies.html#deployments-ab-testing_route-based-deployment-strategies) is pretty good at showing an example of how to do a manual A/B deployment. But in the real world you'll want to automate this by increasing the load of the alternative service based on some tests or other metric. Plus this is GITOPS! So how do we do a A/B with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
