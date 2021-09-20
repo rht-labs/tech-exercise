@@ -72,7 +72,7 @@
     ```bash
     cd /projects/tech-exercise
     git add ubiquitous-journey/values-tooling.yaml
-    git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭" 
+    git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭"
     git push 
     ```
 
@@ -173,7 +173,7 @@
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m  "🥽 ADD - save-test-results step 🥽" 
+    git commit -m  "🥽 ADD - save-test-results step 🥽"
     git push 
     ```
 

@@ -90,7 +90,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash
     git add .
-    git commit -m  "🦆 ADD - correct project names 🦆" 
+    git commit -m  "🦆 ADD - correct project names 🦆"
     git push 
     ```
 

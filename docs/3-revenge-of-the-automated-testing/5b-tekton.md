@@ -13,7 +13,7 @@ Let's enable the **kube-linter** task in our pipeline.
     # commit this so ArgoCD will sync it 
     cd /projects/tech-exercise
     git add .
-    git commit -m  "☎️ ADD - kube-linter task ☎️" 
+    git commit -m  "☎️ ADD - kube-linter task ☎️"
     git push
     ```
 
@@ -109,7 +109,7 @@ Let's enable the **kube-linter** task in our pipeline.
     cd /projects/tech-exercise
     # git add, commit, push your changes..
     git add .
-    git commit -m  "🐡 ADD - kube-linter checks 🐡" 
+    git commit -m  "🐡 ADD - kube-linter checks 🐡"
     git push
     ```
 
@@ -142,7 +142,7 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     cd /projects/tech-exercise
     # git add, commit, push your changes..
     git add .
-    git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡" 
+    git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡"
     git push
     ```
 
@@ -189,7 +189,7 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     ```bash
     cd /project/pet-battle-api
     git add .
-    git commit -m  "🐊 ADD - kube-linter owner labels 🐊" 
+    git commit -m  "🐊 ADD - kube-linter owner labels 🐊"
     git push
     ```
 

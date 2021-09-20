@@ -16,7 +16,7 @@
     ```bash
     cd /projects/tech-exercise
     git add ubiquitous-journey/values-tooling.yaml
-    git commit -m  "🐝 ADD - Zap Jenkins Agent 🐝" 
+    git commit -m  "🐝 ADD - Zap Jenkins Agent 🐝"
     git push
     ```
 

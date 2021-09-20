@@ -106,7 +106,7 @@
     cd /projects/tech-exercise
     # git add, commit, push your changes..
     git add .
-    git commit -m  "🪰 ADD - zap scan pentest 🪰" 
+    git commit -m  "🪰 ADD - zap scan pentest 🪰"
     git push
     ```
 

@@ -1,1 +1,1 @@
-### Extend Jenkins Pipeline with Stackrox
+# Extend Jenkins Pipeline with Stackrox

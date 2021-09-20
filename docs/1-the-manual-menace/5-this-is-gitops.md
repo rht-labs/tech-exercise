@@ -38,7 +38,7 @@
 
     ```bash
     git add .
-    git commit -m  "🍪 ADD - Jenkins environment variable 🍪" 
+    git commit -m  "🍪 ADD - Jenkins environment variable 🍪"
     git push 
     ```
 

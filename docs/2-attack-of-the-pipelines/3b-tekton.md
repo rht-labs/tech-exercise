@@ -100,7 +100,7 @@ Some of the key things to note above are:
 ```bash
 cd /projects/tech-exercise
 git add .
-git commit -m  "🍕 ADD - tekton pipelines config 🍕" 
+git commit -m  "🍕 ADD - tekton pipelines config 🍕"
 git push 
 ```
 ![uj-and-tekkers](./images/uj-and-tekkers.png)
@@ -143,7 +143,7 @@ data:
 ```bash
 cd /projects/pet-battle-api
 git add .
-git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕" 
+git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕"
 git push 
 ```
 

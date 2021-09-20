@@ -22,7 +22,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
 
     ```bash
     git add .
-    git commit -m  "🦘 ADD - nexus repo manager 🦘" 
+    git commit -m  "🦘 ADD - nexus repo manager 🦘"
     git push 
     ```
 

@@ -135,7 +135,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
     ```bash
     git add .
-    git commit -m  "🐩 ADD - pet battle apps 🐩" 
+    git commit -m  "🐩 ADD - pet battle apps 🐩"
     git push 
     ```
 

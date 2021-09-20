@@ -94,7 +94,7 @@
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m  "🥽 ADD - code-analysis & check steps 🥽" 
+    git commit -m  "🥽 ADD - code-analysis & check steps 🥽"
     git push 
     ```
 

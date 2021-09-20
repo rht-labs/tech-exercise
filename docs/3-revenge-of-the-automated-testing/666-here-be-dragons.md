@@ -61,7 +61,7 @@ Make the test pass.
 
 ```bash
 git add .
-git commit -m  "⛑️ ADD - new test ⛑️" 
+git commit -m  "⛑️ ADD - new test ⛑️"
 git push 
 ```
 
@@ -134,7 +134,7 @@ Git add, commit, push your changes
 ```bash
 cd /projects/pet-battle-api
 git add .
-git commit -m  "💍 FIX Security HotSpots 💍" 
+git commit -m  "💍 FIX Security HotSpots 💍"
 git push 
 ```
 

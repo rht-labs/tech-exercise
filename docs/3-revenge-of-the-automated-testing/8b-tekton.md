@@ -73,7 +73,7 @@ EOF
 ```bash
 # git add, commit, push your changes..
 git add .
-git commit -m  "👨‍🎤 ADD - image-signing-task 👨‍🎤" 
+git commit -m  "👨‍🎤 ADD - image-signing-task 👨‍🎤"
 git push
 ```
 

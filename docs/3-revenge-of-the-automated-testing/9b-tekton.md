@@ -96,7 +96,7 @@ EOF
 ```bash
 cd /projects/tech-exercise/tekton
 git add .
-git commit -m  "🌀 ADD - load testing task 🌀" 
+git commit -m  "🌀 ADD - load testing task 🌀"
 git push
 ```
 

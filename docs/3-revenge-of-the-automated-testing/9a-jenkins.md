@@ -25,7 +25,7 @@ Commit the changes to the Git repository:
 ```bash
 cd /projects/tech-exercise
 git add ubiquitous-journey/values-tooling.yaml
-git commit -m  "🐍 ADD - Python Jenkins Agent 🐍" 
+git commit -m  "🐍 ADD - Python Jenkins Agent 🐍"
 git push
 ```
 

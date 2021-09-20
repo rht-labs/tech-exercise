@@ -90,7 +90,7 @@ Update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values
 ```bash
 cd /projects/tech-exercise
 git add .
-git commit -m  "🍕 ADD - jenkins pipelines config 🍕" 
+git commit -m  "🍕 ADD - jenkins pipelines config 🍕"
 git push
 ```
 

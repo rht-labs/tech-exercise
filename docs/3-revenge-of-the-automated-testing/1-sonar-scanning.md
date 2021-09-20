@@ -33,7 +33,7 @@
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m  "🦇 ADD - sonarqube 🦇" 
+    git commit -m  "🦇 ADD - sonarqube 🦇"
     git push 
     ```
 
@@ -95,7 +95,7 @@
     ```bash
     cd /projects/tech-exercise
     git add ubiquitous-journey/values-tooling.yaml
-    git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳" 
+    git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳"
     git push
     ```
 

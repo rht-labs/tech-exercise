@@ -59,7 +59,7 @@ appVersion: 1.1.0
 ```bash
 cd /projects/pet-battle-api
 git add .
-git commit -m  "🌳 ADD - Alerting Rules extended 🌳" 
+git commit -m  "🌳 ADD - Alerting Rules extended 🌳"
 git push
 ```
 
