@@ -1,112 +1,119 @@
 # Sonar Scanning
-> Sonarqube is  tool that performs static code analyis. It looks for pitfals in coding and reports them. It's great tool for catching vulnerabilities
 
-### Task
+> Sonarqube is  tool that performs static code analysis. It looks for pitfalls in coding and reports them. It's great tool for catching vulnerabilities
+
+## Task
+
 ![task-sonar](./images/task-sonar.png)
-### Deploy Sonarqube using GitOps
+
+## Deploy Sonarqube using GitOps
+
 1. Install **Sonarqube**, a code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file in your IDE  and add to the `applications` list:
 
-```yaml
-  # Sonarqube
-  - name: sonarqube
-    enabled: true
-    source: https://github.com/redhat-cop/helm-charts.git
-    source_path: "charts/sonarqube"
-    source_ref: "sonarqube-0.0.15"
-    values:
-      account:
-        adminPassword: admin123
-        currentAdminPassword: admin
-      initContainers: true
-      plugins:
-        install:
-          - https://github.com/checkstyle/sonar-checkstyle/releases/download/8.40/checkstyle-sonar-plugin-8.40.jar
-          - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
-```
+    ```yaml
+      # Sonarqube
+      - name: sonarqube
+        enabled: true
+        source: https://github.com/redhat-cop/helm-charts.git
+        source_path: "charts/sonarqube"
+        source_ref: "sonarqube-0.0.15"
+        values:
+          account:
+            adminPassword: admin123
+            currentAdminPassword: admin
+          initContainers: true
+          plugins:
+            install:
+              - https://github.com/checkstyle/sonar-checkstyle/releases/download/8.40/checkstyle-sonar-plugin-8.40.jar
+              - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
+    ```
 
-2. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive
+2. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive.
 
-```bash
-cd /projects/tech-exercise
-git add .
-git commit -m  "🦇 ADD - sonarqube 🦇" 
-git push 
-```
-![argocd-sonar](./images/argocd-sonar.png)
+    ```bash
+    cd /projects/tech-exercise
+    git add .
+    git commit -m  "🦇 ADD - sonarqube 🦇" 
+    git push 
+    ```
+
+    ![argocd-sonar](./images/argocd-sonar.png)
 
 3. Let's save the Sonarqube credentials as SealedSecrets in git repository _(yes, because it is GitOps!)_ so that the pipelines can leverage the secrets when executing.
 
-```bash
-cat << EOF > /tmp/sonarqube-auth.yaml
-apiVersion: v1
-data:
-  username: "$(printf admin | base64 -w0)"
-  password: "$(printf admin123 | base64 -w0)"
-kind: Secret
-metadata:
-  labels:
-    credential.sync.jenkins.openshift.io: "true"
-  name: sonarqube-auth
-EOF
-```
+    ```bash
+    cat << EOF > /tmp/sonarqube-auth.yaml
+    apiVersion: v1
+    data:
+      username: "$(printf admin | base64 -w0)"
+      password: "$(printf admin123 | base64 -w0)"
+    kind: Secret
+    metadata:
+      labels:
+        credential.sync.jenkins.openshift.io: "true"
+      name: sonarqube-auth
+    EOF
+    ```
 
 4. Just as before, use `kubeseal` command line to seal the secret definition just created.
 
-```bash
-kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
-    -n ${TEAM_NAME}-ci-cd \
-    --controller-namespace do500-shared \
-    --controller-name sealed-secrets \
-    -o yaml
-```
+    ```bash
+    kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
+        -n ${TEAM_NAME}-ci-cd \
+        --controller-namespace do500-shared \
+        --controller-name sealed-secrets \
+        -o yaml
+    ```
 
-We want to grab the results of this sealing activity, in particular the `encryptedData`.
-```bash
-cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
-```
+    We want to grab the results of this sealing activity, in particular the `encryptedData`.
 
-The output should look like this with massively long nonsense strings:
-<div class="highlight" style="background: #f7f7f7">
-<pre><code class="language-yaml">
-    username: AgAj3JQj+EP23pnzu...
-    password: AgAtnYz8U0AqIIaqYrj...
-</code></pre></div>
+    ```bash
+    cat /tmp/sealed-sonarqube-auth.yaml| grep -E 'username|password'
+    ```
+
+    The output should look like this with massively long nonsense strings:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+        username: AgAj3JQj+EP23pnzu...
+        password: AgAtnYz8U0AqIIaqYrj...
+    </code></pre></div>
 
 5. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
-```yaml
-        - name: sonarqube-auth
-          type: Opaque
-          labels:
-            credential.sync.jenkins.openshift.io: "true"
-          data:
-            username: AgAj3JQj+EP23pnzu...
-            password: AgAtnYz8U0AqIIaqYrj...
-  ```
-..and push the changes:
+    ```yaml
+            - name: sonarqube-auth
+              type: Opaque
+              labels:
+                credential.sync.jenkins.openshift.io: "true"
+              data:
+                username: AgAj3JQj+EP23pnzu...
+                password: AgAtnYz8U0AqIIaqYrj...
+      ```
 
-```bash
-cd /projects/tech-exercise
-git add ubiquitous-journey/values-tooling.yaml
-git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳" 
-git push
-```
+    and push the changes:
+
+    ```bash
+    cd /projects/tech-exercise
+    git add ubiquitous-journey/values-tooling.yaml
+    git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳" 
+    git push
+    ```
 
 6. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
 
-```bash
-oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
-```
+    ```bash
+    oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
+    ```
 
 7. Connect to Sonarqube UI to verify if the installation is successful (username `admin` & password `admin123`):
 
-```bash
-echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
-```
-![sonary-alive](./images/sonary-alive.png)
+    ```bash
+    echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    ```
 
+    ![sonary-alive](./images/sonary-alive.png)
 
-Now that we have the tool deployed... 
+    Now that we have the tool deployed ...
 
 #### In your groups pick the tool you'd like to integrate the pipeline with:
 
