@@ -1,11 +1,10 @@
-
-## Here be dragons!
+# Here be dragons!
 
 ![oh-look-another-dragon](../images/oh-look-dragons.png)
 
-### Tekton Pruning
+## Tekton Pruning
 
-We can globally configure pruning for Tekton resources by configuring the Operator *TektonConfig*. For example we can keep the last 15 *PipelineRun* resources, and prune every 15 minutes using this condifguration:
+We can globally configure pruning for Tekton resources by configuring the Operator *TektonConfig*. For example we can keep the last 15 *PipelineRun* resources, and prune every 15 minutes using this configuration:
 
 ```yaml
   pruner:
@@ -27,4 +26,4 @@ This generates a kubernetes *CronJob* in the *targetNamespace* which is:
 oc get cronjob resource-pruner -n openshift-pipelines -o yaml
 ```
 
-!> **GitOps** this should be put into the global chart/configuration used to deploy Tekton for the cluster.
+?> **GitOps** this should be put into the global chart/configuration used to deploy Tekton for the cluster.
