@@ -11,7 +11,7 @@ On the OpenShift UI, go to *Monitoring*, it should show basic health indicators
 
 2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your test namespace 
 ```
-sum(container_memory_working_set_bytes{container!='',namespace='pants-test'}) by (pod)
+sum(container_memory_working_set_bytes{container!='',namespace='<TEAM_NAME>-test'}) by (pod)
 ```
 ![petbattle-promql](images/petbattle-promql.png)
 
@@ -85,11 +85,11 @@ If you use `Log in with OpenShift` to login and display dashboards - you user wi
 5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `pet-battle-api`. In your IDE, run on your terminal:
 ```bash
 curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/dogs
-curl -vL -X POST -d '{"OK":"🐈"}' $(oc get route/pet-battle-api -n pants-test --template='{{.spec.host}}')/cats/
+curl -vL -X POST -d '{"OK":"🐈"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
 curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
-curl -vL -X POST -d '{"OK":"🦆"}' $(oc get route/pet-battle-api -n pants-test --template='{{.spec.host}}')/cats/
+curl -vL -X POST -d '{"OK":"🦆"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
 curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
-curl -vL -X POST -d '{"OK":"🐶"}' $(oc get route/pet-battle-api -n pants-test --template='{{.spec.host}}')/cats/
+curl -vL -X POST -d '{"OK":"🐶"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
 ```
 
 6. Back in Grafana, we should see some data populated into the `4xx` and `5xx` boards...
