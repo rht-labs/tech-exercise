@@ -2,7 +2,7 @@
 
 Let's enable the **kube-linter** task in our pipeline.
 
-1. Kube lint has a tekton task on tekton hub so let's grab it and add the `Task` to our cluster. Feel free to explore what the `Task` will be doing 
+1. Kube lint has a tekton task on Tekton Hub so let's grab it and add the `Task` to our cluster. Feel free to explore what the `Task` will be doing 
 
     ```bash
     curl -sLo /projects/tech-exercise/tekton/templates/tasks/kube-linter.yaml \
@@ -17,72 +17,9 @@ Let's enable the **kube-linter** task in our pipeline.
     git push
     ```
 
-2. While this is being sync'd to the cluster - let's try StackRox **kube-linter** out locally on the **chart** folder. (As you can see we've got a list of things we need to fix 👀)
+2. We could run the **kube-linter** task with all default checks in our pipeline but this would fail the build. So let's do the _naughty thing_ and run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml` (stored in `/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`). 
 
-    ```bash
-    cd /projects/pet-battle-api
-    kube-linter lint chart/
-    ```
-
-3. Kube Lint has a load of built in best practices to check for when performing a lint. We can list them
-
-    ```bash
-    kube-linter checks list | grep Name:
-    ```
-
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-    Name: cluster-admin-role-binding
-    Name: dangling-service
-    Name: default-service-account
-    Name: deprecated-service-account-field
-    Name: docker-sock
-    Name: drop-net-raw-capability
-    Name: env-var-secret
-    Name: exposed-services
-    Name: host-ipc
-    Name: host-network
-    Name: host-pid
-    Name: mismatching-selector
-    Name: no-anti-affinity
-    Name: no-extensions-v1beta
-    Name: no-liveness-probe
-    Name: no-read-only-root-fs
-    Name: no-readiness-probe
-    Name: non-existent-service-account
-    Name: privilege-escalation-container
-    Name: privileged-container
-    Name: privileged-ports
-    Name: required-annotation-email
-    Name: required-label-owner
-    Name: run-as-non-root
-    Name: sensitive-host-mounts
-    Name: ssh-port
-    Name: unsafe-proc-mount
-    Name: unsafe-sysctls
-    Name: unset-cpu-requirements
-    Name: unset-memory-requirements
-    Name: writable-host-mount
-    </code></pre></div>
-
-4. We could run the **kube-linter** task with all default checks in our pipeline but this would fail the build...
-
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-        - name: kube-linter
-        runAfter:
-        - fetch-app-repository
-        taskRef:
-            name: kube-linter
-        workspaces:
-            - name: source
-            workspace: shared-workspace
-        params:
-            - name: manifest
-            value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
-    </code></pre></div>
-
-5. So let's do the _naughty thing_ and run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml` (stored in `/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`). Be sure to update the `maven` Task in the pipeline as well so its `runAfter` is the `kube-linter` Task.
+ Be sure to update the `maven` Task in the pipeline as well so its `runAfter` is the `kube-linter` Task 💪
 
     ```yaml
         # Kube-linter
@@ -102,6 +39,37 @@ Let's enable the **kube-linter** task in our pipeline.
             - name: includelist
               value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
     ```
+
+    You should have a pipeline definition like this:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+        - name: kube-linter
+        runAfter:
+        - fetch-app-repository
+        taskRef:
+            name: kube-linter
+        workspaces:
+            - name: source
+            workspace: shared-workspace
+        params:
+            - name: manifest
+              value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
+            - name: default_option
+              value: do-not-auto-add-defaults
+            - name: includelist
+              value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
+        
+        - name: maven
+          runAfter: <- make sure you update this 💪💪
+            - kube-linter <- make sure you update this 💪💪
+          taskRef:
+            name: maven
+          params:
+            - name: WORK_DIRECTORY
+            value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+    ....
+    </code></pre></div>
+
 
 6. Check our changes into git.
 
@@ -193,4 +161,4 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     git push
     ```
 
-    🪄 Obeserve the **pet-battle-api** pipeline running successfully again.
+    🪄 Observe the **pet-battle-api** pipeline running successfully again.

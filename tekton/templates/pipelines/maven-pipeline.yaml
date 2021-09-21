@@ -92,8 +92,6 @@ spec:
         - name: sonarqube-auth
           secret:
             secretName: sonarqube-auth
-      runAfter:
-        - fetch-app-repository
 
     - name: bake
       taskRef:
