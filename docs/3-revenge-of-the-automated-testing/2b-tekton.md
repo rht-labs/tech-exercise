@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Automated Testing
+## Extend Tekton Pipeline with Automated Testing
 > In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
 
 #### Part 1 - Allure 

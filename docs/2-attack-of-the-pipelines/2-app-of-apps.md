@@ -1,4 +1,4 @@
-# Deploy App of Apps
+## Deploy App of Apps
 
 We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
@@ -6,7 +6,7 @@ A developer can get the same experience and end result installing an application
 
 We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In PetBattle we generate the app-of-apps definitions using a Helm chart.
 
-## Deploying Pet Battle - Keycloak
+### Deploying Pet Battle - Keycloak
 
 > In this exercise we'll deploy PetBattle and a supporing piece of tech it uses (Keycloak) using the same pattern. We'll deploy PetBattle to two environments - `test` and `stage` by configuring the values files in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
 
@@ -60,7 +60,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 5. In ArgoCD at this point we should see things start to get a bit more busy:
 ![arogcd-app-of-pb.png](images/arogcd-app-of-pb.png)
 
-## Deploying Pet Battle
+### Deploying Pet Battle
 > Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. Each environment folder (test / stage) contains the configuration for the corresponding projects in OpenShift. All we need to do is extend or edit the list of `applications` for the changes to be synced to the cluster. We can also separate test environment config from staging or even prod using this method.
 
 1. In your IDE, open up the `pet-battle/test/values.yaml` file and copy the following:

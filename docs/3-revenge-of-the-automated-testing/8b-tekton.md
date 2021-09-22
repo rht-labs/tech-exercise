@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Image Signing
+## Extend Tekton Pipeline with Image Signing
 
 
 1. Add a task into our codebase to sign our built images.

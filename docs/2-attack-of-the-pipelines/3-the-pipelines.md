@@ -1,4 +1,4 @@
-### Pipelines
+## Pipelines
 
 Why create pipelines:
 * Assurance - drive up code quality and remove the need for dedicated deployment / release management teams

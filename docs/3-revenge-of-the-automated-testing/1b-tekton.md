@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Sonar Scanning
+## Extend Tekton Pipeline with Sonar Scanning
 
 > In this exercise, we're going to edit the tekton `Pipeline` to run code-analysis using sonar of the API and add an additional `Task` to analyse the results
 

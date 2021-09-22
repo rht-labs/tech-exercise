@@ -1,4 +1,4 @@
-# Extend Jenkins Pipeline with Automated Testing
+## Extend Jenkins Pipeline with Automated Testing
 
 > Jest is a super fast light weight JavaScript testing framework built by the friendly people at Facebook. We will use it to assess our Angular components.
 

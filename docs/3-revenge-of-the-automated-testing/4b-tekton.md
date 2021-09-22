@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Code Linting Task
+## Extend Tekton Pipeline with Code Linting Task
 
 1. Code formatting as part of the maven build lifecycle
     - https://code.revelc.net/formatter-maven-plugin/usage.html

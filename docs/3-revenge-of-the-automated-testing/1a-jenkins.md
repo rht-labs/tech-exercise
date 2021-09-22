@@ -1,4 +1,4 @@
-### Extend Jenkins Pipeline with Sonar Scanning
+## Extend Jenkins Pipeline with Sonar Scanning
 > In this exercise, we'll connect our code base to Sonar for quality metrics
 
 1. Open the CodeReadyWorkspace and create a sonar file in the root of the `pet-battle` project. This file contains the information of Sonarqube instance and other properties for the scanner to use while assessing the code base.

@@ -1,4 +1,4 @@
-### Extend Jenkins Pipeline with Code Linting Step
+## Extend Jenkins Pipeline with Code Linting Step
 
 1. JavaScript has many wonderful _quirks_ and because it's not compiled being able to ensure code is written to a specific style is very important. Enter linting the code! In a large software project ensuring consistency across all engineers can be really helpful for support. We can also enforce the rules in the build! Let's play with them locally first, in your IDE install the app dependencies and run the linter:
 

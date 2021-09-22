@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with Load Testing
+## Extend Tekton Pipeline with Load Testing
 
 1. For load testing, we will use a Python-based open source tool called [`locust`](https://docs.locust.io/en/stable/index.html). Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
 

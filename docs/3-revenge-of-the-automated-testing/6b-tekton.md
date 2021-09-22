@@ -1,4 +1,4 @@
-### Extend Tekton Pipeline with OWASP Zap Security Scanning
+## Extend Tekton Pipeline with OWASP Zap Security Scanning
 
 <p class="warn"> You will need to have *Allure* deployed from the testing exercise to run this task. If you did not do this task when prioritizing your work, no big deal, just <a href="/#/3-revenge-of-the-automated-testing/2b-tekton?id=part-1-allure">head over here</a> and do <strong>Part 1 only</strong>.
 </p>
