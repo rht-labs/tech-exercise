@@ -9,7 +9,7 @@ practices
 of issues
 
 ## 👨‍🍳 Exercise Intro
-In this exercise, we will use OpenShift out-of-the-box monitoring and logging stack. We will collect PetBattle metrics with `Prometheus` and set alerts with some sensible tresholds. Also visualize PetBattle metrics with `Grafana` to have a better understanding of PetBattle's internals. Moreover, we will gather logs of the apps to store in `ElasticSearch` and visualize them with the help of `Kibana`.
+In this exercise, we will use OpenShift out-of-the-box monitoring and logging stack. We will collect PetBattle metrics with `Prometheus` and set alerts with some sensible tresholds. Also visualize PetBattle metrics with `Grafana` to have a better understanding of PetBattle's status. Moreover, we will gather logs of the apps to store in `ElasticSearch` and visualize them with the help of `Kibana`.
 ## 🖼️ Big Picture
 ![big-picture-monitoring](images/big-picture-monitoring.jpg)
 ## 🔮 Learning Outcomes

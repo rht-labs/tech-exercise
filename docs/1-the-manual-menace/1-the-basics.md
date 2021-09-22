@@ -5,7 +5,7 @@
 ![crw](./images/crw.png)
 
 <p class="warn">
-If the workspace has not been set up for you, you can create one from this devfile. On Code Ready Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
+If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
 <a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a>
 </p>
 
@@ -18,12 +18,12 @@ If the workspace has not been set up for you, you can create one from this devfi
 echo "zsh" >> ~/.bashrc
 ```
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by replacing this and running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
+4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
 ```bash
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-5. Retrieve the `CLUSTER_DOMAIN` from the facilitator and add it to the environment:
+5. Add the `CLUSTER_DOMAIN` to the environment:
 ```bash
 echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 ```

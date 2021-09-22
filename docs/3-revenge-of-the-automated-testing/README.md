@@ -4,13 +4,11 @@
 
 Continuous Delivery needs rapid and reliable feedback. Investing in continuous testing is a worthwhile activity.
 
-<!-- ![images/continuous-testing.png](images/continuous-testing.png) -->
-
 ## 👨‍🍳 Exercise Intro
 
 **💥 Choose your own adventure 💥**
 
-There are lots of things we can do under the heading of `Quality Gates`, so decide for yourselves what you'd like to do. In your table groups, create a Kanban with each of the exercise titles. Discuss among yourselves the order you'd like to do them in and as mobs / pairs etc take tasks from the list and implement them. At the end of each section, play back to the other group what you've accomplished. Then grab the next priortized item on your list!
+There are lots of things we can do under the heading of `Quality Gates`, so decide for yourselves what you'd like to do. In your table groups, create a Kanban with each of the exercise titles. Discuss among yourselves the order you'd like to do them in and as mobs / pairs, take tasks from the list and implement them. At the end of each section, play back to the other group what you've accomplished. Then grab the next priortized item on your list!
 
 ![team-kanban](images/team-kanban.jpg)
 
