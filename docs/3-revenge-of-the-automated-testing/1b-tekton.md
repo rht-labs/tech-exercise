@@ -26,8 +26,7 @@
             - name: output
               workspace: shared-workspace
             - name: sonarqube-auth
-              secret:
-                secretName: sonarqube-auth
+              workspace: sonarqube-auth
     ```
 
 2. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image.
@@ -125,7 +124,7 @@
 
 4. In Tekton, we can control flow by using `runAfter` to organize the structure of the pipeline. Adjust the `maven` build step's `runAfter` to be `analysis-check` so the static analysis steps happen before we even compile the app!
 
-    <code class="language-yaml">
+    <div class="highlight" style="background: #f7f7f7"><pre><code class="language-yaml">
         - name: maven
           taskRef:
             name: maven

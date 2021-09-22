@@ -147,11 +147,11 @@ Lets start by sealing our StackRox credentials.
     cat << EOF > /tmp/rox-auth.yaml
     apiVersion: v1
     data:
-    password: "$(printf ${ROX_API_TOKEN} | base64 -w0)"
-    username: "$(printf ${ROX_ENDPOINT} | base64 -w0)"
+      password: "$(printf ${ROX_API_TOKEN} | base64 -w0)"
+      username: "$(printf ${ROX_ENDPOINT} | base64 -w0)"
     kind: Secret
     metadata:
-    name: rox-auth
+      name: rox-auth
     EOF
     ```
 
