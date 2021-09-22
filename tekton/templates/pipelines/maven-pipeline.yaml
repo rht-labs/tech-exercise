@@ -75,6 +75,8 @@ spec:
     - name: maven
       taskRef:
         name: maven
+      runAfter:
+         - fetch-app-repository
       params:
         - name: WORK_DIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"

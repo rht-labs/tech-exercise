@@ -60,10 +60,10 @@ Let's enable the **kube-linter** task in our pipeline.
               value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
         
         - name: maven
-          runAfter: <- make sure you update this 💪💪
-            - kube-linter <- make sure you update this 💪💪
           taskRef:
             name: maven
+          runAfter: <- make sure you update this 💪💪
+            - kube-linter <- make sure you update this 💪💪
           params:
             - name: WORK_DIRECTORY
             value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
