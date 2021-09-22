@@ -1,6 +1,6 @@
-### Alerting and Notifications
+## Alerting and Notifications
 > OpenShift's built in alerts.... blah
-#### Platform Alerts
+### Platform Alerts
 1. The Pet Battle API and UI charts both have one basic `rule` for firing off an alert. If you open up the `/projects/pet-battle-api/chart/templates/prometheusrule.yaml` you'll see one configured to alert when a pod is not available for one minute. The alert rules are written in PromQL.
 
   <div class="highlight" style="background: #f7f7f7">

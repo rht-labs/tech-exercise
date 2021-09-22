@@ -1,4 +1,4 @@
-#### Aggregated Logging
+## Aggregated Logging
 > OpenShift's built in logging .... Something something installed operator before hand. Very memory intensive, logging can be deployed to the infra plane though...
 
 1. Observe logs from any given container:
