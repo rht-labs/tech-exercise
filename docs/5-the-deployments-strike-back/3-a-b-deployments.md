@@ -3,12 +3,89 @@
 
 [OpenShift Docs](https://docs.openshift.com/container-platform/4.8/applications/deployments/route-based-deployment-strategies.html#deployments-ab-testing_route-based-deployment-strategies) is pretty good at showing an example of how to do a manual A/B deployment. But in the real world you'll want to automate this by increasing the load of the alternative service based on some tests or other metric. Plus this is GITOPS! So how do we do a A/B with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
-[TODO - ADD the DIAGRAM for what's happening]
+![a-b-diagram](images/a-b-diagram.jpg)
 
-- Let's explore `route` definition.
-[TODO - Insert existing route definition and introduce alternateBackends]
+- As you see in the diagram, OpenShift can distribute the traffic that coming to Route. But how does it do it? Let's explore `route` definition. This is a classic Route definition: 
+  <div class="highlight" style="background: #f7f7f7">
+  <pre><code class="language-yaml">
+  apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: pet-battle
+  spec:
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: pet-battle
+      weight: 100       <-- All of the traffic goes to `pet-battle` service
+    ...
+  </code></pre></div>
 
-1. First let's deploy our experiment we want to compare -  let's call this `A` and we'll use our existing Pet Battle deployment as `B`
+  In order to split the traffic, we introduce something called `alternateBackends`.
+
+  <div class="highlight" style="background: #f7f7f7">
+  <pre><code class="language-yaml">
+  apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: pet-battle
+  spec:
+    port:
+      targetPort: 8080-tcp
+    to:
+      kind: Service
+      name: pet-battle
+      weight: 80
+    alternateBackends: <-- This helps us to divide the traffic
+    - kind: Service
+      name: pet-battle-b
+      weight: 20       <-- based on the percentage we give
+  </code></pre></div>
+
+  PetBattle UI helm chart already has this capability. We just need to enable it through `values`.
+
+### A/B and Analytics
+> The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our endusers, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
+
+Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
+
+1. Open up `tech-exercise/ubiquitous-journey/values-tooling.yaml` file and add the following application definition:
+
+```yaml
+  # Matomo
+  matomo:
+    name: matomo
+    enabled: true
+    source: https://petbattle.github.io/helm-charts
+    chart_name: matomo
+    source_ref: "4.1.1+01"
+```
+
+Push the changes:
+```bash
+cd /projects/tech-exercise
+git add .
+git commit -m  "📈 ADD - matomo app 📈"
+git push 
+```
+
+See Matomo is deploying:
+```bash
+oc get pod -n ${TEAM_NAME}-ci-cd -w
+```
+When Matomo pods are running, get the URL and connect it:
+```bash
+echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
+``` 
+- Username: `admin`
+- Password: `My$uper$ecretPassword123#`
+
+2. Currently, there is no data yet. But Pet Battle is already configured to send data to Matomo everytime a connection happens. (see `tech-exercise/pet-battle/test/values.yaml` and look for `matomo`) Let's advance to experiment with A/B deployment and check Matomo UI on the way.
+
+
+### A/B Deployment
+1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`
   ```bash
   cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
     # Pet Battle UI - experiment
@@ -37,11 +114,11 @@
   EOF
   ```
 
-2. Extend the cofiguration for the Pet Battle deployment by adding the `a_b_deploy` properties to the values section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
+2. Extend the cofiguration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the values section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
   ```yaml
         a_b_deploy:
           a_weight: 80
-          b_weight: 20 # 20% of the traffic will be directed to 'a'
+          b_weight: 20 # 20% of the traffic will be directed to 'A'
           svc_name: pet-battle-b
   ```
   The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different)
@@ -57,7 +134,7 @@
         image_version: latest # container image version  
         <strong>a_b_deploy:
           a_weight: 80
-          b_weight: 20 # 20% of the traffic will be directed to 'b'
+          b_weight: 20 # 20% of the traffic will be directed to 'B'
           svc_name: pet-battle-b</strong>
         config_map: ...
   </code></pre></div>
@@ -133,9 +210,3 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
   git commit -m  "💯 service B weight increased to 100 💯"
   git push
   ```
-### A/B and Analytics
-> something somethign matomo / google analytics
-
-1. Deploy matomo via our argocd stuff
-2. make app change for the experiment we want to run eg upvote / downvote
-3. show data in the matomo server
