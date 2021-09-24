@@ -43,7 +43,7 @@
       weight: 20       <-- based on the percentage we give
   </code></pre></div>
 
-  PetBattle UI helm chart already has this capability. We just need to enable it through `values`.
+  PetBattle UI helm chart already has this capability. We just need to enable it through `values`. But before that, we need to install a helper tool.
 
 ### A/B and Analytics
 > The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our endusers, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
@@ -54,12 +54,12 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
 ```yaml
   # Matomo
-  matomo:
-    name: matomo
-    enabled: true
-    source: https://petbattle.github.io/helm-charts
-    chart_name: matomo
-    source_ref: "4.1.1+01"
+  - matomo:
+      name: matomo
+      enabled: true
+      source: https://petbattle.github.io/helm-charts
+      chart_name: matomo
+      source_ref: "4.1.1+01"
 ```
 
 Push the changes:
@@ -81,8 +81,7 @@ echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.hos
 - Username: `admin`
 - Password: `My$uper$ecretPassword123#`
 
-2. Currently, there is no data yet. But Pet Battle is already configured to send data to Matomo everytime a connection happens. (see `tech-exercise/pet-battle/test/values.yaml` and look for `matomo`) Let's advance to experiment with A/B deployment and check Matomo UI on the way.
-
+2. Currently, there is no data yet. But Pet Battle is already configured to send data to Matomo everytime a connection happens. (open up `tech-exercise/pet-battle/test/values.yaml` file and look for `matomo`) Let's start experimenting with A/B deployment and check Matomo UI on the way.
 
 ### A/B Deployment
 1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`
