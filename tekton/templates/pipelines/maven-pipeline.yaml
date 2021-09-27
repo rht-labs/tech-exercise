@@ -92,8 +92,8 @@ spec:
         - name: output
           workspace: shared-workspace
         - name: sonarqube-auth
-          secret:
-            secretName: sonarqube-auth
+        - name: sonarqube-auth
+          workspace: sonarqube-auth
 
     - name: bake
       taskRef:
