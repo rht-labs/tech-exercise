@@ -46,4 +46,5 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
     ```
 
 2. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Make sure you **untick** `Enable SSL verification` and then click `Add webhook`.
-![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
+
+    ![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
