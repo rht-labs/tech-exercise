@@ -29,7 +29,16 @@
               workspace: sonarqube-auth
     ```
 
-2. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image.
+2. We also need to bind the `sonarqube-auth` workspace to our secret when we trigger the Pipeline to run. To do this edit `tekton/templates/triggers/gitlab-trigger-template.yaml` file, add this code to the end of the `workspaces list` where the `# sonarqube-auth` placeholder is:
+
+    ```yaml
+        # sonarqube-auth
+        - name: sonarqube-auth
+          secret:
+            secretName: sonarqube-auth
+    ```
+
+3. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image.
 
     ```bash
     cd /projects/tech-exercise
@@ -102,7 +111,7 @@
     EOF
     ```
 
-3. Let's add this task to our pipleine. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
+4. Let's add this task to our pipleine. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
 
     ```yaml
         # Code Analysis Check
@@ -122,7 +131,7 @@
           - code-analysis
     ```
 
-4. In Tekton, we can control flow by using `runAfter` to organize the structure of the pipeline. Adjust the `maven` build step's `runAfter` to be `analysis-check` so the static analysis steps happen before we even compile the app!
+5. In Tekton, we can control flow by using `runAfter` to organize the structure of the pipeline. Adjust the `maven` build step's `runAfter` to be `analysis-check` so the static analysis steps happen before we even compile the app!
 
     <div class="highlight" style="background: #f7f7f7"><pre><code class="language-yaml">
         - name: maven
@@ -146,7 +155,7 @@
             - analysis-check</strong>
     </code></pre></div>
 
-5. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:
+6. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:
 
     ```bash
     cd /projects/tech-exercise
@@ -155,7 +164,7 @@
     git push 
     ```
 
-6. Now let's trigger a pipeline build - we can push an empty commit to the repo to trigger the pipeline:
+7. Now let's trigger a pipeline build - we can push an empty commit to the repo to trigger the pipeline:
 
     ```bash
     cd /projects/pet-battle-api
@@ -167,7 +176,7 @@
 
     ![images/sonar-pb-api-code-quality](images/sonar-pb-api-code-quality.png)
 
-7. When the pipeline has complete - we can inspect the results in Sonarqube UI. Browse to Sonarqube URL
+8. When the pipeline has complete - we can inspect the results in Sonarqube UI. Browse to Sonarqube URL
 
     ```bash
     echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
