@@ -114,4 +114,4 @@ Now we can use ACS to help move security **LEFT** in our build pipeline. In each
 | * Configure your pipeline to `check` build time policy violations | * Configure your pipeline to `check` build time policy violations |
 | * Configure your pipeline to `scan` images for CVE/CVSS | * Configure your pipeline to `scan` images for CVE/CVSS |
 | * Break/Fix your pipeline | * Break/Fix your pipeline |
-| [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/6b-tekton.md) |
+| [jenkins](3-revenge-of-the-automated-testing/7a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/7b-tekton.md) |
