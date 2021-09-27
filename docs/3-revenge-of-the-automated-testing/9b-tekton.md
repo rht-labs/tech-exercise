@@ -6,13 +6,13 @@
 
     _You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
 
-    Below scenario calls `/` endpoint and fails the test if:
+    Below scenario calls `/cats` endpoint and fails the test if:
     - 1% of calls are not 200 (OK)
     - Total average response time to `/cats` endpoint is more than 200 ms
     - The max response time in 90 percentile is higher than 800 ms
 
     ```bash
-    cat << EOF > /projects/pet-battle/locustfile.py
+    cat << EOF > /projects/pet-battle-api/locustfile.py
 
     import logging
     from locust import HttpUser, task, events

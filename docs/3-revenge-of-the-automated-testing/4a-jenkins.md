@@ -27,7 +27,7 @@
 
     ```groovy
                     //💅 Lint exercise here
-                    echo '### Running Jest Testing ###'
+                    echo '### Running Linting ###'
                     sh 'npm run lint'
     ```
 

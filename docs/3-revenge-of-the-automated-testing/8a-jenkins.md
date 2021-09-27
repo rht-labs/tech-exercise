@@ -21,6 +21,7 @@
 2. Add a new stage into Jenkinsfile with cosign steps. Image signing should run after image build. Copy the below block into the right placeholder:
 
     ```groovy
+            // 🔏 IMAGE SIGN EXAMPLE GOES HERE
             stage("🔏 Image Signing") {
                 agent { label "jenkins-agent-cosign" }
                 steps {

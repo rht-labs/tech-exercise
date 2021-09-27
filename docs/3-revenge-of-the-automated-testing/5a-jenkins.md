@@ -2,7 +2,7 @@
 
 Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Package"`. This stage runs `helm lint` and then package the helm chart to store in Nexus. But `helm lint` only checks the chart for possible issues like if there is a wrong intendention etc but we want to extend this stage with `kube-linter` to also check for security misconfigurations and Kubernetes best practices.
 
-1. Add the following code snippet into the placeholder in Jenkinsfile under `/projects/pet-battle/`.
+1. Add the following code snippet into the placeholder in Jenkinsfile under `/projects/pet-battle/`. It is under `stage("🏗️ Deploy - Helm Package")` stage.
 
     ```groovy
 			// Kube-linter step

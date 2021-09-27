@@ -19,7 +19,7 @@
             - name: jenkins-agent-mvn
             - name: jenkins-agent-helm
             - name: jenkins-agent-argocd
-            - name: jenkins-agent-python
+            - name: jenkins-agent-python # add this
     </code></pre></div>
 
     Commit the changes to the Git repository:
@@ -68,7 +68,7 @@
 3. Create a stage which uses `jenkins-agent-python` agent and triggers the load test. Copy the below code to the placeholder in `/project/pet-battle/Jenkinsfile`:
 
     ```groovy
-            // LOADTESTING
+            // 🏋🏻‍♀️ LOAD TESTING EXAMPLE GOES HERE
             stage("🏋🏻‍♀️ Load Testing") {
                 agent { label "jenkins-agent-python" }
                 steps {
