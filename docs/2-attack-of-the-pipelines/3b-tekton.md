@@ -15,7 +15,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 #### Deploying the Tekton Objects
 
-1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle-api`. Make the project as **public**.
+1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle-api`. Make the project as **internal**.
 
 ![pet-battle-api-git-repo](images/pet-battle-api-git-repo.png)
 
