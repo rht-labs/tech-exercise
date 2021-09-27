@@ -142,7 +142,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 5. You should see the two Pet Battle apps for `test` and `stage` deployed in ArgoCD and if you drill into one eg `test-app-of-pb` you'll see each of the three components of PetBattle:
 ![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
 
-6. Finally - let's see if the whole thing in working. Go to OpenShift -> Developer View -> Topology and select your `<TEAM_NAME>-test` project.
+6. Finally - let's see if the whole thing in working. Go to `OpenShift -> Developer View -> Topology` and select your `<TEAM_NAME>-test` project.
     </br>
     🪄 🪄 You should be able to see the Pet Battle Applications running. 🪄 🪄
 

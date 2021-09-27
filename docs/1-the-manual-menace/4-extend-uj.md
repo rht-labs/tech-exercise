@@ -37,7 +37,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
     ![nexus](images/nexus.png)
 
 #### Add ArgoCD Webhook from GitLab
-> ArgoCD has a cycle time of about 5ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. 
+> ArgoCD has a cycle time of about 3ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. 
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 
