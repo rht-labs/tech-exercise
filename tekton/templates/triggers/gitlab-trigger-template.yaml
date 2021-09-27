@@ -67,4 +67,4 @@ spec:
         - name: sonarqube-auth
           secret:
             secretName: sonarqube-auth
-          optional: true
+
