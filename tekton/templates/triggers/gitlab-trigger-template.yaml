@@ -64,7 +64,3 @@ spec:
         - name: git-auth
           secret:
             secretName: git-auth
-        - name: sonarqube-auth
-          secret:
-            secretName: sonarqube-auth
-
