@@ -1,5 +1,5 @@
 # Extend Tekton Pipeline with Stackrox
-
+<!---
 > We are going to make use of ACS to move security checks into our pipeline. We will look at:
 > - **roxctl** - using the ACS/StackRox CLI
 > - **kube-linter** - adding the ACS/StackRox kube linter Task to check deployment configurations
@@ -136,9 +136,8 @@ Let's learn how to use the **roxctl** command line.
     ```
 
     ![images/acs-scan-deployment-cli.png](images/acs-scan-deployment-cli.png)
-
 ## StackRox scan,check Tasks
-
+--->
 Lets start by sealing our StackRox credentials.
 
 1. Run this command. This will generate a Kubernetes secret object in `tmp`
@@ -177,22 +176,14 @@ Lets start by sealing our StackRox credentials.
         password: AgAtnYz8U0AqIIaqYrj...
     </code></pre></div>
 
-4. In `ubiquitous-journey/values-tooling.yaml` add an entry for `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
 
     ```yaml
-      # Sealed Secrets
-      - name: sealed-secrets
-        enabled: true
-        source: https://redhat-cop.github.io/helm-charts
-        chart_name: helper-sealed-secrets
-        source_ref: "1.0.2"
-        values:
-          secrets:
-            - name: rox-auth
-              type: kubernetes.io/basic-auth
-              data:
-                password: BASE64_ROX_API_TOKEN
-                username: BASE64_ROX_ENDPOINT
+          - name: rox-auth
+            type: kubernetes.io/basic-auth
+            data:
+              username: AgAj3JQj+EP23pnzu...
+              password: AgAtnYz8U0AqIIaqYrj...
     ```
 
 5. Check our changes into git.
@@ -269,13 +260,13 @@ Lets start by sealing our StackRox credentials.
     git push 
     ```
 
-3. Reinstall our App-of-Apps helm chart with the new definition.
+<!-- 3. Reinstall our App-of-Apps helm chart with the new definition.
 
     ```bash
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
-    ```
+    ``` -->
 
-4. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
+3. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
 
     ```yaml
         # Image Scan
@@ -296,7 +287,7 @@ Lets start by sealing our StackRox credentials.
               value: pretty
     ```
 
-5. Check in these changes.
+4. Check in these changes.
 
     ```bash
     # git add, commit, push your changes..
@@ -305,7 +296,7 @@ Lets start by sealing our StackRox credentials.
     git push 
     ```
 
-6. Trigger a pipeline build.
+5. Trigger a pipeline build.
 
     ```bash
     cd /projects/pet-battle-api

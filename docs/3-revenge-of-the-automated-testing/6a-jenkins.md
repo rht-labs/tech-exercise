@@ -20,14 +20,15 @@
     git push
     ```
 
-2. Let's run
+2. Open up `/projects/pet-battle/Jenkinsfile` and add the below stage where `// 🐝 OWASP ZAP STAGE GOES HERE` placeholder is, to trigger ZAP scanning against Pet Battle. This stage will create a report on possible security vulnerabilities.
 
     ```groovy
-            stage('  OWASP Scan') {
+            // 🐝 OWASP ZAP STAGE GOES HERE
+            stage('🐝 OWASP Scan') {
                 agent { label "jenkins-agent-zap" }
                 steps {
                 sh '''
-                    /zap/zap-baseline.py -r index.html -t http://<some website url> || return_code=$?
+                    /zap/zap-baseline.py -r index.html -t https://pet-battle-${TEAM_NAME}-test.<CLUSTER_DOMAIN> || return_code=$?
                     echo "exit value was  - " $return_code
                 ''' }
                 post {
@@ -43,3 +44,14 @@
             ] }
             } }
     ```
+
+3. Push your changes, then observe the pipeline:
+
+    ```bash
+    cd /projects/pet-battle
+    git add Jenkinsfile
+    git commit -m  "🍯 ADD - OWASP ZAP scanning 🍯"
+    git push
+    ```
+
+4. 

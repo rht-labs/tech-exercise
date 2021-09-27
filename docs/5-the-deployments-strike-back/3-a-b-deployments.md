@@ -113,14 +113,14 @@ echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.hos
   EOF
   ```
 
-2. Extend the cofiguration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the values section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
+2. Extend the cofiguration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the `values` section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
   ```yaml
         a_b_deploy:
           a_weight: 80
           b_weight: 20 # 20% of the traffic will be directed to 'A'
           svc_name: pet-battle-b
   ```
-  The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different)
+  The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different):
   <div class="highlight" style="background: #f7f7f7">
   <pre><code class="language-yaml">
     pet-battle:
@@ -152,7 +152,7 @@ echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.hos
   oc get svc -l app.kubernetes.io/name=pet-battle-b -n ${TEAM_NAME}-test
   ```
 
-5. Before verify the traffic redirection, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` HTML Tag under the `<!-- Green #009B00 -->`.
+5. Before verify the traffic redirection, let's make a simple application change to make this more visual! In the frontend, we'll change the banner along the top of the app. In your IDE, open `/projects/pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` HTML Tag under the `<!-- Green #009B00 -->`.
 
   <strong>Remove the line</strong> for the original `<nav class="navbar navbar-expand-lg navbar-dark bg-dark">`. It appears like this:
     ```html
@@ -161,7 +161,7 @@ echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.hos
         <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #009B00;">
     ```
 
-6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
+6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository.
   <div class="highlight" style="background: #f7f7f7">
   <pre><code class="language-yaml">
   "name": "pet-battle",
@@ -209,3 +209,5 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
   git commit -m  "💯 service B weight increased to 100 💯"
   git push
   ```
+
+  ..and do not forget to check Matomo!

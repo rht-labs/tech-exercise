@@ -6,7 +6,7 @@ The time between software being written and tested, till it is deployed in produ
 ## 👨‍🍳 Exercise Intro
 In this exercise, we will enable autoscale for frontend and run some tests to trigger scaling. Then, we will experience Blue/Green and A/B deployments with OpenShift's existing capabilities: deployments, services and routes. 
 ## 🖼️ Big Picture
-![big-picture-complete](images/big-picture-complete.jpg)
+![big-picture-matomo](images/big-picture-matomo.jpg)
 ## 🔮 Learning Outcomes
 - [ ] Can enable Horizontal Pod Autoscaler
 - [ ] Can add Blue/Green deployment method into pipeline

@@ -40,14 +40,9 @@
     </code></pre></div>
 
 4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
-
     ```yaml
-            - name: allure-auth
+          - name: allure-auth
             type: Opaque
-            annotations:
-              tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
-            labels:
-              credential.sync.jenkins.openshift.io: "true"
             data:
               username: AgAj3JQj+EP23pnzu...
               password: AgAtnYz8U0AqIIaqYrj...
