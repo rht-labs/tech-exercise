@@ -78,7 +78,7 @@
         # Load Testing
         - name: load-testing
           runAfter:
-          - verify-deployment
+            - verify-deployment
           taskRef:
             name: load-testing
           workspaces:

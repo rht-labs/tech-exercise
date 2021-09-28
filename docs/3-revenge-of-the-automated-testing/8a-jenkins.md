@@ -46,31 +46,30 @@
     ```
 
     🪄 Observe the **pet-battle** pipeline running with the **image-sign** stage.
+    ![cosign-jenkins-pipeline](images/cosign-jenkins-pipeline.png)
 
-    After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed.
+    After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed.
 
-    ![cosign-image-signing](images/cosign-image-signing.png)
+    ![cosign-image-signing-pet-battleg](images/cosign-image-signing-pet-battle.png)
 
-    [TODO] update the screenshot
-
-4. Let's verify the signed image with the public key:
+4. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.3.1` in this case)
 
     ```bash
     cd /projects/pet-battle
     oc registry login
-    cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle
+    cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1
     ```
 
     The output should be like:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle --
+    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1 --
     The following checks were performed on each of these signatures:
     - The cosign claims were validated
     - The signatures were verified against the specified public key
     - Any certificates were verified against the Fulcio roots.
-    {"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
+    {"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle"},"image":{"docker-manifest-digest":"sha256:0ed4731d77bc2412079c85c6bc40f19c0a1615b9574cc3e7a7005910740248de"},"type":"cosign container image signature"},"optional":null}
     </code>
     </pre>
     </div>

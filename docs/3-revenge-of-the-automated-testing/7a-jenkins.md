@@ -35,7 +35,7 @@
                             curl -k -L -H "Authorization: Bearer ${ROX_CREDS_PSW}" https://${ROX_CREDS_USR}/api/cli/download/roxctl-linux --output roxctl  > /dev/null;
                             chmod +x roxctl > /dev/null
                             export ROX_API_TOKEN=${ROX_CREDS_PSW}
-                            ./roxctl image scan --insecure-skip-tls-verify -e ${ROX_CREDS_USR}:443 --image ${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} --format pretty
+                            ./roxctl image scan --insecure-skip-tls-verify -e ${ROX_CREDS_USR}:443 --image image-registry.openshift-image-registry.svc:5000/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} --format pretty
                         '''
 
                         // BUILD & DEPLOY CHECKS
@@ -69,14 +69,7 @@
                         sh '''
                             set +x
                             export ROX_API_TOKEN=${ROX_CREDS_PSW}
-                            ./roxctl image check --insecure-skip-tls-verify -e ${ROX_CREDS_USR}:443  --image ${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} --json --json-fail-on-policy-violations=true
-                            if [ $? -eq 0 ]; then
-                                echo "🦕 no issues found 🦕";
-                                exit 0;
-                            else
-                                echo "🛑 image checks failed 🛑";
-                                exit 1;
-                            fi
+                            ./roxctl image check --insecure-skip-tls-verify -e ${ROX_CREDS_USR}:443  --image image-registry.openshift-image-registry.svc:5000/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} --json --json-fail-on-policy-violations=false
                         '''
     ```
 2. Again, push the changes to the repo, which also will trigger the pipeline.
@@ -88,8 +81,14 @@
     git commit -m  "🎄 ADD - image scan stage 🎄"
     git push 
     ```
-    🪄 Observe the **pet-battle** pipeline running with two steps in one stage.
+    🪄 Observe the **pet-battle** pipeline, check the logs for image scanning stage and detects some violations for deploy 😔😔
+![acs-jenkins-pipeline](images/acs-jenkins-pipeline.png)
 
+3. Go back to StackRox webUI and see the failure in the *Violations* view. 
+    <p class="tip">We should have broken the pipeline and fix these violations in order to continue to our pipeline. Please refer _Here Be Dragons_ section for it.</p>
+
+![acs-pet-battle-violations](images/acs-pet-battle-violations.png)
+<!--
 ## Breaking the Build
 
 Let's run through a scenario where we break/fix the build using a build policy violation.
@@ -130,3 +129,4 @@ Let's run through a scenario where we break/fix the build using a build policy v
     ```
 
 🪄 Observe the **pet-battle** pipeline running successfully again.
+-->

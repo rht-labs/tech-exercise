@@ -80,7 +80,7 @@ git push
 4. Store the public key in `pet-battle-api` repository for anyone who would like to verify our images. This push will also trigger the pipeline.
 
 ```bash
-cp cosign.pub /projects/pet-battle-api/
+cp /tmp/cosign.pub /projects/pet-battle-api/
 cd /projects/pet-battle-api
 git add cosign.pub
 git commit -m  "🪑 ADD - cosign public key for image verification 🪑"
@@ -92,21 +92,21 @@ git push
 After the task succesfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sig` which shows you that this is image signed. 
 ![cosign-image-signing](images/cosign-image-signing.png)
 
-5. Let's verify the signed image with the public key:
+5. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.2.1` in this case)
 
 ```bash
 cd /projects/pet-battle-api
 oc registry login
-cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-cd-cd/pet-battle-api
+cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.2.1
 ```
 
 The output should be like:
 
 ```bash
-Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api --
+Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.2.1 --
 The following checks were performed on each of these signatures:
   - The cosign claims were validated
   - The signatures were verified against the specified public key
   - Any certificates were verified against the Fulcio roots.
-{"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-ci-cd/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
+{"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:ec332c568ef608b6f1d2d179d9ac154523fbe412b4f893d76d49d267a7973fea"},"type":"cosign container image signature"},"optional":null}
 ```
