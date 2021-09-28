@@ -17,7 +17,7 @@ When running through the exercise, we're tried to call out where things need rep
     name: biscuits
     </code></pre></div>
 
-There are lots of code blocks for you to copy/paste. They have little copy✂️ icon on the right if you move your cursor on the code block. 
+There are lots of code blocks for you to copy and paste. They have little ✂️ icon on the right if you move your cursor on the code block. 
 ```bash
 echo "like this one :)"
 ```

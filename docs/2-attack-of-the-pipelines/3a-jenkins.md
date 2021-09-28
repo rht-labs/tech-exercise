@@ -28,7 +28,7 @@ git push
 --->
 
 #### Setup Pet Battle (front end) Git Repo
-1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **internal**.
+1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)
 
@@ -56,7 +56,7 @@ git push
 
 1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in OpenShift BUTTTTTT this is GITOPS! :muscle: :gun:
 
-    Update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values 
+    Update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values to match with the following:
 
     ```yaml
           #... more jenkins configuration here
@@ -65,14 +65,14 @@ git push
               - name: GITLAB_DEFAULT_BRANCH
                 value: 'main'
               - name: GITLAB_HOST
-                value: 'https://gitlab-ce.<CLUSTER_DOMAIN>'
+                value: 'gitlab-ce.<CLUSTER_DOMAIN>'
               - name: GITLAB_GROUP_NAME
                 value: '<TEAM_NAME>'
               - name: BISCUITS
                 value: 'jaffa-cakes🍪'
     ```
 
-2. Jenkins will push changes to our Helm Chart to Nexus as part of the pipeline. Previously we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle-api`:
+2. Jenkins will push changes to our Helm Chart to Nexus as part of the pipeline. Previously we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -87,6 +87,7 @@ git push
         ...
     </code></pre></div>
 
+    Then do the same thing for `pet-battle/stage/values.yaml` file as well.
 3. Commit these changes to git so Argo CD can sync them.
 
     ```bash

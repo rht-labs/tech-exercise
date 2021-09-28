@@ -108,7 +108,8 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 3. The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
 
-    ```yaml
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
       # Pet Battle Frontend
       pet-battle:
         name: pet-battle
@@ -129,9 +130,9 @@ We deploy each of our applications using an Argo CD `application` definition. We
               "enableLogging": true
             }
           }'
-    ```
+    </code></pre></div>
 
-4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _Its not real unless its in git_
+4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
 
     ```bash
     git add .
