@@ -49,7 +49,7 @@
         currentPassword: AgAtnYz8U0AqIIaqYrj...
     </code></pre></div>
 
-3. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+3. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username`, `password` and `currentAdminPassword` from the previous command and update the values. Make sure you indent the data correctly.
 
     ```yaml
             - name: sonarqube-auth
@@ -59,7 +59,7 @@
               data:
                 username: AgAj3JQj+EP23pnzu...
                 password: AgAtnYz8U0AqIIaqYrj...
-                currentPassword: AgAtnYz8U0AqIIaqYrj...
+                currentAdminPassword: AgCHCphbYpeLYMPK...
       ```
 
     and push the changes:
@@ -70,6 +70,7 @@
     git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳"
     git push
     ```
+  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
 
 4. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
 

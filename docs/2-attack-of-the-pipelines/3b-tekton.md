@@ -151,7 +151,7 @@ In this snippet of the pipeline used in this exercise, we define:
     git push 
     ```
 
-    🪄 Observe Pipeline running by browsing to OpenShift Pipelines -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
+    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
     ![images/tekton-pipeline-running.png](images/tekton-pipeline-running.png)
 
@@ -160,3 +160,4 @@ In this snippet of the pipeline used in this exercise, we define:
 ```bash
 tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
 ```
+🪄OBSERVE PIPELINE RUNNING :D - At this point check in with the other half of the group and see if you’ve managed to integrate the apps🪄

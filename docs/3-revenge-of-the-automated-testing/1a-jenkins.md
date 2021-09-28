@@ -53,13 +53,13 @@
 3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where // SONARQUBE SCANNING placeholder is. This needs to be happen before the build.
 
     ```bash
-            // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
-            echo '### Running SonarQube ###'
-            sh '''
-              export SONARQUBE_USERNAME=${SONARQUBE_CREDS_USR}
-              export SONARQUBE_PASSWORD=${SONARQUBE_CREDS_PSW}
-              npm run sonar
-            '''
+                // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
+                echo '### Running SonarQube ###'
+                sh '''
+                  export SONARQUBE_USERNAME=${SONARQUBE_CREDS_USR}
+                  export SONARQUBE_PASSWORD=${SONARQUBE_CREDS_PSW}
+                  npm run sonar
+                '''
     ```
 
 4. Push the changes to the git repository, which also will trigger a new build.

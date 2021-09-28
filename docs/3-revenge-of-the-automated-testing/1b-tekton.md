@@ -32,10 +32,10 @@
 2. We also need to bind the `sonarqube-auth` workspace to our secret when we trigger the Pipeline to run. To do this edit `tekton/templates/triggers/gitlab-trigger-template.yaml` file, add this code to the end of the `workspaces list` where the `# sonarqube-auth` placeholder is:
 
     ```yaml
-        # sonarqube-auth
-        - name: sonarqube-auth
-          secret:
-            secretName: sonarqube-auth
+            # sonarqube-auth
+            - name: sonarqube-auth
+              secret:
+                secretName: sonarqube-auth
     ```
 
 3. Tekton Tasks are just piece of yaml. So it's easy for us to add more tasks. The Tekton Hub is a great place to go find some reusable components for doing specific activities. In our case, we're going to grab the `sonarqube-quality-gate-check.yaml` task and add it to our cluster. If you open `tekton/templates/tasks/sonarqube-quality-gate-check.yaml` file afterwards, you'll see the task is a simple one that executes one shell script in an image.
@@ -137,6 +137,8 @@
         - name: maven
           taskRef:
             name: maven
+          runAfter:
+            - analysis-check # <- update this 💪💪
           params:
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
@@ -151,8 +153,6 @@
               workspace: maven-m2
             - name: output
               workspace: shared-workspace
-          <strong>runAfter:
-            - analysis-check</strong>
     </code></pre></div>
 
 6. With all these changes in place - Git add, commit, push your changes so our pipeline definition is updated on the cluster:

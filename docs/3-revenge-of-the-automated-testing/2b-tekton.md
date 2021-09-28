@@ -41,11 +41,11 @@
 
 4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
     ```yaml
-          - name: allure-auth
-            type: Opaque
-            data:
-              username: AgAj3JQj+EP23pnzu...
-              password: AgAtnYz8U0AqIIaqYrj...
+            - name: allure-auth
+              type: Opaque
+              data:
+                username: AgAj3JQj+EP23pnzu...
+                password: AgAtnYz8U0AqIIaqYrj...
     ```
 
 5. While in the `ubiquitous-journey/value-tooling.yaml` file - install Allure by adding it's helm chart:
@@ -70,6 +70,7 @@
     git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭"
     git push 
     ```
+  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
 
 7. You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
 
@@ -149,18 +150,18 @@
     ```yaml
         # Save Test Results
         - name: save-test-results
-        taskRef:
-          name: allure-post-report
-        params:
-          - name: APPLICATION_NAME
-            value: "$(params.APPLICATION_NAME)"
-          - name: WORK_DIRECTORY
-            value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-        runAfter:
-          - code-analysis
-        workspaces:
-          - name: output
-            workspace: shared-workspace
+          taskRef:
+            name: allure-post-report
+          params:
+            - name: APPLICATION_NAME
+              value: "$(params.APPLICATION_NAME)"
+            - name: WORK_DIRECTORY
+              value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
+          runAfter:
+            - code-analysis
+          workspaces:
+            - name: output
+              workspace: shared-workspace
     ```
 
 3. Git add, commit, push your changes
@@ -196,6 +197,6 @@
 
     ![images/allure-behaviours.png](images/allure-behaviours.png)
 
-    ?> TIP! You can also find the available projects and test reports from Allure swagger api by navigating to https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/
+    <p class="warn"><b>TIP</b> You can also find the available projects and test reports from Allure swagger api by navigating to https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/</p>
 
     ![images/allure-api.png](images/allure-api.png)

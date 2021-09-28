@@ -4,6 +4,7 @@
     - https://code.revelc.net/formatter-maven-plugin/usage.html
 
     ```bash
+    cd /projects/pet-battle-api
     mvn formatter:format
     ```
 
@@ -15,26 +16,16 @@
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
 
-    Your changes should be removed !
+    Do not forget to remove your changes. Otherwise pipeline will fail! :)
 
 3. Linting and Formatting using Checkstyle (`checkstyle.xml`)
 
-    - install an IDE extensions for realtime feedback
-
+    - There are some plugins to help us here. For example, if you are a user of VSCode, you can install [an IDE extensions](https://code.visualstudio.com/docs/java/java-linting) for realtime feedback.
     ![images/checkstyle-extension.png](images/checkstyle-extension.png)
 
-    For VSCode IDE .. there is a great help page here:
+    - There is also a [Sonar Lint Extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode) for realtime checking in your IDE.
 
-    - https://code.visualstudio.com/docs/java/java-linting
-
-4. There is a Sonar Lint Extension for realtime checking in your IDE
-
-    - https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode
-
-5. Lets have a look at how we use these tools from the command line.
-
-    - Sonar build and pipeline feedback
-    - mvn command line
+4. Let's have a look at how we use these tools from the command line.
 
     By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. So we will only see this on the command line:
 
@@ -42,7 +33,7 @@
     mvn checkstyle:check
     ```
 
-6. Let's set an individual severity of **error** in our configuration for the **EmptyCatchBlock** check
+6. Open up `/project/pet-battle-api/checkstyle.xml` file and search for `EmptyCatchBlock`. Then set the severity value as **error**.
     - https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock
 
     ```xml
