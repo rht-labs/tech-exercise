@@ -11,7 +11,7 @@ Why create pipelines:
   * “We have already done it” behavior de-risks go live
 
 ### Choose your own adventure
-Split into 2 groups within your team. Choose you own adventure! Each group will get to perform similar tasks:
+Split into 2 groups within your team. Choose your own adventure! Each group will get to perform similar tasks:
 
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
