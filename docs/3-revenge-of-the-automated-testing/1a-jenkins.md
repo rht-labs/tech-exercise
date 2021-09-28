@@ -50,7 +50,7 @@
     }
     </code></pre></div>
 
-3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where // SONARQUBE SCANNING placeholder is. This needs to be happen before the build.
+3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where `// SONARQUBE SCANNING` placeholder is. This needs to be happen before the build.
 
     ```bash
                 // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 

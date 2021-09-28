@@ -1,66 +1,5 @@
 # Extend Tekton Pipeline with Stackrox
-
-Lets start by sealing our StackRox credentials.
-
-1. Run this command. This will generate a Kubernetes secret object in `tmp`
-
-    ```bash
-    cat << EOF > /tmp/rox-auth.yaml
-    apiVersion: v1
-    data:
-      password: "$(printf ${ROX_API_TOKEN} | base64 -w0)"
-      username: "$(printf ${ROX_ENDPOINT} | base64 -w0)"
-    kind: Secret
-    metadata:
-      name: rox-auth
-    EOF
-    ```
-
-2. Use `kubeseal` commandline to seal the secret definition.
-
-    ```bash
-    kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
-        --controller-namespace do500-shared \
-        --controller-name sealed-secrets \
-        -o yaml
-    ```
-
-3. We want to grab the results of this sealing activity, in particular the `encryptedData`.
-
-    ```bash
-    cat /tmp/sealed-rox-auth.yaml | grep -E 'username|password'
-    ```
-
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-        username: AgAj3JQj+EP23pnzu...
-        password: AgAtnYz8U0AqIIaqYrj...
-    </code></pre></div>
-
-4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
-
-    ```yaml
-            - name: rox-auth
-              type: kubernetes.io/basic-auth
-              data:
-                username: AgAj3JQj+EP23pnzu...
-                password: AgAtnYz8U0AqIIaqYrj...
-    ```
-
-5. Check our changes into git.
-
-    ```bash
-    cd /projects/tech-exercise
-    # git add, commit, push your changes..
-    git add .
-    git commit -m  "🔒 ADD - stackrox sealed secret 🔒"
-    git push
-    ```
-
-    🪄 You should be able to see a **rox-auth** secret in your <TEAM_NAME>-ci-cd namespace.
-
-## **Scan** Images
+## Scan Images
 
 1. Add a task into our codebase to scan our built images.
 
@@ -117,16 +56,11 @@ Lets start by sealing our StackRox credentials.
 
     ```bash
     # git add, commit, push your changes..
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🐡 ADD - rox-image-scan-task 🐡"
     git push 
     ```
-
-<!-- 3. Reinstall our App-of-Apps helm chart with the new definition.
-
-    ```bash
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
-    ``` -->
 
 3. Lets try this in our pipeline. Edit `maven-pipeline.yaml` and add a step definition that runs after the **bake** image task. Be sure to adjust the **helm-package** task to `runAfter` the **image-scan** task:
 
@@ -149,6 +83,26 @@ Lets start by sealing our StackRox credentials.
               value: pretty
     ```
 
+  So you'll have a pipeline definition like this:
+  <div class="highlight" style="background: #f7f7f7">
+  <pre><code class="language-yaml">
+    ...
+    # Image Scan
+      - name: image-scan
+        runAfter:
+        - bake
+        taskRef:
+          name: rox-image-scan
+    ...
+    ...
+    - name: helm-package
+        taskRef:
+          name: helm-package
+        runAfter: <- make sure you update this❗❗
+          - image-scan <- make sure you update this❗❗
+    ...
+  </code></pre></div>
+
 4. Check in these changes.
 
     ```bash
@@ -166,9 +120,9 @@ Lets start by sealing our StackRox credentials.
     git push
     ```
 
-    🪄 Obeserve the **pet-battle-api** pipeline running with the **image-scan** task.
+    🪄 Observe the **pet-battle-api** pipeline running with the **image-scan** task.
 
-## **Check** Build/Deploy Time Violations
+## Check Build/Deploy Time Violations
 
 ?> **Tip** We could extend the previous check by changing the output format to **json** and installing and using the **jq** command. For example, to check the image scan output and return a results when the **riskScore** and **topCvss** are below a certain value say. These are better handled as *Build Policy* within ACS which we can check next.
 
@@ -225,11 +179,11 @@ Lets start by sealing our StackRox credentials.
     git push
     ```
 
-4. Our Pipeline should look like this now with the addition of the **kube-linter** and **image-scan** steps.
+4. Our Pipeline should look like this now with two `image-scan` steps.
 
-    ![images/acs-tasks-pipe.png](images/acs-tasks-pipe.png)
+    ![acs-tasks-pipe.png](images/acs-tasks-pipe.png)
 
-    🪄 Obeserve the **pet-battle-api** pipeline running with the **image-scan** task.
+    🪄 Observe the **pet-battle-api** pipeline running with the **image-scan** task.
 
 ## Breaking the Build
 
@@ -237,7 +191,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we enabled earlier.
 
-2. Edit the `pet-battle-api/Dockerfile.jvm` and add the following line:
+2. Edit the `pet-battle-api/Dockerfile.jvm` and add the following line under `EXPOSE 8080`:
 
     ```bash
     EXPOSE 22
