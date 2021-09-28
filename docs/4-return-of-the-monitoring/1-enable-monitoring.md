@@ -39,6 +39,7 @@
         matchLabels:
           app: my-app
   </code></pre></div>
+
   Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
   Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/staging/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
 
@@ -47,10 +48,19 @@
   ```
   Then push it to the git repo.
   ```bash
+  cd /projects/pet-battle
   git add .
   git commit -m "🖥️ ServiceMonitor enabled 🖥️"
   git push
   ```
+
+  ```bash
+  cd /projects/pet-battle-api
+  git add .
+  git commit -m "🖥️ ServiceMonitor enabled 🖥️"
+  git push
+  ```
+
   If you want to verify the object exists you can run from your terminal:
   ```bash
   oc get servicemonitor -n ${TEAM_NAME}-test -o yaml
@@ -59,15 +69,16 @@
 2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
 
   ```yaml
-    # Grafana
-    - name: grafana
-      enabled: true
-      source: https://github.com/petbattle/pet-battle-infra.git
-      source_path: grafana
+     # Grafana
+     - name: grafana
+       enabled: true
+       source: https://github.com/petbattle/pet-battle-infra.git
+       source_path: grafana
   ```
 
 3. Commit the changes to the repo as you've done before
   ```bash
+  cd /projects/tech-exercise
   git add .
   git commit -m "📈 Grafana added 📈"
   git push
@@ -76,7 +87,7 @@
 4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for Pet Battle;
   ```bash
   # get the route and open it in your broswer
-  oc get route grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd
+  echo https://$(oc get route grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
   ```
   If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
 

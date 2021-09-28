@@ -75,7 +75,7 @@
                     script {
                         sh '''
                         pip3 install locust
-                        locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}-<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary
+                        locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}.<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary
                         '''
                     }
                 }

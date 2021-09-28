@@ -68,7 +68,7 @@
           script: |
             #!/usr/bin/env bash
             pip3 install locust
-            locust --headless --users 10 --spawn-rate 1 -H https://$(params.APPLICATION_NAME)-$(params.TEAM_NAME)-test-{{ .Values.cluster_domain }} --run-time 1m --loglevel INFO --only-summary 
+            locust --headless --users 10 --spawn-rate 1 -H https://$(params.APPLICATION_NAME)-$(params.TEAM_NAME)-test.{{ .Values.cluster_domain }} --run-time 1m --loglevel INFO --only-summary 
     EOF
     ```
 
