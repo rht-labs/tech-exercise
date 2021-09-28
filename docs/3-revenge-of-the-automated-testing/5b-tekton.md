@@ -19,8 +19,6 @@ Let's enable the **kube-linter** task in our pipeline.
 
 2. We could run the **kube-linter** task with all default checks in our pipeline but this would fail the build. So let's do the _naughty thing_ and run with a restricted set of checks. Add the following step in our `maven-pipeline.yaml` (stored in `/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`). 
 
- Be sure to update the `maven` Task in the pipeline as well so its `runAfter` is the `kube-linter` Task 💪
-
     ```yaml
         # Kube-linter
         - name: kube-linter
@@ -40,30 +38,24 @@ Let's enable the **kube-linter** task in our pipeline.
               value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
     ```
 
+ Be sure to update the `maven` task in the pipeline as well so its `runAfter` is the `kube-linter` task 💪💪💪
+
+    <p class="tip">
+    ⛷️ <b>NOTE</b> ⛷️ - If you've completed Sonarqube step, you need to set <strong>runAfter</strong> as <strong>analysis-check</strong>
+    </p>
+
     You should have a pipeline definition like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
         - name: kube-linter
         runAfter:
         - fetch-app-repository
-        taskRef:
-            name: kube-linter
-        workspaces:
-            - name: source
-            workspace: shared-workspace
-        params:
-            - name: manifest
-              value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)/chart"
-            - name: default_option
-              value: do-not-auto-add-defaults
-            - name: includelist
-              value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
-        
+....      
         - name: maven
           taskRef:
             name: maven
           runAfter: <- make sure you update this 💪💪
-            - kube-linter <- make sure you update this 💪💪
+            - kube-linter # check the NOTE above❗❗ this could be `analysis-check` as well.
           params:
             - name: WORK_DIRECTORY
             value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
@@ -97,7 +89,7 @@ Let's enable the **kube-linter** task in our pipeline.
 
 Let's run through a scenario where we break/fix the build with **kube-linter**.
 
-1. Edit `maven-pipeline.yaml` again and Add the following value **required-label-owner** to the includelist on the **kube-linter** task:
+1. Edit `maven-pipeline.yaml` again and add **required-label-owner** to the includelist to **includelist** list on the **kube-linter** task:
 
     ```yaml
             - name: includelist
@@ -113,7 +105,9 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡"
     git push
     ```
+  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
 
+    Make an empty commit to trigger the pipeline.
     ```bash
     cd /projects/pet-battle-api
     git commit --allow-empty -m "🩴 test required-label-owner check 🩴"
@@ -136,21 +130,36 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
 5. The linter is complaining we're missing a label on our resources - let's fix our deployment by adding an **owner** label using helm. Edit `pet-battle-api/chart/values.yaml` file and add a value for **owner**:
 
     ```yaml
+    # Owner value
     owner: <TEAM_NAME>
     ```
-
-6. In helm land, the `_helpers.tpl` file allows us to define varibales and chunks of yaml that can be reused across all resources in a chart easily. Let's update our label definitions in there to fix the kube-lint issue. Edit `pet-battle-api/chart/_helpers.tpl` and add the `owner` label like this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"** append it below `app.kubernetes.io/managed-by: {{ .Release.Service }}` so it looks like this:
-
-    ```go
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
+6. In helm land, the `_helpers.tpl` file allows us to define variables and chunks of yaml that can be reused across all resources in a chart easily. Let's update our label definitions in there to fix the kube-lint issue. Edit `pet-battle-api/chart/_helpers.tpl` and add the `owner` label like this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"** append it below `app.kubernetes.io/managed-by: {{ .Release.Service }}` 
+    ```yaml
     owner: {{ .Values.owner }}
     ```
 
-7. Since we changed the chart we should update it's version while we're at it. Bump the version in `chart/chart.yaml`
+  So it looks like this:
+  <div class="highlight" style="background: #f7f7f7">
+  <pre><code class="language-yaml">
+  ...
+      {{- end }}
+      app.kubernetes.io/managed-by: {{ .Release.Service }}
+      owner: {{ .Values.owner }}
+      {{- end }}
+  ...
+  </code></pre></div>
 
-    ```yaml
-    version: 1.2.0
-    ```
+7. Since we changed the chart we should update it's version while we're at it. Bump the version in `chart/Chart.yaml`
+
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+    apiVersion: v2
+    name: pet-battle-api
+    description: Pet Battle API
+    type: application
+    version: 1.1.0 <- bump this!!
+    appVersion: 1.1.0
+    </code></pre></div>
 
 8. We can check the **kube-linter** command again and check these changes in:
 

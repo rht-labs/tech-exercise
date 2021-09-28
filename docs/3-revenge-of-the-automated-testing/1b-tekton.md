@@ -111,7 +111,7 @@
     EOF
     ```
 
-4. Let's add this task to our pipleine. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
+4. Let's add this task to our pipeline. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file and add the `code-analysis-check` step to our pipeline as shown below.
 
     ```yaml
         # Code Analysis Check

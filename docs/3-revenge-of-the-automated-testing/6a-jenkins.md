@@ -8,7 +8,7 @@
             - name: jenkins-agent-mvn
             - name: jenkins-agent-helm
             - name: jenkins-agent-argocd
-            - name: jenkins-agent-zap # add this one
+            - name: jenkins-agent-zap # add this one!!
     ```
 
     Push the changes to git repository:
@@ -54,4 +54,6 @@
     git push
     ```
 
-4. 
+4. On Jenkins we should be able to see the test results. On the left hand side, you'll see "OWASP Zed Attack Proxy"
+    ![owasp-report-jenkins](images/owasp-report-jenkins.png)
+    ![owasp-report-jenkins-2](images/owasp-report-jenkins-2.png)

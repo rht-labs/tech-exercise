@@ -13,7 +13,7 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
 			  kube-linter lint chart/  --"${default_option}" --include "${includelist}" 
 			'''
     ```
-    _We use a set of restricted set of checks but as you see in the beginning with `kube-linter checks list` command, there are more checks you can include_
+    _We use a restricted set of checks but as you see in the beginning with `kube-linter checks list` command, there are more checks you can include._
 
 2. Check our changes into git.
     ```bash
@@ -37,39 +37,39 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
         Error: found 1 lint errors
     </code></pre></div>
 
-    Readiness and Liveness probes are the foundational best practices for monitoring application health status. For more info, please refer [here](https://docs.openshift.com/container-platform/4.8/applications/application-health.html).
+    Readiness and Liveness probes are the foundational best practices for tracking application health status. For more info, please refer [here](https://docs.openshift.com/container-platform/4.8/applications/application-health.html).
 
-3. Let's fix this then! Open up `projects/pet-battle/chart/templates/deploymentconfig.yaml` file. In line 46, you'll see a `readinessProbe` definition. We will add our `livelinessProbe` definition right after that. Please mind that it should be aligned with `readinessProbe`.
+3. Let's fix this then! Open up `projects/pet-battle/chart/templates/deploymentconfig.yaml` file. In line 46, you'll see a `readinessProbe` definition. We will add our `livelinessProbe` definition right after that block (line 52). Please mind that it should be aligned with `readinessProbe`.
 
     ```yaml
-        livenessProbe:
-          httpGet:
-            path: /
-            port: 8080
-          timeoutSeconds: 1
-          periodSeconds: 10
-          successThreshold: 1
-          failureThreshold: 3
+            livenessProbe:
+              httpGet:
+                  path: /
+                  port: 8080
+              timeoutSeconds: 1
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 3
 
     ```
-    You should have a YAML file looks like this:
+    You should have a YAML file should look like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
     ...
             readinessProbe:
-            httpGet:
-                path: /
-                port: 8080
-            initialDelaySeconds: 10
-            timeoutSeconds: 1
+              httpGet:
+                  path: /
+                  port: 8080
+              initialDelaySeconds: 10
+              timeoutSeconds: 1
             livenessProbe:
-            httpGet:
-                path: /
-                port: 8080
-            timeoutSeconds: 1
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 3
+              httpGet:
+                  path: /
+                  port: 8080
+              timeoutSeconds: 1
+              periodSeconds: 10
+              successThreshold: 1
+              failureThreshold: 3
         dnsPolicy: ClusterFirst
         restartPolicy: Always
         schedulerName: default-scheduler
@@ -97,7 +97,7 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
   You should see such output 💪💪
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-    KubeLinter 0.2.3
+    KubeLinter 0.2.2
 
     No lint errors found!
     </code></pre></div>

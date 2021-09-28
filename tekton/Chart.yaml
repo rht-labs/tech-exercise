@@ -1,6 +1,6 @@
 apiVersion: v2
 name: tekton-pipelines
-description: Pipleines, tasks and triggers for OpenShift
+description: Pipelines, tasks and triggers for OpenShift
 type: application
 version: 1.0.0
 appVersion: 1.0.0

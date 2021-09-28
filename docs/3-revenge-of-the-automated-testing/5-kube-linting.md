@@ -7,7 +7,7 @@
 
 ## Get Familiar with kube-linter
 
-1. KubeLinter has a load of built in best practices to check for when performing a lint. We can list them
+1. KubeLinter has a load of built in best practices to check for when performing a lint. We can list them.
 
     ```bash
     kube-linter checks list | grep Name:
