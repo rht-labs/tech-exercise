@@ -102,7 +102,7 @@
     git push
     ```
 
-5. Now let's trigger the pet-battle-api pipeline by pushing `locustfile.py` for verifying if the load testing task works as expected.
+5. Now let's trigger the pet-battle-api pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
 
     ```bash
     cd /projects/pet-battle-api

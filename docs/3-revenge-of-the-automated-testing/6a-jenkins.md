@@ -1,4 +1,4 @@
-## Extend Jenkins Pipeline with 
+## Extend Jenkins Pipeline with OWASP Zap Security Scanning
 
 1. Add a new Jenkins agent with `zap` command line in it. Open up `ubiquitous-journey/values-tooling.yaml` and under `Jenkins` add `jenkins-agent-zap` to the list.
 

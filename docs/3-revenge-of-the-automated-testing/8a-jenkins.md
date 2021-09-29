@@ -62,14 +62,11 @@
 
     The output should be like:
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-bash">
+    ```bash
     Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1 --
     The following checks were performed on each of these signatures:
     - The cosign claims were validated
     - The signatures were verified against the specified public key
     - Any certificates were verified against the Fulcio roots.
     {"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle"},"image":{"docker-manifest-digest":"sha256:0ed4731d77bc2412079c85c6bc40f19c0a1615b9574cc3e7a7005910740248de"},"type":"cosign container image signature"},"optional":null}
-    </code>
-    </pre>
-    </div>
+    ```

@@ -4,7 +4,7 @@
 
     _You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
 
-    In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercises/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
+    In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercise/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
 
     ```yaml
             - name: jenkins-agent-python
