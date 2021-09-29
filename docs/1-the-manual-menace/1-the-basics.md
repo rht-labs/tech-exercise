@@ -89,8 +89,8 @@ verify the clean up
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
-
-6. For those who are really interested, this is the anatomy of our Helm chart. It can be [found here](https://github.com/rht-labs/todolist), but the basic structure is as follows:
+<!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
+6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;" >[found here](https://github.com/rht-labs/todolist)</span>, but the basic structure is as follows:
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-bash">
 todolist/chart
