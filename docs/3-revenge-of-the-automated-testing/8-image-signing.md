@@ -25,9 +25,11 @@
     Public key written to cosign.pub
     </code></pre></div>
 
-You just generated two key (one private key, one public key). Private key is used to sign the images and it is automatically saved as a secret in ci-cd namespace alongside the password you choose. Public key is used to verify the signed images. You can share your public key for people to verify images but private one should not be shared or at least sealed before storing publicly.
+    You just generated two keys (one private key, one public key). Private key is used to sign the images and it is automatically saved as a secret in your `ci-cd` namespace alongside the password you choose. Public key is used to verify the signed images. You can share your public key for people to verify your images but private one should not be shared or at least sealed before storing publicly.
 
-Now let's proceed to extend the pipelines with image signing step.
+Now let's proceed to extend the pipelines with image signing step. 
+
+_This step makes more sense when you use an external image registry and share images across clusters or publicly._
 
 #### In your groups pick the tool you'd like to integrate the pipeline with:
 
