@@ -26,6 +26,6 @@ In this exercise, we will use OpenShift out-of-the-box monitoring and logging st
 ## 🔨 Tools used in this exercise!
 
 * <span style="color:blue;">[Prometheus](https://prometheus.io/)</span> - Stores our metrics and used for alerting
-* <span style="color:blue;">[Grafana](https://grafana.com/)</span> - Used to visualize our metrics 
+* <span style="color:blue;">[Grafana](https://grafana.com/)</span> - Used to visualize our metrics
 * <span style="color:blue;">[ElasticSearch](https://www.elastic.co/)</span> - Stores logs & data in an unstructured way
 * <span style="color:blue;">[Kibana](https://www.elastic.co/kibana/)</span> - Used to visualize ElasticSearch data
