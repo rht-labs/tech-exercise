@@ -6,10 +6,43 @@
 - Add $SOMETHING from the redhat-cop/helm-charts repo to the UJ eg Hoverfly, Zalenium or something else
 [todo links to example charts]
 
-### 2. Environment
+### Helm in more detail
+
+There is a bit of hidden magic from the `helm repo add` and `helm install` commands in [the-basics](1-the-manual-menace/1-the-basics) exercise. A hosted helm repository holds your packaged up Charts and an `index.yaml` file.
+
+For the `todolist` application we deploy you can take a look at the file by browsing <span style="color:blue;" >[here](https://rht-labs.com/todolist/index.yaml).<span>
+
+![images/helm-index.png](images/helm-index.png)
+
+This lists the versions and details that the helm repository contains. So when you `helm repo add` it adds the repo url to your operating system dependent config file. This from `man helm`:
+
+```bash
+| Operating System | Cache Path                | Configuration Path             | Data Path               |
+|------------------|---------------------------|--------------------------------|-------------------------|
+| Linux            | $HOME/.cache/helm         | $HOME/.config/helm             | $HOME/.local/share/helm |
+| macOS            | $HOME/Library/Caches/helm | $HOME/Library/Preferences/helm | $HOME/Library/helm      |
+| Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm          |
+```
+
+In OpenShift you can create `HelmChartRepository` objects that populate the WebUI, read more about that <span style="color:blue;" >[here](https://docs.openshift.com/container-platform/4.8/applications/working_with_helm_charts/configuring-custom-helm-chart-repositories.html).</span>
+
+When installing the helm chart into your namespace, the helm command line actually uploads your full chart, stores it in a secret that the Helm Controller in your OpenShift cluster can act upon.
+
+<div class="highlight" style="background: #f7f7f7">
+<pre><code class="language-bash">
+$ oc get secrets -l owner=helm
+NAME                           TYPE                 DATA   AGE
+sh.helm.release.v1.argocd.v1   helm.sh/release.v1   1      3d
+sh.helm.release.v1.argocd.v2   helm.sh/release.v1   1      3d
+sh.helm.release.v1.my.v1       helm.sh/release.v1   1      7m39s
+sh.helm.release.v1.uj.v1       helm.sh/release.v1   1      2d23h
+sh.helm.release.v1.uj.v2       helm.sh/release.v1   1      2d23h
+</code></pre></div>
+
+### Environment
 - use the learnings from above to create a `uat` environment from code.
 
-### 3. Make ArgoCD more secure
+### Make ArgoCD more secure
 
 `FIXME` - write about these topics with some examples.
 
