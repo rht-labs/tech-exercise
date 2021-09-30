@@ -74,7 +74,7 @@ data:
   username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
-  annotaion:
+  annotation:
     tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
@@ -127,7 +127,7 @@ data:
   username: "$(printf ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
-  annotaion:
+  annotation:
     tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
   labels:
     credential.sync.jenkins.openshift.io: "true"
