@@ -6,7 +6,7 @@
 
 <p class="warn">
 If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
-<span style="color:blue;" ><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a><span>
+<span style="color:blue;"><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a><span>
 </p>
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-do500` from the menu.
@@ -70,7 +70,7 @@ echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spe
 ![todolist](./images/todolist.png)
 
 
-4.  You can overwrite the default <span style="color:blue;" >[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+4.  You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
@@ -90,7 +90,7 @@ verify the clean up
 oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
 <!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
-6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;" >[found here](https://github.com/rht-labs/todolist)</span>, but the basic structure is as follows:
+6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/rht-labs/todolist)</span>, but the basic structure is as follows:
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-bash">
 todolist/chart

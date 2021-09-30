@@ -10,7 +10,7 @@
 
 There is a bit of hidden magic from the `helm repo add` and `helm install` commands in [the-basics](1-the-manual-menace/1-the-basics) exercise. A hosted helm repository holds your packaged up Charts and an `index.yaml` file.
 
-For the `todolist` application we deploy you can take a look at the file by browsing <span style="color:blue;" >[here](https://rht-labs.com/todolist/index.yaml).<span>
+For the `todolist` application we deploy you can take a look at the file by browsing <span style="color:blue;">[here](https://rht-labs.com/todolist/index.yaml).<span>
 
 ![images/helm-index.png](images/helm-index.png)
 
@@ -24,7 +24,7 @@ This lists the versions and details that the helm repository contains. So when y
 | Windows          | %TEMP%\helm               | %APPDATA%\helm                 | %APPDATA%\helm          |
 ```
 
-In OpenShift you can create `HelmChartRepository` objects that populate the WebUI, read more about that <span style="color:blue;" >[here](https://docs.openshift.com/container-platform/4.8/applications/working_with_helm_charts/configuring-custom-helm-chart-repositories.html).</span>
+In OpenShift you can create `HelmChartRepository` objects that populate the WebUI, read more about that <span style="color:blue;">[here](https://docs.openshift.com/container-platform/4.8/applications/working_with_helm_charts/configuring-custom-helm-chart-repositories.html).</span>
 
 When installing the helm chart into your namespace, the helm command line actually uploads your full chart, stores it in a secret that the Helm Controller in your OpenShift cluster can act upon.
 
