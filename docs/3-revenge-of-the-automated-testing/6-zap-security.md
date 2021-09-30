@@ -13,4 +13,4 @@ For this exercise, we will use a tool called "OWASP Zed Attack Proxy" or ZAP in 
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * Add a stage to our pipeline to run the security scan | * Add a task to our pipeline to run the security scan |
-| [jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/6b-tekton.md) |
+| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/6b-tekton.md)</span> |

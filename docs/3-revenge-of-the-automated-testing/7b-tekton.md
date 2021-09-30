@@ -1,4 +1,5 @@
 # Extend Tekton Pipeline with Stackrox
+
 ## Scan Images
 
 1. Add a task into our codebase to scan our built images.
@@ -83,30 +84,31 @@
               value: pretty
     ```
 
-  So you'll have a pipeline definition like this:
-  <div class="highlight" style="background: #f7f7f7">
-  <pre><code class="language-yaml">
-    ...
-    # Image Scan
-      - name: image-scan
-        runAfter:
-        - bake
-        taskRef:
-          name: rox-image-scan
-    ...
-    ...
-    - name: helm-package
-        taskRef:
-          name: helm-package
-        runAfter: <- make sure you update this❗❗
-          - image-scan <- make sure you update this❗❗
-    ...
-  </code></pre></div>
+    So you'll have a pipeline definition like this:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+      ...
+      # Image Scan
+        - name: image-scan
+          runAfter:
+          - bake
+          taskRef:
+            name: rox-image-scan
+      ...
+      ...
+      - name: helm-package
+          taskRef:
+            name: helm-package
+          runAfter: <- make sure you update this❗❗
+            - image-scan <- make sure you update this❗❗
+      ...
+    </code></pre></div>
 
 4. Check in these changes.
 
     ```bash
     # git add, commit, push your changes..
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🔑 ADD - image-scan step to pipeline 🔑"
     git push 
@@ -166,6 +168,7 @@
 
     ```bash
     # git add, commit, push your changes..
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🐡 ADD - rox-image-check-task 🐡"
     git push

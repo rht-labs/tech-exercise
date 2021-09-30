@@ -1,7 +1,9 @@
 ## Extend Tekton Pipeline with Automated Testing
+
 > In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
 
-#### Part 1 - Allure 
+### Part 1 - Allure 
+
 1. For this exercise, we will use a tool called **Allure**, a test repository manager for Java, but first let's create SealedSecrets object for username and password we'll use for this tool. This process should be pretty familiar by now 🃏🃏🃏
 
     ```bash
@@ -40,6 +42,7 @@
     </code></pre></div>
 
 4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
     ```yaml
             - name: allure-auth
               type: Opaque
@@ -62,7 +65,7 @@
             secret: allure-auth
     ```
 
-6.  Finally - push the changes to the repository:
+6. Finally - push the changes to the repository:
 
     ```bash
     cd /projects/tech-exercise
@@ -70,7 +73,8 @@
     git commit -m  "👩‍🏭 ADD - Allure tooling 👩‍🏭"
     git push 
     ```
-  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
+
+    <p class="warn">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
 
 7. You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
 
@@ -83,7 +87,7 @@
 </br>
 </br>
 
-#### Part 2 - Testing Tasks
+### Part 2 - Testing Tasks
 
 1. In our IDE, let's create a tekton task to push our test scores to allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder.
 
@@ -197,6 +201,6 @@
 
     ![images/allure-behaviours.png](images/allure-behaviours.png)
 
-    <p class="warn"><b>TIP</b> You can also find the available projects and test reports from Allure swagger api by navigating to https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/</p>
+    <p class="warn"><b>TIP</b> You can also find the available projects and test reports from Allure swagger api by navigating to <span style="color:blue;"><a href="https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/">https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/</a></span></p>
 
     ![images/allure-api.png](images/allure-api.png)

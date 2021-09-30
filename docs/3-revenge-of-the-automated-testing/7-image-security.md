@@ -1,10 +1,13 @@
 # Image Security (Stack Rox)
+
 > We use some ready container images to build our own application images. We use them as base and add our app binaries, or install packages on top of them. We need to protect our containers from errors and vulnerabilities in public registry images, or outdated packages and libraries. Image security step in our pipeline helps us to discover them before moving images to production.
+
 ## Task
 
 ![task-image-security](./images/task-image-security.png)
 
 ## Set Up StackRox Access
+
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed in the cluster for you to configure.
 
 1. Connect to the ACS WebUI Route using the **admin** credentials:
@@ -30,13 +33,17 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 3. **Save** this token somewhere safe, we will need of it. 
 
     Export the token as environment variable:
+
     ```bash
     export ROX_API_TOKEN=eyJhbGciOiJSUzI1NiIsIm...
     ```
+
     Export the StackRox endpoint:
+
     ```bash
     export ROX_ENDPOINT=central-stackrox.<CLUSTER_DOMAIN>
     ```
+
 4. Verify the token by running **roxctl**
 
     ```bash
@@ -92,6 +99,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
                 username: AgAj3JQj+EP23pnzu...
                 password: AgAtnYz8U0AqIIaqYrj...
     ```
+
     Check our changes into git.
 
     ```bash
@@ -102,9 +110,9 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     git push
     ```
 
-
 ## Group Exercise
-> Below steps should only be done *once* because this is a cluster-wide operation. 
+
+> Below steps should only be done *once* because this is a cluster-wide operation.
 
 1. Generate the init bundle for the cluster. This can be done from the **Platform Configuration > Integration > Cluster Init Bundle** ACE web page also.
 
@@ -138,40 +146,40 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     oc -n stackrox create -f /tmp/cluster_init_bundle.yaml
     ```
 
-2. It may take a few min for the collector pods in the `stackrox` project to become ready. If the `secured cluster` is listed as `unreconcileable`, delete and recreate it from the ACS operator in the `stackrox` project.
+3. It may take a few min for the collector pods in the `stackrox` project to become ready. If the `secured cluster` is listed as `unreconcileable`, delete and recreate it from the ACS operator in the `stackrox` project.
 
     ![images/acs-secured-cluster2.png](images/acs-secured-cluster2.png)
     ![images/acs-secured-cluster.png](images/acs-secured-cluster.png)
 
-3. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
+4. You should now be able to see your cluster and all the data in ACS for you cluster. Take a look around.
 
     ![images/acs-cluster-import.png](images/acs-cluster-import.png)
     ![images/acs-dashboard.png](images/acs-dashboard.png)
     ![images/acs-compliance-graphs.png](images/acs-compliance-graphs.png)
 
-4. OpenShift internal registry fix.
+5. OpenShift internal registry fix.
 
     <p class="tip"><b>FIXME</b> to make roxctl cli work on internal OpenShift images, we need to manually add a registry. There is automatically discovered registries there so it should be automatic using the ServiceAccount. Browse to <code class="language-bash" style="background: #f7f7f7">Platform Configurations -> Generic Docker Registry</code> and add a Registry entry with: <b>image-registry.openshift-image-registry.svc:5000</b> and password from: <code class="language-bash" style="background: #f7f7f7">echo $(oc -n <TEAM_NAME>-ci-cd sa get-token pipeline)</code></p>
 
     ![images/acs-internal-registry.png](images/acs-internal-registry.png)
 
-5. As a group we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
+6. As a group we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
 
     ![images/acs-find-policy.png](images/acs-find-policy.png)
 
-6. Clone this Policy so we can edit it, give it a new name.
+7. Clone this Policy so we can edit it, give it a new name.
 
     ![images/acs-clone-policy.png](images/acs-clone-policy.png)
 
-7. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
+8. Click *Next* and add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
 
     ![images/acs-policy-criteria.png](images/acs-policy-criteria.png)
 
-8. Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
+9. Hit *Next* and *Next* and turn **ON** policy enforcement at *Build* time.
 
     ![images/acs-policy-enforcement.png](images/acs-policy-enforcement.png)
 
-9. *Save* the policy. It should look like this now.
+10. *Save* the policy. It should look like this now.
 
     ![images/acs-policy-done.png](images/acs-policy-done.png)
 
@@ -184,4 +192,4 @@ Now we can use ACS to help move security **LEFT** in our build pipeline. In each
 | * Configure your pipeline to `check` build time policy violations | * Configure your pipeline to `check` build time policy violations |
 | * Configure your pipeline to `scan` images for CVE/CVSS | * Configure your pipeline to `scan` images for CVE/CVSS |
 | * Break/Fix your pipeline | * Break/Fix your pipeline |
-| [jenkins](3-revenge-of-the-automated-testing/7a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/7b-tekton.md) |
+| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/7a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/7b-tekton.md)</span> |

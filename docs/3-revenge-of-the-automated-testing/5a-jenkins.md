@@ -33,7 +33,7 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
         (check: no-liveness-probe, remediation: Specify a liveness probe in your container. 
         Refer to https://kubernetes.io/docs/tasks/configure-pod-container/
         configure-liveness-readiness-startup-probes/ for details.)
-        
+
         Error: found 1 lint errors
     </code></pre></div>
 
@@ -50,8 +50,8 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
               periodSeconds: 10
               successThreshold: 1
               failureThreshold: 3
-
     ```
+
     You should have a YAML file should look like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -87,14 +87,14 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
 	appVersion: 0.0.1
     </code></pre></div>
 
-  Before pushing the changes, let's verify that if this change helps us:
+    Before pushing the changes, let's verify that if this change helps us:
 
-  ```bash
-  cd /projects/pet-battle
-  kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount
-  ```
+    ```bash
+    cd /projects/pet-battle
+    kube-linter lint chart --do-not-auto-add-defaults --include no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount
+    ```
 
-  You should see such output 💪💪
+    You should see such output 💪💪
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
     KubeLinter 0.2.2
@@ -103,10 +103,12 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
     </code></pre></div>
 
 4. Again, push the changes into the repository:
+
 	```bash
 	cd /projects/pet-battle
 	git add .
 	git commit -m  "🗻 ADD - Liveliness probe 🗻"
 	git push
-	``` 
-    This will again trigger the pipeline, but this time you should see a successfull output for this stage 🔥🔥🔥
+	```
+
+    This will again trigger the pipeline, but this time you should see a successful output for this stage 🔥🔥🔥

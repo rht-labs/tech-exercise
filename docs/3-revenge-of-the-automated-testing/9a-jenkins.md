@@ -1,8 +1,8 @@
 ## Extend Jenkins Pipeline with Load Testing
 
-1. For load testing, we will use a Python-based open source tool called [`locust`](https://docs.locust.io/en/stable/index.html). Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
+1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
 
-    _You can find how to write more complex testing scenarios for your needs in [Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_
+    _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
 
     In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercise/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
 

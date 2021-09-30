@@ -1,4 +1,5 @@
 # Automated Testing
+
 > Testing testing .... is this thing on?
 
 Continuous Delivery needs rapid and reliable feedback. Investing in continuous testing is a worthwhile activity.
@@ -13,4 +14,4 @@ Continuous Delivery needs rapid and reliable feedback. Investing in continuous t
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * Add Jest Testing to the pipeline | * Add Junit and Alure test reporting to the pipeline |
-|  [jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/2b-tekton.md) |
+| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/2a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/2b-tekton.md)</span> |

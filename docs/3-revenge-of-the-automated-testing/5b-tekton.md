@@ -38,9 +38,9 @@ Let's enable the **kube-linter** task in our pipeline.
               value: "no-extensions-v1beta,no-readiness-probe,no-liveness-probe,dangling-service,mismatching-selector,writable-host-mount"
     ```
 
- Be sure to update the `maven` task in the pipeline as well so its `runAfter` is the `kube-linter` task 💪💪💪
+    Be sure to update the `maven` task in the pipeline as well so its `runAfter` is the `kube-linter` task 💪💪💪
 
-    <p class="tip">
+    <p class="warn">
     ⛷️ <b>NOTE</b> ⛷️ - If you've completed Sonarqube step, you need to set <strong>runAfter</strong> as <strong>analysis-check</strong>
     </p>
 
@@ -50,20 +50,19 @@ Let's enable the **kube-linter** task in our pipeline.
         - name: kube-linter
         runAfter:
         - fetch-app-repository
-....      
+    ...
         - name: maven
           taskRef:
             name: maven
-          runAfter: <- make sure you update this 💪💪
+          runAfter: <== make sure you update this 💪💪
             - kube-linter # check the NOTE above❗❗ this could be `analysis-check` as well.
           params:
             - name: WORK_DIRECTORY
             value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-    ....
+    ...
     </code></pre></div>
 
-
-6. Check our changes into git.
+3. Check our changes into git.
 
     ```bash
     cd /projects/tech-exercise
@@ -73,7 +72,7 @@ Let's enable the **kube-linter** task in our pipeline.
     git push
     ```
 
-7. Trigger a pipeline build.
+4. Trigger a pipeline build.
 
     ```bash
     cd /projects/pet-battle-api
@@ -105,9 +104,11 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     git commit -m  "🐡 ADD - kube-linter required-label-owner check 🐡"
     git push
     ```
-  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
+
+    <p class="warn">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
 
     Make an empty commit to trigger the pipeline.
+
     ```bash
     cd /projects/pet-battle-api
     git commit --allow-empty -m "🩴 test required-label-owner check 🩴"
@@ -133,21 +134,23 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     # Owner value
     owner: <TEAM_NAME>
     ```
-6. In helm land, the `_helpers.tpl` file allows us to define variables and chunks of yaml that can be reused across all resources in a chart easily. Let's update our label definitions in there to fix the kube-lint issue. Edit `pet-battle-api/chart/_helpers.tpl` and add the `owner` label like this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"** append it below `app.kubernetes.io/managed-by: {{ .Release.Service }}` 
+
+6. In helm land, the `_helpers.tpl` file allows us to define variables and chunks of yaml that can be reused across all resources in a chart easily. Let's update our label definitions in there to fix the kube-lint issue. Edit `pet-battle-api/chart/_helpers.tpl` and add the `owner` label like this in two places - where we **define "pet-battle-api.labels"** and where we **define "mongodb.labels"** append it below `app.kubernetes.io/managed-by: {{ .Release.Service }}`
+
     ```yaml
     owner: {{ .Values.owner }}
     ```
 
-  So it looks like this:
-  <div class="highlight" style="background: #f7f7f7">
-  <pre><code class="language-yaml">
-  ...
-      {{- end }}
-      app.kubernetes.io/managed-by: {{ .Release.Service }}
-      owner: {{ .Values.owner }}
-      {{- end }}
-  ...
-  </code></pre></div>
+    So it looks like this:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+    ...
+        {{- end }}
+        app.kubernetes.io/managed-by: {{ .Release.Service }}
+        owner: {{ .Values.owner }}
+        {{- end }}
+    ...
+    </code></pre></div>
 
 7. Since we changed the chart we should update it's version while we're at it. Bump the version in `chart/Chart.yaml`
 

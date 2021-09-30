@@ -59,6 +59,7 @@
      🪄 Observe the **pet-battle** pipeline running with the **image-scan** stage.
 
 ## Check Build/Deploy Time Violations
+
 ?> **Tip** We could extend the previous check by changing the output format to **json** and installing and using the **jq** command. For example, to check the image scan output and return a results when the **riskScore** and **topCvss** are below a certain value say. These are better handled as *Build Policy* within ACS which we can check next.
 
 1. Lets extend the stage to check for any build time violations. Add the following into the placeholder inside the image-scanning stage:
@@ -72,6 +73,7 @@
                             ./roxctl image check --insecure-skip-tls-verify -e ${ROX_CREDS_USR}:443  --image image-registry.openshift-image-registry.svc:5000/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} --json --json-fail-on-policy-violations=false
                         '''
     ```
+
 2. Again, push the changes to the repo, which also will trigger the pipeline.
 
     ```bash
@@ -81,13 +83,15 @@
     git commit -m  "🎄 ADD - image scan stage 🎄"
     git push 
     ```
+
     🪄 Observe the **pet-battle** pipeline, check the logs for image scanning stage and detects some violations for deploy 😔😔
-![acs-jenkins-pipeline](images/acs-jenkins-pipeline.png)
+
+    ![acs-jenkins-pipeline](images/acs-jenkins-pipeline.png)
 
 3. Go back to StackRox webUI and see the failure in the *Violations* view. 
     <p class="tip">We should have broken the pipeline and fix these violations in order to continue to our pipeline. Please refer _Here Be Dragons_ section for it.</p>
 
-![acs-pet-battle-violations](images/acs-pet-battle-violations.png)
+    ![acs-pet-battle-violations](images/acs-pet-battle-violations.png)
 <!--
 ## Breaking the Build
 

@@ -8,7 +8,7 @@
 
 ### Continuous Testing
 
-- https://quarkus.io/guides/continuous-testing
+Quarkus <span style="color:blue;">[Continuous Testing](https://quarkus.io/guides/continuous-testing)</span>
 
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
@@ -142,7 +142,8 @@ git push
 
 ![images/sonar-pb-api-better-quality.png](images/sonar-pb-api-better-quality.png)
 
-- [ ] Setup a code quality gate e.g. chart here https://github.com/eformat/sonarqube-jobs
+- [ ] Setup a code quality gate e.g. chart <span style="color:blue;">[here](https://github.com/eformat/sonarqube-jobs)</span>
+
 ```yaml
   # Sonarqube setup
   - name: sonarqube-setup
@@ -160,7 +161,6 @@ git push
 
 
 ### ACS/StackRox Command Line fun
-
 
 > We are going to make use of ACS to move security checks into our pipeline. We will look at:
 > - **roxctl** - using the ACS/StackRox CLI

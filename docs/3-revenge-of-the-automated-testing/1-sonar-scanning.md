@@ -125,4 +125,4 @@
 | * Configure your pipeline to run code analysis | * Configure your pipeline to run code analysis |
 | * Configure your pipeline to check the quality gate | * Configure your pipeline to check the quality gate |
 | * Improve your application code quality | * Improve your application code quality |
-| [jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md) | [tekton](3-revenge-of-the-automated-testing/1b-tekton.md) |
+| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/1a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/1b-tekton.md)</span> |

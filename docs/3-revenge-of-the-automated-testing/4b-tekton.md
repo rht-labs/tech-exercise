@@ -1,29 +1,26 @@
 ## Extend Tekton Pipeline with Code Linting Task
 
-1. Code formatting as part of the maven build lifecycle
-    - https://code.revelc.net/formatter-maven-plugin/usage.html
+1. Lets try some code formatting as part of the maven build lifecycle using the <span style="color:blue;">[maven formatter plugin](https://code.revelc.net/formatter-maven-plugin/usage.html).</span> Run this command in your shell to format your code.
 
     ```bash
     cd /projects/pet-battle-api
     mvn formatter:format
     ```
 
-2. Edit a java class file add some TAB/spaces
+2. Now edit a java class file and add some TAB/spaces e.g. in L19,21
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
 
-    Then rerun the `formatting:format` maven command:
+    Then rerun the `formatting:format` maven command which will remove these spaces.
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
 
-    Do not forget to remove your changes. Otherwise pipeline will fail! :)
+3. Linting and Formatting using Checkstyle (`checkstyle.xml`). Unfortunately we haven't installed these in our Cloud IDE yet so you may not be able to try these directly, but we will get to use the command line equivalents in the next step. For those using VCode you can checkout these links:
 
-3. Linting and Formatting using Checkstyle (`checkstyle.xml`)
-
-    - There are some plugins to help us here. For example, if you are a user of VSCode, you can install [an IDE extensions](https://code.visualstudio.com/docs/java/java-linting) for realtime feedback.
+    - There are some plugins to help us here. For example, if you are a user of VSCode, you can install <span style="color:blue;">[an IDE extension](https://code.visualstudio.com/docs/java/java-linting)</span> for realtime feedback.
     ![images/checkstyle-extension.png](images/checkstyle-extension.png)
 
-    - There is also a [Sonar Lint Extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode) for realtime checking in your IDE.
+    - There is also a <span style="color:blue;">[Sonar Lint Extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)</span> for realtime checking in your IDE.
 
 4. Let's have a look at how we use these tools from the command line.
 
@@ -33,8 +30,7 @@
     mvn checkstyle:check
     ```
 
-6. Open up `/project/pet-battle-api/checkstyle.xml` file and search for `EmptyCatchBlock`. Then set the severity value as **error**.
-    - https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock
+5. Open up `/project/pet-battle-api/checkstyle.xml` file and search for `EmptyCatchBlock`. Then set the severity value as **error**. You can read about <span style="color:blue;">[EmptyCatchBlock here.](https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock)</span>
 
     ```xml
             <module name="EmptyCatchBlock">
@@ -52,7 +48,7 @@
                     </configuration>
     ```
 
-7. Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
+6. Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
 
     ![images/codestyle-violation.png](images/codestyle-violation.png)
 
@@ -64,13 +60,13 @@
 
     ![images/checkstyle-error.png](images/checkstyle-error.png)
 
-8. These types of checks (as well as tests) are included in the Maven lifecycle phase called **verify**
+7. These types of checks (as well as tests) are included in the Maven lifecycle phase called **verify**
 
     ```bash
     mvn verify
     ```
 
-9. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
+8. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
 
     A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
 
@@ -82,10 +78,11 @@
     - verify: run any checks to verify the package is valid and meets quality criteria
     - test: run unit tests
 
-    We use these phases in out build pipeline. The full lifecycle reference is here
-    - https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference
+    We use these phases in out build pipeline. The full lifecycle reference is <span style="color:blue;">[here.](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference)</span>
 
     We use the checkstyle plugin in Sonarqube which is found under **Rues** - **Java** language, **Repository**
+
+    <p class="warn"><b>TIP</b> You can find the available projects and reports in Sonarqube by navigating to <span style="color:blue;"><a href="https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/">https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/</a></span></p>
 
     ![images/checkstyle-sonar.png](images/checkstyle-sonar.png)
 
