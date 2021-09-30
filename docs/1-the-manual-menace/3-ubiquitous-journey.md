@@ -2,7 +2,7 @@
 
 At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CICD tooling to accelerate setup and onboarding. The code repository is called **Ubiquitous Journey** (🔥🦄). We have created a lite version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
 
-This repo is available on the Red Hat Labs GitHub organization – https://github.com/rht-labs/ubiquitous-journey. Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
+This repo is available on the Red Hat Labs GitHub organization – <span style="color:blue;">https://github.com/rht-labs/ubiquitous-journey.</span> Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
 - **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extended to support new tools and methodologies.
 - **Traceable** - We can easily see where changes have occured and most importantly trace exactly what git tag/commit is in which environment.
@@ -18,9 +18,10 @@ All of these traits lead to one outcome - the ability to build and release quali
  
 1. Log into GitLab with your credentials. GitLab URL:
 
-    ```
+    ```bash
     https://gitlab-ce.<CLUSTER_DOMAIN>
     ```
+
     We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
     ![gitlab-initial-login](images/gitlab-initial-login.png)
 
