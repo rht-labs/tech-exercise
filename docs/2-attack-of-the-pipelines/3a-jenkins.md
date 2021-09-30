@@ -1,4 +1,5 @@
-### Jenkins Pipeline 
+### Jenkins Pipeline
+
 > Jenkins is a tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool. 
 
 <!---
@@ -28,6 +29,7 @@ git push
 --->
 
 #### Setup Pet Battle (front end) Git Repo
+
 1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)

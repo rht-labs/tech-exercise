@@ -67,7 +67,7 @@ Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called 
     ...
     </code></pre></div>
 
-5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a [helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets) that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
+5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a <span style="color:blue;">[helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets)</span> that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
 
     ```bash
     cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'

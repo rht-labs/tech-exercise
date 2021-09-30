@@ -1,7 +1,8 @@
-### Tekton Pipeline 
+### Tekton Pipeline
+
 > Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in poplularity as it's Kubenetes Native way of running CI/CD.
 
-There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. [Tekton Hub](https://hub.tekton.dev/) is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
+There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
 Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline.
 
@@ -160,4 +161,5 @@ In this snippet of the pipeline used in this exercise, we define:
 ```bash
 tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
 ```
+
 🪄OBSERVE PIPELINE RUNNING :D - At this point check in with the other half of the group and see if you’ve managed to integrate the apps🪄
