@@ -183,6 +183,10 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 
     ![images/acs-policy-done.png](images/acs-policy-done.png)
 
+    <p class="tip">
+    🐌 THIS IS NOT GITOPS - Manually configuring the policy and setup is a good way to play with StackRox. See advanced exercises for creating and storing the policy as code. 🐎
+    </p>
+
 #### In your groups pick the tool you'd like to integrate the pipeline with:
 
 Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will do the following:
