@@ -88,7 +88,7 @@ When something is seen as not matching the required state in Git, an application
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the todolist app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION` or `+ NEW APP`. You should see see an empty form. Let's fill it out by setting the following:
+7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the todolist app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`

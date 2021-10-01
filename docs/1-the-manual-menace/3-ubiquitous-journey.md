@@ -95,6 +95,10 @@ All of these traits lead to one outcome - the ability to build and release quali
     git push 
     ```
 
+  <p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - Bootstrap step also provides the necessary rolebindings. That means now the other users in the same team can access <b><TEAM_NAME></b> environments.
+  </p>
+
 4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. Set these variables on your terminal:
 
     ```bash
