@@ -1,7 +1,16 @@
 ## Extend UJ with a another tool, eg Nexus 
 Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to manage and store our artifacts. Nexus is here to help! We can use Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
-#### Add Nexus in our tool box
+<p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
+</p>
+
+```bash
+cd /projects/tech-exercise
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git pull
+```
+### Add Nexus in our tool box
 > In this exercise we'll add Sonatype's Nexus repository manager to our tooling - this tool will be used to host our application binaries!
 
 1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. In this example we're just pointing our ArgoCD config to a helm chart. Add the following into the file under the `# Nexus` placeholder
@@ -36,7 +45,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
     ```
     ![nexus](images/nexus.png)
 
-#### Add ArgoCD Webhook from GitLab
+### Add ArgoCD Webhook from GitLab
 > ArgoCD has a cycle time of about 3ish mins - this is too slow for us, so we can make argocd sync our changes AS SOON AS things hit the git repo. 
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:

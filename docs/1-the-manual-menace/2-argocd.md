@@ -30,7 +30,7 @@ When something is seen as not matching the required state in Git, an application
  
     We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
-    A) Configure our ArgoCD instance with a secret and unique applicationInstanceLabelKey by creating a small bit of yaml 😋:
+    Configure our ArgoCD instance with a secret and unique `applicationInstanceLabelKey` by creating a small bit of yaml 😋:
 
     ```bash
     cat << EOF > /projects/tech-exercise/argocd-values.yaml
@@ -51,7 +51,7 @@ When something is seen as not matching the required state in Git, an application
     EOF
     ```
 
-    B) Deploy ArgoCD using helm and this piece of yaml:
+    Then, deploy ArgoCD using helm and this piece of yaml:
 
     ```bash
     helm upgrade --install argocd \
