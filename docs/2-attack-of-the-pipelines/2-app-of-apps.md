@@ -10,7 +10,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 > In this exercise we'll deploy PetBattle and a supporing piece of tech it uses (Keycloak) using the same pattern. We'll deploy PetBattle to two environments - `test` and `stage` by configuring the values files in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
 
-1. In your IDE - open `values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
+1. In your IDE - open `tech-exercises/values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
