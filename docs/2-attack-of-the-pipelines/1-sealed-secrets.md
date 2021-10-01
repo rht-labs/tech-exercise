@@ -4,6 +4,16 @@ When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we 
 
 Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 
+<p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
+</p>
+
+```bash
+cd /projects/tech-exercise
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git pull
+```
+
 ### Sealed Secrets in action
 
 1. The observant among you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git...😳 Lets start by fixing this and sealing our Git credentials so they can be safely checked in to the code. First, we'll create the secret in a tmp directory. Replace `<YOUR_GITLAB_USER>` and `<YOUR_GITLAB_PASSWORD>` accordingly if not already set in your environment:

@@ -52,3 +52,5 @@
   * [🔵🟩 Blue/Green Deployments](5-the-deployments-strike-back/2-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
   * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)
+* [99. Rise of the Cluster](99-the-rise-of-the-cluster/README.md)
+  * [🐼 Tooling Installation](99-the-rise-of-the-cluster/1-tooling-installation.md)

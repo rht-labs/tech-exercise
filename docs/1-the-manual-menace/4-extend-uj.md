@@ -7,7 +7,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git
 git pull
 ```
 ### Add Nexus in our tool box
