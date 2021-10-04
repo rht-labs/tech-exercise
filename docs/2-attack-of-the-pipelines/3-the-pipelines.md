@@ -11,6 +11,16 @@ Why create pipelines:
   * More prod like infrastructure increases assurance
   * “We have already done it” behavior de-risks go live
 
+<p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
+</p>
+
+```bash
+cd /projects/tech-exercise
+git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git pull
+```
+
 ### Choose your own adventure
 
 Split into 2 groups within your team. Choose your own adventure! Each group will get to perform similar tasks:
