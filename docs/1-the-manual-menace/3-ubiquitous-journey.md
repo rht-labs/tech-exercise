@@ -67,8 +67,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
 2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
+    ```bash
             - name: jenkins
               kind: ServiceAccount
               role: admin
@@ -85,7 +84,7 @@ All of these traits lead to one outcome - the ability to build and release quali
             - name: <TEAM_NAME>-stage
               operatorgroup: true
               bindings: *binds
-    </code></pre></div>
+    ```
 
 3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 
