@@ -30,8 +30,7 @@
 			// Dynamically load the content of the MD file
 			const urlParams = new URLSearchParams(window.location.search);
 			const name = urlParams.get('name');
-			const root = document.getElementById("root-section");
-			root.setAttribute("data-markdown", `${name}.md`);
+			document.getElementById("root-section").setAttribute("data-markdown", `${name}.md`);
 			document.title = name
 
 			// More info about initialization & config:
