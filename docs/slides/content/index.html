@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>TL500</title>
 
 		<link rel="stylesheet" href="../dist/reset.css">
 		<link rel="stylesheet" href="../dist/reveal.css">
@@ -26,13 +26,13 @@
 		<script src="../plugin/markdown/markdown.js"></script>
 		<script src="../plugin/highlight/highlight.js"></script>
 		<script>
-			
-			// Test stuff
+
+			// Dynamically load the content of the MD file
 			const urlParams = new URLSearchParams(window.location.search);
 			const name = urlParams.get('name');
 			const root = document.getElementById("root-section");
 			root.setAttribute("data-markdown", `${name}.md`);
-
+			document.title = name
 
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
