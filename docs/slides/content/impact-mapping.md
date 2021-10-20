@@ -58,8 +58,8 @@ It was brought to the IT world by Gojko Adzic in 2012.
 
 
 
-### Example Impact Map
-![Example](images/ImpactMapping/ImpactMap.png)
+#### Example Impact Map
+<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/ImpactMap.png", class="white-style" -->
 
 
 
