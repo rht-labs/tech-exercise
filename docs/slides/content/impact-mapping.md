@@ -69,14 +69,11 @@ It was brought to the IT world by Gojko Adzic in 2012.
 
 
 ### Exercise - Setting the Scene
-One of the facilitators is playing the role of *CEO* of Todolist Management International (TMI&trade;)
-
-#### Market Research
-
-* TMI&trade; has been a market leader for 15 years in pen and paper TodoList Kit industry
-* Our research suggests that people most likely  to use a digital TodoList application are aged between 18 and 49 years old
-* Long Term goal is to use the Facebook model - attract millions of users to be able to harvest their data for nefarious use
-
+#### Pet Battle Industries
+A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter them into a competition.
+* Started as a hobbyist application built by a few friends over a weekend
+* Deployed as a single VM running on a free host. Over the weekend a famous person tweeted about the app and it exploded in usage however the application started to fail and crash loads under the load
+* The team behind the hobbyist app have decided to quit their jobs and go all in on PBI&trade;
 
 
 ### Exercise - Impact Mapping 1/2

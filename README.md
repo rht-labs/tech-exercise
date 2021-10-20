@@ -40,4 +40,4 @@ docsify serve ./docs
 ## 🎃 Contribution
 Pull requests welcome 🎃
 
-Changes approved and pushed to main will automatically be published to the docs site.
+Changes approved and pushed to main will automatically be published to the docs site

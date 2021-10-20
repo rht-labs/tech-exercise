@@ -17,7 +17,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<!-- Use external markdown resource, separate slides by three newlines; vertical slides by two newlines -->
-				<section id="root-section" data-markdown="" data-separator="^\n\n\n" data-separator-vertical="^\n\n"></section>
+				<section class="my-section" data-markdown="" data-separator="^\n\n\n" data-separator-vertical="^\n\n"></section>
 			</div>
 		</div>
 
@@ -30,7 +30,7 @@
 			// Dynamically load the content of the MD file
 			const urlParams = new URLSearchParams(window.location.search);
 			const name = urlParams.get('name');
-			document.getElementById("root-section").setAttribute("data-markdown", `${name}.md`);
+			document.getElementsByClassName("my-section")[0].setAttribute("data-markdown", `${name}.md`);
 			document.title = name
 
 			// More info about initialization & config:
