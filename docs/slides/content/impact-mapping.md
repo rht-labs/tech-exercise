@@ -76,11 +76,12 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 * The team behind the hobbyist app have decided to quit their jobs and go all in on PBI&trade;
 
 
-### Exercise - Impact Mapping 1/2
-As a class:
+
+### Exercise - Impact Mapping 1/3
+#### *As a class:*
 
 1. Start at the end:
-   * We have an easy to use tool with 1 million users getting tasks done.
+   * Generate 100K in revenue with our new & existing customer base by the end of the year
 2. Discuss:
    * Is this a good goal?
 3. Diverge <> Converge:
@@ -89,13 +90,26 @@ As a class:
 
 
 
-### Exercise - Impact Mapping 2/2
-As a class:
-1. Walk through creating the Impacts and Deliverables for one Actor
+### Exercise - Impact Mapping 2/3
+#### *As a class:*
+1. Walk through creating the Impacts and Deliverables for one Actor 
 
-As a team:
+![example-pbi](images/ImpactMapping/example-pbi.png)
+
+
+
+### Exercise - Impact Mapping 3/3
+#### *In your team:*
+
 1. Determine impacts and deliverables for your actors
 2. Issue your Donal Dollars&trade; to identify where you should place your bets
+![donal-dollars](images/ImpactMapping/donal-dollars.jpeg)
+
+
+
+# Exercise Wrap Up
+
+[PetBattle Miro Board](https://app.mural.co/t/warhw2023/m/warhw2023/1580744046908/05e98ef35312102d27aa494ff5e92b4ecb1ecc17?sender=dspring0331)
 
 
 
