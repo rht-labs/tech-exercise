@@ -63,9 +63,8 @@ It was brought to the IT world by Gojko Adzic in 2012.
 
 
 
-### Example Impact Map with Deliverables
-![Example2](images/ImpactMapping/ImpactDeliverables.png)
-
+### 
+<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/ImpactDeliverables.png", class="white-style" -->
 
 
 ### Exercise - Setting the Scene
