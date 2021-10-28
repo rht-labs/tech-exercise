@@ -36,7 +36,7 @@ git pull
       username: "$(printf ${GITLAB_USER} | base64 -w0)"
       password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
     metadata:
-      annotation:
+      annotations:
         tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
       labels:
         credential.sync.jenkins.openshift.io: "true"
