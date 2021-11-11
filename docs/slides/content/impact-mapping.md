@@ -14,7 +14,7 @@ TL500 <!-- {_class="title-color"} -->
 
 
 
-#### Impact Map
+#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
 
 
@@ -52,15 +52,15 @@ At the end of the Impact Mapping exercise, you should have:
 
 #### Why do we use it?
 * Impact mapping enables to focus on business objectives and orient product teams toward delivering business value and not just delivering more and more features
-* Brings together business and technology improving communication between business and technology
-* Visualises how strategic goals link to Teams work
-* It helps to define initial experiment, because it helps identify which hypotheses are the most valuable to test first
-* It is a graphical mind map easy to facilitate and has a low barrier to attendees
+* Brings together business and technology improving communication and purpose
+* Visualises how strategic goals link to the teams work
+* Impact Mapping creates hypotheses and shows the most valuable ones to accomplish the goal
+* It is a graphical mind map, easy to facilitate and has a low barrier to entry
 
 
 
 <div class="r-stack">
-  <img class="fragment " data-fragment-index="0" src="images/ImpactMapping/impact-mapping-goal.png">
+  <img class="" data-fragment-index="0" src="images/ImpactMapping/impact-mapping-goal.png">
   <img class="fragment " data-fragment-index="1" src="images/ImpactMapping/impact-mapping-actors.png">
   <img class="fragment " data-fragment-index="2" src="images/ImpactMapping/impact-mapping-impacts.png">
   <img class="fragment " data-fragment-index="3" src="images/ImpactMapping/impact-mapping-deliverables.png">
@@ -69,7 +69,7 @@ At the end of the Impact Mapping exercise, you should have:
 
 
 
-#### Impact Map
+#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
 
 
@@ -83,6 +83,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 * Started as a hobbyist application built by a few friends over a weekend
 * Deployed as a single VM running on a free host. Over the weekend a famous person tweeted about the app and it exploded in usage however the application started to fail and crash loads under the load
 * The team behind the hobbyist app have decided to quit their jobs and go all in on PBI&trade;
+* PBI&trade; are looking to monetize their application
 
 
 
@@ -114,6 +115,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 
 
+#### Impact Map - Pet Battle <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/pb-full-example.png", class="white-style" -->
 
 
