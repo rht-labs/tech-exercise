@@ -86,7 +86,7 @@
         enabled: true
         source: https://redhat-cop.github.io/helm-charts
         chart_name: sonarqube
-        source_ref: "0.0.16"
+        source_ref: "0.0.17"
         values:
           account:
             existingSecret: sonarqube-auth
