@@ -90,10 +90,10 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 ### The Goal & Actors
 #### *As a class:*
 
-1. The _`Goal`_- Is this a good goal?
+1. The _`Goal`_ - Is this a good goal?
    * _Generate 100K in revenue with our new & existing customer base by the end of the year_
   
-2. The _`Actors`_- Diverge <> Converge:
+2. The _`Actors`_ - Diverge <> Converge:
    * Who are the **all** the actors that can get us to our goal?
    * Who are the focus ones? Pick one to two actors per table
 
@@ -101,10 +101,10 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 ### The Impacts
 #### *As a class:*
-1. Walk through creating the _`Impacts`_for one _`Actor`_
+1. Walk through creating the _`Impacts`_ for one _`Actor`_
 ![example-pbi](images/ImpactMapping/example-pbi.png)
 #### *In your team:*
-1. Determine _`Impacts`_for your _`Actors`_
+1. Determine _`Impacts`_ for your _`Actors`_
 
 
 
