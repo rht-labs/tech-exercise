@@ -126,6 +126,19 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 
 
+
+#### Facilitation Tips
+* Don't spend too long on the goal - get it good enough and move on
+* Have a goal preprepared in advance to really speed up teh workshop
+* If time is a constraint, forget about deliverables and focus just on the impacts
+
+#### Tips For Remote
+* Break the practice into many sessions
+* Use breakout rooms to ideate in smaller size
+* Don't rely on the facilitator alone to update the board
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Impact Mapping](https://openpracticelibrary.com/practice/impact-mapping/)
+### Related Practices
+- [Start at the End](https://openpracticelibrary.com/practice/start-at-the-end/) - a simple exercise to identify a set of assumptions which must be tested in order achieve a long term goal
