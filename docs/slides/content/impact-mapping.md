@@ -90,10 +90,10 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 ### The Goal & Actors
 #### *As a class:*
 
-1. The `Goal` - Is this a good goal?
+1. The _`Goal`_- Is this a good goal?
    * _Generate 100K in revenue with our new & existing customer base by the end of the year_
   
-2. The `Actors` - Diverge <> Converge:
+2. The _`Actors`_- Diverge <> Converge:
    * Who are the **all** the actors that can get us to our goal?
    * Who are the focus ones? Pick one to two actors per table
 
@@ -101,17 +101,17 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 ### The Impacts
 #### *As a class:*
-1. Walk through creating the `Impacts` for one `Actor` 
+1. Walk through creating the _`Impacts`_for one _`Actor`_
 ![example-pbi](images/ImpactMapping/example-pbi.png)
 #### *In your team:*
-1. Determine `Impacts` for your `Actors` 
+1. Determine _`Impacts`_for your _`Actors`_
 
 
 
 ### The Deliverables & Voting
 #### *In your team:*
-1. Determine some `Deliverables` for the `Impacts` on your `Actors`
-2. Issue your Donal Dollars&trade; and place your bets on the `Impacts`
+1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_
+2. Issue your Donal Dollars&trade; and place your bets on the _`Impacts`_
 
 ![donal-dollars](images/ImpactMapping/donal-dollars.jpeg)
 
