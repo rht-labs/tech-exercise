@@ -90,10 +90,10 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 ### The Goal & Actors
 #### *As a class:*
 
-1. The Goal - Is this a good goal?
+1. The _`Goal`_ - Is this a good goal?
    * _Generate 100K in revenue with our new & existing customer base by the end of the year_
   
-2. The Actors - Diverge <> Converge:
+2. The _`Actors`_ - Diverge <> Converge:
    * Who are the **all** the actors that can get us to our goal?
    * Who are the focus ones? Pick one to two actors per table
 
@@ -101,22 +101,19 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 ### The Impacts
 #### *As a class:*
-1. Walk through creating the Impacts for one Actor 
+1. Walk through creating the _`Impacts`_ for one _`Actor`_
 ![example-pbi](images/ImpactMapping/example-pbi.png)
 #### *In your team:*
-1. Determine impacts for your actors 
+1. Determine _`Impacts`_ for your _`Actors`_
 
 
 
 ### The Deliverables & Voting
-1. Determine some deliverables for your impact on your actors
-2. Issue your Donal Dollars&trade; to identify where you should place your bets
+#### *In your team:*
+1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_
+2. Issue your Donal Dollars&trade; and place your bets on the _`Impacts`_
+
 ![donal-dollars](images/ImpactMapping/donal-dollars.jpeg)
-
-
-
-#### Impact Map - Pet Battle <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/pb-full-example.png", class="white-style" -->
 
 
 
@@ -126,6 +123,26 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 
 
+#### Impact Map - Pet Battle <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/pb-full-example.png", class="white-style" -->
+
+
+
+
+#### Facilitation Tips
+
+* Don't spend too long on the goal - get it good enough and move on
+* Have a goal preprepared in advance to really speed up teh workshop
+* If time is a constraint, forget about deliverables and focus just on the impacts
+ 
+
+#### Tips For Remote
+* Break the practice into many sessions
+* Use breakout rooms to ideate in smaller size
+* Don't rely on the facilitator alone to update the board
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Impact Mapping](https://openpracticelibrary.com/practice/impact-mapping/)
+### Related Practices
+- [Start at the End](https://openpracticelibrary.com/practice/start-at-the-end/) - a simple exercise to identify a set of assumptions which must be tested in order achieve a long term goal

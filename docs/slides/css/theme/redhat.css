@@ -1,4 +1,56 @@
-@import url("https://s3.amazonaws.com/static.slid.es/fonts/overpass2/overpass2.css");
+// @import url("https://s3.amazonaws.com/static.slid.es/fonts/overpass2/overpass2.css");
+
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url("./RedHatDisplay/RedHatDisplayVF.woff2") format('woff2-variations');
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url("./RedHatDisplay/RedHatDisplayVF-Italic.woff2") format('woff2-variations');
+  font-weight: 300 900;
+  font-style: italic;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'RedHatText';
+  src: url("./RedHatText/RedHatTextVF.woff2") format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'RedHatText';
+  src: url("./RedHatText/RedHatTextVF-Italic.woff2") format('woff2-variations');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'RedHatMono';
+  src: url("./RedHatMono/RedHatMonoVF.woff2") format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: 'RedHatMono';
+  src: url("./RedHatMono/RedHatMonoVF-Italic.woff2") format('woff2-variations');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: fallback;
+}
+
+
+
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -120,7 +172,7 @@ body {
 }
 
 .reveal {
-  font-family: "Overpass 2", Overpass, sans-serif !important;
+  font-family: "RedHatText", RedHatText, sans-serif !important;
   font-size: 28px;
   font-weight: normal;
   color: #000; }
@@ -151,7 +203,7 @@ body {
 .reveal h6 {
   margin: 0 0 20px 0;
   color: #000;
-  font-family: "Overpass 2", Overpass, sans-serif !important;
+  font-family: "RedHatDisplay", RedHatDisplay, sans-serif !important;
   font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
@@ -278,13 +330,13 @@ body {
   margin: 20px auto;
   text-align: left;
   font-size: 0.55em;
-  font-family: monospace;
+  font-family: RedHatMono;
   line-height: 1.2em;
   word-wrap: break-word;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  font-family: monospace;
+  font-family: RedHatMono;
   text-align: left;}
 
 .reveal pre code {
