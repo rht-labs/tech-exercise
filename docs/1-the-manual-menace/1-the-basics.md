@@ -28,29 +28,36 @@ echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-6. Verify the variables you have set:
+6. Add the `GIT_SERVER` to the environment:
 ```bash
-source ~/.bashrc
-echo ${CLUSTER_DOMAIN}
-echo ${TEAM_NAME}
+echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-7. Check if you can connect to OpenShift. Run the command below. 
+7. Verify the variables you have set:
+```bash
+source ~/.bashrc
+echo ${TEAM_NAME}
+echo ${CLUSTER_DOMAIN}
+echo ${GIT_SERVER}
+```
+
+8. Check if you can connect to OpenShift. Run the command below. 
 ```bash
 oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
 
-8. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
+9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 ```bash
 oc new-project ${TEAM_NAME}-ci-cd
 ```
 ![new-project](./images/new-project.png)
+
 ### Helm 101
 > Helm is the package manager for Kubernetes. It provides a way to templatise the Kubernetes YAML that make up our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
 Let's deploy a simple application using Helm.
 
-1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts aswell as the tar file the chart is packaged as.
+1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts as well as the tar file the chart is packaged as.
 ```bash
 helm repo add do500 https://rht-labs.com/todolist/
 ```

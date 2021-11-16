@@ -6,19 +6,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <!--link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"-->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
 </head>
 <body>
   <div class="team-name-form">
       <div class="team-inputs">
-        <label for="tname">Team Name</label>
+        <label for="tname">Team Name</label><br/>
         <input type="text" id="tname" name="teamname" placeholder="Your team name..">
       </div>
 
       <div class="team-inputs">
-        <label for="cdomain">Cluster Domain</label>
+        <label for="cdomain">Cluster Domain</label><br/>
         <input type="text" id="cdomain" name="clusterdomain" placeholder="Your cluster domain..">
+      </div>
+
+      <div class="team-inputs">
+        <label for="gitserver">Git Server</label><br/>
+        <input type="text" id="gitserver" name="gitserver" placeholder="Your git server..">
       </div>
 
       <div class="">
@@ -28,18 +32,20 @@
   </div>
 
   <div id="app"></div>
-  
-  
+    
   <script>
     document.getElementById("tname").value = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '';
     document.getElementById("cdomain").value = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '';
+    document.getElementById("gitserver").value = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '';
 
     function setNamesInStorage () {
       let tname = document.getElementById('tname').value.toLowerCase();
       let cdomain = document.getElementById('cdomain').value.toLowerCase();
-      console.info('INFO - setting team and cluster to :', tname, cdomain)
+      let gitserver = document.getElementById('gitserver').value.toLowerCase();
+      console.info('INFO - setting team, cluster and git to :', tname, cdomain, gitserver);
       localStorage.setItem('TEAM_NAME', tname);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
+      localStorage.setItem('GIT_SERVER', gitserver);
       location.reload();
     }
 
@@ -47,8 +53,10 @@
       console.info('INFO - clearing team and cluster');
       localStorage.removeItem('TEAM_NAME');
       localStorage.removeItem('CLUSTER_DOMAIN');
+      localStorage.removeItem('GIT_SERVER');
       document.getElementById('tname').value = '';
       document.getElementById('cdomain').value = '';
+      document.getElementById('gitserver').value = '';
       location.reload();
     }
 
@@ -74,8 +82,10 @@
             // Invoked each time before parsing the Markdown file.
             const teamName = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '<TEAM_NAME>';
             const clusterDomain = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '<CLUSTER_DOMAIN>';
+            const gitServer = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '<GIT_SERVER>';
             return content.replaceAll('<TEAM_NAME>', teamName)
-                    .replaceAll('<CLUSTER_DOMAIN>', clusterDomain);
+                    .replaceAll('<CLUSTER_DOMAIN>', clusterDomain)
+                    .replaceAll('<GIT_SERVER>', gitServer);
           });
 
           const footer = `<hr/>
@@ -92,13 +102,10 @@
       ],
       search: 'auto', // default
       vueComponents: { }
-    }
-
-    
+    }    
   </script>
 
   <!-- Docsify v4 -->
-  <!-- <script src="//cdn.jsdelivr.net/npm/vue@3/dist/vue.global.js"></script> -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>

@@ -39,7 +39,7 @@ git push
     ```bash
     cd /projects
     git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
-    git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle.git
+    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
     git branch -M main
     git push -u origin main
     ```
@@ -67,7 +67,7 @@ git push
               - name: GITLAB_DEFAULT_BRANCH
                 value: 'main'
               - name: GITLAB_HOST
-                value: 'gitlab-ce.<CLUSTER_DOMAIN>'
+                value: '<GIT_SERVER>'
               - name: GITLAB_GROUP_NAME
                 value: '<TEAM_NAME>'
               - name: BISCUITS
@@ -145,9 +145,9 @@ git push
                     echo '### Running Linting ###'
 
                     // 🃏 Jest Testing
-                   echo '### Running Jest Testing ###'
+                    echo '### Running Jest Testing ###'
 
-                   echo '### Running build ###'
+                    echo '### Running build ###'
                     sh 'npm run build '
 
                     // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
@@ -159,9 +159,9 @@ git push
                         curl -v -f -u ${NEXUS_CREDS} --upload-file ${PACKAGE} \
                             http://nexus:8081/repository/${NEXUS_REPO_NAME}/${APP_NAME}/${PACKAGE}
                     '''
-             }
-            // 📰 Post steps go here
-           }
+                }
+                // 📰 Post steps go here
+            }
     ```
 
 7. Push the changes to git.

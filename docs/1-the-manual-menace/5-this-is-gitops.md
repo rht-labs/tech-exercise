@@ -7,7 +7,7 @@
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
 git pull
 ```
 
@@ -46,7 +46,7 @@ git pull
     # more yaml ...
     </code></pre></div>
 
-3. Git commit that change and open the ArgoCD UI to see the new variable syncrhonised.
+3. Git commit that change and open the ArgoCD UI to see the new variable synchronized.
 
     ```bash
     git add .

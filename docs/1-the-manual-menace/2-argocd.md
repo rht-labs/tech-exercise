@@ -26,7 +26,7 @@ When something is seen as not matching the required state in Git, an application
     helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
     ```
 
-2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case. However when deploying many instances of ArgoCD in one shared cluster, we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each argocd instance seeing the others' resources.
+2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case. However when deploying many instances of ArgoCD in one shared cluster, we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each `argocd` instance seeing the others' resources.
  
     We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
@@ -40,7 +40,7 @@ When something is seen as not matching the required state in Git, an application
         enabled: true
       applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
       repositoryCredentials: |
-        - url: https://gitlab-ce.${CLUSTER_DOMAIN}
+        - url: https://${GIT_SERVER}
           type: git
           passwordSecret:
             key: password
@@ -88,7 +88,7 @@ When something is seen as not matching the required state in Git, an application
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the todolist app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form. Let's fill it out by setting the following:
+7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `todolist` app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`

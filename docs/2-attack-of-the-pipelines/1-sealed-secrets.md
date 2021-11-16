@@ -10,7 +10,7 @@ Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called 
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
 git pull
 ```
 
@@ -37,7 +37,7 @@ git pull
       password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
     metadata:
       annotations:
-        tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
+        tekton.dev/git-0: https://${GIT_SERVER}
       labels:
         credential.sync.jenkins.openshift.io: "true"
       name: git-auth
@@ -104,7 +104,7 @@ git pull
             - name: git-auth
               type: kubernetes.io/basic-auth
               annotations:
-                tekton.dev/git-0: https://gitlab-ce.<CLUSTER_DOMAIN>
+                tekton.dev/git-0: https://<GIT_SERVER>
               labels:
                 credential.sync.jenkins.openshift.io: "true"
               data:
@@ -128,7 +128,7 @@ git pull
 
     <p class="tip">HEALTH DETAILS - failed update: Resource <b>"git-auth"</b> already exists and is not managed by SealedSecret</p>
 
-    Thats because we already created a `git-auth` secret manually in Excercise 1. Lets remove it now and resync ArgoCD:
+    Thats because we already created a `git-auth` secret manually in Exercise 1. Lets remove it now and resync ArgoCD:
 
     ```bash
     oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth

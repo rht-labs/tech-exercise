@@ -1,6 +1,6 @@
 ### Tekton Pipeline
 
-> Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in poplularity as it's Kubenetes Native way of running CI/CD.
+> Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in popularity as it's Kubernetes Native way of running CI/CD.
 
 There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
@@ -25,7 +25,7 @@ In this snippet of the pipeline used in this exercise, we define:
     ```bash
     cd /projects
     git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api
-    git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/pet-battle-api.git
+    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
     git branch -M main
     git push -u origin main
     ```
@@ -64,21 +64,22 @@ In this snippet of the pipeline used in this exercise, we define:
    * `Workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
    * `secrets` - secure things used by the pipeline
-   * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & resuable set of activities.
+   * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
    * `triggers` folder stores the configuration for the webhooks. We will add WebHooks from gitlab to trigger our pipeline, using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
-4. Seeing as Tekton pipelines are just YAML, we can have Argo CD sync the pipelines to the cluster so our code can use them. To deploy the pipeline defintions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
+4. Seeing as Tekton pipelines are just YAML, we can have Argo CD sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
 
     ```yaml
       # Tekton Pipelines
       - name: tekton-pipeline
         enabled: true
-        source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+        source: "https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git"
         source_ref: main
         source_path: tekton
         values:
           team: <TEAM_NAME>
           cluster_domain: <CLUSTER_DOMAIN>
+          git_server: <GIT_SERVER>
     ```
 
 5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:

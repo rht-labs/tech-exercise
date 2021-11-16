@@ -1,6 +1,6 @@
 # change source and team
 # source: https://github.com/rht-labs/tech-exercise.git
-source: https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git
+source: https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
 team: <TEAM_NAME>
 release: ci-cd
 
