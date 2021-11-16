@@ -42,10 +42,27 @@
       let tname = document.getElementById('tname').value.toLowerCase();
       let cdomain = document.getElementById('cdomain').value.toLowerCase();
       let gitserver = document.getElementById('gitserver').value.toLowerCase();
+
+      // Check inputs
+      if (tname == '') {        
+        alert('Please enter a team name');
+        return;
+      }
+      if (cdomain == '') {        
+        alert('Please enter a cluster domain');
+        return;
+      }
+
       console.info('INFO - setting team, cluster and git to :', tname, cdomain, gitserver);
       localStorage.setItem('TEAM_NAME', tname);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
-      localStorage.setItem('GIT_SERVER', gitserver);
+      // gitserver is not nullable
+      if (gitserver !== '') {
+        localStorage.setItem('GIT_SERVER', gitserver);
+      } else {
+        // Default GitLab Server
+        localStorage.setItem('GIT_SERVER', 'gitlab-ce.' + cdomain);
+      }
       location.reload();
     }
 
