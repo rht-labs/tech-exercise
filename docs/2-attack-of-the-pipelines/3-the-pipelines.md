@@ -17,7 +17,7 @@ Why create pipelines:
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
 git pull
 ```
 
@@ -28,7 +28,7 @@ Split into 2 groups within your team. Choose your own adventure! Each group will
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * We need to fork PetBattle (clone from GitHub and push to GitLab) | * We need to fork PetBattle API (clone from GitHub and push to GitLab) |
-| * Update Jenkinsfile task to leave out some stuff for participants | * Update Tekton task to leave out some stuff for participants |
+| * Update `Jenkinsfile` task to leave out some stuff for participants | * Update Tekton task to leave out some stuff for participants |
 | * Add webhook into GitLab repositories for triggering jobs | * Add webhook into GitLab repositories for triggering jobs |
 | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) 
 | * By updating version files (pom.xml etc), kick the pipelines | * By updating version files (pom.xml etc), kick the pipelines |

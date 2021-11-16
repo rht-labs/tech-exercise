@@ -1,2 +1,3 @@
 team: biscuits
 cluster_domain: apps.cluster.com
+git_server: gitlab-ce.apps.cluster.com

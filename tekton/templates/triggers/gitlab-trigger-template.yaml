@@ -40,7 +40,7 @@ spec:
           - name: APPLICATION_NAME
             value: $(tt.params.git-repo-name)
           - name: GIT_URL
-            value: http://gitlab-ce.{{ .Values.cluster_domain }}/{{ .Values.team }}/$(tt.params.git-repo-name).git
+            value: http://{{ .Values.git_server }}/{{ .Values.team }}/$(tt.params.git-repo-name).git
           - name: GIT_REVISION
             value: $(tt.params.git-revision)
           - name: GIT_SHORT_REVISION

@@ -5,7 +5,7 @@ At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residen
 This repo is available on the Red Hat Labs GitHub organization – <span style="color:blue;">https://github.com/rht-labs/ubiquitous-journey.</span> Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
 - **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extended to support new tools and methodologies.
-- **Traceable** - We can easily see where changes have occured and most importantly trace exactly what git tag/commit is in which environment.
+- **Traceable** - We can easily see where changes have occurred and most importantly trace exactly what git tag/commit is in which environment.
 - **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
 - **Auditable** - Git logs and history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
 - **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. Its not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
@@ -19,7 +19,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 1. Log into GitLab with your credentials. GitLab URL:
 
     ```bash
-    https://gitlab-ce.<CLUSTER_DOMAIN>
+    https://<GIT_SERVER>
     ```
 
     We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
@@ -41,15 +41,12 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```
 
     ```bash
-    git remote set-url origin https://gitlab-ce.${CLUSTER_DOMAIN}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
     ```
 
     ```bash
     git add .
     git commit -am "🐙 ADD - argocd values file 🐙"
-    ```
-
-    ```bash
     git push -u origin --all
     ```
 
@@ -61,7 +58,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in to create App of Apps in ArgoCD. Let's get right into it - in the your IDE, Open the `values.yaml` file in the root of the project. Update it to reference the git repo you just created and your team name. This values file is the default ones for the chart and will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (`services`, `deployments` & `routes`) but an ArgoCD application definition, just like the one we manually created in the previous exercise when we deployed an app in the UI of ArgoCD.
 
     ```yaml
-    source: "https://gitlab-ce.<CLUSTER_DOMAIN>/<TEAM_NAME>/tech-exercise.git"
+    source: "https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git"
     team: <TEAM_NAME>
     ```
 
@@ -75,15 +72,16 @@ All of these traits lead to one outcome - the ability to build and release quali
           namespaces:
             - name: <TEAM_NAME>-ci-cd
               bindings: *binds
+              operatorgroup: false
             - name: <TEAM_NAME>-dev
-              operatorgroup: true
               bindings: *binds
+              operatorgroup: true
             - name: <TEAM_NAME>-test
-              operatorgroup: true
               bindings: *binds
+              operatorgroup: true
             - name: <TEAM_NAME>-stage
-              operatorgroup: true
               bindings: *binds
+              operatorgroup: true
     ```
 
 3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
@@ -119,7 +117,7 @@ All of these traits lead to one outcome - the ability to build and release quali
       kind: Secret
       metadata:
         annotations:
-          tekton.dev/git-0: https://gitlab-ce.${CLUSTER_DOMAIN}
+          tekton.dev/git-0: https://${GIT_SERVER}
         labels:
           credential.sync.jenkins.openshift.io: "true"
         name: git-auth
