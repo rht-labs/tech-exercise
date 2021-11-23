@@ -29,6 +29,7 @@ TL500 <!-- {_class="title-color"} -->
 
 #### _What is it?_
 Impact mapping is a technique that helps build shared understanding and alignment between leaders of organization strategy and product delivery teams.
+
 <br>
 
 #### At the end of the Impact Mapping exercise, you should have:

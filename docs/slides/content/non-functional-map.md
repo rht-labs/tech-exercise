@@ -21,58 +21,67 @@ TL500 <!-- {_class="title-color"} -->
 
 
 
-#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
+##### NFR Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/nfr-map/example-who-nfr-map.png", class="white-style" -->
 
 
 
 #### _What is it?_
-Impact mapping is a technique that helps build shared understanding and alignment between leaders of organization strategy and product delivery teams.
+A tool to capture and articulate the non-functional requirements of a solution that a team are striving to deliver
+
 <br>
 
-#### At the end of the Impact Mapping exercise, you should have:
-![you-should-have](images/ImpactMapping/you-should-have.png)<!-- .element: class="image-no-shadow image-full-width" -->
+![what-is-it](images/nfr-map/what-is-it.png)<!-- .element: class="image-no-shadow image-full-width" -->
 <!--  
 #### _What is it?_
-At the end of the Impact Mapping exercise, you should have:
-
-* A shared understanding of the goal or problem statement
-* An inventory of human behavior changes in users and stakeholders that must occur (or not occur) in order for your project to be successful. These are the impacts from which the technique gets its name
-* Optionally, an inventory of project deliverables that could be delivered to achieve the aforementioned impacts
-* Some sort of prioritization of scope – one or more deliverables – and/or impacts
+* Aims to elaborate non-functional areas that are unlikely to be captured using practices primarily focused on functional aspects of a solution.
+* Non-functional requirements are broken down into areas represented by each segment on the canvas.
+* Findings and learnings from other Discovery practices can be input into this practice if appropriate.
 -->
 
 
 
-####
+#### Why do we use it?
+* To gain a shared understanding of non-functional aspects of a system in a visually structured representation. 
+
+* On completion you should have a good view on the key non-functional considerations for the solution and where work is required to realise these.
+<!--
+--->
+
+
+
+## How do we do it?
+<!-- .slide: data-background-size="contain" data-background-image="https://openpracticelibrary.com/images/non-functional-requirements-map.jpg", class="black-style" -->
+
+
+
+#### How do we do it?
+1. Ensure that everyone participating is comfortable with the headings and what they mean <!-- .element: class="fragment" -->
+2. For each heading, capture on stickies important considerations or requirements for the system or solution. Depending on the number of participants, you could use facilitation techniques such as 1-2-4-all or splitting into smaller groups to capture items <!-- .element: class="fragment" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://openpracticelibrary.com/images/non-functional-requirements-map.jpg", class="black-style" style: opacity: 0.5; -->
+
+
+
+#### How do we do it?
+3. For each heading, play back the stickies as a group
+4. During the playback, think about whether each sticky should be:
+
+![how](images/nfr-map/how-to-do-it.png)<!-- .element: class="image-no-shadow image-full-width" -->
+
+
+
 <div class="container">
 <div class="col" data-markdown>
 
-![impact-mapping](https://www.impactmapping.org/assets/cover500.png)
+![nfr-map](https://openpracticelibrary.com/images/non-functional-requirements-map.jpg)<!-- .element: style="width: 75%" -->
    
 </div>
 <div class="col" data-markdown>
 
-_It's as a lightweight, collaborative planning technique for teams that want to make a big impact with software products_
-
-_It help delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher level organizational goals_
-
-~ Gojko Adzic
+1. Ensure that everyone participating is comfortable with the headings and what they mean
+2. For each heading, capture on stickies important considerations or requirements for the system or solution. Depending on the number of participants, you could use facilitation techniques such as 1-2-4-all or splitting into smaller groups to capture items
 </div>
 </div>
-
-
-
-#### Why do we use it?
-![why-use-it](images/ImpactMapping/why-use-it.png)<!-- .element: class="image-no-shadow " -->
-<!--
-#### Why do we use it?
-* Impact mapping enables to focus on business objectives and orient product teams toward delivering business value and not just delivering more and more features
-* Brings together business and technology improving communication and purpose
-* Visualises how strategic goals link to the teams work
-* Impact Mapping creates hypotheses and shows the most valuable ones to accomplish the goal
-* It is a graphical mind map, easy to facilitate and has a low barrier to entry
---->
 
 
 
