@@ -5,7 +5,7 @@ TL500 <!-- {_class="title-color"} -->
 
 
 
-### [Impact Mapping](https://openpracticelibrary.com/practice/impact-mapping/)
+### [Open Practice Library](https://openpracticelibrary.com/practice/impact-mapping/)
 <div class="r-stack">
   <img class="fragment fade-out" data-fragment-index="0" src="images/opl-complete.png">
   <img class="fragment current-visible" data-fragment-index="0" src="images/opl-discovery.png">
