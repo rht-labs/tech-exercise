@@ -1,19 +1,18 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- {_class="course-title"} -->
-## Impact Mapping <!-- {_class="title-color"} -->
+## Non Functional Requirements Map <!-- {_class="title-color"} -->
 TL500 <!-- {_class="title-color"} -->
 
 
 
-<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
 <div class="fragment fade-out" data-fragment-index="0" >
   <h2>Open Practice Library</h2>
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Impact Mapping</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/impact-mapping/">
+  <h2>NFR Map</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/non-functional-requirements-map/">
   <img src="images/opl-discovery.png">
   </a>
 </div>
