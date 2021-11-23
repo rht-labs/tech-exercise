@@ -50,7 +50,7 @@ We have a `do500-devfile.yaml` which is the _as code_ definition of our workspac
 ...
   - type: dockerimage
     alias: stack-do500
-    image: quay.io/rht-labs/stack-do500:3.0.8
+    image: quay.io/rht-labs/stack-do500:3.0.9
 ...
 ```
 
