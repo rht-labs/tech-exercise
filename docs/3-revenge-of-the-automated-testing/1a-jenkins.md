@@ -32,7 +32,7 @@
     EOF
     ```
 
-2. Then we need to introduce SonarQube credentials to `Jenkinsfile` - these are already being sychronized to the cluster from Git, we just have to tell our pipeline to use them. Add the followings to the list of other `CREDS` in the `environment {}` block in the `Jenkinsfile`.
+2. Then we need to introduce SonarQube credentials to `Jenkinsfile` - these are already being synchronized to the cluster from Git, we just have to tell our pipeline to use them. Add the followings to the list of other `CREDS` in the `environment {}` block in the `Jenkinsfile`.
 
     ```groovy
             SONARQUBE_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonarqube-auth")
