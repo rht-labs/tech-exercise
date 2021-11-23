@@ -49,23 +49,16 @@
 
     Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 
-    Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/staging/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
+    Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
 
     ```yaml
-        servicemonitor: true
+          servicemonitor: true
     ```
 
     Then push it to the git repo.
 
     ```bash
-    cd /projects/pet-battle
-    git add .
-    git commit -m "🖥️ ServiceMonitor enabled 🖥️"
-    git push
-    ```
-
-    ```bash
-    cd /projects/pet-battle-api
+    cd /projects/tech-exercises
     git add .
     git commit -m "🖥️ ServiceMonitor enabled 🖥️"
     git push
@@ -80,11 +73,11 @@
 2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
 
     ```yaml
-       # Grafana
-       - name: grafana
-         enabled: true
-         source: https://github.com/petbattle/pet-battle-infra.git
-         source_path: grafana
+      # Grafana
+      - name: grafana
+        enabled: true
+        source: https://github.com/petbattle/pet-battle-infra.git
+        source_path: grafana
     ```
 
 3. Commit the changes to the repo as you've done before
@@ -99,7 +92,7 @@
 4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for Pet Battle;
 
     ```bash
-    # get the route and open it in your broswer
+    # get the route and open it in your browser
     echo https://$(oc get route grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
 
@@ -139,7 +132,7 @@
 
     ![grafana-add-panel](./images/grafana-add-panel.png)
 
-4. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Pannel settings, set the title to something sensible and add the query below. Hit save!
+4. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Panel settings, set the title to something sensible and add the query below. Hit save!
 
     ```bash
     sum(kube_pod_status_ready{namespace="<TEAM_NAME>-test",condition="true"})
@@ -147,7 +140,7 @@
 
     ![new-panel](./images/new-panel.png)
 
-5. With the new panel on our dashboad, let's see it in action by killing off some pods in our namespace
+5. With the new panel on our dashboard, let's see it in action by killing off some pods in our namespace
 
     ```bash
     oc delete pods -l app.kubernetes.io/instance=pet-battle-api -n ${TEAM_NAME}-test
