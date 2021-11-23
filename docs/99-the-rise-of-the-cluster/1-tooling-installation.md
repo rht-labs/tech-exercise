@@ -1,4 +1,5 @@
 ## TL500 Cluster Setup
+
 <p class="warn">
     ⛷️ <b>NOTE</b> ⛷️ - You need an OpenShift 4.8+ with cluster-admin privileges.
 </p>
@@ -13,12 +14,13 @@ Let's clone the repository and prepare the cluster:
 
 ```bash
 git clone https://github.com/rht-labs/enablement-framework
-cd enablement-framework
 ```
 
 #### Helm Charts for Toolings
+
 Here is the list of the tools and objects we deploy for TL500 setup:
-* IPA - for user management
+
+* IPA - for user management - [prerequisite install](https://github.com/redhat-cop/containers-quickstarts/tree/master/ipa-server)
 * CodeReady Workspaces - for developer environment.
 * GitLab - as Git server
 * SealedSecrets - for storing the secrets publicly safely. 
@@ -28,9 +30,16 @@ Here is the list of the tools and objects we deploy for TL500 setup:
 * Namespaces
 * RBAC definition for attendees
 
-[todo] add helm install commands...
+A basic install looks like this:
+
+```bash
+cd enablement-framework/tooling/charts/do500
+helm dep up
+helm upgrade --install do500 . --namespace do500 --create-namespace --timeout=15m
+```
 
 #### CodeReady Workspaces Setup
+
 During the exercises, we use different commandlines like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
 We utilize GitHub Actions in order to build and store this image publicly. 
