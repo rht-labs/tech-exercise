@@ -13,7 +13,7 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
             - name: GOALS
-              value: "test org.sonarsource.scanner.maven:sonar-maven-plugin:sonar"  # - org.owasp:dependency-check-maven:check
+              value: "test sonar:sonar"  # - org.owasp:dependency-check-maven:check
             - name: MAVEN_BUILD_OPTS
               value: "-Dsonar.host.url=http://sonarqube-sonarqube:9000 -Dsonar.userHome=/tmp/sonar"
           runAfter:
