@@ -58,46 +58,21 @@ A tool to capture and articulate the non-functional requirements of a solution t
 #### How do we do it?
 1. Ensure that everyone participating is comfortable with the headings and what they mean <!-- .element: class="fragment" -->
 2. For each heading, capture on stickies important considerations or requirements for the system or solution. Depending on the number of participants, you could use facilitation techniques such as 1-2-4-all or splitting into smaller groups to capture items <!-- .element: class="fragment" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://openpracticelibrary.com/images/non-functional-requirements-map.jpg", class="black-style" style: opacity: 0.5; -->
+<!-- .slide: data-background-size="contain" data-background-image="https://openpracticelibrary.com/images/non-functional-requirements-map.jpg", class="black-style" data-background-opacity="0.2"	 -->
 
 
 
 #### How do we do it?
-3. For each heading, play back the stickies as a group
-4. During the playback, think about whether each sticky should be:
+<!-- .slide: data-background-size="contain" data-background-image="https://openpracticelibrary.com/images/non-functional-requirements-map.jpg", class="black-style" data-background-opacity="0.2"	 -->
+3. For each heading, play back the stickies as a group  <!-- .element: class="fragment" data-fragment-index="0" -->
+4. During the playback, think about whether each sticky should be:  <!-- .element: class="fragment" data-fragment-index="1" -->
 
-![how](images/nfr-map/how-to-do-it.png)<!-- .element: class="image-no-shadow image-full-width" -->
-
-
-
-<div class="container">
-<div class="col" data-markdown>
-
-![nfr-map](https://openpracticelibrary.com/images/non-functional-requirements-map.jpg)<!-- .element: style="width: 75%" -->
-   
-</div>
-<div class="col" data-markdown>
-
-1. Ensure that everyone participating is comfortable with the headings and what they mean
-2. For each heading, capture on stickies important considerations or requirements for the system or solution. Depending on the number of participants, you could use facilitation techniques such as 1-2-4-all or splitting into smaller groups to capture items
-</div>
-</div>
+![how](images/nfr-map/how-to-do-it.png)<!-- .element: class="fragment image-no-shadow image-full-width" data-fragment-index="1"-->
 
 
 
-<div class="r-stack">
-  <img class="" data-fragment-index="0" src="images/ImpactMapping/impact-mapping-goal.png">
-  <img class="fragment " data-fragment-index="1" src="images/ImpactMapping/smart-goal.png">
-  <img class="fragment " data-fragment-index="2" src="images/ImpactMapping/impact-mapping-actors.png">
-  <img class="fragment " data-fragment-index="3" src="images/ImpactMapping/impact-mapping-impacts.png">
-  <img class="fragment " data-fragment-index="4" src="images/ImpactMapping/impact-mapping-deliverables.png">
-  <img class="fragment " data-fragment-index="5" src="images/ImpactMapping/impact-mapping-voting.png">
-</div>
-
-
-
-#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
+#### NFR - World Health Organisation <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/nfr-map/example-who-nfr-map.png", class="white-style" -->
 
 
 
@@ -106,72 +81,47 @@ A tool to capture and articulate the non-functional requirements of a solution t
 
 
 #### Setting the Scene: Pet Battle Industries
-A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter them into a competition.
-![pb-industries](images/ImpactMapping/pbindustries.png)<!-- .element: class="image-no-shadow" -->
-<!-- 
-* Started as a hobbyist application built by a few friends over a weekend
-* Deployed as a single VM running on a free host. Over the weekend a famous person tweeted about the app and it exploded in usage however the application started to fail and crash loads under the load
-* The team behind the hobbyist app have decided to quit their jobs and go all in on PBI&trade;
-* PBI&trade; are looking to monetize their application
--->
+Pet Battle Industries have a good handle on the functional design of their applications. Let's not think of all the _other_ things they need to do to harder their application.
 
 
-### The Goal & Actors
+
+
+### Create the NFR Map
 #### *As a class:*
 
-1. The _`Goal`_ - Is this a good goal?
-   * _Generate 100K in revenue with our new & existing customer base by the end of the year_
-  
-2. The _`Actors`_ - Diverge <> Converge:
-   * Who are the **all** the actors that can get us to our goal?
-   * Who are the focus ones? Pick one to two actors per table
-
-
-
-### The Impacts
-#### *As a class:*
-1. Walk through creating the _`Impacts`_ for one _`Actor`_
-![example-pbi](images/ImpactMapping/example-pbi.png)
+1. Ensure that everyone participating is comfortable with the headings and what they mean
+2. Split the map into two segments and divide among the teams - each team taking at least one half of the map 
 #### *In your team:*
-1. Determine _`Impacts`_ for your _`Actors`_
-
-
-
-### The Deliverables & Voting
-#### *In your team:*
-1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_
-2. Issue your Donal Dollars&trade; and place your bets on the _`Impacts`_
-
-![donal-dollars](images/ImpactMapping/donal-dollars.jpeg)
+3. For your area: for each heading, capture important considerations or requirements for the system or solution and add stickies for each item
 
 
 
 # Exercise Wrap Up
+#### *As a class:*
+3. Merge the Map with all area
+4. For each heading, play back the top two or three stickies as a group
+5. During the playback, think about whether each sticky would update the DoD / ACs on a story or form an experiment for the sprint.
 
-[PetBattle Miro Board](https://app.mural.co/t/warhw2023/m/warhw2023/1580744046908/05e98ef35312102d27aa494ff5e92b4ecb1ecc17?sender=dspring0331)
+
+
+#### NFR Map - Finance Co <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/nfr-map/nfr-example-2.png", class="white-style" -->
 
 
 
-#### Impact Map - Pet Battle <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/pb-full-example.png", class="white-style" -->
-
+#### NFR Map to Backlog
+![nfr-to-backlog](./images/nfr-map/nfr-to-backlog.png)
 
 
 
 #### Facilitation Tips
-
-* Don't spend too long on the goal - get it good enough and move on
-* Have a goal preprepared in advance to really speed up teh workshop
-* If time is a constraint, forget about deliverables and focus just on the impacts
- 
+* 🙈
 
 #### Tips For Remote
-* Break the practice into many sessions
-* Use breakout rooms to ideate in smaller size
-* Don't rely on the facilitator alone to update the board
+* 🙈
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related Practices
-- [Start at the End](https://openpracticelibrary.com/practice/start-at-the-end/) - a simple exercise to identify a set of assumptions which must be tested in order achieve a long term goal
+- [](https://openpracticelibrary.com/practice/) - 
