@@ -154,7 +154,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 #### Facilitation Tips
 
 * Don't spend too long on the goal - get it good enough and move on
-* Have a goal preprepared in advance to really speed up teh workshop
+* Have a goal preprepared in advance to really speed up the workshop
 * If time is a constraint, forget about deliverables and focus just on the impacts
  
 
