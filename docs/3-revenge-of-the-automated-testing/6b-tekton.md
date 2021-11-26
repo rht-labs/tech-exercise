@@ -94,7 +94,7 @@
             - verify-deployment
           params:
             - name: APP_URL
-              value: "https://pet-battle-{{ .Values.team }}-test.{{ .Values.cluster_domain }}"
+              value: "https://pet-battle-api-{{ .Values.team }}-test.{{ .Values.cluster_domain }}"
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
           workspaces:

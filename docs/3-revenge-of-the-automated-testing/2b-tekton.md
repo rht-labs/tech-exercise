@@ -112,7 +112,7 @@
         - name: IMAGE
           description: the image to use to upload results
           type: string
-          default: "quay.io/openshift/origin-cli:4.8"
+          default: "quay.io/openshift/origin-cli:4.9"
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
           type: string

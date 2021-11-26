@@ -12,5 +12,5 @@ Empty big picture? :D
 - [ ] Can create a cluster ready for TL500 
 
 ## 🔨 Tools used in this exercise!
-* Openshift 4.8+
+* Openshift 4.8+,4.9+
 * <span style="color:blue;">[Helm](https://helm.sh/)</span> - Helps us to define, install, and upgrade Kubernetes application.

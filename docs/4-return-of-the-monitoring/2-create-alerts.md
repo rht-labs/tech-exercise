@@ -56,8 +56,8 @@
     name: pet-battle-api
     description: Pet Battle API
     type: application
-    version: 1.1.0 <- bump this
-    appVersion: 1.1.0
+    version: 1.1.1 <- bump this
+    appVersion: 1.1.1
     </code></pre></div>
 
 5. Now push the changes into the repo:

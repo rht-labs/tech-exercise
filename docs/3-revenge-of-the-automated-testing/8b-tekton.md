@@ -31,7 +31,7 @@
           type: string
       steps:
         - name: image-signing
-          image: quay.io/openshift/origin-cli:4.8
+          image: quay.io/openshift/origin-cli:4.9
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           script: |
             #!/usr/bin/env bash
