@@ -160,8 +160,8 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     name: pet-battle-api
     description: Pet Battle API
     type: application
-    version: 1.1.0 <- bump this!!
-    appVersion: 1.1.0
+    version: 1.1.1 <- bump this!!
+    appVersion: 1.1.1
     </code></pre></div>
 
 8. We can check the **kube-linter** command again and check these changes in:
