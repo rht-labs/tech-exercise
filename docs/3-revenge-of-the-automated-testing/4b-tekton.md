@@ -66,7 +66,14 @@
     mvn verify
     ```
 
-8. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
+8. We can stash these checkstyle changes and revert our code for now.
+
+    ```bash
+    cd /projects/pet-battle-api
+    git stash
+    ```
+
+9. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
 
     A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
 
