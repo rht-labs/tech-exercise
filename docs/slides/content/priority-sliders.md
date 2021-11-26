@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Priority Sliders <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Priority Sliders <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -15,7 +15,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ### Effective Priority Sliders
-![More important?](images/post-it-priority-sliders.png) <!-- {_class="fragment inline-image"} -->
+![More important?](images/post-it-priority-sliders.png) <!-- {.element: class="fragment inline-image"} -->
 - Used to validate what items should be done next when there are debates
 - Publicly displayed
 - A finite set of topics/dimensions/areas that can be relatively prioritized against each other
@@ -30,7 +30,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ### Exercise - Priority Sliders
-![Priority Sliders Example](images/example-priority-sliders.jpg) <!-- {_class="inline-image"} -->
+![Priority Sliders Example](images/example-priority-sliders.jpg) <!-- {.element: class="inline-image"} -->
 #### In table groups, work together to:
   1. Draw a 5 heading priority slider chart
   2. Consider the areas identified from Target Outcomes practice

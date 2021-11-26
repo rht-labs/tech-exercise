@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-### DevOps Culture and Practice <!-- {_class="course-title"} -->
-## Tech Exercise III <!-- {_class="title-color"} -->
-TL500 <!-- {_class="title-color"} -->
+### DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+## Tech Exercise III <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -12,7 +12,7 @@ TL500 <!-- {_class="title-color"} -->
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
   <h2>Test Automation</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/non-functional-requirements-map/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
@@ -21,7 +21,7 @@ TL500 <!-- {_class="title-color"} -->
 
 
 ### Tech Exercise III
-[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
+[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h){:target="_blank"}
 
 
 
@@ -42,7 +42,17 @@ TL500 <!-- {_class="title-color"} -->
 
 
 #### Background
-TODO
+TODO - Test Pyramid 
+TODO - Align with previous Test Autmotion Contnet
+
+
+
+#### What is it?
+
+
+
+#### Why do it?
+
 
 
 

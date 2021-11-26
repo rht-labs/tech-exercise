@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### What is DevOps? <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### What is DevOps? <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -54,9 +54,9 @@ come to mind.
 
 ### The Three Ways of DevOps
 #### _The First Way: Systems Thinking_
-The First Way emphasizes the performance of the entire system, as opposed to the performance of a specific silo of work or department. This can be as large as a division or as small as an individual contributor. <!-- {_class="medium para"} -->
+The First Way emphasizes the performance of the entire system, as opposed to the performance of a specific silo of work or department. This can be as large as a division or as small as an individual contributor. <!-- {.element: class="medium para"} -->
 
-_The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
+_The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} -->
 
 
 
@@ -71,7 +71,7 @@ _The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
   * Shortening and amplifying all feedback loops
   * Embedding knowledge where we need it
 
-_The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
+_The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} -->
 
 
 
@@ -88,7 +88,7 @@ _The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
   * Creating rituals that reward the team for taking risks
   * Introducing faults into the system to increase resilience
 
-_The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
+_The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} -->
 
 
 
@@ -110,56 +110,56 @@ _The DevOps Handbook_ <!-- {_class="small" style="text-align: right;"} -->
 ### DevOps Anti-Patterns
 #### _Throw it over the wall_
 ![ThrowItOverWall](images/DevOps/antiA.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _DevOps Team Silo_
 ![DevOpsTeamSilo](images/DevOps/antiB.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Dev Doesn't Need Ops_
 ![NoNeedOps](images/DevOps/antiC.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _DevOps as Tool Team_
 ![DevOpsToolTeam](images/DevOps/antiD.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Re-branded Sys Admin_
 ![RebrandSysAdmin](images/DevOps/antiE.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Ops Embedded in Dev Team_
 ![EmbeddedOps](images/DevOps/antiF.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Dev and DBA Silos_
 ![DevOpsDBASilo](images/DevOps/antiG.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Success
 #### _Fully Shared Ops Responsibilities_
 ![DevOpsSuccess](images/DevOps/dosuccess.png)
-https://web.devopstopologies.com/ <!-- {_class="small"} -->
+https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 

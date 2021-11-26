@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Estimation <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Estimation <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 

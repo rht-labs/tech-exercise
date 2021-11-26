@@ -1,20 +1,20 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Pairing and Mobbing <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Pairing and Mobbing <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
 <!--.slide: id="pair-mob" -->
 ### Pair Programming
-![Pair Programming](images/PairAndMob/coaching-coders-coding-7374.jpg) <!-- {_class="inline-image"} -->
+![Pair Programming](images/PairAndMob/coaching-coders-coding-7374.jpg) <!-- {.element: class="inline-image"} -->
 **Pair programming** is a practice used in e**X**treme **P**rogramming in which
 two programmers work together at one computer.
 
 
 
 ### Mob Programming
-![Mob Programming](images/PairAndMob/chairs-developer-development-1181376.jpg) <!-- {_class="inline-image"} -->
+![Mob Programming](images/PairAndMob/chairs-developer-development-1181376.jpg) <!-- {.element: class="inline-image"} -->
 **Mob programming** is a software development approach where the whole team
 works on the same thing, at the same time, in the same space, and at the same
 computer.

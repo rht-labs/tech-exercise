@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Event Storming <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Event Storming <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -27,7 +27,7 @@ some **very** heated debate
 
 ### Event Storming
 #### _Where Did It Come From?_
-![Brandolini](images/eventstorming/brandolini.jpg) <!-- {_class="inline-image" width="350"} -->
+![Brandolini](images/eventstorming/brandolini.jpg) <!-- {.element: class="inline-image" width="350"} -->
 Event Storming was developed by Alberto Brandolini
 * Brandolini has a background in event-driven systems
 * He is an active member of the Domain-Driven Design (DDD) community
@@ -75,7 +75,7 @@ event model
 
 
 ### Event Storming: Events
-![Events](images/eventstorming/events.jpg) <!-- {_class="inline-image"} -->
+![Events](images/eventstorming/events.jpg) <!-- {.element: class="inline-image"} -->
 Something that happened that people care about
 * Subject --> Verb in past tense, e.g **Item Shipped**
 * Could be timed, e.g. **Nightly Accounts Reconciled**
@@ -84,7 +84,7 @@ Something that happened that people care about
 
 
 ### Event Storming: Events
-![Event](images/eventstorming/eventsticky.png) <!-- {_class="inline-image"} -->
+![Event](images/eventstorming/eventsticky.png) <!-- {.element: class="inline-image"} -->
 Where do events come from?
 * A system
 * Passing of time
@@ -93,7 +93,7 @@ Where do events come from?
 
 
 ### Event Storming: Commands
-![Command](images/eventstorming/commandsticky.png) <!-- {_class="inline-image"} -->
+![Command](images/eventstorming/commandsticky.png) <!-- {.element: class="inline-image"} -->
 * A **command** is an **action** started by an **actor**
 * It represents the **decision**
 * It is usually the reverse of the **event**, e.g:
@@ -103,7 +103,7 @@ Where do events come from?
 
 
 ### Event Storming: Actors
-![Actor](images/eventstorming/actorsticky.png) <!-- {_class="inline-image"} -->
+![Actor](images/eventstorming/actorsticky.png) <!-- {.element: class="inline-image"} -->
 An actor is the user of the system
 * Keep it fuzzy, e.g. **Joe**
 * The actor makes the decision
@@ -111,7 +111,7 @@ An actor is the user of the system
 
 
 ### Event Storming: Questions
-![Question](images/eventstorming/questionsticky.png) <!-- {_class="inline-image"} -->
+![Question](images/eventstorming/questionsticky.png) <!-- {.element: class="inline-image"} -->
 * Pain Points, e.g. **It takes a long time!**
 * How / What / Why?
 * Hot Spots
@@ -120,14 +120,14 @@ An actor is the user of the system
 
 
 ### Event Storming: External Systems
-![System](images/eventstorming/systemsticky.png) <!-- {_class="inline-image"} -->
+![System](images/eventstorming/systemsticky.png) <!-- {.element: class="inline-image"} -->
 * Third party services
 * Existing systems
 
 
 
 ### Event Storming: Read Model
-![ReadModel](images/eventstorming/readmodelsticky.png) <!-- {_class="inline-image"} -->
+![ReadModel](images/eventstorming/readmodelsticky.png) <!-- {.element: class="inline-image"} -->
 The **information** needed in order to make a **decision**
 * Represents an implementation
   * Stored Procedure
@@ -138,7 +138,7 @@ The **information** needed in order to make a **decision**
 
 
 ### Event Storming: Policies and Procedures
-![PolicyProcedure](images/eventstorming/policysticky.png) <!-- {_class="inline-image"} -->
+![PolicyProcedure](images/eventstorming/policysticky.png) <!-- {.element: class="inline-image"} -->
 * Keywords to use are **always** and **immediately**
 * Procedures include:
   * Automatic process
@@ -155,7 +155,7 @@ The **information** needed in order to make a **decision**
 
 
 ### Event Storming: Aggregate
-![Aggregate](images/eventstorming/aggsticky.png) <!-- {_class="inline-image"} -->
+![Aggregate](images/eventstorming/aggsticky.png) <!-- {.element: class="inline-image"} -->
 Part of the system that **receives** the **command** and decides to **execute**
 the **event**
 * Usually a noun, e.g. **Item**
@@ -179,7 +179,7 @@ the **event**
 
 ### Exercise
 ### Event Storm for To Do List Management
-![Key](images/eventstorming/key.png) <!-- {_class="inline-image"} -->
+![Key](images/eventstorming/key.png) <!-- {.element: class="inline-image"} -->
 * In your teams, create example event storm for the Current state of the To Do List
 Management application. Cover the following things:
   1. Add the new Events

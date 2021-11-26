@@ -1,12 +1,12 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Agile Animals <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Agile Animals <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
 ## Exercise - Animals
-![Draw an animal](images/animals.png)<!-- {_class="inline-image"} -->
+![Draw an animal](images/animals.png)<!-- {.element: class="inline-image"} -->
 Draw a simple representation of an animal that you feel represents your current mood. Hang on to these.
 
 

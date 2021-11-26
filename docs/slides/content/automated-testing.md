@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### DDD, BDD & TDD <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### DDD, BDD & TDD (& DDT) <!-- {.element: class="title-color"} -->
+DO500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -46,6 +46,10 @@ before, or as part of, specifying system behavior.
 
 
 
+![BDD-Cartoon](images/tdd/bdd.png)
+
+
+
 ![BDD](images/tdd/bdd.jpg)
 
 
@@ -77,6 +81,10 @@ This practice is particularly powerful when combined with
 
 
 
+![TDD-Cartoon](images/tdd/tdd.png)
+
+
+
 ![TDD](images/tdd/tdd.jpg)
 
 
@@ -99,44 +107,6 @@ This practice is particularly powerful when combined with
 
 
 
-<!-- .slide: id="revenge-automated-testing" -->
-## Revenge of the Automated Testing
-### Part 1
-
-
-
-### Lab Exercise 3: Revenge of the Automated Testing
-This lab helps us:
-* Understand the "why" behind Test Driven Development (TDD)
-* Implement a feature using TDD for the front end and back end of the application
-* Write end-to-end tests for a feature and run them through continuous integration
-
-
-
-### What new Tools and Frameworks will we use?
-* **Jest**: zero configuration testing platform to test JavaScript code
-* **Vue Test Utils**: the official testing utility library for Vue.js
-* **Nightwatch.js**: easy to use Node.js based end-to-end testing solution for
-browser based apps. It uses the powerful W3C WebDriver API to perform commands
-and assertions on DOM elements
-* **Mocha**: feature-rich JavaScript test framework running on Node.js and in
-the browser, making asynchronous testing simple and fun
-* **Sinon**: standalone test spies, stubs, and mocks for JavaScript. Works with
-any unit testing framework
-
-
-
-### The Big Picture
-![BP3](images/tdd/bp-3-revenge-automated-testing.jpg)
-
-
-
-### Let's Go!!!
-Lab Exercise 3: _Revenge of the Automated Testing_
-Part 1
-
-
-
 <!-- .slide: id="revenge-automated-testing-part-2" -->
 ## Revenge of the Automated Testing
 ### Part 2
@@ -156,16 +126,16 @@ How we write the test before we write code and how that forces our design to eme
 ### TDD Lifecylce
 ![TDD-Simplified](https://i0.wp.com/s3.amazonaws.com/production-wordpress-assets/blog/wp-content/uploads/2017/04/11100523/TDD.jpg?zoom=2&fit=400%2C237&ssl=1)
 
-Red - Write a small test that fails <!-- {_class="fragment" style="color: red" data-fragment-index="1"} -->
+Red - Write a small test that fails <!-- {.element: class="fragment" style="color: red" data-fragment-index="1"} -->
 
-Green - Do the minimum to make the test pass <!-- {_class="fragment" style="color: green" data-fragment-index="2"} -->
+Green - Do the minimum to make the test pass <!-- {.element: class="fragment" style="color: green" data-fragment-index="2"} -->
 
-Refactor - Eliminate duplication & make it beautiful <!-- {_class="fragment" data-fragment-index="3"} -->
+Refactor - Eliminate duplication & make it beautiful <!-- {.element: class="fragment" data-fragment-index="3"} -->
 
 
 
 ### TDD Lifecycle
-![Circle of life](https://media.giphy.com/media/DvMHwFYLVHlZe/giphy.gif)  <!-- {_class="" style="height:450px"} -->
+![Circle of life](https://media.giphy.com/media/DvMHwFYLVHlZe/giphy.gif)  <!-- {.element: class="" style="height:450px"} -->
 
 
 
@@ -176,38 +146,38 @@ Our program is made of Lego. Get your equipment ready for coding
 
 
 ### 2 Simple Rules for Lego TDD
-KISS - Keep It Simple Stupid  <!-- {_class="fragment"  data-fragment-index="1"} -->
+KISS - Keep It Simple Stupid  <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 
-YAGNI - You Ain't Gonna Need It!  <!-- {_class="fragment"  data-fragment-index="2"} -->
+YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragment-index="2"} -->
 
-![simple-house](images/Simple-Lego-home.jpg)  <!-- {_class="fragment"  data-fragment-index="1" style="height:250px"} -->
-![complex-house](http://www.abc.net.au/news/image/7370406-3x2-940x627.jpg)  <!-- {_class="fragment" style="height:250px"  data-fragment-index="2"} -->
+![simple-house](images/Simple-Lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
+![complex-house](http://www.abc.net.au/news/image/7370406-3x2-940x627.jpg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
 
 
 
 ### Pair Builds
-![pairs](https://i.ebayimg.com/images/g/pfgAAOSw3NtbJ57f/s-l1600.jpg) <!-- {_class="" style="height:450px"} -->
+![pairs](https://i.ebayimg.com/images/g/pfgAAOSw3NtbJ57f/s-l1600.jpg) <!-- {.element: class="" style="height:450px"} -->
 
 
 
 ### The Steps
-1. One person in the pair will write a test, in the form of a question, on a sticky note and place it on the table. For example "Is there a person?". <!-- {_class="fragment"  data-fragment-index="1"} -->
-2. The other person will then implement something in LEGO that passes that test. <!-- {_class="fragment" data-fragment-index="2"} -->
-3. When the first person is satisfied that the test is passing, they switch positions. <!-- {_class="fragment" data-fragment-index="3"} -->
-4. Now the second person writes a test and puts it on the table and the first person implements in LEGO. <!-- {_class="fragment" data-fragment-index="4"} -->
+1. One person in the pair will write a test, in the form of a question, on a sticky note and place it on the table. For example "Is there a person?". <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. The other person will then implement something in LEGO that passes that test. <!-- {.element: class="fragment" data-fragment-index="2"} -->
+3. When the first person is satisfied that the test is passing, they switch positions. <!-- {.element: class="fragment" data-fragment-index="3"} -->
+4. Now the second person writes a test and puts it on the table and the first person implements in LEGO. <!-- {.element: class="fragment" data-fragment-index="4"} -->
 
 
 
 ### Some example tests
 
-![TDD](images/tdd/lego-tdd-1.jpg) <!-- {_class="inline-image"} -->
-- Is there a person in the program? <!-- {_class="fragment" data-fragment-index="1"} -->
-- Is there a house in the program? <!-- {_class="fragment" data-fragment-index="2"} -->
-- Is there a window on a wall of the house? <!-- {_class="fragment" data-fragment-index="3"} -->
-- Is it true that the house is taller than the person? <!-- {_class="fragment" data-fragment-index="4"} -->
-- The house is wider than the person? <!-- {_class="fragment" data-fragment-index="5"} -->
-- Is it true that the house has 2 connected walls <!-- {_class="fragment" data-fragment-index="6"} -->
-- Can the person enter the house? <!-- {_class="fragment" data-fragment-index="7"} -->
+![TDD](images/tdd/lego-tdd-1.jpg) <!-- {.element: class="inline-image"} -->
+- Is there a person in the program? <!-- {.element: class="fragment" data-fragment-index="1"} -->
+- Is there a house in the program? <!-- {.element: class="fragment" data-fragment-index="2"} -->
+- Is there a window on a wall of the house? <!-- {.element: class="fragment" data-fragment-index="3"} -->
+- Is it true that the house is taller than the person? <!-- {.element: class="fragment" data-fragment-index="4"} -->
+- The house is wider than the person? <!-- {.element: class="fragment" data-fragment-index="5"} -->
+- Is it true that the house has 2 connected walls <!-- {.element: class="fragment" data-fragment-index="6"} -->
+- Can the person enter the house? <!-- {.element: class="fragment" data-fragment-index="7"} -->
 
 
 
@@ -219,9 +189,9 @@ YAGNI - You Ain't Gonna Need It!  <!-- {_class="fragment"  data-fragment-index="
        3. a plant
        4. a vehicle
        5. a building.
- - There may only be one "broken" test at a time. All previous tests must continue to pass. <!-- {_class="fragment" data-fragment-index="1"} -->
- - Nothing must be built in LEGO if there wasn't a failing test that forced that to exist. <!-- {_class="fragment" data-fragment-index="2"} -->
- - After each test is passing, the people switch roles. <!-- {_class="fragment" data-fragment-index="4"} -->
+ - There may only be one "broken" test at a time. All previous tests must continue to pass. <!-- {.element: class="fragment" data-fragment-index="1"} -->
+ - Nothing must be built in LEGO if there wasn't a failing test that forced that to exist. <!-- {.element: class="fragment" data-fragment-index="2"} -->
+ - After each test is passing, the people switch roles. <!-- {.element: class="fragment" data-fragment-index="4"} -->
 
 
 
@@ -247,10 +217,10 @@ Many times people will have built cool things that they didn't have tests for. W
 
 ### The Game Begins Again!
 
-![TDD](images/tdd/lego-tdd-2.png) <!-- {_class="inline-image" style="height:500px"} -->
+![TDD](images/tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
  - As a table; Pick a project to build. Projects should be something complex that has lots of different kinds of things in it. Some examples if you're stuck could include _A Zoo_, _Shopping Center_, _a spaceship_ or _a city_.
- - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {_class="fragment" data-fragment-index="1"} -->
- - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {_class="fragment" data-fragment-index="2"} -->
+ - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
+ - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
 
 
 
