@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
 ### Team Identity <!-- {.element: class="title-color"} -->
-DO500 <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 

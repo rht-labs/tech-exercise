@@ -1,7 +1,22 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
 ### DDD, BDD & TDD (& DDT) <!-- {.element: class="title-color"} -->
-DO500 <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
+
+
+
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Testing Testing Testing 🔨🔨</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
+  <img src="images/opl-foundation.png">
+  </a>
+</div>
+</div>
 
 
 
@@ -18,7 +33,7 @@ business concepts.
 
 
 
-![DDD](images/tdd/ddd.png)
+![DDD](images/bdd-tdd/ddd.png)
 
 
 
@@ -42,15 +57,15 @@ create the same understanding
 #### _What Is It?_
 Behavior-Driven Development (BDD) is a Test-First, Agile Testing practice 
 that provides Built-In Quality by defining (and potentially automating) tests 
-before, or as part of, specifying system behavior. 
+before, or as part of, specifying system behavior.
 
 
 
-![BDD-Cartoon](images/tdd/bdd.png)
+![BDD-Cartoon](images/bdd-tdd/bdd.png)
 
 
 
-![BDD](images/tdd/bdd.jpg)
+![BDD](images/bdd-tdd/bdd.jpg)
 
 
 
@@ -61,6 +76,22 @@ the business and the Agile Teams
 * Helps guide development, decrease rework, and increase flow
 * Creates business-facing scenarios that attempt to describe the behavior of a 
 Story, Feature, or Capability from a user's perspective.
+
+
+
+#### Example Mapping
+Based on the idea that multiple examples of specific cases convey information better than a single bad abstraction of a concept.
+![example-mapping](images/bdd-tdd/example-mapping.jpg)
+
+
+
+#### Example Mapping - World Health Organisation
+![example-mapping-who](images/bdd-tdd/example-mapping-who.jpg)
+
+
+
+#### Example Mapping story A/Cs and test cases
+![example-mapping--test-casess](images/bdd-tdd/example-mapping-to-test-casess.png)
 
 
 
@@ -81,11 +112,11 @@ This practice is particularly powerful when combined with
 
 
 
-![TDD-Cartoon](images/tdd/tdd.png)
+![TDD-Cartoon](images/bdd-tdd/tdd.png)
 
 
 
-![TDD](images/tdd/tdd.jpg)
+![TDD](images/bdd-tdd/tdd.jpg)
 
 
 
@@ -98,12 +129,12 @@ This practice is particularly powerful when combined with
 
 
 
-![TDD](images/tdd/TDD_Lifecycle.png)
+![TDD](images/bdd-tdd/TDD_Lifecycle.png)
 
 
 
 ### DDD & BDD & TDD
-![TDD](images/tdd/ddd-bdd-tdd.jpg)
+![TDD](images/bdd-tdd/ddd-bdd-tdd.jpg)
 
 
 
@@ -141,7 +172,7 @@ Refactor - Eliminate duplication & make it beautiful <!-- {.element: class="frag
 
 ### Prepare your environment
 Our program is made of Lego. Get your equipment ready for coding
-![lego-space](images/tdd/lego-620x349.jpg)
+![lego-space](images/bdd-tdd/lego-620x349.jpg)
 
 
 
@@ -170,7 +201,7 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 
 ### Some example tests
 
-![TDD](images/tdd/lego-tdd-1.jpg) <!-- {.element: class="inline-image"} -->
+![TDD](images/bdd-tdd/lego-tdd-1.jpg) <!-- {.element: class="inline-image"} -->
 - Is there a person in the program? <!-- {.element: class="fragment" data-fragment-index="1"} -->
 - Is there a house in the program? <!-- {.element: class="fragment" data-fragment-index="2"} -->
 - Is there a window on a wall of the house? <!-- {.element: class="fragment" data-fragment-index="3"} -->
@@ -217,7 +248,7 @@ Many times people will have built cool things that they didn't have tests for. W
 
 ### The Game Begins Again!
 
-![TDD](images/tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
+![TDD](images/bdd-tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
  - As a table; Pick a project to build. Projects should be something complex that has lots of different kinds of things in it. Some examples if you're stuck could include _A Zoo_, _Shopping Center_, _a spaceship_ or _a city_.
  - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
  - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
@@ -252,3 +283,4 @@ Was your final design different than you expected? Discuss.
 ### DevOps practices used in this section:
 - [Test Driven Development](https://openpracticelibrary.com/practice/test-driven-development/)
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
+- [Example Mapping](https://openpracticelibrary.com/practice/example-mapping/)
