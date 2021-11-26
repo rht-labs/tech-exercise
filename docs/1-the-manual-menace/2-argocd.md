@@ -18,7 +18,7 @@ From ArgoCD's website, it is described as a tool that:
 When something is seen as not matching the required state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then resync the changes to apply whatever is in Git immediately or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
 
 ### ArgoCD Basic Install
-> ArgoCD is one of the most popular GitOps tools to keep the entire state of our OpenShift clusters as described in our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can then configure it to do things based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
+> ArgoCD is one of the most popular GitOps tools. It keeps the state of our OpenShift applications synchronized with our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can configure ArgoCD to take actions based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
 
 1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests are welcomed :P
 
@@ -26,19 +26,53 @@ When something is seen as not matching the required state in Git, an application
     helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
     ```
 
-2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case. However when deploying many instances of ArgoCD in one shared cluster, we need to set the `applicationInstanceLabelKey` uniquely for each ArgoCD deployment. If we don't do this funky things start happening, like each `argocd` instance seeing the others' resources.
- 
+2. We are using the [Red Hat GitOps Operator](https://github.com/redhat-developer/gitops-operator) which was deployed as part of the cluster setup. Normally this step would be done as part of the Operator Install so its a bit more complicated than we would like. Because _we did not know_ your team names ahead of time 👻 we will need to update an environment variable on the Operator Subscription. This tells the Operator its OK to deploy a cluster scoped ArgoCD instance into your <TEAM_NAME>-ci-cd project. Run this shell script:
+
+    <p class="tip">
+    🐌 THIS IS NOT GITOPS - Until we work out a better way to automate this. 🐎
+    </p>
+
+    ```bash
+    run()
+    {
+      NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \
+        -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
+      if [ -z $NS ]; then
+        NS="${TEAM_NAME}-ci-cd"
+      elif [[ "$NS" =~ .*"${TEAM_NAME}-ci-cd".* ]]; then
+        echo "${TEAM_NAME}-ci-cd already added."
+        return
+      else
+        NS="${TEAM_NAME}-ci-cd,${NS}"
+      fi
+      oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \
+        -p '[{"op":"replace","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
+      echo "EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \
+        -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')"
+    }
+    run
+    ```
+
+    The output should look something like this with other teams appended as well:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-bash">
+      subscription.operators.coreos.com/openshift-gitops-operator patched
+      EnvVar set to: <TEAM_NAME>-ci-cd,anotherteam-ci-cd
+    </code></pre></div>
+
+2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case.
+
     We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
 
-    Configure our ArgoCD instance with a secret and unique `applicationInstanceLabelKey` by creating a small bit of yaml 😋:
+    Configure our ArgoCD instance with a secret in our <TEAM_NAME>-ci-cd namespace by creating a small bit of yaml 😋:
 
     ```bash
     cat << EOF > /projects/tech-exercise/argocd-values.yaml
-    namespace: ${TEAM_NAME}-ci-cd
+    ignoreHelmHooks=true
+    operator=[]
+    namespaces:
+      - ${TEAM_NAME}-ci-cd
     argocd_cr:
-      namespaceRoleBinding:
-        enabled: true
-      applicationInstanceLabelKey: rht-labs.com/${TEAM_NAME}
       repositoryCredentials: |
         - url: https://${GIT_SERVER}
           type: git
@@ -55,9 +89,9 @@ When something is seen as not matching the required state in Git, an application
 
     ```bash
     helm upgrade --install argocd \
-      --namespace ${TEAM_NAME}-ci-cd \
+      --namespace ateam-ci-cd \
       -f /projects/tech-exercise/argocd-values.yaml \
-      redhat-cop/argocd-operator
+      redhat-cop/gitops-operator
     ```
 
     <p class="tip">
