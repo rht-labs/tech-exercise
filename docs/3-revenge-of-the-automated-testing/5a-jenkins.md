@@ -37,7 +37,7 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
         Error: found 1 lint errors
     </code></pre></div>
 
-    Readiness and Liveness probes are the foundational best practices for tracking application health status. For more info, please refer [here](https://docs.openshift.com/container-platform/4.8/applications/application-health.html).
+    Readiness and Liveness probes are the foundational best practices for tracking application health status. For more info, please refer [here](https://docs.openshift.com/container-platform/4.9/applications/application-health.html).
 
 3. Let's fix this then! Open up `projects/pet-battle/chart/templates/deploymentconfig.yaml` file. In around line 46, you'll see a `readinessProbe` definition. We will add our `livelinessProbe` definition right after that block (line 52). Please mind that it should be aligned with `readinessProbe`.
 
