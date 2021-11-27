@@ -68,8 +68,8 @@ When something is seen as not matching the required state in Git, an application
 
     ```bash
     cat << EOF > /projects/tech-exercise/argocd-values.yaml
-    ignoreHelmHooks=true
-    operator=[]
+    ignoreHelmHooks: true
+    operator: []
     namespaces:
       - ${TEAM_NAME}-ci-cd
     argocd_cr:
