@@ -1,11 +1,11 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Open Practice Library <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Open Practice Library <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
-### ![Open Practice Library](images/open-practice-library-logo.png) <!-- {_class="inline-image"} -->
+### ![Open Practice Library](images/open-practice-library-logo.png) <!-- {.element: class="inline-image"} -->
 #### _What is It?_
 * Open source community-driven repository of practices and tools
 * Practices are created by people currently using them on daily basis
@@ -17,7 +17,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 
-### ![Open Practice Library](images/open-practice-library-logo.png) <!-- {_class="inline-image"} -->
+### ![Open Practice Library](images/open-practice-library-logo.png) <!-- {.element: class="inline-image"} -->
 #### _Why Use It?_
 * Be inspired by new ideas
 * Share ideas and create references

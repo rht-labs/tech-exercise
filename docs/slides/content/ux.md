@@ -1,16 +1,16 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### UX <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### UX <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
 <!-- .slide: id="ux" -->
 ### Exercise - Do you know what is....
 
-![UserTopics](images/usm/ux_topics.png) <!-- {_class="" style="border:none; box-shadow:none;"} -->
+![UserTopics](images/usm/ux_topics.png) <!-- {.element: class="" style="border:none; box-shadow:none;"} -->
 
-![Excercise](images/exercise.png) <!-- {_class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
+![Excercise](images/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
 1. Break out into teams and research a topic [5mins]
 2. Generate a presentation with graphic [5mins]
 3. Playback your findings [3mins]
@@ -19,8 +19,8 @@ DO500 <!-- {_class="title-color"} -->
 
 ### Pop Quiz
 
-![Question](images/usm/question.png) <!-- {_class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
-<p align="left">The main responsibility of a UX designer is to create nice looking user interfaces?</p><!-- {_class="" style="margin-top: 120px;"} -->
+![Question](images/usm/question.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
+<p align="left">The main responsibility of a UX designer is to create nice looking user interfaces?</p><!-- {.element: class="" style="margin-top: 120px;"} -->
 
 <p align="left">True **or** False</p>
 
@@ -28,8 +28,8 @@ DO500 <!-- {_class="title-color"} -->
 
 ### Pop Quiz
 
-![LightBulb](images/light-bulb.png) <!-- {_class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
-<p align="left">I’m a designer.</p><!-- {_class="" style="margin-top: 120px;"} -->
+![LightBulb](images/light-bulb.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
+<p align="left">I’m a designer.</p><!-- {.element: class="" style="margin-top: 120px;"} -->
 
 <p align="left">**No**, I don’t just make things pretty.</p>
 
@@ -68,9 +68,9 @@ improvement and optimization.
 
 
 ### **GREAT NEWS!**
-![Announcement](images/usm/announcement.png) <!-- {_class="" style="border:none; box-shadow:none; height:200px; float:left;"} -->
+![Announcement](images/usm/announcement.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:200px; float:left;"} -->
 
-MORNING ROUTINE VENTURES <!-- {_class="" style="margin-top: 100px; text-align:left;"} -->
+MORNING ROUTINE VENTURES <!-- {.element: class="" style="margin-top: 100px; text-align:left;"} -->
 Wants to invest in the ‘people that are late for work market’!
 
 <p align="left">**BIG OPPORTUNITY !** </p>
@@ -79,20 +79,20 @@ Wants to invest in the ‘people that are late for work market’!
 
 ### Exercise
 
-![LeanUX](images/usm/lean_ux.jpg) <!-- {_class="" style="border:none; box-shadow:none; height:300px; float:right;"} -->
-<p align="left" width="200px">Invent a product based on your value slicing excercise information.  <!-- {_class="" style="width:500px;"} -->
+![LeanUX](images/usm/lean_ux.jpg) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:right;"} -->
+<p align="left" width="200px">Invent a product based on your value slicing excercise information.  <!-- {.element: class="" style="width:500px;"} -->
 
 * **Step 1** - User Interview [5 mins]
 * **Step 2** - Sketch - Prototype [10 mins]
 * **Step 3** - User Testing [5 mins]
 * **Step 4** - Build with Lego [15 mins]
 
-<p>Quick Tips - Use an empathy map, Ask 5 ladder technique : WHY?</p><!--{_class="" style="text-align:left; font-size: smaller; font-weight: 100;"} -->
+<p>Quick Tips - Use an empathy map, Ask 5 ladder technique : WHY?</p><!--{.element: class="" style="text-align:left; font-size: smaller; font-weight: 100;"} -->
 
 
 
 ### User interview - useful tips
-![LeanUX](images/usm/interview.png) <!-- {_class="" style="border:none; box-shadow:none; height:150px; float:right; margin-left:200px;"} -->
+![LeanUX](images/usm/interview.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:150px; float:right; margin-left:200px;"} -->
 
 * Well crafted open questions:
 <p> *e.g. ~~Do you like...?~~ What do you like about...?*
@@ -106,9 +106,9 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 ### **TEAM PRESENTATIONS**
-![Presentation](images/usm/presentation.jpg) <!-- {_class="" style="border:none; box-shadow:none; height:350px; float:left; margin-left:100px;""} -->
+![Presentation](images/usm/presentation.jpg) <!-- {.element: class="" style="border:none; box-shadow:none; height:350px; float:left; margin-left:100px;""} -->
 
-* Initial Idea<!-- {_class="" style="margin-top: 120px; text-align:left;"} -->
+* Initial Idea<!-- {.element: class="" style="margin-top: 120px; text-align:left;"} -->
 * User Interview
 * Product
 * User Feedback

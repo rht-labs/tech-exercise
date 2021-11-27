@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Retrospectives <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Retrospectives <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -15,9 +15,9 @@ DO500 <!-- {_class="title-color"} -->
 
 Retrospectives are practice used by their teams to **reflect** on their way of working, and **continuously become better** in what they do. They are meant to help teams **keep improving.**
 
-<!-- {_class="fragment" data-fragment-index="1"} -->"*At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly*"
+<!-- {.element: class="fragment" data-fragment-index="1"} -->"*At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly*"
 
-<!-- {_class="fragment" data-fragment-index="1"} --> **- 12th Principle of the Agile Manifesto -**
+<!-- {.element: class="fragment" data-fragment-index="1"} --> **- 12th Principle of the Agile Manifesto -**
 
 
 
@@ -33,7 +33,7 @@ Retrospectives are practice used by their teams to **reflect** on their way of w
 
 ### Retrospectives
 #### _Retrospective Anti-patterns_
-![Cry Emoji](images/cryemoji.png) <!-- {_class="inline-image"} -->
+![Cry Emoji](images/cryemoji.png) <!-- {.element: class="inline-image"} -->
 
 **Teams do not have them**
 

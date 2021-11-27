@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Metric-Based Process Mapping <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Metric-Based Process Mapping <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -167,7 +167,7 @@ Lead Time vs. Process Time
 
 ### Exercise - TODO List MBPM (Setup)
 
-![Swimlanes](images/vsm/mbpmstep2.png) <!-- {_class="inline-image"} -->
+![Swimlanes](images/vsm/mbpmstep2.png) <!-- {.element: class="inline-image"} -->
 * What will you call your MBPM diagram?
 * Who/What are your typical functions that do work in your process?
 
@@ -175,7 +175,7 @@ Lead Time vs. Process Time
 
 ### Exercise - TODO List MBPM
 
-![Metrics](images/vsm/mbpmstep5.png) <!-- {_class="inline-image"} -->
+![Metrics](images/vsm/mbpmstep5.png) <!-- {.element: class="inline-image"} -->
 * PT = The time to actually do the work
 * LT = Time from when the work is available until it reaches the next step
 * % C&A = Percent of time downstream steps can complete without returning

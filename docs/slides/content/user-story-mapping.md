@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### User Story Mapping and Value Slicing <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### User Story Mapping and Value Slicing <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -58,9 +58,9 @@ As a learner, I want to stay awake so that I can be attentive and listen to teac
 ### Exercise -  Mapping Stories for "getting to work"
 *Scenario* -> You woke up late and you must get to an early morning meeting at work
 and cannot miss it. What **must** you do to prepare for work and get there on time?
-1. As an individual, capture on stickies things you do from the moment you wake up until you arrive at work<!-- {_class="fragment"  data-fragment-index="1"} -->
-2. As a team, add all activities to the story map and remove duplicates. If some are similar but slightly different, do not remove as duplicates<!-- {_class="fragment"  data-fragment-index="2"} -->
-3. Cluster similar activities and capture themes above them<!-- {_class="fragment"  data-fragment-index="3"} -->
+1. As an individual, capture on stickies things you do from the moment you wake up until you arrive at work<!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. As a team, add all activities to the story map and remove duplicates. If some are similar but slightly different, do not remove as duplicates<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+3. Cluster similar activities and capture themes above them<!-- {.element: class="fragment"  data-fragment-index="3"} -->
 
 
 
@@ -94,10 +94,10 @@ minimally viable product.
 and cannot miss it. What **must** you do to prepare for work and get there on time?
 
 1. As a team, draw a line on the user story mapping board representing what
-must be done<!-- {_class="fragment"  data-fragment-index="1"} -->
-2. Discuss which stories are absolutely necessary given the scenario<!-- {_class="fragment"  data-fragment-index="2"} -->
+must be done<!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. Discuss which stories are absolutely necessary given the scenario<!-- {.element: class="fragment"  data-fragment-index="2"} -->
 3. Move stories below the line that are not absolutely necessary based on
-consensus of the team<!-- {_class="fragment"  data-fragment-index="3"} -->
+consensus of the team<!-- {.element: class="fragment"  data-fragment-index="3"} -->
 
 
 

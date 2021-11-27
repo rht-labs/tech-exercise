@@ -1,12 +1,12 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Kick Off <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Kick Off <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png" -->
-# Welcome <!-- {_class="subtitle-text"} -->
+# Welcome <!-- {.element: class="subtitle-text"} -->
 
 
 
@@ -16,7 +16,7 @@ DO500 <!-- {_class="title-color"} -->
 
 ### Introducing
 #### The room and the walls
-![Chef Hands](images/chef-hands.png) <!-- {_class="inline-image"} -->
+![Chef Hands](images/chef-hands.png) <!-- {.element: class="inline-image"} -->
 - Backlog for the week
 - Burndown for the week
 - Emerging Big Picture

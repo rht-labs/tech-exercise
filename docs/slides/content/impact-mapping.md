@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-### DevOps Culture and Practice <!-- {_class="course-title"} -->
-## Impact Mapping <!-- {_class="title-color"} -->
-TL500 <!-- {_class="title-color"} -->
+### DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+## Impact Mapping <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 

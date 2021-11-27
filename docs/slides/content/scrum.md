@@ -1,12 +1,12 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Scrum <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Scrum <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
 ### Origins of Scrum
-![Scrum](images/Agile/scrum.jpg) <!-- {_class="inline-image"} -->
+![Scrum](images/Agile/scrum.jpg) <!-- {.element: class="inline-image"} -->
 * Rugby term: used to restart play
 * 1986 Hirotaka Takeuchi and Ikujiro Nonaka published [The New New Product Development Game](https://hbr.org/1986/01/the-new-new-product-development-game)
 * 1990 Jeff Sutherland and Ken Schwaber used scrum for software development

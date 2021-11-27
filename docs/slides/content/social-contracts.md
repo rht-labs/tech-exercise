@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Social Contracts <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Social Contracts <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -11,7 +11,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ### A Social Contract codifies behavior and expectations of the team between its members
-![Of the people](images/Social_Contract.jpg) <!-- {_class="fragment inline-image"} -->
+![Of the people](images/Social_Contract.jpg) <!-- {.element: class="fragment inline-image"} -->
 #### _Effective Social Contracts are:_
 - Publicly displayed
 - Revisited regularly and amended if required
@@ -28,7 +28,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ### Social Contract examples:
-![Example Social Contract](images/Example_Social_Contract.png) <!-- {_class="inline-image"} -->
+![Example Social Contract](images/Example_Social_Contract.png) <!-- {.element: class="inline-image"} -->
 - Core hours
 - No blame culture
 - No Rock Stars!
@@ -38,7 +38,7 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ### Exercise - Social Contract and Team Identity
-![Post It](images/post-it.png) <!-- {_class="inline-image"} -->
+![Post It](images/post-it.png) <!-- {.element: class="inline-image"} -->
 1. In table groups, work together to:
   - Establish a team name
   - Talk about how you want to work together this week

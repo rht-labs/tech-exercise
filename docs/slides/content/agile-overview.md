@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Agile Overview <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Agile Overview <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -21,7 +21,7 @@ come to mind.
 <!-- .slide: id="agile"-->
 ### Where did agile come from?
 February 2001: Snowbird Resort, Utah, United States
-![Utah](images/Agile/USA_UT.png) <!-- {_class="inline-image"} -->
+![Utah](images/Agile/USA_UT.png) <!-- {.element: class="inline-image"} -->
 * 17 software developers
 * Identified common things that did and did not work
 * Defined values that recommended best practices for software development
@@ -35,12 +35,12 @@ February 2001: Snowbird Resort, Utah, United States
 
 
 ### 4 Values
-![agile-manifesto-infographic](images/Agile/agile-manifesto-infographic.png)  <!-- {_class="" style="height:550px"} -->
+![agile-manifesto-infographic](images/Agile/agile-manifesto-infographic.png)  <!-- {.element: class="" style="height:550px"} -->
 
 
 
 ### 12 Principles
-![12-principles-download](images/Agile/12-principles-download.png)  <!-- {_class="" style="height:550px"} -->
+![12-principles-download](images/Agile/12-principles-download.png)  <!-- {.element: class="" style="height:550px"} -->
 
 
 
@@ -71,7 +71,7 @@ Working in teams:
 1. On a piece of paper make room for 12 boxes.
 2. For each box, write 2 to 3 words maximum that effectively capture each of the 12 principles.
 
-http://tastycupcakes.org/2010/01/pocket-sized-principles/ <!-- {_class="small"} -->
+http://tastycupcakes.org/2010/01/pocket-sized-principles/ <!-- {.element: class="small"} -->
 
 
 

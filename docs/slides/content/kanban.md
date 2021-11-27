@@ -1,12 +1,12 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Kanban <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Kanban <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
 ### Origins of Kanban
-![Kanban](images/kanban/toyota-production-system.png) <!-- {_class="inline-image"} -->
+![Kanban](images/kanban/toyota-production-system.png) <!-- {.element: class="inline-image"} -->
 * Kanban is a Japanese word that means _card you can see_
 * 1950 Taiichi Onho defined the [Toyota Production System](http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/origin_of_the_toyota_production_system.html) based on customer demand (Just in Time)
 * 2007 David J. Anderson introduced as method for software development
@@ -30,7 +30,7 @@ DO500 <!-- {_class="title-color"} -->
 * Any task must be in the board
 * Designed by the Team (physical or virtual)
 
-![Kanban Board](images/kanban/kanban-board.png) <!-- {_class="" style="height:350px"} -->
+![Kanban Board](images/kanban/kanban-board.png) <!-- {.element: class="" style="height:350px"} -->
 
 
 

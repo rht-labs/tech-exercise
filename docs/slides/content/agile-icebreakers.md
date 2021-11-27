@@ -1,8 +1,8 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
 
-## DevOps Culture and Practice <!-- {_class="course-title"} -->
-### Agile Ice Breakers <!-- {_class="title-color"} -->
-DO500 <!-- {_class="title-color"} -->
+## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+### Agile Ice Breakers <!-- {.element: class="title-color"} -->
+TL500 <!-- {.element: class="title-color"} -->
 
 
 
@@ -23,17 +23,17 @@ DO500 <!-- {_class="title-color"} -->
 
 
 ## What is it?
-![Draw an animal](images/animals.png)<!-- {_class="inline-image"} -->
+![Draw an animal](images/animals.png)<!-- {.element: class="inline-image"} -->
 Draw a simple representation of an animal that you feel represents your current mood. Hang on to these.
 
 
 
 ## Exercise - Back to the Animals!
 Introduce yourself to the group and share your animal.
-- What is your name?<!-- {_class="fragment"  data-fragment-index="1"} -->
-- Where are you from?<!-- {_class="fragment"  data-fragment-index="2"} -->
-- What is your current role in your organization?<!-- {_class="fragment"  data-fragment-index="3"} -->
-- Show and Tell: your animal drawing<!-- {_class="fragment"  data-fragment-index="4"} -->
+- What is your name?<!-- {.element: class="fragment"  data-fragment-index="1"} -->
+- Where are you from?<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+- What is your current role in your organization?<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+- Show and Tell: your animal drawing<!-- {.element: class="fragment"  data-fragment-index="4"} -->
 
 
 
@@ -50,10 +50,10 @@ Meet your classmates by collaboratively drawing each others faces.
 
 ## Exercise - Back to the Faces!
 Firstly, Take a big sticker and sharpie and write down your name. By rounds:
-- Pass the sticker to the classmate on the right<!-- {_class="fragment"  data-fragment-index="1"} -->
-- Define 30 seconds timer<!-- {_class="fragment"  data-fragment-index="2"} -->
-- Draw a part of the sticker owner's face (eyes, eyebrows, nose, mouth, ears and hair)<!-- {_class="fragment"  data-fragment-index="3"} -->
-- Share the result<!-- {_class="fragment"  data-fragment-index="4"} -->
+- Pass the sticker to the classmate on the right<!-- {.element: class="fragment"  data-fragment-index="1"} -->
+- Define 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+- Draw a part of the sticker owner's face (eyes, eyebrows, nose, mouth, ears and hair)<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+- Share the result<!-- {.element: class="fragment"  data-fragment-index="4"} -->
 
 
 

@@ -1,7 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-### DevOps Culture and Practice <!-- {_class="course-title"} -->
-## Tech Exercise III <!-- {_class="title-color"} -->
-TL500 <!-- {_class="title-color"} -->
+### DevOps Culture and Practice <!-- .element: class="course-title" -->
+## Tech Exercise III <!-- .element: class="title-color" -->
+TL500 <!-- .element: class="title-color" -->
 
 
 
@@ -11,8 +11,8 @@ TL500 <!-- {_class="title-color"} -->
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Test Automation</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/non-functional-requirements-map/">
+  <h2>Testing Testing Testing 🔨🔨</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
@@ -41,8 +41,32 @@ TL500 <!-- {_class="title-color"} -->
 
 
 
-#### Background
-TODO
+#### What is it?
+AUTOMATE ALL THE THINGS 💥🔨
+* Unit Tests & Integration tests
+* Static Code Analysis
+* Configurations and policy checks
+* Security (dependencies, vulnerabilities and pen tests)
+
+
+
+#### Testing Pyramid
+![test-pyramid](image/../images/tech-exercise-iii/testing-pyramid.png)
+
+
+
+#### Measuring Test
+Answering the age old question of how do i know my tests are any good??
+![test-measuers](image/../images/tech-exercise-iii/measuring-tests.png)
+* Code Coverage
+* Static Code Analysis
+
+
+
+#### Why do it?
+* Improved quality - applying patterns like TDD or BDD drive up shared understanding
+* Deliver reliably at speed - as features are produced you can confidently release without a large manual regression each time
+* Fewer bottlenecks - without automated tests, queues form in front of testers
 
 
 
@@ -72,6 +96,21 @@ TODO
 
 
 # Exercise Wrap Up
+
+
+
+#### Sams Code <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
+
+
+
+#### Sams Code - Strikes back 🕺 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code2.jpg", class="black-style" data-background-opacity="1"	 -->
+
+
+
+#### BDD Syntax - Gov Customer <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/bdd-example.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
