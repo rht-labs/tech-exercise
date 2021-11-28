@@ -89,7 +89,7 @@ When something is seen as not matching the required state in Git, an application
 
     ```bash
     helm upgrade --install argocd \
-      --namespace ateam-ci-cd \
+      --namespace ${TEAM_NAME}-ci-cd \
       -f /projects/tech-exercise/argocd-values.yaml \
       redhat-cop/gitops-operator
     ```
