@@ -5,40 +5,62 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Event Storming</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/event-storming/">
+  <img src="images/opl-discovery.png">
+  </a>
+</div>
+</div>
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who.png", class="white-style" -->
+
+
+
 ### Event Storming
-#### _What is It?_
-* Provides a repeatable, teachable technique for modeling:
+#### _What is it?_
+_Event Storming is a rapid, interactive approach to business process discovery and design that yields high quality models_
+
+It provides a repeatable, teachable technique for modeling:
   * Event-driven systems
   * Large microservice-based systems
-* Requires a really, really large modeling surface
-* Requires lots of stickies in a rainbow of colors with a legend to their usage
 
 
 
-### Event Storming
-#### _What is It?_
+#### _What is it?_
+At the end of the event storm, you should have:
+* A shared understanding of the business process you are building as part of the project, including:
+![you-should-have](images/event-storming/you-should-have.png)<!-- .element: class="image-no-shadow " -->
+* A physical diagram with the above information, which can be transferred to a digital format
+<!-- ### Event Storming
+#### _What is it?_
 * Who: key business stakeholders and techies
 * There will be lots of talking, a fair bit of squabbling, and periodically
 some **very** heated debate
 * No chairs!
-* Expect a tiring but fun day that achieves a great deal from the most basic of tools
+* Expect a tiring but fun day that achieves a great deal from the most basic of tools -->
 
 
 
-### Event Storming
-#### _Where Did It Come From?_
-![Brandolini](images/eventstorming/brandolini.jpg) <!-- {.element: class="inline-image" width="350"} -->
-Event Storming was developed by Alberto Brandolini
-* Brandolini has a background in event-driven systems
-* He is an active member of the Domain-Driven Design (DDD) community
-* He started Event Storming as a guest slot in Vernon Vaughn's DDD workshop
-* First blog post about event storming was in 2013
+#### _Where did it come from?_
+![Brandolini](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
+It was introduced in a blog by Alberto Brandolini in 2013.
+![ubiquitous-language](images/event-storming/es-ubiquitous-language.png) <!-- {.element: class="" style="max-width:450px;"} -->
+
+It's a sort of Domain Driven Design (DDD) Lite – but with more business focus and less of the jargon and complexity.
 
 
 
-### Event Storming
-#### _Why Do We Use It?_
-* Very simple modeling that is accessible to all business people
+#### _Why do we use it?_
+* Very simple modelling practice that is accessible to all business people
 * Engages all stakeholders and removes technical barriers:
   * Non-technical people can actively contribute
   * Builds a shared understanding
@@ -57,114 +79,64 @@ event model
 
 
 
-### Event Storming
+### 
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/vision-to-detail.png", class="black-style" -->
+
+
+
+### Event Storming - How
 #### _Tips for Success_
 * Hold a Big Picture Workshop
 * Invite the right people: business stakeholders, IT, and User Experience (UX)
 * Provide unlimited modeling space with a surface, markers, and stickies
 * Model **a whole business line** with domain events
+* Frame the discussion to limit the off topic converstation
+![es-tips](images/event-storming/es-tips.png) <!-- {.element: class="image-no-shadow"} -->
 
 
 
-## Event Storming Diagram
+## Event Storming Key
 
 
 
-![System](images/eventstorming/system.jpg)
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-flow.png", class="black-style" -->
 
 
 
-### Event Storming: Events
-![Events](images/eventstorming/events.jpg) <!-- {.element: class="inline-image"} -->
-Something that happened that people care about
-* Subject --> Verb in past tense, e.g **Item Shipped**
-* Could be timed, e.g. **Nightly Accounts Reconciled**
-* A meaningful result of another thing, e.g. **Account Locked**
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-events.png", class="black-style" -->
 
 
 
-### Event Storming: Events
-![Event](images/eventstorming/eventsticky.png) <!-- {.element: class="inline-image"} -->
-Where do events come from?
-* A system
-* Passing of time
-* Consequence of another event
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-commands-actors.png", class="black-style" -->
 
 
 
-### Event Storming: Commands
-![Command](images/eventstorming/commandsticky.png) <!-- {.element: class="inline-image"} -->
-* A **command** is an **action** started by an **actor**
-* It represents the **decision**
-* It is usually the reverse of the **event**, e.g:
-  * Buy Ticket
-  * Cancel Reservation
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-readmodel.png", class="black-style" -->
 
 
 
-### Event Storming: Actors
-![Actor](images/eventstorming/actorsticky.png) <!-- {.element: class="inline-image"} -->
-An actor is the user of the system
-* Keep it fuzzy, e.g. **Joe**
-* The actor makes the decision
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-systems-quests.png", class="black-style" -->
 
 
 
-### Event Storming: Questions
-![Question](images/eventstorming/questionsticky.png) <!-- {.element: class="inline-image"} -->
-* Pain Points, e.g. **It takes a long time!**
-* How / What / Why?
-* Hot Spots
-* Assumptions
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-policies.png", class="black-style" -->
 
 
 
-### Event Storming: External Systems
-![System](images/eventstorming/systemsticky.png) <!-- {.element: class="inline-image"} -->
-* Third party services
-* Existing systems
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-aggregates.png", class="black-style" -->
 
 
 
-### Event Storming: Read Model
-![ReadModel](images/eventstorming/readmodelsticky.png) <!-- {.element: class="inline-image"} -->
-The **information** needed in order to make a **decision**
-* Represents an implementation
-  * Stored Procedure
-  * Query
-  * Projection
-* Ties to the page layout
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-extras.png", class="black-style" -->
 
 
 
-### Event Storming: Policies and Procedures
-![PolicyProcedure](images/eventstorming/policysticky.png) <!-- {.element: class="inline-image"} -->
-* Keywords to use are **always** and **immediately**
-* Procedures include:
-  * Automatic process
-  * Process manager
-  * Listener
-  * "Don't forget to..."
-  * Agreement
-  * Rules
-  * Habit
-* For example:
-
-  Refund Requested > Refund Policy > Issue Receipt
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-flow.png", class="black-style" -->
 
 
 
-### Event Storming: Aggregate
-![Aggregate](images/eventstorming/aggsticky.png) <!-- {.element: class="inline-image"} -->
-Part of the system that **receives** the **command** and decides to **execute**
-the **event**
-* Usually a noun, e.g. **Item**
-* The aggregate is the **state machine**
-* Serve as a place to logically group commands once all event sources are identified
-
-
-
-![System](images/eventstorming/system.jpg)
+<!-- # complete -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-complete.png", class="black-style" -->
 
 
 
@@ -179,7 +151,7 @@ the **event**
 
 ### Exercise
 ### Event Storm for To Do List Management
-![Key](images/eventstorming/key.png) <!-- {.element: class="inline-image"} -->
+![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
 * In your teams, create example event storm for the Current state of the To Do List
 Management application. Cover the following things:
   1. Add the new Events
