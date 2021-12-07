@@ -35,6 +35,11 @@ It provides a repeatable, teachable technique for modeling:
 
 
 
+#### The Knowledge Distribution <!-- {.element: class="fragment"} -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/knowledge-distribution.png", class="white-style" -->
+
+
+
 #### _What is it?_
 At the end of the event storm, you should have:
 * A shared understanding of the business process you are building as part of the project, including:
