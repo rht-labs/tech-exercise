@@ -84,18 +84,8 @@ event model
 
 
 
-### Event Storming - How
-#### _Tips for Success_
-* Hold a Big Picture Workshop
-* Invite the right people: business stakeholders, IT, and User Experience (UX)
-* Provide unlimited modeling space with a surface, markers, and stickies
-* Model **a whole business line** with domain events
-* Frame the discussion to limit the off topic converstation
-![es-tips](images/event-storming/es-tips.png) <!-- {.element: class="image-no-shadow"} -->
-
-
-
-## Event Storming Key
+#### Event Storming - How
+The Event Storming Key is specific set of coloured stickies...
 
 
 
@@ -140,6 +130,61 @@ event model
 
 
 
+### Class Exercise
+
+
+
+#### Context - PetBattle
+* The PetBattle team has decided to use event storming to design part of their system. As with all great teams, they started by defining the example they would map out. This is important as it frames the end-to-end journey and stops them from modelling too big a piece of the application.
+* Take the deliverable from the _Impact Map_ to and reframe it using the _Friends Notation_ drill down into the system design
+![tow-pb](images/event-storming/tow-pb.png)
+
+
+
+#### Event Storm - in your team
+Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and wins a prize"_
+![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
+
+1. Begin with creating the spine of the `Events`
+2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`
+3. Are there any `policies` or `procedures` that you can identify?
+4. Are there new `Systems` (external?) or `Aggregates`?
+
+##### Things help steer you ...
+* Who is Mary? Does she need to need to authenticate to enter the compentition?
+* What is the daily prize? How does Mary know about it?
+* How will Mary know she's won the competition? Does she get notified? Is there a leaderboard?
+
+
+
+### Exercise Wrap Up
+
+
+
+##### Pet Battle - No Systems or Policies<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-pb-no-systems.jpg", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who-systems.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch3.png", class="white-style" -->
+
+
 ### Event Storming: Key Takeaways
 * Builds a shared understanding of a problem space
 * Models business processes
@@ -149,20 +194,26 @@ event model
 
 
 
-### Exercise
-### Event Storm for To Do List Management
-![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
-* In your teams, create example event storm for the Current state of the To Do List
-Management application. Cover the following things:
-  1. Add the new Events
-  * Add the new Commands, Users and Read Models
-  * Are there new Systems or Aggregates?
-* Reflect on your Impact Map deliverables and enhance it with some new functionality e.g
-  1. Sharing lists between users
-  2. Integration with other vendors or providers
+
+#### _Tips for Success_
+* Invite the right people: business stakeholders, IT, and User Experience (UX)
+* Provide unlimited modeling space with a surface, markers, and stickies
+* Keep people refreshed and hydrated! (🥝 🍫 🍌 / 🚰 / 🫖 ☕️)
+* Frame the discussion to limit the off topic conversation using TOWs
+* If remote, use breakout sessions to encourage more conversation with regular regrouping
+![es-tips](images/event-storming/es-tips.png) <!-- {.element: class="image-no-shadow"} -->
+* Set up the environment with a Social Contract to ensure psychological safety
+* Watch out for the Dungeon Master ...
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Event Storming](https://openpracticelibrary.com/practice/event-storming/)
+### Related Practices
+ * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
+* Impact Map - can form an input for the scope of the modelling
+
+There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
+* Emerging architecture
+* Non functional Map
+* Metrics-based process Map
+Together with Event Storm they provide input for creating the Product Backlog.
