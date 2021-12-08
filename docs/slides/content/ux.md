@@ -149,16 +149,18 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 ### User interview - useful tips
-![LeanUX](images/ux/interview.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:150px; float:right; margin-left:200px;"} -->
 
-* Well crafted open questions:
-<p> *e.g. ~~Do you like...?~~ What do you like about...?*
+* Well crafted open questions - Ask question which assist the interviewee to tell a story,  avoid binary questions (questions which can be answered by yes/no)
+<p> *e.g. <s>Do you like...?</s> What do you like about...?*
 * Dig deeper, follow up:
 <p> *e.g. you mentioned it was hard, tell me more about why...*
-* Do not use jargon.
-* Embrace the awkward silence.
-* Keep your reaction neutral.
-* Do not mention the solution until the end.
+* Ask 'why', try to keep the conversation flowing
+* Embrace the awkward silence - Silence is good, it gives the interviewee time to reflect on what they have said
+* Do not use jargon
+![LeanUX](images/ux/interview.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:150px; float:right; margin-left:200px;"} -->
+* Keep your reaction neutral
+* Do not mention the solution until the end
+* Inconsistencies can lead to interesting insights
 
 
 
@@ -182,13 +184,14 @@ Wants to invest in the ‘people that are late for work market’!
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related Practices
-It relates to some Tech Practice like Blue Green deployments and a/b tests
+#### Technical Practices:
+- [Blue Green deployments](https://openpracticelibrary.com/practice/blue-green-deployments/)
+- [Split Testing or A/B Tests](https://openpracticelibrary.com/practice/split-testing-a-b-testing/)
 
-There are several practice pages in the Open Practice Library that relate to 
-human-centered design practices. These include: 
-* openpracticelibrary.com/practice/aeiou-observation-framework/ 
-* openpracticelibrary.com/practice/proto-persona
-* openpracticelibrary.com/practice/stakeholders-interview
-* openpracticelibrary.com/practice/empathy-mapping 
-* openpracticelibrary.com/practice/lean-ux-workshop
-* openpracticelibrary.com/practice/ui-design-workshop 
+#### Human Centered Design Practices: 
+- [AEIOU Observation Framework](openpracticelibrary.com/practice/aeiou-observation-framework/)
+- [Proto Persona](openpracticelibrary.com/practice/proto-persona)
+- [Stakeholders Interview](openpracticelibrary.com/practice/stakeholders-interview)
+- [Empathy Mapping](openpracticelibrary.com/practice/empathy-mapping)
+- [Lean UX Workshop](openpracticelibrary.com/practice/lean-ux-workshop)
+- [UI Design Workshop](openpracticelibrary.com/practice/ui-design-workshop)
