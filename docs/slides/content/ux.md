@@ -175,6 +175,14 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 
+<!-- .slide: data-background-size="contain" data-background-image="images/ux/example-dev-ops.png", class="white-style" -->
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/ux/example-pb.png", class="white-style" -->
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### DevOps practices used in this section:
 - [Empathy Mapping](https://openpracticelibrary.com/practice/empathy-mapping/)
