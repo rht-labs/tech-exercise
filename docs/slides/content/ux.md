@@ -175,11 +175,18 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 
+#### Empathy Map - Dev and Ops <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/ux/example-dev-ops.png", class="white-style" -->
 
 
 
+#### Empathy Map - Pet Battle <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/ux/example-pb.png", class="white-style" -->
+
+
+
+#### User Interviews - WHO <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/ux/who-personas.png", class="white-style" -->
 
 
 
