@@ -31,11 +31,12 @@ TL500 <!-- .element: class="title-color" -->
 
 
 #### Learning Outcomes
+As a learner, by the end of this exercise I ...
 * Can add security gates to pipeline
-*  Can add testing gates to pipeline
-*  Can add static code analysis gates to pipeline
-*  Can add image signing to the pipeline
-*  Can add load testing to the pipeline
+* Can add testing gates to pipeline
+* Can add static code analysis gates to pipeline
+* Can add image signing to the pipeline
+* Can add load testing to the pipeline
 <!--
 --->
 
@@ -51,13 +52,13 @@ AUTOMATE ALL THE THINGS 💥🔨
 
 
 #### Testing Pyramid
-![test-pyramid](image/../images/tech-exercise-iii/testing-pyramid.png)
+![test-pyramid](images/tech-exercise-iii/testing-pyramid.png)
 
 
 
 #### Measuring Test
 Answering the age old question of how do i know my tests are any good??
-![test-measuers](image/../images/tech-exercise-iii/measuring-tests.png)
+![test-measuers](images/tech-exercise-iii/measuring-tests.png)
 * Code Coverage
 * Static Code Analysis
 
