@@ -85,6 +85,16 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
+### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/impact-effort.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/how-now-wow.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
 ### 💥 Build your Kanban 💥 <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
 
