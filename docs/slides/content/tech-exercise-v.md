@@ -103,21 +103,24 @@ Using the platform to support running an experiment
 
 
 
-#### Design of Experiments <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
+#### Design of Experiments - From Value slice <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-v/pet-battle-experiment.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
-#### Sams Code - Strikes back 🕺 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code2.jpg", class="black-style" data-background-opacity="1"	 -->
+#### Design of Experiments - Implementation <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-v/pet-battle-example.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
-#### BDD Syntax - Gov Customer <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/bdd-example.png", class="black-style" data-background-opacity="1"	 -->
+#### Design of Experiments - Measure <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-v/pet-battle-matomo.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related Practices
-- [](https://openpracticelibrary.com/practice/) - 
+- [Lean UX](https://openpracticelibrary.com/)
+- [Split Testing](https://openpracticelibrary.com/)
+- [Dark Launches](https://openpracticelibrary.com/)
+- [Feature Toggling](https://openpracticelibrary.com/)
