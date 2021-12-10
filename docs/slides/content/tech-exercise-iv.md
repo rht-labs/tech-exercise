@@ -1,6 +1,6 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
-## Tech Exercise III <!-- .element: class="title-color" -->
+## Tech Exercise IV <!-- .element: class="title-color" -->
 TL500 <!-- .element: class="title-color" -->
 
 
@@ -11,7 +11,7 @@ TL500 <!-- .element: class="title-color" -->
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Testing Testing Testing 🔨🔨</h2>
+  <h2> Observability 🔨🔨</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
@@ -21,7 +21,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise III
-[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
+[Return of the Monitoring](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
 
 
 
@@ -110,18 +110,15 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-#### Sams Code <!-- .element: class="title-bottom-left" -->
+#### Feedback
+* Q&A
+* Real World Stories
+* Pull Requests Welcome 🦄
+
+
+
+#### Some Real World Examples <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
-
-
-
-#### Sams Code - Strikes back 🕺 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code2.jpg", class="black-style" data-background-opacity="1"	 -->
-
-
-
-#### BDD Syntax - Gov Customer <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/bdd-example.png", class="black-style" data-background-opacity="1"	 -->
 
 
 

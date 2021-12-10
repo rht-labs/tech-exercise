@@ -118,3 +118,17 @@ _We will set up Git projects, create dev, test and stage projects in OpenShift, 
 * Q&A
 * Real World Stories
 * Pull Requests Welcome 🦄
+
+
+
+#### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+### Related & Used Practices
+- [Everything-as-code](https://openpracticelibrary.com/practice/) - 
+- [Automation](https://openpracticelibrary.com/practice/) - 
+- [Containers](https://openpracticelibrary.com/practice/) - 
+- [CitOps](https://openpracticelibrary.com/practice/) - 

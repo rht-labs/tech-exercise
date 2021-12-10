@@ -110,6 +110,13 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
+#### Feedback
+* Q&A
+* Real World Stories
+* Pull Requests Welcome 🦄
+
+
+
 #### Sams Code <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
 
