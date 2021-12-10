@@ -21,7 +21,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise I
-[The Manual Mennace](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
+[The Manual Mennace](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMqYlqu9pjOZKwUq1zvZ)
 
 
 
@@ -30,10 +30,11 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### Learning Outcomes
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
 As a learner, by the end of this exercise I ...
-* can articulate the benefits gained from GitOps
 * can deploy helm charts manually
+* can do everything as code 
+* can articulate the benefits gained from GitOps
 * can drive tool installations through GitOps
 * can deploy the labs accelerator - 🔥🦄
 <!--
@@ -42,31 +43,36 @@ As a learner, by the end of this exercise I ...
 
 
 #### What is it?
-Everything as code
-* Unit Tests & Integration tests
-* Static Code Analysis
-* Configurations and policy checks
-* Security (dependencies, vulnerabilities and pen tests)
+Everything as Code is the practice of treating all parts of the system as code. This means:
+![what-it-is](images/tech-exercise-i/what-it-is.png) <!-- .element: class="image-no-shadow image-full-width" -->
+<!--
+* Storing configuration along with Source Code in a repository such as git
+* All manual steps should be scripted, automated, and checked into a source control management system.
+* Storing all the things! From bottom to top - infrastructure, operating systems, build configurations, application properties and deployment configurations, etc ...
+--->
 
 
 
-#### Testing Pyramid
-![test-pyramid](images/tech-exercise-iii/testing-pyramid.png)
+### Why do we do it?
+* **Traceability**: Having your environment descriptions and structure stored in a version control system allows us to audit changes made to the system, tracked to the individual who made them
+* **Repeatable**: Moving from one cloud provider to another should be a simple task. Picking a deployment target should be like shopping around for the best price that week. By storing all things as code, systems can be re-created in moments in various providers
+* **GitOps**: A single source of the truth means no more tribal knowledge or experts needed to set up cables or attach hard drives
 
 
 
-#### Measuring Test
-Answering the age old question of how do i know my tests are any good??
-![test-measuers](images/tech-exercise-iii/measuring-tests.png)
-* Code Coverage
-* Static Code Analysis
+### Why do we do it?
+* **Phoenix Server**: No more fears of configuration drift. If a server needs to be patched or randomly dies, that's OK. Just create it again from scratch using the stored configuration
+* **Cross-functional Teams**: Writing all things as code improves collaboration between silos in an organization. The development team is able to contribute to the environment creation or can recreate their own like-for-like environments in a sandbox
+* **De-risking**: Changes can be applied to environments or application deployments and reverted to previous states quickly, thus de-risking big upgrades of any kind.
 
 
 
-#### Why do it?
-* Improved quality - applying patterns like TDD or BDD drive up shared understanding
-* Deliver reliably at speed - as features are produced you can confidently release without a large manual regression each time
-* Fewer bottlenecks - without automated tests, queues form in front of testers
+#### How do we do it?
+1. Select automated tools for provisioning and configuration eg Ansible, templating, bash, etc
+2. Write installation and configuration sequences as code
+3. Design configuration options as templates
+4. Check source configuration code into a source control repository
+5. Use the automated tools to apply your configs
 
 
 
@@ -74,34 +80,33 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-### 💥 Choose your own adventure 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-backlog.png", class="black-style" data-background-opacity="1"	 -->
+_In this exercise, we will use GitOps to set up our working environment._
+
+_We will set up Git projects, create dev, test and stage projects in OpenShift, and deploy tools like **Jenkins** and **Nexus** and ***ArgoCD*** to enable CI/CD in the next exercise. In order to do that, we’ll utilize a very popular approach: GitOps_
 
 
 
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/priority-matrix.png", class="black-style" data-background-opacity="1"	 -->
+### 💥 Mob to Learn 💥
+* Begin with the [pairing and mobbing](/slides/content/?name=pairing-and-mobbing) exercise (if not already done)
+* In your table teams, form a mob to complete the exercise. Working together as a team to deploy your shared tooling and infrastructure!
+* Rotate the `driver` a the end of the section to give everyone a go at getting their hands dirty with code!
+* If you finish early, try your hand at the `Here be dragons` section
+* Your tutor will share links to the instructions, OpenShift Console, CRW and GitLab server
 
 
 
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/impact-effort.png", class="black-style" data-background-opacity="1"	 -->
+### 💥 CodeReadyWorkspaces 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/crw.png", class="white-style" data-background-opacity="1"	 -->
 
 
 
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/how-now-wow.png", class="black-style" data-background-opacity="1"	 -->
+### 💥 Logging in to OpenShift 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/oc-login.png", class="white-style" data-background-opacity="1"	 -->
 
 
 
-### 💥 Build your Kanban 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
-
-
-
-#### 💥 90mins of Tech Exercise 💥
-* In mobs / pairs work through your tasks
-* If in pairs, continuously playback what you accomplish to the others
+### 💥 Setup the instructions site 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/instructions.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
@@ -109,21 +114,7 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-#### Sams Code <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
-
-
-
-#### Sams Code - Strikes back 🕺 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code2.jpg", class="black-style" data-background-opacity="1"	 -->
-
-
-
-#### BDD Syntax - Gov Customer <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/bdd-example.png", class="black-style" data-background-opacity="1"	 -->
-
-
-
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
-- [](https://openpracticelibrary.com/practice/) - 
+#### Feedback
+* Q&A
+* Real World Stories
+* Pull Requests Welcome 🦄
