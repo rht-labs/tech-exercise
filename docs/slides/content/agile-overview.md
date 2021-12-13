@@ -5,7 +5,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-![Owl](images/Agile/owl.png)
+![Owl](images/agile/owl.png)
 
 
 
@@ -21,7 +21,7 @@ come to mind.
 <!-- .slide: id="agile"-->
 ### Where did agile come from?
 February 2001: Snowbird Resort, Utah, United States
-![Utah](images/Agile/USA_UT.png) <!-- {.element: class="inline-image"} -->
+![Utah](images/agile/USA_UT.png) <!-- {.element: class="inline-image"} -->
 * 17 software developers
 * Identified common things that did and did not work
 * Defined values that recommended best practices for software development
@@ -30,17 +30,26 @@ February 2001: Snowbird Resort, Utah, United States
 
 
 ### Agile Manifesto
-![Manifesto](images/Agile/manifesto.png)
+![Manifesto](images/agile/manifesto.png)
 
 
 
-### 4 Values
-![agile-manifesto-infographic](images/Agile/agile-manifesto-infographic.png)  <!-- {.element: class="" style="height:550px"} -->
+### The Four Values
 
 
 
-### 12 Principles
-![12-principles-download](images/Agile/12-principles-download.png)  <!-- {.element: class="" style="height:550px"} -->
+###  <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/agile/agile-manifesto-infographic.png", class="black-style" -->
+
+
+
+### The 12 Principles
+
+
+
+
+###  <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/agile/12-principles-download.png", class="black-style" -->
 
 
 
@@ -110,7 +119,17 @@ The agile approach can minimize risk by getting a working piece of software into
 
 
 #### Agile Product Ownership in a Nutshell
-<iframe width="600" height="480" src="https://www.youtube.com/embed/502ILHjX9EE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe src="https://www.youtube.com/embed/502ILHjX9EE" frameborder="0" allowfullscreen></iframe>
+
+
+
+#### Being Vs Doing Agile <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/agile/being-vs-doing.png", class="white-style" -->
+
+
+
+#### Being Vs Doing Agile <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/agile/waterfall-agile.png", class="white-style" -->
 
 
 
