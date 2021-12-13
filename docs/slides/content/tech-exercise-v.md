@@ -1,7 +1,9 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
-## Tech Exercise V <!-- .element: class="title-color" -->
+### Tech Exercise V - The Deployments Strike Back  <!-- .element: class="title-color" -->
+### Advanced Deployments & Scalability <!-- .element: class="title-color" -->
 TL500 <!-- .element: class="title-color" -->
+
 
 
 
@@ -11,8 +13,8 @@ TL500 <!-- .element: class="title-color" -->
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Advanced Deployments</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
+  <h2>🚚 Advanced Deployments 📦</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/blue-green-deployments/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
@@ -32,9 +34,9 @@ TL500 <!-- .element: class="title-color" -->
 
 #### Learning Outcomes
 As a learner, by the end of this exercise I ...
-* Can enable Horizontal Pod Autoscaler
+* Can enable the Horizontal Pod Autoscaler for my applications
 * Can add Blue/Green deployment method into pipeline
-* Can shift traffic gradually between two different versions with A/B deployment method
+* Can run a split test on OpenShift with GitOps - splitting traffic between two tests 
 <!--
 --->
 
@@ -43,8 +45,8 @@ As a learner, by the end of this exercise I ...
 #### What is it?
 Advanced Deployments 🚚📦📦📦👷
 * Autoscaling - horizontally scale applications based on observed metrics
-* Blue Green Deployments - release, validate, switch
-* A/B Deployments - great for testing new features in small groups
+* Blue / Green Deployments - release, validate and switch
+* A/B Deployments - great for testing new features in small groups. One release with traffic routing between each
   * Don't forget to take measures!!
 
 
@@ -58,18 +60,19 @@ Advanced Deployments 🚚📦📦📦👷
 
 
 #### Design of Experiments
-All our ideas about new products, new services, new feature, any changes we can introduce to make things better (growth, revenue, experience, etc.) start as an idea, a hypothesis, an assumption
+All our ideas about new products, new services, new feature, any changes we can introduce to make things better (growth, revenue, experience, etc.) start as an idea, a hypothesis, an assumption.
 
-The Design of Experiments is the practice we use to turn ideas, hypothesis and/or assumptions into a concrete well defined set of experiments which can be carried out in order to validate those ideas, hypothesis and assumptions, i.e. provide us with valuable learning
+The Design of Experiments is the practice we use to turn ideas, hypothesis and/or assumptions into a concrete well defined set of experiments which can be carried out in order to validate those ideas, hypothesis and assumptions, i.e. provide us with valuable learning.
 
 
 
-#### Why - Design of Experiments
-* Design of Experiments is a fail safe way to advance a solution and learn fast
-* Design of Experiments can provide a quick way to evolve a product
-* Design of Experiments helps drive innovation in existing as well as new products
-* Design of Experiments enables autonomous team to deliver on leadership intent by placing small bets
-* Design of Experiments is essential for realising the Build-Measure-Learn loop
+#### Why do it?
+Design of Experiments...
+* is a fail safe way to advance a solution and learn fast
+* can provide a quick way to evolve a product
+* helps drive innovation in existing as well as new products
+* enables autonomous team to deliver on leadership intent by placing small bets
+* is essential for realising the Build-Measure-Learn loop
 
 
 

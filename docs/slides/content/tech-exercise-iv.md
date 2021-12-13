@@ -1,6 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
-## Tech Exercise IV <!-- .element: class="title-color" -->
+### Tech Exercise IV - Return of the Monitoring <!-- .element: class="title-color" -->
+#### Observability, Logging & Metrics <!-- .element: class="title-color" -->
 TL500 <!-- .element: class="title-color" -->
 
 
@@ -11,7 +12,7 @@ TL500 <!-- .element: class="title-color" -->
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2> Observability 🔨🔨</h2>
+  <h2>📈🪵 Observability 🪵📊</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
@@ -20,23 +21,23 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-### Tech Exercise III
+### Tech Exercise IV
 [Return of the Monitoring](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
 
 
 
 ##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/3-revenge-of-the-automated-testing/images/big-picture-pipeline-complete.jpg", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/4-return-of-the-monitoring/images/big-picture-monitoring.jpg", class="white-style" -->
 
 
 
 #### Learning Outcomes
 As a learner, by the end of this exercise I ...
-* Can add security gates to pipeline
-* Can add testing gates to pipeline
-* Can add static code analysis gates to pipeline
-* Can add image signing to the pipeline
-* Can add load testing to the pipeline
+* Can add ServiceMonitor for apps to gather metrics
+* Can query Prometheus to see metrics
+* Can create alerts with PrometheusRule
+* Can install Grafana create dashboards with it
+* Can create search index in Kibana
 <!--
 --->
 
