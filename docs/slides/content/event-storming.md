@@ -153,7 +153,7 @@ The Event Storming Key is specific set of coloured stickies...
 2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`
 3. Are there any `policies` or `procedures` that you can identify?
 4. Are there new `Systems` (external?) or `Aggregates`?
-- <!-- {.element: class="display:none"} -->
+<p>&nbsp;</p>
 
 #### Things help steer you ...
 * Who is Mary? Does she need to need to authenticate to enter the compentition?
@@ -187,7 +187,7 @@ The Event Storming Key is specific set of coloured stickies...
 
 
 ##### <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch3.png", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch2.png", class="white-style" -->
 
 
 
@@ -217,7 +217,7 @@ The Event Storming Key is specific set of coloured stickies...
 ### Related Practices
  * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
 * Impact Map - can form an input for the scope of the modelling
-<br>
+<p>&nbsp;</p>
 
 There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
 * Emerging Architecture
