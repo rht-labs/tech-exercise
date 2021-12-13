@@ -27,7 +27,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Event Storming
 #### _What is it?_
-_Event Storming is a rapid, interactive approach to business process discovery and design that yields high quality models_
+_Event Storming is a rapid, interactive approach to business process discovery and design that yields high quality models._
 
 It provides a repeatable, teachable technique for modeling:
   * Event-driven systems
@@ -35,7 +35,7 @@ It provides a repeatable, teachable technique for modeling:
 
 
 
-#### The Knowledge Distribution <!-- {.element: class="fragment"} -->
+#### The Knowledge Distribution <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/event-storming/knowledge-distribution.png", class="white-style" -->
 
 
@@ -146,16 +146,16 @@ The Event Storming Key is specific set of coloured stickies...
 
 
 
-#### Event Storm - in your team
-Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and wins a prize"_
+#### Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and wins a prize"_
 ![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
 
 1. Begin with creating the spine of the `Events`
 2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`
 3. Are there any `policies` or `procedures` that you can identify?
 4. Are there new `Systems` (external?) or `Aggregates`?
+- <!-- {.element: class="display:none"} -->
 
-##### Things help steer you ...
+#### Things help steer you ...
 * Who is Mary? Does she need to need to authenticate to enter the compentition?
 * What is the daily prize? How does Mary know about it?
 * How will Mary know she's won the competition? Does she get notified? Is there a leaderboard?
@@ -190,6 +190,7 @@ Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and 
 <!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch3.png", class="white-style" -->
 
 
+
 ### Event Storming: Key Takeaways
 * Builds a shared understanding of a problem space
 * Models business processes
@@ -216,9 +217,11 @@ Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and 
 ### Related Practices
  * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
 * Impact Map - can form an input for the scope of the modelling
+<br>
 
 There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
-* Emerging architecture
-* Non functional Map
-* Metrics-based process Map
+* Emerging Architecture
+* Non Functional Map
+* Metrics-Based Process Map
+
 Together with Event Storm they provide input for creating the Product Backlog.

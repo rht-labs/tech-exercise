@@ -102,5 +102,7 @@ consensus of the team<!-- {.element: class="fragment"  data-fragment-index="3"} 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [User Story Mapping](https://openpracticelibrary.com/practice/user-story-mapping/)
+### Related & Used Practices
+- [Start At the End](https://openpracticelibrary.com/practice/start-at-the-end/)
+- [User Story Mapping & Value Slicing](https://openpracticelibrary.com/practice/user-story-mapping/)
+- [Backlog Refinement](https://openpracticelibrary.com/practice/backlog-refinement/)

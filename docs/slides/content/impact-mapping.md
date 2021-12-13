@@ -109,6 +109,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 -->
 
 
+
 ### The Goal & Actors
 #### *As a class:*
 
@@ -159,6 +160,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
  
 
 #### Tips For Remote
+
 * Break the practice into many sessions
 * Use breakout rooms to ideate in smaller size
 * Don't rely on the facilitator alone to update the board
