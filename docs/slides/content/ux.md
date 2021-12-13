@@ -67,10 +67,6 @@ We use empathy maps during the facilitation of product discovery, user research,
 
 
 
-<!-- .slide: data-background-image="images/ux/iceberg-doodle.png", data-background-size="contain", class="white-style" -->
-
-
-
 ### Empathy Mapping
 
 
@@ -81,23 +77,23 @@ We use empathy maps during the facilitation of product discovery, user research,
 
 #### _What is it?_
 * A tool to capture and visualize what key stakeholders are sensing when in a
-particular context or completing a set of tasks.
+particular context or completing a set of tasks
 * A way to form a better understanding of users and build personas
 * Information is captured directly from interviews, observations, and other
-facilitated conversation exercises.
-* Senses captured can include what the person is seeing, thinking, doing, and feeling.
+facilitated conversation exercises
+* Senses captured can include what the person is seeing, thinking, doing, and feeling
 * Originated from Dave Gray of [XPLANE](http://www.xplane.com/)
 
 
 
 #### _Why use it?_
 * Captures information and learning directly from the end user affected by the
-system/application/solution in question.
+system/application/solution in question
 * Enables a direct connection between important stakeholders and developers, e.g.
-developers of an application can learn directly from end users using it.
+developers of an application can learn directly from end users using it
 * The tool identifies pain points, opportunities, and starts to form a basis for
-improvement and optimization.
-* The tool can be used to move from user empathy to value propositions.
+improvement and optimization
+* The tool can be used to move from user empathy to value propositions
 
 
 
@@ -107,7 +103,7 @@ improvement and optimization.
 
 <!-- .slide: data-background-image="images/ux/empathy-map.jpg", class="black-style" data-background-opacity="0.15"-->
 #### _How do we do it?_
-1. Different colour stickies may be used for positive/negative feedback from the user. This is a team decision.
+1. Different colour stickies may be used for positive/negative feedback from the user
 2. The moderator will ask the user prompting questions, while the group will capture the feedback
 3. The "See" quadrant will contain what your user encounters in their daily experiences (people, activities, things)
 4. "Say & Do" may include information around the tasks they undertake and how they describe or convay these tasks to their team
@@ -118,8 +114,8 @@ improvement and optimization.
 #### _How do we do it?_
 5. "Hear" outlines what the user is hearing and how it may influence them (family, friends, media, coworkers)
 6. "Think & Feel" what feelings are invoked? Consider positive and negative. What worries them? What are they lacking? What thoughts are triggered?
-7. Pains & Gains - What does success and failure look like? Capture the obstacles and aspirations.
-8. Cluster collaboratively similar notes within the same quadrants, theme and discuss - the team should gain a shared understanding of the user.
+7. Pains & Gains - What does success and failure look like? Capture the obstacles and aspirations
+8. Cluster collaboratively similar notes within the same quadrants, theme and discuss - the team should gain a shared understanding of the user
 
 
 
@@ -144,7 +140,7 @@ Wants to invest in the ‘people that are late for work market’!
 * **Step 3** - User Testing [5 mins]
 * **Step 4** - Build with Lego [15 mins]
 
-<p>Quick Tips - Use an empathy map, Ask 5 ladder technique : WHY?</p><!--{.element: class="" style="text-align:left; font-size: smaller; font-weight: 100;"} -->
+<p>Quick Tips - Use an empathy map, Ask 5 ladder technique: WHY?WHY?WHY?WHY?WHY?</p><!--{.element: class="" style="text-align:left; font-size: smaller; font-weight: 100;"} -->
 
 
 
@@ -191,19 +187,13 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Empathy Mapping](https://openpracticelibrary.com/practice/empathy-mapping/)
-- [Lean UX](https://openpracticelibrary.com/practice/lean-us/)
-
-
-
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related Practices
 #### Technical Practices:
 - [Blue Green deployments](https://openpracticelibrary.com/practice/blue-green-deployments/)
 - [Split Testing or A/B Tests](https://openpracticelibrary.com/practice/split-testing-a-b-testing/)
 
 #### Human Centered Design Practices: 
+- [Empathy Mapping](https://openpracticelibrary.com/practice/empathy-mapping/)
 - [AEIOU Observation Framework](openpracticelibrary.com/practice/aeiou-observation-framework/)
 - [Proto Persona](openpracticelibrary.com/practice/proto-persona)
 - [Stakeholders Interview](openpracticelibrary.com/practice/stakeholders-interview)
