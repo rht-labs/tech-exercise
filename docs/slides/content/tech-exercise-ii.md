@@ -1,6 +1,8 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
-## Tech Exercise II <!-- .element: class="title-color" -->
+### Tech Exercise II - Attack of the Pipelines<!-- .element: class="title-color" -->
+### CI, CD & CD2<!-- .element: class="title-color" -->
+
 TL500 <!-- .element: class="title-color" -->
 
 
@@ -83,10 +85,9 @@ _The job of a Pipeline is to prove that your code is **not** ready for productio
 
 
 ### Continuous Integration
-Continuous Integration (**CI**) is a development practice where developers integrate code into a shared repository frequently, 
-preferably several times a day
+Continuous Integration (**CI**) is a development practice where developers integrate code into a shared repository frequently, preferably several times a day.
 
-These actions are repeated frequently ensuring that the code base can **continuously integrate**
+These actions are repeated frequently ensuring that the code base can **continuously integrate**.
 
 
 
@@ -97,11 +98,10 @@ These actions are repeated frequently ensuring that the code base can **continuo
 
 ### Continuous Integration
 #### _Why do it?_
-* Automated testing reduces busy work and improves software quality.
-* Small, regular code commits reduce the number of integration problems.
-* Rapid feedback loops make it easier for new contributors to get started.
-* Shipping of functional software in small increments is more enjoyable than 
-waiting for someone to manually test a giant code change.
+* Automated testing reduces busy work and improves software quality
+* Small, regular code commits reduce the number of integration problems
+* Rapid feedback loops make it easier for new contributors to get started
+* Shipping of functional software in small increments is more enjoyable than waiting for someone to manually test a giant code change
 
 
 
@@ -130,9 +130,9 @@ waiting for someone to manually test a giant code change.
 
 
 ### Continuous Delivery
-Continuous delivery (**CD**)  is an extension of continuous integration since it automatically deploys all code changes to a testing and/or staging environment after the build stage. 
+Continuous delivery (**CD**)  is an extension of continuous integration since it automatically deploys all code changes to a testing and/or staging environment after the build stage.
 
-This delivers our sotfware to the doorway of production
+This delivers our software to the doorway of production.
 
 
 
@@ -167,7 +167,7 @@ This delivers our sotfware to the doorway of production
 
 
 ### Continuous Deployment
-Continuous deployment (**CD**) is a strategy for software releases wherein any code that has been committed which passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users
+Continuous deployment (**CD**) is a strategy for software releases wherein any code that has been committed which passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users.
 
 
 
@@ -211,7 +211,11 @@ to production
 
 
 
-_Separating CI from CD we will first deploy Pet Battle and its supporting infra (keycloak) from Git using ArgoCD's App of Apps pattern. With this in place we will create two pipelines, one for the frontend and one for the api. The frontend will use Jenkins and the backend Tekton_
+_By separating CI from CD we will first deploy Pet Battle and its supporting infra (Keycloak) from Git using ArgoCD's App of Apps pattern._
+
+_With this in place we will create two pipelines, one for the frontend and one for the api._
+
+_The frontend (AngularJS) will use Jenkins and the backend (Quarkus with MongoDB) Tekton._
 
 
 
@@ -273,6 +277,9 @@ Choose your own adventure but both half of the teams must be successful to finis
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
+- [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
+- [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)
+- [Mob Programming](https://openpracticelibrary.com/practice/mob-programming)
 - [Pipelines As Code](https://openpracticelibrary.com/practice/)
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
 - [Continuous Delivery](https://openpracticelibrary.com/practice/continuous-delivery)

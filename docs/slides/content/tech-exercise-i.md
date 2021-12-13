@@ -130,9 +130,9 @@ _We will set up Git projects, create dev, test and stage projects in OpenShift, 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
 - [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
+- [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)
+- [Mob Programming](https://openpracticelibrary.com/practice/mob-programming)
 - [Everything-as-code](https://openpracticelibrary.com/practice/everything-as-code)
 - [Automation](https://openpracticelibrary.com/practice/)
 - [Containers](https://openpracticelibrary.com/practice/)
 - [GitOps](https://openpracticelibrary.com/practice/gitops)
-- [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)
-- [Mob Programming](https://openpracticelibrary.com/practice/mob-programming)
