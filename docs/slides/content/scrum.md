@@ -82,6 +82,11 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+### Real World Examples 
+[TODO] 
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### DevOps practices used in this section:
 - [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning/)
