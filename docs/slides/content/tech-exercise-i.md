@@ -1,6 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
-## Tech Exercise I <!-- .element: class="title-color" -->
+### Tech Exercise I  - The Manual Menace <!-- .element: class="title-color" -->
+### Everything as Code <!-- .element: class="title-color" -->
 TL500 <!-- .element: class="title-color" -->
 
 
@@ -21,7 +22,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise I
-[The Manual Mennace](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMqYlqu9pjOZKwUq1zvZ)
+[The Manual Menace](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMqYlqu9pjOZKwUq1zvZ)
 
 
 
@@ -55,7 +56,7 @@ Everything as Code is the practice of treating all parts of the system as code. 
 
 ### Why do we do it?
 * **Traceability**: Having your environment descriptions and structure stored in a version control system allows us to audit changes made to the system, tracked to the individual who made them
-* **Repeatable**: Moving from one cloud provider to another should be a simple task. Picking a deployment target should be like shopping around for the best price that week. By storing all things as code, systems can be re-created in moments in various providers
+* **Repeatability**: Moving from one cloud provider to another should be a simple task. Picking a deployment target should be like shopping around for the best price that week. By storing all things as code, systems can be re-created in moments in various providers
 * **GitOps**: A single source of the truth means no more tribal knowledge or experts needed to set up cables or attach hard drives
 
 
@@ -67,7 +68,7 @@ Everything as Code is the practice of treating all parts of the system as code. 
 
 
 
-#### How do we do it?
+### How do we do it?
 1. Select automated tools for provisioning and configuration eg Ansible, templating, bash, etc
 2. Write installation and configuration sequences as code
 3. Design configuration options as templates
@@ -87,7 +88,7 @@ _We will set up Git projects, create dev, test and stage projects in OpenShift, 
 
 
 ### 💥 Mob to Learn 💥
-* Begin with the [pairing and mobbing](/slides/content/?name=pairing-and-mobbing) exercise (if not already done)
+* Begin with the [pairing and mobbing](?name=pairing-and-mobbing) exercise (if not already done)
 * In your table teams, form a mob to complete the exercise. Working together as a team to deploy your shared tooling and infrastructure!
 * Rotate the `driver` a the end of the section to give everyone a go at getting their hands dirty with code!
 * If you finish early, try your hand at the `Here be dragons` section
@@ -128,7 +129,10 @@ _We will set up Git projects, create dev, test and stage projects in OpenShift, 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [Everything-as-code](https://openpracticelibrary.com/practice/) - 
-- [Automation](https://openpracticelibrary.com/practice/) - 
-- [Containers](https://openpracticelibrary.com/practice/) - 
-- [CitOps](https://openpracticelibrary.com/practice/) - 
+- [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
+- [Everything-as-code](https://openpracticelibrary.com/practice/everything-as-code)
+- [Automation](https://openpracticelibrary.com/practice/)
+- [Containers](https://openpracticelibrary.com/practice/)
+- [GitOps](https://openpracticelibrary.com/practice/gitops)
+- [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)
+- [Mob Programming](https://openpracticelibrary.com/practice/mob-programming)
