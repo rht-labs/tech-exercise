@@ -15,7 +15,7 @@ If the workspace has not been set up for you, you can create one from this devfi
 <!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
 3. <strong>OPTIONAL</strong> - if you want to use `zsh` as opposed to `sh`, you can set it as the default shell by running. `zsh` is swish has neat shortcuts and plugins plus all the cool kids are using it 😎!
 ```bash
-echo "zsh" >> ~/.bashrc
+echo "exec zsh" >> ~/.bashrc
 ```
 
 4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
