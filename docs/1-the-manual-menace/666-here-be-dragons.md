@@ -145,7 +145,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
 - name: redhat-cop
   type: helm
   url: https://redhat-cop.github.io/helm-charts
-- name: do500-git
+- name: tl500-git
   url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
   type: git
   insecure: true

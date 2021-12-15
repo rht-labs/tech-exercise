@@ -49,7 +49,7 @@ git pull
     ```bash
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
-        --controller-namespace do500-shared \
+        --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
     ```

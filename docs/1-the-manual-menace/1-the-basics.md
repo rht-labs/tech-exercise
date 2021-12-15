@@ -5,11 +5,11 @@
 ![crw](./images/crw.png)
 
 <p class="warn">
-If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
-<span style="color:blue;"><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a><span>
+If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the TL500 stack:</br>
+<span style="color:blue;"><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml</a><span>
 </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-do500` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-tl500` from the menu.
 ![new-terminal](./images/new-terminal.png)
 
 <!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
@@ -59,7 +59,7 @@ Let's deploy a simple application using Helm.
 
 1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts as well as the tar file the chart is packaged as.
 ```bash
-helm repo add do500 https://rht-labs.com/todolist/
+helm repo add tl500 https://rht-labs.com/todolist/
 ```
 
 2. Let's install a chart from this repo. First search the repositories to see what is available, then install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
@@ -67,7 +67,7 @@ helm repo add do500 https://rht-labs.com/todolist/
 helm search repo todolist
 ```
 ```bash
-helm install my do500/todolist --namespace ${TEAM_NAME}-ci-cd
+helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd
 ```
 
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
@@ -82,7 +82,7 @@ echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spe
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
 ```bash
-helm upgrade my do500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
+helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
 ```
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd

@@ -30,7 +30,7 @@
     ```bash
     kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
-        --controller-namespace do500-shared \
+        --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
     ```

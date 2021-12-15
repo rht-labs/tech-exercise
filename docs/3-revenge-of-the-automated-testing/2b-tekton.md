@@ -23,7 +23,7 @@
     ```bash
     kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
-        --controller-namespace do500-shared \
+        --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
     ```
