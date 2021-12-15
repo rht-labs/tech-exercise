@@ -5,8 +5,23 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>🤼 Scrum 🏉</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <img src="images/opl-delivery.png">
+  </a>
+</div>
+</div>
+
+
+
 ### Origins of Scrum
-![Scrum](images/Agile/scrum.jpg) <!-- {.element: class="inline-image"} -->
+![Scrum](images/agile/scrum.jpg) <!-- {.element: class="inline-image"} -->
 * Rugby term: used to restart play
 * 1986 Hirotaka Takeuchi and Ikujiro Nonaka published [The New New Product Development Game](https://hbr.org/1986/01/the-new-new-product-development-game)
 * 1990 Jeff Sutherland and Ken Schwaber used scrum for software development
@@ -14,19 +29,14 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 ### 3 Key Roles in Scrum
-* _Product Owner_
-
-   Conveys message of envisioned product and sets priorities for team
-* _Scrum Master_
-
-   Coaches team on Scrum process and helps iterate towards a productive environment
-* _Development Team Members_
-
-   Self-organize to transform backlog items into a potentially releasable product increment
+* **Product Owner** - Conveys the message of envisioned product and sets priorities for team
+* **Scrum Master** - Coaches team on Scrum process and helps iterate towards a productive environment
+* **Development Team Members** - Self-organize to transform backlog items into a potentially releasable product increment
 
 
 
-![Scrum Ceremonies](images/Agile/scrum_process.png)
+###
+<!-- .slide: data-background-image="images/agile/scrum-process.png", class="white-style" data-background-size="contain" -->
 
 
 
@@ -41,21 +51,15 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 ### 3 Key Artifacts in Scrum
-* _Product Backlog_
-
-  Set of all baseline requirements prioritized for the team.
-* _Sprint Backlog_
-
-  Subset of the Product Backlog the team agreed to pull into the Sprint to work on.
-* _Product Increment_
-
-  The most important artifact that is produced at the end of each Sprint.
+* **Product Backlog** - Set of all baseline requirements prioritized for the team
+* **Sprint Backlog** - Subset of the Product Backlog the team agreed to pull into the Sprint to work on
+* **Product Increment** - The most important artifact that is produced at the end of each Sprint
 
 
 
 ### Exercise - The Ball Game (Setup)
 
-In Your Groups
+#### In Your Groups
 1. Draw a table with two columns and three rows.
 2. Record your estimate for an iteration.
 3. Pass the balls for one minute.
@@ -64,12 +68,22 @@ In Your Groups
 
 
 
-### Exercise - The Ball Game (Rules)
-
+### Exercise - The Ball Game 
+#### Rules
 1. Pass as many ping pong balls through all the team members.
 2. There must be "air time" between each pass.
 3. You cannot use any artificial containers.
 4. If you drop a ball, you lose a point.
+
+
+
+#### Being Vs Doing Agile <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/agile/being-vs-doing.png", class="white-style" -->
+
+
+
+### Real World Examples 
+[TODO] 
 
 
 

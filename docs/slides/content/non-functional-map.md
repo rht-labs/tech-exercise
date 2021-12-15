@@ -20,7 +20,6 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-
 ##### NFR Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/nfr-map/example-who-nfr-map.png", class="white-style" -->
 

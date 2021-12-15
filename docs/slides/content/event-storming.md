@@ -5,40 +5,67 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Event Storming</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/event-storming/">
+  <img src="images/opl-discovery.png">
+  </a>
+</div>
+</div>
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who.png", class="white-style" -->
+
+
+
 ### Event Storming
-#### _What is It?_
-* Provides a repeatable, teachable technique for modeling:
+#### _What is it?_
+_Event Storming is a rapid, interactive approach to business process discovery and design that yields high quality models._
+
+It provides a repeatable, teachable technique for modeling:
   * Event-driven systems
   * Large microservice-based systems
-* Requires a really, really large modeling surface
-* Requires lots of stickies in a rainbow of colors with a legend to their usage
 
 
 
-### Event Storming
-#### _What is It?_
+#### The Knowledge Distribution <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/knowledge-distribution.png", class="white-style" -->
+
+
+
+#### _What is it?_
+At the end of the event storm, you should have:
+* A shared understanding of the business process you are building as part of the project, including:
+![you-should-have](images/event-storming/you-should-have.png)<!-- .element: class="image-no-shadow " -->
+* A physical diagram with the above information, which can be transferred to a digital format
+<!-- ### Event Storming
+#### _What is it?_
 * Who: key business stakeholders and techies
 * There will be lots of talking, a fair bit of squabbling, and periodically
 some **very** heated debate
 * No chairs!
-* Expect a tiring but fun day that achieves a great deal from the most basic of tools
+* Expect a tiring but fun day that achieves a great deal from the most basic of tools -->
 
 
 
-### Event Storming
-#### _Where Did It Come From?_
-![Brandolini](images/eventstorming/brandolini.jpg) <!-- {.element: class="inline-image" width="350"} -->
-Event Storming was developed by Alberto Brandolini
-* Brandolini has a background in event-driven systems
-* He is an active member of the Domain-Driven Design (DDD) community
-* He started Event Storming as a guest slot in Vernon Vaughn's DDD workshop
-* First blog post about event storming was in 2013
+#### _Where did it come from?_
+![Brandolini](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
+It was introduced in a blog by Alberto Brandolini in 2013.
+![ubiquitous-language](images/event-storming/es-ubiquitous-language.png) <!-- {.element: class="" style="max-width:450px;"} -->
+
+It's a sort of Domain Driven Design (DDD) Lite – but with more business focus and less of the jargon and complexity.
 
 
 
-### Event Storming
-#### _Why Do We Use It?_
-* Very simple modeling that is accessible to all business people
+#### _Why do we use it?_
+* Very simple modelling practice that is accessible to all business people
 * Engages all stakeholders and removes technical barriers:
   * Non-technical people can actively contribute
   * Builds a shared understanding
@@ -57,114 +84,110 @@ event model
 
 
 
-### Event Storming
-#### _Tips for Success_
-* Hold a Big Picture Workshop
-* Invite the right people: business stakeholders, IT, and User Experience (UX)
-* Provide unlimited modeling space with a surface, markers, and stickies
-* Model **a whole business line** with domain events
+### 
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/vision-to-detail.png", class="black-style" -->
 
 
 
-## Event Storming Diagram
+#### Event Storming - How
+The Event Storming Key is specific set of coloured stickies...
 
 
 
-![System](images/eventstorming/system.jpg)
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-flow.png", class="black-style" -->
 
 
 
-### Event Storming: Events
-![Events](images/eventstorming/events.jpg) <!-- {.element: class="inline-image"} -->
-Something that happened that people care about
-* Subject --> Verb in past tense, e.g **Item Shipped**
-* Could be timed, e.g. **Nightly Accounts Reconciled**
-* A meaningful result of another thing, e.g. **Account Locked**
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-events.png", class="black-style" -->
 
 
 
-### Event Storming: Events
-![Event](images/eventstorming/eventsticky.png) <!-- {.element: class="inline-image"} -->
-Where do events come from?
-* A system
-* Passing of time
-* Consequence of another event
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-commands-actors.png", class="black-style" -->
 
 
 
-### Event Storming: Commands
-![Command](images/eventstorming/commandsticky.png) <!-- {.element: class="inline-image"} -->
-* A **command** is an **action** started by an **actor**
-* It represents the **decision**
-* It is usually the reverse of the **event**, e.g:
-  * Buy Ticket
-  * Cancel Reservation
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-readmodel.png", class="black-style" -->
 
 
 
-### Event Storming: Actors
-![Actor](images/eventstorming/actorsticky.png) <!-- {.element: class="inline-image"} -->
-An actor is the user of the system
-* Keep it fuzzy, e.g. **Joe**
-* The actor makes the decision
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-systems-quests.png", class="black-style" -->
 
 
 
-### Event Storming: Questions
-![Question](images/eventstorming/questionsticky.png) <!-- {.element: class="inline-image"} -->
-* Pain Points, e.g. **It takes a long time!**
-* How / What / Why?
-* Hot Spots
-* Assumptions
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-policies.png", class="black-style" -->
 
 
 
-### Event Storming: External Systems
-![System](images/eventstorming/systemsticky.png) <!-- {.element: class="inline-image"} -->
-* Third party services
-* Existing systems
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-aggregates.png", class="black-style" -->
 
 
 
-### Event Storming: Read Model
-![ReadModel](images/eventstorming/readmodelsticky.png) <!-- {.element: class="inline-image"} -->
-The **information** needed in order to make a **decision**
-* Represents an implementation
-  * Stored Procedure
-  * Query
-  * Projection
-* Ties to the page layout
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-extras.png", class="black-style" -->
 
 
 
-### Event Storming: Policies and Procedures
-![PolicyProcedure](images/eventstorming/policysticky.png) <!-- {.element: class="inline-image"} -->
-* Keywords to use are **always** and **immediately**
-* Procedures include:
-  * Automatic process
-  * Process manager
-  * Listener
-  * "Don't forget to..."
-  * Agreement
-  * Rules
-  * Habit
-* For example:
-
-  Refund Requested > Refund Policy > Issue Receipt
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-flow.png", class="black-style" -->
 
 
 
-### Event Storming: Aggregate
-![Aggregate](images/eventstorming/aggsticky.png) <!-- {.element: class="inline-image"} -->
-Part of the system that **receives** the **command** and decides to **execute**
-the **event**
-* Usually a noun, e.g. **Item**
-* The aggregate is the **state machine**
-* Serve as a place to logically group commands once all event sources are identified
+<!-- # complete -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-complete.png", class="black-style" -->
 
 
 
-![System](images/eventstorming/system.jpg)
+### Class Exercise
+
+
+
+#### Context - PetBattle
+* The PetBattle team has decided to use event storming to design part of their system. As with all great teams, they started by defining the example they would map out. This is important as it frames the end-to-end journey and stops them from modelling too big a piece of the application.
+* Take the deliverable from the _Impact Map_ to and reframe it using the _Friends Notation_ drill down into the system design
+![tow-pb](images/event-storming/tow-pb.png)
+
+
+
+#### Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and wins a prize"_
+![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
+
+1. Begin with creating the spine of the `Events`
+2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`
+3. Are there any `policies` or `procedures` that you can identify?
+4. Are there new `Systems` (external?) or `Aggregates`?
+<p>&nbsp;</p>
+
+#### Things help steer you ...
+* Who is Mary? Does she need to need to authenticate to enter the compentition?
+* What is the daily prize? How does Mary know about it?
+* How will Mary know she's won the competition? Does she get notified? Is there a leaderboard?
+
+
+
+### Exercise Wrap Up
+
+
+
+##### Pet Battle - No Systems or Policies<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-pb-no-systems.jpg", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/example-who-systems.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch.png", class="white-style" -->
+
+
+
+##### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/event-storming/es-emerging-arch2.png", class="white-style" -->
 
 
 
@@ -177,20 +200,28 @@ the **event**
 
 
 
-### Exercise
-### Event Storm for To Do List Management
-![Key](images/eventstorming/key.png) <!-- {.element: class="inline-image"} -->
-* In your teams, create example event storm for the Current state of the To Do List
-Management application. Cover the following things:
-  1. Add the new Events
-  * Add the new Commands, Users and Read Models
-  * Are there new Systems or Aggregates?
-* Reflect on your Impact Map deliverables and enhance it with some new functionality e.g
-  1. Sharing lists between users
-  2. Integration with other vendors or providers
+
+#### _Tips for Success_
+* Invite the right people: business stakeholders, IT, and User Experience (UX)
+* Provide unlimited modeling space with a surface, markers, and stickies
+* Keep people refreshed and hydrated! (🥝 🍫 🍌 / 🚰 / 🫖 ☕️)
+* Frame the discussion to limit the off topic conversation using TOWs
+* If remote, use breakout sessions to encourage more conversation with regular regrouping
+![es-tips](images/event-storming/es-tips.png) <!-- {.element: class="image-no-shadow"} -->
+* Set up the environment with a Social Contract to ensure psychological safety
+* Watch out for the Dungeon Master ...
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Event Storming](https://openpracticelibrary.com/practice/event-storming/)
+### Related Practices
+ * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
+* Impact Map - can form an input for the scope of the modelling
+<p>&nbsp;</p>
+
+There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
+* Emerging Architecture
+* Non Functional Map
+* Metrics-Based Process Map
+
+Together with Event Storm they provide input for creating the Product Backlog.
