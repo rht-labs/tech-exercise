@@ -70,8 +70,8 @@ Lets put our git credentials via a Kubernetes secret for now. **We will fix this
 cat <<EOF | oc apply -f -
 apiVersion: v1
 data:
-  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
-  username: "$(printf ${GITLAB_USER} | base64 -w0)"
+  password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+  username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
   annotations:
@@ -123,8 +123,8 @@ Lets our git creds via a secret (**UJ this**)
 cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
 apiVersion: v1
 data:
-  password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
-  username: "$(printf ${GITLAB_USER} | base64 -w0)"
+  password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+  username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 metadata:
   annotations:

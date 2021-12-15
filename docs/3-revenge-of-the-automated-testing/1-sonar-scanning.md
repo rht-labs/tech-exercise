@@ -14,9 +14,9 @@
     cat << EOF > /tmp/sonarqube-auth.yaml
     apiVersion: v1
     data:
-      username: "$(printf admin | base64 -w0)"
-      password: "$(printf admin123 | base64 -w0)"
-      currentAdminPassword: "$(printf admin | base64 -w0)"
+      username: "$(echo -n admin | base64 -w0)"
+      password: "$(echo -n admin123 | base64 -w0)"
+      currentAdminPassword: "$(echo -n admin | base64 -w0)"
     kind: Secret
     metadata:
       labels:

@@ -51,8 +51,8 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     cat << EOF > /tmp/rox-auth.yaml
     apiVersion: v1
     data:
-      password: "$(printf ${ROX_API_TOKEN} | base64 -w0)"
-      username: "$(printf ${ROX_ENDPOINT} | base64 -w0)"
+      password: "$(echo -n ${ROX_API_TOKEN} | base64 -w0)"
+      username: "$(echo -n ${ROX_ENDPOINT} | base64 -w0)"
     kind: Secret
     metadata:
       labels:

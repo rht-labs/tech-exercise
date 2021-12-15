@@ -33,8 +33,8 @@ git pull
     kind: Secret
     apiVersion: v1
     data:
-      username: "$(printf ${GITLAB_USER} | base64 -w0)"
-      password: "$(printf ${GITLAB_PASSWORD} | base64 -w0)"
+      username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
+      password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
     metadata:
       annotations:
         tekton.dev/git-0: https://${GIT_SERVER}
