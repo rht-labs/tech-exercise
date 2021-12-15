@@ -137,7 +137,7 @@ git pull
 9. You may need to force sync your secret in argocd to get it to apply:
 ![argocd-force-sync.png](images/argocd-force-sync.png)
 
-    🪄 You can verify it's been synced to Jenkins now by opening `Jenkins -> Configuration -> Credentials` to view `<TEAM_NAME>-ci-cd-git-auth` credential is there
+    🪄 You can verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view `<TEAM_NAME>-ci-cd-git-auth` credential is there
 
     ```bash
     echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
