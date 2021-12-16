@@ -48,9 +48,15 @@
                     </configuration>
     ```
 
-6. Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
+6. Edit the `CatResource.java` class file and remove the stack trace in the catch block that is part of the `loadlitter()`method, making it empty.
 
-    ![images/codestyle-violation.png](images/codestyle-violation.png)
+    From this:
+
+    ![images/codestyle-violation2.png](images/codestyle-violation1.png)
+
+    To this:
+
+    ![images/codestyle-violation2.png](images/codestyle-violation2.png)
 
     Now when we run the check we should get a hard error telling us we have an empty code block.
 
