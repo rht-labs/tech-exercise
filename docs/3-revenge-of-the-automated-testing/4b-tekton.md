@@ -7,7 +7,7 @@
     mvn formatter:format
     ```
 
-2. Now edit a java class file and add some TAB/spaces e.g. in L19,21
+2. Now edit a java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
 
