@@ -52,14 +52,14 @@
 3. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username`, `password` and `currentAdminPassword` from the previous command and update the values. Make sure you indent the data correctly.
 
     ```yaml
-            - name: sonarqube-auth
-              type: Opaque
-              labels:
-                credential.sync.jenkins.openshift.io: "true"
-              data:
-                username: AgAj3JQj+EP23pnzu...
-                password: AgAtnYz8U0AqIIaqYrj...
-                currentAdminPassword: AgCHCphbYpeLYMPK...
+      - name: sonarqube-auth
+        type: Opaque
+        labels:
+          credential.sync.jenkins.openshift.io: "true"
+        data:
+          username: AgAj3JQj+EP23pnzu...
+          password: AgAtnYz8U0AqIIaqYrj...
+          currentAdminPassword: AgCHCphbYpeLYMPK...
       ```
 
     and push the changes:
