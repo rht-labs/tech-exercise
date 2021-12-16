@@ -70,7 +70,7 @@
     git commit -m  "🍳 ADD - sonarqube creds sealed secret 🍳"
     git push
     ```
-  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
+  <p class="tip">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull --rebase</i></b>, then <b><i>git push</i></b> again.</p>
 
 4. Verify that you have the secret definition available in the cluster by checking the UI or on the terminal:
 
