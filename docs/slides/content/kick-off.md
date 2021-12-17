@@ -26,7 +26,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Backlog](https://openpracticelibrary.com/practice/backlog-refinement/)
 - [Work Visualization](https://openpracticelibrary.com/practice/visualisation-of-work/)
 - [Burndown](https://openpracticelibrary.com/practice/burndown/)

@@ -168,5 +168,5 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 - [Start at the End](https://openpracticelibrary.com/practice/start-at-the-end/) - a simple exercise to identify a set of assumptions which must be tested in order achieve a long term goal

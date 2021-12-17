@@ -280,7 +280,7 @@ Was your final design different than you expected? Discuss.
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Test Driven Development](https://openpracticelibrary.com/practice/test-driven-development/)
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
 - [Example Mapping](https://openpracticelibrary.com/practice/example-mapping/)

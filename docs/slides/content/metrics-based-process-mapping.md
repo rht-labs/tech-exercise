@@ -114,8 +114,8 @@ How To ...
 
 
 <div class="r-stack">
-  <div class="fragment fade-in-then-out" data-fragment-index="0" > 
-    <h4>Create the swimlanes</h4>
+  <div> 
+    <h4 class="fragment fade-out" data-fragment-index="1">Create the swimlanes</h4>
     <img class="image-no-shadow image-full-width" src="images/mbpm/mbpm-swim-lanes.png">
   </div>
   <div class="fragment fade-in-then-out" data-fragment-index="1" > 
@@ -136,8 +136,8 @@ Document all activities / steps (the things)
 
 
 <div class="r-stack">
-  <div class="fragment fade-in-then-out" data-fragment-index="0" > 
-    <h4>The Activity</h4>
+  <div> 
+    <h4 class="fragment fade-out" data-fragment-index="1" >The Activity</h4>
     <img class="image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-0.png">
   </div>
   <div class="fragment fade-in-then-out" data-fragment-index="1" > 
@@ -162,8 +162,8 @@ Document all activities / steps (the things)
 
 
 <div class="r-stack">
-  <div class="fragment fade-in-then-out" data-fragment-index="0" > 
-    <h4>The time spent doing the activity</h4>
+  <div  > 
+    <h4 class="fragment fade-out" data-fragment-index="1">The time spent doing the activity</h4>
     <img class="image-no-shadow image-full-width" src="images/mbpm/pt-lt-1.png">
   </div>
   <div class="fragment fade-in-then-out" data-fragment-index="1" > 
@@ -259,7 +259,7 @@ Document all activities / steps (the things)
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related and Used practices
+### Related & Used Practices
 Related practices:
 
 * [Value Stream Mapping](https://openpracticelibrary.com/practices/vsm-mbpm)

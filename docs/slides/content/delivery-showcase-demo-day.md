@@ -79,5 +79,5 @@ In teams, take some time to brainstorm:
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Showcase](https://openpracticelibrary.com/practice/showcase/)

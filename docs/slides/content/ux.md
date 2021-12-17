@@ -187,7 +187,7 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 #### Technical Practices:
 - [Blue Green deployments](https://openpracticelibrary.com/practice/blue-green-deployments/)
 - [Split Testing or A/B Tests](https://openpracticelibrary.com/practice/split-testing-a-b-testing/)

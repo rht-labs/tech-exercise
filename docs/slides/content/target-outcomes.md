@@ -36,5 +36,5 @@ _What are Target Outcomes?_
 
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Target Outcomes](https://openpracticelibrary.com/practice/target-outcomes/)

@@ -98,6 +98,6 @@ Reflect on the first day of class, and make adjustments to continuously improve
 
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
 - [Realtime Retrospective](https://openpracticelibrary.com/practice/realtime-retrospective/)

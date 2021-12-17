@@ -24,7 +24,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-### Resources
+### Related & Used Practices
 * Github Repo for this class: https://github.com/rht-labs/enablement-docs/
   * Slides are in the /slides folder
 * Posters: https://github.com/rht-labs/enablement-docs/tree/master/facilitation/00-setup

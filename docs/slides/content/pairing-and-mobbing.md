@@ -59,6 +59,6 @@ _Mob Drawing_
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Pair Programming](https://openpracticelibrary.com/practice/pair-programming/)
 - [Mob Programming](https://openpracticelibrary.com/practice/mob-programming/)

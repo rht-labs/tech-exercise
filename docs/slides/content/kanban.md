@@ -102,7 +102,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Kanban](https://openpracticelibrary.com/practice/kanban/)
 - [Kanban Picture](https://openpracticelibrary.com/practice/kanban-picture/)
 - [Daily Standup](https://openpracticelibrary.com/practice/daily-standup/)

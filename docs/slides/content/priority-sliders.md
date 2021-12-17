@@ -7,7 +7,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 <!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
-<div class="fragment fade-in-then-out current-visible" data-fragment-index="0" >
+<div class="fragment fade-out" data-fragment-index="1" >
   <h2>Open Practice Library</h2>
   <img src="images/opl-complete.png">
 </div>
@@ -116,10 +116,8 @@ How did you reach consensus?
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Priority Sliders](https://openpracticelibrary.com/practice/priority-sliders/)
-
-### Related Practices
-- [voting](https://openpracticelibrary.com/practice/) - Dot Voting / etc
+- [Voting](https://openpracticelibrary.com/practice/) - eg Dot Voting, Heat Map, etc
 - Any other prioritization tools eg Impact / Effort Matrix
-- Sprint Planning - this practice provides a useful input in the depth of task writing and definition
+- [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning) - this practice provides a useful input in the depth of task writing and definition

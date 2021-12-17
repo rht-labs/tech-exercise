@@ -88,7 +88,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning/)
 - [Daily Standup](https://openpracticelibrary.com/practice/daily-standup/)
 - [Showcase](https://openpracticelibrary.com/practice/showcase/)

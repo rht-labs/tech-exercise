@@ -170,7 +170,7 @@ https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
 - [Continuous Delivery](https://openpracticelibrary.com/practice/continuous-delivery/)
 - [Continuous Deployment](https://openpracticelibrary.com/practice/continuous-deployment/)

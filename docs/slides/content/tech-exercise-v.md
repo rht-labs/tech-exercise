@@ -122,7 +122,7 @@ Using the platform to support running an experiment
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 - [Lean UX](https://openpracticelibrary.com/)
 - [Split Testing](https://openpracticelibrary.com/)
 - [Dark Launches](https://openpracticelibrary.com/)

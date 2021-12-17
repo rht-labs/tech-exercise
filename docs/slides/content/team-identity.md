@@ -29,5 +29,5 @@ Form a straight line across the room in order of relative technical experience i
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - Team Identity
