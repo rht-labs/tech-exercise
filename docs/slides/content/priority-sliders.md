@@ -103,7 +103,7 @@ In this exercise we will create a priortiy slider canvas for Pet Battle.
 Q&A  / Feedback
 
 How did you reach consensus?
-![what=is it](images/priority-sliders/consensus-tools.png)<!-- .element: class="image-no-shadow image-full-width" -->
+![what-is-it](images/priority-sliders/consensus-tools.png)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
 

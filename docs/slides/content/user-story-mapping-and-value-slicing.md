@@ -5,35 +5,60 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-<!-- .slide: id="usm" -->
-## User Story Mapping
+<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>User Story Mapping & Value Slicing</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/impact-mapping/">
+  <img src="images/opl-options.png">
+  </a>
+</div>
+</div>
 
 
 
-### User Stories
-#### As a < type of user >, I want < some goal > so that < some reason >
-As a learner, I want to stay awake so that I can be attentive and listen to teacher
-
-* A promise to create a conversation
-  * Card
-  * Conversation
-  * Confirmation
-* Enough detail to give direction for completion
-* Provide value to the end consumer
+##### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/user-story-mapping-and-value-slicing/example-who.png", class="white-style" -->
 
 
 
-### User Stories
-![invest](images/user-stories/user-stories-invest.png)
+### User Stories	&#8800;
+As a < type of user >, I want < some goal > so that < some reason >
+#### As a learner, I want to stay awake so that I can be attentive and listen to teacher
+
+User Story Mapping is an effective practice for creating lightweight release plans that can drive standard Agile delivery practices. At the end of user story mapping, you should have:
+![what-is-it](images/user-story-mapping-and-value-slicing/what-is-user-story.png)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
 
-#### SHARED DOCUMENTATION &#8800; SHARED UNDERSTANDING
-![Example1](images/value-slicing/glad-we-all-agree-1.png)
+
+#### Shared Documentation &#8800; Shared Understanding
+<div class="container">
+<div class="col" data-markdown>
+
+![Example1](images/user-story-mapping-and-value-slicing/glad-we-all-agree.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:100%; float:left;" } -->
+
+</div>
+<div class="col" style="padding-left: 5px" data-markdown>
+
+User Story Mapping
+
+* Frame the opportunity, goal, outcome, and value
+* Tell the story of the product from left to right (user steps)
+* Go back and talk about and capture the details of each step
+* Use value driven outcomes to slice out valuable release plans
+
+</div>
+</div>
 
 
 
-![USMBook](images/usm/book.png)
+
+![USMBook](images/user-story-mapping-and-value-slicing/book.png)
 
 
 
@@ -71,7 +96,7 @@ and cannot miss it. What **must** you do to prepare for work and get there on ti
 
 
 #### PRODUCT SLICING GONE BAD!
-![Example1](images/value-slicing/slicing-gone-wrong.jpg )
+![Example1](images/user-story-mapping-and-value-slicing/slicing-gone-wrong.jpg )
 
 
 
@@ -84,7 +109,7 @@ minimally viable product.
 
 
 <video width="320" height="240" controls>
-  <source src="images/usm/value_slicing.mp4" type="video/mp4">
+  <source src="images/user-story-mapping-and-value-slicing/value_slicing.mp4" type="video/mp4">
 </video>
 
 
