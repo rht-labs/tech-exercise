@@ -9,7 +9,7 @@
 1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`.
 
     ```bash
-    cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
+    cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
       # Pet Battle UI Blue
       blue-pet-battle:
         name: blue-pet-battle
