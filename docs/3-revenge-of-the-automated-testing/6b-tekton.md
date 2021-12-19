@@ -71,7 +71,7 @@
                     allure.attach.file(file, attachment_type=allure.attachment_type.HTML)
                 pass
             EOF
-            export PATH=/tekton/home/.local/bin:$PATH
+            export PATH=$HOME/.local/bin:$PATH
             pytest test.py --alluredir=/zap/wrk/allure-results
             curl -sLo send_results.sh https://raw.githubusercontent.com/eformat/allure/main/scripts/send_results.sh && chmod 755 send_results.sh
             ./send_results.sh $(params.APPLICATION_NAME) \
