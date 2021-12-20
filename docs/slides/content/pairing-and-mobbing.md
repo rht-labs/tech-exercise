@@ -34,6 +34,8 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Pair Programming
 ![Pair Programming](images/pairing-and-mobbing/coaching-coders-coding.jpg) <!-- {.element: class="inline-image"} -->
+</br>
+</br>
 **Pair programming** is a practice used in e**X**treme **P**rogramming in which
 two programmers work together at one computer.
 
@@ -41,6 +43,7 @@ two programmers work together at one computer.
 
 ### Mob Programming
 ![Mob Programming](images/pairing-and-mobbing/chairs-developer-development.jpg) <!-- {.element: class="inline-image"} -->
+</br>
 **Mob programming** is a software development approach where the whole team
 works on the same thing, at the same time, in the same space, and at the same
 computer.
@@ -90,7 +93,7 @@ computer.
 
 1. Everyone grab a small post-it.
 2. Each person grab a different color pen.
-3. Draw Public Figure on your own sticky note.
+3. Draw Steven Tyler on your own sticky note.
 
 
 
@@ -98,7 +101,7 @@ computer.
 
 1. Assemble in pairs (or trios if there is an odd number).
 2. Each pair grab a medium post-it.
-3. Take turns drawing an element of Public Figure.
+3. Take turns drawing an element of Steven Tyler.
 
 
 
@@ -106,7 +109,7 @@ computer.
 
 1. Assemble in table groups.
 2. Each table use an easel post-it.
-3. Take turns drawing an element of Public Figure.
+3. Take turns drawing an element of Steven Tyler.
 
 
 
