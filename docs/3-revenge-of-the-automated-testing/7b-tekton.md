@@ -24,7 +24,7 @@
           description: Full name of image to scan (example -- gcr.io/rox/sample:5.0-rc1)
         - name: OUTPUT_FORMAT
           type: string
-          description:  Output format (json | csv | pretty)
+          description:  Output format (json | csv | table)
           default: json
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
@@ -153,7 +153,7 @@
             export NO_COLOR="True"
             curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl"
             chmod +x roxctl > /dev/null
-            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
+            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json
             if [ $? -eq 0 ]; then
               echo "🦕 no issues found 🦕";
               exit 0;
