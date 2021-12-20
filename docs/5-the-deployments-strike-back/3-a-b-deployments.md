@@ -96,7 +96,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`.
 
     ```bash
-    cat << EOF > /projects/tech-exercise/pet-battle/test/values.yaml
+    cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
       # Pet Battle UI - experiment
       pet-battle-b:
         name: pet-battle-b
