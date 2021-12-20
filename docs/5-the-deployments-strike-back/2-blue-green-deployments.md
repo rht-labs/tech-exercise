@@ -158,6 +158,7 @@
     cd /projects/pet-battle
     git add .
     git commit -m "🔵 ADD - Blue / Green deployment to pipeline 🟩"
+    git push
     ```
 
 8. When Jenkins executes, you should see things progress and the blue green deployment happen automatically.
