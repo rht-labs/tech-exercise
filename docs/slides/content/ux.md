@@ -18,17 +18,17 @@ TL500 <!-- {.element: class="title-color"} -->
 
 <!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
-<div class="fragment fade-in-then-out current-visible" data-fragment-index="0" >
+<div class="fragment fade-out " data-fragment-index="0" >
   <h2>Open Practice Library</h2>
   <img src="images/opl-complete.png">
 </div>
-<div class="fragment fade-in-then-out" data-fragment-index="1" >
+<div class="fragment fade-in-then-out" data-fragment-index="0" >
   <h2>Lean UX / Empathy Mapping</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/lean-ux-workshop/">
   <img src="images/opl-discovery.png">
   </a>
 </div>
-<div class="fragment" data-fragment-index="2" >
+<div class="fragment" data-fragment-index="1" >
   <h2>Lean UX / Empathy Mapping</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/empathy-mapping/">
   <img src="images/opl-foundation.png">
