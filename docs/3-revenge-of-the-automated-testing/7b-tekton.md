@@ -30,7 +30,7 @@
           description: Directory to start build in (handle multiple branches)
       steps:
         - name: rox-image-scan
-          image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+          image: registry.access.redhat.com/ubi8/ubi-minimal:latest
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           env:
             - name: ROX_API_TOKEN
@@ -134,7 +134,7 @@
     cd /projects/tech-exercise
     cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
         - name: rox-image-check
-          image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+          image: registry.access.redhat.com/ubi8/ubi-minimal:latest
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           env:
             - name: ROX_API_TOKEN
