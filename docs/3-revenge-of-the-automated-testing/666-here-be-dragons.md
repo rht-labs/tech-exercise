@@ -183,7 +183,7 @@ Let's learn how to use the **roxctl** command line.
     We can run a **check** on our **pet-battle** image by doing:
 
     ```bash
-    roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )' | jq .
+    roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest -o json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )' | jq .
     ```
 
     This returns a Policy error that should look something like this:

@@ -153,7 +153,7 @@
             export NO_COLOR="True"
             curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null;echo "Getting roxctl"
             chmod +x roxctl > /dev/null
-            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json
+            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) -o json
             if [ $? -eq 0 ]; then
               echo "🦕 no issues found 🦕";
               exit 0;
