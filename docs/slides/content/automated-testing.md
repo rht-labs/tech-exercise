@@ -172,7 +172,7 @@ Refactor - Eliminate duplication & make it beautiful <!-- {.element: class="frag
 
 ### Prepare your environment
 Our program is made of Lego. Get your equipment ready for coding
-![lego-space](images/bdd-tdd/lego-620x349.jpg)
+![lego-space](images/bdd-tdd/lego-space.jpeg)
 
 
 
