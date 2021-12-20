@@ -56,7 +56,7 @@
 
     ```bash
     cd /projects/pet-battle
-    oc registry login
+    oc registry login $(oc registry info) --insecure=true
     cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1
     ```
 
