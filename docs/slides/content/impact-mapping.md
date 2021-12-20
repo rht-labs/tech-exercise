@@ -23,7 +23,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 #### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/example-who.png", class="white-style" -->
 
 
 
@@ -33,7 +33,7 @@ Impact mapping is a technique that helps build shared understanding and alignmen
 <br>
 
 #### At the end of the Impact Mapping exercise, you should have:
-![you-should-have](images/ImpactMapping/you-should-have.png)<!-- .element: class="image-no-shadow image-full-width" -->
+![you-should-have](images/impact-mapping/you-should-have.png)<!-- .element: class="image-no-shadow image-full-width" -->
 <!--  
 #### _What is it?_
 At the end of the Impact Mapping exercise, you should have:
@@ -66,7 +66,7 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 
 
 #### Why do we use it?
-![why-use-it](images/ImpactMapping/why-use-it.png)<!-- .element: class="image-no-shadow " -->
+![why-use-it](images/impact-mapping/why-use-it.png)<!-- .element: class="image-no-shadow " -->
 <!--
 #### Why do we use it?
 * Impact mapping enables to focus on business objectives and orient product teams toward delivering business value and not just delivering more and more features
@@ -79,18 +79,18 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 
 
 <div class="r-stack">
-  <img class="" data-fragment-index="0" src="images/ImpactMapping/impact-mapping-goal.png">
-  <img class="fragment " data-fragment-index="1" src="images/ImpactMapping/smart-goal.png">
-  <img class="fragment " data-fragment-index="2" src="images/ImpactMapping/impact-mapping-actors.png">
-  <img class="fragment " data-fragment-index="3" src="images/ImpactMapping/impact-mapping-impacts.png">
-  <img class="fragment " data-fragment-index="4" src="images/ImpactMapping/impact-mapping-deliverables.png">
-  <img class="fragment " data-fragment-index="5" src="images/ImpactMapping/impact-mapping-voting.png">
+  <img class="" data-fragment-index="0" src="images/impact-mapping/impact-mapping-goal.png">
+  <img class="fragment " data-fragment-index="1" src="images/impact-mapping/smart-goal.png">
+  <img class="fragment " data-fragment-index="2" src="images/impact-mapping/impact-mapping-actors.png">
+  <img class="fragment " data-fragment-index="3" src="images/impact-mapping/impact-mapping-impacts.png">
+  <img class="fragment " data-fragment-index="4" src="images/impact-mapping/impact-mapping-deliverables.png">
+  <img class="fragment " data-fragment-index="5" src="images/impact-mapping/impact-mapping-voting.png">
 </div>
 
 
 
 #### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/example-who.png", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/example-who.png", class="white-style" -->
 
 
 
@@ -100,7 +100,7 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 
 #### Setting the Scene: Pet Battle Industries
 A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter them into a competition.
-![pb-industries](images/ImpactMapping/pbindustries.png)<!-- .element: class="image-no-shadow" -->
+![pb-industries](images/impact-mapping/pbindustries.png)<!-- .element: class="image-no-shadow" -->
 <!-- 
 * Started as a hobbyist application built by a few friends over a weekend
 * Deployed as a single VM running on a free host. Over the weekend a famous person tweeted about the app and it exploded in usage however the application started to fail and crash loads under the load
@@ -125,7 +125,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 ### The Impacts
 #### *As a class:*
 1. Walk through creating the _`Impacts`_ for one _`Actor`_
-![example-pbi](images/ImpactMapping/example-pbi.png)
+![example-pbi](images/impact-mapping/example-pbi.png)
 #### *In your team:*
 1. Determine _`Impacts`_ for your _`Actors`_
 
@@ -136,7 +136,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_
 2. Issue your Donal Dollars&trade; and place your bets on the _`Impacts`_
 
-![donal-dollars](images/ImpactMapping/donal-dollars.jpeg)
+![donal-dollars](images/impact-mapping/donal-dollars.jpeg)
 
 
 
@@ -147,7 +147,7 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 
 #### Impact Map - Pet Battle <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/ImpactMapping/pb-full-example.png", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/pb-full-example.png", class="white-style" -->
 
 
 
