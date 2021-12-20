@@ -81,7 +81,7 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
             - name: OUTPUT_FORMAT
-              value: pretty
+              value: table
     ```
 
     So you'll have a pipeline definition like this:
