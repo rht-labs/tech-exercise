@@ -148,7 +148,7 @@ _What are all the activities you do to in the morning to prepare for work and ge
 
 ### Class Exercise 🛏 ⏰
 
-_oh no! you slept through your alarm and woke up ... now you must get to a big meeting at work that you cannot miss. What  activities **must** you do to prepare for work and get there on time?  You cannot join remotely!_
+_Oh no! You slept through your alarm and woke up... now you must get to a big meeting at work that you cannot miss. What  activities **must** you do to prepare for work and get there on time?  You cannot join remotely!_
 
 1. As a team, draw a line on the user story mapping board representing what
 must be done<!-- {.element: class="fragment"  data-fragment-index="1"} -->
