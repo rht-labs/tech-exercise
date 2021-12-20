@@ -5,6 +5,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
 <div class="fragment fade-out" data-fragment-index="0" >
   <h2>Open Practice Library</h2>
@@ -26,10 +27,11 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 #### _What is it?_
-When you hear someone say that they are now doing agile, their team is using agile, or their organization has adopted agile, there's a very strong chance that what they are actually doing is some form of Scrum.
+When you hear someone say that they are now doing agile, their team is using agile, or their organization has adopted agile, there's a very strong chance that what they are actually doing is some form of Scrum. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+</br></br>
 
-#### Scrum is not the same as agile. 
-Agile is an ideology. It is underpinned by those values and principles set out in the Agile Manifesto. Scrum is one of several frameworks that instantiates Agile and makes the principles a reality through a group of practices. It is also, by far, the most popular Agile framework.
+##### Scrum is not the same as agile. 
+Agile is an ideology. It is underpinned by those values and principles set out in the Agile Manifesto. Scrum is one of several frameworks that instantiates Agile and makes the principles a reality through a group of practices. It is also, by far, the most popular Agile framework. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 
 
@@ -51,8 +53,10 @@ Agile is an ideology. It is underpinned by those values and principles set out i
 
 
 #### _Why use it?_
-Because of its simplicity! 
-Often people confuse the many (now hundreds) of practices associated with Agile as being Scrum. In fact, Scrum has very few practices. We tend to describe them as 3-5-3 (which sounds a bit like a formation for a sports team!). 
+Because of the simplicity of Scrum!
+</br>
+
+Often people confuse the many (now hundreds) of practices associated with Agile as being Scrum. In fact, Scrum has very few practices. We tend to describe them as the 3-5-3 of Scrum (which sounds a bit like a formation for a sports team!). <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 
 
@@ -86,16 +90,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 
 
-#### _How can it be used?_
-![how-to-use](images/scrum/how-to-use.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:30%; float:right;" } -->
-1) Follow the **INVEST** guidelines for good user stories
-2) Individually capture, using stickies everything you do in the process you are mapping and add all activities to the story map. Visualise everything
-3) Identify and remove duplicates
-4) Cluster similar activities and capture a theme title
-5) Slice out high value to form incremental release strategy. Filter and maintain focus on delivering valuable outcomes
-
-
-
+#### _How do we do Sprint Planning?_
 ![sprint](images/scrum/sprint-board.png)<!-- .element: class="image-no-shadow image-full-width " -->
 
 
@@ -103,6 +98,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 ### Exercise - The Ball Game (Setup)
 
 #### In Your Groups
+![sprint](images/scrum/estimate-actual.png)<!-- .element: class="inline-image" -->
 1. Draw a table with two columns and three rows.
 2. Record your estimate for an iteration.
 3. Pass the balls for one minute.
@@ -121,16 +117,16 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 
 ### Real World Examples 
-![who-scrum](images/scrum/who-scrum.png)
+![who-scrum](images/scrum/who-scrum.png)<!-- .element: class="image-no-shadow image-full-width " -->
 
 
 
-![who-sprint-review](images/scrum/who-sprint-review.png)
+![who-sprint-review](images/scrum/who-sprint-review.png)<!-- .element: class="image-no-shadow image-full-width " -->
 
 
 
 #### Scrum Board - Pet Battle
-![scrum-pb](images/scrum/scrum-pb.png)
+![scrum-pb](images/scrum/scrum-pb.png)<!-- .element: class="image-no-shadow image-full-width " -->
 
 
 
@@ -144,11 +140,11 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning/)
-- [Daily Scrum (often known as the Daily Stand-Up)](https://openpracticelibrary.com/practice/daily-standup/)
-- [Sprint Review (sometimes called the Showcase)](https://openpracticelibrary.com/practice/showcase/)
-- [Sprint Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
-- [Sprint itself as a fixed time-box container](https://openpracticelibrary.com/practice/)
+- Sprint practices:
+  - [Planning](https://openpracticelibrary.com/practice/iteration-planning/)
+  - [Daily Scrum (often known as the Daily Stand-Up)](https://openpracticelibrary.com/practice/daily-standup/)
+  - [Review (sometimes called the Showcase)](https://openpracticelibrary.com/practice/showcase/)
+  - [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
 - [Product Backlog Refinement](https://openpracticelibrary.com/practice/backlog-refinement)
 - [Definition of Ready](https://openpracticelibrary.com/practice/definition-of-ready/)
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done)
