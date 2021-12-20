@@ -43,7 +43,7 @@
     EOF
     ```
 
-2. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+2. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
     ```yaml
         # Cosign Image Sign
