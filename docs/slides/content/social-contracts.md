@@ -24,7 +24,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 <!--.slide: id="social-contract" -->
 ##### Real Life Example <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/social-contracts/example-1.", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/social-contracts/example-1.png", class="white-style" -->
 
 
 
