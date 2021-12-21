@@ -21,7 +21,6 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-
 #### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/example-who.png", class="white-style" -->
 
