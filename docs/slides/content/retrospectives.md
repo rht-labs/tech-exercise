@@ -5,19 +5,49 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-<!-- .slide: id="retrospectives" -->
+<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Retrospectives</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <img src="images/opl-delivery.png">
+  </a>
+</div>
+<div class="fragment current-visible" data-fragment-index="1" >
+  <h2>Realtime Retro</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <img src="images/opl-foundation.png">
+  </a>
+</div>
+</div>
+
+
+
+#### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/example-who.png", class="white-style" -->
+
+
+
+#### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/example-who-2.png", class="white-style" -->
+
+
+
 ### Retrospectives
+
+
+
 #### _What are Retrospectives?_
-
-
-
-### Retrospectives
 
 Retrospectives are practice used by their teams to **reflect** on their way of working, and **continuously become better** in what they do. They are meant to help teams **keep improving.**
 
-<!-- {.element: class="fragment" data-fragment-index="1"} -->"*At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly*"
-
-<!-- {.element: class="fragment" data-fragment-index="1"} --> **- 12th Principle of the Agile Manifesto -**
+"At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly." <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+</br></br>
+_- 12th Principle of the Agile Manifesto_
 
 
 
