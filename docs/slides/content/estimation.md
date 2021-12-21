@@ -85,7 +85,7 @@ _An example_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 
 #### Example
-Is there a PB example?
+QQ: Is there a PB example?
 
 
 
@@ -113,7 +113,7 @@ A helpful tool for big planning:
 ### Related & Used Practices
 - [Relative Estimation](https://openpracticelibrary.com/practice/relative-estimation/)
 - [Cost of Delay and WSJF(_Weighted Shortest Job First_)](https://openpracticelibrary.com/practice/weighted-shortest-job-first/)
-- [Tee-shirt Sizing](https://openpracticelibrary.com/practice/)
+- [T-shirt Sizing](https://openpracticelibrary.com/practice/)
 - [Planning Poker](https://openpracticelibrary.com/practice/)
 - [Product Backlog Refinement ](https://openpracticelibrary.com/practice/backlog-refinement/)
 - [Acceptance Criteria ](https://openpracticelibrary.com/practice/)
