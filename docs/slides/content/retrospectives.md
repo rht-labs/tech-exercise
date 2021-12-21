@@ -128,6 +128,13 @@ _But they are done poorly and teams do not follow up on identified items_
 
 
 
+#### Real World Examples
+
+![retro-actions](images/retrospectives/retro-actions.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:right;"} -->
+![pub-retro](images/retrospectives/pub-retro.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
+
+
+
 #### Popular Formats <!-- .element: class="text-center" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/popular-formats.png", class="white-style" -->
 
@@ -142,6 +149,7 @@ _But they are done poorly and teams do not follow up on identified items_
   - 1 - *I’ll smile and be calm; everything is great and agree with the managers*
 - The numbers should be taken anonymously.
 - Acknowledge the result and decide what’s next...
+
 
 
 
@@ -168,4 +176,4 @@ Reflect on the first day of class, and make adjustments to continuously improve
 * [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
 * [Realtime Retrospective](https://openpracticelibrary.com/practice/realtime-retrospective/)
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract)
-* [Product Backlog](https://openpracticelibrary.com/practice/)
+* [Backlog](https://openpracticelibrary.com/practice/)
