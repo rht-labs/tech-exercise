@@ -79,10 +79,10 @@ _Effective Social Contracts are:_
 #### _Exercise - Social Contract and Team Identity_
 ![post-it](images/social-contracts/post-it.png) <!-- {.element: class="inline-image"} -->
 1. In table groups, work together to:
-  - Establish a team name
-  - Talk about how you want to work together this week
-  - Write your Social Contract
-  - Record your team button
+    - Establish a team name
+    - Talk about how you want to work together this week
+    - Write your Social Contract
+    - Record your team button
 2. Think about any aspects of your Social Contract that are appropriate for the entire class so we can write the class Social Contract
 
 
