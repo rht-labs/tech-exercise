@@ -127,6 +127,14 @@ If you will work in multiple teams think about what are the aspects of your Soci
 
 
 
+#### Facilitation Tips
+Ensure things in the Social Contract are actionable. For example  "Be Open" has good intent but lacks specificity. Ask questions to tease our greater meanings.
+</br>
+
+_"Can you give me an example of not being open?" could lead to actionable items like "Listen to others as I would like to be heard" or "Give space to the quiet person"._ <!--{.element: style="font-size: ; font-weight: 300!important;"} -->
+
+
+
 #### Example - WHO <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-image="images/social-contracts/real-life-example-2.png", data-background-size="contain", class="white-style" -->
 
@@ -134,7 +142,6 @@ If you will work in multiple teams think about what are the aspects of your Soci
 
 <!-- .slide: data-background-image="images/chef-background.png", data- class="white-style" -->
 ### Related & Used Practices
-* [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
 * [Affinity Mapping](https://openpracticelibrary.com/practice/affinity-mapping/)
 * [Voting (fist of five, dot voting, ..)](https://openpracticelibrary.com/practice/confidence-voting/)
