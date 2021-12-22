@@ -62,6 +62,10 @@ _- 12th Principle of the Agile Manifesto_
 
 
 ### Realtime Retrospectives
+
+
+
+### Realtime Retrospectives
 ![realtime-retro](images/retrospectives/realtime-retro.jpg)<!-- {.element: class="inline-image"} -->
 * Real-time retrospective enables faster, more accurate, and more direct feedback from everyone involved
 * Have a more continuous and always on self-service approach to capturing feedback
@@ -71,25 +75,25 @@ _- 12th Principle of the Agile Manifesto_
 
 
 #### _Why using it?_
-Retrospectives improves:
-- **Productivity** _helps teams to assess their situation and reduce waste_
-- **Capability** _share knowledge and set goals for other team members to learn_
-- **Quality** _writing better code means less rework and less bugs_
-- **Capacity** _determine optimal solution for choosing features that add value_
-- **Camaraderie** _provide a constructive environment for a good team dynamic_
-- **Team data** _capturing measure-and-learn data from incremental delivery_
-- **Visualisation** _cycle of inspection and adaptation understanding team sentiment, feedback and idea of improvements_
+Retrospectives improve:
+- **Productivity** - _helps teams to assess their situation and reduce waste_
+- **Capability** - _share knowledge and set goals for other team members to learn_
+- **Quality** - _writing better code means less rework and less bugs_
+- **Capacity** - _determine optimal solution for choosing features that add value_
+- **Camaraderie** - _provide a constructive environment for a good team dynamic_
+- **Team Data** - _capturing measure-and-learn data from incremental delivery_
+- **Visualisation** - _cycle of inspection and adaptation understanding team sentiment, feedback and idea of improvements_
 
 
 
 #### _Why using it?_
-_Realtime Retrospective_
-
-It is particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) if there was a simple improvement or resolution that could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+Realtime Retros are particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) if there was a simple improvement or resolution that could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 ![realtime-retro-2](images/retrospectives/realtime-retro-2.jpg)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
 
-For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp of the information in realtime.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp the information in realtime.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+
+And most importantly - we can respond to the feedback sooner
 
 
 
@@ -108,12 +112,11 @@ _But they are done poorly and teams do not follow up on identified items_
 
 
 
+#### The Retrospective Prime Directive
 
-### The Retrospective Prime Directive
+![retrospective](images/retrospectives/retro-primedirective.png) <!-- {.element: class="image-no-shadow image-full-width"} -->
 
-**“Regardless of what we discover, we understand and truly believe that everyone did the best job they could, given what they knew at the time, their skills and abilities, the resources available, and the situation at hand."**
-    
--Norm Kerth, Project Retrospectives: A Handbook for Team Review <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+~ Norm Kerth, Project Retrospectives: A Handbook for Team Review 
 
 
 
