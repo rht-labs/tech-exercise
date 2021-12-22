@@ -162,14 +162,15 @@ Reflect on the first day of class, and make adjustments to continuously improve
 
 
 #### Facilitation Tips
-* End with an high note
+![retrospective](images/retrospectives/retro-tips.png) <!-- {.element: class="image-no-shadow image-full-width"} -->
+<!-- * End with an high note
 * Focus discussions on what you are able to change
 * Create an environment of psychological safety, only the team is part of the retro
 * Don't record the session in a virtual environment
 * Play some music in the background
 * Mix up the format
 * Experiment with the location  like pub-retro, urban golf, meeting at a nice café and having a retro-breakfast
-* Rotate the facilitator around the team
+* Rotate the facilitator around the team -->
 
 
 
