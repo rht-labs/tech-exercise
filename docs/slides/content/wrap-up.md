@@ -5,6 +5,39 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+### Unlearn
+<iframe width="560" height="315" src="https://www.youtube.com/embed/MFzDaBzBlL0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+
+### Team WtW 
+In your table groups, run a mini Walk the Walls session just like we did each morning. Pick the practices you've created throughout the week and discuss them in your teams.
+
+
+
+### Mini Big Picture 🚂🚂
+With only the items in the bags given to you by your instructor, recreate as many elements on the Big Picture as you can. You get one point for every item on the Big Picture. <!--{.element: style="font-size: smaller; font-weight: 400;"} -->
+
+![mini-bp](images/wrap-up/mini-big-pic1.png) <!-- {.element: class="" style="border:none; box-shadow:none; width:300px; float:left;"} -->
+![mini-bp](images/wrap-up/mini-big-pic2.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:200px; float:right;"} -->
+
+
+
+## The Open Practice Library 🌀
+![link](https://rht-labs.com/slides/content/?name=open-practice-library)
+
+
+
+### _Lean Coffee_ or _Tech Mobbing_
+#### Choose your fighter for the next hour :P
+
+* Lean Coffee ☕☕ - Take the Car Park, your coffee and any other burning questions to the lean coffee event. Topics will be voted and discussed within a timebox.
+* Tech Mobbing 👩‍💻👨‍💻 - Continue working through the tech exercise as a group and have an open chat about all things techie
+
+![choose-your-fighter](https://i.ytimg.com/vi/qi0ohQSdx9I/hqdefault.jpg)
+
+
+
 # Let's Recap
 
 
@@ -13,7 +46,9 @@ TL500 <!-- {.element: class="title-color"} -->
 * Team Forming
 * Discovery, Delivery, Foundational practices
 * Hands-on technical exercises
-* Evolved two visualizations for project running and technical environment
+* Built two visualizations useful for any project
+  * Practice Corner
+  * The Big Picture
 
 
 
@@ -23,7 +58,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 ### The Showcase
-#### _What is It?_
+#### _What is it?_
 * An event where stakeholders and interested parties are given a demonstration of
 recent work performed by a team
 * The latest increment of the product with new features built by the team is
@@ -35,13 +70,13 @@ milestones in the life of the product
 
 
 ### The Showcase
-#### _Why Use It?_
+#### _Why use it?_
 The showcase provides a critical feedback loop for products being incrementally
 and iteratively built. Stakeholders can give feedback on the features as they
 are being built, suggest improvements, give ideas for new features, and catch
-problems early.
+problems early. <!--{.element: style="font-size: smaller; font-weight: 400;"} -->
 
-**Other benefits**
+#### _Other benefits_
 * Provides an open forum for channeling feedback from stakeholders to product
 leadership so that prioritization and future work can be adapted accordingly
 * Enables collaboration across all interested parties on a regular basis
@@ -76,7 +111,7 @@ the **culture** and **philosophy** used to produce it
 
 
 ### Exercise A: The Successful Demo Day 
-In teams, take some time to brainstorm:
+#### In teams, take some time to brainstorm:
 * What have you taken away from this week's set of sessions and activities:
   * People, processes **and** technology
 * What did you learn about your team, class, or instructors?
@@ -85,7 +120,7 @@ In teams, take some time to brainstorm:
 
 
 ### Exercise B: The Success Factors and the Anti Patterns
-In teams, take some time to brainstorm:
+#### In teams, take some time to brainstorm:
 * Demo Day - What are the things you would bring and show during a Demo Day?
 * Success Factors - What are things or people who could help drive this new way of working and help with adoption
 * Anti Patterns - What are the things that would hinder us or prevent us from succeeding? 
@@ -94,16 +129,24 @@ In teams, take some time to brainstorm:
 
 ### Closing
 * Closing comments round
-* Be the force with you round High Five
+* High Five
 * CSAT
 * SWAG
 * Sharing social contacts
+
 
 
 ### Call to Action
 * Use what you have learned
 * Reach out to your classmates and instructors
 * Use the resources shared during the class
+* Get yourself a copy of `DevOps Culture and Practice with OpenShift` 💰💰
+
+
+
+#### 📗🐛 Get yourself a copy of our Bookie Wookie 🍪🍪
+
+![bookie-wookie](images/wrap-up/book.png)<!-- {.element: class="" style="max-height: 600px!important;" } -->
 
 
 
@@ -117,4 +160,5 @@ In teams, take some time to brainstorm:
 
 
 
-# High Fives!
+
+<!-- .slide: data-background-size="" data-background-image="images/wrap-up/may-the-force-be-with-you.jpeg", class="black-style" data-background-opacity="1"	 -->
