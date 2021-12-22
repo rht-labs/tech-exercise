@@ -1,7 +1,7 @@
 # Exercise 1 - The Manual Menace
 > A GitOps approach to perform and automate deployments.
 ## 👨‍🍳 Exercise Intro
-In this exercise, we will use GitOps to set up our working environment. We will set up Git projects, create `dev`, `test` and `stage` projects in OpenShift, and deploy tools like Jenkins and Nexus to enable CI/CD in the next exercise. In order to do that, we'll utilize a very popular approach: _GitOps_
+In this exercise, we will use GitOps to set up our working environment. We will set up Git projects, create `dev`, `test` and `stage` projects in OpenShift, and deploy tools like Jenkins and Nexus to enable CI/CD in the next exercise. In order to do that, we'll use a popular approach called _GitOps_
 
 ## 🖼️ Big Picture
 ![big-picture-tools](images/big-picture-tools.jpg)
