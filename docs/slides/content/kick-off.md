@@ -19,7 +19,7 @@ Meet your classmates by collaboratively drawing each others faces.
 
 
 ## Exercise
-#### Gather your aparatus
+#### Gather your apparatus 🔬🧑‍🔬
 1. Take a big Post-It and Sharpie
 2. Holding it in portrait, write your name on the top or bottom 
 
@@ -29,8 +29,8 @@ Meet your classmates by collaboratively drawing each others faces.
 ## Exercise
 #### Find someone you've never met before
 - Pass the Post-It to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
-- Define 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
-- Draw a part of the Posts-It owner's face:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+- Set 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+- Draw a part of owner's face on the Posts-It:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
   * Eyes <!-- {.element: class="fragment"  data-fragment-index="3"} -->
 - Swap back admire the work ... then find a new partner. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
 - Repeat the process for more facial features <!-- {.element: class="fragment"  data-fragment-index="5"} -->
@@ -46,7 +46,7 @@ Meet your classmates by collaboratively drawing each others faces.
 - An effective way of starting a team-building event
 - Help people get to know each other
 
-**When?**   
+#### When Ice Breakers?  
 - Participants come from different backgrounds
 - People need to bond quickly so as to work towards a common goal
 - A team is newly formed
@@ -63,37 +63,39 @@ Meet your classmates by collaboratively drawing each others faces.
 - [Backlog](https://openpracticelibrary.com/practice/backlog-refinement/)
 - [Work Visualization](https://openpracticelibrary.com/practice/visualisation-of-work/)
 - [Burndown](https://openpracticelibrary.com/practice/burndown/)
-![Chef Hands](images/kick-off/chef-hands.png) <!-- {.element: class="inline-image"} -->
+![Chef Hands](images/kick-off/wtw.png) <!-- {.element: class="inline-image"} -->
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done/)
 - [Team Sentiment](https://openpracticelibrary.com/practice/team-sentiment/)
 - [Real Time Retro](https://openpracticelibrary.com/practice/realtime-retrospective/)
 - [Big Picture](https://openpracticelibrary.com/practice/the-big-picture/)
-- Practice Corner
+- [Practice Corner]()
 - [Parking Lot (Car Park)](https://openpracticelibrary.com/practice/parking-lot-car-park/)
 - [Quote Wall](https://openpracticelibrary.com/practice/quote-wall/)
-- [Stop the world](https://openpracticelibrary.com/practice/stop-the-world-event/)
+- [Stop the World](https://openpracticelibrary.com/practice/stop-the-world-event/)
 
 
 
-All of these things are Information Radiators - they display information realtime and publicly. Don't be and information refrigerator
+All of these things are Information Radiators - they display information realtime and publicly. 
+
+🥶 Don't be an Information Refrigerator 🧊
 
 
 
 <!-- .slide: id="information-radiators"-->
 ### Information Radiators
 #### _An Information Radiator..._
-- Involves radiating and visually representing all aspects of work.
-- Typically means information that is useful to team members, stakeholders and users is physically presented on walls, windows, doors and other flat surfaces and positioned in the line of sight of those people who will get value from consuming the information.
-- Enables the ability to "Walk the Walls", where someone interested in the work can walk around the physical space the associated team(s) are working from and get all the information they need from inspecting artefacts on the wall and from the resulting conversations.
+- Involves radiating and visually representing all aspects of work
+- Typically means information that is useful to team members, stakeholders and users is physically presented on walls, windows, doors and other flat surfaces and positioned in the line of sight of those people who will get value from consuming the information
+- Enables the ability to "Walk the Walls", where someone interested in the work can walk around the physical space the associated team(s) are working from and get all the information they need from inspecting artefacts on the wall and from the resulting conversations
 
 
 
 ### Information Radiators
 #### _Why visualize work?_
-- Facilitates a transparent and open way of working.
-- Avoids hiding information about status, progress, direction, challenges and opportunities related to a project.
-- Where important information is constantly accessible and visible to people, both speed and accuracy of their work can improve with reduced wastage from having to search for information.
-- It is more likely that the information is accurate because people are continuously being reminded of it.
+- Facilitates a transparent and open way of working
+- Avoids hiding information about status, progress, direction, challenges and opportunities related to a project
+- Where important information is constantly accessible and visible to people, both speed and accuracy of their work can improve with reduced wastage from having to search for information
+- It is more likely that the information is accurate because people are continuously being reminded of it
 
 
 
@@ -105,10 +107,10 @@ Draw a simple representation of an animal that you feel represents your current 
 
 
 ## Back to the Animals!
-Introduce yourself to the group and share your animal.
+Introduce yourself to the group and share your animal   
 - What is your name?
 - Where are you from?
-- What is your current role in your organization?
+- What is your current role within your organization?
 - Show and Tell: your animal drawing
 
 
@@ -120,18 +122,18 @@ Introduce yourself to the group and share your animal.
 
 #### What are your expectations for the week?
 
-* Everyone grab a pen and a pack of sticky notes
-* Individually write your expectations (one for each sticky note)
+* Everyone grab a pen and a few sticky notes
+* Individually write your expectations (one per sticky note)
 * Add them to a class board named expectations
 * Group them by affinity
 * Discuss comparing the course Target Outcomes
 
 
 
-#### _What are Target Outcomes_
-- Are a tool to capture and articulate the goals and outcomes a team are striving to deliver.
-- Can include customer (end user) based outcomes as well as business and capability based outcomes.
-- Often harnesses and summarizes the findings and learnings from other Discovery practices into a finite set of statements that can be publicly displayed for team and stakeholders to regularly reference.
+#### _What are Target Outcomes?_
+- Are a tool to capture and articulate the goals and outcomes a team are striving to deliver
+- Can include customer (end user) based outcomes as well as business and capability based outcomes
+- Often harnesses and summarizes the findings and learnings from other Discovery practices into a finite set of statements that can be publicly displayed for team and stakeholders to regularly reference
 
 
 
@@ -141,10 +143,9 @@ Introduce yourself to the group and share your animal.
 
 ### Learning Target Outcomes
 #### _What are **our** Target Outcomes?_
-- Generate enthusiasm for DevOps culture and practices.
-- Explore all principle practices used in everyday discovery and delivery.
+- Generate enthusiasm for DevOps culture and practices
+- Explore all principle practices used in everyday discovery and delivery
 - Have fun!
-- _More?_
 
 
 
