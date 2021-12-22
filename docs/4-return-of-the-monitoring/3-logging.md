@@ -52,6 +52,7 @@
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
+    exit
     ```
 
 9. Back on Kibana we can filter and find these messages with another query:
