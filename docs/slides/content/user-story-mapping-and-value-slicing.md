@@ -26,13 +26,12 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-### User Stories	&#8800;
+### User Stories
 As a < type of user >, I want < some goal > so that < some reason >
 #### As a learner, I want to stay awake so that I can be attentive and listen to teacher
 
 User Story Mapping is an effective practice for creating lightweight release plans that can drive standard Agile delivery practices. At the end of user story mapping, you should have:
 ![what-is-it](images/user-story-mapping-and-value-slicing/what-is-user-story.png)<!-- .element: class="image-no-shadow image-full-width" -->
-
 
 
 
@@ -58,76 +57,150 @@ User Story Mapping
 
 
 
-![USMBook](images/user-story-mapping-and-value-slicing/book.png)
+#### User Story Mapping
+<div class="container">
+<div class="col" data-markdown>
+
+![USMBook](images/user-story-mapping-and-value-slicing/book-user-story-map.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:80%; float:left;" } -->
+
+</div>
+<div class="col" style="padding-left: 10px" data-markdown>
+</br>
+</br>
+"User Story Mapping is about having a good old-fashioned conversation and then organizing it in the form of a map."
+
+~ Jeff Patton
+
+</br>
+"User Story Mapping is a visualisation tool that drives groups towards a shared understanding."
+
+~ Tim Beattie
+</div>
+</div>
 
 
 
-### User Story Mapping
-> **User Story Mapping is about having a good old-fashioned conversation and then organizing it in the form of a map.**
-> > -Jeff Patton
-
-> **User Story Mapping is a visualisation tool that drives groups towards a shared understanding.**
-> > -Me
+#### Value Slicing
+_The goal of value slicing is to divide user stories into iterations such that it forms the outline of a plan. Usually the first iteration builds a minimally viable product._
 
 
 
-### User Story Mapping
-#### _What is It?_
-* Frame the opportunity, goal, outcome, and value
-* Tell the story of the product from left to right (user steps)
-* Go back and talk about and capture the details of each step
+#### Product Slicing Gone Bad!
+![Example1](images/user-story-mapping-and-value-slicing/slicing-gone-wrong.jpg)
 
 
 
-
-### Exercise -  Mapping Stories for "getting to work"
-*Scenario* -> You woke up late and you must get to an early morning meeting at work
-and cannot miss it. What **must** you do to prepare for work and get there on time?
-1. As an individual, capture on stickies things you do from the moment you wake up until you arrive at work<!-- {.element: class="fragment"  data-fragment-index="1"} -->
-2. As a team, add all activities to the story map and remove duplicates. If some are similar but slightly different, do not remove as duplicates<!-- {.element: class="fragment"  data-fragment-index="2"} -->
-3. Cluster similar activities and capture themes above them<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+#### _Why use it?_
+* No one likes estimating work effort, but it's an important step in many environments. User Story Mapping presents an approach to estimation that many teams find much more tolerable than practices like planning poker or t-shirt sizing
+* Many projects have a natural progression of work from beginning, middle to end. This progression is often lost in a traditional flat backlog. User Story Mapping captures this information with a lightweight mechanism to plan out more than one iteration (i.e. an Agile release plan)
+* User Story Mapping presents backlog items in the context of the overall business process so you don't lose sight of "the big picture", a common pitfall in Scrum projects
 
 
 
 
-<!-- .slide: id="value-slicing" -->
-## Value Slicing
+#### _How do we use it?_
+![how-to-use](images/user-story-mapping-and-value-slicing/how-to-use.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:30%; float:right;" } -->
+1) Follow the **INVEST** guidelines for good user stories
+2) Individually capture, using stickies everything you do in the process you are mapping and add all activities to the story map. Visualise everything
+3) Identify and remove duplicates
+4) Cluster similar activities and capture a theme title
+5) Slice out high value to form incremental release strategy. Filter and maintain focus on delivering valuable outcomes
 
 
 
-#### PRODUCT SLICING GONE BAD!
-![Example1](images/user-story-mapping-and-value-slicing/slicing-gone-wrong.jpg )
-
-
-
-### Value Slicing
-#### _What Is It?_
-The goal of **value slicing** is to divide user stories into iterations such
-that it forms the outline of a plan. Usually the first iteration builds a
-minimally viable product.
-
-
-
+####  Visualisation of User Story Mapping
 <video width="320" height="240" controls>
   <source src="images/user-story-mapping-and-value-slicing/value_slicing.mp4" type="video/mp4">
 </video>
 
 
 
-### Exercise - Value Slicing for "getting to work"
-*Scenario* -> You woke up late and you must get to an early morning meeting at work
-and cannot miss it. What **must** you do to prepare for work and get there on time?
+<div class="r-stack">
+  <div class="fragment fade-out" data-fragment-index="0" > 
+    <img class=" image-no-shadow image-full-width" src="images/user-story-mapping-and-value-slicing/how-to-1.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="0" > 
+    <img class=" image-no-shadow image-full-width" src="images/user-story-mapping-and-value-slicing/how-to-2.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="2" > 
+    <img class=" image-no-shadow image-full-width" src="images/user-story-mapping-and-value-slicing/how-to-3.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="3" > 
+    <img class=" image-no-shadow image-full-width" src="images/user-story-mapping-and-value-slicing/how-to-4.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="4" > 
+    <img class=" image-no-shadow image-full-width" src="images/user-story-mapping-and-value-slicing/how-to-5.png">
+  </div>
+</div>
+
+
+
+
+### Class Exercise
+
+_What are all the activities you do to in the morning to prepare for work and get there on time?_
+
+1. As an individual, capture on individual stickies all the things you do from the moment you wake up until you arrive at work<!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. As a team, add all activities to the story map and remove duplicates. If some are similar but slightly different, do not remove as duplicates<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+3. Cluster similar activities and capture themes above them e.g. Cleaning Routine<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+
+
+
+### Class Exercise 🛏 ⏰
+
+_Oh no! You slept through your alarm and woke up... now you must get to a big meeting at work that you cannot miss. What  activities **must** you do to prepare for work and get there on time?  You cannot join remotely!_
 
 1. As a team, draw a line on the user story mapping board representing what
 must be done<!-- {.element: class="fragment"  data-fragment-index="1"} -->
-2. Discuss which stories are absolutely necessary given the scenario<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+2. Discuss which stories are absolutely necessary given the scenario 🛏 ⏰ <!-- {.element: class="fragment"  data-fragment-index="2"} -->
 3. Move stories below the line that are not absolutely necessary based on
 consensus of the team<!-- {.element: class="fragment"  data-fragment-index="3"} -->
 
 
 
+
+### Real World Examples
+
+
+
+#### In Scope / Out of Scope
+![in-scope-out-of-scope](images/user-story-mapping-and-value-slicing/in-scope-out-of-scope.png)<!-- {.element: class="image-no-shadow image-full-width" } -->
+
+
+
+#### 3 Slices &#8800; 3 Sprints
+![3-slices-3-sprints](images/user-story-mapping-and-value-slicing/3-slices-3-sprints.png)<!-- {.element: class="image-no-shadow image-full-width" } -->
+
+
+
+#### Slicing == Continuous Delivery
+![slicing-equals-cd](images/user-story-mapping-and-value-slicing/slicing-equals-cd.png)<!-- {.element: class="image-no-shadow image-full-width" } -->
+
+
+
+#### Value Slice - Pet Battle 
+![example-pb](images/user-story-mapping-and-value-slicing/example-pb.png)
+
+
+
+### Facilitation Tips
+![slicing-summary](images/user-story-mapping-and-value-slicing/summary.png)<!-- {.element: class="inline-image" } -->
+</br>
+* A single slice doesn't mean in scope and out of scope
+* Same slice size doesn't mean each slice is the goal of a sprint
+* If possible add target outcomes as grouping for the Value slice, it gives the benefit to be linked to business goals
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [Start At the End](https://openpracticelibrary.com/practice/start-at-the-end/)
-- [User Story Mapping & Value Slicing](https://openpracticelibrary.com/practice/user-story-mapping/)
-- [Backlog Refinement](https://openpracticelibrary.com/practice/backlog-refinement/)
+User story Mapping and Value slice are connected to multiple practices including:
+* [Target Outcomes](https://openpracticelibrary.com/practices/target-outcomes/)
+* [Impact Mapping deliverables](https://openpracticelibrary.com/practices/impact-mapping/)
+* [Empathy Mapping ideas and feedback](https://openpracticelibrary.com/practices/empathy-mapping/)
+* [Non Functional Requirements](https://openpracticelibrary.com/practices/non-functional-requirements-map)
+* [Big Picture workflow](https://openpracticelibrary.com/practices/the-big-picture/)
+* [Event Storming commands](https://openpracticelibrary.com/practices/event-storming/)
+* [Metrics Based Process Mapping continuous delivery bottlenecks](https://openpracticelibrary.com/practices/metrics-based-process-mapping/)
+
+User Story Mapping feeds into Value Slice that generate the Product Backlog

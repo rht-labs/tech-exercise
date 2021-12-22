@@ -5,39 +5,100 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-<!-- .slide: id="retrospectives" -->
-### Retrospectives
-#### _What are Retrospectives?_
+<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Retrospectives</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <img src="images/opl-delivery.png">
+  </a>
+</div>
+<div class="fragment current-visible" data-fragment-index="1" >
+  <h2>Realtime Retro</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <img src="images/opl-foundation.png">
+  </a>
+</div>
+</div>
+
+
+
+#### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/example-who.png", class="white-style" -->
+
+
+
+#### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/example-who-2.png", class="white-style" -->
 
 
 
 ### Retrospectives
+
+
+
+#### _What is it?_
 
 Retrospectives are practice used by their teams to **reflect** on their way of working, and **continuously become better** in what they do. They are meant to help teams **keep improving.**
 
-<!-- {.element: class="fragment" data-fragment-index="1"} -->"*At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly*"
-
-<!-- {.element: class="fragment" data-fragment-index="1"} --> **- 12th Principle of the Agile Manifesto -**
-
-
-
-### Retrospectives
-#### _Why use a Retrospective?_
-- Improved productivity - *Helps teams to assess their situation and reduce waste*
-- Improved capability - *Share knowledge and set goals for other team members to learn*
-- Improved quality - *Writing better code means less rework and less bugs*
-- Improved capacity - *Determine optimal solution for choosing features that add value. Being more productive, improving capability, and improving quality increases capacity*
-- Improved camaraderie - *Provide a constructive environment for a good team dynamic*
+"At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly." <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+</br></br>
+_- 12th Principle of the Agile Manifesto_
 
 
 
 ### Retrospectives
-#### _Retrospective Anti-patterns_
-![Cry Emoji](images/cryemoji.png) <!-- {.element: class="inline-image"} -->
+![retrospective](images/retrospectives/retrospective.jpg) <!-- {.element: class="inline-image"} -->
+</br>
+* Create the foundation and culture of collaboration
+* Through a retrospective, the team identify some issues to continuously improve
+* It provides a great opportunity for the group to inspect and adapt changes, possibly updating it with new ideas or improvements
+* They often take place at the end of sprints but can be scheduled at any time
 
+
+
+### Realtime Retrospectives
+![realtime-retro](images/retrospectives/realtime-retro.jpg)<!-- {.element: class="inline-image"} -->
+* Real-time retrospective enables faster, more accurate, and more direct feedback from everyone involved
+* Have a more continuous and always on self-service approach to capturing feedback
+* Provides a simple, visual tool for anyone to add retrospective feedback on any item at any time, both positive and negative things
+
+
+
+
+#### _Why using it?_
+Retrospectives improves:
+- **Productivity** _helps teams to assess their situation and reduce waste_
+- **Capability** _share knowledge and set goals for other team members to learn_
+- **Quality** _writing better code means less rework and less bugs_
+- **Capacity** _determine optimal solution for choosing features that add value_
+- **Camaraderie** _provide a constructive environment for a good team dynamic_
+- **Team data** _capturing measure-and-learn data from incremental delivery_
+- **Visualisation** _cycle of inspection and adaptation understanding team sentiment, feedback and idea of improvements_
+
+
+
+#### _Why using it?_
+_Realtime Retrospective_
+
+It is particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) if there was a simple improvement or resolution that could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+
+![realtime-retro-2](images/retrospectives/realtime-retro-2.jpg)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
+
+For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp of the information in realtime.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+
+
+
+#### _Retrospective Anti-Patterns_
+![cry-emoji](images/retrospectives/cry-emoji.png) <!-- {.element: class="inline-image"} -->
+</br></br>
 **Teams do not have them**
 
-_So they never improve_
+_so they never improve_
 
 OR  
 
@@ -47,37 +108,36 @@ _But they are done poorly and teams do not follow up on identified items_
 
 
 
+
+### The Retrospective Prime Directive
+
+**“Regardless of what we discover, we understand and truly believe that everyone did the best job they could, given what they knew at the time, their skills and abilities, the resources available, and the situation at hand."**
+    
+-Norm Kerth, Project Retrospectives: A Handbook for Team Review <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+
+
+
 ### Retrospectives
 #### _Guidelines_
-- Shorten the time between each one.
-- Have ground rules for the session visible.
-- Start with an update on the previous retrospective items.
-- Focus discussions on what you are able to change.
-- Always end on a high note.
+* Choose the format of the retrospective session before the session, with ground rules visible and ensure everyone has understood it.
+* Update the previous retrospective backlog.
+* Give the time to think and write feedback individually, start by allowing a few minutes for everyone to silently write down their feedback.
+* Share as a team and group by affinity, leaving the time to comments/ask questions.
+* Agree on a set of corrective actions to come out of the Retrospective, prioritize them, and agree on owners to take them forward.
 
 
 
-### Retrospectives
-#### _Popular Formats_
-- Round the circle reflection
-- Starfish (Stop/Start/Continue/More/Less)
-- Happy/Sad/Glad
-- Timeline
-- Sailboat (Island/Wind/Anchor/Rocks)
-- Deep dive on specific problem area
-  - Fishbone
-  - 5 Whys
+
+#### Real World Examples
+
+![retro-actions](images/retrospectives/retro-actions.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:right;"} -->
+![pub-retro](images/retrospectives/pub-retro.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
 
 
 
-### Retrospectives
-_The Retrospective Prime Directive_
+#### Popular Formats <!-- .element: class="text-center" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/retrospectives/popular-formats.png", class="white-style" -->
 
-**"Regardless of what we discover, we understand and truly believe that everyone
-did the best job they could, given what they knew at the time, their skills and
-abilities, the resources available, and the situation at hand."**
-
--Norm Kerth, Project Retrospectives: A Handbook for Team Review
 
 
 
@@ -92,12 +152,28 @@ abilities, the resources available, and the situation at hand."**
 
 
 
+
 ### Exercise - Daily Retrospective
 Reflect on the first day of class, and make adjustments to continuously improve
 
 
 
+#### Facilitation Tips
+* End with an high note
+* Focus discussions on what you are able to change
+* Create an environment of psychological safety, only the team is part of the retro
+* Don't record the session in a virtual environment
+* Play some music in the background
+* Mix up the format
+* Experiment with the location  like pub-retro, urban golf, meeting at a nice café and having a retro-breakfast
+* Rotate the facilitator around the team
+
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
 ### Related & Used Practices
-- [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
-- [Realtime Retrospective](https://openpracticelibrary.com/practice/realtime-retrospective/)
+* [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
+* [Realtime Retrospective](https://openpracticelibrary.com/practice/realtime-retrospective/)
+* [Social Contract](https://openpracticelibrary.com/practice/social-contract)
+* [Backlog](https://openpracticelibrary.com/practice/)
