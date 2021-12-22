@@ -1,4 +1,5 @@
 ## Here be dragons!
+<!--This section, up until adding the repo was very confusing for me.  I didn't follow what was being taught  -->
 
 ![oh-look-a-dragon](../images/oh-look-dragons.png)
 
@@ -8,9 +9,9 @@
 
 ### Helm in more detail
 
-There is a bit of hidden magic from the `helm repo add` and `helm install` commands in [the-basics](1-the-manual-menace/1-the-basics) exercise. A hosted helm repository holds your packaged up Charts and an `index.yaml` file.
+There is a bit of hidden magic from the `helm repo add` and `helm install` commands in [🐌 The Basics](1-the-manual-menace/1-the-basics) exercise. A hosted helm repository holds your packaged up Charts and an `index.yaml` file.
 
-For the `todolist` application we deploy you can take a look at the file by browsing <span style="color:blue;">[here](https://rht-labs.com/todolist/index.yaml).<span>
+For the `todolist` application deploy you can take a look at the file by browsing <span style="color:blue;">[here](https://rht-labs.com/todolist/index.yaml).<span>
 
 ![images/helm-index.png](images/helm-index.png)
 
@@ -60,8 +61,8 @@ We can add `Git|Helm` repositories via `ssh|https`.
 Lets add our GitLab repo.
 
 ```bash
-export GITLAB_USER=<your gitlab user>
-export GITLAB_PASSWORD=<your gitlab password>
+export GITLAB_USER=<YOUR_GITLAB_USER>
+export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
 ```
 
 Lets put our git credentials via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
@@ -82,7 +83,7 @@ metadata:
 EOF
 ```
 
-Patch the repository list, be sure to use your `GITLAB_URL`
+Patch the repository list, be sure to use your `GITLAB_URL` <!--The statement 'be sure to use your GITLAB_URL' is confusing and I don't believe is needed so it should be removed. -->
 
 ```bash
 oc -n ${TEAM_NAME}-ci-cd patch cm argocd-cm --patch "
@@ -107,6 +108,7 @@ data:
 ```
 
 ### ArgoCD - Add Repositories at install time
+<!--I'm also confused by this.  Why are we adding the Repo at runtime AND install time?  Don't we just need to do one or the other?  Perhaps a paragraph before the previous section should explain  -->
 
 **Going the Extra Mile**
 
@@ -135,6 +137,7 @@ metadata:
 type: kubernetes.io/basic-auth
 EOF
 ```
+<!--I stopped the exercise here after the above returned "The Secret "git-auth" is invalid: type: Invalid value: "kubernetes.io/basic-auth": field is immutable"  -->
 
 Create our configuration, be sure to use your `GITLAB_URL`.
 

@@ -52,12 +52,13 @@ We deploy each of our applications using an Argo CD `application` definition. We
     ```
 
 4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
-
+<!-- This command seems odd to me.  Why is uj here when we aren't updgrading it? -->
     ```bash
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
 5. In ArgoCD at this point we should see things start to get a bit more busy:
+<!-- This image needs to be updated because it is missing test-keycloak -->
 ![arogcd-app-of-pb.png](images/arogcd-app-of-pb.png)
 
 ### Deploying Pet Battle
@@ -78,6 +79,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
           image_name: pet-battle-api
           image_version: latest # container image version
 
+      #Pet Battle Frontend
       pet-battle:
         name: pet-battle
         enabled: true
@@ -107,7 +109,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     EOF
     ```
 
-3. The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
+3. The last 20 lines of the `pet-battle/test/values.yaml` file should now look something like this:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -133,7 +135,9 @@ We deploy each of our applications using an Argo CD `application` definition. We
           }'
     </code></pre></div>
 
-4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
+4. Repeat the same thing for `pet-battle/stage/values.yaml` file in order to deploy the staging environment.  Don't forget to  include the keycloak application from step 2. The easiest way to do this is just copy and paste from one file to the next and update the `<TEAM_NAME>-test` to `<TEAM_NAME>-stage` for the Frontend configuration. 
+
+  Push your changes to the repo. _It's not real unless it's in git_
 
     ```bash
     git add .

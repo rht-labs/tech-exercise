@@ -4,6 +4,9 @@ At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residen
 
 This repo is available on the Red Hat Labs GitHub organization – <span style="color:blue;">https://github.com/rht-labs/ubiquitous-journey.</span> Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
+Some important characteristics of this Journey:
+<!--This is a great list of traits... I believe some context is first needed so I suggest adding something like he previous line  -->
+
 - **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extended to support new tools and methodologies.
 - **Traceable** - We can easily see where changes have occurred and most importantly trace exactly what git tag/commit is in which environment.
 - **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
@@ -16,7 +19,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 ### Get GitLab Ready for GitOps
 > In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
  
-1. Log into GitLab with your credentials. GitLab URL:
+1. From a browser, log into GitLab using your ldap credentials. GitLab URL:
 
     ```bash
     https://<GIT_SERVER>
@@ -124,7 +127,8 @@ All of these traits lead to one outcome - the ability to build and release quali
     EOF
     ```
 
-5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
+5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. (Refer back to step 4 of the last section '🐙 ArgoCD' if you need a reminder of how to open the ArgoCD UI.)  
+We've just deployed our first AppOfApps!
 
     ```bash
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .

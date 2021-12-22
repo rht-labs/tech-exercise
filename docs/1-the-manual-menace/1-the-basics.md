@@ -1,13 +1,16 @@
 ## 🐌 The Basics - CRW, OCP & Helm
 ## CodeReady Workspaces setup
 
-1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
+1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this along with your ldap username (Team Name) and password will be provided by your instructor.
 ![crw](./images/crw.png)
 
 <p class="warn">
-If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the DO500 stack:</br>
+If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Fill in the form by keeping the default values for Namespace, Workspace Name and Storage Type then enter this DevFile URL to load the DO500 stack:</br>
 <span style="color:blue;"><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/do500-devfile.yaml</a><span>
+
+
 </p>
+
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-do500` from the menu.
 ![new-terminal](./images/new-terminal.png)
@@ -41,10 +44,11 @@ echo ${CLUSTER_DOMAIN}
 echo ${GIT_SERVER}
 ```
 
-8. Check if you can connect to OpenShift. Run the command below. 
+8. Check if you can connect to OpenShift. Run the command below which should result in a "Login successful" reply. Don't forget to make your replacements for \<USERNAME> and \<PASSWORD>. 
 ```bash
 oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
+Note: Answer 'y' if you receive a prompt to bypass certificate check.
 
 9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 ```bash
@@ -55,7 +59,7 @@ oc new-project ${TEAM_NAME}-ci-cd
 ### Helm 101
 > Helm is the package manager for Kubernetes. It provides a way to templatise the Kubernetes YAML that make up our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
-Let's deploy a simple application using Helm.
+Let's deploy a simple application using Helm, in this case your Todo List.
 
 1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts as well as the tar file the chart is packaged as.
 ```bash
@@ -70,7 +74,9 @@ helm search repo todolist
 helm install my do500/todolist --namespace ${TEAM_NAME}-ci-cd
 ```
 
-3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
+3. Open the Todo List application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app.  
+
+Note: It may take a minute for your application to start so don't panic if you receive an error about Application not being available when you first try opening your application.
 ```bash
 echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
 ``` 
@@ -115,4 +121,4 @@ where:
 * `templates/*.yaml` - they are our k8s resources. 
 * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
 
-🪄🪄 Now, let's continue with even more exiting tool... !🪄🪄
+🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄

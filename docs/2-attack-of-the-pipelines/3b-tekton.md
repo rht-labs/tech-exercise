@@ -16,7 +16,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 #### Deploying the Tekton Objects
 
-1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle-api`. Make the project as **internal**.
+1. Open the GitLab UI. Select `<TEAM_NAME>` from the Groups tab. Create a new project/repo in GitLab under your group called `pet-battle-api`.  Make the project as **internal**.
 
     ![pet-battle-api-git-repo](images/pet-battle-api-git-repo.png)
 
@@ -128,8 +128,11 @@ In this snippet of the pipeline used in this exercise, we define:
 
     ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
-    <p class="warn"><b>Tip</b> You can enable debug log info for your Tekton webhook pod by setting <div class="highlight" style="background: #f7f7f7"><pre><code class="language-bash">oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers</code></pre></div></p>
-
+    <p class="warn"><b>Tip</b> You can enable debug log info for your Tekton webhook pod by update the configuration.  Do this by requesting an OpenShift edit, then modify the config using the vi editor.
+    
+    ```bash
+    oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers
+    ```
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
     // set log level
@@ -143,7 +146,7 @@ In this snippet of the pipeline used in this exercise, we define:
         <artifactId>pet-battle-api</artifactId>
         <version>1.2.1</version>
     ```
- 
+ <!-- The previous couple lines should not allow copy/paste.  I don't know how to fix it. -->
 10.  As always, push the code to git ...
 
     ```bash

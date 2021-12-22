@@ -15,7 +15,7 @@ The box on the top of the page allows you to load the docs with variables used b
 </p>
 
 * If my team is called `biscuits` then pop that in the first box. This value will be prefixed to some of the things such as the namespaces we use.
-* For the cluster domain, you want to add the `apps.*` the bit from the OpenShift domain. For example if my console address lives at <code class="language-yaml">https://console-openshift-console.apps.hivec.sandbox1243.opentlc.com/</code>
+* For the cluster domain, you want to add the `apps.*` bit from the OpenShift domain. For example if my console address lives at <code class="language-yaml">https://console-openshift-console.apps.hivec.sandbox1243.opentlc.com/</code>
  then just put `apps.hivec.sandbox1243.opentlc.com` in the box to generate the correct address for the exercises.
 * For the git server, you could use your preferred and accessible Git server (GitHub, GitLab, ...). The instructor could provide you one.
 For example if the git server lives at <code class="language-yaml">https://gitlab-ce.apps.hivec.sandbox1243.opentlc.com/</code>, then just
