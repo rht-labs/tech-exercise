@@ -63,7 +63,7 @@ Meet your classmates by collaboratively drawing each others faces.
 - [Backlog](https://openpracticelibrary.com/practice/backlog-refinement/)
 - [Work Visualization](https://openpracticelibrary.com/practice/visualisation-of-work/)
 - [Burndown](https://openpracticelibrary.com/practice/burndown/)
-![Chef Hands](images/chef-hands.png) <!-- {.element: class="inline-image"} -->
+![Chef Hands](images/kick-off/chef-hands.png) <!-- {.element: class="inline-image"} -->
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done/)
 - [Team Sentiment](https://openpracticelibrary.com/practice/team-sentiment/)
 - [Real Time Retro](https://openpracticelibrary.com/practice/realtime-retrospective/)

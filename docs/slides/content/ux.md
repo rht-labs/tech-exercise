@@ -9,7 +9,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ![UserTopics](images/ux/ux_topics.png) <!-- {.element: class="" style="border:none; box-shadow:none;"} -->
 
-![Excercise](images/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
+![Excercise](images/ux/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
 1. Break out into teams and research a topic [5mins]
 2. Generate a presentation with graphic [5mins]
 3. Playback your findings [3mins]
@@ -56,7 +56,7 @@ We use empathy maps during the facilitation of product discovery, user research,
 
 ### Pop Quiz
 
-![LightBulb](images/light-bulb.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
+![LightBulb](images/ux/light-bulb.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
 <p align="left">I’m a designer.</p><!-- {.element: class="" style="margin-top: 120px;"} -->
 
 <p align="left">**No**, I don’t just make things pretty.</p>

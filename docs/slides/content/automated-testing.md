@@ -181,8 +181,8 @@ KISS - Keep It Simple Stupid  <!-- {.element: class="fragment"  data-fragment-in
 
 YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragment-index="2"} -->
 
-![simple-house](images/Simple-Lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
-![complex-house](http://www.abc.net.au/news/image/7370406-3x2-940x627.jpg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
+![simple-house](images/bdd-tdd/simple-lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
+![complex-house](images/bdd-tdd/complex-home.jpeg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
 
 
 

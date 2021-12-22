@@ -27,9 +27,13 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-
 #### <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/priority-sliders/example-who.png", class="white-style" -->
+
+
+
+#### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/priority-sliders/example-priority-sliders.jpg", class="white-style" -->
 
 
 
