@@ -1,7 +1,8 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ### DevOps Culture and Practice <!-- .element: class="course-title" -->
 ### Tech Exercise IV - Return of the Monitoring <!-- .element: class="title-color" -->
-#### Observability, Logging & Metrics <!-- .element: class="title-color" -->
+
+### Observability, Logging & Metrics<!-- .element: class="title-color" -->
 TL500 <!-- .element: class="title-color" -->
 
 
@@ -44,31 +45,35 @@ As a learner, by the end of this exercise I ...
 
 
 #### What is it?
-AUTOMATE ALL THE THINGS 💥🔨
-* Unit Tests & Integration tests
-* Static Code Analysis
-* Configurations and policy checks
-* Security (dependencies, vulnerabilities and pen tests)
+With software, there are often two competing forces at work: 
+* Innovation, which inherently is accompanied by system change
+* Running software, which is serving end customers and implies that the system is stable
+
+We can identify two important areas to focus on here:
+
+* To help measure the effectiveness of a team’s development and delivery practices
+* To start measuring and monitoring activities that allow the rapid diagnosis of issues
 
 
 
-#### Testing Pyramid
-![test-pyramid](images/tech-exercise-iii/testing-pyramid.png)
+#### Why do we do it?
+An observable system can tell us many things:
+
+* how users use our products so that we can understand how to scope features and fixes
+* what to prioritize next for features and fixes
+* what needs to be responded quickly
+* the code we ship deliver the value as we expect or not
 
 
 
-#### Measuring Test
-Answering the age old question of how do i know my tests are any good??
-![test-measuers](images/tech-exercise-iii/measuring-tests.png)
-* Code Coverage
-* Static Code Analysis
+#### How do we do it?
+Ask questions and gather data to answer them.
 
-
-
-#### Why do it?
-* Improved quality - applying patterns like TDD or BDD drive up shared understanding
-* Deliver reliably at speed - as features are produced you can confidently release without a large manual regression each time
-* Fewer bottlenecks - without automated tests, queues form in front of testers
+_Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+* **Metrics:** the starting point and a great way to measure overall performance and health. For example how many requests per second are being handled by a given service, how much memory is being used, etc.
+* **Event:** a detailed record of something that the system did.
+* **Logs:** immutable, time-stamped, human-readable text of each event over time.
+* **Traces:** helps to identify the work done at each level, therefore, help us to identify latency along the path and which layer causes a bottleneck or a failure.
 
 
 
@@ -76,28 +81,12 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-### 💥 Choose your own adventure 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-backlog.png", class="black-style" data-background-opacity="1"	 -->
 
+_In this exercise, we will use Prometheus to gather Pet Battle metrics and Grafana to visualize them_
 
+_We will create Alerts to be notified about Pet Battle health_
 
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/priority-matrix.png", class="black-style" data-background-opacity="1"	 -->
-
-
-
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/impact-effort.png", class="black-style" data-background-opacity="1"	 -->
-
-
-
-### 💥 Prioritise your work 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/how-now-wow.png", class="black-style" data-background-opacity="1"	 -->
-
-
-
-### 💥 Build your Kanban 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
+_We will use ElasticSearch to collect logs and Kibana to query the logs_
 
 
 
@@ -125,4 +114,4 @@ Answering the age old question of how do i know my tests are any good??
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [](https://openpracticelibrary.com/practice/) - 
+* [Observability](https://openpracticelibrary.com/practice/observability)
