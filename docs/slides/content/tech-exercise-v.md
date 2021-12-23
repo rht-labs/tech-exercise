@@ -48,6 +48,8 @@ Advanced Deployments 🚚📦📦📦👷
 * Blue / Green Deployments - release, validate and switch
 * A/B Deployments - great for testing new features in small groups. One release with traffic routing between each
   * Don't forget to take measures!!
+* Canary Release - Like a canary in the mines ... Exposing a small number of real users to a new version
+* Feature Toggling (Flags) - modifying system behaviours without changing the code
 
 
 
@@ -127,3 +129,4 @@ Using the platform to support running an experiment
 - [Split Testing](https://openpracticelibrary.com/)
 - [Dark Launches](https://openpracticelibrary.com/)
 - [Feature Toggling](https://openpracticelibrary.com/)
+- [Canary Release](https://openpracticelibrary.com/)
