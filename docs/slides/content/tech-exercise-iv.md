@@ -34,11 +34,11 @@ TL500 <!-- .element: class="title-color" -->
 
 #### Learning Outcomes
 As a learner, by the end of this exercise I ...
-* Can add ServiceMonitor for apps to gather metrics
-* Can query Prometheus to see metrics
-* Can create alerts with PrometheusRule
-* Can install Grafana create dashboards with it
-* Can create search index in Kibana
+* can add ServiceMonitor for apps to gather metrics
+* can query Prometheus to see metrics
+* can create alerts with PrometheusRule
+* can install Grafana create dashboards with it
+* can create search index in Kibana
 <!--
 --->
 
@@ -82,18 +82,19 @@ _Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 
 
 
 
-_In this exercise, we will use Prometheus to gather Pet Battle metrics and Grafana to visualize them_
+_In this exercise, we will use **Prometheus** to gather Pet Battle metrics and **Grafana** to visualize them_
 
-_We will create Alerts to be notified about Pet Battle health_
+_We will create **Alerts** to be notified about Pet Battle health_
 
-_We will use ElasticSearch to collect logs and Kibana to query the logs_
+_We will use **ElasticSearch** to collect logs and **Kibana** to query the logs_
 
 
 
 #### 💥 90mins of Tech Exercise 💥
 * In mobs / pairs work through your tasks
 * If in pairs, continuously playback what you accomplish to the others
-
+* Rotate the `driver` a the end of the section to give everyone a go at getting their hands dirty with code!
+* If you finish early, try your hand at the `Here be dragons` section
 
 
 # Exercise Wrap Up
@@ -108,10 +109,12 @@ _We will use ElasticSearch to collect logs and Kibana to query the logs_
 
 
 #### Some Real World Examples <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/sams-code1.jpg", class="black-style" data-background-opacity="1"	 -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iv/example-who.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
 * [Observability](https://openpracticelibrary.com/practice/observability)
+* [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
+* [GitOps](https://openpracticelibrary.com/practice/gitops)
