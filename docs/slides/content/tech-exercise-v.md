@@ -91,12 +91,12 @@ Using the platform to support running an experiment
 
 
 
-### 💥 Extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
+### 💥 Prioritize and Extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
-#### 💥 90mins of Tech Exercise 💥
+#### 💥 Tech Exercise 💥
 * In mobs / pairs work through your tasks
 * If in pairs, continuously playback what you accomplish to the others
 

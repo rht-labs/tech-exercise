@@ -100,7 +100,7 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-#### 💥 90mins of Tech Exercise 💥
+#### 💥 Tech Exercise 💥
 * In mobs / pairs work through your tasks
 * If in pairs, continuously playback what you accomplish to the others
 

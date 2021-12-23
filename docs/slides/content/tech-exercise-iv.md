@@ -14,7 +14,7 @@ TL500 <!-- .element: class="title-color" -->
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
   <h2>📈🪵 Observability 🪵📊</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/observability/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
@@ -39,8 +39,7 @@ As a learner, by the end of this exercise I ...
 * can create alerts with PrometheusRule
 * can install Grafana create dashboards with it
 * can create search index in Kibana
-<!--
---->
+
 
 
 
@@ -59,10 +58,10 @@ We can identify two important areas to focus on here:
 #### Why do we do it?
 An observable system can tell us many things:
 
-* how users use our products so that we can understand how to scope features and fixes
-* what to prioritize next for features and fixes
-* what needs to be responded quickly
-* the code we ship deliver the value as we expect or not
+* how our products are used such that we can understand how to scope features and fixes
+* the features and fixes to prioritize next
+* what needs to be responded to quickly
+* the code we ship is delivering value as we expect or not
 
 
 
@@ -70,10 +69,10 @@ An observable system can tell us many things:
 Ask questions and gather data to answer them.
 
 _Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-* **Metrics:** the starting point and a great way to measure overall performance and health. For example how many requests per second are being handled by a given service, how much memory is being used, etc.
-* **Event:** a detailed record of something that the system did.
+* **Metrics:** the starting point and a great way to measure overall performance and health. For example how many requests per second are being handled by a given service, how much memory is being used, uptime/downtime etc.
 * **Logs:** immutable, time-stamped, human-readable text of each event over time.
-* **Traces:** helps to identify the work done at each level, therefore, help us to identify latency along the path and which layer causes a bottleneck or a failure.
+* **Event:** a detailed record of something that the system did.
+* **Traces:** help to identify the work done at each level, therefore, help us to identify latency along the path and which layer causes a bottleneck or a failure.
 
 
 
@@ -84,17 +83,28 @@ _Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 
 
 _In this exercise, we will use **Prometheus** to gather Pet Battle metrics and **Grafana** to visualize them_
 
-_We will create **Alerts** to be notified about Pet Battle health_
+_We will create **Alerts** to be notified about Pet Battle events_
 
-_We will use **ElasticSearch** to collect logs and **Kibana** to query the logs_
+_We will use **Fluentd** to collect logs, **ElasticSearch** to store them and **Kibana** to query the logs_
 
 
 
-#### 💥 90mins of Tech Exercise 💥
+#### 💥 Tech Exercise 💥
 * In mobs / pairs work through your tasks
 * If in pairs, continuously playback what you accomplish to the others
 * Rotate the `driver` a the end of the section to give everyone a go at getting their hands dirty with code!
 * If you finish early, try your hand at the `Here be dragons` section
+
+
+
+### 💥 Choose your own adventure 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iv/tasks.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+### 💥 Prioritize and Extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
+
 
 
 # Exercise Wrap Up
@@ -118,3 +128,5 @@ _We will use **ElasticSearch** to collect logs and **Kibana** to query the logs_
 * [Observability](https://openpracticelibrary.com/practice/observability)
 * [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
 * [GitOps](https://openpracticelibrary.com/practice/gitops)
+* [Site Reliability Engineering](https://sre.google/books/)
+* [SLOs / SLAs / SLIs](https://openpracticelibrary.com/practice/service-level-indicators/)
