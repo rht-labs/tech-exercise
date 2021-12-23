@@ -5,7 +5,7 @@
 ## Slide Decks
 Slide decks are now published along side the tech exercise. The raw Markdown files for each of the tech exercise is in the same monorepo used by learners and facilitators. To add a new slide deck or update any existing ones, simply navigate to `docs/slides/content` and edit and existing file or create a new `.md` file. This will auto generate the slide deck once published. You can view or edit the for testing by running the docsify server. See the github repo for more information
 
-👨‍🏫 👉 [The Published Slides Live Here](/slides/) 👈 🧑‍💻
+👨‍🏫 👉 [The Published Slides Live Here](https://rht-labs.com/tech-exercise/slides/) 👈 🧑‍💻
 
 ## 🪄 Customize The Instructions
 The box on the top of the page allows you to load the docs with variables used by your team prefilled. All you have to do is fill in the boxes on the top of the page with your teams name in the box and the domain your cluster is using and hit `save`. This will persist the values in your local storage for the site - so hitting `clear` will reset these for you if you made a mistake.

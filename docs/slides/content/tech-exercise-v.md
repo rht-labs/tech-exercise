@@ -32,7 +32,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### Learning Outcomes
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
 As a learner, by the end of this exercise I ...
 * Can enable the Horizontal Pod Autoscaler for my applications
 * Can add Blue/Green deployment method into pipeline

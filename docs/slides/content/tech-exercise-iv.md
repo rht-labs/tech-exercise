@@ -32,7 +32,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### Learning Outcomes
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
 As a learner, by the end of this exercise I ...
 * can add ServiceMonitor for apps to gather metrics
 * can query Prometheus to see metrics

@@ -30,7 +30,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### Learning Outcomes
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
 As a learner, by the end of this exercise I ...
 * Can add security gates to pipeline
 * Can add testing gates to pipeline
