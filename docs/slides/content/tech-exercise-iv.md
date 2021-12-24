@@ -76,6 +76,81 @@ _Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 
 
 
 
+
+### How to decide which data is useful?
+
+
+
+#### Service Level Indicators (SLIs)
+SLIs are about having meaningful measurements of your service from your user’s perspective. They are closely tied to what the users care about, such as availability, latency, or response time.
+
+So the question is; what does the user care about?
+
+
+
+#### Example: Pet Battle
+During Impact Mapping, we've identified some actors like _Uploaders, Animal Lovers, or Casual Viewers_. 
+
+Let's take one of them and define how they interact with Pet Battle. 
+* **Uploaders want to:** 
+    - Access to Pet Battle fast
+    - Upload multiple cat photos successfully
+    - View their own cat photos on the dashboard 
+
+
+
+#### _Uploading Photos Successfully_
+From an Uploader perspective here “good” means:
+1. Pet Battle is always available
+2. Upload button functions
+3. Upload happens successfully when right type of file is provided
+4. Uploaded photos are displayed on the dashboard
+
+From system’s perspective:
+1. Pet Battle is up and running, and responds fast enough
+2. There is enough space to upload the photos
+
+
+
+
+#### _Uploading Photos Successfully_
+#### _SLIs for Pet Battle_
+- Request to access Pet Battle complete successfully
+- Proportion of access requests that were served are < 150ms (a time-based measurement)
+- Database is always have 20% available space
+
+We defined what to measure to track our users' happiness. Next step is to decide the best place to collect data for it (_which we will do during this tech exercise_).
+
+
+
+
+#### Service Level Objectives (SLOs)
+Now that we have SLIs, we can set objectives based on that. SLOs are what sets the bar for customer expectations.
+
+Let’s take an SLI and set a realistic objective.
+
+```
+User Journey: Uploading Cat Photos
+SLI Type: Availability 
+SLI Specification: Request to access Pet Battle complete successfully
+SLI Implementations:
+  - measured from API metrics.
+SLO:
+  99% of successfull requests in the past 28 days served are less than 150ms
+```
+
+_It is important that SLOs are documentated and iterate over time._
+
+
+
+
+#### Error Budgets
+Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our endusers. When our measurements show if we are not reliabile enough - now what?
+
+Let's discuss what would you do if you don't meet with SLOs?
+
+
+
 ## Exercise Instructions
 
 
@@ -83,7 +158,7 @@ _Some example data type_ <!--{.element: style="font-size: smaller; font-weight: 
 
 _In this exercise, we will use **Prometheus** to gather Pet Battle metrics and **Grafana** to visualize them_
 
-_We will create **Alerts** to be notified about Pet Battle events_
+_We will create **Alerts** to be notified about Pet Battle events (based on SLI/SLO definitions)_
 
 _We will use **Fluentd** to collect logs, **ElasticSearch** to store them and **Kibana** to query the logs_
 
