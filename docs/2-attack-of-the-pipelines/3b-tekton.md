@@ -92,7 +92,7 @@ In this snippet of the pipeline used in this exercise, we define:
         enabled: true
         source: http://nexus:8081/repository/helm-charts #<- update this
         chart_name: pet-battle-api
-        source_ref: 1.1.1 # helm chart version
+        source_ref: 1.2.1 # helm chart version
         values:
         image_name: pet-battle-api
         image_version: latest # container image version
@@ -141,7 +141,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
     ```xml
         <artifactId>pet-battle-api</artifactId>
-        <version>1.2.1</version>
+        <version>1.3.1</version>
     ```
  
 10.  As always, push the code to git ...
@@ -149,7 +149,7 @@ In this snippet of the pipeline used in this exercise, we define:
     ```bash
     cd /projects/pet-battle-api
     git add .
-    git commit -m  "🍕 UPDATED - pet-battle-version to 1.2.1 🍕"
+    git commit -m  "🍕 UPDATED - pet-battle-version to 1.3.1 🍕"
     git push 
     ```
 
