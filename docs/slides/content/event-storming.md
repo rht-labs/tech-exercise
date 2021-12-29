@@ -214,12 +214,12 @@ The Event Storming Key is specific set of coloured stickies...
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
  * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
 * Impact Map - can form an input for the scope of the modelling
 <p>&nbsp;</p>
 
-There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
+There are other practices in the space of working on how we might start building a solution that fixes problems or realize some new opportunities:
 * Emerging Architecture
 * Non Functional Map
 * Metrics-Based Process Map

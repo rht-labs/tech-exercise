@@ -7,7 +7,7 @@
     mvn formatter:format
     ```
 
-2. Now edit a java class file and add some TAB/spaces e.g. in L19,21
+2. Now edit a java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
 
@@ -48,9 +48,15 @@
                     </configuration>
     ```
 
-6. Edit the `CatResource.java` class file and remove the comment in the catch block making it empty.
+6. Edit the `CatResource.java` class file and remove the stack trace in the catch block that is part of the `loadlitter()`method, making it empty.
 
-    ![images/codestyle-violation.png](images/codestyle-violation.png)
+    From this:
+
+    ![images/codestyle-violation2.png](images/codestyle-violation1.png)
+
+    To this:
+
+    ![images/codestyle-violation2.png](images/codestyle-violation2.png)
 
     Now when we run the check we should get a hard error telling us we have an empty code block.
 

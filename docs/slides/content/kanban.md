@@ -5,6 +5,22 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+<!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
+<div class="r-stack">
+<div class="fragment fade-out" data-fragment-index="0" >
+  <h2>Open Practice Library</h2>
+  <img src="images/opl-complete.png">
+</div>
+<div class="fragment current-visible" data-fragment-index="0" >
+  <h2>Kanban</h2>
+  <a target="_blank" href="https://openpracticelibrary.com/practice/kanban/">
+  <img src="images/opl-delivery.png">
+  </a>
+</div>
+</div>
+
+
+
 ### Origins of Kanban
 ![Kanban](images/kanban/toyota-production-system.png) <!-- {.element: class="inline-image"} -->
 * Kanban is a Japanese word that means _card you can see_
@@ -13,24 +29,20 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+##### Example - WHO<!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/kanban/who-kanban.png", class="white-style" -->
+
+
+
 ### Kanban Practices
 
+#### Kanban is a framework used to implement agile software development based in the following practices:
 * Visualize the Workflow
 * Limit Work in Progress
 * Manage Flow
 * Make Process Policies Explicit
 * Feedback Loops
 
-
-
-### Visualize the Workflow - Kanban Board
-
-* Visualize the process in columns and cards (Always visible)
-* **Column** is a step of the workflow and a **card** is a work item
-* Any task must be in the board
-* Designed by the Team (physical or virtual)
-
-![Kanban Board](images/kanban/kanban-board.png) <!-- {.element: class="" style="height:350px"} -->
 
 
 
@@ -88,7 +100,20 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+#### _Why use it?_
+
+* Kanban applies in situations where work arrives in an unpredictable fashion and/or when work items should be deployed as soon as they are ready, rather than waiting for other work items.
+* This framework helps you to:
+  - Visually see work in progress
+  - Identify bottlenecks or impediments and take steps to remove them
+  - Improve team collaboration
+  - Increase efficiency and productivity, reducing the time it takes to take a project or user story from start to finish.
+  - Reduce waste
+
+
+
 ### Kanban Metrics
+Kanban will provide you a set of metrics to measure your process. These metrics are very usefull to improve your flow and identify points of failure.
 
 * **Lead Time**: Measures how much time a task spends in the Kanban board, since get in and get out. A measure for our customers
 * **Cycle Time**: Measures how much time a task spends going through the process, from when the task started.
@@ -101,8 +126,38 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
+#### _How do we use it?_
+
+* Visualize the process in columns and cards (always visible)
+* **Column** is a step of the workflow and a **card** is a work item
+* Any task must be in the board
+* Designed by the Team (physical or virtual)
+
+![Kanban Board](images/kanban/kanban-board.png) <!-- {.element: class="" style="height:350px"} -->
+
+
+
+![Kanban Board](images/kanban/kanban-board-2.png)
+
+
+
+### Real World Examples
+![who-example](images/kanban/who-kanban.png)
+
+
+
+
+### Kanban - Pet Battle
+![kanban-pet-battle](images/kanban/kanban-pb.png)
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Kanban](https://openpracticelibrary.com/practice/kanban/)
 - [Kanban Picture](https://openpracticelibrary.com/practice/kanban-picture/)
-- [Daily Standup](https://openpracticelibrary.com/practice/daily-standup/)
+- [Scrum](https://openpracticelibrary.com/practice/)
+- [Prioritisation practices](https://openpracticelibrary.com/practice/)
+- [Definition of Ready](https://openpracticelibrary.com/practice/definition-of-ready/)
+- [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done)
+- [Product Backlog](https://openpracticelibrary.com/practice/)

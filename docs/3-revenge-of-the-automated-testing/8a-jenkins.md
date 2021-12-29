@@ -50,14 +50,14 @@
 
     After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed.
 
-    ![cosign-image-signing-pet-battleg](images/cosign-image-signing-pet-battle.png)
+    ![cosign-image-signing-pet-battle](images/cosign-image-signing-pet-battle.png)
 
 4. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.3.1` in this case)
 
     ```bash
     cd /projects/pet-battle
-    oc registry login
-    cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1
+    oc registry login $(oc registry info) --insecure=true
+    cosign verify --key k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.3.1
     ```
 
     The output should be like:

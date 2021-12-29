@@ -41,6 +41,7 @@ Each table picks a sector and a business use case (some examples below):
 * **Finance** - Creating new Current Account
 * **Government** - Paying for Council Tax
 * **Energy** - Switching energy provider
+
 #### Some questions to lead the discussions ...
 What is the trigger for the stream?
 What is end business value?
@@ -113,139 +114,160 @@ How To ...
 
 
 <div class="r-stack">
-  <img class="image-no-shadow image-full-width" data-fragment-index="0" src="images/mbpm/mbpm-swim-lanes.png">
-  <img class="fragment image-no-shadow image-full-width" data-fragment-index="1" src="images/mbpm/mbpm-swim-add-time.png.png">
-  <img class="fragment image-no-shadow image-full-width" data-fragment-index="2" src="images/mbpm/images/mbpm/mbpm-steps.png">
+  <div> 
+    <h4 class="fragment fade-out" data-fragment-index="1">Create the swimlanes</h4>
+    <img class="image-no-shadow image-full-width" src="images/mbpm/mbpm-swim-lanes.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="1" > 
+    <h4>Add activities / steps over time</h4>
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-swim-add-time.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="2" > 
+    <h4>Some activities / steps could be in parallel</h4>  
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-steps.png">
+  </div>
 </div>
 
 
 
-#### Label the map and create Swim Lanes
-![Map Label](images/mbpm/mbpm-swim-lanes.png)
-
-
-
-#### Add time and the activities (the steps) to the map
-![Map Label](images/mbpm/mbpm-swim-add-time.png)
-
-
-
-#### Some could be in parallel
-![Map Label](images/mbpm/mbpm-steps.png)
-
-
-
 ### Metric-Based Process Mapping
-Document all activities (the steps)
+Document all activities / steps (the things)
 
 
 
-#### The Activity
-![the activity](images/mbpm/mbpm-activities-0.png)
+<div class="r-stack">
+  <div> 
+    <h4 class="fragment fade-out" data-fragment-index="1" >The Activity</h4>
+    <img class="image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-0.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="1" > 
+    <h4>Name the activity and who's involved</h4>
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-1.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="2" > 
+    <h4>Add the number of people</h4>  
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-2.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="3" > 
+    <h4>Add the accuracy</h4>  
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-3.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="4" > 
+    <h4>Process Time / Lead Time</h4>  
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/mbpm-activities-4.png">
+  </div>
+</div>
 
 
 
-#### Name the activity and who's involved
-![Map Label](images/mbpm/mbpm-activities-1.png)
+
+<div class="r-stack">
+  <div  > 
+    <h4 class="fragment fade-out" data-fragment-index="1">The time spent doing the activity</h4>
+    <img class="image-no-shadow image-full-width" src="images/mbpm/pt-lt-1.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="1" > 
+    <h4>Lead Time includes Process Time</h4>
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/pt-lt-2.png">
+  </div>
+  <div class="fragment fade-in-then-out" data-fragment-index="2" > 
+    <h4>Lead Time includes Process Time and all other delays</h4>  
+    <img class=" image-no-shadow image-full-width" src="images/mbpm/pt-lt-3.png">
+  </div>
+</div>
 
 
 
-#### Add the number of people 
-![Map Label](images/mbpm/mbpm-activities-2.png)
-
-
-
-#### Add the accuracy
-![Map Label](images/mbpm/mbpm-activities-3.png)
-
-
-
-#### Process Time / Lead Time
-![Map Label](images/mbpm/mbpm-activities-4.png)
-
-
-
-### Metric-Based Process Mapping
-Lead Time vs. Process Time
-
-
-
-![Map Label](images/mbpm/pt-lt-1.png)
-
-
-
-![Map Label](images/mbpm/pt-lt-2.png)
-
-
-
-![Map Label](images/mbpm/pt-lt-3.png)
-
-
-
-### Metric-Based Process Mapping
-#### Metrics: Time
-* Process Time (PT)
-  * The time to actually do the work, if one is able to do it uninterrupted
-  * Includes when specific to the task at hand:
-
-    Touch, talk, read, and think time
-* Lead Time (LT)
-  * Elapsed time from the time work is made available until it is completed
-  and passed on to the next person or department in the chain
-  * Includes process
-
-
-
-### Metric-Based Process Mapping
-#### Metrics: Quality
-* Percent complete and accurate
-* Percent of time downstream customer can perform task without having to:
-  * **Correct** information or material supplied
-  * **Add** information that should have been supplied
-  * **Clarify** information that should or could have been clearer
-
-
-
-### Metric-Based Process Mapping: How To
 #### Define the _Timeline Critical Path_
-![Critical Path](images/mbpm/mbpmstep6.png)
+![Critical Path](images/mbpm/mbpmstep6.png)<!-- .element: class="image-no-shadow image-full-screen" -->
 
 
 
-### Metric-Based Process Mapping: What Else To Do?
-* Create the timeline
+#### Summary of the steps
+1. Label the map and create Swim Lanes
+2. Add time
+3. Add the activities (the steps) to the map (some could be in parallel)
+4. Document all the activities (the steps). On each sticky note track the activity
+   * Name the activity and who's involved
+   * Add the number of people
+   * Add the Accuracy (% complete and accurate)
+   * Add process / Lead Time
+
+
+
+### What to do next?
+* Identify handoffs
 * Create summary metrics
 * Identify improvement areas
+* Validate the improvements with a future state MBPM
 
 
 
-
-### Exercise - TODO List MBPM (Assumptions)
-
-* Guardrails are:
-  * Start - Feature Complete and ready to commit
-  * End - Feature deployed to Test env
-* Manual handoff and jobs
+### Exercise 
+#### As a class:
+1. Walk through the *as-was* MBPM
 
 
 
-### Exercise - TODO List MBPM (Setup)
-
-![Swimlanes](images/mbpm/mbpmstep2.png) <!-- {.element: class="inline-image"} -->
-* What will you call your MBPM diagram?
-* Who/What are your typical functions that do work in your process?
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/pb-as-was.png", class="white-style" -->
 
 
 
-### Exercise - TODO List MBPM
+#### In your team
+![activity-mbpm](images/mbpm/activity.png) <!-- {.element: class="inline-image"} -->
+1. Identify improvements on the steps and if it's possible to reduce handover or remove any of the existing steps.
+2. Document any new activities (the steps). On each sticky note track the activity:
+     * Name the activity and who's involved
+     * Add the number of people
+     * Add the Accuracy (% complete and accurate)
+     * Add process / Lead Time
 
-![Metrics](images/mbpm/mbpmstep5.png) <!-- {.element: class="inline-image"} -->
-* PT = The time to actually do the work
-* LT = Time from when the work is available until it reaches the next step
-* % C&A = Percent of time downstream steps can complete without returning
+
+
+### Real World Examples
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/mbpm-cars1.png", class="white-style" -->
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/mbpm-cars2.png", class="white-style" -->
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/mbpm-cars3.png", class="white-style" -->
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/metrics-car-co.png", class="white-style" -->
+
+
+
+<!-- .slide: data-background-size="contain" data-background-image="images/mbpm/pelorus.png", class="white-style" -->
+
+
+
+### Facilitation Tips
+* You can map the MBPM steps with the Big Picture flow and improvements for a better visualisation of work
+* Use a spreadsheet to calculate numbers for metrics, it will be much easier to do it
+* Iterate Iterate Iterate! Start with small teams and compare over and over again
+* If psychological safety is low, postpone gathering the numbers until trust there
+  * Tools with numbers on them can be very intimidating to people
+* Don't be too specific about the numbers, just use them as a gauge. It's not about the seconds it's bigger than that
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
-- [Metric-Based Processing Mapping](https://openpracticelibrary.com/practice/vsm-and-mbpm/)
+### Related & Used Practices
+Related practices:
+
+* [Value Stream Mapping](https://openpracticelibrary.com/practices/vsm-mbpm)
+* [Value Stream Mapping](https://openpracticelibrary.com/practices/value-slicing)
+* [Team Topologies](https://teamtopologies.com)
+
+There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
+
+* [Emerging Architecture](https://openpracticelibrary.com/)
+* [NFR Map](https://openpracticelibrary.com/practices/non-functional-requirements-mapping)
+* [Event Storming](https://openpracticelibrary.com/practices/event-storming)

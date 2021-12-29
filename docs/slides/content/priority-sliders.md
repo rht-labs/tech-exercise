@@ -7,7 +7,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 <!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
-<div class="fragment fade-in-then-out current-visible" data-fragment-index="0" >
+<div class="fragment fade-out" data-fragment-index="1" >
   <h2>Open Practice Library</h2>
   <img src="images/opl-complete.png">
 </div>
@@ -27,9 +27,13 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-
 #### <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/priority-sliders/example-who.png", class="white-style" -->
+
+
+
+#### <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/priority-sliders/example-priority-sliders.jpg", class="white-style" -->
 
 
 
@@ -103,7 +107,7 @@ In this exercise we will create a priortiy slider canvas for Pet Battle.
 Q&A  / Feedback
 
 How did you reach consensus?
-![what=is it](images/priority-sliders/consensus-tools.png)<!-- .element: class="image-no-shadow image-full-width" -->
+![what-is-it](images/priority-sliders/consensus-tools.png)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
 
@@ -116,10 +120,8 @@ How did you reach consensus?
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Priority Sliders](https://openpracticelibrary.com/practice/priority-sliders/)
-
-### Related Practices
-- [voting](https://openpracticelibrary.com/practice/) - Dot Voting / etc
+- [Voting](https://openpracticelibrary.com/practice/) - eg Dot Voting, Heat Map, etc
 - Any other prioritization tools eg Impact / Effort Matrix
-- Sprint Planning - this practice provides a useful input in the depth of task writing and definition
+- [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning) - this practice provides a useful input in the depth of task writing and definition

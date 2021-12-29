@@ -43,7 +43,7 @@
     EOF
     ```
 
-2. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+2. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
     ```yaml
         # Cosign Image Sign
@@ -92,19 +92,19 @@
 
     ![cosign-image-signing](images/cosign-image-signing.png)
 
-5. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.2.1` in this case)
+5. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.3.1` in this case)
 
     ```bash
     cd /projects/pet-battle-api
-    oc registry login
-    cosign verify -key cosign.pub default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.2.1
+    oc registry login $(oc registry info) --insecure=true
+    cosign verify --key k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1
     ```
 
     The output should be like:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.2.1 --
+    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1 --
     The following checks were performed on each of these signatures:
       - The cosign claims were validated
       - The signatures were verified against the specified public key

@@ -29,5 +29,5 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Information Radiators](https://openpracticelibrary.com/practice/visualisation-of-work/)

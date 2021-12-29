@@ -122,5 +122,5 @@ Pet Battle Industries have a good handle on the functional design of their appli
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 - [](https://openpracticelibrary.com/practice/) - 

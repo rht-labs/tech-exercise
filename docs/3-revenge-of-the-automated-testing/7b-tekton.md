@@ -24,13 +24,13 @@
           description: Full name of image to scan (example -- gcr.io/rox/sample:5.0-rc1)
         - name: OUTPUT_FORMAT
           type: string
-          description:  Output format (json | csv | pretty)
+          description:  Output format (json | csv | table)
           default: json
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
       steps:
         - name: rox-image-scan
-          image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+          image: registry.access.redhat.com/ubi8/ubi-minimal:latest
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           env:
             - name: ROX_API_TOKEN
@@ -49,7 +49,7 @@
             export NO_COLOR="True"
             curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl"
             chmod +x roxctl > /dev/null
-            ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --format $(params.OUTPUT_FORMAT)
+            ./roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) -o $(params.OUTPUT_FORMAT)
     EOF
     ```
 
@@ -81,7 +81,7 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
             - name: OUTPUT_FORMAT
-              value: pretty
+              value: table
     ```
 
     So you'll have a pipeline definition like this:
@@ -134,7 +134,7 @@
     cd /projects/tech-exercise
     cat <<'EOF' >> tekton/templates/tasks/rox-image-scan.yaml
         - name: rox-image-check
-          image: registry.access.redhat.com/ubi8/ubi-minimal:8.4
+          image: registry.access.redhat.com/ubi8/ubi-minimal:latest
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           env:
             - name: ROX_API_TOKEN
@@ -151,9 +151,9 @@
             #!/usr/bin/env bash
             set +x
             export NO_COLOR="True"
-            curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null; echo "Getting roxctl"
+            curl -k -L -H "Authorization: Bearer $ROX_API_TOKEN" https://$ROX_ENDPOINT/api/cli/download/roxctl-linux --output roxctl  > /dev/null;echo "Getting roxctl"
             chmod +x roxctl > /dev/null
-            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) --json --json-fail-on-policy-violations=true
+            ./roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image $(params.IMAGE) -o json
             if [ $? -eq 0 ]; then
               echo "🦕 no issues found 🦕";
               exit 0;

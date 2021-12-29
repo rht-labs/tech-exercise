@@ -30,7 +30,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### Learning Outcomes
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
 As a learner, by the end of this exercise I ...
 * Can add security gates to pipeline
 * Can add testing gates to pipeline
@@ -100,7 +100,7 @@ Answering the age old question of how do i know my tests are any good??
 
 
 
-#### 💥 90mins of Tech Exercise 💥
+#### 💥 Tech Exercise 💥
 * In mobs / pairs work through your tasks
 * If in pairs, continuously playback what you accomplish to the others
 
@@ -133,5 +133,5 @@ Answering the age old question of how do i know my tests are any good??
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 - [](https://openpracticelibrary.com/practice/) - 

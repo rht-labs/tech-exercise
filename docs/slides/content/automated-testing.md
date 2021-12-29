@@ -172,7 +172,7 @@ Refactor - Eliminate duplication & make it beautiful <!-- {.element: class="frag
 
 ### Prepare your environment
 Our program is made of Lego. Get your equipment ready for coding
-![lego-space](images/bdd-tdd/lego-620x349.jpg)
+![lego-space](images/bdd-tdd/lego-space.jpeg)
 
 
 
@@ -181,8 +181,8 @@ KISS - Keep It Simple Stupid  <!-- {.element: class="fragment"  data-fragment-in
 
 YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragment-index="2"} -->
 
-![simple-house](images/Simple-Lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
-![complex-house](http://www.abc.net.au/news/image/7370406-3x2-940x627.jpg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
+![simple-house](images/bdd-tdd/simple-lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
+![complex-house](images/bdd-tdd/complex-home.jpeg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
 
 
 
@@ -280,7 +280,7 @@ Was your final design different than you expected? Discuss.
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### Related & Used Practices
 - [Test Driven Development](https://openpracticelibrary.com/practice/test-driven-development/)
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
 - [Example Mapping](https://openpracticelibrary.com/practice/example-mapping/)

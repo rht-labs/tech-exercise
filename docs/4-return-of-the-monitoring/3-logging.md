@@ -25,7 +25,7 @@
 
 5. On configure settings, select `@timestamp` to filter by and create the index.
 
-    ![kibana-create-index-timestamp](./images/kibana-create-index.png)
+    ![kibana-create-index-timestamp](./images/kibana-create-index-timestamp.png)
 
 6. Go to the Kibana Dashboard - Hit `Discover` in the top right hand corner, we should now see all logs across all pods. It's a lot of information but we can query it easily.
 
@@ -52,6 +52,7 @@
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
     echo "🦄🦄🦄🦄" >> /tmp/custom.log
+    exit
     ```
 
 9. Back on Kibana we can filter and find these messages with another query:

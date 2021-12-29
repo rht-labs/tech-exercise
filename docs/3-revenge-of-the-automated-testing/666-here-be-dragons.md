@@ -183,7 +183,7 @@ Let's learn how to use the **roxctl** command line.
     We can run a **check** on our **pet-battle** image by doing:
 
     ```bash
-    roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )' | jq .
+    roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest -o json | jq -c '.alerts[].policy | select ( .severity == "HIGH_SEVERITY" or .severity == "CRITICAL_SEVERITY" )' | jq .
     ```
 
     This returns a Policy error that should look something like this:
@@ -242,10 +242,10 @@ Let's learn how to use the **roxctl** command line.
 3. We can also perform image **scans** directly. Try:
 
     ```bash
-    roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest --format pretty
+    roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest -o table
     ```
 
-    We can run the **scan** command with a format of *json, csv, and pretty. default "json"*.
+    We can run the **scan** command with a format of *json, csv, and table. default "json"*.
 
 4. We can try this on the **pet-battle-api** image we built using the image reference (this is printed out in the **bake** stage of our pipeline)
 

@@ -9,7 +9,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ![UserTopics](images/ux/ux_topics.png) <!-- {.element: class="" style="border:none; box-shadow:none;"} -->
 
-![Excercise](images/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
+![Excercise](images/ux/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
 1. Break out into teams and research a topic [5mins]
 2. Generate a presentation with graphic [5mins]
 3. Playback your findings [3mins]
@@ -18,17 +18,17 @@ TL500 <!-- {.element: class="title-color"} -->
 
 <!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
-<div class="fragment fade-in-then-out current-visible" data-fragment-index="0" >
+<div class="fragment fade-out " data-fragment-index="0" >
   <h2>Open Practice Library</h2>
   <img src="images/opl-complete.png">
 </div>
-<div class="fragment fade-in-then-out" data-fragment-index="1" >
+<div class="fragment fade-in-then-out" data-fragment-index="0" >
   <h2>Lean UX / Empathy Mapping</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/lean-ux-workshop/">
   <img src="images/opl-discovery.png">
   </a>
 </div>
-<div class="fragment" data-fragment-index="2" >
+<div class="fragment" data-fragment-index="1" >
   <h2>Lean UX / Empathy Mapping</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/empathy-mapping/">
   <img src="images/opl-foundation.png">
@@ -56,7 +56,7 @@ We use empathy maps during the facilitation of product discovery, user research,
 
 ### Pop Quiz
 
-![LightBulb](images/light-bulb.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
+![LightBulb](images/ux/light-bulb.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:left;"} -->
 <p align="left">I’m a designer.</p><!-- {.element: class="" style="margin-top: 120px;"} -->
 
 <p align="left">**No**, I don’t just make things pretty.</p>
@@ -187,7 +187,7 @@ Wants to invest in the ‘people that are late for work market’!
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### Related Practices
+### Related & Used Practices
 #### Technical Practices:
 - [Blue Green deployments](https://openpracticelibrary.com/practice/blue-green-deployments/)
 - [Split Testing or A/B Tests](https://openpracticelibrary.com/practice/split-testing-a-b-testing/)
