@@ -30,7 +30,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     Export the token as environment variable:
 
     ```bash
-    export ROX_API_TOKEN=$(oc -n stackrox get secret rox-api-token-do500 -o go-template='{{index .data "token" | base64decode}}')
+    export ROX_API_TOKEN=$(oc -n stackrox get secret rox-api-token-tl500 -o go-template='{{index .data "token" | base64decode}}')
     ```
 
     Export the StackRox endpoint:
@@ -66,7 +66,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     ```bash
     kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
-        --controller-namespace do500-shared \
+        --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
     ```

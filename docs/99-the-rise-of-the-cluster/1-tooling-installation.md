@@ -33,9 +33,9 @@ Here is the list of the tools and objects we deploy for TL500 setup:
 A basic install looks like this:
 
 ```bash
-cd enablement-framework/tooling/charts/do500
+cd enablement-framework/tooling/charts/tl500
 helm dep up
-helm upgrade --install do500 . --namespace do500 --create-namespace --timeout=15m
+helm upgrade --install tl500 . --namespace tl500 --create-namespace --timeout=15m
 ```
 
 #### CodeReady Workspaces Setup
@@ -44,13 +44,13 @@ During the exercises, we use different commandlines like `oc`, `mvn`, `kube-lint
 
 We utilize GitHub Actions in order to build and store this image publicly. 
 
-We have a `do500-devfile.yaml` which is the _as code_ definition of our workspace. We refer to the container image inside the devfile:
+We have a `tl500-devfile.yaml` which is the _as code_ definition of our workspace. We refer to the container image inside the devfile:
 
 ```yaml
 ...
   - type: dockerimage
-    alias: stack-do500
-    image: quay.io/rht-labs/stack-do500:3.0.9
+    alias: stack-tl500
+    image: quay.io/rht-labs/stack-tl500:3.0.9
 ...
 ```
 

@@ -7,8 +7,8 @@ applications:
     source_ref: "1.0.1"
     values:
       serviceaccounts: ""
-      bindings: &binds # lodestar-developers is the GROUP NAME in IDM
-        - name: lodestar-developers
+      bindings: &binds # tl500-users is the GROUP NAME in IDM
+        - name: tl500-users
           kind: Group
           role: edit
         - name: jenkins
