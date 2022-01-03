@@ -24,7 +24,7 @@ With only the items in the bags given to you by your instructor, recreate as man
 
 
 ## The Open Practice Library 🌀
-![link](https://rht-labs.com/slides/content/?name=open-practice-library)
+[> slide deck](https://rht-labs.com/tech-exercise/slides/content/?name=open-practice-library)
 
 
 
