@@ -1,6 +1,6 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
 ## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
-### Pairing and Mobbing <!-- {.element: class="title-color"} -->
+### Pair and Mob Programming <!-- {.element: class="title-color"} -->
 TL500 <!-- {.element: class="title-color"} -->
 
 
@@ -27,13 +27,13 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-### Mobbing in Action
-![example](images/pairing-and-mobbing/example-mob.jpg)
+### Mob Programming in Action
+![example](images/pair-and-mob-programming/example-mob.jpg)
 
 
 
 ### Pair Programming
-![Pair Programming](images/pairing-and-mobbing/coaching-coders-coding.jpg) <!-- {.element: class="inline-image"} -->
+![Pair Programming](images/pair-and-mob-programming/coaching-coders-coding.jpg) <!-- {.element: class="inline-image"} -->
 </br>
 </br>
 **Pair programming** is a practice used in e**X**treme **P**rogramming in which
@@ -42,7 +42,7 @@ two programmers work together at one computer.
 
 
 ### Mob Programming
-![Mob Programming](images/pairing-and-mobbing/chairs-developer-development.jpg) <!-- {.element: class="inline-image"} -->
+![Mob Programming](images/pair-and-mob-programming/chairs-developer-development.jpg) <!-- {.element: class="inline-image"} -->
 </br>
 **Mob programming** is a software development approach where the whole team
 works on the same thing, at the same time, in the same space, and at the same
@@ -117,13 +117,13 @@ computer.
 
 
 
-#### WHO - Remote Pairing and Mobbing <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/pairing-and-mobbing/example-who-2.png", class="white-style" -->
+#### WHO - Remote Pair and Mob Programming <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/pair-and-mob-programming/example-who-2.png", class="white-style" -->
 
 
 
-#### WHO - Remote Pairing and Mobbing <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/pairing-and-mobbing/pair-and-mob-1.png", class="white-style" -->
+#### WHO - Remote Pair and Mob Programming <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/pair-and-mob-programming/pair-and-mob-1.png", class="white-style" -->
 
 
 
@@ -136,7 +136,7 @@ computer.
 - **Mentoring of team members:** Sharing tips and tricks or shortcuts can widen both pairs' skill depth. This sharing can also bring junior associates up to speed very rapidly.
 - **Half the code:** Two minds working on the same problem makes for more efficiently written code, so less spaghetti.
 - **No pull requests:** code is being reviewed as it's written avoiding superficial reviews. They won't cut corners when pairing as someone is watching.
-- **Team bonding:** Pairing and mobbing facilitates interactions. A room with mobbing and pairing going on is louder. Happy coders lead to better code.
+- **Team bonding:** Pair and mob programming facilitates interactions. A room with mob and pair programming going on is louder. Happy coders lead to better code.
 
 
 
@@ -144,7 +144,7 @@ computer.
 - **The knowledge stays in the team:**  when holidays or even flu season take over, the team can still continue to work at pace knowing the Unicorn is not leaving with key information.
 </br>
 
-![unicorns](images/pairing-and-mobbing/unicorns.jpg)<!-- {.element: class="image-no-shadow"} -->
+![unicorns](images/pair-and-mob-programming/unicorns.jpg)<!-- {.element: class="image-no-shadow"} -->
 
 
 
