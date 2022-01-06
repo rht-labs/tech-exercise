@@ -113,14 +113,19 @@ Pet Battle Industries have a good handle on the functional design of their appli
 
 
 
-#### Facilitation Tips
-* 🙈
+### Facilitation Tips
+As you review items on the map define if any sticky note could be:
 
-#### Tips For Remote
-* 🙈
+- added to the backlog and prioritized as it requires work to realize
+- be included in the Definition of Done
+- be part of the acceptance criteria for any backlog items
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [](https://openpracticelibrary.com/practice/) - 
+- [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done/)
+- [Kanban](https://openpracticelibrary.com/practice/kanban)
+- [Product Backlog](https://openpracticelibrary.com/practice/)
+- [Big Picture](https://openpracticelibrary.com/practice/big-picture)
+- [Priority Matrix](https://openpracticelibrary.com/practice/impact-effort-prioritization-matrix/)
