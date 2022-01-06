@@ -54,9 +54,9 @@ At the end of the Impact Mapping exercise, you should have:
 </div>
 <div class="col" data-markdown>
 
-_A lightweight, collaborative planning technique for teams that want to make a big impact with software products_.
+_Impact mapping is a lightweight, collaborative planning technique for teams that want to make a big impact with software products_.
 
-_Helps delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher level organizational goals_.
+_It helps delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher-level organizational goals_.
 
 ~ Gojko Adzic
 </div>
