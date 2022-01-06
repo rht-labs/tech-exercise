@@ -7,8 +7,8 @@ applications:
     source_ref: "1.0.1"
     values:
       serviceaccounts: ""
-      bindings: &binds # tl500-users is the GROUP NAME in IDM
-        - name: tl500-users
+      bindings: &binds # student is the GROUP NAME in IDM
+        - name: student
           kind: Group
           role: edit
         - name: jenkins
