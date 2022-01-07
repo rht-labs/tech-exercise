@@ -111,12 +111,12 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-      # Pet Battle Frontend
       pet-battle:
         name: pet-battle
         enabled: true
-        source: https://github.com/petbattle/pet-battle-infra.git
-        source_ref: 1.0.0 # helm chart version
+        source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts 
+        chart_name: pet-battle
+        source_ref: 1.0.6 # helm chart version
         values:
           image_version: latest # container image version
           config_map: '{
