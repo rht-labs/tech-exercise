@@ -27,9 +27,8 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Domain Driven Design
 #### _What Is It?_
-Domain-driven design (DDD) is an approach to developing software for complex 
-needs by deeply connecting the implementation to an evolving model of the core 
-business concepts.
+Domain Driven design (DDD) is an approach to developing software for complex 
+needs that deeply connects the implementation to an evolving model of the core business concepts.
 
 
 
@@ -39,12 +38,11 @@ business concepts.
 
 ### Domain Driven Design
 #### _How Does It Help?_
-* Placing the project's primary focus on the core domain and domain logic
-* Basing complex designs on a model of the domain
-* Initiating a creative collaboration between technical and domain experts to iteratively 
-refine a conceptual model that addresses particular domain problems
-* Bridge the gap between domain experts and developers by using the same language to 
-create the same understanding
+* Places the project's primary focus on the core domain and domain logic
+* Bases complex designs on a model of the domain
+* Initiates a creative collaboration between technical and domain experts to iteratively refine a conceptual model to address domain problems
+* Bridges the gap between domain experts and developers by using the same language to create the same understanding
+<!--TechEdit: I'd say "to create a shared understanding.">
 
 
 
@@ -55,9 +53,8 @@ create the same understanding
 
 ### Behavior Driven Development
 #### _What Is It?_
-Behavior-Driven Development (BDD) is a Test-First, Agile Testing practice 
-that provides Built-In Quality by defining (and potentially automating) tests 
-before, or as part of, specifying system behavior.
+Behavior Driven Development (BDD) is a test-first, agile testing practice 
+that provides built-in quality by defining (and potentially automating) tests before, or as part of, specifying system behavior.
 
 
 
@@ -71,16 +68,14 @@ before, or as part of, specifying system behavior.
 
 ### Behavior Driven Development
 #### _How Does It Help?_
-* Creates a shared understanding of requirements between 
-the business and the Agile Teams
+* Creates a shared understanding of requirements between the business and the Agile teams
 * Helps guide development, decrease rework, and increase flow
-* Creates business-facing scenarios that attempt to describe the behavior of a 
-Story, Feature, or Capability from a user's perspective.
+* Creates business-facing scenarios that attempt to describe the behavior of a story, feature, or capability from a user's perspective.
 
 
 
 #### Example Mapping
-Based on the idea that multiple examples of specific cases convey information better than a single bad abstraction of a concept.
+Example Mapping is based on the idea that multiple examples of specific cases convey information better than a single bad abstraction of a concept.
 ![example-mapping](images/bdd-tdd/example-mapping.jpg)
 
 
@@ -90,7 +85,7 @@ Based on the idea that multiple examples of specific cases convey information be
 
 
 
-#### Example Mapping story A/Cs and test cases
+#### Example Mapping Story A/Cs and Test Cases
 ![example-mapping--test-casess](images/bdd-tdd/example-mapping-to-test-casess.png)
 
 
@@ -102,13 +97,12 @@ Based on the idea that multiple examples of specific cases convey information be
 
 ### Test Driven Development
 #### _What Is It?_
-Test Driven Development (TDD) is a software development process that relies on
-the repetition of a very short development cycle.
-Requirements are turned into test cases, where the software is developed to pass
+Test Driven Development (TDD) is a software development process that relies on the repetition of a very short development cycle.
+<!-- Tech Edit: I'm not sure what "the repetition of" means here. I'd suggest "...that relies on short development cycles" -->
+Requirements are turned into test cases and the software is developed to pass
 the tests.
 
-This practice is particularly powerful when combined with
-**Continuous Integration**.
+This practice is particularly powerful when combined with **Continuous Integration**.
 
 
 
@@ -123,8 +117,8 @@ This practice is particularly powerful when combined with
 ### Test Driven Development
 #### _How Does It Help?_
 * Creates a detailed specification for the code
-* Gives fast feedback
-* Indicates whether the last change has broken previously working code
+* Provides rapid feedback
+* Indicates whether the most recent change broke previously working code
 * Allows the design to evolve and adapt as understanding of the problem evolves
 
 
@@ -148,9 +142,9 @@ Credit to [Gargoyle Software](http://www.gargoylesoftware.com/ex/lego_tdd)
 
 
 ### Intent
-Demonstrate the concepts behind TDD.
+Demonstrate the concepts behind Test Driven Development.
 
-How we write the test before we write code and how that forces our design to emerge.
+How writing the test before we write code forces our design to emerge.
 
 
 
@@ -161,7 +155,7 @@ Red - Write a small test that fails <!-- {.element: class="fragment" style="colo
 
 Green - Do the minimum to make the test pass <!-- {.element: class="fragment" style="color: green" data-fragment-index="2"} -->
 
-Refactor - Eliminate duplication & make it beautiful <!-- {.element: class="fragment" data-fragment-index="3"} -->
+Refactor - Eliminate duplication and make it beautiful <!-- {.element: class="fragment" data-fragment-index="3"} -->
 
 
 
@@ -176,7 +170,7 @@ Our program is made of Lego. Get your equipment ready for coding
 
 
 
-### 2 Simple Rules for Lego TDD
+### Two Simple Rules for Lego TDD
 KISS - Keep It Simple Stupid  <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 
 YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragment-index="2"} -->
@@ -192,10 +186,10 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 
 
 ### The Steps
-1. One person in the pair will write a test, in the form of a question, on a sticky note and place it on the table. For example "Is there a person?". <!-- {.element: class="fragment"  data-fragment-index="1"} -->
-2. The other person will then implement something in LEGO that passes that test. <!-- {.element: class="fragment" data-fragment-index="2"} -->
-3. When the first person is satisfied that the test is passing, they switch positions. <!-- {.element: class="fragment" data-fragment-index="3"} -->
-4. Now the second person writes a test and puts it on the table and the first person implements in LEGO. <!-- {.element: class="fragment" data-fragment-index="4"} -->
+1. One person in the pair writes a test, in the form of a question, on a sticky note and places it on the table. For example, "Is there a person?" <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. The second person then implements something in LEGO that passes the test. <!-- {.element: class="fragment" data-fragment-index="2"} -->
+3. When the first person is satisfied that the test passes, the two switch positions. <!-- {.element: class="fragment" data-fragment-index="3"} -->
+4. Now, the second person writes a test, puts it on the table, and the first person implements it in LEGO. <!-- {.element: class="fragment" data-fragment-index="4"} -->
 
 
 
@@ -204,10 +198,10 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 ![TDD](images/bdd-tdd/lego-tdd-1.jpg) <!-- {.element: class="inline-image"} -->
 - Is there a person in the program? <!-- {.element: class="fragment" data-fragment-index="1"} -->
 - Is there a house in the program? <!-- {.element: class="fragment" data-fragment-index="2"} -->
-- Is there a window on a wall of the house? <!-- {.element: class="fragment" data-fragment-index="3"} -->
+- Is there a window in a wall of the house? <!-- {.element: class="fragment" data-fragment-index="3"} -->
 - Is it true that the house is taller than the person? <!-- {.element: class="fragment" data-fragment-index="4"} -->
-- The house is wider than the person? <!-- {.element: class="fragment" data-fragment-index="5"} -->
-- Is it true that the house has 2 connected walls <!-- {.element: class="fragment" data-fragment-index="6"} -->
+- Is the house wider than the person? <!-- {.element: class="fragment" data-fragment-index="5"} -->
+- Is it true that the house has 2 connected walls? <!-- {.element: class="fragment" data-fragment-index="6"} -->
 - Can the person enter the house? <!-- {.element: class="fragment" data-fragment-index="7"} -->
 
 
@@ -220,9 +214,9 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
        3. a plant
        4. a vehicle
        5. a building.
- - There may only be one "broken" test at a time. All previous tests must continue to pass. <!-- {.element: class="fragment" data-fragment-index="1"} -->
- - Nothing must be built in LEGO if there wasn't a failing test that forced that to exist. <!-- {.element: class="fragment" data-fragment-index="2"} -->
- - After each test is passing, the people switch roles. <!-- {.element: class="fragment" data-fragment-index="4"} -->
+ - There can be only one "broken" test at a time. All previous tests must continue to pass. <!-- {.element: class="fragment" data-fragment-index="1"} -->
+ - Nothing must be built in LEGO unless a failing test required it. <!-- {.element: class="fragment" data-fragment-index="2"} -->
+ - After each test passes, participants must switch roles. <!-- {.element: class="fragment" data-fragment-index="4"} -->
 
 
 
@@ -236,8 +230,8 @@ Have each pair demo two or three of their features. Have them read out the test 
 Many times people will have built cool things that they didn't have tests for. We stress again that in TDD, we don't build anything until the test has forced us to do that.
  -->
  - What did you observe? How did that feel?
- - Did everyone complete the five base requirements listed above?
- - Are all tests currently passing?
+ - Did everyone complete the five listed requirements?
+ - Do all tests currently pass?
 
 
 
@@ -249,10 +243,11 @@ Many times people will have built cool things that they didn't have tests for. W
 ### The Game Begins Again!
 
 ![TDD](images/bdd-tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
- - As a table; Pick a project to build. Projects should be something complex that has lots of different kinds of things in it. Some examples if you're stuck could include _A Zoo_, _Shopping Center_, _a spaceship_ or _a city_.
+ - As a table group, pick a project to build. Projects must be something complex that has lots of different elements in it. Some examples, if you're stuck, might include a _zoo_, a _shopping center_, a _spaceship_, or a _city_.
  - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
  - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
-
+<!--The final bullet above doesn't make sense. What implementation? The features built previously by the pairs? How about 
+"The goal is to integrate the features that you built previously in pairs into the project selected by the table group." -->
 
 
 ### Debrief
@@ -269,9 +264,9 @@ Was your final design different than you expected? Discuss.
  -->
  - What did you observe?
  - Look around your table. Are all the tests still passing?
- - Are there tests that you should have that are missing?
- - Did you have any conflicts where a new feature from one pair broke a test from another? What did you do about that?
- - Was your final design different than you expected?
+ - Are any necessary tests still missing?
+ - Did you encounter any conflicts between a new feature from one pair that broke a test from another? How did you resolve these conflicts?
+ - Was your final design different from what you expected?
 
 
 
