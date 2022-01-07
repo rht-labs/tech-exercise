@@ -127,7 +127,7 @@ This practice is particularly powerful when combined with **Continuous Integrati
 
 
 
-### DDD & BDD & TDD
+### DDD, BDD, and TDD
 ![TDD](images/bdd-tdd/ddd-bdd-tdd.jpg)
 
 
