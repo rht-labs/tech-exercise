@@ -12,13 +12,9 @@ If the workspace has not been set up for you, you can create one from this devfi
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-tl500` from the menu.
 ![new-terminal](./images/new-terminal.png)
 
-<!--@Cansu - this is how you style a colour on a word mid sentence <span style="color:purple;" >zsh</span>  -->
-3. <strong>OPTIONAL</strong> - if you want to use `zsh` as opposed to `sh`, you can set it as the default shell by running. `zsh` is swish has neat shortcuts and plugins plus all the cool kids are using it 😎!
-```bash
-echo "zsh" >> ~/.bashrc
-```
+3. Notice the nifty default shell in the stack-tl500 container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. Ensure your `TEAM_NAME` is spelt with lower case characters and without any spaces in the name:
+4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 ```bash
 echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
 ```
@@ -35,7 +31,7 @@ echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
 
 7. Verify the variables you have set:
 ```bash
-source ~/.bashrc
+source ~/.zshrc
 echo ${TEAM_NAME}
 echo ${CLUSTER_DOMAIN}
 echo ${GIT_SERVER}
@@ -57,15 +53,17 @@ oc new-project ${TEAM_NAME}-ci-cd
 
 Let's deploy a simple application using Helm.
 
-1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores version history of our charts as well as the tar file the chart is packaged as.
+1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores the version history of our charts as well as the packaged tar file.
 ```bash
 helm repo add tl500 https://rht-labs.com/todolist/
 ```
 
-2. Let's install a chart from this repo. First search the repositories to see what is available, then install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
+2. Let's install a chart from this repo. First search the repository to see what is available.
 ```bash
 helm search repo todolist
 ```
+
+Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
 ```bash
 helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd
 ```
@@ -77,13 +75,17 @@ echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spe
 ![todolist](./images/todolist.png)
 
 
-4.  You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values. By default, we only have one replica of our application, let's use helm to set this to 5.
+4.  You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
+
+By default, we only have one replica of our application. Let's use helm to set this to 5.
 ```bash
 helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
 ```
+
+Verify the deployment has scaled up to 5 replicas.
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd
 ```
@@ -92,7 +94,7 @@ oc get pods -n ${TEAM_NAME}-ci-cd
 ```bash
 helm uninstall my --namespace ${TEAM_NAME}-ci-cd
 ```
-verify the clean up
+Verify the clean up
 ```bash
 oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
 ```
@@ -111,8 +113,8 @@ todolist/chart
 </code></pre></div>
 where:
 * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
-* `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can over write these values on the command line.
+* `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can overwrite these values on the command line.
 * `templates/*.yaml` - they are our k8s resources. 
 * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
 
-🪄🪄 Now, let's continue with even more exiting tool... !🪄🪄
+🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄
