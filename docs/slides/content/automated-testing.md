@@ -27,7 +27,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Domain Driven Design
 #### _What Is It?_
-Domain Driven design (DDD) is an approach to developing software for complex 
+Domain Driven Design (DDD) is an approach to developing software for complex 
 needs that deeply connects the implementation to an evolving model of the core business concepts.
 
 
