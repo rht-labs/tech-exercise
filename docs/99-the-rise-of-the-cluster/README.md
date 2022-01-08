@@ -5,12 +5,12 @@
 In this exercise, we will walk through the steps we take in order to have a ready cluster for all the other exercises. 
 
 ## 🖼️ Big Picture
-Empty big picture? :D
+![empty-big-picture](images/big-picture-empty.jpg)
 
 ## 🔮 Learning Outcomes
 
-- [ ] Can create a cluster ready for TL500 
+- [ ] Can install the components which are necessary to run the exercises
 
 ## 🔨 Tools used in this exercise!
-* Openshift 4.8+,4.9+
+* Openshift 4.9+
 * <span style="color:blue;">[Helm](https://helm.sh/)</span> - Helps us to define, install, and upgrade Kubernetes application.
