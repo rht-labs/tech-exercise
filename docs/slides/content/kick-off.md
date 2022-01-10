@@ -12,7 +12,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 #### Agile Faces
 
-Meet your classmates by collaboratively drawing each others faces.
+Meet your classmates by collaboratively drawing each other's faces.
 
 ![faces](images/kick-off/faces.png)
 
@@ -20,19 +20,19 @@ Meet your classmates by collaboratively drawing each others faces.
 
 ## Exercise
 #### Gather your apparatus 🔬🧑‍🔬
-1. Take a big Post-It and Sharpie
-2. Holding it in portrait, write your name on the top or bottom 
+1. Take a large Post-it note and a Sharpie marker.
+2. Write your name on the top or bottom of the note (in portrait orientation).
 
 
 
 
 ## Exercise
-#### Find someone you've never met before
-- Pass the Post-It to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
-- Set 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
-- Draw a part of owner's face on the Posts-It:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+#### Choose someone you've never met before
+- Pass the Post-it note to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+- Set a 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
+- Draw a part of owner's face on the Post-it note:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
   * Eyes <!-- {.element: class="fragment"  data-fragment-index="3"} -->
-- Swap back admire the work ... then find a new partner. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
+- Swap back, admire the work, and then choose a new partner. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
 - Repeat the process for more facial features <!-- {.element: class="fragment"  data-fragment-index="5"} -->
   * Nose <!-- {.element: class="fragment"  data-fragment-index="5"} -->
   * Mouth <!-- {.element: class="fragment"  data-fragment-index="6"} -->
@@ -40,16 +40,24 @@ Meet your classmates by collaboratively drawing each others faces.
   * Ears <!-- {.element: class="fragment"  data-fragment-index="8"} -->
   * Chin / Facial hair <!-- {.element: class="fragment"  data-fragment-index="9"} -->
 
+<!-- Tech Editor
+Do the unfamiliar pair swap post-it notes and each draws on their partner's note? This isn't very clear. How about
+#### Choose someone that you haven't previously met
+- Swap Post-it notes with your chosen partner
+- Draw a part of your partner's face on their Post-it note
+  * Eyes
+- Swap back, admire the work, and then choose a new partner.
+-->
 
 
-#### Why Ice Breakers?
+#### Why Use Ice Breakers?
 - An effective way of starting a team-building event
-- Help people get to know each other
+- Helps people get to know each other
 
-#### When Ice Breakers?  
+#### When to Use Ice Breakers?  
 - Participants come from different backgrounds
-- People need to bond quickly so as to work towards a common goal
-- A team is newly formed
+- People need to bond quickly so they can work towards a common goal
+- The team is newly-formed.
 
 
 
