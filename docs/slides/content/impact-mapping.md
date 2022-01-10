@@ -21,13 +21,13 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
+#### Impact Map - World Health Organization <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/example-who.png", class="white-style" -->
 
 
 
 #### _What is it?_
-Impact mapping is a technique that helps build shared understanding and alignment between leaders of organization strategy and product delivery teams.
+Impact mapping is a technique that helps build shared understanding and alignment between organizational strategy leaders and product delivery teams.
 
 <br>
 
@@ -37,10 +37,10 @@ Impact mapping is a technique that helps build shared understanding and alignmen
 #### _What is it?_
 At the end of the Impact Mapping exercise, you should have:
 
-* A shared understanding of the goal or problem statement
-* An inventory of human behavior changes in users and stakeholders that must occur (or not occur) in order for your project to be successful. These are the impacts from which the technique gets its name
-* Optionally, an inventory of project deliverables that could be delivered to achieve the aforementioned impacts
-* Some sort of prioritization of scope – one or more deliverables – and/or impacts
+* A shared understanding of the goal or problem statement.
+* An inventory of human behavior changes in users and stakeholders that must occur (or not occur) for your project to be successful. These are the impacts from which the technique gets its name.
+* Optionally, an inventory of project deliverables that could be delivered to achieve the aforementioned impacts.
+* Some prioritization of scope, including one or more deliverables and/or impacts.
 -->
 
 
@@ -54,9 +54,9 @@ At the end of the Impact Mapping exercise, you should have:
 </div>
 <div class="col" data-markdown>
 
-_It's as a lightweight, collaborative planning technique for teams that want to make a big impact with software products_
+_Impact mapping is a lightweight, collaborative planning technique for teams that want to make a big impact with software products_.
 
-_It help delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher level organizational goals_
+_It helps delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher-level organizational goals_.
 
 ~ Gojko Adzic
 </div>
@@ -68,11 +68,11 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 ![why-use-it](images/impact-mapping/why-use-it.png)<!-- .element: class="image-no-shadow " -->
 <!--
 #### Why do we use it?
-* Impact mapping enables to focus on business objectives and orient product teams toward delivering business value and not just delivering more and more features
-* Brings together business and technology improving communication and purpose
-* Visualises how strategic goals link to the teams work
-* Impact Mapping creates hypotheses and shows the most valuable ones to accomplish the goal
-* It is a graphical mind map, easy to facilitate and has a low barrier to entry
+* Enables focusing on business objectives and orienting product teams toward delivering business value, instead of delivering more and more features.
+* Brings business and technology together, thereby improving communication and purpose.
+* Visualizes how strategic goals link to the team's work.
+* Creates hypotheses and shows the ones most valuable to accomplishing the goal.
+* Results in a graphical mind map that is easy to facilitate and has a low entry barrier.
 --->
 
 
@@ -88,7 +88,7 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 
 
 
-#### Impact Map - World Health Organisation <!-- .element: class="title-bottom-left" -->
+#### Impact Map - World Health Organization <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/impact-mapping/example-who.png", class="white-style" -->
 
 
@@ -98,41 +98,41 @@ _It help delivery teams and stakeholders visualize roadmaps, explain how deliver
 
 
 #### Setting the Scene: Pet Battle Industries
-A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter them into a competition.
+Pet Battle Industries (PBI) is a silly app that allows users to upload pictures of their 🐈 or 🐕 and enter them into a competition.
 ![pb-industries](images/impact-mapping/pbindustries.png)<!-- .element: class="image-no-shadow" -->
 <!-- 
-* Started as a hobbyist application built by a few friends over a weekend
-* Deployed as a single VM running on a free host. Over the weekend a famous person tweeted about the app and it exploded in usage however the application started to fail and crash loads under the load
-* The team behind the hobbyist app have decided to quit their jobs and go all in on PBI&trade;
-* PBI&trade; are looking to monetize their application
+* PBI started as a hobbyist application built by a few friends over a weekend.
+* Initially, they deployed it as a single VM running on a free host. One day, a famous person tweeted about the app and it's usage exploded, however, the application failed and crashed under the load.
+* The team behind the hobbyist app decided to quit their jobs and go all in on PBI&trade;.
+* PBI&trade; is looking to monetize their application.
 -->
 
 
 
 ### The Goal & Actors
-#### *As a class:*
+#### *As a class*
 
 1. The _`Goal`_ - Is this a good goal?
-   * _Generate 100K in revenue with our new & existing customer base by the end of the year_
+   * _Generate 100K in revenue with our new and existing customer base by the end of the year_.
   
 2. The _`Actors`_ - Diverge <> Converge:
-   * Who are the **all** the actors that can get us to our goal?
-   * Who are the focus ones? Pick one to two actors per table
+   * Who are the **all** the actors that can help get us to our goal?
+   * Who are the actors to focus on? Pick one to two actors per table.
 
 
 
 ### The Impacts
-#### *As a class:*
-1. Walk through creating the _`Impacts`_ for one _`Actor`_
+#### *As a class*
+1. Walk through creating the _`Impacts`_ for one _`Actor`_.
 ![example-pbi](images/impact-mapping/example-pbi.png)
-#### *In your team:*
-1. Determine _`Impacts`_ for your _`Actors`_
+#### *In your team*
+1. Determine _`Impacts`_ for your _`Actors`_.
 
 
 
 ### The Deliverables & Voting
-#### *In your team:*
-1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_
+#### *In your team*
+1. Determine some _`Deliverables`_ for the _`Impacts`_ on your _`Actors`_.
 2. Issue your Donal Dollars&trade; and place your bets on the _`Impacts`_
 
 ![donal-dollars](images/impact-mapping/donal-dollars.jpeg)
@@ -153,16 +153,16 @@ A silly app that allows users to upload pictures of their 🐈 or 🐕 and enter
 
 #### Facilitation Tips
 
-* Don't spend too long on the goal - get it good enough and move on
-* Have a goal preprepared in advance to really speed up the workshop
-* If time is a constraint, forget about deliverables and focus just on the impacts
+* Don't spend too long on the goal - get it to good enough and move on.
+* Have a goal preprepared in advance to really speed up the workshop.
+* If time is a constraint, forget about deliverables and focus just on the impacts.
  
 
 #### Tips For Remote
 
-* Break the practice into many sessions
-* Use breakout rooms to ideate in smaller size
-* Don't rely on the facilitator alone to update the board
+* Break the practice into many sessions.
+* Use breakout rooms to ideate in smaller size groups.
+* Do not rely on the facilitator alone to update the board.
 
 
 
