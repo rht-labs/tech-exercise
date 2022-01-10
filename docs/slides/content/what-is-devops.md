@@ -48,7 +48,7 @@ come to mind.
 ### The Three Ways of DevOps
 #### _The DevOps Handbook_
 #### by Gene Kim, et. al.
-![DevOps Handbook](images/devops/devopshandbook.jpg)
+![DevOps Handbook](images/DevOps/devopshandbook.jpg)
 
 
 
