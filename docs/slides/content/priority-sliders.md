@@ -55,7 +55,7 @@ _Priority Sliders are a visual tool for helping teams to agree about which work 
 
 
 
-### Why use it?
+### Why use Priority Sliders?
 _A practice that increases the autonomy of teams_
 - Enables alignment and consensus about areas of focus
 - Drives agreement, which is key because projects often involve trade-offs.
