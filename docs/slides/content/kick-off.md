@@ -20,6 +20,7 @@ Meet your classmates by collaboratively drawing each other's faces.
 
 ## Exercise
 #### Gather your apparatus 🔬🧑‍🔬
+<!--TechEditor: "apparatus is an odd word choice. I'd suggest something more straightforward, such as "tools" or "supplies" -->
 1. Take a large Post-it note and a Sharpie marker.
 2. Write your name on the top or bottom of the note (in portrait orientation).
 
@@ -28,6 +29,7 @@ Meet your classmates by collaboratively drawing each other's faces.
 
 ## Exercise
 #### Choose someone you've never met before
+<!-- Tech Editor: in the slides, these items do not display in the correct order. The display on click, bullets 3, 1, 2, then detailed list (Eyes, etc.) -->
 - Pass the Post-it note to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 - Set a 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
 - Draw a part of owner's face on the Post-it note:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
@@ -51,13 +53,13 @@ Do the unfamiliar pair swap post-it notes and each draws on their partner's note
 
 
 #### Why Use Ice Breakers?
-- An effective way of starting a team-building event
+- Provides an effective way to start a team-building event
 - Helps people get to know each other
 
-#### When to Use Ice Breakers?  
+#### When to Use Ice Breakers 
 - Participants come from different backgrounds
 - People need to bond quickly so they can work towards a common goal
-- The team is newly-formed.
+- The team is newly-formed
 
 
 
@@ -83,7 +85,7 @@ Do the unfamiliar pair swap post-it notes and each draws on their partner's note
 
 
 
-All of these things are Information Radiators - they display information realtime and publicly. 
+All of these things are Information Radiators - they display information in real time and publicly. 
 
 🥶 Don't be an Information Refrigerator 🧊
 
@@ -92,34 +94,34 @@ All of these things are Information Radiators - they display information realtim
 <!-- .slide: id="information-radiators"-->
 ### Information Radiators
 #### _An Information Radiator..._
-- Involves radiating and visually representing all aspects of work
-- Typically means information that is useful to team members, stakeholders and users is physically presented on walls, windows, doors and other flat surfaces and positioned in the line of sight of those people who will get value from consuming the information
-- Enables the ability to "Walk the Walls", where someone interested in the work can walk around the physical space the associated team(s) are working from and get all the information they need from inspecting artefacts on the wall and from the resulting conversations
+- Visually represents and radiates all aspects of work.
+- Typically, information useful to team members, stakeholders, and users is physically presented on walls, windows, doors, and other flat surfaces. Position the information in the line of sight of those people who get value from consuming it.
+- Enables someone interested in the work to "Walk the Walls," meaning they can walk around the physical space where associated teams are working and get all the information they need by inspecting artifacts on the walls and from the resulting conversations.
 
 
 
 ### Information Radiators
 #### _Why visualize work?_
-- Facilitates a transparent and open way of working
-- Avoids hiding information about status, progress, direction, challenges and opportunities related to a project
-- Where important information is constantly accessible and visible to people, both speed and accuracy of their work can improve with reduced wastage from having to search for information
-- It is more likely that the information is accurate because people are continuously being reminded of it
+- Facilitates a transparent and open way of working.
+- Avoids hiding information about status, progress, direction, challenges, and opportunities related to a project.
+- When important information is constantly accessible and visible to team members, both the speed and accuracy of their work can improve. Waste is reduced because the team spends less time searching for information.
+- It is more likely that the information is accurate because people are continuously reminded of it.
 
 
 
 ## Exercise - Animals
 ![Draw an animal](images/kick-off/animals.png)<!-- {.element: class="inline-image"} -->
 </br></br>
-Draw a simple representation of an animal that you feel represents your current mood
+Draw a simple representation of an animal that you feel represents your current mood.
 
 
 
 ## Back to the Animals!
-Introduce yourself to the group and share your animal   
+Introduce yourself to the group and share your animal.   
 - What is your name?
 - Where are you from?
 - What is your current role within your organization?
-- Show and Tell: your animal drawing
+- Show and Tell: Share your animal drawing
 
 
 
@@ -130,18 +132,18 @@ Introduce yourself to the group and share your animal
 
 #### What are your expectations for the week?
 
-* Everyone grab a pen and a few sticky notes
-* Individually write your expectations (one per sticky note)
-* Add them to a class board named expectations
-* Group them by affinity
-* Discuss comparing the course Target Outcomes
+* Everyone grab a pen and a few sticky notes.
+* Individually write your expectations (one per sticky note).
+* Add them to a class board named "Expectations."
+* Group the sticky notes by affinity.
+* Discuss expectations by comparing them to the course's Target Outcomes.
 
 
 
 #### _What are Target Outcomes?_
-- Are a tool to capture and articulate the goals and outcomes a team are striving to deliver
+- A tool to capture and articulate the goals and outcomes that a team is striving to deliver
 - Can include customer (end user) based outcomes as well as business and capability based outcomes
-- Often harnesses and summarizes the findings and learnings from other Discovery practices into a finite set of statements that can be publicly displayed for team and stakeholders to regularly reference
+- Harnesses and summarizes the findings and learnings from other Discovery practices into a finite set of statements that can be publicly displayed for team and stakeholders to regularly reference
 
 
 
@@ -151,22 +153,22 @@ Introduce yourself to the group and share your animal
 
 ### Learning Target Outcomes
 #### _What are **our** Target Outcomes?_
-- Generate enthusiasm for DevOps culture and practices
-- Explore all principle practices used in everyday discovery and delivery
+- Generate enthusiasm for DevOps culture and practices.
+- Explore all of the principle practices used in everyday discovery and delivery.
 - Have fun!
 
 
 
-#### Target Outcomes - World Health Organisation <!-- .element: class="title-bottom-left" --> 
+#### Target Outcomes - World Health Organization <!-- .element: class="title-bottom-left" --> 
 <!-- .slide: data-background-size="contain" data-background-image="images/kick-off/example-to-who.png" -->
 
 
 
 ### Exercise - Team Formation
-* Form a straight line across the room in order of relative technical experience in development engineering practices
-* Assign each person a number 1,2,3,4,1,2,3,4,1,2... to divide the group into balanced teams
-* Each member with the same number is on the same team  
-
+* Form a straight line across the room in order of relative technical experience in development engineering practices.
+* Assign each person a number, 1,2,3, or 4, to divide the group into balanced teams.
+* Each member assigned the same number is on the same team 
+<!-- TechEdit: this last bit seems awkward and unecessary aftery yuou already say in the previous bullet that the numbers are for grouping into teams. Everyone will understand. -- >
 
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
