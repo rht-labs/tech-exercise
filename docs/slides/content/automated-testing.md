@@ -41,7 +41,7 @@ needs that deeply connects the implementation to an evolving model of the core b
 * Places the project's primary focus on the core domain and domain logic
 * Bases complex designs on a model of the domain
 * Initiates a creative collaboration between technical and domain experts to iteratively refine a conceptual model to address domain problems
-* Bridges the gap between domain experts and developers by using the same language to create the same understanding
+* Bridges the gap between domain experts and developers by using the same language to create a shared understanding
 <!--TechEdit: I'd say "to create a shared understanding.">
 
 
