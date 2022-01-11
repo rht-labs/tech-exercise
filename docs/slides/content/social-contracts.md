@@ -27,7 +27,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-#### What is it?
+#### What is Team Identity?
 * Shared bond and shared purpose
 * Promotes a strong team culture of collective ownership
 * Enables psychological safety
@@ -55,7 +55,7 @@ A Social Contract codifies behavior and expectations for the team members.<!--{.
 
 
 
-#### Effective Social Contracts
+#### Effective Social Contracts Are
 - Publicly displayed
 - Revisited regularly and amended if required
 - Binding on *all* parties
