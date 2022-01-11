@@ -32,7 +32,7 @@ TL500 <!-- {.element: class="title-color"} -->
 * Promotes a strong team culture of collective ownership
 * Enables psychological safety
 * Converts groups of individuals into high performing teams
-* Critical for team's success
+* Critical to a team's success
 
 
 
@@ -51,11 +51,11 @@ TL500 <!-- {.element: class="title-color"} -->
 
 The Social Contract is a simple, yet highly effective manner to enable team autonomy and self accountability for engagements.<!--{.element: style="font-size: ; font-weight: 400!important;"} -->
 
-A Social Contract codifies behavior and expectations of the team between its members.<!--{.element: style="font-size: ; font-weight: 400!important;"} -->
+A Social Contract codifies behavior and expectations for the team members.<!--{.element: style="font-size: ; font-weight: 400!important;"} -->
 
 
 
-#### Effective Social Contracts are
+#### Effective Social Contracts
 - Publicly displayed
 - Revisited regularly and amended if required
 - Binding on *all* parties
@@ -63,26 +63,26 @@ A Social Contract codifies behavior and expectations of the team between its mem
 
 
 
-#### _Why use it?_
-* Provide a quick means to clearly determine team dynamics and expectations
-* Promote autonomy and self governing of team behavior
-* Keep the team consciously aware of how they work together
-* Establish empathy and context for future conversations between team members
+#### _Why Use a Social Contract?_
+* Provides a quick means to determine team dynamics and expectations
+* Promotes autonomy and self-governing of team behavior
+* Keeps the team consciously aware of how they work together
+* Establishes empathy and context for future conversations between team members
 * Enables psychological safety within the group
 
 
 
-#### _How do we do it?_
-1) Individually, write how you expect to work together
-    * Think about behaviours of really great teams you've worked with
-    * Think about terrible teams you've worked with
-3) Together, review and group the behaviours
-5) Sign the contract once consensus is reached
-6) Display the contract in a visible place
-7) Establish your team name (naming things is hard ...)
+#### _Creating a Social Contract_
+1) Individually, write down your expectations about working together.
+    * Think about behaviors exhibited by really great teams that you've worked with.
+    * Consider the behaviors of any terrible teams that you've worked with.
+3) Together, review and group the behaviors.
+5) After reaching consensus, sign the contract.
+6) Display the contract in a visible place.
+7) Establish your team name (naming things is hard).
 <br/>
 
-If you will work in multiple teams think about what are the aspects of your Social Contract that are appropriate for the entire group, so you can write the group social contract<!--{.element: style="font-size: medium; font-weight: 600!important;"} -->
+If you work on multiple teams, think about the aspects of your Social Contract that are appropriate for the entire group so you can write the group social contract.<!--{.element: style="font-size: medium; font-weight: 600!important;"} -->
 
 
 
@@ -93,12 +93,13 @@ If you will work in multiple teams think about what are the aspects of your Soci
 </br></br>
 
 1. In table groups, work together to:
-    - Establish a team name
-    - Talk about how you want to work together this week
+    - Choose a team name
+    - Discuss how you want to work together this week
     - Write your Social Contract
     - Record your team button
 </br></br>
-2. Think about any aspects of your Social Contract that are appropriate for the entire class so we can write the class Social Contract
+<!-- There's nothing in the slides about this "team button" so it's not clear what it means here.-->
+2. Think about any aspects of your Social Contract that are appropriate for the entire class so that we can write the class Social Contract.
 
 </div>
 <div class="col" data-markdown>
@@ -128,21 +129,22 @@ If you will work in multiple teams think about what are the aspects of your Soci
 
 
 #### Facilitation Tips
-Ensure things in the Social Contract are actionable. For example  "Be Open" has good intent but lacks specificity. Ask questions to tease our greater meanings.
+Ensure that things in the Social Contract are actionable. For example  "Be Open" has good intent, but lacks specificity. Ask questions to tease our greater meanings.
 </br>
 
-_"Can you give me an example of not being open?" could lead to actionable items like "Listen to others as I would like to be heard" or "Give space to the quiet person"._ <!--{.element: style="font-size: ; font-weight: 300!important;"} -->
+_"Can you give me an example of not being open?" can lead to actionable items like "Listen to others as I would like to be heard" or "Give space to the quiet person"._ <!--{.element: style="font-size: ; font-weight: 300!important;"} -->
 
 
 
 #### Example - WHO <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-image="images/social-contracts/real-life-example-2.png", data-background-size="contain", class="white-style" -->
 
-
+<!-- Tech Editor: I don't know what "WHO" stands for in this title. You've used World Health Organization before. If you intend to use it again, I'd write it out. -->
+<!-- Tech Editor: Similarly, I don't know what "used practices" means in the next title. Used by whom, for what? I'd just say "Related Practices" as the title. -->
 
 <!-- .slide: data-background-image="images/chef-background.png", data- class="white-style" -->
 ### Related & Used Practices
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
 * [Affinity Mapping](https://openpracticelibrary.com/practice/affinity-mapping/)
-* [Voting (fist of five, dot voting, ..)](https://openpracticelibrary.com/practice/confidence-voting/)
+* [Voting (fist of five, dot voting)](https://openpracticelibrary.com/practice/confidence-voting/)
 * [Retrospective](https://openpracticelibrary.com/practice/retrospectives/)
