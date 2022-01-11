@@ -27,7 +27,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-#### What is Team Identity?
+#### What is it?
 * Shared bond and shared purpose
 * Promotes a strong team culture of collective ownership
 * Enables psychological safety
@@ -63,7 +63,7 @@ A Social Contract codifies behavior and expectations for the team members.<!--{.
 
 
 
-#### _Why Use a Social Contract?_
+#### _Why use it?_
 * Provides a quick means to determine team dynamics and expectations
 * Promotes autonomy and self-governing of team behavior
 * Keeps the team consciously aware of how they work together
@@ -72,7 +72,7 @@ A Social Contract codifies behavior and expectations for the team members.<!--{.
 
 
 
-#### _Creating a Social Contract_
+#### _How do we do it?_
 1) Individually, write down your expectations about working together.
     * Think about behaviors exhibited by really great teams that you've worked with.
     * Consider the behaviors of any terrible teams that you've worked with.
@@ -139,8 +139,6 @@ _"Can you give me an example of not being open?" can lead to actionable items li
 #### Example - WHO <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-image="images/social-contracts/real-life-example-2.png", data-background-size="contain", class="white-style" -->
 
-<!-- Tech Editor: I don't know what "WHO" stands for in this title. You've used World Health Organization before. If you intend to use it again, I'd write it out. -->
-<!-- Tech Editor: Similarly, I don't know what "used practices" means in the next title. Used by whom, for what? I'd just say "Related Practices" as the title. -->
 
 <!-- .slide: data-background-image="images/chef-background.png", data- class="white-style" -->
 ### Related & Used Practices
