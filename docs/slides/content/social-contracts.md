@@ -140,6 +140,7 @@ _"Can you give me an example of not being open?" can lead to actionable items li
 <!-- .slide: data-background-image="images/social-contracts/real-life-example-2.png", data-background-size="contain", class="white-style" -->
 
 
+
 <!-- .slide: data-background-image="images/chef-background.png", data- class="white-style" -->
 ### Related & Used Practices
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
