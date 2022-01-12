@@ -32,17 +32,17 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### 🧑‍🏫 Learning outcomes 🧑‍💻
-As a learner, by the end of this exercise I ...
-* can manage Application Config via git
-* can automatically build / bake / deploy software Jenkins or Tekton
-* can store secrets used by my pipeline securely in git
-<!--
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Manage Application Configs via git
+* Automatically build / bake / deploy software Jenkins or Tekton
+* Store secrets used by my pipeline securely in git
+<!--Tech Editor:"...deploy software by using Jenkins or Tekton"
 --->
 
 
 
-#### What is a pipeline
+#### What Is a Pipeline?
 ![derek](https://miro.medium.com/max/1400/1*OD6N_1evXg9ffzT47oJx-Q.jpeg)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
@@ -76,7 +76,7 @@ As a learner, by the end of this exercise I ...
 
 
 
-_The job of a Pipeline is to prove that your code is **not** ready for production._
+_The purpose of a pipeline is to prove that your code is **not** ready for production._
 
 
 
@@ -87,7 +87,7 @@ _The job of a Pipeline is to prove that your code is **not** ready for productio
 ### Continuous Integration
 Continuous Integration (**CI**) is a development practice where developers integrate code into a shared repository frequently, preferably several times a day.
 
-These actions are repeated frequently ensuring that the code base can **continuously integrate**.
+These actions are repeated often to ensure that the code base can **continuously integrate**.
 
 
 
@@ -98,19 +98,19 @@ These actions are repeated frequently ensuring that the code base can **continuo
 
 ### Continuous Integration
 #### _Why do it?_
-* Automated testing reduces busy work and improves software quality
-* Small, regular code commits reduce the number of integration problems
-* Rapid feedback loops make it easier for new contributors to get started
-* Shipping of functional software in small increments is more enjoyable than waiting for someone to manually test a giant code change
+* Automated testing reduces busy work and improves software quality.
+* Small, regular code commits reduce the number of integration problems.
+* Rapid feedback loops make it easier for new contributors to get started.
+* Shipping of functional software in small increments is more enjoyable than waiting for someone to manually test a giant code change.
 
 
 
 ### Continuous Integration
 #### _How do we do it?_
-* Developers submit **small and frequent changes** to the source code
-* **Automated** build and test steps are run to ensure code works as expected
-* Developers are notified if anything fails and developers react quickly to fix
-* The tests and build steps are typically run in an automation server (Tekton, Jenkins, GitLab CI/CD, Apache Airflow...)
+* Developers submit **small and frequent changes** to the source code.
+* **Automated** build and test steps are run to ensure code works as expected.
+* Developers are notified if anything fails and can react quickly to fix it.
+* The tests and build steps are typically run on an automation server (for example, Tekton, Jenkins, GitLab CI/CD, Apache Airflow).
 
 
 
@@ -130,7 +130,7 @@ These actions are repeated frequently ensuring that the code base can **continuo
 
 
 ### Continuous Delivery
-Continuous delivery (**CD**)  is an extension of continuous integration since it automatically deploys all code changes to a testing and/or staging environment after the build stage.
+Continuous delivery (**CD**)  is an extension of continuous integration because it automatically deploys all code changes to a testing and/or staging environment after the build stage.
 
 This delivers our software to the doorway of production.
 
@@ -153,10 +153,10 @@ This delivers our software to the doorway of production.
 
 ### Continuous Delivery
 #### _Why do it?_
-* Automation reduces the manual work required to do a release
-* Faster feedback cycles from quality engineers, product owners, and stakeholders
-* Produces a happier operations team
-* Prepares the way for push button deployments
+* Automation reduces the manual work required to perform a release.
+* Results in faster feedback cycles from quality engineers, product owners, and stakeholders.
+* Produces a happier operations team.
+* Prepares the way for push button deployments.
 
 
 
@@ -167,7 +167,7 @@ This delivers our software to the doorway of production.
 
 
 ### Continuous Deployment
-Continuous deployment (**CD**) is a strategy for software releases wherein any code that has been committed which passes the automated testing phase is automatically released into the production environment, making changes that are visible to the software's users.
+Continuous deployment (**CD**) is a strategy for software releases whereby any code that has been committed and passes the automated testing phase is automatically released into the production environment making the changes visible to the software's users.
 
 
 
@@ -178,32 +178,31 @@ Continuous deployment (**CD**) is a strategy for software releases wherein any c
 
 ### Continuous Deployment
 #### _What is It?_
-* Software development practice
-* Development team maintains software so that it can be **released to production** at any moment
-* Builds upon the practices of **continuous integration** and **continuous delivery**
-* Software configuration and deployment orchestration becomes part of the
-development team's duty to maintain the software
+* A software development practice
+* The development team maintains software so that it can be **released to production** at any moment.
+* Builds upon the practices of **continuous integration** and **continuous delivery**.
+* Software configuration and deployment orchestration becomes a part of the
+development team's duty to maintain the software.
 
 
 
 ### Continuous Deployment
 #### _Why do it?_
-* Team maintains deployable code and configuration over new features
-* Fast feedback from end users
-* Features can be pushed out after completion
-* Enforces best practice of **eveything as code**
-* Configuration and deployment orchestration needs to be part of automation
+* Helps the team maintain deployable code and configuration over new features
+* Provides fast feedback from end users
+* Enables pushing features out after completion
+* Enforces a best practice of **eveything as code**
+* Includes configuration and deployment orchestration as part of automation
 * Enables quick rollbacks and recovery from failures
 
 
 
 ### Continuous Deployment
 #### _How do we do it?_
-* Collaborate closely with everyone involved in deployment and delivery of software
-to production
-* Automate everything as much as possible
-* Build "feature toggles" or "dark launches" to allow for quick rollback if needed
-* Provide adequate automated monitoring of the application
+* Collaborate closely with everyone involved in the deployment and delivery of software to production.
+* Automate everything as much as possible.
+* Build "feature toggles" or "dark launches" to allow for quick rollback if needed.
+* Provide adequate automated monitoring of the application.
 
 
 
@@ -211,11 +210,11 @@ to production
 
 
 
-_By separating CI from CD we will first deploy Pet Battle and its supporting infra (Keycloak) from Git using ArgoCD's App of Apps pattern._
+_By separating CI from CD, we will first deploy Pet Battle and its supporting infra (Keycloak) from Git by using ArgoCD's App of Apps pattern._
 
-_With this in place we will create two pipelines, one for the frontend and one for the api._
+_With this in place, we will create two pipelines, one for the front end and one for the API._
 
-_The frontend (AngularJS) will use Jenkins and the backend (Quarkus with MongoDB) Tekton._
+_The front end (AngularJS) will use Jenkins and the back end (Quarkus with MongoDB) will use Tekton._
 
 
 
@@ -225,20 +224,20 @@ _The frontend (AngularJS) will use Jenkins and the backend (Quarkus with MongoDB
 
 
 ### 💥 Mob to Learn 💥
-* Ensure you have completed at least the [Extend the UJ](https://rht-labs.com/tech-exercise/#/1-the-manual-menace/4-extend-uj?id=extend-uj-with-a-another-tool-eg-nexus) excersise from Lab 1
-* Continue to Mob for the first two parts of this exercise
-  * Sealed Secrets - adding secrets to be used by the pipeline with GitOps
-  * Application of Applications - sets up the config repo the pipeline will integrate with
+* Ensure that you have completed at least the [Extend the UJ](https://rht-labs.com/tech-exercise/#/1-the-manual-menace/4-extend-uj?id=extend-uj-with-a-another-tool-eg-nexus) exercise from Lab 1.
+* Continue to Mob for the first two parts of this exercise.
+  * Sealed Secrets - adding secrets that are used by the pipeline with GitOps
+  * Application of Applications - setting up the config repo with which the pipeline will integrate.
 
 
 
 ### 💥 Pair to build 💥
-Split into 2 groups within your team for [The Pipelines](https://rht-labs.com/tech-exercise/#/2-attack-of-the-pipelines/3-the-pipelines) section:
+Split into 2 groups within your team for [The Pipelines](https://rht-labs.com/tech-exercise/#/2-attack-of-the-pipelines/3-the-pipelines) section.
 
-* 🐈‍⬛ Jenkins Group 🐈‍⬛	- will automate the front components of Pet Battle
-* 🐅 Tekton Group 🐅 - will automate the backend components of Pet Battle API
+* 🐈‍⬛ Jenkins Group 🐈‍⬛	will automate the front end components of Pet Battle.
+* 🐅 Tekton Group 🐅 will automate the back end components of the Pet Battle API.
 
-Choose your own adventure but both half of the teams must be successful to finish the exercise!
+Choose your own adventure, but both groups must be successful to finish the exercise!
 
 
 
@@ -247,7 +246,7 @@ Choose your own adventure but both half of the teams must be successful to finis
 
 
 #### Feedback
-* Q&A
+* Q & A
 * Real World Stories
 * Pull Requests Welcome 🦄
 
@@ -255,19 +254,21 @@ Choose your own adventure but both half of the teams must be successful to finis
 
 #### WHO - Pipelines <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+<!--Tech Edit - this slide is empty except for the heading. -->
 
 
 
 #### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+<!--Tech Edit - this slide is empty except for the heading. -->
 
 
 
 ### Summary
-* **Continuous Integration**: Integrate several changes into a shared repo and rely heavily on testing to make sure that the changes and commits works and have passed all (unit testing / code quality / code conduct).
-* **Continuous Delivery**: The goal is to have a working artifact that's ready to be deployed at any time. It relies on testing and automation to make sure that it has passed all functional tests and can be Manually deployed (push button).
-* **Continuous Deployment/Release**: One step further now that we are sure that this is ready to deploy to production then we can rely on features toggle, dark launches or other deployment strategy to promote to other critical environments asap using these techniques for the new features/fixes won't risk the operation.
-
+* **Continuous Integration**: Integrate several changes into a shared repository and rely heavily on testing to make sure that the changes and commits work and have passed all tests (unit testing / code quality / code conduct).
+* **Continuous Delivery**: The goal is to have a working artifact that's ready to be deployed at any time. It relies on testing and automation to make sure that it has passed all functional tests and can be manually deployed (push button).
+* **Continuous Deployment/Release**: A further step, now that we are sure this artifact is ready to deploy to production, is to rely on features toggle, dark launches, or other deployment strategies to promote this artifact to other critical environments. By using these techniques for the new features/fixes, we can release them immediately without risking the operation.
+<!--TechEdit: This last bullet didn't make sense as written, it was sort of a long run-on. I've rewritten, please check. -->
 
 
 ### Summary
