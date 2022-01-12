@@ -12,7 +12,7 @@ TL500 <!-- .element: class="title-color" -->
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>🔥 Everything as code 🦄</h2>
+  <h2>🔥 Everything as Code 🦄</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
@@ -31,7 +31,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### 🧑‍🏫 Learning outcomes 🧑‍💻
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
 As a learner, I can perform the following tasks by the end of this exercise:
 * Deploy helm charts manually
 * Do everything as code 
