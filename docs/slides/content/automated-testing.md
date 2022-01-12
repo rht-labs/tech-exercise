@@ -245,7 +245,7 @@ Many times people will have built cool things that they didn't have tests for. W
  - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
  - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
 
-"The goal is to integrate the elements that you built previously into the project selected by the table group." -->
+- The goal is to integrate the elements that you built previously into the project selected by the table group.<!-- {.element: class="fragment" data-fragment-index="3"} -->
 
 
 
