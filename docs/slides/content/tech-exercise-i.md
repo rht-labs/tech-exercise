@@ -32,7 +32,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 #### 🧑‍🏫 Learning outcomes 🧑‍💻
-As a learner, by the end of this exercise I can:
+As a learner, I can perform the following tasks by the end of this exercise:
 * Deploy helm charts manually
 * Do everything as code 
 * Articulate the benefits gained from GitOps
