@@ -244,6 +244,8 @@ Many times people will have built cool things that they didn't have tests for. W
  - As a table group, pick a project to build. Projects must be something complex that has lots of different elements in it. Some examples, if you're stuck, might include a _zoo_, a _shopping center_, a _spaceship_, or a _city_.
  - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
  - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
+
+
 "The goal is to integrate the elements that you built previously into the project selected by the table group." -->
 
 
