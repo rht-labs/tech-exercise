@@ -114,8 +114,7 @@ How did you reach consensus?
 #### Facilitation Tips
 * Topics are not product features but product area are team-building topics.
 <!--Tech Editor: I don't understand this first bullet, and "product area are team building topics" has a subject-verb agreement error and is unclear. The first part is ok, "topics are not product features", but the second part confused me. Please edit for better clarity. -->
-* Bring to your Sprint Planning: can be used as a filtering mechanism for product backlog items prioritization.
-<!--TechEdit: Does this mean "Bring priority slider artifacts to sprint planning to use when prioritizing items in the backlog." Please update. -->
+* Bring priority slider artifacts to sprint planning to use when prioritizing items in the backlog.
 * The Customer team defines the priorities.
 * Prioritization is not static. Although the work we are doing takes us towards one priority, things can change. Treat this as a dynamic artifact.
 
