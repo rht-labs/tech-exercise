@@ -52,15 +52,15 @@ computer.
 
 ##### Why do it?
 #### Pair Programming
-* Enables knowledge sharing between team members.
-* Increases the quality of work because it is reviewed and improved simultaneously.
-* Builds trust between team members.
+* Enables knowledge sharing between team members
+* Increases the quality of work because it is reviewed and improved simultaneously
+* Builds trust between team members
 </br>
 </br>
 
 #### Mob Programming
-* Ensures that the whole team understands how a specific feature is implemented or a problem is solved. 
-* Provides a quick way to onboard new team members.
+* Ensures that the whole team understands how a specific feature is implemented or a problem is solved
+* Provides a quick way to onboard new team members
 
 
 
@@ -138,6 +138,7 @@ computer.
 - **No pull requests:** Code is reviewed as it's written, avoiding superficial reviews. The temptation to cut corners is reduced when pairing because someone is watching.
 - **Team bonding:** Pair and mob programming facilitates interactions. A room with mob and pair programming going on is louder. Happy coders lead to better code.
 <!--TechEdit: this bit about "is louder" - is that a key takeaway? Does it imply something positive or negative? Usually, "loud" has a more negative connotation, so maybe a word other than "loud" would be better or say why "loud" is good, such as "... is loud because team members are fully engaged." I would probably rephrase - "loud" isn't the point, but rather engagement, I think.-->
+
 
 
 ##### Key Takeaways
