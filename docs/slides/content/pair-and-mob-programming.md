@@ -52,34 +52,34 @@ computer.
 
 ##### Why do it?
 #### Pair Programming
-* Enable knowledge sharing between team members.
-* Increased quality of work as it is reviewed and improved simultaneously.
-* Building of trust between team members.
+* Enables knowledge sharing between team members.
+* Increases the quality of work because it is reviewed and improved simultaneously.
+* Builds trust between team members.
 </br>
 </br>
 
 #### Mob Programming
-* Ensures the whole team understands how a specific feature is implemented or problem is solved. 
-* It can also be a quick way to onboard new team members.
+* Ensures that the whole team understands how a specific feature is implemented or a problem is solved. 
+* Provides a quick way to onboard new team members.
 
 
 
 ##### How do we do it?
 #### Pair Programming
-* The team member behind the keyboard and mouse is the driver. The driver is focused on performing the actual work.
-* The other team member is the navigator or observer. The navigator is focused on the strategic outcome of the work being performed.
-* The navigator reviews the work being performed by the driver as it is done.
-* While reviewing, the navigator keeps in mind the end goal and ensures the current task is working towards it.
-* Switch the roles often, for example every 15 minutes, for the team members to experience the different aspects of the work.
+* The team member behind the keyboard and mouse is the driver. The driver focuses on performing the actual work.
+* The other team member is the navigator or observer. The navigator focuses on the strategic outcome of the work the driver is performing.
+* The navigator reviews the driver's work while it is done.
+* While reviewing, the navigator focuses on the end goal and ensures the current task is working towards it.
+* Switch the roles often, for example, every 15 minutes, so that the team members experience the different aspects of the work.
 
 
 
 ##### How do we do it?
 #### Mob Programming
-* Mob programming involves the whole team working on a single piece of functionality at the same time. The easiest way to mob program is to have one team member driving a laptop that is connected to a large screen or projector.
-* The person behind the keyboard and mouse is usually called "Driver" and the others would be "Navigators". This role should be rotated if working on implementation.
-* When using this practice for knowledge sharing then rotation is not necessary.
-* The whole team then implement the feature together by talking through the development together.
+* Mob programming involves the whole team working on a single piece of functionality simultaneously. The easiest way to mob program is to have one team member driving a laptop that is connected to a large screen or projector.
+* The person behind the keyboard and mouse is the driver and the other team members are the navigators. 
+* Rotate the roles frequently while working on implementations. If you use this practice for knowledge sharing, then rotation is not necessary.
+* Finally, the whole team implements the feature together by talking through the development.
 
 
 
@@ -91,7 +91,7 @@ computer.
 
 #### Individual Drawing
 
-1. Everyone grab a small post-it.
+1. Everyone grab a small sticky note.
 2. Each person grab a different color pen.
 3. Draw Steven Tyler on your own sticky note.
 
@@ -100,7 +100,7 @@ computer.
 #### Pair Drawing
 
 1. Assemble in pairs (or trios if there is an odd number).
-2. Each pair grab a medium post-it.
+2. Each pair grab a medium sticky note.
 3. Take turns drawing an element of Steven Tyler.
 
 
@@ -108,7 +108,7 @@ computer.
 #### Mob Drawing
 
 1. Assemble in table groups.
-2. Each table use an easel post-it.
+2. Each table grab an easel pad.
 3. Take turns drawing an element of Steven Tyler.
 
 
@@ -127,7 +127,7 @@ computer.
 
 
 
-### A day of Mob Programming
+### A Day of Mob Programming
 <iframe width="1200" height="900" src="https://www.youtube.com/embed/dVqUcNKVbYg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen></iframe>
 
 
@@ -135,13 +135,13 @@ computer.
 ##### Key Takeaways
 - **Mentoring of team members:** Sharing tips and tricks or shortcuts can widen both pairs' skill depth. This sharing can also bring junior associates up to speed very rapidly.
 - **Half the code:** Two minds working on the same problem makes for more efficiently written code, so less spaghetti.
-- **No pull requests:** code is being reviewed as it's written avoiding superficial reviews. They won't cut corners when pairing as someone is watching.
+- **No pull requests:** Code is reviewed as it's written, avoiding superficial reviews. The temptation to cut corners is reduced when pairing because someone is watching.
 - **Team bonding:** Pair and mob programming facilitates interactions. A room with mob and pair programming going on is louder. Happy coders lead to better code.
-
+<!--TechEdit: this bit about "is louder" - is that a key takeaway? Does it imply something positive or negative? Usually, "loud" has a more negative connotation, so maybe a word other than "loud" would be better or say why "loud" is good, such as "... is loud because team members are fully engaged." I would probably rephrase - "loud" isn't the point, but rather engagement, I think.-->
 
 
 ##### Key Takeaways
-- **The knowledge stays in the team:**  when holidays or even flu season take over, the team can still continue to work at pace knowing the Unicorn is not leaving with key information.
+- **The knowledge stays in the team:**  When holidays or flu season take over, the team can still continue to work at pace knowing the Unicorn is not leaving with key information.
 </br>
 
 ![unicorns](images/pair-and-mob-programming/unicorns.jpg)<!-- {.element: class="image-no-shadow"} -->
