@@ -20,7 +20,6 @@ Meet your classmates by collaboratively drawing each other's faces.
 
 ## Exercise
 #### Gather your apparatus 🔬🧑‍🔬
-<!--TechEditor: "apparatus is an odd word choice. I'd suggest something more straightforward, such as "tools" or "supplies" -->
 1. Take a large Post-it note and a Sharpie marker.
 2. Write your name on the top or bottom of the note (in portrait orientation).
 
@@ -29,7 +28,6 @@ Meet your classmates by collaboratively drawing each other's faces.
 
 ## Exercise
 #### Choose someone you've never met before
-<!-- Tech Editor: in the slides, these items do not display in the correct order. The display on click, bullets 3, 1, 2, then detailed list (Eyes, etc.) -->
 - Pass the Post-it note to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 - Set a 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
 - Draw a part of owner's face on the Post-it note:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
@@ -168,8 +166,6 @@ Introduce yourself to the group and share your animal.
 * Form a straight line across the room in order of relative technical experience in development engineering practices.
 * Assign each person a number, 1,2,3, or 4, to divide the group into balanced teams.
 * Each member assigned the same number is on the same team 
-<!-- TechEdit: this last bit seems awkward and unecessary aftery yuou already say in the previous bullet that the numbers are for grouping into teams. Everyone will understand. -- >
-
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
 ### Related & Used Practices
