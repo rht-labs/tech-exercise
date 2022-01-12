@@ -27,11 +27,11 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 #### _What is it?_
-When you hear someone say that they are now doing agile, their team is using agile, or their organization has adopted agile, there's a very strong chance that what they are actually doing is some form of Scrum. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+When you hear someone say that they are doing Agile, their team is using Agile, or their organization has adopted Agile, there's a very strong chance that what they are actually doing is some form of Scrum. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 </br></br>
 
 ##### Scrum is not the same as agile. 
-Agile is an ideology. It is underpinned by those values and principles set out in the Agile Manifesto. Scrum is one of several frameworks that instantiates Agile and makes the principles a reality through a group of practices. It is also, by far, the most popular Agile framework. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+Agile is an ideology. It is underpinned by those values and principles set out in the Agile Manifesto. Scrum is one of several frameworks that embodies Agile and makes the principles a reality through a group of practices. It is also, by far, the most popular Agile framework. <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 
 
@@ -42,9 +42,9 @@ Agile is an ideology. It is underpinned by those values and principles set out i
 
 ### Origins of Scrum
 ![Scrum](images/scrum/scrum.jpg) <!-- {.element: class="inline-image"} -->
-* Rugby term: used to restart play
-* 1986 Hirotaka Takeuchi and Ikujiro Nonaka published [The New New Product Development Game](https://hbr.org/1986/01/the-new-new-product-development-game)
-* 1990 Jeff Sutherland and Ken Schwaber used scrum for software development
+* A Rugby term used to restart play
+* In 1986, Hirotaka Takeuchi and Ikujiro Nonaka published [The New New Product Development Game](https://hbr.org/1986/01/the-new-new-product-development-game).
+* In 1990, Jeff Sutherland and Ken Schwaber used Scrum for software development.
 
 
 
@@ -56,7 +56,7 @@ Agile is an ideology. It is underpinned by those values and principles set out i
 Because of the simplicity of Scrum!
 </br>
 
-Often people confuse the many (now hundreds) of practices associated with Agile as being Scrum. In fact, Scrum has very few practices. We tend to describe them as the 3-5-3 of Scrum (which sounds a bit like a formation for a sports team!). <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+Often, people confuse the many (now hundreds) of practices associated with Agile as being Scrum. In fact, Scrum has very few practices. We tend to describe them as the 3-5-3 of Scrum (which sounds a bit like a formation for a sports team). <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 
 
@@ -66,8 +66,8 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 
 #### 3 Key Roles in Scrum
-* **Product Owner** - Conveys the message of envisioned product and sets priorities for team
-* **Scrum Master** - Coaches team on Scrum process and helps iterate towards a productive environment
+* **Product Owner** - Conveys the message of the envisioned product and sets priorities for team
+* **Scrum Master** - Coaches the team on Scrum the process and helps iterate towards a productive environment
 * **Development Team Members** - Self-organize to transform backlog items into a potentially releasable product increment
 
 
@@ -76,16 +76,16 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 | Scrum Event | Purpose |
 | --- | --- |
 | **Sprint Planning** | Commit to a set of defined work as a team for the upcoming sprint cycle. The end result is the Sprint Backlog. |
-| **Daily Standup** | Daily sync to share common understanding of the goals, coordinate the team effort, report on progress of work, and to communicate problems and improvements. |
+| **Daily Standup** | Daily sync to share common understanding of the goals, coordinate the team effort, report on progress of work, and communicate problems and improvements. |
 | **Sprint Review** | Review what was completed during the sprint with all relevant stakeholders to collect feedback. |
 | **Sprint Retrospective** | Help teams reflect on their internal team process with the goal to continuously improve. |
-| **Sprint** | A time boxed event that brings the team towards the goal set for that iteration and ends with reviewing the product increment. |
+| **Sprint** | A time-boxed event that moves the team towards the goal set for that iteration and ends with reviewing the product increment. |
 
 
 
 #### 3 Key Artifacts in Scrum
 * **Product Backlog** - Set of all baseline requirements prioritized for the team
-* **Sprint Backlog** - Subset of the Product Backlog the team agreed to pull into the Sprint to work on
+* **Sprint Backlog** - Subset of the Product Backlog that the team agreed to pull into the Sprint to work on
 * **Product Increment** - The most important artifact that is produced at the end of each Sprint
 
 
@@ -97,7 +97,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 ### Exercise - The Ball Game (Setup)
 
-#### In Your Groups
+#### In your groups
 ![sprint](images/scrum/estimate-actual.png)<!-- .element: class="inline-image" -->
 1. Draw a table with two columns and three rows.
 2. Record your estimate for an iteration.
@@ -132,9 +132,10 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 
 ### Facilitation Tips
-* A single slice doesn't mean in scope and out of scope
+* A single slice doesn't mean in scope or out of scope.
 * Same slice size doesn't mean each slice is the goal of a sprint
-* If possible add target outcomes as grouping for the Value slice, it gives the benefit to be linked to business goals
+* If possible, add target outcomes as grouping for the Value slice because it links to business goals.
+<!--TechEdit: the first couple of bullets here are not self-explanatory to me. Be sure they are to the audience. -->
 
 
 
@@ -142,7 +143,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 ### Related & Used Practices
 - Sprint practices:
   - [Planning](https://openpracticelibrary.com/practice/iteration-planning/)
-  - [Daily Scrum (often known as the Daily Stand-Up)](https://openpracticelibrary.com/practice/daily-standup/)
+  - [Daily Scrum (often called the Daily Stand-Up)](https://openpracticelibrary.com/practice/daily-standup/)
   - [Review (sometimes called the Showcase)](https://openpracticelibrary.com/practice/showcase/)
   - [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
 - [Product Backlog Refinement](https://openpracticelibrary.com/practice/backlog-refinement)
