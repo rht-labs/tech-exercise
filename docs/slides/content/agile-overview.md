@@ -9,7 +9,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-## Exercise - What is Agile?...
+## Exercise - What is Agile?
 _Answer the question "What is Agile?"_
 1. Everyone grab one sticky note.
 2. Answer the question "What is Agile?" with one or two words that first
@@ -19,7 +19,7 @@ come to mind.
 
 
 <!-- .slide: id="agile"-->
-### Where did agile come from?
+### Where Did Agile Come From?
 February 2001: Snowbird Resort, Utah, United States
 ![Utah](images/agile/USA_UT.png) <!-- {.element: class="inline-image"} -->
 * 17 software developers
@@ -57,7 +57,7 @@ February 2001: Snowbird Resort, Utah, United States
 * Our highest priority is to satisfy the customer through early and
 continuous delivery of valuable software.
 * Welcome changing requirements, even late in development. Agile processes harness change for the customer's competitive advantage.
-* Deliver working software frequently, from a couple of weeks to a couple of months, with a preference to the shorter timescale.
+* Deliver working software frequently, from a couple of weeks to a couple of months, with a preference for the shorter timescale.
 * Business people and developers must work together daily throughout the project.
 
 * Build projects around motivated individuals. Give them the environment and support they need, and trust them to get the job done.
@@ -75,16 +75,17 @@ continuous delivery of valuable software.
 
 
 
-### Exercise - Pocket Sized Principles
-Working in teams:
+### Exercise - Pocket-sized Principles
+Working in teams
 1. On a piece of paper make room for 12 boxes.
-2. For each box, write 2 to 3 words maximum that effectively capture each of the 12 principles.
+<!--TechEdit: this instruction seems odd, "make room for" on a piece of paper isn't something one can actually do. Give the action directly. "On a piece of paper, draw 12 boxes." -->
+2. For each box, write 2 or 3 words that effectively capture each of the 12 principles.
 
 http://tastycupcakes.org/2010/01/pocket-sized-principles/ <!-- {.element: class="small"} -->
 
 
 
-### Pocket Sized Principles Examples
+### Pocket-sized Principles Examples
 | | | | |
 |---|---|---|---|
 | 1. Satisfy the customer | 2. Welcome change | 3. Deliver frequently | 4. Work together |
@@ -99,7 +100,7 @@ http://tastycupcakes.org/2010/01/pocket-sized-principles/ <!-- {.element: class=
 
 
 ### Increased Visibility
-The agile approach can lead to increased visibility within projects as deliverables are typically built and tested by real users much sooner than with the traditional approach.
+The agile approach can lead to increased visibility within projects because deliverables are typically built and tested by real users much sooner than with the traditional approach.
 
 
 
@@ -109,12 +110,12 @@ Because the agile approach heavily relies on iterative processes and review, agi
 
 
 ### Increased Business Value
-With the agile approach, business value can increase much sooner than with the traditional approach. And because of continuous improvement and feedback cycles, the value is able to be sustained and maximized for the duration of the project.
+With the agile approach, business value can increase much sooner than with the traditional approach. Because of continuous improvement and feedback cycles, the value can be sustained and maximized for the duration of the project.
 
 
 
 ### Minimized Risk
-The agile approach can minimize risk by getting a working piece of software into the user's hands faster, while allowing for fast updates per user feedback. This ensures that customers are involved early in the process, while continuing to maintain a steady, incremental path toward the desired solution.
+The agile approach can minimize risk by getting a working piece of software into the user's hands faster, while allowing for fast updates based on user feedback. This ensures that customers are involved early in the process, while continuing to maintain a steady, incremental path toward the desired solution.
 
 
 
@@ -134,5 +135,5 @@ The agile approach can minimize risk by getting a working piece of software into
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
-### DevOps practices used in this section:
+### DevOps Practices Used in This Section
 - [Agile Manifesto](https://agilemanifesto.org)
