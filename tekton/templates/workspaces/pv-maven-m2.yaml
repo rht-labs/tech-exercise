@@ -9,7 +9,6 @@ spec:
   resources:
     requests:
       storage: 3Gi
-  storageClassName: gp2
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
