@@ -77,8 +77,7 @@ continuous delivery of valuable software.
 
 ### Exercise - Pocket-sized Principles
 Working in teams
-1. On a piece of paper make room for 12 boxes.
-<!--TechEdit: this instruction seems odd, "make room for" on a piece of paper isn't something one can actually do. Give the action directly. "On a piece of paper, draw 12 boxes." -->
+1. On a piece of paper draw 12 boxes.
 2. For each box, write 2 or 3 words that effectively capture each of the 12 principles.
 
 http://tastycupcakes.org/2010/01/pocket-sized-principles/ <!-- {.element: class="small"} -->
