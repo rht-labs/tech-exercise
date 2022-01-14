@@ -98,7 +98,6 @@ If you work on multiple teams, think about the aspects of your Social Contract t
     - Write your Social Contract
     - Record your team button
 </br></br>
-<!-- There's nothing in the slides about this "team button" so it's not clear what it means here.-->
 2. Think about any aspects of your Social Contract that are appropriate for the entire class so that we can write the class Social Contract.
 
 </div>
