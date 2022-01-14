@@ -135,7 +135,6 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 * A single slice doesn't mean in scope or out of scope.
 * Same slice size doesn't mean each slice is the goal of a sprint
 * If possible, add target outcomes as grouping for the Value slice because it links to business goals.
-<!--TechEdit: the first couple of bullets here are not self-explanatory to me. Be sure they are to the audience. -->
 
 
 
