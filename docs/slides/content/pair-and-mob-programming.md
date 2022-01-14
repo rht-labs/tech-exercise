@@ -137,7 +137,6 @@ computer.
 - **Half the code:** Two minds working on the same problem makes for more efficiently written code, so less spaghetti.
 - **No pull requests:** Code is reviewed as it's written, avoiding superficial reviews. The temptation to cut corners is reduced when pairing because someone is watching.
 - **Team bonding:** Pair and mob programming facilitates interactions. Instead of sitting in a room with headphones on, ignoring the world around, developers in pairs or mobs look engaged and happier. Happy coders lead to better code.
-<!--TechEdit: this bit about "is louder" - is that a key takeaway? Does it imply something positive or negative? Usually, "loud" has a more negative connotation, so maybe a word other than "loud" would be better or say why "loud" is good, such as "... is loud because team members are fully engaged." I would probably rephrase - "loud" isn't the point, but rather engagement, I think.-->
 
 
 
