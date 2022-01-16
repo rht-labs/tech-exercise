@@ -35,10 +35,8 @@ TL500 <!-- .element: class="title-color" -->
 #### 🧑‍🏫 Learning Outcomes 🧑‍💻
 As a learner, I can perform the following tasks by the end of this exercise:
 * Manage Application Configs via git
-* Automatically build / bake / deploy software Jenkins or Tekton
+* Automatically build / bake / deploy software by using Jenkins or Tekton
 * Store secrets used by my pipeline securely in git
-<!--Tech Editor:"...deploy software by using Jenkins or Tekton"
---->
 
 
 
@@ -253,14 +251,13 @@ Choose your own adventure, but both groups must be successful to finish the exer
 
 
 #### WHO - Pipelines <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
-<!--Tech Edit - this slide is empty except for the heading. -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/who-pipeline-1.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
 #### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
-<!--Tech Edit - this slide is empty except for the heading. -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/who-app-of-apps.png", class="black-style" data-background-opacity="1"	 -->
+<!--Let's try to find a better quality image here. -->
 
 
 
@@ -268,7 +265,7 @@ Choose your own adventure, but both groups must be successful to finish the exer
 * **Continuous Integration**: Integrate several changes into a shared repository and rely heavily on testing to make sure that the changes and commits work and have passed all tests (unit testing / code quality / code conduct).
 * **Continuous Delivery**: The goal is to have a working artifact that's ready to be deployed at any time. It relies on testing and automation to make sure that it has passed all functional tests and can be manually deployed (push button).
 * **Continuous Deployment/Release**: A further step, now that we are sure this artifact is ready to deploy to production, is to rely on features toggle, dark launches, or other deployment strategies to promote this artifact to other critical environments. By using these techniques for the new features/fixes, we can release them immediately without risking the operation.
-<!--TechEdit: This last bullet didn't make sense as written, it was sort of a long run-on. I've rewritten, please check. -->
+
 
 
 ### Summary

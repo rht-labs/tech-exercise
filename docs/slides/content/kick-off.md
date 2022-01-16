@@ -28,9 +28,9 @@ Meet your classmates by collaboratively drawing each other's faces.
 
 ## Exercise
 #### Choose someone you've never met before
-- Pass the Post-it note to them <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+- Swap Post-it notes with your chosen partner <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 - Set a 30 seconds timer<!-- {.element: class="fragment"  data-fragment-index="2"} -->
-- Draw a part of owner's face on the Post-it note:<!-- {.element: class="fragment"  data-fragment-index="3"} -->
+- Draw a part of owner's face on the Post-it note <!-- {.element: class="fragment"  data-fragment-index="3"} -->
   * Eyes <!-- {.element: class="fragment"  data-fragment-index="3"} -->
 - Swap back, admire the work, and then choose a new partner. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
 - Repeat the process for more facial features <!-- {.element: class="fragment"  data-fragment-index="5"} -->
@@ -40,14 +40,7 @@ Meet your classmates by collaboratively drawing each other's faces.
   * Ears <!-- {.element: class="fragment"  data-fragment-index="8"} -->
   * Chin / Facial hair <!-- {.element: class="fragment"  data-fragment-index="9"} -->
 
-<!-- Tech Editor
-Do the unfamiliar pair swap post-it notes and each draws on their partner's note? This isn't very clear. How about
-#### Choose someone that you haven't previously met
-- Swap Post-it notes with your chosen partner
-- Draw a part of your partner's face on their Post-it note
-  * Eyes
-- Swap back, admire the work, and then choose a new partner.
--->
+
 
 
 #### Why Use Ice Breakers?
