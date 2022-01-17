@@ -144,5 +144,5 @@ _"Can you give me an example of not being open?" can lead to actionable items li
 ### Related & Used Practices
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
 * [Affinity Mapping](https://openpracticelibrary.com/practice/affinity-mapping/)
-* [Voting (fist of five, dot voting)](https://openpracticelibrary.com/practice/confidence-voting/)
+* [Voting (fist of five, dot voting, etc.)](https://openpracticelibrary.com/practice/confidence-voting/)
 * [Retrospective](https://openpracticelibrary.com/practice/retrospectives/)
