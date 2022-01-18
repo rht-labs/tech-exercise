@@ -58,7 +58,7 @@
     Then push it to the git repo.
 
     ```bash
-    cd /projects/tech-exercises
+    cd /projects/tech-exercise
     git add .
     git commit -m "🖥️ ServiceMonitor enabled 🖥️"
     git push
