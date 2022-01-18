@@ -18,7 +18,7 @@ applications:
       namespaces:
         - name: <TEAM_NAME>-ci-cd
           bindings: *binds
-          operatorgroup: false
+          operatorgroup: true
         - name: <TEAM_NAME>-dev
           bindings: *binds
           operatorgroup: true
