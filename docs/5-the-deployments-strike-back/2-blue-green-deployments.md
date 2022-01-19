@@ -16,7 +16,7 @@
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.1.0 # helm chart version
+        source_ref: 1.0.6 # helm chart version
         values:
           image_version: latest # container image version
           fullnameOverride: blue-pet-battle
@@ -43,7 +43,7 @@
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.1.0 # helm chart version
+        source_ref: 1.0.6 # helm chart version
         values:
           image_version: latest # container image version
           fullnameOverride: green-pet-battle
