@@ -90,7 +90,7 @@ TL500 <!-- {.element: class="title-color"} -->
 ### Feedback Loops
 
 * Ensure that we adequately respond to potential changes
-* Are defined with a frequency and a fixed time, straight to the point, and never unnecessarily long
+* Defined with a frequency and a fixed time, they are straight to the point and never unnecessarily long
 
 | Event | Purpose |
 | --- | --- |
