@@ -167,7 +167,7 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
 8. We can check the **kube-linter** command again and check these changes in:
 
     ```bash
-    cd /project/pet-battle-api
+    cd /projects/pet-battle-api
     git add .
     git commit -m  "🐊 ADD - kube-linter owner labels 🐊"
     git push
