@@ -27,7 +27,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Event Storming
 #### _What is it?_
-_Event Storming is a rapid, interactive approach to business process discovery and design that yields high quality models._
+_Event Storming is a rapid, interactive approach to business process discovery and design that yields high-quality models._
 
 It provides a repeatable, teachable technique for modeling:
   * Event-driven systems
@@ -44,7 +44,7 @@ It provides a repeatable, teachable technique for modeling:
 At the end of the event storm, you should have:
 * A shared understanding of the business process you are building as part of the project, including:
 ![you-should-have](images/event-storming/you-should-have.png)<!-- .element: class="image-no-shadow " -->
-* A physical diagram with the above information, which can be transferred to a digital format
+* A physical diagram with the above information that can be transferred to a digital format
 <!-- ### Event Storming
 #### _What is it?_
 * Who: key business stakeholders and techies
@@ -57,30 +57,29 @@ some **very** heated debate
 
 #### _Where did it come from?_
 ![Brandolini](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
-It was introduced in a blog by Alberto Brandolini in 2013.
+It was introduced in 2013 in a blog by Alberto Brandolini.
 ![ubiquitous-language](images/event-storming/es-ubiquitous-language.png) <!-- {.element: class="" style="max-width:450px;"} -->
 
-It's a sort of Domain Driven Design (DDD) Lite – but with more business focus and less of the jargon and complexity.
+It provides a kind of Domain Driven Design (DDD) "Lite," but with more business focus and less jargon and complexity.
 
 
 
 #### _Why do we use it?_
-* Very simple modelling practice that is accessible to all business people
+* Very simple modeling practice that is accessible to all business people
 * Engages all stakeholders and removes technical barriers:
   * Non-technical people can actively contribute
   * Builds a shared understanding
-  * Fail fast to solve difficult problems
-  * Deliver really useful design artifacts
+  * Fails fast to solve complex problems
+  * Delivers meaningful design artifacts
 
 
 
 ### Event Storming
 #### _Artifacts_
-* **Big Picture**: quickly build a shared understanding of a problem space
-* **Process Diagram**: model business processes
-* **Aggregate Modeling**: find the key microservices, operations, and a retrospective
-event model
-* **UI Modeling**: model the flow of pages in an application
+* **Big Picture**: Quickly build a shared understanding of a problem space
+* **Process Diagram**: Model business processes
+* **Aggregate Modeling**: Find the key microservices, operations, and a retrospective event model
+* **UI Modeling**: Model the flow of pages in an application
 
 
 
@@ -90,7 +89,7 @@ event model
 
 
 #### Event Storming - How
-The Event Storming Key is specific set of coloured stickies...
+The Event Storming Key is specific set of colored sticky notes.
 
 
 
@@ -140,25 +139,27 @@ The Event Storming Key is specific set of coloured stickies...
 
 
 #### Context - PetBattle
-* The PetBattle team has decided to use event storming to design part of their system. As with all great teams, they started by defining the example they would map out. This is important as it frames the end-to-end journey and stops them from modelling too big a piece of the application.
-* Take the deliverable from the _Impact Map_ to and reframe it using the _Friends Notation_ drill down into the system design
+* The PetBattle team decides to use event storming to design part of their system. As with all great teams, they started by defining the example they will map out. This important step frames the end-to-end journey and stops them from modeling too big a piece of the application.
+* Take a deliverable from the _Impact Map_ and reframe it by using the _Friends Notation_ to drill down into the system design.
 ![tow-pb](images/event-storming/tow-pb.png)
 
 
 
-#### Create the Event Storm for _"THE ONE WHERE Mary Enters the daily tournament and wins a prize"_
+#### Create the Event Storm for _"The one where Mary enters the daily tournament and wins a prize"_
 ![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
-
-1. Begin with creating the spine of the `Events`
-2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`
+<!--Tech Edit: I changed the case on this title to reflect the case used on the sticky note displayed on the previous slide. It looked odd to have the all caps and title case when you are listing the sentence case title of the note.-->
+1. Begin by creating the spine of the `Events`.
+2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`.
 3. Are there any `policies` or `procedures` that you can identify?
-4. Are there new `Systems` (external?) or `Aggregates`?
+4. Are there new `Systems` (external) or `Aggregates`?
 <p>&nbsp;</p>
 
-#### Things help steer you ...
-* Who is Mary? Does she need to need to authenticate to enter the compentition?
+
+
+#### Questions to help guide you
+* Who is Mary? Does she need to authenticate to enter the competition?
 * What is the daily prize? How does Mary know about it?
-* How will Mary know she's won the competition? Does she get notified? Is there a leaderboard?
+* How will Mary know that she's won the competition? Does she get notified? Is there a leaderboard?
 
 
 
@@ -202,26 +203,29 @@ The Event Storming Key is specific set of coloured stickies...
 
 
 #### _Tips for Success_
-* Invite the right people: business stakeholders, IT, and User Experience (UX)
-* Provide unlimited modeling space with a surface, markers, and stickies
+* Invite the right people: Business stakeholders, IT, and User Experience (UX).
+* Provide unlimited modeling space with a surface, markers, and sticky notes.
 * Keep people refreshed and hydrated! (🥝 🍫 🍌 / 🚰 / 🫖 ☕️)
-* Frame the discussion to limit the off topic conversation using TOWs
-* If remote, use breakout sessions to encourage more conversation with regular regrouping
+* Frame the discussion to limit off-topic conversation using TOWs
+* If remote, use breakout sessions with regular regrouping to encourage more conversation.
 ![es-tips](images/event-storming/es-tips.png) <!-- {.element: class="image-no-shadow"} -->
-* Set up the environment with a Social Contract to ensure psychological safety
-* Watch out for the Dungeon Master ...
+* Set up the environment with a Social Contract to ensure psychological safety.
+* Watch out for the Dungeon Master!
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
- * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog
-* Impact Map - can form an input for the scope of the modelling
+ * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog.
+* Impact Map: Forms an input for the scope of the modeling
 <p>&nbsp;</p>
 
+<!--This bit intro is wordy and unclear. This bit "in the space of working on how we might start building.." is very convoluted and doesn't make sense to me. Suggest "There are other practices to consider as we start building a solution to fix the problem and these can help us recognize new opportunities."
+Also, the <p>&nbsp;</p> bit seems to be forcing an indent on the second paragraph so the alignment looks a bit off.-->
 There are other practices in the space of working on how we might start building a solution that fixes problems or realize some new opportunities:
 * Emerging Architecture
 * Non Functional Map
 * Metrics-Based Process Map
 
-Together with Event Storm they provide input for creating the Product Backlog.
+
+Together with Event Storming, these practices provide input for creating the Product Backlog.
