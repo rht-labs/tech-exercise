@@ -192,6 +192,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     cd /projects/pet-battle
     git add .
     git commit -m "🫒 ADD - Green banner 🫒"
+    git push
     ```
 
 8. When Jenkins executes, it'll bump the version in ArgoCD configuration. ArgoCD triggers the new version deployment while `pet-battle-b` is still running in the previous version.
