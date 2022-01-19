@@ -92,7 +92,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
 ### A/B Deployment
 
-1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
+1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
@@ -122,7 +122,9 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     EOF
     ```
 
-2. Extend the cofiguration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the `values` section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
+    We will use our existing Pet Battle deployment as `A`.
+
+2. Extend the configuration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the `values` section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
 
     ```yaml
           a_b_deploy:
@@ -131,7 +133,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
             svc_name: pet-battle-b
     ```
 
-    The `pet-battle` definition in `test/values.yaml` should look something like this (the version numbers may be different):
+    The `pet-battle-a` definition in `test/values.yaml` should look something like this (the version numbers may be different):
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -208,10 +210,10 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
 
     ```bash
     cd /projects/tech-exercise
-    yq eval -i .applications.pet-battle-a.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
-    yq eval -i .applications.pet-battle-a.values.a_b_deploy.b_weight='100' pet-battle/test/values.yaml
+    yq eval -i .applications.pet-battle.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
+    yq eval -i .applications.pet-battle.values.a_b_deploy.b_weight='100' pet-battle/test/values.yaml
     git add pet-battle/test/values.yaml
-    git commit -m  "🏋️‍♂️ service B weight increased to 80 🏋️‍♂️"
+    git commit -m  "🏋️‍♂️ service B weight increased to 50% 🏋️‍♂️"
     git push
     ```
 
@@ -225,8 +227,8 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
 
     ```bash
     cd /projects/tech-exercise
-    yq eval -i .applications.pet-battle-a.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
-    yq eval -i .applications.pet-battle-a.values.a_b_deploy.b_weight='0' pet-battle/test/values.yaml
+    yq eval -i .applications.pet-battle.values.a_b_deploy.a_weight='100' pet-battle/test/values.yaml
+    yq eval -i .applications.pet-battle.values.a_b_deploy.b_weight='0' pet-battle/test/values.yaml
     git add pet-battle/test/values.yaml
     git commit -m  "💯 service B weight increased to 100 💯"
     git push
