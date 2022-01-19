@@ -78,6 +78,7 @@
 6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the pet-battle-api deployment, you should see the replica count has jumped.
 
     ![petbattle-api-hpa](./images/petbattle-api-hpa.png)
+    ![petbattle-api-hpa-topology](./images/petbattle-api-hpa-topology.png)
     ![petbattle-api-deployment](./images/petbattle-api-deployment.png)
 
 7. After a few moments you should see the autoscaler settle back down and the replicas are reduced.
