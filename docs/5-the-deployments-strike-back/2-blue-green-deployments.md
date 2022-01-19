@@ -6,7 +6,7 @@
 
 ![blue-green-diagram](images/blue-green-diagram.jpg)
 
-1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`. You want to adjust the `source_ref` helm chart version to point to the latest you have in nexus.
+1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
@@ -16,9 +16,9 @@
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
+        source_ref: 1.0.6 # helm chart version - may need adjusting!
         values:
-          image_version: latest # container image version
+          image_version: latest # container image version - may need adjusting!
           fullnameOverride: blue-pet-battle
           blue_green: active
           # we controll the prod route via the "blue" chart for simplicity
@@ -43,9 +43,9 @@
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
+        source_ref: 1.0.6 # helm chart version - may need adjusting!
         values:
-          image_version: latest # container image version
+          image_version: latest # container image version - may need adjusting!
           fullnameOverride: green-pet-battle
           blue_green: inactive
           config_map: '{
