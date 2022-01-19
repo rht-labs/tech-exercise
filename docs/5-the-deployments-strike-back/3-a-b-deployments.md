@@ -162,8 +162,8 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 4. Verify if you have the both service definition.
 
     ```bash
-    oc get svc -l app.kubernetes.io/name=pet-battle -n ${TEAM_NAME}-test
-    oc get svc -l app.kubernetes.io/name=pet-battle-b -n ${TEAM_NAME}-test
+    oc get svc -l app.kubernetes.io/instance=pet-battle -n ${TEAM_NAME}-test
+    oc get svc -l app.kubernetes.io/instance=pet-battle-b -n ${TEAM_NAME}-test
     ```
 
 5. Before verify the traffic redirection, let's make a simple application change to make this more visual! In the frontend, we'll change the banner along the top of the app. In your IDE, open `/projects/pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` HTML Tag under the `<!-- Green #009B00 -->`.
