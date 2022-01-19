@@ -57,12 +57,11 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
     ```yaml
       # Matomo
-      - matomo:
-          name: matomo
-          enabled: true
-          source: https://petbattle.github.io/helm-charts
-          chart_name: matomo
-          source_ref: "4.1.1+01"
+      - name: matomo
+        enabled: true
+        source: https://petbattle.github.io/helm-charts
+        chart_name: matomo
+        source_ref: "4.1.1+01"
     ```
 
     Push the changes:
