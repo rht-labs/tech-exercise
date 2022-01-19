@@ -6,7 +6,7 @@
 
 ![blue-green-diagram](images/blue-green-diagram.jpg)
 
-1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`.
+1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`. You want to adjust the `source_ref` helm chart version to point to the latest you have in nexus.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
