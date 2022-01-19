@@ -92,7 +92,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
 ### A/B Deployment
 
-1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`.
+1. Let's deploy our experiment we want to compare -  let's call this `B` and we'll use our existing Pet Battle deployment as `A`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
@@ -102,9 +102,9 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.1.0 # helm chart version
+        source_ref: 1.0.6 # helm chart version - may need adjusting!
         values:
-          image_version: latest # container image version
+          image_version: latest # container image version - may need adjusting!
           fullnameOverride: pet-battle-b
           route: false
           config_map: '{
