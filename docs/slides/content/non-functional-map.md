@@ -80,7 +80,7 @@ A tool to capture and articulate the non-functional requirements of a solution t
 
 
 #### Setting the Scene: Pet Battle Industries
-Pet Battle Industries have a good handle on the functional design of their applications. Let's not think of all the _other_ things they need to do to harder their application.
+Pet Battle Industries have a good handle on the functional design of their applications. Let's now think of all the _other_ things they need to do to harden their application.
 
 
 
