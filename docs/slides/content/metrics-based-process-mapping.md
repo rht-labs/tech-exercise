@@ -249,26 +249,21 @@ Document all activities and steps (the things)
 
 
 ### Facilitation Tips
+
 * You can map the MBPM steps with the Big Picture flow and improvements for a better visualization of work.
 * Use a spreadsheet to calculate numbers for metrics because it's much easier.
 * Iterate Iterate Iterate! Start with small teams and compare over and over again.
 * If psychological safety is low, postpone gathering the numbers until trust is established.
-  * Tools with numbers on them can be very intimidating to people.
+* Tools with numbers on them can be very intimidating to people.
 * Don't be too specific about the numbers, just use them as a gauge. It's not about the seconds, it's bigger than that.
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
+
 Related practices:
 
 * [Value Stream Mapping](https://openpracticelibrary.com/practices/vsm-mbpm)
 * [Value Stream Mapping](https://openpracticelibrary.com/practices/value-slicing)
 * [Team Topologies](https://teamtopologies.com)
-
-There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
-<!--I commented on this phrasing elsewhere, it is very ambiguous and wordy. "in the space of  working on how we might start building..." I suggested "Suggest "There are other practices to consider as we start building a solution to fix the problem and these can help us recognize new opportunities." in the event-storming module.
-Also this para is weirdly indented by a single space-->
-* [Emerging Architecture](https://openpracticelibrary.com/)
-* [NFR Map](https://openpracticelibrary.com/practices/non-functional-requirements-mapping)
-* [Event Storming](https://openpracticelibrary.com/practices/event-storming)
