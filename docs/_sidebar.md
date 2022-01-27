@@ -54,3 +54,4 @@
   * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)
 * [99. Rise of the Cluster](99-the-rise-of-the-cluster/README.md)
   * [🐼 Tooling Installation](99-the-rise-of-the-cluster/1-tooling-installation.md)
+  * [🐉 Here Be Dragons!](99-the-rise-of-the-cluster/666-here-be-dragons.md)
