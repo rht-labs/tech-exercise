@@ -32,11 +32,11 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-#### 🧑‍🏫 Learning outcomes 🧑‍💻
-As a learner, by the end of this exercise I ...
-* Can enable the Horizontal Pod Autoscaler for my applications
-* Can add Blue/Green deployment method into pipeline
-* Can run a split test on OpenShift with GitOps - splitting traffic between two tests 
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Enable the Horizontal Pod Autoscaler for my applications
+* Add a Blue/Green deployment method to the pipeline
+* Run a split test on OpenShift with GitOps - splitting traffic between two tests 
 <!--
 --->
 
@@ -44,12 +44,12 @@ As a learner, by the end of this exercise I ...
 
 #### What is it?
 Advanced Deployments 🚚📦📦📦👷
-* Autoscaling - horizontally scale applications based on observed metrics
-* Blue / Green Deployments - release, validate and switch
-* A/B Deployments - great for testing new features in small groups. One release with traffic routing between each
+* Autoscaling - horizontally scale applications based on observed metrics.
+* Blue / Green Deployments - release, validate and switch.
+* A/B Deployments - great for testing new features in small groups. One release with traffic routing between each.
   * Don't forget to take measures!!
-* Canary Release - Like a canary in the mines ... Exposing a small number of real users to a new version
-* Feature Toggling (Flags) - modifying system behaviours without changing the code
+* Canary Release - Like a canary in the mines ... Exposing a small number of real users to a new version.
+* Feature Toggling (Flags) - modifying system behaviors without changing the code.
 
 
 
@@ -62,24 +62,24 @@ Advanced Deployments 🚚📦📦📦👷
 
 
 #### Design of Experiments
-All our ideas about new products, new services, new feature, any changes we can introduce to make things better (growth, revenue, experience, etc.) start as an idea, a hypothesis, an assumption.
+All our ideas about new products, new services, new features, and changes that we can introduce to make things better (growth, revenue, experience, etc.) start as an idea, a hypothesis, or an assumption.
 
-The Design of Experiments is the practice we use to turn ideas, hypothesis and/or assumptions into a concrete well defined set of experiments which can be carried out in order to validate those ideas, hypothesis and assumptions, i.e. provide us with valuable learning.
+The Design of Experiments is the practice we use to turn ideas, hypotheses, and assumptions into a concrete, well-defined set of experiments that can validate those ideas, hypotheses, and assumptions, providing valuable learning.
 
 
 
 #### Why do it?
-Design of Experiments...
-* is a fail safe way to advance a solution and learn fast
-* can provide a quick way to evolve a product
-* helps drive innovation in existing as well as new products
-* enables autonomous team to deliver on leadership intent by placing small bets
-* is essential for realising the Build-Measure-Learn loop
+Design of Experiments
+* Is a fail safe way to advance a solution and learn fast
+* Can provide a quick way to evolve a product
+* Helps drive innovation in new and existing products
+* Enables an autonomous team to deliver on leadership intent by placing small bets
+* Is essential to realizing the Build-Measure-Learn loop
 
 
 
-#### Split testing
-Using the platform to support running an experiment
+#### Split Testing
+Using the platform to support running an experiment.
 ![ab-test](images/tech-exercise-v/ab-test.png)
 
 
@@ -93,22 +93,23 @@ Using the platform to support running an experiment
 
 
 
-### 💥 Prioritize and Extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
+### 💥 Prioritize and extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
 #### 💥 Tech Exercise 💥
-* In mobs / pairs work through your tasks
-* If in pairs, continuously playback what you accomplish to the others
+* In mobs / pairs, work through your tasks.
+* If in pairs, continuously playback what you accomplish to the others.
+<!--I've commented on the verbiage playback before, it's odd. Which others? If I am in a pair, do you mean my partner?-->
 
 
 
-# Exercise Wrap Up
+# Exercise Wrap-up
 
 
 
-#### Design of Experiments - From Value slice <!-- .element: class="title-bottom-left" -->
+#### Design of Experiments - From Value Slice <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-v/pet-battle-experiment.png", class="black-style" data-background-opacity="1"	 -->
 
 
