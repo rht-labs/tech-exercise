@@ -31,41 +31,43 @@ TL500 <!-- {.element: class="title-color"} -->
 * A mechanism for sizing different work items *relative* to each other
 * A tool to facilitate conversations, especially where there are different views on relative sizes
 * Common formats to call it: relative estimation, planning poker, count number of work items
+<!--This sentence doesn't really make sense. Does this mean that estimation is sometimes called relative estimation... OR that there are some different strategies to do estimating, such as relative estimation..." Please clarify.-->
 
 
 
 #### _Why use it?_
 
 * Facilitates conversation
-* Helps align groups of people to reach consensus on their understanding regarding the size of complexity and/or value of an item
-* Avoids the emotion, buffering and other negative side effects of absolute estimation
+* Helps align groups to reach consensus on their understanding regarding the size of, complexity, and/or value of an item
+* Avoids the emotion, buffering, and other negative side effects of absolute estimation
 
 
 
 #### _How do we do it?_
-_Things to consider before starting:_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-* First we need to have done the product backlog refinement and the sprint planning
-* After we picked the user stories for the next sprint and put them into the Relative Estimation board
+_Things to consider before starting_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+* First, the product backlog refinement and the sprint planning must be done.
+* Then, you pick up the user stories for the next sprint and put them into the Relative Estimation board.
 
 
 
 #### _How do we do it?_
-1. We draw a ladder and agree on the points we are going to use. A common practice is to use the Fibonacci series or T-Shirt sizes
+1. Draw a ladder and agree on the points to use. A common practice is to use the Fibonacci series or T-Shirt sizes.
 
 ![fibonacci-series](images/estimation/fibonacci-series.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
 
-2. Then we start the sizing for the stories: the first step is to identify the 1-pointer and the 13-pointer
-3. From there we then compare the other user stories to the previous items:
-    - Maybe the second user story is a bit harder, so let's call that a 2-pointer
-    - Then the next user story we need to ask ourselves how much harder or easier it is compared to the others
+2. Then, begin sizing for the stories. The first step is to identify the 1-pointer and the 13-pointer.
+3. Next, compare the other user stories to the previous items:
+    - Perhaps the second user story is a bit harder, so let's call that a 2-pointer
+    - Consider the story that follows. We must ask ourselves how much harder or easier it is compared to the others.
 
 
 
 #### _How do we do it?_
 _An example_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-* 'Okay we have story A, is this bigger than the 3 points we have here?'
-* Assuming yes - 'Okay is it bigger than the 8 pointer? Or is it roughly the same size'
-* Assuming no - 'Okay so we'll say it is a 5 pointer then'
+* 'Is Story A bigger than the 3 points we have here?'
+* Assuming yes, ask "Is it bigger than the 8 pointer? Or is it roughly the same size?"
+* Assuming no, "Okay, then let's say it is a 5 pointer."
+<!--If it's not bigger than story A, then why do we increase the points from 3 to 5? This is unclear.-->
 
 
 
@@ -73,16 +75,16 @@ _An example_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 #### _Relative Estimation_
 In 60 seconds ⏱...
 
-* Individually - write as many fruits as you can think of the wilder and weirder the better
+* Individually, write down as many fruits as you can think of, the wilder and weirder the better.
 
 
 
 ### Exercise - Fruit Salad 🥗
 #### _Relative Estimation_
 * As a Team
-  * Move the fruit to one single list and remove duplicates
-  * Create rows on a board and label them 1,2,3,5,8,13
-  * Relative Estimate your fruit based in how hard is to peel and cut each fruit
+  * Combine the fruits into a single list and remove duplicates.
+  * Create rows on a board and label them 1, 2, 3, 5, 8, and 13.
+  * Perform a Relative Estimate of your fruits based on how hard is to peel and cut each fruit.
 
 
 
@@ -108,19 +110,19 @@ In 60 seconds ⏱...
 
 #### Key Takeaways
 </br>
-As we go through these estimations, conversations will occur within the team and you'll discover more with understandings beginning to align.
+As we go through these estimations, conversations occur within the team and you'll discover more as understandings beginning to align.
 
-In this exercise this might include things like:
-  - Perhaps someone has a tool that makes opening coconuts easier so maybe it doesn't require as much effort as we thought?
-  - Maybe the orange has pips in it and also it's more difficult than the banana?
+In this exercise these new discoveries might include things such as:
+  - Someone has a tool that makes opening coconuts easier, so perhaps it doesn't require as much effort as you first thought.
+  - The orange has pips in it and it's also more difficult to peel than the banana.
 ![fruits](images/estimation/fruits.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:100%;" } -->
 
 
 
 #### Facilitation Tips
-A helpful tool for big planning:
-* The relative estimation line is one technique that can help with this sort of thing allowing for quick and easy estimation based on past experience
-* It is important to avoid stories too big that are brought into the sprint and they are carried over multiple sprints. Because the story is never "done" the points cannot be cashed in.
+A helpful tool for big planning
+* The relative estimation line is a technique that helps planning by allowing for quick and easy estimation based on past experience.
+* It is important to avoid stories that are too big and are carried over multiple sprints. Because the story is never "done", the points cannot be cashed in.
 
 
 
