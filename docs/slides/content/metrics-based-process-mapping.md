@@ -7,15 +7,15 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Batch Processing
 #### _What is it?_
-* Concurrent work being done
-* Typically performed on a schedule or specific timeframe
+* Work is done concurrently
+* Typically performed on a schedule or within a specific time frame
 
 #### _How can it be used?_
-* Help identify Work In Progress limits
-* Show flow of work through the team/system
+* Helps identify Work In Progress limits
+* Shows the flow of work through the team or system
 
 #### [The Penny Game](https://www.leanagiletraining.com/better-agile/agile-penny-game-rules/)
-1. Break out into teams and experiment with batch processing using poker chips.
+1. Break out into teams and experiment with batch processing by using poker chips.
 2. Follow the facilitator's instructions.
 
 
@@ -36,21 +36,21 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 ### Value Streams 
-Each table picks a sector and a business use case (some examples below):
+Each table picks a sector and a business use case, for example:
 * **Telco** - Ordering a new Broadband package
-* **Finance** - Creating new Current Account
-* **Government** - Paying for Council Tax
-* **Energy** - Switching energy provider
+* **Finance** - Creating new account
+* **Government** - Paying a Council Tax
+* **Energy** - Switching energy providers
 
-#### Some questions to lead the discussions ...
+#### Some questions to lead the discussions:
 What is the trigger for the stream?
 What is end business value?
 What are all the steps in between?
-What's the Technology or system that helps with that step?
+What are the technologies or systems that help with these steps?
 
 
 
-_DevOps is focused on speeding up that value chain. Metric-Based Process Mapping (MBPM) is a practice that will help visualize all these steps and capture some metrics about how long they take._
+_DevOps is focused on speeding up the value chain. Metric-Based Process Mapping (MBPM) is a practice that helps visualize all these steps and capture some metrics about how long they take to complete._
 
 
 
@@ -78,11 +78,11 @@ The second generation from Learning to See.
 
 
 #### _Why use it?_
-* Holistically analyze and optimize "brownfield" delivery processes, including everything from requirements definition, infrastructure provisioning and application development.
-* Visually represent the way work flows through an organization
-* Building a shared understanding throughout the various levels of an organization
-how the work is actually done.
-* Formulating specific, data driven improvement plans.
+* Holistically analyze and optimize "brownfield" delivery processes, including everything from requirements definition to infrastructure provisioning and application development.
+* Visually represent the way work flows through an organization.
+* Build a shared understanding throughout the various levels of an organization
+about how the work is actually done.
+* Formulate specific, data driven improvement plans.
 
 
 
@@ -90,9 +90,9 @@ how the work is actually done.
 ![accelerate](images/mbpm/accelerate-book.png)<!-- {.element: class="" style="border:none; box-shadow:none; height:200px; float:left;"} -->
 
 * Frequency of deployments (more frequent is better)
-* Lead time for new features: from ideation through delivery (shorter is better)
+* Lead time for new features from ideation through delivery (shorter is better)
 * Frequency of change failures (fewer changes are better)
-* Mean-time-to-repair, MTTR (shorter recovery times are better)
+* Mean-time-to-repair, or MTTR (shorter recovery times are better)
 
 
 
@@ -101,8 +101,8 @@ how the work is actually done.
 
 
 #### Flow Metrics
-* **Throughput** — the number of work items finished per unit of time
-* **Work in progress (WIP)** — the number of work items started but not finished. The team can use the WIP metric to provide transparency about their progress towards reducing their WIP and improving their flow
+* **Throughput** — the number of work items finished per unit of time.
+* **Work in progress (WIP)** — the number of work items started but not finished. The team can use the WIP metric to provide transparency about their progress towards reducing their WIP and improving their flow.
 * **Cycle Time** — the amount of elapsed time between when a work item starts and when a work item finishes.
 * **Work Item Age** — the amount of time between when a work item started and the current time. This applies only to items that are still in progress.
 
@@ -131,7 +131,7 @@ How To ...
 
 
 ### Metric-Based Process Mapping
-Document all activities / steps (the things)
+Document all activities and steps (the things)
 
 
 
@@ -183,11 +183,11 @@ Document all activities / steps (the things)
 
 
 
-#### Summary of the steps
-1. Label the map and create Swim Lanes
-2. Add time
-3. Add the activities (the steps) to the map (some could be in parallel)
-4. Document all the activities (the steps). On each sticky note track the activity
+#### Summary of the Steps
+1. Label the map and create Swim Lanes.
+2. Add time.
+3. Add the activities (the steps) to the map (some could be in parallel).
+4. Document all the activities (the steps). On each sticky note track the activity:
    * Name the activity and who's involved
    * Add the number of people
    * Add the Accuracy (% complete and accurate)
@@ -195,8 +195,8 @@ Document all activities / steps (the things)
 
 
 
-### What to do next?
-* Identify handoffs
+### What To Do Next?
+* Identify hand-offs
 * Create summary metrics
 * Identify improvement areas
 * Validate the improvements with a future state MBPM
@@ -204,8 +204,8 @@ Document all activities / steps (the things)
 
 
 ### Exercise 
-#### As a class:
-1. Walk through the *as-was* MBPM
+#### As a class
+1. Walk through the *as-was* MBPM.
 
 
 
@@ -215,7 +215,7 @@ Document all activities / steps (the things)
 
 #### In your team
 ![activity-mbpm](images/mbpm/activity.png) <!-- {.element: class="inline-image"} -->
-1. Identify improvements on the steps and if it's possible to reduce handover or remove any of the existing steps.
+1. Identify improvements to the steps and whether it's possible to reduce hand-offs or remove any of the existing steps.
 2. Document any new activities (the steps). On each sticky note track the activity:
      * Name the activity and who's involved
      * Add the number of people
@@ -249,25 +249,21 @@ Document all activities / steps (the things)
 
 
 ### Facilitation Tips
-* You can map the MBPM steps with the Big Picture flow and improvements for a better visualisation of work
-* Use a spreadsheet to calculate numbers for metrics, it will be much easier to do it
-* Iterate Iterate Iterate! Start with small teams and compare over and over again
-* If psychological safety is low, postpone gathering the numbers until trust there
-  * Tools with numbers on them can be very intimidating to people
-* Don't be too specific about the numbers, just use them as a gauge. It's not about the seconds it's bigger than that
+
+* You can map the MBPM steps with the Big Picture flow and improvements for a better visualization of work.
+* Use a spreadsheet to calculate numbers for metrics because it's much easier.
+* Iterate Iterate Iterate! Start with small teams and compare over and over again.
+* If psychological safety is low, postpone gathering the numbers until trust is established.
+* Tools with numbers on them can be very intimidating to people.
+* Don't be too specific about the numbers, just use them as a gauge. It's not about the seconds, it's bigger than that.
 
 
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
+
 Related practices:
 
 * [Value Stream Mapping](https://openpracticelibrary.com/practices/vsm-mbpm)
 * [Value Stream Mapping](https://openpracticelibrary.com/practices/value-slicing)
 * [Team Topologies](https://teamtopologies.com)
-
-There are other practices in the space of  working on how we might start building a solution that fixes problems or realize some new opportunities:
-
-* [Emerging Architecture](https://openpracticelibrary.com/)
-* [NFR Map](https://openpracticelibrary.com/practices/non-functional-requirements-mapping)
-* [Event Storming](https://openpracticelibrary.com/practices/event-storming)

@@ -23,9 +23,9 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Origins of Kanban
 ![Kanban](images/kanban/toyota-production-system.png) <!-- {.element: class="inline-image"} -->
-* Kanban is a Japanese word that means _card you can see_
-* 1950 Taiichi Onho defined the [Toyota Production System](http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/origin_of_the_toyota_production_system.html) based on customer demand (Just in Time)
-* 2007 David J. Anderson introduced as method for software development
+* Kanban is a Japanese word that means the _card you can see_.
+* In 1950, Taiichi Onho defined the [Toyota Production System](http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/origin_of_the_toyota_production_system.html) based on customer demands (Just in Time)
+* In 2007, David J. Anderson introduced Kanban as method for software development.
 
 
 
@@ -36,7 +36,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ### Kanban Practices
 
-#### Kanban is a framework used to implement agile software development based in the following practices:
+#### Kanban is a framework used to implement agile software development based on the following practices:
 * Visualize the Workflow
 * Limit Work in Progress
 * Manage Flow
@@ -50,7 +50,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 * Visual representation of a work item (requested or already in progress)
 * Review details at a glance
-* Contains valuable information about the tasks and it status (e.g: summary, responsible person, deadline, ...)
+* Contains valuable information about the task and its status (for example, summary, responsible person, deadline, etc.)
 * Identify opportunities for collaboration
 
 
@@ -59,10 +59,10 @@ TL500 <!-- {.element: class="title-color"} -->
 
 * The number of task items that a team is currently working on in each stage
 * Frames the capacity of the team's workflow at any moment
-* Not mean to do less tasks, means to do less tasks **at the same time**
+* Does not mean doing fewer tasks overall, but working fewer tasks at any one time, or **simultaneously**
 * Helps to identify bottlenecks
-* Preventing a constant context switching between tasks
-* Defined a stable workflow and then a predictable delivery
+* Prevents constant context switching between tasks
+* Defines a stable workflow resulting in a predictable delivery
 
 
 
@@ -70,9 +70,9 @@ TL500 <!-- {.element: class="title-color"} -->
 
 * Flow means the movement of work items through the process
 * Manages the work but not the people
-* Main goal is to create a smooth, healthy flow.
-* Focus on managing the work processes and how to improve it to work faster
-* Deliver value to end customers as fast as possible
+* The goal is to create a smooth, healthy flow.
+* Focus on managing the work processes and ways to improve it to work faster
+* Deliver value to end customers as quickly as possible
 
 
 
@@ -80,43 +80,44 @@ TL500 <!-- {.element: class="title-color"} -->
 
 * Your process should be clearly defined, published, and socialized
 * Declare explicit policies for:
-  - When move a work item from one column to the next one
-  - Priorization
-  - How to manage urgent work items
-* Policies will allow to take fast decissions without doubts or queries
+  - Moving a work item from one column to the next
+  - Prioritizing work items
+  - Managing urgent work items
+* Policies enable the team to make decisions quickly without doubts or queries
 
 
 
 ### Feedback Loops
 
-* Ensure that we adequately responding to potencial changes
-* Defined with a frequency, fixed time, straight to the point and never unnecesarily long
+* Ensure that we adequately respond to potential changes
+* Defined with a frequency and a fixed time, they are straight to the point and never unnecessarily long
 
 | Event | Purpose |
 | --- | --- |
-| **Daily Standup** | Daily sync to share common understanding of the goals, coordinate the team effort, report on progress of work, and to communicate problems and improvements. Starts from the right column (work items closest to end) |
-| **Delivery Review** | Follow workflow or delivery process. |
-| **Risk Review** | Check, identify and/or mitigate risk in our process. |
+| **Daily Standup** | Daily sync to share a common understanding of the goals, coordinate the team effort, report on the work progress, and communicate problems and improvements. Starts from the right column (those work items closest to completion) |
+| **Delivery Review** | Follow the workflow or delivery process
+| **Risk Review** | Check, identify, and mitigate risk in our process |
 
 
 
 #### _Why use it?_
 
-* Kanban applies in situations where work arrives in an unpredictable fashion and/or when work items should be deployed as soon as they are ready, rather than waiting for other work items.
+* Kanban applies in situations where work arrives unpredictably, or when you must deploy work items as soon as they are ready instead of waiting for other work items.
 * This framework helps you to:
   - Visually see work in progress
   - Identify bottlenecks or impediments and take steps to remove them
   - Improve team collaboration
-  - Increase efficiency and productivity, reducing the time it takes to take a project or user story from start to finish.
+  - Increase efficiency and productivity, reducing the time it takes to complete a project or user story from start to finish.
   - Reduce waste
 
 
 
 ### Kanban Metrics
-Kanban will provide you a set of metrics to measure your process. These metrics are very usefull to improve your flow and identify points of failure.
+Kanban provides you with a set of metrics to measure your process. These metrics are very useful to improve your flow and identify points of failure.
 
-* **Lead Time**: Measures how much time a task spends in the Kanban board, since get in and get out. A measure for our customers
-* **Cycle Time**: Measures how much time a task spends going through the process, from when the task started.
+* **Lead Time**: Measures how much time a task spends in the Kanban board, since get in and get out. Provides a measure for our customers.
+<!--TechEdit: "get in and get out" is not defined anywhere as to what that means. Time on the board since what exactly? Please confirm that this will be well understood by students and instructors. It's oddly constructed. If it's a known term should we put it it quotes? -->
+* **Cycle Time**: Measures how much time a task spends going through the process from when the task started.
 * **Throughput**: Measures the total amount of work delivered (completed work items)
 * Cycle time, throughput, and WIP are connected by **[Little's Law](https://en.wikipedia.org/wiki/Little%27s_law)**
 
@@ -124,13 +125,15 @@ Kanban will provide you a set of metrics to measure your process. These metrics 
 
 * Be focus to **reduce the Lead Time**
 
+<!--TechEdit: This last one has a grammar problem and I'm not sure what is intended. Should this say "Be focused to reduce lead time? Be focused on what? Maybe this relates to my question about "get in get out" in the same bullet? -->
+
 
 
 #### _How do we use it?_
 
 * Visualize the process in columns and cards (always visible)
-* **Column** is a step of the workflow and a **card** is a work item
-* Any task must be in the board
+* A **Column** is a step of the workflow and a **card** is a work item
+* All tasks must be on the board
 * Designed by the Team (physical or virtual)
 
 ![Kanban Board](images/kanban/kanban-board.png) <!-- {.element: class="" style="height:350px"} -->

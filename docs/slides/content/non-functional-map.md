@@ -81,10 +81,8 @@ A tool to capture and articulate the non-functional requirements of a solution t
 
 
 #### Setting the Scene: Pet Battle Industries
-Pet Battle Industries has a good handle on the functional design of their applications. Let's not think of all the _other_ things they need to do to harder their application.
-<!-- Tech Edit: I think this should be "Now, let's think of all the _other_ things they need to do to harden their application." Please confirm. -->
 
-
+Pet Battle Industries have a good handle on the functional design of their applications. Now, let's think of all the _other_ things they need to do to harden their application.
 
 
 ### Create the NFR Map
