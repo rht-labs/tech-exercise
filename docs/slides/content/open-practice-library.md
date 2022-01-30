@@ -59,13 +59,11 @@ Practices are created by people who use them daily, for people looking to be ins
 
 
 #### How do we use it?
-The Open Practice Library uses the Mobius Loop model, on a foundation of Culture and Technology, to navigate between an evolving number of open practices.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+The Open Practice Library uses the Mobius Loop model, built on a foundation of Culture and Technology, to navigate between an evolving number of open practices.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 ![Open Practice Library](images/opl/mobius-loop-dark.png)
 
-It is an iterative process model for rapidly developing digital products<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-
-<!--TechEditor: the "it" as the subject is ambiguous, it could refer to the OPL or the Mobius Loop. I think you mean the ML? "The Mobius Loop is an interative process model..."-->
+The Mobius Loop is an continuous process model for rapidly developing digital products<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 [Mobius Loop Site](https://www.mobiusloop.com/)<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
