@@ -138,5 +138,4 @@ I assume the tasks will be obvious or assigned (although this is vague), but the
 
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
-- [](https://openpracticelibrary.com/practice/) - 
-<!--TechEdit; this displays as an empty list with one bullet and a dash; need to provide the link text for the existing bullet.-->
+- [Open Practice Library](https://openpracticelibrary.com/practice/)
