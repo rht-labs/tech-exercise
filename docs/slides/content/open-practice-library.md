@@ -27,15 +27,15 @@ TL500 <!-- {.element: class="title-color"} -->
 <div class="col" data-markdown>
 
 #### _What is it?_
-* Open source community-driven repository of practices and tools
-* Practices are created by people currently using them on daily basis
+* An open source, community-driven repository of practices and tools.
+* Practices are created by people who use them daily.
 
 </div>
 <div class="col" data-markdown>
 
 #### _What is it not?_
-* It is not a methodology or framework. It does not tell you exactly which practice to use when and where
-* We will not say there is one right way to do things because it does not exist. Our approach is to adapt based on context, learning, and experience
+* A methodology or framework that tells you exactly which practice to use when and where.
+* There is no one "right" way to do things. Our approach is to adapt based on context, learning, and experience.
 
 </div>
 </div>
@@ -54,16 +54,16 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ![Open Practice Library](images/opl/open-practice-library-logo.png) <!-- {.element: class="inline-image"} -->
 #### _Why use it?_
-Practices are created by people currently using them on daily basis for people looking to be inspired with new ideas and experience
+Practices are created by people who use them daily, for people looking to be inspired with new ideas and experiences.
 
 
 
 #### How do we use it?
-The Open Practice Library uses the Mobius loop model on a foundation of Culture and Technology to navigate between an evolving number of open practices<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+The Open Practice Library uses the Mobius Loop model, built on a foundation of Culture and Technology, to navigate between an evolving number of open practices.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 ![Open Practice Library](images/opl/mobius-loop-dark.png)
 
-It is an iterative process model for rapidly developing digital products<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+The Mobius Loop is an continuous process model for rapidly developing digital products<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 [Mobius Loop Site](https://www.mobiusloop.com/)<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
@@ -75,11 +75,11 @@ It is an iterative process model for rapidly developing digital products<!--{.el
 
 #### Tips
 
-Which practices you choose is up to you but, in nearly all cases, we strongly recommend using practices that allow fast delivery, rapid feedback, and continuous learning throughout.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+Which practices you choose is up to you, but in nearly all cases, we strongly recommend using practices that allow fast delivery, rapid feedback, and continuous learning throughout.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 ![Open Practice Library](images/opl/canvas-tips.png)<!-- {.element: class="image-no-shadow" } -->
 
 
 
 #### Seeking Contributions
-Head over to https://openpracticelibrary.com/ and use a practice or contribute your own
+Head over to https://openpracticelibrary.com/ and use a practice or contribute your own.
