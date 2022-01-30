@@ -18,7 +18,7 @@ TL500 <!-- {.element: class="title-color"} -->
   </a>
 </div>
 <div class="fragment current-visible" data-fragment-index="1" >
-  <h2>Realtime Retro</h2>
+  <h2>Realtime Retrospective</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
   <img src="images/opl-foundation.png">
   </a>
@@ -43,7 +43,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 #### _What is it?_
 
-Retrospectives are practice used by their teams to **reflect** on their way of working, and **continuously become better** in what they do. They are meant to help teams **keep improving.**
+Retrospectives are a practice used by teams to **reflect** on their way of working and **continuously become better** at what they do. Retrospectives help teams **keep improving.**
 
 "At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly." <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 </br></br>
@@ -54,10 +54,10 @@ _- 12th Principle of the Agile Manifesto_
 ### Retrospectives
 ![retrospective](images/retrospectives/retrospective.jpg) <!-- {.element: class="inline-image"} -->
 </br>
-* Create the foundation and culture of collaboration
-* Through a retrospective, the team identify some issues to continuously improve
-* It provides a great opportunity for the group to inspect and adapt changes, possibly updating it with new ideas or improvements
-* They often take place at the end of sprints but can be scheduled at any time
+* Creates the foundation and culture of collaboration
+* Helps the team identify some issues to continuously improve
+* Provides a great opportunity for the group to inspect and adapt to changes, potentially adding new ideas or improvements
+* Occurs at the end of a sprint most often, but can be scheduled at any time
 
 
 
@@ -67,33 +67,33 @@ _- 12th Principle of the Agile Manifesto_
 
 ### Realtime Retrospectives
 ![realtime-retro](images/retrospectives/realtime-retro.jpg)<!-- {.element: class="inline-image"} -->
-* Real-time retrospective enables faster, more accurate, and more direct feedback from everyone involved
-* Have a more continuous and always on self-service approach to capturing feedback
-* Provides a simple, visual tool for anyone to add retrospective feedback on any item at any time, both positive and negative things
+* Enables faster, more accurate, and more direct feedback from everyone involved.
+* Has a more continuous and "always on" self-service approach to capturing feedback
+* Provides a simple, visual tool for anyone to add retrospective feedback on any item at any time, both positive and negative
 
 
 
 
-#### _Why using it?_
+#### _Why use it?_
 Retrospectives improve:
-- **Productivity** - _helps teams to assess their situation and reduce waste_
-- **Capability** - _share knowledge and set goals for other team members to learn_
-- **Quality** - _writing better code means less rework and less bugs_
-- **Capacity** - _determine optimal solution for choosing features that add value_
-- **Camaraderie** - _provide a constructive environment for a good team dynamic_
+- **Productivity** - _helping teams to assess their situation and reduce waste_
+- **Capability** - _sharing knowledge and setting goals for other team members to learn_
+- **Quality** - _writing better code means less rework and fewer bugs_
+- **Capacity** - _determining optimal solutions for choosing features that add value_
+- **Camaraderie** - _providing a constructive environment for a good team dynamic_
 - **Team Data** - _capturing measure-and-learn data from incremental delivery_
-- **Visualisation** - _cycle of inspection and adaptation understanding team sentiment, feedback and idea of improvements_
+- **Visualisation** - _enabling a cycle of inspection and adaptation for understanding team sentiment, feedback, and ideas for improvements_
 
 
 
-#### _Why using it?_
-Realtime Retros are particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) if there was a simple improvement or resolution that could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+#### _Why use it?_
+Realtime Retros are particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) that a simple improvement or resolution could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
 ![realtime-retro-2](images/retrospectives/realtime-retro-2.jpg)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
 
-For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp the information in realtime.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp the information in real time.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
-And most importantly - we can respond to the feedback sooner
+And most importantly, you can respond to the feedback sooner!
 
 
 
@@ -122,11 +122,11 @@ _But they are done poorly and teams do not follow up on identified items_
 
 ### Retrospectives
 #### _Guidelines_
-* Choose the format of the retrospective session before the session, with ground rules visible and ensure everyone has understood it.
+* Choose the format of the retrospective session before the session, make ground rules visible, and ensure everyone understands them.
 * Update the previous retrospective backlog.
-* Give the time to think and write feedback individually, start by allowing a few minutes for everyone to silently write down their feedback.
-* Share as a team and group by affinity, leaving the time to comments/ask questions.
-* Agree on a set of corrective actions to come out of the Retrospective, prioritize them, and agree on owners to take them forward.
+* Dedicate time to think and write feedback individually; start by allowing a few minutes for everyone to silently write down their feedback.
+* Share as a team and group by affinity, leaving time for comments and questions.
+* Agree on the corrective actions that come out of the Retrospective, prioritize them, and agree on owners to take them forward.
 
 
 
@@ -148,16 +148,16 @@ _But they are done poorly and teams do not follow up on identified items_
 #### _The Retrospective Safety Check_
 
 - Ask participants to choose a number between 1 and 5 that indicates how safe they feel within the group.
-  - 5 - *No Problem, I’ll talk about anything*
-  - 1 - *I’ll smile and be calm; everything is great and agree with the managers*
-- The numbers should be taken anonymously.
-- Acknowledge the result and decide what’s next...
+  - 5 - *No Problem, I’ll talk about anything.*
+  - 1 - *I’ll smile and be calm, pretend that everything is great, and agree with the managers.*
+- The numbers should be gathered anonymously.
+- Acknowledge the result and decide what comes next.
 
 
 
 
 ### Exercise - Daily Retrospective
-Reflect on the first day of class, and make adjustments to continuously improve
+Reflect on the first day of class and make adjustments to continuously improve.
 
 
 
