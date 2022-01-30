@@ -84,26 +84,12 @@ leadership so that priorities and future work can be adapted accordingly
 
 ### Demo Day
 #### _What is Demo Day about?_
-* Demo Day is the culmination of a trip around the Practice Loop. 
-* It provides many important opportunities:
-  * For the team to showcase their work from a particular time period.
-  * For key stakeholders to see the results.
-  * To talk about "what's next" and how do to adapt the culture for the next round
-  * To celebrate!
-* May have had many showcases or product increments completed feeding this
-
-<!--I pulled this last bullet to the bottom. It doesn't really fit with the others and it doesn't quite make sense - the "this" is an ambiguous subject here. I'm not sure what it means or adds. Is the point that a Demo Day might be be preceded by numerous development increments and product showcases that culminate in a Demo Day? If yes, then I'd add this to the first bullet.
-
-* Demo Day is the culmination of a trip around the Practice Loop. The Demo Day is often preceded by many development increments and product showcases.
-* Demo Day provides many important opportunities:
-  * For the team to showcase their work from a particular time period.
-  * or key stakeholders a chance to see the results.
-  * To talk about "what's next" and how do to adapt the culture for
-the next round
-  * To celebrate!
-
--->
-
+* Demo Day is the culmination of a trip around the Practice Loop.
+* There will be several showcases or product increments that feed into the demo day.
+* The team can showcase their work from a particular time period.
+* Key stakeholders get to see the results.
+* Provides an opportunity to discuss "what's next" and how do to adapt the team culture for the next round.
+* A celebration !
 
 
 
