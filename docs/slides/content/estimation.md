@@ -30,8 +30,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 * A mechanism for sizing different work items *relative* to each other
 * A tool to facilitate conversations, especially where there are different views on relative sizes
-* Common formats to call it: relative estimation, planning poker, count number of work items
-<!--This sentence doesn't really make sense. Does this mean that estimation is sometimes called relative estimation... OR that there are some different strategies to do estimating, such as relative estimation..." Please clarify.-->
+* Other names you may have heard for this exercise: relative estimation, planning poker, counting the number of work items
 
 
 
@@ -67,8 +66,6 @@ _An example_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 * 'Is Story A bigger than the 3 points we have here?'
 * Assuming yes, ask "Is it bigger than the 8 pointer? Or is it roughly the same size?"
 * Assuming no, "Okay, then let's say it is a 5 pointer."
-<!--If it's not bigger than story A, then why do we increase the points from 3 to 5? This is unclear.-->
-
 
 
 ### Exercise - Fruit Salad 🥗
