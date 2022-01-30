@@ -145,9 +145,9 @@ The Event Storming Key is specific set of colored sticky notes.
 
 
 
-#### Create the Event Storm for _"The one where Mary enters the daily tournament and wins a prize"_
+#### Create the Event Storm for _"THE ONE WHERE: Mary enters the daily tournament and wins a prize"_
 ![Key](images/event-storming/key.png) <!-- {.element: class="inline-image"} -->
-<!--Tech Edit: I changed the case on this title to reflect the case used on the sticky note displayed on the previous slide. It looked odd to have the all caps and title case when you are listing the sentence case title of the note.-->
+
 1. Begin by creating the spine of the `Events`.
 2. Add the information needed to make a decision with the `Commands`, `Users` and `Read Models`.
 3. Are there any `policies` or `procedures` that you can identify?
