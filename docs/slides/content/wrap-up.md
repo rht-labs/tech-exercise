@@ -153,7 +153,7 @@ leadership so that priorities and future work can be adapted accordingly
 * Open Practice Library: https://openpracticelibrary.com/
 * Ubiquitous Journey🔥🦄: https://github.com/rht-labs/ubiquitous-journey
 * DevOps Culture and Practice with OpenShift book
-  * Download the [ebook](https://www.redhat.com/en/engage/devops-culture-practice-openshift-ebooks)
+  * Download the [ebook chapters](https://www.redhat.com/en/engage/devops-culture-practice-openshift-ebooks)
   * You can obtain the [physical book](https://www.packtpub.com/product/devops-culture-and-practice-with-openshift/9781800202368) on Pack editor or Amazon
 
 
