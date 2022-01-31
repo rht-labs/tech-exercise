@@ -136,11 +136,11 @@ leadership so that priorities and future work can be adapted accordingly
 * Use what you have learned.
 * Reach out to your classmates and instructors.
 * Use the resources shared during the class.
-* Buy a copy of `DevOps Culture and Practice with OpenShift`.💰💰
+* Download a copy of `DevOps Culture and Practice with OpenShift` ebook.💰💰
 
 
 
-#### 📗🐛 Buy a copy of our Bookie Wookie 🍪🍪
+#### 📗🐛 Get a copy of our Bookie Wookie 🍪🍪
 
 ![bookie-wookie](images/wrap-up/book.png)<!-- {.element: class="" style="max-height: 600px!important;" } -->
 
@@ -152,7 +152,9 @@ leadership so that priorities and future work can be adapted accordingly
 * GitHub repository: https://github.com/rht-labs/tech-exercise
 * Open Practice Library: https://openpracticelibrary.com/
 * Ubiquitous Journey🔥🦄: https://github.com/rht-labs/ubiquitous-journey
-* DevOps Culture and Practice with OpenShift book ([chapters ebooks](https://www.redhat.com/en/engage/devops-culture-practice-openshift-ebooks), [physical book](https://www.packtpub.com/product/devops-culture-and-practice-with-openshift/9781800202368) on Pack editor or Amazon)
+* DevOps Culture and Practice with OpenShift book
+  * Download the [ebook chapters](https://www.redhat.com/en/engage/devops-culture-practice-openshift-ebooks)
+  * You can obtain the [physical book](https://www.packtpub.com/product/devops-culture-and-practice-with-openshift/9781800202368) on Pack editor or Amazon
 
 
 
