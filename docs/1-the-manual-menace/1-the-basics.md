@@ -48,6 +48,10 @@ oc new-project ${TEAM_NAME}-ci-cd
 ```
 ![new-project](./images/new-project.png)
 
+<p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you are working as a team and are using the same TEAM_NAME, you may receive a message saying this project already exists. One of your team mates would have already created this project. It's all good!
+  </p>
+
 ### Helm 101
 > Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
