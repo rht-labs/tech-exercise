@@ -38,6 +38,7 @@ echo ${GIT_SERVER}
 ```
 
 8. Check if you can connect to OpenShift. Run the command below. 
+   Tip: Before you hit enter, make sure you change the username and password to match your team's login details!
 ```bash
 oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
 ```
