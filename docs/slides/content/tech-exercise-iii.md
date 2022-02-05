@@ -58,8 +58,8 @@ AUTOMATE ALL THE THINGS 💥🔨
 
 
 #### Measuring Test
-Answering the age old question, "How do I know if my tests are any good?"
 ![test-measuers](images/tech-exercise-iii/measuring-tests.png)
+Answering the age old question, "How do I know if my tests are any good?"
 * Code Coverage
 * Static Code Analysis
 <!--Tech Edit: There is some odd word wrapping on this slide. the Intro sentence is wrapping around the graphic and pushing the "...good?" to below the graphic. Please fix.-->
