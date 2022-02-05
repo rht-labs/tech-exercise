@@ -45,8 +45,7 @@ two programmers work together at one computer.
 ![Mob Programming](images/pair-and-mob-programming/chairs-developer-development.jpg) <!-- {.element: class="inline-image"} -->
 </br>
 **Mob programming** is a software development approach where the whole team
-works on the same thing, at the same time, in the same space, and at the same
-computer.
+works on the same thing concurrently, and at the same computer.
 
 
 
