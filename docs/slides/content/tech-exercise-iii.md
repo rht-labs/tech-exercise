@@ -58,7 +58,7 @@ AUTOMATE ALL THE THINGS 💥🔨
 
 
 #### Measuring Test
-Answering the age old question, "How do I know if my tests are any good?"
+<p>Answering the age old question, "How do I know if my tests are any good?"</p>
 ![test-measuers](images/tech-exercise-iii/measuring-tests.png)
 * Code Coverage
 * Static Code Analysis
