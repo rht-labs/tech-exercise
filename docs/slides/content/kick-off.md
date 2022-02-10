@@ -160,6 +160,41 @@ Introduce yourself to the group and share your animal.
 * Assign each person a number, 1,2,3, or 4, to divide the group into balanced teams.
 * Each member assigned the same number is on the same team 
 
+
+
+### ⚔️ Let the Battle Begin ⚔️
+
+
+
+
+### Pet Battle: Whose cat is the best?
+As a team, you've created an application called Pet Battle to entertain your friends and families and also to decide who's the best cat!
+
+😼 😼 😼
+
+Everyone uploads photos of their cats to Pet Battle and voting to decide which cat is the best! 
+
+👍 👎 👍
+
+
+
+One day, nearly overnight, there was a drastically increased number of players! 
+
+The Pet Battle server crashes, not able to scale and malicious pictures of not cats start appearing on the child-friendly application 😱
+
+
+
+![tweet](images/kick-off/tweet.png)
+
+
+
+Pet Battle became a hit! And as a team, you decide to develop a business around it! 
+
+And here your journey of embracing *_DevOps Culture and Practices_* begins! 
+<iframe src="https://giphy.com/embed/HVr4gFHYIqeti" width="480" height="192" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/running-adventure-movie-HVr4gFHYIqeti"></a></p>
+
+
+
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
 ### Related & Used Practices
 <div class="container">

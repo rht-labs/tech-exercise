@@ -85,6 +85,7 @@ A tool to capture and articulate the non-functional requirements of a solution t
 Pet Battle Industries have a good handle on the functional design of their applications. Now, let's think of all the _other_ things they need to do to harden their application.
 
 
+
 ### Create the NFR Map
 #### *As a class*
 
