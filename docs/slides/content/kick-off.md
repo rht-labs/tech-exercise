@@ -178,7 +178,18 @@ Everyone uploads photos of their cats to Pet Battle and voting to decide which c
 
 
 
-One day, nearly overnight, there was a drastically increased number of players! 
+
+![petbattle-ui](images/kick-off/petbattle-ui.png)<!-- .element: class="image-no-shadow image-full-width " -->
+
+
+
+It is a simple web-based user interface with an API layer coupled with a NoSQL database.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+
+![petbattle-initial-architecture](images/kick-off/petbattle-initial-architecture.png)<!-- .element: class="image-no-shadow image-full-width " -->
+
+
+
+One day, there was a drastically increased number of players! 
 
 The Pet Battle server crashes, not able to scale and malicious pictures of not cats start appearing on the child-friendly application 😱
 
@@ -188,7 +199,7 @@ The Pet Battle server crashes, not able to scale and malicious pictures of not c
 
 
 
-Pet Battle became a hit! And as a team, you decide to develop a business around it! 
+Pet Battle became a hit! And as a team, you decided to develop a business and a production-ready version of this hobbyist app! 
 
 And here your journey of embracing *_DevOps Culture and Practices_* begins! 
 <iframe src="https://giphy.com/embed/HVr4gFHYIqeti" width="480" height="192" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/running-adventure-movie-HVr4gFHYIqeti"></a></p>
