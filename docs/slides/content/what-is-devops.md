@@ -19,30 +19,12 @@ come to mind.
 
 
 
-<!-- .slide: data-transition="slide-in fade-out" -->
 ## What is DevOps?
+* Create a 3 x 3 table on a paper sheet.
+* Fill each of your nine squares with a term, phrase, or idea related to DevOps.
+* Yell out "Bingo!!!" when you match a row up, down, or diagonal during the section.
 
-                              Culture?                       Agile?
-
-                                          Pipelines?
-                      Automation?                                          Mindset?
-                                      A Role?
-                                                       CI/CD?
-                                                                  Dev & Ops?
-                              Tools?
-                                            Way of Working?
-
-
-
-<!-- .slide: data-transition="fade-in slide-out" -->
-## DevOps is...
-
-                              Culture
-
-                                                                           Mindset
-
-                                            Way of Working
-
+![devops-bingo](images/what-is-devops/devops-bingo.png)<!-- {.element: class="" style="height:450px"} -->
 
 
 
