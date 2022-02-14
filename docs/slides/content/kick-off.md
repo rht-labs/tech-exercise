@@ -183,9 +183,9 @@ Everyone uploads photos of their cats to Pet Battle and voting to decide which c
 
 
 
-It is a simple web-based user interface with an API layer coupled with a NoSQL database.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
+There are very few bells and whistles to the initial architecture. It is deployed on a single virtual machine. It has a simple web-based user interface and an API layer coupled with a NoSQL database.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
-![petbattle-initial-architecture](images/kick-off/petbattle-initial-architecture.png)<!-- .element: class="image-no-shadow image-full-width " -->
+![petbattle-initial-architecture](images/kick-off/petbattle-initial-architecture.png) <!-- {.element: class="" style="height:550px"} -->
 
 
 
