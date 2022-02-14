@@ -55,7 +55,8 @@ come to mind.
 
 
 ### The Three Ways of DevOps
-#### _The First Way: Systems Thinking_
+![first-way](images/what-is-devops/first-way.png)<!-- .element: class="image-no-shadow image-full-width " -->
+
 The First Way emphasizes the performance of the entire system, as opposed to the performance of a specific silo of work or department. This can be as large as a division or as small as an individual contributor. <!-- {.element: class="medium para"} -->
 
 _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} -->
@@ -63,7 +64,7 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
 
 
 ### The Three Ways of DevOps
-#### _The Second Way: Amplify Feedback Loops_
+![second-way](images/what-is-devops/second-way.png)<!-- .element: class="image-no-shadow image-full-width " -->
 * The Second Way is about creating more frequent feedback loops.
 
 * The goal of almost any process improvement initiative is to shorten and amplify feedback loops so necessary corrections can be continually made.
@@ -78,7 +79,7 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
 
 
 ### The Three Ways of DevOps
-#### _The Third Way: Culture of Continual Experimentation and Learning_
+![third-way](images/what-is-devops/third-way.png)<!-- .element: class="image-no-shadow image-full-width " -->
 * The Third Way is about creating a culture that fosters two things:
   * Continual experimentation, taking risks and learning from failure
   * Understanding that repetition and practice is the prerequisite to mastery
@@ -91,6 +92,11 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
   * Introducing faults into the system to increase resilience
 
 _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} -->
+
+
+
+
+![ways-of-devops](images/what-is-devops/ways-of-devops.png)<!-- .element: class="image-no-shadow image-full-width " -->
 
 
 
