@@ -45,10 +45,12 @@ come to mind.
 
 
 
+
 ### The Three Ways of DevOps
 #### _The DevOps Handbook_
 #### by Gene Kim, et. al.
-![DevOps Handbook](images/DevOps/devopshandbook.jpg)
+![DevOps Handbook](images/what-is-devops/devopshandbook.jpg)
+
 
 
 
@@ -93,7 +95,13 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
 
 
 ### DevOps as It Relates to Agile
-![Feedback Loop](images/DevOps/feedbackloop.png)
+![Feedback Loop](images/what-is-devops/feedbackloop.png)
+
+
+
+
+Implementation of DevOps practices leading to faster delivery and better products.
+![what-is-devops](images/what-is-devops/what-is-devops.jpg)
 
 
 
@@ -109,56 +117,56 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
 
 ### DevOps Anti-Patterns
 #### _Throw it over the wall_
-![ThrowItOverWall](images/DevOps/antiA.png)
+![ThrowItOverWall](images/what-is-devops/antiA.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _DevOps Team Silo_
-![DevOpsTeamSilo](images/DevOps/antiB.png)
+![DevOpsTeamSilo](images/what-is-devops/antiB.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Dev Doesn't Need Ops_
-![NoNeedOps](images/DevOps/antiC.png)
+![NoNeedOps](images/what-is-devops/antiC.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _DevOps as Tool Team_
-![DevOpsToolTeam](images/DevOps/antiD.png)
+![DevOpsToolTeam](images/what-is-devops/antiD.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Re-branded Sys Admin_
-![RebrandSysAdmin](images/DevOps/antiE.png)
+![RebrandSysAdmin](images/what-is-devops/antiE.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Ops Embedded in Dev Team_
-![EmbeddedOps](images/DevOps/antiF.png)
+![EmbeddedOps](images/what-is-devops/antiF.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Anti-Patterns
 #### _Dev and DBA Silos_
-![DevOpsDBASilo](images/DevOps/antiG.png)
+![DevOpsDBASilo](images/what-is-devops/antiG.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
 
 ### DevOps Success
 #### _Fully Shared Ops Responsibilities_
-![DevOpsSuccess](images/DevOps/dosuccess.png)
+![DevOpsSuccess](images/what-is-devops/dosuccess.png)
 https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
 
 
