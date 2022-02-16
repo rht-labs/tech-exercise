@@ -29,7 +29,7 @@ When something is seen as not matching the required state in Git, an application
 2. We are using the [Red Hat GitOps Operator](https://github.com/redhat-developer/gitops-operator) which was deployed as part of the cluster setup. Normally this step would be done as part of the Operator Install so its a bit more complicated than we would like. Because _we did not know_ your team names ahead of time 👻 we will need to update an environment variable on the Operator Subscription. This tells the Operator its OK to deploy a cluster scoped ArgoCD instance into your <TEAM_NAME>-ci-cd project. Run this shell script:
 
     <p class="tip">
-    🐌 THIS IS NOT GITOPS - Until we work out a better way to automate this. 🐎
+    🐌 THIS IS NOT GITOPS - Until we work out a better way to automate this. 🐎 If you see "...." in your terminal after you copy this shell script, do not worry. Hit return and it will run as designed.
     </p>
 
     ```bash
@@ -98,7 +98,7 @@ When something is seen as not matching the required state in Git, an application
     ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
     </p>
 
-3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up.
+3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up. To do this, we are going to run a command with a 'watch' flag to continuousy monitor pod creation.
 
     ```bash
     oc get pods -w -n ${TEAM_NAME}-ci-cd
@@ -106,7 +106,7 @@ When something is seen as not matching the required state in Git, an application
 
     ![argocd-pods](images/argocd-pods.png)
 
-    *You can do Control+C to break the 'watch' mode*
+    *You must do Control+C to break the 'watch' mode to continue to the next step. Once all your pods are running*
 
 4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab.
 
