@@ -82,6 +82,14 @@ Lets take our code from `cluster-a` to `cluster-b`.
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
+    
+    cat /tmp/sealed-git-auth.yaml| grep -E 'username|password'
+    ```
+
+    Need to apply this to temporarily kick thins off
+
+    ```bash
+    oc apply -n ${TEAM_NAME} -f /tmp/git-auth.yaml
     ```
 
     Set `sonarqube-auth`
@@ -201,14 +209,14 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     helm upgrade --install argocd \
     --namespace ${TEAM_NAME}-ci-cd \
-    -f tech-exercises/argocd-values.yaml \
+    -f tech-exercise/argocd-values.yaml \
     redhat-cop/gitops-operator
     ```
 
 9. Install UJ
 
     ```bash
-    cd tech-exercises
+    cd tech-exercise
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
