@@ -194,12 +194,12 @@ must be done.<!-- {.element: class="fragment"  data-fragment-index="1"} -->
 <!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
 ### Related & Used Practices
 User Story Mapping and Value Slice are connected to multiple practices including:
-* [Target Outcomes](https://openpracticelibrary.com/practices/target-outcomes/)
-* [Impact Mapping deliverables](https://openpracticelibrary.com/practices/impact-mapping/)
-* [Empathy Mapping ideas and feedback](https://openpracticelibrary.com/practices/empathy-mapping/)
-* [Non Functional Requirements](https://openpracticelibrary.com/practices/non-functional-requirements-map)
-* [Big Picture workflow](https://openpracticelibrary.com/practices/the-big-picture/)
-* [Event Storming commands](https://openpracticelibrary.com/practices/event-storming/)
-* [Metrics Based Process Mapping continuous delivery bottlenecks](https://openpracticelibrary.com/practices/metrics-based-process-mapping/)
+* [Target Outcomes](https://openpracticelibrary.com/practice/target-outcomes/)
+* [Impact Mapping deliverables](https://openpracticelibrary.com/practice/impact-mapping/)
+* [Empathy Mapping ideas and feedback](https://openpracticelibrary.com/practice/empathy-mapping/)
+* [Non Functional Requirements](https://openpracticelibrary.com/practice/non-functional-requirements-map)
+* [Big Picture workflow](https://openpracticelibrary.com/practice/the-big-picture/)
+* [Event Storming commands](https://openpracticelibrary.com/practice/event-storming/)
+* [Metrics Based Process Mapping continuous delivery bottlenecks](https://openpracticelibrary.com/practice/metrics-based-process-mapping/)
 
 User Story Mapping feeds into Value Slice that generate the Product Backlog.

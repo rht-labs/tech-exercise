@@ -265,6 +265,6 @@ Document all activities and steps (the things)
 Related practices:
 
 * [Metrics Based Process Mapping](https://openpracticelibrary.com/practice/metrics-based-process-mapping/)
-* [Value Stream Mapping](https://openpracticelibrary.com/practices/vsm-and-mbpm/)
-* [User Story Mapping & Value Slicing](https://openpracticelibrary.com/practices/user-story-mapping/)
+* [Value Stream Mapping](https://openpracticelibrary.com/practice/vsm-and-mbpm/)
+* [User Story Mapping & Value Slicing](https://openpracticelibrary.com/practice/user-story-mapping/)
 * [Team Topologies](https://teamtopologies.com)
