@@ -87,17 +87,11 @@ _We will set up Git projects, create dev, test, and stage projects in OpenShift,
 
 
 
-### 💥 Mob to Learn 💥
-* Begin with the [pairing and mobbing](?name=pairing-and-mobbing) exercise (if not already completed).
+### 💥 Let's Begin 💥
 * In your table teams, form a mob to complete the exercise. Work together as a team to deploy your shared tooling and infrastructure!
-* Rotate the `driver` at the end of the section to give everyone a chance to get their hands dirty with code!
-* If you finish early, try your hand at the `Here be dragons` section.
-* Your tutor will share links to the instructions, OpenShift Console, CRW, and GitLab server.
-
-
-
-### 💥 CodeReadyWorkspaces 💥 <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/crw.png", class="white-style" data-background-opacity="1"	 -->
+* You will want to rotate the `driver` at the end of each exercise section to give everyone a chance to get their hands dirty with code!
+* If you finish the exercise early, try your hand at the `Here be dragons` section.
+* Your facilitator will share links to the instructions, OpenShift Console, CRW, and GitLab server.
 
 
 

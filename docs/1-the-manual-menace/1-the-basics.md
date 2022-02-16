@@ -46,7 +46,7 @@
 8. Check if you can connect to OpenShift. Run the command below.
 
     <p class="tip">
-    ⛷️ <b>TIP</b> ⛷️ - Before you hit enter, make sure you change the username and password to match your team's login details
+    ⛷️ <b>TIP</b> ⛷️ - Before you hit enter, make sure you change the username and password to match your team's login details. If your password includes special characters, put it in single quotes. ie: 'A8y?Rpm!9+A3B/KG'
     </p>  
 
     ```bash
