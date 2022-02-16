@@ -11,4 +11,4 @@ The tech exercise are designed to be run in groups. NOT AS INDIVIDUALS. The firs
 3. Users ....
 
 ## Big Picture
-Each tech exercise should introduce new components to the big picture. You can see what it should look like up to the end of the exercise on each intro page. There are components available for Big Picture in Miro 
+Each tech exercise should introduce new components to the big picture. You can see what it should look like up to the end of the exercise on each intro page. There are components available for Big Picture in Miro.
