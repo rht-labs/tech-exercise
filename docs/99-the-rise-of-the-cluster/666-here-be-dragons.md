@@ -222,6 +222,29 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
 10. Add the integrations and web hooks to gitlab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
 
-11. Kick off builds, make sure they work, fix up and helm chart version mismatches etc.
+11. Create new cosign signing keys.
 
-12. 🎉🎉🎉 Celebrate a successful migration to a new cluster 🎉🎉🎉
+    ```bash
+    cd /tmp
+    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign
+
+    cd /projects/tech-exercise
+    git add ubiquitous-journey/values-tooling.yaml
+    git commit -m  "🔒 ADD - Cosign Jenkins Agent 🔒"
+    git push
+
+    cp /tmp/cosign.pub /projects/pet-battle-api/
+    cd /projects/pet-battle-api
+    git add cosign.pub
+    git commit -m  "🪑 ADD - cosign public key for image verification 🪑"
+    git push
+    ```
+
+12. Kick off builds, make sure they work, fix up and helm chart version mismatches etc.
+
+    ```bash
+    cd /projects/pet-battle-api; git commit -m "test" --allow-empty; git push
+    cd /projects/pet-battle; git commit -m "test" --allow-empty; git push
+    ```
+
+13. 🎉🎉🎉 Celebrate a successful migration to a new cluster 🎉🎉🎉
