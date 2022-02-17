@@ -240,7 +240,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     git push
     ```
 
-12. Kick off builds, make sure they work, fix up and helm chart version mismatches etc.
+12. Kick off builds, make sure they work, fix up any helm chart version mismatches etc.
 
     ```bash
     cd /projects/pet-battle-api; git commit -m "test" --allow-empty; git push
