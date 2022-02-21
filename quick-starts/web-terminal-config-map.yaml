@@ -12,7 +12,7 @@ data:
     - name: claim-devworkspace
       path: "/projects"
   devworkspace.idle_timeout: 8h
-  devworkspace.routing.cluster_host_suffix: apps.hivec.sandbox1243.opentlc.com
+  devworkspace.routing.cluster_host_suffix: apps.openshift-410-kwlrb.demo.redhatlabs.dev
 kind: ConfigMap
 metadata:
   labels:
