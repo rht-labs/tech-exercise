@@ -1,4 +1,4 @@
-## DO500 Quick Starts for OpenShift - 💥💥 EXPERIMENTAL 💥💥
+## TL500 Quick Starts for OpenShift - 💥💥 EXPERIMENTAL 💥💥
 
 As a cluster-admin load the getting started files into your cluster
 ```bash
