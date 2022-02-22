@@ -1,0 +1,28 @@
+apiVersion: workspace.devfile.io/v1alpha2
+kind: DevWorkspaceTemplate
+metadata:
+  annotations:
+    web-terminal.redhat.com/unmanaged-state: "true"
+    controller.devfile.io/allow-import-from: '*'
+  labels:
+    console.openshift.io/terminal: "true"
+  name: web-terminal-tooling
+  namespace: openshift-operators
+spec:
+  components:
+  - container:
+      args:
+      - sleep
+      - infinity
+      env:
+      - name: DEVWORKSPACE_IDLE_TIMEOUT
+        value: 1hr
+      value: 1hr
+      cpuLimit: 400m
+      cpuRequest: 100m
+      image: quay.io/rht-labs/stack-do500:latest
+      memoryLimit: 512Mi
+      memoryRequest: 128Mi
+      mountSources: true
+      sourceMapping: /projects
+    name: web-terminal-tooling
