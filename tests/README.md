@@ -20,7 +20,7 @@ podman exec -it stack zsh
 
 git clone https://github.com/rht-labs/tech-exercise.git
 # FIXME test branch for now 
-cd tech-exercise && git checkout tests
+cd tech-exercise && git checkout tests && cd tests
 
 # Run the test suite
 ./regression.sh
