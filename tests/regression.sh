@@ -79,8 +79,10 @@ test_file() {
     local file=$1
     local tags=$2
     local outFile=out-${file%%md}json
-    
-    echo -n "Testing $file tags: $tags"
+
+    echo
+    echo -n "=== Testing $file tags: $tags"
+    echo
 
     ((tests++))
     replace_env_vars $file
