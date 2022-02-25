@@ -17,13 +17,13 @@ else
 fi
 
 # FIXME Check for
-[ -z "$TEAM_NAME" ] && { echo "Warning: must supply TEAM_NAME in env"; exit 1; }
-[ -z "$CLUSTER_DOMAIN" ] && { echo "Warning: must supply CLUSTER_DOMAIN in env"; exit 1 }
-[ -z "$GIT_SERVER" ] && { echo "Warning: must supply GIT_SERVER in env"; exit 1; }
-[ -z "$GIT_USER" ] && { echo "Warning: must supply GIT_USER in env"; exit 1; }
-[ -z "$GIT_PASSWORD" ] && { echo "Warning: must supply GIT_PASSWORD in env"; exit 1; }
-[ -z "$OCP_USER" ] && { echo "Warning: must supply OCP_USER in env"; exit 1; }
-[ -z "$OCP_PASSWORD" ] && { echo "Warning: must supply OCP_PASSWORD in env"; exit 1; }
+[ -z "$TEAM_NAME" ] && echo "Warning: must supply TEAM_NAME in env" && exit 1
+[ -z "$CLUSTER_DOMAIN" ] && echo "Warning: must supply CLUSTER_DOMAIN in env" && exit 1
+[ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && exit 1
+[ -z "$GIT_USER" ] && echo "Warning: must supply GIT_USER in env" && exit 1
+[ -z "$GIT_PASSWORD" ] && echo "Warning: must supply GIT_PASSWORD in env" && exit 1
+[ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
+[ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
 
 #
 tests=0
