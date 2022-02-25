@@ -18,25 +18,25 @@
 
 4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
-    ```bash
-    echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
+    ```bash#test
+    echo export TEAM_NAME="tteam" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 5. Add the `CLUSTER_DOMAIN` to the environment:
 
-    ```bash
-    echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
+    ```bash#test
+    echo export CLUSTER_DOMAIN="apps.openshift-410-kwlrb.demo.redhatlabs.dev" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 6. Add the `GIT_SERVER` to the environment:
 
-    ```bash
-    echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
+    ```bash#test
+    echo export GIT_SERVER="gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 7. Verify the variables you have set:
 
-    ```bash
+    ```zsh#test
     source ~/.zshrc
     echo ${TEAM_NAME}
     echo ${CLUSTER_DOMAIN}
@@ -55,8 +55,8 @@
 
 9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 
-    ```bash
-    oc new-project ${TEAM_NAME}-ci-cd
+    ```bash#test
+    oc new-project ${TEAM_NAME}-ci-cd || true
     ```
 
     ![new-project](./images/new-project.png)
@@ -73,25 +73,25 @@ Let's deploy a simple application using Helm.
 
 1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores the version history of our charts as well as the packaged tar file.
 
-    ```bash
+    ```bash#test
     helm repo add tl500 https://rht-labs.com/todolist/
     ```
 
 2. Let's install a chart from this repo. First search the repository to see what is available.
 
-    ```bash
+    ```bash#test
     helm search repo todolist
     ```
 
     Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
 
-    ```bash
-    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd
+    ```bash#test
+    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true
     ```
 
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
 
-    ```bash
+    ```bash#test
     echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
     ```
 
@@ -99,31 +99,31 @@ Let's deploy a simple application using Helm.
 
 4. You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
 
-    ```bash
+    ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
     By default, we only have one replica of our application. Let's use helm to set this to 5.
 
-    ```bash
+    ```bash#test
     helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
     ```
 
     Verify the deployment has scaled up to 5 replicas.
 
-    ```bash
+    ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
 5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run helm uninstall to remove our release of the chart.
 
-    ```bash
+    ```bash#test
     helm uninstall my --namespace ${TEAM_NAME}-ci-cd
     ```
 
     Verify the clean up
 
-    ```bash
+    ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
     ```
 

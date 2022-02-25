@@ -1,0 +1,61 @@
+{
+    "code_blocks": [
+        {
+            "code": "    run()\n    {\n      NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      if [ -z $NS ]; then\n        NS=\"${TEAM_NAME}-ci-cd\"\n      elif [[ \"$NS\" =~ .*\"${TEAM_NAME}-ci-cd\".* ]]; then\n        echo \"${TEAM_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TEAM_NAME}-ci-cd,${NS}\"\n      fi\n      oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"replace\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    run()\n    {\n      NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      if [ -z $NS ]; then\n        NS=\"${TEAM_NAME}-ci-cd\"\n      elif [[ \"$NS\" =~ .*\"${TEAM_NAME}-ci-cd\".* ]]; then\n        echo \"${TEAM_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TEAM_NAME}-ci-cd,${NS}\"\n      fi\n      oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"replace\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

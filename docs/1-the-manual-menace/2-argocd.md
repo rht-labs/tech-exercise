@@ -32,7 +32,7 @@ When something is seen as not matching the required state in Git, an application
     🐌 THIS IS NOT GITOPS - Until we work out a better way to automate this. 🐎 If you see "...." in your terminal after you copy this shell script, do not worry. Hit return and it will run as designed.
     </p>
 
-    ```bash
+    ```bash#test
     run()
     {
       NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \
@@ -66,7 +66,7 @@ When something is seen as not matching the required state in Git, an application
 
     Configure our ArgoCD instance with a secret in our <TEAM_NAME>-ci-cd namespace by creating a small bit of yaml 😋:
 
-    ```bash
+    ```bash#test
     cat << EOF > /projects/tech-exercise/argocd-values.yaml
     ignoreHelmHooks: true
     operator: []
@@ -82,12 +82,12 @@ When something is seen as not matching the required state in Git, an application
           usernameSecret:
             key: username
             name: git-auth
-    EOF
+EOF
     ```
 
     Then, deploy ArgoCD using helm and this piece of yaml:
 
-    ```bash
+    ```bash#test
     helm upgrade --install argocd \
       --namespace ${TEAM_NAME}-ci-cd \
       -f /projects/tech-exercise/argocd-values.yaml \
@@ -110,7 +110,7 @@ When something is seen as not matching the required state in Git, an application
 
 4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab.
 
-    ```bash
+    ```bash#test
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  
     ```
 

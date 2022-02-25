@@ -1,0 +1,131 @@
+{
+    "code_blocks": [
+        {
+            "code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -am \"\ud83d\udc19 ADD - argocd values file \ud83d\udc19\"\n    git push -u origin --all\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -am \"\ud83d\udc19 ADD - argocd values file \ud83d\udc19\"\n    git push -u origin --all\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise/\n    git add .\n    git commit -m  \"\ud83e\udd86 ADD - correct project names \ud83e\udd86\"\n    git push\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise/\n    git add .\n    git commit -m  \"\ud83e\udd86 ADD - correct project names \ud83e\udd86\"\n    git push\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc get projects | grep ${TEAM_NAME}\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc get projects | grep ${TEAM_NAME}\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

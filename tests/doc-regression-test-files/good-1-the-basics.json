@@ -1,0 +1,201 @@
+{
+    "code_blocks": [
+        {
+            "code": "    echo export TEAM_NAME=\"tteam\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo export TEAM_NAME=\"tteam\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo export CLUSTER_DOMAIN=\"apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo export CLUSTER_DOMAIN=\"apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo export GIT_SERVER=\"gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo export GIT_SERVER=\"gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    source ~/.zshrc\n    echo ${TEAM_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n",
+            "interpreter": "zsh",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    source ~/.zshrc\n    echo ${TEAM_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n"
+                }
+            ],
+            "tags": [
+                "zsh",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc new-project ${TEAM_NAME}-ci-cd || true\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc new-project ${TEAM_NAME}-ci-cd || true\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm repo add tl500 https://rht-labs.com/todolist/\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm repo add tl500 https://rht-labs.com/todolist/\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm search repo todolist\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm search repo todolist\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    helm uninstall my --namespace ${TEAM_NAME}-ci-cd\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    helm uninstall my --namespace ${TEAM_NAME}-ci-cd\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

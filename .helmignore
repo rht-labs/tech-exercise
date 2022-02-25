@@ -1,7 +1,10 @@
 # so we dont include these in our chart secret
+tests/
 docs/
+quick-starts/
 pet-battle/
 tekton/
 quick-starts/
+ubiquitous-journey/
 README.md
 .git
