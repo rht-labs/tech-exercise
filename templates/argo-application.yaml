@@ -1,6 +1,7 @@
 {{- if .Values.applications }}
 {{- $release := .Values.release }}
 {{- $source := .Values.source }}
+{{- $source_ref := .Values.source_ref }}
 {{- $team := .Values.team }}
 {{- range $app := .Values.applications }}
 {{- if $app.source }}
@@ -50,7 +51,7 @@ spec:
     path: {{ .source_path | default "." }}
     {{- end }}
     repoURL: {{ $source }}
-    targetRevision: {{ .source_ref | default "main" | quote }}
+    targetRevision: {{ $source_ref | default "main" | quote }}
     {{- if not .source_path }}
     chart: {{ .chart_name | default .name }}
     {{- end }}
