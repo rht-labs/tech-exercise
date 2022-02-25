@@ -16,10 +16,14 @@ else
     exit 1
 fi
 
-# FIXME
-teamName=tteam
-clusterDomain=apps.openshift-410-kwlrb.demo.redhatlabs.dev
-gitServer=gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev
+# FIXME Check for
+[ -z "$TEAM_NAME" ] && { echo "Warning: must supply TEAM_NAME in env"; exit 1; }
+[ -z "$CLUSTER_DOMAIN" ] && { echo "Warning: must supply CLUSTER_DOMAIN in env"; exit 1 }
+[ -z "$GIT_SERVER" ] && { echo "Warning: must supply GIT_SERVER in env"; exit 1; }
+[ -z "$GIT_USER" ] && { echo "Warning: must supply GIT_USER in env"; exit 1; }
+[ -z "$GIT_PASSWORD" ] && { echo "Warning: must supply GIT_PASSWORD in env"; exit 1; }
+[ -z "$OCP_USER" ] && { echo "Warning: must supply OCP_USER in env"; exit 1; }
+[ -z "$OCP_PASSWORD" ] && { echo "Warning: must supply OCP_PASSWORD in env"; exit 1; }
 
 #
 tests=0
@@ -51,9 +55,9 @@ strip_output() {
 
 replace_env_vars() {
     local file_path=$1
-    sed -i -e "s|<TEAM_NAME>|$teamName|" $file_path
-    sed -i -e "s|<CLUSTER_DOMAIN>|$clusterDomain|" $file_path
-    sed -i -e "s|<GIT_SERVER>|$gitServer|" $file_path
+    sed -i -e "s|<TEAM_NAME>|${TEAM_NAME}|" $file_path
+    sed -i -e "s|<CLUSTER_DOMAIN>|${CLUSTER_DOMAIN}|" $file_path
+    sed -i -e "s|<GIT_SERVER>|${GIT_SERVER}|" $file_path
 }
 
 git_checkout() {
@@ -73,6 +77,17 @@ setup_python() {
 
 source_python() {
     source env/bin/activate
+}
+
+perform_logins() {
+    oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 > /dev/null 2>&1
+    if [ ! -f "~/.netrc" ]; then
+    cat <<EOF > ~/.netrc
+    machine ${GIT_SERVER}
+       login ${GIT_USER}
+       password ${GIT_PASSWORD}
+EOF
+    fi
 }
 
 test_file() {
@@ -121,6 +136,7 @@ Rundoc regression tests
 
 setup_python
 git_checkout
+perform_logins
 
 # 1-the-manual-menace
 setup_test /projects/tech-exercise/docs/1-the-manual-menace
