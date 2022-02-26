@@ -156,13 +156,9 @@ all() {
     # other tests
 
     # done
-    if $GENERATE; then
-        echo "generated successfully"
-    else
-        echo "Tests run: $tests"
-        echo "Failed tests: $failed_tests"
-        exit $failed_tests
-    fi
+    echo "Tests run: $tests"
+    echo "Failed tests: $failed_tests"
+    exit $failed_tests
 }
 
 usage() {
@@ -203,6 +199,6 @@ shift `expr $OPTIND - 1`
 # run test suite
 all
 
-if [ ${CLEAN} ]; then
+if [ ! -z ${CLEAN} ]; then
     cleanup
 fi
