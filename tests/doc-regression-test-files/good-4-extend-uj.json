@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "code": "    yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                    "user_code": "    yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
                 }
             ],
             "tags": [
