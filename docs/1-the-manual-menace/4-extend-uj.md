@@ -31,7 +31,7 @@ git pull
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
-    yq e '.applications += {"name": "nexus","enabled": true,"source": "https://redhat-cop.github.io/helm-charts","chart_name": "sonatype-nexus","source_ref": "1.1.3","values":{"service": {"name": "nexus"}}}' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    yq e '.applications += {"name": "nexus","enabled": true,"source": "https://redhat-cop.github.io/helm-charts","chart_name": "sonatype-nexus","source_ref": "1.1.3","values":{"service": {"name": "nexus"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     ```
 
 2. Now push the changes into your git repository for it to be automatically rolled out by ArgoCD!
