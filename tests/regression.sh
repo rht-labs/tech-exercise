@@ -6,28 +6,11 @@
 scriptDir=$(cd `dirname "$0"`; pwd; cd - 2>&1 >> /dev/null)
 runDir=$scriptDir/doc-regression-test-files
 cd $scriptDir/doc-regression-test-files
-
-if [ "$1" = "gen" ]; then
-    generate=true
-elif [ "$1" = "" ]; then
-    generate=false
-else
-    echo "Bad option $1, needed 'gen'"
-    exit 1
-fi
-
-# FIXME Check for
-[ -z "$TEAM_NAME" ] && echo "Warning: must supply TEAM_NAME in env" && exit 1
-[ -z "$CLUSTER_DOMAIN" ] && echo "Warning: must supply CLUSTER_DOMAIN in env" && exit 1
-[ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && exit 1
-[ -z "$GIT_USER" ] && echo "Warning: must supply GIT_USER in env" && exit 1
-[ -z "$GIT_PASSWORD" ] && echo "Warning: must supply GIT_PASSWORD in env" && exit 1
-[ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
-[ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
-
-#
 tests=0
 failed_tests=0
+
+CLEAN=
+GENERATE=
 
 verify_zero_exit() {
     if [ "$?" != "0" ]; then
@@ -146,40 +129,80 @@ cleanup() {
      echo "Cleanup Done"
 }
 
-# TESTING STARTS HERE
+all() {
+    # TESTING STARTS HERE
 
-echo "
-Rundoc regression tests
-=======================
-"
+    echo "
+    Rundoc regression tests
+    =======================
+    "
 
-setup_python
-git_checkout
-perform_logins
+    setup_python
+    git_checkout
+    perform_logins
 
-# 1-the-manual-menace
-setup_test /projects/tech-exercise/docs/1-the-manual-menace
+    # 1-the-manual-menace
+    setup_test /projects/tech-exercise/docs/1-the-manual-menace
 
-test_file 1-the-basics.md "-t bash#test -t zsh#test"
-verify_zero_exit
+    test_file 1-the-basics.md "-t bash#test -t zsh#test"
+    verify_zero_exit
 
-test_file 2-argocd.md "-T bash#test"
-verify_zero_exit
+    test_file 2-argocd.md "-T bash#test"
+    verify_zero_exit
 
-test_file 3-ubiquitous-journey.md "-T bash#test"
-verify_zero_exit
+    test_file 3-ubiquitous-journey.md "-T bash#test"
+    verify_zero_exit
 
+    # other tests
 
-# other tests
+    # done
+    if $GENERATE; then
+        echo "generated successfully"
+    else
+        echo "Tests run: $tests"
+        echo "Failed tests: $failed_tests"
+        exit $failed_tests
+    fi
+}
 
-# cleanup
-cleanup
+usage() {
+  cat <<EOF 2>&1
+usage: $0 [ -c -g ] 
+Run test suite for markdown code snippets
+        -c      clean and delete test environment at end of tests
+        -g      generate output files only (dont run tests)
+EOF
+  exit 1
+}
 
-# done
-if $generate; then
-    echo "generated successfully"
-else
-    echo "Tests run: $tests"
-    echo "Failed tests: $failed_tests"
-    exit $failed_tests
+while getopts cg a; do
+  case $a in
+    u)
+      CLEAN=true
+      ;;
+    g)
+      GENERATE=true
+      ;;
+    *)
+      usage
+      ;;
+  esac
+done
+
+shift `expr $OPTIND - 1`
+
+# Check for EnvVars
+[ -z "$TEAM_NAME" ] && echo "Warning: must supply TEAM_NAME in env" && exit 1
+[ -z "$CLUSTER_DOMAIN" ] && echo "Warning: must supply CLUSTER_DOMAIN in env" && exit 1
+[ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && exit 1
+[ -z "$GIT_USER" ] && echo "Warning: must supply GIT_USER in env" && exit 1
+[ -z "$GIT_PASSWORD" ] && echo "Warning: must supply GIT_PASSWORD in env" && exit 1
+[ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
+[ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
+
+# run test suite
+all
+
+if [ ${CLEAN} ]; then
+    cleanup
 fi
