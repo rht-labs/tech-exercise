@@ -51,6 +51,7 @@ EOF
 - [X] `oc login` manual for now
 - [ ] regression.sh can generate output files
 - [ ] gitlab create team and public repos first
+- [ ] gitlab adding webhooks
 - [X] gitlab creds first time we commit / cache
 - [X] gitlab secret manual for now
 
@@ -65,4 +66,5 @@ echo export GITLAB_PASSWORD=password | tee -a ~/.bashrc -a ~/.zshrc
 --set source_ref=tests
 ```
 
-- [ ] add a tidy function to delete all ocp resources, git resources at end of tests
+- [X] add a tidy function to delete all ocp resources at end of tests
+- [ ] add a tidy function to delete all git resources at end of tests
