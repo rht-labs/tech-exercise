@@ -41,6 +41,20 @@
                 "bash",
                 "test"
             ]
+        },
+        {
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
         }
     ],
     "env": {}
