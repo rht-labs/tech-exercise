@@ -173,7 +173,7 @@ EOF
 
 while getopts cg a; do
   case $a in
-    u)
+    c)
       CLEAN=true
       ;;
     g)
