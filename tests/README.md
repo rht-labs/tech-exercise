@@ -48,11 +48,11 @@ EOF
 
 - [ ] may need to remove bash#test tags etc in html redraw
 - [ ] secrets and env vars in rundoc (which has some support?)
-- [ ] `oc login` manual for now
+- [X] `oc login` manual for now
 - [ ] regression.sh can generate output files
 - [ ] gitlab create team and public repos first
-- [ ] gitlab creds first time we commit / cache
-- [ ] gitlab secret manual for now
+- [X] gitlab creds first time we commit / cache
+- [X] gitlab secret manual for now
 
 ```bash
 echo export GITLAB_USER=user | tee -a ~/.bashrc -a ~/.zshrc
