@@ -154,6 +154,9 @@ all() {
     test_file 3-ubiquitous-journey.md "-T bash#test"
     verify_zero_exit
 
+    test_file 4-extend-uj.md "-T bash#test"
+    verify_zero_exit
+
     # other tests
 
     # done
