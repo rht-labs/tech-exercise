@@ -159,7 +159,7 @@ all() {
     # done
     echo "Tests run: $tests"
     echo "Failed tests: $failed_tests"
-    exit $failed_tests
+    return $failed_tests
 }
 
 usage() {
@@ -199,7 +199,16 @@ shift `expr $OPTIND - 1`
 
 # run test suite
 all
+if [ $? -ne 0 ]; then
+    echo "There were failed tests."
+    if [ ! -z ${CLEAN} ]; then
+        cleanup
+    fi
+    exit 1
+fi
 
 if [ ! -z ${CLEAN} ]; then
     cleanup
 fi
+
+exit 0
