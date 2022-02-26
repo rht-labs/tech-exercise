@@ -68,3 +68,5 @@ echo export GITLAB_PASSWORD=password | tee -a ~/.bashrc -a ~/.zshrc
 
 - [X] add a tidy function to delete all ocp resources at end of tests
 - [ ] add a tidy function to delete all git resources at end of tests
+
+- [ ] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests ?
