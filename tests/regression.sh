@@ -122,7 +122,7 @@ cleanup() {
         if [ $cnt > 3 ]; then
             echo "Force deleting namespace $namespace ..."
             oc delete namespace $namespace --timeout=10s 2>/dev/null
-            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
+            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
             oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
             curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
         fi
