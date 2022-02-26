@@ -64,3 +64,5 @@ echo export GITLAB_PASSWORD=password | tee -a ~/.bashrc -a ~/.zshrc
 ```bash
 --set source_ref=tests
 ```
+
+- [ ] add a tidy function to delete all ocp resources, git resources at end of tests
