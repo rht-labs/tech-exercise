@@ -68,7 +68,7 @@ patch_rundoc() {
 }
 
 perform_logins() {
-    oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 > /dev/null 2>&1
+    oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 #> /dev/null 2>&1
     if [ ! -f "~/.netrc" ]; then
     cat <<EOF > ~/.netrc
     machine ${GIT_SERVER}
