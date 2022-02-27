@@ -162,6 +162,9 @@ test_the_manual_menance() {
 }
 
 all() {
+    setup_tests
+
+    # TESTS
     test_the_manual_menance
 
     # other tests
