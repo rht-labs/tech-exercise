@@ -28,7 +28,7 @@ cd tech-exercise && git checkout tests && cd tests
 
 **_FIXME - All the fiddly bits that need more work_**
 
-- [ ] - patch for upto 4 whitespace in markdown -> html
+- [X] - patch for upto 4 whitespace in markdown -> html
 
 ```bash
 cat <<'EOF' > rundoc-patch
