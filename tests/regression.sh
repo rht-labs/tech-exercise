@@ -64,7 +64,7 @@ source_python() {
 
 patch_rundoc() {
     # cater for upto 4 spaces at start of code block in markdown
-    sed -i -e "s|P<fence>^(|P<fence>^\\\s{0,4}(|" tech-exercise/tests/doc-regression-test-files/env/lib/python3.9/site-packages/markdown_rundoc/rundoc_code.py
+    sed -i -e "s|P<fence>^(|P<fence>^\\\s{0,4}(|" /projects/tech-exercise/tests/doc-regression-test-files/env/lib/python3.9/site-packages/markdown_rundoc/rundoc_code.py
 }
 
 perform_logins() {
