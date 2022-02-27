@@ -7,7 +7,8 @@ applications:
     source_ref: "1.0.1"
     values:
       serviceaccounts: ""
-      bindings: &binds # student is the GROUP NAME in IDM
+      # student is the GROUP NAME in IDM
+      bindings: &binds
         - name: student
           kind: Group
           role: edit
@@ -71,7 +72,7 @@ applications:
 
   # Sealed Secrets
 
-  
+
   # Tekton Pipelines
 
 

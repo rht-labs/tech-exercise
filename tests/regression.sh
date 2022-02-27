@@ -130,9 +130,7 @@ cleanup() {
      echo "Cleanup Done"
 }
 
-all() {
-    # TESTING STARTS HERE
-
+setup_tests() {
     echo "
     Rundoc regression tests
     =======================
@@ -141,7 +139,9 @@ all() {
     setup_python
     git_checkout
     perform_logins
+}
 
+test_the_manual_menance() {
     # 1-the-manual-menace
     setup_test /projects/tech-exercise/docs/1-the-manual-menace
 
@@ -156,6 +156,13 @@ all() {
 
     test_file 4-extend-uj.md "-T bash#test"
     verify_zero_exit
+
+    test_file 5-this-is-gitops.md "-T bash#test"
+    verify_zero_exit
+}
+
+all() {
+    test_the_manual_menance
 
     # other tests
 

@@ -46,9 +46,18 @@ git pull
     # more yaml ...
     </code></pre></div>
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name=="BISCUITS") | length' values-tooling.yaml) < 1 ]]; then
+        echo here
+        yq e '.applications.[1].values.deployment.env_vars += {"name": "BISCUITS", "value": "jaffa-cakes"}' -i values-tooling.yaml
+    fi
+    ```
+
 3. Git commit that change and open the ArgoCD UI to see the new variable synchronized.
 
-    ```bash
+    ```bash#test
     git add .
     git commit -m  "🍪 ADD - Jenkins environment variable 🍪"
     git push 
