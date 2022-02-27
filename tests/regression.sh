@@ -62,6 +62,11 @@ source_python() {
     source env/bin/activate
 }
 
+patch_rundoc() {
+    # cater for upto 4 spaces at start of code block in markdown
+    sed -i -e "s|P<fence>^(|P<fence>^\\\s{0,4}(|" tech-exercise/tests/doc-regression-test-files/env/lib/python3.9/site-packages/markdown_rundoc/rundoc_code.py
+}
+
 perform_logins() {
     oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 > /dev/null 2>&1
     if [ ! -f "~/.netrc" ]; then
@@ -137,6 +142,7 @@ setup_tests() {
     "
 
     setup_python
+    patch_rundoc
     git_checkout
     perform_logins
 }
