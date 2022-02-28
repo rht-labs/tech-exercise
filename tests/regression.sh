@@ -100,6 +100,8 @@ test_file() {
         ((failed_tests++))
         echo "Does NOT Match $runDir/good-${file%%md}json"
         echo " -> failed"
+        echo
+        diff -u $runDir/good-${file%%md}json $runDir/$outFile
     else
         echo "Matches $runDir/good-${file%%md}json"
         echo " -> success"
@@ -219,10 +221,10 @@ shift `expr $OPTIND - 1`
 # run test suite
 all
 if [ $? -ne 0 ]; then
-    echo "There were failed tests."
     if [ ! -z ${CLEAN} ]; then
         cleanup
     fi
+    echo "There were failed tests."
     exit 1
 fi
 
@@ -230,4 +232,5 @@ if [ ! -z ${CLEAN} ]; then
     cleanup
 fi
 
+echo "All tests passed."
 exit 0
