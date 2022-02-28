@@ -101,12 +101,12 @@ test_file() {
     diff $runDir/good-${file%%md}json $runDir/$outFile > /dev/null 2>&1
     if [ "$?" != 0 ]; then
         ((failed_tests++))
-        echo "Does NOT Match $runDir/good-${file%%md}json"
+        echo -e "${RED}Does NOT Match $runDir/good-${file%%md}json${NC}"
         echo -e "${RED} -> failed${NC}"
         echo
         diff -u $runDir/good-${file%%md}json $runDir/$outFile
     else
-        echo "Matches $runDir/good-${file%%md}json"
+        echo -e "${GREEN}Matches $runDir/good-${file%%md}json${NC}"
         echo -e "${GREEN} -> success${NC}"
         rm -f $runDir/$outFile
     fi
