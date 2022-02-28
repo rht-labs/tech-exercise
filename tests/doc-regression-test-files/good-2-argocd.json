@@ -45,12 +45,7 @@
         {
             "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  \n",
             "interpreter": "bash",
-            "runs": [
-                {
-                    "retcode": 0,
-                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  \n"
-                }
-            ],
+            "runs": [],
             "tags": [
                 "bash",
                 "test"

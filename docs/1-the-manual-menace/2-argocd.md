@@ -22,7 +22,7 @@ When something is seen as not matching the required state in Git, an application
 
 1. To get started with ArgoCD, we've written a Helm Chart to deploy an instance of ArgoCD to the cluster. On your terminal (in the IDE), add the redhat-cop helm charts repository. This is a collection of charts curated by consultants in the field from their experience with customers. Pull requests are welcomed :P
 
-    ```bash
+    ```bash#test
     helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
     ```
 
