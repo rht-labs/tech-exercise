@@ -9,6 +9,9 @@ cd $scriptDir/doc-regression-test-files
 tests=0
 failed_tests=0
 
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 CLEAN=
 GENERATE=
 
@@ -99,12 +102,12 @@ test_file() {
     if [ "$?" != 0 ]; then
         ((failed_tests++))
         echo "Does NOT Match $runDir/good-${file%%md}json"
-        echo " -> failed"
+        echo "${RED} -> failed${NC}"
         echo
         diff -u $runDir/good-${file%%md}json $runDir/$outFile
     else
         echo "Matches $runDir/good-${file%%md}json"
-        echo " -> success"
+        echo "${GREEN} -> success${NC}"
         rm -f $runDir/$outFile
     fi
 }
