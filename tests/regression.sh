@@ -102,12 +102,12 @@ test_file() {
     if [ "$?" != 0 ]; then
         ((failed_tests++))
         echo "Does NOT Match $runDir/good-${file%%md}json"
-        echo "${RED} -> failed${NC}"
+        echo -e "${RED} -> failed${NC}"
         echo
         diff -u $runDir/good-${file%%md}json $runDir/$outFile
     else
         echo "Matches $runDir/good-${file%%md}json"
-        echo "${GREEN} -> success${NC}"
+        echo -e "${GREEN} -> success${NC}"
         rm -f $runDir/$outFile
     fi
 }
