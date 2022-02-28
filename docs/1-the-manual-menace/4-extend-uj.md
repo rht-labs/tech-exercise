@@ -39,6 +39,7 @@ git pull
 2. Now push the changes into your git repository for it to be automatically rolled out by ArgoCD!
 
     ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🦘 ADD - nexus repo manager 🦘"
     git push 

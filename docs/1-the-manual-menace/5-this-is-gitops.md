@@ -57,6 +57,7 @@ git pull
 3. Git commit that change and open the ArgoCD UI to see the new variable synchronized.
 
     ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🍪 ADD - Jenkins environment variable 🍪"
     git push 
