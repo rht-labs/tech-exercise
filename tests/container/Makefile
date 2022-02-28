@@ -1,6 +1,6 @@
 # Image URL to use all building/pushing image targets
 REGISTRY ?= quay.io
-REPOSITORY ?= $(REGISTRY)/eformt/tech-exercise-test
+REPOSITORY ?= $(REGISTRY)/eformat/tech-exercise-test
 
 IMG := $(REPOSITORY):latest
 
