@@ -19,19 +19,19 @@
 4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
     ```bash#test
-    echo export TEAM_NAME="tteam" | tee -a ~/.bashrc -a ~/.zshrc
+    echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 5. Add the `CLUSTER_DOMAIN` to the environment:
 
     ```bash#test
-    echo export CLUSTER_DOMAIN="apps.openshift-410-kwlrb.demo.redhatlabs.dev" | tee -a ~/.bashrc -a ~/.zshrc
+    echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 6. Add the `GIT_SERVER` to the environment:
 
     ```bash#test
-    echo export GIT_SERVER="gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev" | tee -a ~/.bashrc -a ~/.zshrc
+    echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 7. Verify the variables you have set:
