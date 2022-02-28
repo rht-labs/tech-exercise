@@ -75,8 +75,8 @@ perform_logins() {
     if [ ! -f "~/.netrc" ]; then
     cat <<EOF > ~/.netrc
     machine ${GIT_SERVER}
-       login ${GIT_USER}
-       password ${GIT_PASSWORD}
+       login ${GITLAB_USER}
+       password ${GITLAB_PASSWORD}
 EOF
     fi
 }
@@ -216,8 +216,8 @@ shift `expr $OPTIND - 1`
 [ -z "$TEAM_NAME" ] && echo "Warning: must supply TEAM_NAME in env" && exit 1
 [ -z "$CLUSTER_DOMAIN" ] && echo "Warning: must supply CLUSTER_DOMAIN in env" && exit 1
 [ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && exit 1
-[ -z "$GIT_USER" ] && echo "Warning: must supply GIT_USER in env" && exit 1
-[ -z "$GIT_PASSWORD" ] && echo "Warning: must supply GIT_PASSWORD in env" && exit 1
+[ -z "$GITLAB_USER" ] && echo "Warning: must supply GITLAB_USER in env" && exit 1
+[ -z "$GITLAB_PASSWORD" ] && echo "Warning: must supply GITLAB_PASSWORD in env" && exit 1
 [ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
 [ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
 

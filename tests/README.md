@@ -6,12 +6,30 @@ Testing our markdown code snippets using the awesome [rundoc](https://gitlab.com
 
 `rundoc` allows you to run your markdown files as if they were scripts. Every code snippet with code highlighting tag is run with interpreter defined by the tag.
 
-We check the command and success return codes (we filter output for now) against `good` run files so we can pick up and regression with the code snippets.
+We check the command and success return codes (we filter output for now) against `good` run files so we can pick up and regression with the code snippets. See the `doc-regression-test-files/good-*.json` files for the expected outputs. These files are generated.
 
-Requirements:
+Testing Requirements:
 - a running openshift cluster with tl500 tooling installed to run against
 
-Example test run using the tl500 stack container:
+### Running test locally
+
+The tests run in a container and secrets are passed in via the environment:
+
+```bash
+podman run \
+  -e CLUSTER_DOMAIN=<apps.cluster.com> \
+  -e TEAM_NAME=<team name> \
+  -e GIT_SERVER=gitlab-ce.apps.<cluster.com> \
+  -e GITLAB_USER=<gitlab user> \
+  -e GITLAB_PASSWORD=<gitlab password> \
+  -e OCP_USER=<openshift user> \
+  -e OCP_PASSWORD=<openshift password>
+  quay.io/eformt/tech-exercise-test:latest 
+```
+
+### Development
+
+To run testing locally for development:
 
 ```bash
 podman pull quay.io/rht-labs/stack-tl500:3.0.10
@@ -25,6 +43,8 @@ cd tech-exercise && git checkout tests && cd tests
 # Run the test suite
 ./regression.sh
 ```
+
+### TO BE DONE
 
 **_FIXME - All the fiddly bits that need more work_**
 
