@@ -63,6 +63,10 @@ patch_rundoc() {
 
 perform_logins() {
     oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 --insecure-skip-tls-verify #> /dev/null 2>&1
+    if [ "$?" != 0 ]; then
+        echo -e "${RED}Failed to login to OpenShift${NC}"
+        exit 1
+    fi
     if [ ! -f "~/.netrc" ]; then
     cat <<EOF > ~/.netrc
     machine ${GIT_SERVER}
