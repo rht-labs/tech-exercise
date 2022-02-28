@@ -15,20 +15,6 @@ NC='\033[0m' # No Color
 CLEAN=
 GENERATE=
 
-verify_zero_exit() {
-    if [ "$?" != "0" ]; then
-        echo "Exited with non 0, but 0 expected."
-        ((failed_tests++))
-    fi
-}
-
-verify_non_zero_exit() {
-    if [ "$?" = "0" ]; then
-        echo "Exited with 0, but failure expected."
-        ((failed_tests++))
-    fi
-}
-
 strip_timestamps() {
     local file_path=$1
     sed -ri '/^\s*"time_(start|stop)": [0-9]{10}\.[0-9]*,?$/d' $file_path
@@ -157,19 +143,10 @@ test_the_manual_menance() {
     setup_test /projects/tech-exercise/docs/1-the-manual-menace
 
     test_file 1-the-basics.md "-t bash#test -t zsh#test"
-    verify_zero_exit
-
     test_file 2-argocd.md "-T bash#test"
-    verify_zero_exit
-
     test_file 3-ubiquitous-journey.md "-T bash#test"
-    verify_zero_exit
-
     test_file 4-extend-uj.md "-T bash#test"
-    verify_zero_exit
-
     test_file 5-this-is-gitops.md "-T bash#test"
-    verify_zero_exit
 }
 
 all() {
