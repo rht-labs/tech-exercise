@@ -36,6 +36,11 @@ git_checkout() {
     cd /projects/tech-exercise && git checkout tests
 }
 
+source_shell() {
+    # source env (we are not a login shell)
+    source /etc/bashrc
+}
+
 setup_python() {
     if [ -d "env" ]; then
         source env/bin/activate
@@ -132,6 +137,7 @@ setup_tests() {
     =======================
     "
 
+    source_shell
     setup_python
     patch_rundoc
     git_checkout

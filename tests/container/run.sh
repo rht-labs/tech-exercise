@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# source env (we are not a login shell)
-source /etc/bashrc
-
 # setup container user
 /usr/local/bin/entrypoint.sh
 
