@@ -19,7 +19,7 @@ The tests can run on OpenShift:
 
 ```bash
 oc new-project tech-exercise-test
-oc run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
+oc -n tech-exercise-test run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
   --env="CLUSTER_DOMAIN=${CLUSTER_DOMAIN}" \
   --env="GIT_SERVER=${GIT_SERVER}" \
   --env="TEAM_NAME=${TEAM_NAME}" \
