@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n",
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n"
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n"
                 }
             ],
             "tags": [
