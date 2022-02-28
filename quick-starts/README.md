@@ -12,4 +12,4 @@ We install the **Web Terminal** Operator from RedHat at cluster scope
 
 ## Operator Config
 
-See the [web-terminal-config-map.yaml](web-terminal-config-map.yaml) file.
+See the [web-terminal-workspace-template.yaml](web-terminal-workspace-template.yaml) file.
