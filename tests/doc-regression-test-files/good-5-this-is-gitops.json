@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        echo here\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
+            "code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        echo here\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
+                    "user_code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
                 }
             ],
             "tags": [
