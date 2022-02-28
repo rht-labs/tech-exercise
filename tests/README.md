@@ -8,26 +8,45 @@ Testing our markdown code snippets using the awesome [rundoc](https://gitlab.com
 
 We check the command and success return codes (we filter output for now) against `good` run files so we can pick up and regression with the code snippets. See the `doc-regression-test-files/good-*.json` files for the expected outputs. These files are generated.
 
+A `non zero` exit code signifies some tests failed. See the test logs for details.
+
 Testing Requirements:
-- a running openshift cluster with tl500 tooling installed to run against
+- A running openshift cluster with tl500 tooling installed to run against
 
-### Running test locally
+### Running tests in OpenShift
 
-The tests run in a container and secrets are passed in via the environment:
+The tests can run on OpenShift:
+
+```bash
+oc new-project tech-exercise-test
+oc run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
+  --env="CLUSTER_DOMAIN=${CLUSTER_DOMAIN}" \
+  --env="GIT_SERVER=${GIT_SERVER}" \
+  --env="TEAM_NAME=${TEAM_NAME}" \
+  --env="GITLAB_USER=${GITLAB_USER}" \
+  --env="GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
+  --env="OCP_USER=${OCP_USER}" \
+  --env="OCP_PASSWORD=${OCP_PASSWORD}" \
+  --restart=Never
+```
+
+### Running tests locally
+
+The tests run in a container on your laptop:
 
 ```bash
 podman run \
-  -e CLUSTER_DOMAIN=<apps.cluster.com> \
-  -e TEAM_NAME=<team name> \
-  -e GIT_SERVER=gitlab-ce.apps.<cluster.com> \
-  -e GITLAB_USER=<gitlab user> \
-  -e GITLAB_PASSWORD=<gitlab password> \
-  -e OCP_USER=<openshift user> \
-  -e OCP_PASSWORD=<openshift password>
-  quay.io/eformt/tech-exercise-test:latest 
+  -e "CLUSTER_DOMAIN=${CLUSTER_DOMAIN}" \
+  -e "GIT_SERVER=${GIT_SERVER}" \
+  -e "TEAM_NAME=${TEAM_NAME}" \
+  -e "GITLAB_USER=${GITLAB_USER}" \
+  -e "GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
+  -e "OCP_USER=${OCP_USER}" \
+  -e "OCP_PASSWORD=${OCP_PASSWORD}" \
+  quay.io/eformat/tech-exercise-test:latest 
 ```
 
-### Development
+### Test Development
 
 To run testing locally for development:
 
