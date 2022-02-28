@@ -84,7 +84,7 @@ gitlab_setup() {
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         > /dev/null
     # generate personal access token form
-    body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b cookies.txt -i "https://${GITLAB_SERVER}/profile/personal_access_tokens" -s)
+    body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # ccrape the personal access token from the response
     body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
