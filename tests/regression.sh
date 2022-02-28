@@ -76,7 +76,7 @@ gitlab_setup() {
     echo "Setting up Gitlab ..."
     # get csrf from login page
     gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${GITLAB_PASSWORD} | base64)"
-    body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c cookies.txt -i "${GIT_SERVER}/users/sign_in")
+    body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # login
     curl -s -H "Authorization: ${gitlab_basic_auth_string}" -b cookies.txt -c cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
@@ -92,9 +92,9 @@ gitlab_setup() {
                         --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${groupname}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z $group_id ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${groupname}&path=${groupname}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete team project
     curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Ftech-exercise" >/dev/null 2>&1
