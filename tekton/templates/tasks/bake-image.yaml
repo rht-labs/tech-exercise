@@ -45,7 +45,7 @@ spec:
       image: quay.io/openshift/origin-cli:4.9
       script: |
         #!/bin/sh
-        oc new-build --binary --name=$(params.APPLICATION_NAME) -l app=$(params.APPLICATION_NAME) --strategy=docker || rc=$?
+        oc new-build --binary --name=$(params.APPLICATION_NAME) -l app=$(params.APPLICATION_NAME) -l app.kubernetes.io/name=$(params.APPLICATION_NAME) --strategy=docker || rc=$?
         oc start-build $(params.APPLICATION_NAME) --from-archive=$(params.APPLICATION_NAME)-$(params.VERSION).tar.gz --follow --wait
     - name: tag-image
       workingDir: $(workspaces.output.path)
