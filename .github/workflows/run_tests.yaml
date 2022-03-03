@@ -34,12 +34,27 @@ jobs:
         run: |
           repo=${{ github.repository }}
           oc new-project ${repo##*/}-test || true
-          oc -n  ${repo##*/}-test run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
+          podname=test-$(date +"%Y-%m-%d-%H-%M-%S")
+          oc -n ${repo##*/}-test run $podname --image=quay.io/eformat/tech-exercise-test:latest \
             --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
-            --env="GIT_SERVER==${{ secrets.GIT_SERVER }}" \
+            --env="GIT_SERVER=${{ secrets.GIT_SERVER }}" \
             --env="TEAM_NAME=${{ secrets.TEAM_NAME }}" \
             --env="GITLAB_USER=${{ secrets.GITLAB_USER }}" \
             --env="GITLAB_PASSWORD=${{ secrets.GITLAB_PASSWORD }}" \
             --env="OCP_USER=${{ secrets.OCP_USER }}" \
             --env="OCP_PASSWORD=${{ secrets.OCP_PASSWORD }}" \
             --restart=Never
+
+          while test 0 == $(oc -n ${repo##*/}-test get pod -l run=$podname -o name 2>/dev/null | wc -l); do sleep 5; done
+          oc -n ${repo##*/}-test wait pod -l run=$podname --for=condition=Running --timeout=60s
+
+          while [ "$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')" != "Failed" && "$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')" != "Succeeded" ]; do
+              echo "$podname phase is $(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}') ..."
+              sleep 5
+          done
+
+          if [ "$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')"=="Failed" ]; then
+            echo "🛑 test failed, exiting 🛑";
+                exit 1;
+          fi
+          echo "🦕 tests ran OK 🦕";
