@@ -6,7 +6,7 @@ on:
       OCP_API:
         description: 'OpenShift API endpoint (e.g. oc whoami --show-server)'
         required: true
-      WEBHOOK_TOKEN:
+      WEBHOOK_TOKEN: # https://github.com/actions/runner/issues/475#issuecomment-742271143
         description: 'OpenShift Token (e.g. oc whoami --show-token)'
         required: true
   schedule:
@@ -19,7 +19,6 @@ jobs:
       - name: Add mask
         run: |
           echo '::add-mask::${{ github.event.inputs.OCP_API }}'
-          echo '::add-mask::${{ github.event.inputs.WEBHOOK_TOKEN }}'
 
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
