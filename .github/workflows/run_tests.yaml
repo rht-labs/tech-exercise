@@ -48,10 +48,11 @@ jobs:
           while test 0 == $(oc -n ${repo##*/}-test get pod -l run=$podname -o name 2>/dev/null | wc -l); do sleep 5; done
           oc -n ${repo##*/}-test wait pod -l run=$podname --for=condition=Ready --timeout=60s
 
-          podphase=$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
+          podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           while [ "$podphase" != "Failed" -a "$podphase" != "Succeeded" ]; do
               echo "$podname phase $podphase ..."
               sleep 5
+              podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           done
 
           if [ "$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')" != "Succeeded" ]; then
