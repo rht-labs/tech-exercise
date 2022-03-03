@@ -6,7 +6,7 @@ on:
       OCP_API:
         description: 'OpenShift API endpoint (e.g. oc whoami --show-server)'
         required: true
-      OCP_TOKEN:
+      WEBHOOK_TOKEN:
         description: 'OpenShift Token (e.g. oc whoami --show-token)'
         required: true
   schedule:
@@ -16,15 +16,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Disable Echo
-        run: |
-          echo '::set-output name=action_echo::disabled'
-
       - name: Add mask
         run: |
-          echo "::add-mask::${{ github.event.inputs.OCP_API }}"
-          echo "::add-mask::${{ github.event.inputs.OCP_TOKEN }}"
-          echo '::set-output name=action_echo::enabled'
+          echo '::add-mask::${{ github.event.inputs.OCP_API }}'
+          echo '::add-mask::${{ github.event.inputs.WEBHOOK_TOKEN }}'
 
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
@@ -33,7 +28,7 @@ jobs:
         uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: ${{ github.event.inputs.OCP_API }}
-          openshift_token: ${{ github.event.inputs.OCP_TOKEN }}
+          openshift_token: ${{ github.event.inputs.WEBHOOK_TOKEN }}
           insecure_skip_tls_verify: true
 
       - name: Run testsuite
