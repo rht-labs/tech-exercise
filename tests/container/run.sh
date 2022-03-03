@@ -5,6 +5,6 @@
 
 # run the test suite
 git clone https://github.com/rht-labs/tech-exercise.git 2>&1
-cd tech-exercise && git checkout tests && cd tests
+cd tech-exercise && git checkout main && cd tests
 
 ./regression.sh 2>&1
