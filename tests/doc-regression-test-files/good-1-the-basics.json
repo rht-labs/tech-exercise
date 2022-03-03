@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    echo export TEAM_NAME=\"tteam\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "code": "    echo export TEAM_NAME=\"<TEAM_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo export TEAM_NAME=\"tteam\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                    "user_code": "    echo export TEAM_NAME=\"<TEAM_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n"
                 }
             ],
             "tags": [
@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    echo export CLUSTER_DOMAIN=\"apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "code": "    echo export CLUSTER_DOMAIN=\"<CLUSTER_DOMAIN>\" | tee -a ~/.bashrc -a ~/.zshrc\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo export CLUSTER_DOMAIN=\"apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                    "user_code": "    echo export CLUSTER_DOMAIN=\"<CLUSTER_DOMAIN>\" | tee -a ~/.bashrc -a ~/.zshrc\n"
                 }
             ],
             "tags": [
@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    echo export GIT_SERVER=\"gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "code": "    echo export GIT_SERVER=\"gitlab-ce.<CLUSTER_DOMAIN>\" | tee -a ~/.bashrc -a ~/.zshrc\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo export GIT_SERVER=\"gitlab-ce.apps.openshift-410-kwlrb.demo.redhatlabs.dev\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                    "user_code": "    echo export GIT_SERVER=\"gitlab-ce.<CLUSTER_DOMAIN>\" | tee -a ~/.bashrc -a ~/.zshrc\n"
                 }
             ],
             "tags": [
