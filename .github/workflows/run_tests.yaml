@@ -55,7 +55,7 @@ jobs:
               podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           done
 
-          if [ "podphase" != "Succeeded" ]; then
+          if [ "$podphase" != "Succeeded" ]; then
               echo "🛑 test failed, exiting 🛑";
               exit 1;
           fi
