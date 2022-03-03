@@ -70,6 +70,8 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. Login to OpenShift ${{ secrets.CLUSTER_DOMAIN }} to see full test log output.
+          body: |-
+            🦀 ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}.
+            Login to OpenShift ${{ secrets.CLUSTER_DOMAIN }} to see full test log output.
           to: ${{ secrets.EMAIL_ALERT_LIST }}
           from: tech-exercise-tests@github.com
