@@ -34,7 +34,7 @@ jobs:
         run: |
           repo=${{ github.repository }}
           oc new-project ${repo##*/}-test || true
-          oc run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
+          oc -n  ${repo##*/}-test run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
             --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
             --env="GIT_SERVER==${{ secrets.GIT_SERVER }}" \
             --env="TEAM_NAME=${{ secrets.TEAM_NAME }}" \
