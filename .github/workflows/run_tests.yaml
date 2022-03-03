@@ -10,7 +10,7 @@ on:
         description: 'OpenShift Token (e.g. oc whoami --show-token)'
         required: true
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
 
@@ -55,7 +55,7 @@ jobs:
               podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           done
 
-          if [ "$(oc get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')" != "Succeeded" ]; then
+          if [ "podphase" != "Succeeded" ]; then
               echo "🛑 test failed, exiting 🛑";
               exit 1;
           fi
