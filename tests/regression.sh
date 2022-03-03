@@ -33,7 +33,7 @@ replace_env_vars() {
 }
 
 git_checkout() {
-    cd /projects/tech-exercise && git checkout tests
+    cd /projects/tech-exercise && git checkout main
 }
 
 source_shell() {
