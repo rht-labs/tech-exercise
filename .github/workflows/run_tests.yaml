@@ -3,10 +3,10 @@ name: Markdown Rundoc Testsuite
 on:
   workflow_dispatch:
     inputs:
-      ocpAPI:
+      OCP_API:
         description: 'OpenShift API endpoint (e.g. oc whoami --show-server)'
         required: true
-      ocpToken:
+      OCP_TOKEN:
         description: 'OpenShift Token (e.g. oc whoami --show-token)'
         required: true
   schedule:
@@ -18,8 +18,8 @@ jobs:
 
       - name: Add mask
         run: |
-          echo "::add-mask::${{ github.event.inputs.ocpToken }}"
-          echo "::add-mask::${{ github.event.inputs.ocpAPI }}"
+          echo "::add-mask::${{ github.event.inputs.OCP_API }}"
+          echo "::add-mask::${{ github.event.inputs.OCP_TOKEN }}"
 
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
@@ -27,8 +27,8 @@ jobs:
       - name: Authenticate with OpenShift
         uses: redhat-actions/oc-login@v1
         with:
-          openshift_server_url: ${{ github.event.inputs.ocpAPI }}
-          openshift_token: ${{ github.event.inputs.ocpToken }}
+          openshift_server_url: ${{ github.event.inputs.OCP_API }}
+          openshift_token: ${{ github.event.inputs.OCP_TOKEN }}
           insecure_skip_tls_verify: true
 
       - name: Run testsuite
