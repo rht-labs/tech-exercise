@@ -9,6 +9,8 @@ on:
       ocpToken:
         description: 'OpenShift Token (e.g. oc whoami --show-token)'
         required: true
+  schedule:
+    - cron: '5 0 * * *'  # every day at 5am
 jobs:
   test:
     runs-on: ubuntu-latest
