@@ -18,6 +18,7 @@ jobs:
 
       - name: Add mask
         run: |
+          echo "::echo::off"
           echo "::add-mask::${{ github.event.inputs.OCP_API }}"
           echo "::add-mask::${{ github.event.inputs.OCP_TOKEN }}"
 
