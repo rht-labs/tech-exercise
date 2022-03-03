@@ -2,12 +2,22 @@ name: Markdown Rundoc Testsuite
 
 on:
   workflow_dispatch:
+    inputs:
+      WEBHOOK_TOKEN:
+        description: 'Webhook token'
+        required: true
   schedule:
     - cron: '5 0 * * *'  # every day at 5am
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      WEBHOOK_TOKEN: ${{ github.event.inputs.WEBHOOK_TOKEN }}
     steps:
+
+      - name: Echo
+        run: |
+          echo "$WEBHOOK_TOKEN"
 
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
