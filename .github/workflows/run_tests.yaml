@@ -14,6 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+      - name: Add mask
+        run: |
+          echo "::add-mask::${{ github.event.inputs.ocpToken }}"
+          echo "::add-mask::${{ github.event.inputs.ocpAPI }}"
+
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
 
