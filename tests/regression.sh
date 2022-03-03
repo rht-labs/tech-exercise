@@ -32,6 +32,13 @@ replace_env_vars() {
     sed -i -e "s|<GIT_SERVER>|${GIT_SERVER}|" $file_path
 }
 
+sanitize_env_vars() {
+    local file_path=$1
+    sed -i -e "s|${TEAM_NAME}|<TEAM_NAME>|" $file_path
+    sed -i -e "s|${CLUSTER_DOMAIN}|<CLUSTER_DOMAIN>|" $file_path
+    sed -i -e "s|${GIT_SERVER}|<GIT_SERVER>|" $file_path
+}
+
 git_checkout() {
     cd /projects/tech-exercise && git checkout main
 }
@@ -123,6 +130,7 @@ test_file() {
     # dont compare time or ouput only run command and return code
     strip_timestamps $runDir/$outFile
     strip_output $runDir/$outFile
+    sanitize_env_vars $runDir/$outFile
 
     diff $runDir/good-${file%%md}json $runDir/$outFile > /dev/null 2>&1
     if [ "$?" != 0 ]; then
