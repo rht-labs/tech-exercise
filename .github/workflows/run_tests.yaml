@@ -29,7 +29,6 @@ jobs:
         run: |
           repo=${{ github.repository }}
           oc new-project ${repo##*/}-test || true
-          oc -n ${repo##*/}-test start-build ${repo##*/}
           oc run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
             --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
             --env="GIT_SERVER==${{ secrets.GIT_SERVER }}" \
