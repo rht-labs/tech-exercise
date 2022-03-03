@@ -39,15 +39,13 @@ All of these traits lead to one outcome - the ability to build and release quali
 
 6. Let's push our code to the GitLab server. Back in your CodeReady Workspace, open a terminal if you have not got one open.
 
-    ```bash
+    ```bash#test
     cd /projects/tech-exercise
-    ```
-
-    ```bash
     git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
     ```
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -am "🐙 ADD - argocd values file 🐙"
     git push -u origin --all
@@ -63,6 +61,13 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```yaml
     source: "https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git"
     team: <TEAM_NAME>
+    ```
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml
+    yq eval ".source = \"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
     ```
 
 2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
@@ -87,12 +92,19 @@ All of these traits lead to one outcome - the ability to build and release quali
               operatorgroup: true
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    ```
+
 3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise/
     git add .
     git commit -m  "🦆 ADD - correct project names 🦆"
-    git push 
+    git push
     ```
 
   <p class="warn">
@@ -111,7 +123,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     Add the Secret to the cluster:
 
-    ```bash
+    ```bash#test
     cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
       apiVersion: v1
       data:
@@ -124,23 +136,25 @@ All of these traits lead to one outcome - the ability to build and release quali
         labels:
           credential.sync.jenkins.openshift.io: "true"
         name: git-auth
-    EOF
+EOF
     ```
 
 5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
 
-    ```bash
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    ```bash#test
+    cd /projects/tech-exercise
+    # FIXME test branch
+    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests
     ```
     ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 
 6. As ArgoCD sync's the resources we can see them in the cluster:
 
-    ```bash
+    ```bash#test
     oc get projects | grep ${TEAM_NAME}
     ```
 
-    ```bash
+    ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 

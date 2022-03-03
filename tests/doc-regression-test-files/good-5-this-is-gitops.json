@@ -1,0 +1,33 @@
+{
+    "code_blocks": [
+        {
+            "code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    if [[ $(yq e '.applications.[].values.deployment.env_vars[] | select(.name==\"BISCUITS\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications.[1].values.deployment.env_vars += {\"name\": \"BISCUITS\", \"value\": \"jaffa-cakes\"}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf6a ADD - Jenkins environment variable \ud83c\udf6a\"\n    git push \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf6a ADD - Jenkins environment variable \ud83c\udf6a\"\n    git push \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

@@ -1,0 +1,61 @@
+{
+    "code_blocks": [
+        {
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.3\",\"values\":{\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83e\udd98 ADD - nexus repo manager \ud83e\udd98\"\n    git push \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

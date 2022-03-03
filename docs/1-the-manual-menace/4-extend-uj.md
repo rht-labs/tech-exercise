@@ -10,6 +10,7 @@ cd /projects/tech-exercise
 git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
 git pull
 ```
+
 ### Add Nexus in our tool box
 > In this exercise we'll add Sonatype's Nexus repository manager to our tooling - this tool will be used to host our application binaries!
 
@@ -27,9 +28,18 @@ git pull
             name: nexus
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    if [[ $(yq e '.applications[] | select(.name=="nexus") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then
+        yq e '.applications += {"name": "nexus","enabled": true,"source": "https://redhat-cop.github.io/helm-charts","chart_name": "sonatype-nexus","source_ref": "1.1.3","values":{"service": {"name": "nexus"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    fi
+    ```
+
 2. Now push the changes into your git repository for it to be automatically rolled out by ArgoCD!
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🦘 ADD - nexus repo manager 🦘"
     git push 
@@ -40,9 +50,10 @@ git pull
 
 4. It can take a few minutes to become available. But you can verify it is all working by opening the Nexus URL in a new tab:
 
-    ```bash
+    ```bash#test
     echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
+
     ![nexus](images/nexus.png)
 
 ### Add ArgoCD Webhook from GitLab
@@ -50,7 +61,7 @@ git pull
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 
-    ```bash
+    ```bash#test
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
     ```
 

@@ -1,0 +1,41 @@
+name: Markdown Rundoc Testsuite
+
+on:
+  workflow_dispatch:
+    inputs:
+      ocpAPI:
+        description: 'OpenShift API endpoint (e.g. oc whoami --show-server)'
+        required: true
+      ocpToken:
+        description: 'OpenShift Token (e.g. oc whoami --show-token)'
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Install OpenShift CLI
+        uses: redhat-actions/oc-installer@v1
+
+      - name: Authenticate with OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ github.event.inputs.ocpAPI }}
+          openshift_token: ${{ github.event.inputs.ocpToken }}
+          insecure_skip_tls_verify: true
+
+      - name: Run testsuite
+        shell: bash
+        run: |
+          repo=${{ github.repository }}
+          oc new-project ${repo##*/}-test || true
+          oc -n ${repo##*/}-test start-build ${repo##*/}
+          oc run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
+            --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
+            --env="GIT_SERVER==${{ secrets.GIT_SERVER }}" \
+            --env="TEAM_NAME=${{ secrets.TEAM_NAME }}" \
+            --env="GITLAB_USER=${{ secrets.GITLAB_USER }}" \
+            --env="GITLAB_PASSWORD=${{ secrets.GITLAB_PASSWORD }}" \
+            --env="OCP_USER=${{ secrets.OCP_USER }}" \
+            --env="OCP_PASSWORD=${{ secrets.OCP_PASSWORD }}" \
+            --restart=Never

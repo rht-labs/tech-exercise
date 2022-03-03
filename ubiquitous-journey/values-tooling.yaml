@@ -7,25 +7,26 @@ applications:
     source_ref: "1.0.1"
     values:
       serviceaccounts: ""
-      bindings: &binds # student is the GROUP NAME in IDM
+      # student is the GROUP NAME in IDM
+      bindings: &binds
         - name: student
           kind: Group
           role: edit
         - name: jenkins
           kind: ServiceAccount
           role: admin
-          namespace: <TEAM_NAME>-ci-cd
+          namespace: TEAM_NAME-ci-cd
       namespaces:
-        - name: <TEAM_NAME>-ci-cd
+        - name: TEAM_NAME-ci-cd
           bindings: *binds
           operatorgroup: true
-        - name: <TEAM_NAME>-dev
+        - name: TEAM_NAME-dev
           bindings: *binds
           operatorgroup: true
-        - name: <TEAM_NAME>-test
+        - name: TEAM_NAME-test
           bindings: *binds
           operatorgroup: true
-        - name: <TEAM_NAME>-stage
+        - name: TEAM_NAME-stage
           bindings: *binds
           operatorgroup: true
 
@@ -71,7 +72,7 @@ applications:
 
   # Sealed Secrets
 
-  
+
   # Tekton Pipelines
 
 
