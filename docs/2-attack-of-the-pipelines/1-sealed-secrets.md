@@ -41,7 +41,7 @@ git pull
       labels:
         credential.sync.jenkins.openshift.io: "true"
       name: git-auth
-    EOF
+EOF
     ```
 
 3. Use `kubeseal` command line to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
