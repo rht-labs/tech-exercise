@@ -38,6 +38,7 @@ git pull
     metadata:
       annotations:
         tekton.dev/git-0: https://${GIT_SERVER}
+        sealedsecrets.bitnami.com/force-managed: "true"
       labels:
         credential.sync.jenkins.openshift.io: "true"
       name: git-auth
