@@ -185,7 +185,7 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    gitlab_setup
+    #gitlab_setup
 }
 
 test_the_manual_menance() {
@@ -206,7 +206,7 @@ wait_for_argocd_server() {
         echo "Waiting for pod argocd-server ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 10 ]; then
+        if [ $i -gt 15 ]; then
             echo "Failed - argocd-server pod never ready"
             exit 1
         fi
@@ -220,7 +220,7 @@ wait_for_jenkins_server() {
         echo "Waiting for pod jenkins ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 90 ]; then
+        if [ $i -gt 120 ]; then
             echo "Failed - jenkins pod never ready"
             exit 1
         fi
@@ -234,7 +234,7 @@ wait_for_nexus_server() {
         echo "Waiting for pod nexus ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 10 ]; then
+        if [ $i -gt 15 ]; then
             echo "Failed - nexus pod never ready"
             exit 1
         fi
@@ -244,18 +244,25 @@ wait_for_nexus_server() {
 wait_for_the_manual_menace() {
     # wait for these sevices before proceeding
     wait_for_argocd_server
-    wait_for_jenkins_server
     wait_for_nexus_server
+    wait_for_jenkins_server
+}
+
+test_attack-of-the-pipelines() {
+    # 2-attack-of-the-pipelines
+    setup_test /projects/tech-exercise/docs/2-attack-of-the-pipelines
+
+    test_file 1-sealed-secrets.md "-T bash#test"
+
 }
 
 all() {
     setup_tests
 
     # TESTS
-    test_the_manual_menance
+    #test_the_manual_menance
     wait_for_the_manual_menace
-
-    # other tests
+    test_attack-of-the-pipelines
 
     # done
     echo "Tests run: $tests"
