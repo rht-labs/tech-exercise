@@ -40,7 +40,7 @@ sanitize_env_vars() {
 }
 
 git_checkout() {
-    cd /projects/tech-exercise && git checkout main
+    cd /projects/tech-exercise && git checkout tests
 }
 
 source_shell() {
