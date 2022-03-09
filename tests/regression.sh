@@ -252,7 +252,7 @@ all() {
     setup_tests
 
     # TESTS
-    #test_the_manual_menance
+    test_the_manual_menance
     wait_for_the_manual_menace
 
     # other tests
