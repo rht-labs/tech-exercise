@@ -145,7 +145,7 @@ EOF
 
     Thats because we already created a `git-auth` secret manually in Exercise 1. Lets remove it now and resync ArgoCD:
 
-    ```bash#test
+    ```bash
     oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth
     ```
 
