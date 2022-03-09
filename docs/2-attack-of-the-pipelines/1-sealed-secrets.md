@@ -127,7 +127,8 @@ EOF
 
 7. Now that we update the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise
     git add ubiquitous-journey/values-tooling.yaml
     git commit -m "🕵🏻‍♂️ Sealed secret of Git user creds is added 🔎"
     git push
@@ -143,7 +144,7 @@ EOF
 
     Thats because we already created a `git-auth` secret manually in Exercise 1. Lets remove it now and resync ArgoCD:
 
-    ```bash
+    ```bash#test
     oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth
     ```
 
@@ -152,7 +153,7 @@ EOF
 
     🪄 You can verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view `<TEAM_NAME>-ci-cd-git-auth` credential is there
 
-    ```bash
+    ```bash#test
     echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
 
