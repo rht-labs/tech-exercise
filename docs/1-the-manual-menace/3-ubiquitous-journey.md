@@ -144,7 +144,7 @@ EOF
     ```bash#test
     cd /projects/tech-exercise
     # FIXME test branch
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests
     ```
     ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 

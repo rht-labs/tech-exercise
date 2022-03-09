@@ -99,7 +99,7 @@ echo export GITLAB_USER=user | tee -a ~/.bashrc -a ~/.zshrc
 echo export GITLAB_PASSWORD=password | tee -a ~/.bashrc -a ~/.zshrc
 ```
 
-- [X] remove branch for tests development uj
+- [] remove branch for tests development uj
 
 ```bash
 --set source_ref=tests

@@ -85,12 +85,12 @@
             ]
         },
         {
-            "code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n",
+            "code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n"
+                    "user_code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests\n"
                 }
             ],
             "tags": [
