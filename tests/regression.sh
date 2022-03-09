@@ -14,6 +14,7 @@ GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 CLEAN=
 GENERATE=
+TOPIC=
 
 strip_timestamps() {
     local file_path=$1
@@ -256,18 +257,22 @@ test_attack-of-the-pipelines() {
 
 }
 
-all() {
+one() {
     setup_tests
+    test_the_manual_menance
+}
 
-    # TESTS
-    #test_the_manual_menance
+two() {
+    setup_tests
     wait_for_the_manual_menace
     test_attack-of-the-pipelines
+}
 
-    # done
-    echo "Tests run: $tests"
-    echo "Failed tests: $failed_tests"
-    return $failed_tests
+all() {
+    setup_tests
+    test_the_manual_menance
+    wait_for_the_manual_menace
+    test_attack-of-the-pipelines
 }
 
 usage() {
@@ -280,13 +285,16 @@ EOF
   exit 1
 }
 
-while getopts cg a; do
+while getopts cgt: a; do
   case $a in
     c)
       CLEAN=true
       ;;
     g)
       GENERATE=true
+      ;;
+    t)
+      TOPIC=$OPTARG
       ;;
     *)
       usage
@@ -306,8 +314,23 @@ shift `expr $OPTIND - 1`
 [ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
 
 # run test suite
-all
-if [ $? -ne 0 ]; then
+case $TOPIC in
+    1)
+      one
+      ;;
+    2)
+      two
+      ;;
+    *)
+      all
+      ;;
+esac
+
+# done
+echo "Tests run: $tests"
+echo "Failed tests: $failed_tests"
+
+if [ $failed_tests -ne 0 ]; then
     if [ ! -z ${CLEAN} ]; then
         cleanup
     fi
