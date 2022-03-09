@@ -220,7 +220,7 @@ wait_for_jenkins_server() {
         echo "Waiting for pod jenkins ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 10 ]; then
+        if [ $i -gt 90 ]; then
             echo "Failed - jenkins pod never ready"
             exit 1
         fi
