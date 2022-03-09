@@ -199,11 +199,61 @@ test_the_manual_menance() {
     test_file 5-this-is-gitops.md "-T bash#test"
 }
 
+wait_for_argocd_server() {
+    local i=0
+    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    do
+        echo "Waiting for pod argocd-server ready condition to be True"
+        sleep 10
+        ((i=i+1))
+        if [ $i -gt 10 ]; then
+            echo "Failed - argocd-server pod never ready"
+            exit 1
+        fi
+    done
+}
+
+wait_for_jenkins_server() {
+    local i=0
+    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l deploymentconfig=jenkins,name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    do
+        echo "Waiting for pod jenkins ready condition to be True"
+        sleep 10
+        ((i=i+1))
+        if [ $i -gt 10 ]; then
+            echo "Failed - jenkins pod never ready"
+            exit 1
+        fi
+    done
+}
+
+wait_for_nexus_server() {
+    local i=0
+    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app=sonatype-nexus -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    do
+        echo "Waiting for pod nexus ready condition to be True"
+        sleep 10
+        ((i=i+1))
+        if [ $i -gt 10 ]; then
+            echo "Failed - nexus pod never ready"
+            exit 1
+        fi
+    done
+}
+
+wait_for_the_manual_menace() {
+    # wait for these sevices before proceeding
+    wait_for_argocd_server
+    wait_for_jenkins_server
+    wait_for_nexus_server
+}
+
 all() {
     setup_tests
 
     # TESTS
-    test_the_manual_menance
+    #test_the_manual_menance
+    wait_for_the_manual_menace
 
     # other tests
 

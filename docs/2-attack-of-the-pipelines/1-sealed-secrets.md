@@ -28,7 +28,7 @@ git pull
 
 2. Run this command to generate a Kubernetes secret object in `/tmp` with the right labels needed for Tekton and Jenkins later.
 
-    ```bash
+    ```bash#test
     cat << EOF > /tmp/git-auth.yaml
     kind: Secret
     apiVersion: v1
@@ -46,7 +46,7 @@ git pull
 
 3. Use `kubeseal` command line to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
 
-    ```bash
+    ```bash#test
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
         --controller-namespace tl500-shared \
@@ -56,7 +56,7 @@ git pull
 
 4. Verify that secret is sealed:
 
-    ```bash
+    ```bash#test
     cat /tmp/sealed-git-auth.yaml 
     ```
 
@@ -79,7 +79,7 @@ git pull
 
 5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a <span style="color:blue;">[helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets)</span> that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
 
-    ```bash
+    ```bash#test
     cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
     ```
 
