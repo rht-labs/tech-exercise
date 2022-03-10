@@ -61,7 +61,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 3. Let's get this deployed of course - it's not real unless its in git!
 
     ```bash#test
-    # git add, commit, push your changes..
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🐰 ADD - app-of-apps and keycloak to test 🐰"
     git push 
@@ -70,6 +70,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
 
     ```bash#test
+    cd /projects/tech-exercise
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
