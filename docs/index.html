@@ -40,8 +40,12 @@
 
     function setNamesInStorage () {
       let tname = document.getElementById('tname').value.toLowerCase();
-      let cdomain = document.getElementById('cdomain').value.toLowerCase();
-      let gitserver = document.getElementById('gitserver').value.toLowerCase();
+      let cdomain = (document.getElementById('cdomain').value.toLowerCase().indexOf('https://') > -1) 
+                    ? document.getElementById('cdomain').value.toLowerCase().substring(8) 
+                    : document.getElementById('cdomain').value.toLowerCase();
+      let gitserver = (document.getElementById('gitserver').value.toLowerCase().indexOf('https://') > -1) 
+                    ? document.getElementById('gitserver').value.toLowerCase().substring(8) 
+                    : document.getElementById('gitserver').value.toLowerCase();
 
       // Check inputs
       if (tname == '') {        
