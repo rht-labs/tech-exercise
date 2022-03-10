@@ -103,7 +103,6 @@ EOF
           secrets:
             # Additional secrets will be added to this list along the exercises.
             - name: git-auth
-              type: Opaque
               annotations:
                 tekton.dev/git-0: https://<GIT_SERVER>
               labels:
