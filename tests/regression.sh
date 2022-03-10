@@ -98,11 +98,12 @@ gitlab_setup() {
     # generate personal access token form
     body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
-    # ccrape the personal access token from the response
+    # scrape the personal access token from the response
     body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+    # FIXME - delete all other api patokens's
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z $group_id ]; then
@@ -114,6 +115,39 @@ gitlab_setup() {
     curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=tech-exercise&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
 }
 
+gitlab_create_argo_webhook() {
+    echo "Create ArgoCD Gitlab Webhook ..."
+    # get csrf from login page
+    gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${GITLAB_PASSWORD} | base64)"
+    body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+    # login
+    curl -s -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
+                        --data "username=${GITLAB_USER}&password=${GITLAB_PASSWORD}" \
+                        --data-urlencode "authenticity_token=${csrf_token}" \
+                        > /dev/null
+    # generate personal access token form
+    body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+    # scrape the personal access token from the response
+    body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
+                        --data-urlencode "authenticity_token=${csrf_token}" \
+                        --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
+    personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+    # FIXME - delete all other api patokens's
+    # get or create webhook
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
+    if [ ! -z $project_id ]; then
+        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
+        if [ -z $hook_id ]; then
+            argocd_url=https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook -n ${TEAM_NAME}-ci-cd)
+            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
+        fi
+    else
+        echo "No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out."
+        exit 1
+    fi
+}
 
 test_file() {
     local file=$1
@@ -201,6 +235,8 @@ test_the_manual_menance() {
     test_file 3-ubiquitous-journey.md "-T bash#test"
     test_file 4-extend-uj.md "-T bash#test"
     test_file 5-this-is-gitops.md "-T bash#test"
+
+    gitlab_create_argo_webhook
 }
 
 wait_for_argocd_server() {

@@ -90,6 +90,7 @@ EOF
 - [X] `oc login` manual for now
 - [ ] regression.sh can generate output files
 - [X] gitlab create team and public repos first
+- [ ] gitlab delete all other api patoken's when creating a new one
 - [ ] gitlab adding webhooks
 - [X] gitlab creds first time we commit / cache
 - [X] gitlab secret manual for now
