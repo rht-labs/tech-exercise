@@ -13,7 +13,7 @@ RED='\033[0;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
 CLEAN=
-GENERATE=
+GITSETUP=true
 TOPIC=
 
 strip_timestamps() {
@@ -186,7 +186,9 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    gitlab_setup
+    if [ ! -z ${GITSETUP} ]; then
+        gitlab_setup
+    fi
 }
 
 test_the_manual_menance() {
@@ -283,7 +285,7 @@ usage() {
 usage: $0 [ -c -g -t 1|2 ]
 Run test suite for markdown code snippets
         -c      clean and delete test environment at end of tests
-        -g      generate output files only (dont run tests)
+        -g      dont delete gitlab projects (default is true delete each run)
         -t      test a topic by chapter e.g. 1 or 2 (leave unset to test all)
 EOF
   exit 1
@@ -295,7 +297,7 @@ while getopts cgt: a; do
       CLEAN=true
       ;;
     g)
-      GENERATE=true
+      GITSETUP=
       ;;
     t)
       TOPIC=$OPTARG
