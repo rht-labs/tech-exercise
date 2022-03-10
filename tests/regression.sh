@@ -186,7 +186,7 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    #gitlab_setup
+    gitlab_setup
 }
 
 test_the_manual_menance() {
