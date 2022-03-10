@@ -281,6 +281,20 @@ wait_for_nexus_server() {
     done
 }
 
+wait_for_pet_battle_api() {
+    local i=0
+    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) == "202" ]
+    do
+        echo "Waiting for pod nexus ready condition to be True"
+        sleep 10
+        ((i=i+1))
+        if [ $i -gt 30 ]; then
+            echo "Failed - nexus pod never ready"
+            exit 1
+        fi
+    done
+}
+
 wait_for_the_manual_menace() {
     # wait for these sevices before proceeding
     wait_for_argocd_server
