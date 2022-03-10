@@ -134,7 +134,6 @@ metadata:
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
-type: kubernetes.io/basic-auth
 EOF
 ```
 
