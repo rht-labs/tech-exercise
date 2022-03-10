@@ -76,6 +76,7 @@ kind: Secret
 metadata:
   annotations:
     tekton.dev/git-0: https://${GIT_SERVER}
+    sealedsecrets.bitnami.com/managed: "true"
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
@@ -129,6 +130,7 @@ kind: Secret
 metadata:
   annotations:
     tekton.dev/git-0: https://${GIT_SERVER}
+    sealedsecrets.bitnami.com/managed: "true"
   labels:
     credential.sync.jenkins.openshift.io: "true"
   name: git-auth
