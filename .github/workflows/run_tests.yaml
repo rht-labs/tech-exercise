@@ -34,7 +34,7 @@ jobs:
           oc new-project ${repo##*/}-test || true
           podname=test-$(date +"%Y-%m-%d-%H-%M-%S")
           teamname=${{ env.TEAM_NAME }}
-          if [ !-z "${{ github.event.inputs.TEAM_NAME }}" ]; then teamname=${{ github.event.inputs.TEAM_NAME }}; fi
+          if [ ! -z "${{ github.event.inputs.TEAM_NAME }}" ]; then teamname=${{ github.event.inputs.TEAM_NAME }}; fi
           oc -n ${repo##*/}-test run $podname --image=quay.io/eformat/tech-exercise-test:latest \
             --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
             --env="GIT_SERVER=${{ secrets.GIT_SERVER }}" \
