@@ -187,7 +187,7 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    if [ ! -z ${GITSETUP} -a -z ${skipgitlab} ]; then
+    if [[ ! -z ${GITSETUP} && -z ${skipgitlab} ]]; then
         gitlab_setup
     fi
 }
