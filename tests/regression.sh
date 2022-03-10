@@ -176,6 +176,7 @@ cleanup() {
 }
 
 setup_tests() {
+    local skipgitlab=${1}
     echo "
     Rundoc regression tests
     =======================
@@ -186,7 +187,7 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    if [ ! -z ${GITSETUP} ]; then
+    if [ ! -z ${GITSETUP} && -z skipgitlab ]; then
         gitlab_setup
     fi
 }
@@ -267,7 +268,7 @@ one() {
 
 # 2-attack-of-the-pipelines
 two() {
-    setup_tests
+    setup_tests "dont-delete-gitlab"
     wait_for_the_manual_menace
     test_attack-of-the-pipelines
 }
@@ -285,7 +286,7 @@ usage() {
 usage: $0 [ -c -g -t 1|2 ]
 Run test suite for markdown code snippets
         -c      clean and delete test environment at end of tests
-        -g      dont delete gitlab projects (default is true delete each run)
+        -g      dont delete gitlab projects (default is to delete gitlab projects for each full run)
         -t      test a topic by chapter e.g. 1 or 2 (leave unset to test all)
 EOF
   exit 1
