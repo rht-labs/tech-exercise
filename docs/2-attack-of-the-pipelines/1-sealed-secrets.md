@@ -38,6 +38,7 @@ git pull
     metadata:
       annotations:
         tekton.dev/git-0: https://${GIT_SERVER}
+        sealedsecrets.bitnami.com/managed: true
       labels:
         credential.sync.jenkins.openshift.io: "true"
       name: git-auth
@@ -102,10 +103,9 @@ EOF
           secrets:
             # Additional secrets will be added to this list along the exercises.
             - name: git-auth
-              type: kubernetes.io/basic-auth
+              type: Opaque
               annotations:
                 tekton.dev/git-0: https://<GIT_SERVER>
-                sealedsecrets.bitnami.com/force-managed: "true"
               labels:
                 credential.sync.jenkins.openshift.io: "true"
               data:
