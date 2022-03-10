@@ -235,7 +235,7 @@ wait_for_nexus_server() {
         echo "Waiting for pod nexus ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 15 ]; then
+        if [ $i -gt 30 ]; then
             echo "Failed - nexus pod never ready"
             exit 1
         fi
