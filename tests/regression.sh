@@ -293,7 +293,7 @@ test_attack-of-the-pipelines() {
     setup_test /projects/tech-exercise/docs/2-attack-of-the-pipelines
 
     test_file 1-sealed-secrets.md "-T bash#test"
-
+    test_file 2-app-off-apps.md "-T bash#test"
 }
 
 # 1-the-manual-menace
