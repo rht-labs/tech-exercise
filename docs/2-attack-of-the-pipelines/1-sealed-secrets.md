@@ -135,24 +135,14 @@ EOF
     git push
     ```
 
-    🪄 🪄 Log in to ArgoCD - you should now see the SealedSecret chart in ArgoCD UI. It is attempting to unsealed as a regular k8s secret 🪄 🪄
+    🪄 🪄 Log in to ArgoCD - you should now see the SealedSecret chart in ArgoCD UI. It is unsealed as a regular k8s secret 🪄 🪄
     ![argocd-ss.png](images/argocd-ss.png)
 
-8. If you drill into the `SealedSecret` on ArgoCD's UI - you'll might notice that the `git-auth` secrets fails to sync:
-    ![argocd-degraded.png](images/argocd-degraded.png)
+8. If you drill into the `SealedSecret` on ArgoCD's UI - you should see the `git-auth` secret has synced automatically:
 
-    <p class="tip">HEALTH DETAILS - failed update: Resource <b>"git-auth"</b> already exists and is not managed by SealedSecret</p>
+    ![argocd-git-auth-synced.png](images/argocd-git-auth-synced.png)
 
-    Thats because we already created a `git-auth` secret manually in Exercise 1. Lets remove it now and resync ArgoCD:
-
-    ```bash
-    oc -n ${TEAM_NAME}-ci-cd delete secret/git-auth
-    ```
-
-9. You may need to force sync your secret in argocd to get it to apply:
-![argocd-force-sync.png](images/argocd-force-sync.png)
-
-    🪄 You can verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view `<TEAM_NAME>-ci-cd-git-auth` credential is there
+9. You can also verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view `<TEAM_NAME>-ci-cd-git-auth`
 
     ```bash#test
     echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
