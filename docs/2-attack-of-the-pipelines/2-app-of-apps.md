@@ -122,7 +122,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 2. The front end needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the values supplied to this chart as such.
 
     ```bash#test
-    cat << EOF >> pet-battle/test/values.yaml
+    cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
           config_map: '{
             "catsUrl": "https://pet-battle-api-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
             "tournamentsUrl": "https://pet-battle-tournament-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
@@ -135,7 +135,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
               "enableLogging": true
             }
           }'
-    EOF
+EOF
     ```
 
 3. The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
