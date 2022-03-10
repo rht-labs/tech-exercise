@@ -2,6 +2,10 @@ name: Markdown Rundoc Testsuite
 
 on:
   workflow_dispatch:
+    inputs:
+      TEAM_NAME:
+        description: 'Team Name [a-z0-9]'
+        required: false
   schedule:
     - cron: '5 0 * * *'  # every day at 5am
 jobs:
@@ -23,14 +27,18 @@ jobs:
       - name: Run testsuite
         id: testsuite
         shell: bash
+        env:
+          TEAM_NAME: ${{ secrets.TEAM_NAME }}
         run: |
           repo=${{ github.repository }}
           oc new-project ${repo##*/}-test || true
           podname=test-$(date +"%Y-%m-%d-%H-%M-%S")
+          teamname=${{ env.TEAM_NAME }}
+          if [ !-z "${{ github.event.inputs.TEAM_NAME }}" ]; then teamname=${{ github.event.inputs.TEAM_NAME }}; fi
           oc -n ${repo##*/}-test run $podname --image=quay.io/eformat/tech-exercise-test:latest \
             --env="CLUSTER_DOMAIN=${{ secrets.CLUSTER_DOMAIN }}" \
             --env="GIT_SERVER=${{ secrets.GIT_SERVER }}" \
-            --env="TEAM_NAME=${{ secrets.TEAM_NAME }}" \
+            --env="TEAM_NAME=$teamname" \
             --env="GITLAB_USER=${{ secrets.GITLAB_USER }}" \
             --env="GITLAB_PASSWORD=${{ secrets.GITLAB_PASSWORD }}" \
             --env="OCP_USER=${{ secrets.OCP_USER }}" \
