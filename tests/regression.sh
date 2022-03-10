@@ -257,17 +257,20 @@ test_attack-of-the-pipelines() {
 
 }
 
+# 1-the-manual-menace
 one() {
     setup_tests
     test_the_manual_menance
 }
 
+# 2-attack-of-the-pipelines
 two() {
     setup_tests
     wait_for_the_manual_menace
     test_attack-of-the-pipelines
 }
 
+# all tests
 all() {
     setup_tests
     test_the_manual_menance
@@ -277,10 +280,11 @@ all() {
 
 usage() {
   cat <<EOF 2>&1
-usage: $0 [ -c -g ] 
+usage: $0 [ -c -g -t 1|2 ]
 Run test suite for markdown code snippets
         -c      clean and delete test environment at end of tests
         -g      generate output files only (dont run tests)
+        -t      test a topic by chapter e.g. 1 or 2 (leave unset to test all)
 EOF
   exit 1
 }
