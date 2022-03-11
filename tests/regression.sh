@@ -279,36 +279,6 @@ cleanup() {
      echo "Cleanup Done"
 }
 
-setup_tests() {
-    local skipgitlab=${1}
-    echo "
-    Rundoc regression tests
-    =======================
-    "
-
-    source_shell
-    setup_python
-    patch_rundoc
-    git_checkout
-    perform_logins
-    if [[ ! -z ${GITSETUP} && -z ${skipgitlab} ]]; then
-        gitlab_setup
-    fi
-}
-
-test_the_manual_menance() {
-    # 1-the-manual-menace
-    setup_test /projects/tech-exercise/docs/1-the-manual-menace
-
-    test_file 1-the-basics.md "-t bash#test -t zsh#test"
-    test_file 2-argocd.md "-T bash#test"
-    test_file 3-ubiquitous-journey.md "-T bash#test"
-    test_file 4-extend-uj.md "-T bash#test"
-    test_file 5-this-is-gitops.md "-T bash#test"
-
-    gitlab_create_argo_webhook
-}
-
 wait_for_argocd_server() {
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
@@ -392,6 +362,36 @@ wait_for_pet_battle_apps() {
     # wait for these services before proceeding
     wait_for_pet_battle_api
     wait_for_pet_battle
+}
+
+setup_tests() {
+    local skipgitlab=${1}
+    echo "
+    Rundoc regression tests
+    =======================
+    "
+
+    source_shell
+    setup_python
+    patch_rundoc
+    git_checkout
+    perform_logins
+    if [[ ! -z ${GITSETUP} && -z ${skipgitlab} ]]; then
+        gitlab_setup
+    fi
+}
+
+test_the_manual_menance() {
+    # 1-the-manual-menace
+    setup_test /projects/tech-exercise/docs/1-the-manual-menace
+
+    test_file 1-the-basics.md "-t bash#test -t zsh#test"
+    test_file 2-argocd.md "-T bash#test"
+    test_file 3-ubiquitous-journey.md "-T bash#test"
+    test_file 4-extend-uj.md "-T bash#test"
+    test_file 5-this-is-gitops.md "-T bash#test"
+
+    gitlab_create_argo_webhook
 }
 
 test_attack-of-the-pipelines() {

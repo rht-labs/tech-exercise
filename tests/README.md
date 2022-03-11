@@ -75,6 +75,7 @@ cd tech-exercise && git checkout tests && cd tests
 - [ ] gitlab delete all other api patoken's when creating a new one
 - [ ] add a tidy function to delete all git resources at end of tests
 - [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
+- [ ] trigger and wait for pipelines first run success
 - [ ] remove branch for tests development uj
 
 ```bash
@@ -91,4 +92,4 @@ cd tech-exercise && git checkout tests && cd tests
 - [X] gitlab secret manual for now
 - [X] add a tidy function to delete all ocp resources at end of tests
 - [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
-- [X] - patch for upto 4 whitespace in markdown -> html
+- [X] patch rundoc for upto 4 whitespace in markdown -> html
