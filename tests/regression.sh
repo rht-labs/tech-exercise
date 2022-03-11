@@ -98,6 +98,18 @@ gitlab_personal_access_token() {
                         > /dev/null
     # generate personal access token form
     body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
+    # reovke them all 💀 !!
+    revoke=$(echo -n $body_header | grep revoke | awk {'print $24'} | sed -e 's/href="//' -e 's/\">Revoke<\/a><\/td>//')
+    if [ ! -z $revoke ]; then
+        arr=()
+        while read -r line; do
+            arr+=("$line")
+        done <<< "$revoke"
+        for x in $arr; do
+            echo "💀 Revoking $x ..."
+            curl -s -o /dev/null -L -b /tmp/cookies.txt -X POST "https://${GIT_SERVER}/$x" --data-urlencode "authenticity_token=${csrf_token}" --data-urlencode "_method=put"
+        done
+    fi
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # scrape the personal access token from the response
     body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
@@ -108,7 +120,7 @@ gitlab_personal_access_token() {
 }
 
 gitlab_setup() {
-    echo "Setting up Gitlab ..."
+    echo "🍓 Setting up Gitlab ..."
     gitlab_personal_access_token
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
@@ -119,7 +131,7 @@ gitlab_setup() {
 }
 
 gitlab_create_argo_webhook() {
-    echo "Create ArgoCD Gitlab Webhook ..."
+    echo "🌶️ Create ArgoCD Gitlab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
@@ -130,13 +142,13 @@ gitlab_create_argo_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
         fi
     else
-        echo "No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out."
+        echo "${RED}No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
         exit 1
     fi
 }
 
 gitlab_create_jenkins_webhook() {
-    echo "Create Jenkins Gitlab Webhook ..."
+    echo "🍅 Create Jenkins Gitlab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
@@ -147,13 +159,13 @@ gitlab_create_jenkins_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
     else
-        echo "No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out."
+        echo "${RED}No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out.${NC}"
         exit 1
     fi
 }
 
 gitlab_create_tekton_webhook() {
-    echo "Create Tekton Gitlab Webhook ..."
+    echo "🍎 Create Tekton Gitlab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
@@ -164,7 +176,7 @@ gitlab_create_tekton_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
-        echo "No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out."
+        echo "${RED}No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -183,11 +195,11 @@ gitlab_recreate_project() {
     until [ $ret = "202" -o $ret = "404" ]
     do
         ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
-        echo "Waiting for 202 or 404 response to delete ${projectname}"
+        echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo "Failed -${projectname} gitlab could not delete, bailing out."
+            echo "${RED}Failed -${projectname} gitlab could not delete, bailing out.${NC}"
             exit 1
         fi
     done
@@ -196,11 +208,11 @@ gitlab_recreate_project() {
     until [ $ret = "201" ]
     do
         ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
-        echo "Waiting for 201 response to create ${projectname}"
+        echo "🍻 Waiting for 201 response to create ${projectname}"
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo "Failed - ${projectname} gitlab could not create, bailing out."
+            echo "${RED}Failed - ${projectname} gitlab could not create, bailing out.${NC}"
             exit 1
         fi
     done
@@ -224,7 +236,7 @@ test_file() {
     local outFile=out-${file%%md}json
 
     echo
-    echo -n "=== Testing $file tags: $tags"
+    echo -n "=== 🍹 Testing $file tags: $tags"
     echo
 
     ((tests++))
@@ -259,7 +271,7 @@ setup_test() {
 }
 
 cleanup() {
-    echo "Cleaning up ..."
+    echo "🍆 Cleaning up ..."
     namespace=${TEAM_NAME}-ci-cd
     cnt=0
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
@@ -275,18 +287,18 @@ cleanup() {
             curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
         fi
      done
-     echo "Cleanup Done"
+     echo "🫒 Cleanup Done"
 }
 
 wait_for_argocd_server() {
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
-        echo "Waiting for pod argocd-server ready condition to be True"
+        echo "🍞 Waiting for pod argocd-server ready condition to be True"
         sleep 10
         ((i=i+1))
         if [ $i -gt 15 ]; then
-            echo "Failed - argocd-server pod never ready"
+            echo "${RED}Failed - argocd-server pod never ready.${NC}"
             exit 1
         fi
     done
@@ -296,11 +308,11 @@ wait_for_jenkins_server() {
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l deploymentconfig=jenkins,name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
-        echo "Waiting for pod jenkins ready condition to be True"
+        echo "🥕 Waiting for pod jenkins ready condition to be True"
         sleep 10
         ((i=i+1))
         if [ $i -gt 120 ]; then
-            echo "Failed - jenkins pod never ready"
+            echo "${RED}Failed - jenkins pod never ready.${NC}"
             exit 1
         fi
     done
@@ -310,11 +322,11 @@ wait_for_nexus_server() {
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app=sonatype-nexus -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
-        echo "Waiting for pod nexus ready condition to be True"
+        echo "🥗 Waiting for pod nexus ready condition to be True"
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "Failed - nexus pod never ready"
+            echo "${RED}Failed - nexus pod never ready.${NC}"
             exit 1
         fi
     done
@@ -325,11 +337,11 @@ wait_for_pet_battle_api() {
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
     until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
-        echo "Waiting for 200 response from ${HOST}"
+        echo "🥯 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "Failed - pet-battle-api ${HOST} never ready"
+            echo "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
             exit 1
         fi
     done
@@ -340,11 +352,11 @@ wait_for_pet_battle() {
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
     until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
-        echo "Waiting for 200 response from ${HOST}"
+        echo "🧅 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "Failed - pet-battle ${HOST} never ready"
+            echo "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
             exit 1
         fi
     done
@@ -489,7 +501,7 @@ if [ $failed_tests -ne 0 ]; then
     if [ ! -z ${CLEAN} ]; then
         cleanup
     fi
-    echo "There were failed tests."
+    echo "${RED}There were failed tests.${NC}"
     exit 1
 fi
 
@@ -497,5 +509,5 @@ if [ ! -z ${CLEAN} ]; then
     cleanup
 fi
 
-echo "All tests passed."
+echo "${GREEN}All tests passed.${NC}"
 exit 0
