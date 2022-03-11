@@ -120,7 +120,7 @@ gitlab_setup() {
     gitlab_personal_access_token
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
-    if [ -z $group_id ]; then
+    if [ -z "$group_id" ]; then
         group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
     gitlab_recreate_project "tech-exercise"
@@ -131,9 +131,9 @@ gitlab_create_argo_webhook() {
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
-    if [ ! -z $project_id ]; then
+    if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
-        if [ -z $hook_id ]; then
+        if [ -z "$hook_id" ]; then
             argocd_url=https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook -n ${TEAM_NAME}-ci-cd)
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
         fi
@@ -148,9 +148,9 @@ gitlab_create_jenkins_webhook() {
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
-    if [ ! -z $project_id ]; then
+    if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
-        if [ -z $hook_id ]; then
+        if [ -z "$hook_id" ]; then
             jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}'/multibranch-webhook-trigger/invoke%3Ftoken=pet-battle -n ${TEAM_NAME}-ci-cd)
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
@@ -165,9 +165,9 @@ gitlab_create_tekton_webhook() {
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
-    if [ ! -z $project_id ]; then
+    if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
-        if [ -z $hook_id ]; then
+        if [ -z "$hook_id" ]; then
             tekton_url=https://webhook-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
@@ -183,7 +183,7 @@ gitlab_recreate_project() {
     gitlab_personal_access_token
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
-    if [ -z $group_id ]; then
+    if [ -z "$group_id" ]; then
         group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete project
@@ -383,7 +383,7 @@ setup_tests() {
     patch_rundoc
     git_checkout
     perform_logins
-    if [[ ! -z ${GITSETUP} && -z ${skipgitlab} ]]; then
+    if [[ ! -z "${GITSETUP}" && -z "${skipgitlab}" ]]; then
         gitlab_setup
     fi
 }
@@ -494,14 +494,14 @@ echo "Tests run: $tests"
 echo "Failed tests: $failed_tests"
 
 if [ $failed_tests -ne 0 ]; then
-    if [ ! -z ${CLEAN} ]; then
+    if [ ! -z "${CLEAN}" ]; then
         cleanup
     fi
     echo -e "${RED}There were failed tests.${NC}"
     exit 1
 fi
 
-if [ ! -z ${CLEAN} ]; then
+if [ ! -z "${CLEAN}" ]; then
     cleanup
 fi
 
