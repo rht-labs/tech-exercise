@@ -142,7 +142,7 @@ gitlab_create_argo_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
         fi
     else
-        echo "${RED}No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -159,7 +159,7 @@ gitlab_create_jenkins_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
     else
-        echo "${RED}No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -176,7 +176,7 @@ gitlab_create_tekton_webhook() {
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
-        echo "${RED}No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -199,7 +199,7 @@ gitlab_recreate_project() {
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo "${RED}Failed -${projectname} gitlab could not delete, bailing out.${NC}"
+            echo -e "${RED}Failed -${projectname} gitlab could not delete, bailing out.${NC}"
             exit 1
         fi
     done
@@ -212,7 +212,7 @@ gitlab_recreate_project() {
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo "${RED}Failed - ${projectname} gitlab could not create, bailing out.${NC}"
+            echo -e "${RED}Failed - ${projectname} gitlab could not create, bailing out.${NC}"
             exit 1
         fi
     done
@@ -298,7 +298,7 @@ wait_for_argocd_server() {
         sleep 10
         ((i=i+1))
         if [ $i -gt 15 ]; then
-            echo "${RED}Failed - argocd-server pod never ready.${NC}"
+            echo -e "${RED}Failed - argocd-server pod never ready.${NC}"
             exit 1
         fi
     done
@@ -312,7 +312,7 @@ wait_for_jenkins_server() {
         sleep 10
         ((i=i+1))
         if [ $i -gt 120 ]; then
-            echo "${RED}Failed - jenkins pod never ready.${NC}"
+            echo -e "${RED}Failed - jenkins pod never ready.${NC}"
             exit 1
         fi
     done
@@ -326,7 +326,7 @@ wait_for_nexus_server() {
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "${RED}Failed - nexus pod never ready.${NC}"
+            echo -e "${RED}Failed - nexus pod never ready.${NC}"
             exit 1
         fi
     done
@@ -341,7 +341,7 @@ wait_for_pet_battle_api() {
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
+            echo -e "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
             exit 1
         fi
     done
@@ -356,7 +356,7 @@ wait_for_pet_battle() {
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
+            echo -e "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
             exit 1
         fi
     done
@@ -377,9 +377,9 @@ wait_for_pet_battle_apps() {
 
 setup_tests() {
     local skipgitlab=${1}
-    echo "
-    Rundoc regression tests
-    =======================
+    echo -e "
+    🍊🍊 Rundoc regression tests 🍊🍊
+    =================================
     "
 
     source_shell
@@ -501,7 +501,7 @@ if [ $failed_tests -ne 0 ]; then
     if [ ! -z ${CLEAN} ]; then
         cleanup
     fi
-    echo "${RED}There were failed tests.${NC}"
+    echo -e "${RED}There were failed tests.${NC}"
     exit 1
 fi
 
@@ -509,5 +509,5 @@ if [ ! -z ${CLEAN} ]; then
     cleanup
 fi
 
-echo "${GREEN}All tests passed.${NC}"
+echo -e "${GREEN}All tests passed.${NC}"
 exit 0
