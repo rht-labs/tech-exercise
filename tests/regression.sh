@@ -285,23 +285,45 @@ wait_for_nexus_server() {
 
 wait_for_pet_battle_api() {
     local i=0
-    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) == "202" ]
+    HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
+    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
-        echo "Waiting for pod nexus ready condition to be True"
+        echo "Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
         if [ $i -gt 30 ]; then
-            echo "Failed - nexus pod never ready"
+            echo "Failed - pet-battle-api ${HOST} never ready"
+            exit 1
+        fi
+    done
+}
+
+wait_for_pet_battle() {
+    local i=0
+    HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
+    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
+    do
+        echo "Waiting for 200 response from ${HOST}"
+        sleep 10
+        ((i=i+1))
+        if [ $i -gt 30 ]; then
+            echo "Failed - pet-battle ${HOST} never ready"
             exit 1
         fi
     done
 }
 
 wait_for_the_manual_menace() {
-    # wait for these sevices before proceeding
+    # wait for these services before proceeding
     wait_for_argocd_server
     wait_for_nexus_server
     wait_for_jenkins_server
+}
+
+wait_for_pet_battle_apps() {
+    # wait for these services before proceeding
+    wait_for_pet_battle_api
+    wait_for_pet_battle
 }
 
 test_attack-of-the-pipelines() {
@@ -310,6 +332,7 @@ test_attack-of-the-pipelines() {
 
     test_file 1-sealed-secrets.md "-T bash#test"
     test_file 2-app-of-apps.md "-T bash#test"
+    wait_for_pet_battle_apps
 }
 
 # 1-the-manual-menace
