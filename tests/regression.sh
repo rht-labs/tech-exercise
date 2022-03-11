@@ -86,6 +86,7 @@ EOF
 }
 
 gitlab_personal_access_token() {
+    if [ ! -z "${personal_access_token}" ]; then return; fi
     # get csrf from login page
     gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${GITLAB_PASSWORD} | base64)"
     body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
@@ -109,24 +110,12 @@ gitlab_personal_access_token() {
 gitlab_setup() {
     echo "Setting up Gitlab ..."
     gitlab_personal_access_token
-    # FIXME - delete all other api patokens's
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z $group_id ]; then
         group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
-    # delete tech-exercise project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Ftech-exercise" >/dev/null 2>&1
-    # create tech-exercise project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=tech-exercise&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
-    # delete pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle" >/dev/null 2>&1
-    # create pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
-    # delete pet-battle-api project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle-api" >/dev/null 2>&1
-    # create pet-battle-api project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle-api&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
+    gitlab_recreate_project "tech-exercise"
 }
 
 gitlab_create_argo_webhook() {
@@ -180,42 +169,53 @@ gitlab_create_tekton_webhook() {
     fi
 }
 
-gitlab_recreate_pet_battle() {
+gitlab_recreate_project() {
+    projectname=${1}
+    local i=0
     gitlab_personal_access_token
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z $group_id ]; then
         group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
-    # delete pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle" >/dev/null 2>&1
-    # create pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
-}
-
-gitlab_recreate_pet_battle_api() {
-    gitlab_personal_access_token
-    # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
-    if [ -z $group_id ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
-    fi
-    # delete pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle-api" >/dev/null 2>&1
-    # create pet-battle project
-    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle-api&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
+    # delete project
+    ret=1; i=0
+    until [ $ret = "202" -o $ret = "404" ]
+    do
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        echo "Waiting for 202 or 404 response to delete ${projectname}"
+        sleep 5
+        ((i=i+1))
+        if [ $i -gt 5 ]; then
+            echo "Failed -${projectname} gitlab could not delete, bailing out."
+            exit 1
+        fi
+    done
+    # create project
+    ret=1; i=0
+    until [ $ret = "201" ]
+    do
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
+        echo "Waiting for 201 response to create ${projectname}"
+        sleep 5
+        ((i=i+1))
+        if [ $i -gt 5 ]; then
+            echo "Failed - ${projectname} gitlab could not create, bailing out."
+            exit 1
+        fi
+    done
 }
 
 remove_pet_battle_code() {
     # so reruns work ok as git recreated each time
     rm -rf /projects/pet-battle
-    gitlab_recreate_pet_battle
+    gitlab_recreate_project "pet-battle"
 }
 
 remove_pet_battle_api_code() {
     # so reruns work ok as git recreated each time
     rm -rf /projects/pet-battle-api
-    gitlab_recreate_pet_battle_api
+    gitlab_recreate_project "pet-battle-api"
 }
 
 test_file() {
