@@ -77,6 +77,7 @@ cd tech-exercise && git checkout tests && cd tests
 - [ ] remove branch for tests development uj
 
 ```bash
+# FIXME test branch
 --set source_ref=tests
 ```
 
