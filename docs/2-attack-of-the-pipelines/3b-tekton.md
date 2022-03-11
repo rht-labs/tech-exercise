@@ -170,7 +170,7 @@ In this snippet of the pipeline used in this exercise, we define:
  
 10.  As always, push the code to git ...
 
-    ```bash
+    ```bash#test
     cd /projects/pet-battle-api
     git add .
     git commit -m  "🍕 UPDATED - pet-battle-version to 1.3.1 🍕"
