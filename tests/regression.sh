@@ -191,6 +191,12 @@ gitlab_create_jenkins_webhook() {
     fi
 }
 
+remove_pet_battle_on_disk() {
+    # so reruns work ok when testing
+    rm -rf /projects/pet-battle
+    rm -rf /projects/pet-battle-api
+}
+
 test_file() {
     local file=$1
     local tags=$2
@@ -374,6 +380,7 @@ test_attack-of-the-pipelines() {
     test_file 2-app-of-apps.md "-T bash#test"
     wait_for_pet_battle_apps
     gitlab_create_jenkins_webhook
+    remove_pet_battle_on_disk
     test_file 3a-jenkins.md "-T bash#test"
 }
 
