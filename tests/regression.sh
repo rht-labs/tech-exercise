@@ -172,7 +172,7 @@ gitlab_create_tekton_webhook() {
     if [ ! -z $project_id ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z $hook_id ]; then
-            tekton_url=https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
+            tekton_url=https://webhook-${TEAM_NAME}.${CLUSTER_DOMAIN}
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
@@ -381,21 +381,6 @@ wait_for_pet_battle() {
     done
 }
 
-wait_for_tekton_hook() {
-    local i=0
-    HOST=https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'/live)
-    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
-    do
-        echo "Waiting for 200 response from ${HOST}"
-        sleep 10
-        ((i=i+1))
-        if [ $i -gt 30 ]; then
-            echo "Failed - tekton hook ${HOST} never ready"
-            exit 1
-        fi
-    done
-}
-
 wait_for_the_manual_menace() {
     # wait for these services before proceeding
     wait_for_argocd_server
@@ -416,12 +401,12 @@ test_attack-of-the-pipelines() {
     test_file 1-sealed-secrets.md "-T bash#test"
     test_file 2-app-of-apps.md "-T bash#test"
     wait_for_pet_battle_apps
-    gitlab_create_jenkins_webhook
     remove_pet_battle_code
+    gitlab_create_jenkins_webhook
     test_file 3a-jenkins.md "-T bash#test"
     remove_pet_battle_api_code
-    test_file 3b-tekton.md "-T bash#test"
     gitlab_create_tekton_webhook
+    test_file 3b-tekton.md "-T bash#test"
 }
 
 # 1-the-manual-menace
