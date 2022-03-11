@@ -83,6 +83,20 @@
                 "bash",
                 "test"
             ]
+        },
+        {
+            "code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
         }
     ],
     "env": {}
