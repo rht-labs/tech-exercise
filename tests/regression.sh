@@ -166,7 +166,6 @@ gitlab_create_jenkins_webhook() {
 gitlab_create_tekton_webhook() {
     echo "Create Tekton Gitlab Webhook ..."
     gitlab_personal_access_token
-    wait_for_tekton_hook
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
     if [ ! -z $project_id ]; then
