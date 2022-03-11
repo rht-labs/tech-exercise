@@ -171,7 +171,7 @@ gitlab_create_tekton_webhook() {
     if [ ! -z $project_id ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z $hook_id ]; then
-            tekton_url=https://webhook-${TEAM_NAME}.${CLUSTER_DOMAIN}
+            tekton_url=https://webhook-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
