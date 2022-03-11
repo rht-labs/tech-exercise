@@ -98,8 +98,10 @@ gitlab_personal_access_token() {
                         > /dev/null
     # generate personal access token form
     body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # reovke them all 💀 !!
     revoke=$(echo -n $body_header | grep "Are you sure you want to revoke" | awk {'print $24'} | sed -e 's/href="//' -e 's/\">Revoke<\/a><\/td>//')
+    sleep 5
     if [ ! -z $revoke ]; then
         arr=()
         while read -r line; do
@@ -110,7 +112,6 @@ gitlab_personal_access_token() {
             curl -s -o /dev/null -L -b /tmp/cookies.txt -X POST "https://${GIT_SERVER}/$x" --data-urlencode "authenticity_token=${csrf_token}" --data-urlencode "_method=put"
         done
     fi
-    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # scrape the personal access token from the response
     body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
