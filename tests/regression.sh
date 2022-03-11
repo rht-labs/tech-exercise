@@ -99,7 +99,7 @@ gitlab_personal_access_token() {
     # generate personal access token form
     body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
-    # reovke them all 💀 !!
+    # revoke them all 💀 !!
     revoke=$(echo $body_header | perl -ne 'print "$1\n" if /href="\/profile\/personal_access_tokens\/(\d+)/')
     if [ ! -z $revoke ]; then
         arr=()
