@@ -182,7 +182,7 @@ git push
 
     ```bash#test
     # FIXME test branch
-    wget -o /projects/pet-battle/
+    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/tests/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy
     ```
 
 7. Push the changes to git.
