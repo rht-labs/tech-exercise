@@ -176,10 +176,29 @@ gitlab_recreate_pet_battle() {
     curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
 }
 
+gitlab_recreate_pet_battle_api() {
+    gitlab_personal_access_token
+    # get or create group id
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    if [ -z $group_id ]; then
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+    fi
+    # delete pet-battle project
+    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle-api" >/dev/null 2>&1
+    # create pet-battle project
+    curl -s -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=pet-battle-api&visibility=public&namespace_id=${group_id}" > /dev/null 2>&1
+}
+
 remove_pet_battle_code() {
     # so reruns work ok as git recreated each time
     rm -rf /projects/pet-battle
     gitlab_recreate_pet_battle
+}
+
+remove_pet_battle_api_code() {
+    # so reruns work ok as git recreated each time
+    rm -rf /projects/pet-battle-api
+    gitlab_recreate_pet_battle_api
 }
 
 test_file() {
@@ -367,6 +386,8 @@ test_attack-of-the-pipelines() {
     gitlab_create_jenkins_webhook
     remove_pet_battle_code
     test_file 3a-jenkins.md "-T bash#test"
+    remove_pet_battle_api_code
+    test_file 3a-tekton.md "-T bash#test"
 }
 
 # 1-the-manual-menace
@@ -395,7 +416,7 @@ usage() {
 usage: $0 [ -c -g -t 1|2 ]
 Run test suite for markdown code snippets
         -c      clean and delete test environment at end of tests
-        -g      dont delete gitlab projects (default is to delete gitlab projects for each full run)
+        -g      dont delete gitlab tech-exercise project (default is to delete gitlab projects for each full run)
         -t      test a topic by chapter e.g. 1 or 2 (leave unset to test all)
 EOF
   exit 1
