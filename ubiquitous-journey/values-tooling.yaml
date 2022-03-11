@@ -9,7 +9,7 @@ applications:
       serviceaccounts: ""
       # student is the GROUP NAME in IDM
       bindings: &binds
-        - name: tl500-users
+        - name: student
           kind: Group
           role: edit
         - name: jenkins
