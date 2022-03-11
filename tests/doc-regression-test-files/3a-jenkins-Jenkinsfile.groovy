@@ -15,7 +15,8 @@ pipeline {
 		// set this as an ENV_VAR on Jenkins to make this easier?
     	// ARGOCD_CONFIG_REPO = "github.com/petbattle/ubiquitous-journey.git"
 		ARGOCD_CONFIG_REPO_PATH = "pet-battle/test/values.yaml"
-		ARGOCD_CONFIG_REPO_BRANCH = "main"
+        // FIXME tests branch
+        ARGOCD_CONFIG_REPO_BRANCH = "tests"
 
 		// Credentials bound in OpenShift
 		GIT_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-git-auth")
