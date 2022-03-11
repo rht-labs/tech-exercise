@@ -99,7 +99,7 @@ gitlab_personal_access_token() {
     # generate personal access token form
     body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
     # reovke them all 💀 !!
-    revoke=$(echo -n $body_header | grep revoke | awk {'print $24'} | sed -e 's/href="//' -e 's/\">Revoke<\/a><\/td>//')
+    revoke=$(echo -n $body_header | grep "Are you sure you want to revoke" | awk {'print $24'} | sed -e 's/href="//' -e 's/\">Revoke<\/a><\/td>//')
     if [ ! -z $revoke ]; then
         arr=()
         while read -r line; do
