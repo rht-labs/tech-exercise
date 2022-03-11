@@ -1,0 +1,117 @@
+{
+    "code_blocks": [
+        {
+            "code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - jenkins pipelines config \ud83c\udf55\"\n    git push\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - jenkins pipelines config \ud83c\udf55\"\n    git push\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    # FIXME test branch\n    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/tests/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    # FIXME test branch\n    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/tests/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/pet-battle\n    git add Jenkinsfile\n    git commit -m \"\ud83c\udf38 Jenkinsfile updated with build stage \ud83c\udf38\"\n    git push\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/pet-battle\n    git add Jenkinsfile\n    git commit -m \"\ud83c\udf38 Jenkinsfile updated with build stage \ud83c\udf38\"\n    git push\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}
