@@ -165,7 +165,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
     ```bash#test
     cd /projects/pet-battle-api
-    mvn versions:set -DnewVersion=1.3.1
+    mvn -ntp versions:set -DnewVersion=1.3.1
     ```
  
 10.  As always, push the code to git ...

@@ -383,7 +383,7 @@ wait_for_pet_battle() {
 
 wait_for_tekton_hook() {
     local i=0
-    HOST=https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
+    HOST=https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}'/live)
     until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
         echo "Waiting for 200 response from ${HOST}"

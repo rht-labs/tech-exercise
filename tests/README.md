@@ -74,6 +74,7 @@ cd tech-exercise && git checkout tests && cd tests
 - [ ] regression.sh can generate output files
 - [ ] gitlab delete all other api patoken's when creating a new one
 - [ ] add a tidy function to delete all git resources at end of tests
+- [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
 - [ ] remove branch for tests development uj
 
 ```bash
