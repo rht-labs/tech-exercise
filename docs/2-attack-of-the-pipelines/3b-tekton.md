@@ -109,9 +109,15 @@ In this snippet of the pipeline used in this exercise, we define:
         image_version: latest # container image version
     </code></pre></div>
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq e '.applications.pet-battle-api.source |="http://nexus:8081/repository/helm-charts"' /projects/tech-exercise/pet-battle/test/values.yaml
+    ```
+
 6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD.
 
-    ```bash
+    ```bash#test
     cd /projects/tech-exercise
     git add .
     git commit -m  "🍕 ADD - tekton pipelines config 🍕"
@@ -123,7 +129,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
 
-    ```bash
+    ```bash#test
     echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
     ```
 
@@ -153,6 +159,13 @@ In this snippet of the pipeline used in this exercise, we define:
     ```xml
         <artifactId>pet-battle-api</artifactId>
         <version>1.3.1</version>
+    ```
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    cd /projects/pet-battle-api
+    mvn versions:set -DnewVersion=1.3.1
     ```
  
 10.  As always, push the code to git ...
