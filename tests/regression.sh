@@ -178,11 +178,11 @@ gitlab_create_jenkins_webhook() {
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # FIXME - delete all other api patokens's
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle" | jq -c '.[] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
     if [ ! -z $project_id ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z $hook_id ]; then
-            jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle
+            jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}'/multibranch-webhook-trigger/invoke%3Ftoken=pet-battle -n ${TEAM_NAME}-ci-cd)
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
     else
