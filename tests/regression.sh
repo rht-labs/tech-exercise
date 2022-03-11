@@ -266,8 +266,6 @@ setup_tests() {
     if [[ ! -z ${GITSETUP} && -z ${skipgitlab} ]]; then
         gitlab_setup
     fi
-    # for testing cluster
-    fix_student_role
 }
 
 test_the_manual_menance() {
