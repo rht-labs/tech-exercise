@@ -113,7 +113,6 @@ gitlab_personal_access_token() {
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
-    # FIXME - delete all other api patokens's, or check for existence ?
 }
 
 gitlab_setup() {
@@ -287,6 +286,9 @@ cleanup() {
      namespace=${TEAM_NAME}-test
      oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
      curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
+
+     #FIXME - delete gitlab assets incl. group
+
      echo "🫒 Cleanup Done"
 }
 
@@ -340,7 +342,7 @@ wait_for_pet_battle_api() {
         echo "🥯 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 100 ]; then
+        if [ $i -gt 200 ]; then
             echo -e "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
             exit 1
         fi
@@ -355,7 +357,7 @@ wait_for_pet_battle() {
         echo "🧅 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 60 ]; then
+        if [ $i -gt 100 ]; then
             echo -e "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
             exit 1
         fi
