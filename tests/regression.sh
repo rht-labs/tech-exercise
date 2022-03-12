@@ -266,6 +266,7 @@ setup_test() {
     echo
 }
 
+# needs to be run as cluster-admin to work properly
 cleanup() {
     echo "🍆 Cleaning up ..."
     namespace=${TEAM_NAME}-ci-cd
