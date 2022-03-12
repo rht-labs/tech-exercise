@@ -453,7 +453,7 @@ EOF
   exit 1
 }
 
-while getopts cgt: a; do
+while getopts cgzt: a; do
   case $a in
     c)
       CLEAN=true
