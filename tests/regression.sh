@@ -16,6 +16,7 @@ NC='\033[0m' # No Color
 CLEAN=
 GITSETUP=true
 TOPIC=
+NUKEFROMORBIT=
 
 strip_timestamps() {
     local file_path=$1
@@ -442,11 +443,12 @@ all() {
 
 usage() {
   cat <<EOF 2>&1
-usage: $0 [ -c -g -t 1|2 ]
+usage: $0 [ -c -g -z -t 1|2 ]
 Run test suite for markdown code snippets
         -c      clean and delete test environment at end of tests
         -g      dont delete gitlab tech-exercise project (default is to delete gitlab projects for each full run)
         -t      test a topic by chapter e.g. 1 or 2 (leave unset to test all)
+        -z      nuke/clean team based stuff from orbit (dont do anything else)
 EOF
   exit 1
 }
@@ -461,6 +463,9 @@ while getopts cgt: a; do
       ;;
     t)
       TOPIC=$OPTARG
+      ;;
+    z)
+      NUKEFROMORBIT=true
       ;;
     *)
       usage
@@ -478,6 +483,13 @@ shift `expr $OPTIND - 1`
 [ -z "$GITLAB_PASSWORD" ] && echo "Warning: must supply GITLAB_PASSWORD in env" && exit 1
 [ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
 [ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
+
+# Nuke only
+if [ ! -z "${NUKEFROMORBIT}" ]; then
+    cleanup
+    exit 0
+fi
+
 
 # run test suite
 case $TOPIC in
