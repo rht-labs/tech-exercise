@@ -11,7 +11,7 @@ applications:
       bindings: &binds
         - name: student
           kind: Group
-          role: edit
+          role: admin
         - name: jenkins
           kind: ServiceAccount
           role: admin
