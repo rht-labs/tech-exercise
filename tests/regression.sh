@@ -339,7 +339,7 @@ wait_for_pet_battle_api() {
         echo "🥯 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 30 ]; then
+        if [ $i -gt 100 ]; then
             echo -e "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
             exit 1
         fi
@@ -354,7 +354,7 @@ wait_for_pet_battle() {
         echo "🧅 Waiting for 200 response from ${HOST}"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 30 ]; then
+        if [ $i -gt 60 ]; then
             echo -e "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
             exit 1
         fi
