@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n",
+            "code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n"
+                    "user_code": "    yq e '.applications.pet-battle.source |=\"http://nexus:8081/repository/helm-charts\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n"
                 }
             ],
             "tags": [

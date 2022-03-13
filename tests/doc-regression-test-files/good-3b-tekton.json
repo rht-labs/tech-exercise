@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n",
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        # FIXME test branch\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"tests\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n"
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        # FIXME test branch\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"tests\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n"
                 }
             ],
             "tags": [
@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    yq e '.applications.pet-battle-api.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n",
+            "code": "    yq e '.applications.pet-battle-api.source |=\"http://nexus:8081/repository/helm-charts\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq e '.applications.pet-battle-api.source |=\"http://nexus:8081/repository/helm-charts\"' /projects/tech-exercise/pet-battle/test/values.yaml\n"
+                    "user_code": "    yq e '.applications.pet-battle-api.source |=\"http://nexus:8081/repository/helm-charts\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n"
                 }
             ],
             "tags": [
