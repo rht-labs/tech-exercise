@@ -344,7 +344,7 @@ wait_for_pet_battle_api() {
         sleep 10
         HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
         ((i=i+1))
-        if [ $i -gt 200 ]; then
+        if [ $i -gt 400 ]; then
             echo -e "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
             exit 1
         fi
