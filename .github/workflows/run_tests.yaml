@@ -51,7 +51,7 @@ jobs:
           podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           while [ "$podphase" != "Failed" -a "$podphase" != "Succeeded" ]; do
               echo "$podname phase $podphase ..."
-              sleep 5
+              sleep 10
               podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           done
 
