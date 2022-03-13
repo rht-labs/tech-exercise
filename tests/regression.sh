@@ -274,12 +274,12 @@ cleanup() {
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
         ((cnt++))
         helm delete uj argocd --namespace $namespace  2>/dev/null
-        oc -n $namespace delete application.argoproj.io bootstrap argocd jenkins allure nexus ubiquitous-journey tekton-pipeline test-app-of-pb test-keycloak test-pet-battle-api test-pet-battle 2>/dev/null
+        oc -n $namespace delete application.argoproj.io bootstrap argocd jenkins allure nexus ubiquitous-journey tekton-pipeline test-app-of-pb test-keycloak test-pet-battle-api test-pet-battle sealed-secrets 2>/dev/null
         sleep 10
         if [ $cnt > 3 ]; then
             echo "Force deleting namespace $namespace ..."
             oc delete namespace $namespace --timeout=10s 2>/dev/null
-            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus application.argoproj.io/tekton-pipeline application.argoproj.io/test-app-of-pb application.argoproj.io/test-keycloak application.argoproj.io/test-pet-battle-api application.argoproj.io/test-pet-battle --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
+            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus application.argoproj.io/tekton-pipeline application.argoproj.io/test-app-of-pb application.argoproj.io/test-keycloak application.argoproj.io/test-pet-battle-api application.argoproj.io/test-pet-battle application.argoproj.io/sealed-secrets --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
             oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
             curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
         fi
