@@ -113,7 +113,7 @@ In this snippet of the pipeline used in this exercise, we define:
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
-    yq e '.applications.pet-battle-api.source |="http://nexus:8081/repository/helm-charts"' /projects/tech-exercise/pet-battle/test/values.yaml
+    yq e '.applications.pet-battle-api.source |="http://nexus:8081/repository/helm-charts"' -i /projects/tech-exercise/pet-battle/test/values.yaml
     ```
 
 6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD.

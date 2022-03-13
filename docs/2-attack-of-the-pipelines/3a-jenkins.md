@@ -101,7 +101,7 @@ git push
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
-    yq e '.applications.pet-battle.source |="http://nexus:8081/repository/helm-charts"' /projects/tech-exercise/pet-battle/test/values.yaml
+    yq e '.applications.pet-battle.source |="http://nexus:8081/repository/helm-charts"' -i /projects/tech-exercise/pet-battle/test/values.yaml
     ```
 
 3. Commit these changes to git so Argo CD can sync them.
