@@ -216,6 +216,7 @@ pipeline {
 						sh  '''
 							git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
 							cd config-repo
+                            # FIXME test branch
 							git checkout -b ${ARGOCD_CONFIG_REPO_BRANCH} --track origin/${ARGOCD_CONFIG_REPO_BRANCH} # master or main
 				
 							PREVIOUS_VERSION=$(yq eval .applications.\\"${APP_NAME}\\".values.image_version "${ARGOCD_CONFIG_REPO_PATH}")
