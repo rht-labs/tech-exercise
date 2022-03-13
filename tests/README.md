@@ -76,6 +76,7 @@ cd tech-exercise && git checkout tests && cd tests
 - [ ] add a tidy function to delete all git resources at end of tests
 - [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
 - [ ] trigger and wait for pipelines first run success
+- [ ] cleanup() must be cluster-admin
 - [ ] remove branch for tests development uj
 
 ```bash
