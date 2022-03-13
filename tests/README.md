@@ -56,8 +56,7 @@ podman run -d --name stack quay.io/rht-labs/stack-tl500:3.0.10 zsh -c 'sleep inf
 podman exec -it stack zsh
 
 git clone https://github.com/rht-labs/tech-exercise.git
-# FIXME test branch for now 
-cd tech-exercise && git checkout tests && cd tests
+cd tech-exercise && cd tests
 
 # Run the test suite
 ./regression.sh
@@ -77,12 +76,6 @@ cd tech-exercise && git checkout tests && cd tests
 - [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
 - [ ] trigger and wait for pipelines first run success
 - [ ] cleanup() must be cluster-admin
-- [ ] remove branch for tests development uj
-
-```bash
-# FIXME test branch
---set source_ref=tests
-```
 
 **_DONE_**
 
@@ -94,3 +87,9 @@ cd tech-exercise && git checkout tests && cd tests
 - [X] add a tidy function to delete all ocp resources at end of tests
 - [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
 - [X] patch rundoc for upto 4 whitespace in markdown -> html
+- [X] remove branch for tests development uj
+
+```bash
+# FIXME test branch
+--set source_ref=tests
+```

@@ -61,8 +61,7 @@ spec:
         git config --global user.email "tekton@rht-labs.bot.com"
         git config --global user.name "🐈 Tekton 🐈"
         git config --global push.default simple
-        # FIXME test branch
-        git checkout tests
+        git checkout main
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
         git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/tech-exercise.git

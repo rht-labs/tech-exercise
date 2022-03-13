@@ -181,8 +181,7 @@ git push
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
-    # FIXME test branch
-    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/tests/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy
+    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/main/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy
     ```
 
 7. Push the changes to git.

@@ -15,8 +15,7 @@ pipeline {
 		// set this as an ENV_VAR on Jenkins to make this easier?
     	// ARGOCD_CONFIG_REPO = "github.com/petbattle/ubiquitous-journey.git"
 		ARGOCD_CONFIG_REPO_PATH = "pet-battle/test/values.yaml"
-        // FIXME tests branch
-        ARGOCD_CONFIG_REPO_BRANCH = "tests"
+        ARGOCD_CONFIG_REPO_BRANCH = "main"
 
 		// Credentials bound in OpenShift
 		GIT_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-git-auth")
@@ -216,8 +215,7 @@ pipeline {
 						sh  '''
 							git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
 							cd config-repo
-                            # FIXME test branch
-							git checkout -b ${ARGOCD_CONFIG_REPO_BRANCH} --track origin/${ARGOCD_CONFIG_REPO_BRANCH} # master or main
+							git checkout -b ${ARGOCD_CONFIG_REPO_BRANCH} --track origin/${ARGOCD_CONFIG_REPO_BRANCH}
 				
 							PREVIOUS_VERSION=$(yq eval .applications.\\"${APP_NAME}\\".values.image_version "${ARGOCD_CONFIG_REPO_PATH}")
 							PREVIOUS_CHART_VERSION=$(yq eval .applications.\\"${APP_NAME}\\".source_ref "${ARGOCD_CONFIG_REPO_PATH}")
