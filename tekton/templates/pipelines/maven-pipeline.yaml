@@ -141,7 +141,7 @@ spec:
         - name: url
           value: "https://{{ .Values.git_server }}/{{ .Values.team }}/tech-exercise.git"
         - name: revision
-          value: "main"
+          value: "tests" # FIXME branch test
         - name: subdirectory
           value: "tech-exercise/main"
         - name: deleteExisting

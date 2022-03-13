@@ -67,45 +67,30 @@ cd tech-exercise && git checkout tests && cd tests
 
 **_FIXME - All the fiddly bits that need more work_**
 
-- [X] - patch for upto 4 whitespace in markdown -> html
-
-```bash
-cat <<'EOF' > rundoc-patch
---- doc-regression-test-files/env/lib/python3.10/site-packages/markdown_rundoc/rundoc_code.py.orig	2022-02-25 11:48:20.325903565 +1000
-+++ doc-regression-test-files/env/lib/python3.9/site-packages/markdown_rundoc/rundoc_code.py	2022-02-25 11:48:30.478893321 +1000
-@@ -89,7 +89,7 @@
- 
- class RundocBlockPreprocessor(Preprocessor):
-     RUNDOC_BLOCK_RE = re.compile(r'''
--(?P<fence>^(?:~{3,}|`{3,}))[ ]*         # Opening ``` or ~~~
-+(?P<fence>^\s{0,4}(?:~{3,}|`{3,}))[ ]*         # Opening ``` or ~~~
- (\{?\.?(?P<tags>[^\n\r]*))?[ ]*         # Optional {, and lang
- # Optional highlight lines, single- or double-quote-delimited
- (hl_lines=(?P<quot>"|')(?P<hl_lines>.*?)(?P=quot))?[ ]*
-EOF
-```
+**_TODO_**
 
 - [ ] may need to remove bash#test tags etc in html redraw
 - [ ] secrets and env vars in rundoc (which has some support?)
-- [X] `oc login` manual for now
 - [ ] regression.sh can generate output files
-- [X] gitlab create team and public repos first
-- [ ] gitlab adding webhooks
-- [X] gitlab creds first time we commit / cache
-- [X] gitlab secret manual for now
+- [ ] gitlab delete all other api patoken's when creating a new one
+- [ ] add a tidy function to delete all git resources at end of tests
+- [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
+- [ ] trigger and wait for pipelines first run success
+- [ ] cleanup() must be cluster-admin
+- [ ] remove branch for tests development uj
 
 ```bash
-echo export GITLAB_USER=user | tee -a ~/.bashrc -a ~/.zshrc
-echo export GITLAB_PASSWORD=password | tee -a ~/.bashrc -a ~/.zshrc
-```
-
-- [X] remove branch for tests development uj
-
-```bash
+# FIXME test branch
 --set source_ref=tests
 ```
 
-- [X] add a tidy function to delete all ocp resources at end of tests
-- [ ] add a tidy function to delete all git resources at end of tests
+**_DONE_**
 
-- [ ] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
+- [X] `oc login` manual for now
+- [X] gitlab create team and public repos first
+- [X] gitlab adding webhooks
+- [X] gitlab creds first time we commit / cache
+- [X] gitlab secret manual for now
+- [X] add a tidy function to delete all ocp resources at end of tests
+- [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
+- [X] patch rundoc for upto 4 whitespace in markdown -> html

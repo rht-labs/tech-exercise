@@ -36,7 +36,7 @@ git push
 
 2. Back in your CodeReady Workspace, we'll fork the PetBattle Frontend code to this newly created repository on git.
 
-    ```bash
+    ```bash#test
     cd /projects
     git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
     git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
@@ -46,7 +46,7 @@ git push
 
 3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 
-    ```bash
+    ```bash#test
     echo "https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
     ```
 
@@ -74,6 +74,13 @@ git push
                 value: 'jaffa-cakes🍪'
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq e '(.applications[] | (select(.name=="jenkins").values.deployment.env_vars[] | select(.name=="GITLAB_HOST")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    yq e '(.applications[] | (select(.name=="jenkins").values.deployment.env_vars[] | select(.name=="GITLAB_GROUP_NAME")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    ```
+
 2. Jenkins will push changes to our Helm Chart to Nexus as part of the pipeline. Previously we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
 
     <div class="highlight" style="background: #f7f7f7">
@@ -90,9 +97,16 @@ git push
     </code></pre></div>
 
     Then do the same thing for `pet-battle/stage/values.yaml` file as well.
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq e '.applications.pet-battle.source |="http://nexus:8081/repository/helm-charts"' -i /projects/tech-exercise/pet-battle/test/values.yaml
+    ```
+
 3. Commit these changes to git so Argo CD can sync them.
 
-    ```bash
+    ```bash#test
     cd /projects/tech-exercise
     git add .
     git commit -m  "🍕 ADD - jenkins pipelines config 🍕"
@@ -101,7 +115,7 @@ git push
 
 4. When this change rolls out we should see the seed job has scaffolded out a pipeline for the frontend in the Jenkins UI. It's done this by looking in the pet-battle repo where it found the `Jenkinsfile` (our pipeline definition). However it will fail on the first execution. This is expected as we're going write some stuff to fix it!
 
-    ```bash
+    ```bash#test
     # to get the Jenkins route on your terminal
     echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
@@ -164,9 +178,16 @@ git push
             }
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    # FIXME test branch
+    wget -O /projects/pet-battle/Jenkinsfile https://raw.githubusercontent.com/rht-labs/tech-exercise/tests/tests/doc-regression-test-files/3a-jenkins-Jenkinsfile.groovy
+    ```
+
 7. Push the changes to git.
 
-    ```bash
+    ```bash#test
     cd /projects/pet-battle
     git add Jenkinsfile
     git commit -m "🌸 Jenkinsfile updated with build stage 🌸"

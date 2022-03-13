@@ -22,7 +22,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 2. Back in your CodeReady Workspace, we'll fork the PetBattle API code to this newly created repository on git.
 
-    ```bash
+    ```bash#test
     cd /projects
     git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api
     git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
@@ -82,6 +82,18 @@ In this snippet of the pipeline used in this exercise, we define:
           git_server: <GIT_SERVER>
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    if [[ $(yq e '.applications[] | select(.name=="tekton-pipeline") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then
+        # FIXME test branch
+        yq e '.applications += {"name": "tekton-pipeline","enabled": true,"source": "https://GIT_SERVER/TEAM_NAME/tech-exercise.git","source_ref": "tests","source_path": "tekton","values": {"team": "TEAM_NAME","cluster_domain": "CLUSTER_DOMAIN","git_server": "GIT_SERVER"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+        sed -i "s|GIT_SERVER|$GIT_SERVER|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+        sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    
+        sed -i "s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    
+    fi
+    ```
+
 5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 
     <div class="highlight" style="background: #f7f7f7">
@@ -98,9 +110,15 @@ In this snippet of the pipeline used in this exercise, we define:
         image_version: latest # container image version
     </code></pre></div>
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq e '.applications.pet-battle-api.source |="http://nexus:8081/repository/helm-charts"' -i /projects/tech-exercise/pet-battle/test/values.yaml
+    ```
+
 6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD.
 
-    ```bash
+    ```bash#test
     cd /projects/tech-exercise
     git add .
     git commit -m  "🍕 ADD - tekton pipelines config 🍕"
@@ -112,7 +130,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
 
-    ```bash
+    ```bash#test
     echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
     ```
 
@@ -143,10 +161,17 @@ In this snippet of the pipeline used in this exercise, we define:
         <artifactId>pet-battle-api</artifactId>
         <version>1.3.1</version>
     ```
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    cd /projects/pet-battle-api
+    mvn -ntp versions:set -DnewVersion=1.3.1
+    ```
  
 10.  As always, push the code to git ...
 
-    ```bash
+    ```bash#test
     cd /projects/pet-battle-api
     git add .
     git commit -m  "🍕 UPDATED - pet-battle-version to 1.3.1 🍕"

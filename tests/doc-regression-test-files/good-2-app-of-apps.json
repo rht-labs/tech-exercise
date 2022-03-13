@@ -1,0 +1,103 @@
+{
+    "code_blocks": [
+        {
+            "code": "    yq e '(.applications[] | (select(.name==\"test-app-of-pb\").enabled)) |=true' -i /projects/tech-exercise/values.yaml\n    yq e '(.applications[] | (select(.name==\"staging-app-of-pb\").enabled)) |=true' -i /projects/tech-exercise/values.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    yq e '(.applications[] | (select(.name==\"test-app-of-pb\").enabled)) |=true' -i /projects/tech-exercise/values.yaml\n    yq e '(.applications[] | (select(.name==\"staging-app-of-pb\").enabled)) |=true' -i /projects/tech-exercise/values.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"keycloak\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.keycloak = {\"name\": \"keycloak\",\"enabled\": true,\"source\": \"https://github.com/petbattle/pet-battle-infra\",\"source_ref\": \"main\",\"source_path\": \"keycloak\",\"values\": {\"app_domain\": \"CLUSTER_DOMAIN\"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"keycloak\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.keycloak = {\"name\": \"keycloak\",\"enabled\": true,\"source\": \"https://github.com/petbattle/pet-battle-infra\",\"source_ref\": \"main\",\"source_path\": \"keycloak\",\"values\": {\"app_domain\": \"CLUSTER_DOMAIN\"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83d\udc30 ADD - app-of-apps and keycloak to test \ud83d\udc30\"\n    git push \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83d\udc30 ADD - app-of-apps and keycloak to test \ud83d\udc30\"\n    git push \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"pet-battle-api\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.pet-battle-api = {\"name\": \"pet-battle-api\",\"enabled\": true,\"source\": \"https://petbattle.github.io/helm-charts\",\"chart_name\": \"pet-battle-api\",\"source_ref\": \"1.2.1\",\"values\": {\"image_name\": \"pet-battle-api\",\"image_version\": \"latest\", \"hpa\": {\"enabled\": false}}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n    if [[ $(yq e '.applications[] | select(.name==\"pet-battle\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.pet-battle = {\"name\": \"pet-battle\",\"enabled\": true,\"source\": \"https://petbattle.github.io/helm-charts\",\"chart_name\": \"pet-battle\",\"source_ref\": \"1.0.6\",\"values\": {\"image_version\": \"latest\"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n    sed -i '/^$/d' /projects/tech-exercise/pet-battle/test/values.yaml\n    sed -i '/^# Keycloak/d' /projects/tech-exercise/pet-battle/test/values.yaml\n    sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"pet-battle-api\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.pet-battle-api = {\"name\": \"pet-battle-api\",\"enabled\": true,\"source\": \"https://petbattle.github.io/helm-charts\",\"chart_name\": \"pet-battle-api\",\"source_ref\": \"1.2.1\",\"values\": {\"image_name\": \"pet-battle-api\",\"image_version\": \"latest\", \"hpa\": {\"enabled\": false}}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n    if [[ $(yq e '.applications[] | select(.name==\"pet-battle\") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then\n        yq e '.applications.pet-battle = {\"name\": \"pet-battle\",\"enabled\": true,\"source\": \"https://petbattle.github.io/helm-charts\",\"chart_name\": \"pet-battle\",\"source_ref\": \"1.0.6\",\"values\": {\"image_version\": \"latest\"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml\n    fi\n    sed -i '/^$/d' /projects/tech-exercise/pet-battle/test/values.yaml\n    sed -i '/^# Keycloak/d' /projects/tech-exercise/pet-battle/test/values.yaml\n    sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    export JSON=\"'\"'{\n            \"catsUrl\": \"https://pet-battle-api-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'\",\n            \"tournamentsUrl\": \"https://pet-battle-tournament-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'\",\n            \"matomoUrl\": \"https://matomo-'${TEAM_NAME}'-ci-cd.'${CLUSTER_DOMAIN}'/\",\n            \"keycloak\": {\n              \"url\": \"https://keycloak-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'/auth/\",\n              \"realm\": \"pbrealm\",\n              \"clientId\": \"pbclient\",\n              \"redirectUri\": \"http://localhost:4200/tournament\",\n              \"enableLogging\": true\n            }\n          }'\"'\"\n    yq e '.applications.pet-battle.values.config_map = env(JSON) | .applications.pet-battle.values.config_map style=\"single\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    export JSON=\"'\"'{\n            \"catsUrl\": \"https://pet-battle-api-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'\",\n            \"tournamentsUrl\": \"https://pet-battle-tournament-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'\",\n            \"matomoUrl\": \"https://matomo-'${TEAM_NAME}'-ci-cd.'${CLUSTER_DOMAIN}'/\",\n            \"keycloak\": {\n              \"url\": \"https://keycloak-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'/auth/\",\n              \"realm\": \"pbrealm\",\n              \"clientId\": \"pbclient\",\n              \"redirectUri\": \"http://localhost:4200/tournament\",\n              \"enableLogging\": true\n            }\n          }'\"'\"\n    yq e '.applications.pet-battle.values.config_map = env(JSON) | .applications.pet-battle.values.config_map style=\"single\"' -i /projects/tech-exercise/pet-battle/test/values.yaml\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83d\udc29 ADD - pet battle apps \ud83d\udc29\"\n    git push \n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83d\udc29 ADD - pet battle apps \ud83d\udc29\"\n    git push \n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        }
+    ],
+    "env": {}
+}

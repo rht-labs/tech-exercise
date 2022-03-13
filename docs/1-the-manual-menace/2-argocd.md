@@ -73,6 +73,7 @@ When something is seen as not matching the required state in Git, an application
     namespaces:
       - ${TEAM_NAME}-ci-cd
     argocd_cr:
+      version: v2.3.1 #       # FIXME test branch
       repositoryCredentials: |
         - url: https://${GIT_SERVER}
           type: git

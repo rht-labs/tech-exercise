@@ -35,7 +35,7 @@ spec:
     - name: PREVIOUS_VERSION
       description: Version of currently running app
   steps:
-    - name: get-current-into
+    - name: get-current-info
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       script: |
@@ -61,8 +61,9 @@ spec:
         git config --global user.email "tekton@rht-labs.bot.com"
         git config --global user.name "🐈 Tekton 🐈"
         git config --global push.default simple
-        git checkout main
+        # FIXME test branch
+        git checkout tests
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
         git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/tech-exercise.git
-        git push -u origin main
+        git push -u origin tests

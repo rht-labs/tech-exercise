@@ -130,9 +130,11 @@ All of these traits lead to one outcome - the ability to build and release quali
         password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
         username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
       kind: Secret
+      type: kubernetes.io/basic-auth
       metadata:
         annotations:
           tekton.dev/git-0: https://${GIT_SERVER}
+          sealedsecrets.bitnami.com/managed: "true"
         labels:
           credential.sync.jenkins.openshift.io: "true"
         name: git-auth
@@ -144,7 +146,7 @@ EOF
     ```bash#test
     cd /projects/tech-exercise
     # FIXME test branch
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests
     ```
     ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 

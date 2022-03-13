@@ -28,6 +28,13 @@ We deploy each of our applications using an Argo CD `application` definition. We
           - pet-battle/stage/values.yaml
     </code></pre></div>
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    yq e '(.applications[] | (select(.name=="test-app-of-pb").enabled)) |=true' -i /projects/tech-exercise/values.yaml
+    yq e '(.applications[] | (select(.name=="staging-app-of-pb").enabled)) |=true' -i /projects/tech-exercise/values.yaml
+    ```
+
 2. Our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. *Please make sure your text is aligned with the existing placeholder comments.*
 
     ```yaml
@@ -42,10 +49,19 @@ We deploy each of our applications using an Argo CD `application` definition. We
           app_domain: <CLUSTER_DOMAIN>
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    if [[ $(yq e '.applications[] | select(.name=="keycloak") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
+        yq e '.applications.keycloak = {"name": "keycloak","enabled": true,"source": "https://github.com/petbattle/pet-battle-infra","source_ref": "main","source_path": "keycloak","values": {"app_domain": "CLUSTER_DOMAIN"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
+        sed -i "s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|" /projects/tech-exercise/pet-battle/test/values.yaml
+    fi
+    ```
+
 3. Let's get this deployed of course - it's not real unless its in git!
 
-    ```bash
-    # git add, commit, push your changes..
+    ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🐰 ADD - app-of-apps and keycloak to test 🐰"
     git push 
@@ -53,7 +69,8 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
@@ -77,6 +94,8 @@ We deploy each of our applications using an Argo CD `application` definition. We
         values:
           image_name: pet-battle-api
           image_version: latest # container image version
+          hpa:
+            enabled: false
 
       pet-battle:
         name: pet-battle
@@ -88,23 +107,36 @@ We deploy each of our applications using an Argo CD `application` definition. We
           image_version: latest # container image version
     ```
 
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    if [[ $(yq e '.applications[] | select(.name=="pet-battle-api") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
+        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.2.1","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
+    fi
+    if [[ $(yq e '.applications[] | select(.name=="pet-battle") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
+        yq e '.applications.pet-battle = {"name": "pet-battle","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle","source_ref": "1.0.6","values": {"image_version": "latest"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
+    fi
+    sed -i '/^$/d' /projects/tech-exercise/pet-battle/test/values.yaml
+    sed -i '/^# Keycloak/d' /projects/tech-exercise/pet-battle/test/values.yaml
+    sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml
+    ```
+
 2. The front end needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the values supplied to this chart as such.
 
-    ```bash
-    cat << EOF >> pet-battle/test/values.yaml
-          config_map: '{
-            "catsUrl": "https://pet-battle-api-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
-            "tournamentsUrl": "https://pet-battle-tournament-${TEAM_NAME}-test.${CLUSTER_DOMAIN}",
-            "matomoUrl": "https://matomo-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}/",
+    ```bash#test
+    export JSON="'"'{
+            "catsUrl": "https://pet-battle-api-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'",
+            "tournamentsUrl": "https://pet-battle-tournament-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'",
+            "matomoUrl": "https://matomo-'${TEAM_NAME}'-ci-cd.'${CLUSTER_DOMAIN}'/",
             "keycloak": {
-              "url": "https://keycloak-${TEAM_NAME}-test.${CLUSTER_DOMAIN}/auth/",
+              "url": "https://keycloak-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'/auth/",
               "realm": "pbrealm",
               "clientId": "pbclient",
               "redirectUri": "http://localhost:4200/tournament",
               "enableLogging": true
             }
-          }'
-    EOF
+          }'"'"
+    yq e '.applications.pet-battle.values.config_map = env(JSON) | .applications.pet-battle.values.config_map style="single"' -i /projects/tech-exercise/pet-battle/test/values.yaml
     ```
 
 3. The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
@@ -135,7 +167,8 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
 
-    ```bash
+    ```bash#test
+    cd /projects/tech-exercise
     git add .
     git commit -m  "🐩 ADD - pet battle apps 🐩"
     git push 

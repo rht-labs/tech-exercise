@@ -71,12 +71,12 @@
             ]
         },
         {
-            "code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n",
+            "code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n"
+                    "user_code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PASSWORD} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n"
                 }
             ],
             "tags": [
@@ -85,12 +85,12 @@
             ]
         },
         {
-            "code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n",
+            "code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n"
+                    "user_code": "    cd /projects/tech-exercise\n    # FIXME test branch\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd . --set source_ref=tests\n"
                 }
             ],
             "tags": [
