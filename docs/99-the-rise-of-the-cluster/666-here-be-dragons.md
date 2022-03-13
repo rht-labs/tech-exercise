@@ -75,6 +75,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
       labels:
         credential.sync.jenkins.openshift.io: "true"
       name: git-auth
+    type: kubernetes.io/basic-auth
     EOF
 
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \

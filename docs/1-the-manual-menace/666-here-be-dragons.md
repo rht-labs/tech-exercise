@@ -73,6 +73,7 @@ data:
   password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
   username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
+type: kubernetes.io/basic-auth
 metadata:
   annotations:
     tekton.dev/git-0: https://${GIT_SERVER}
@@ -127,6 +128,7 @@ data:
   password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
   username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
+type: kubernetes.io/basic-auth
 metadata:
   annotations:
     tekton.dev/git-0: https://${GIT_SERVER}

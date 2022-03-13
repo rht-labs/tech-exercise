@@ -35,6 +35,7 @@ git pull
     data:
       username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
       password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+    type: kubernetes.io/basic-auth
     metadata:
       annotations:
         tekton.dev/git-0: https://${GIT_SERVER}
@@ -103,7 +104,7 @@ EOF
           secrets:
             # Additional secrets will be added to this list along the exercises.
             - name: git-auth
-              type: Opaque
+              type: kubernetes.io/basic-auth
               annotations:
                 tekton.dev/git-0: https://<GIT_SERVER>
               labels:
@@ -117,7 +118,7 @@ EOF
 
     ```bash#test
     if [[ $(yq e '.applications[] | select(.name=="sealed-secrets") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then
-        yq e '.applications += {"name": "sealed-secrets","enabled": true,"source": "https://redhat-cop.github.io/helm-charts","chart_name": "helper-sealed-secrets","source_ref": "1.0.2","values": {"secrets": [{"name": "git-auth","type": "Opaque","annotations": {"tekton.dev/git-0": "https://GIT_SERVER","sealedsecrets.bitnami.com/managed": "true"},"labels": {"credential.sync.jenkins.openshift.io": "true"},"data": {"username": "SEALED_SECRET_USERNAME","password": "SEALED_SECRET_PASSWORD"}}]}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+        yq e '.applications += {"name": "sealed-secrets","enabled": true,"source": "https://redhat-cop.github.io/helm-charts","chart_name": "helper-sealed-secrets","source_ref": "1.0.2","values": {"secrets": [{"name": "git-auth","type": "kubernetes.io/basic-auth","annotations": {"tekton.dev/git-0": "https://GIT_SERVER","sealedsecrets.bitnami.com/managed": "true"},"labels": {"credential.sync.jenkins.openshift.io": "true"},"data": {"username": "SEALED_SECRET_USERNAME","password": "SEALED_SECRET_PASSWORD"}}]}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
         SEALED_SECRET_USERNAME=$(yq e '.spec.encryptedData.username' /tmp/sealed-git-auth.yaml)
         SEALED_SECRET_PASSWORD=$(yq e '.spec.encryptedData.password' /tmp/sealed-git-auth.yaml)
         sed -i "s|GIT_SERVER|$GIT_SERVER|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
