@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n",
+            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      version: v2.3.1 #       # FIXME test branch\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n"
+                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      version: v2.3.1 #       # FIXME test branch\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n"
                 }
             ],
             "tags": [
