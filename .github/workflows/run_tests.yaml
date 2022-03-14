@@ -43,6 +43,8 @@ jobs:
             --env="GITLAB_PASSWORD=${{ secrets.GITLAB_PASSWORD }}" \
             --env="OCP_USER=${{ secrets.OCP_USER }}" \
             --env="OCP_PASSWORD=${{ secrets.OCP_PASSWORD }}" \
+            --env="OCP_ADMIN_USER=${{ secrets.OCP_ADMIN_USER }}" \
+            --env="OCP_ADMIN_PASSWORD=${{ secrets.OCP_ADMIN_PASSWORD }}" \
             --restart=Never
 
           while test 0 == $(oc -n ${repo##*/}-test get pod -l run=$podname -o name 2>/dev/null | wc -l); do sleep 5; done
