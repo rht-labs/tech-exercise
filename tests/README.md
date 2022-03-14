@@ -27,6 +27,8 @@ oc -n tech-exercise-test run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/e
   --env="GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
   --env="OCP_USER=${OCP_USER}" \
   --env="OCP_PASSWORD=${OCP_PASSWORD}" \
+  --env="OCP_ADMIN_USER=${OCP_ADMIN_USER}" \
+  --env="OCP_ADMIN_PASSWORD=${OCP_ADMIN_PASSWORD}" \
   --restart=Never
 ```
 
@@ -43,6 +45,8 @@ podman run \
   -e "GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
   -e "OCP_USER=${OCP_USER}" \
   -e "OCP_PASSWORD=${OCP_PASSWORD}" \
+  -e "OCP_ADMIN_USER=${OCP_ADMIN_USER}" \
+  -e "OCP_ADMIN_PASSWORD=${OCP_ADMIN_PASSWORD}" \
   quay.io/eformat/tech-exercise-test:latest 
 ```
 
