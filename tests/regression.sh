@@ -298,11 +298,19 @@ setup_test() {
     echo
 }
 
+force_delete_namespace() {
+    local namespace=${1}
+    echo "Force deleting namespace $namespace ..."
+    oc delete namespace $namespace --timeout=10s 2>/dev/null
+    oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
+    curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
+}
+
 # needs to be run as cluster-admin to work properly
 cleanup() {
     echo "🍆 Cleaning up ..."
     perform_admin_logins
-    namespace=${TEAM_NAME}-ci-cd
+    local namespace=${TEAM_NAME}-ci-cd
     cnt=0
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
         ((cnt++))
@@ -310,16 +318,16 @@ cleanup() {
         oc -n $namespace delete application.argoproj.io bootstrap argocd jenkins allure nexus ubiquitous-journey tekton-pipeline test-app-of-pb test-keycloak test-pet-battle-api test-pet-battle sealed-secrets 2>/dev/null
         sleep 10
         if [ $cnt > 3 ]; then
-            echo "Force deleting namespace $namespace ..."
-            oc delete namespace $namespace --timeout=10s 2>/dev/null
             oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus application.argoproj.io/tekton-pipeline application.argoproj.io/test-app-of-pb application.argoproj.io/test-keycloak application.argoproj.io/test-pet-battle-api application.argoproj.io/test-pet-battle application.argoproj.io/sealed-secrets --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
-            oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
-            curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
+            force_delete_namespace "$namespace"
         fi
      done
+     namespace=${TEAM_NAME}-dev
+     force_delete_namespace "$namespace"
      namespace=${TEAM_NAME}-test
-     oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
-     curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
+     force_delete_namespace "$namespace"
+     namespace=${TEAM_NAME}-stage
+     force_delete_namespace "$namespace"
 
      gitlab_delete_project "tech-exercise"
      gitlab_delete_project "pet-battle"
