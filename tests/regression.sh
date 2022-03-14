@@ -222,6 +222,30 @@ gitlab_recreate_project() {
     done
 }
 
+gitlab_delete_project() {
+    projectname=${1}
+    local i=0
+    gitlab_personal_access_token
+    # get or create group id
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    if [ -z "$group_id" ]; then
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+    fi
+    # delete project
+    ret=1; i=0
+    until [ $ret = "202" -o $ret = "404" ]
+    do
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
+        sleep 5
+        ((i=i+1))
+        if [ $i -gt 5 ]; then
+            echo -e "${RED}Failed -${projectname} gitlab could not delete, bailing out.${NC}"
+            exit 1
+        fi
+    done
+}
+
 remove_pet_battle_code() {
     # so reruns work ok as git recreated each time
     rm -rf /projects/pet-battle
@@ -297,7 +321,9 @@ cleanup() {
      oc get namespace $namespace -o json | jq '.spec = {"finalizers":[]}' >/tmp/$namespace.json 2>/dev/null
      curl -k -H "Authorization: Bearer $(oc whoami -t)" -H "Content-Type: application/json" -X PUT --data-binary @/tmp/$namespace.json "https://api.${CLUSTER_DOMAIN##apps.}:6443/api/v1/namespaces/$namespace/finalize" 2>/dev/null
 
-     #FIXME - delete gitlab assets incl. group
+     gitlab_delete_project "tech-exercise"
+     gitlab_delete_project "pet-battle"
+     gitlab_delete_project "pet-battle-api"
 
      echo "🫒 Cleanup Done"
 }
