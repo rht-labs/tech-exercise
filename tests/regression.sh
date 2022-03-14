@@ -86,6 +86,14 @@ EOF
     fi
 }
 
+perform_admin_logins() {
+    oc login -u ${OCP_ADMIN_USER} -p ${OCP_ADMIN_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 --insecure-skip-tls-verify #> /dev/null 2>&1
+    if [ "$?" != 0 ]; then
+        echo -e "${RED}Failed to login to OpenShift${NC}"
+        exit 1
+    fi
+}
+
 gitlab_personal_access_token() {
     if [ ! -z "${personal_access_token}" ]; then return; fi
     # get csrf from login page
@@ -269,6 +277,7 @@ setup_test() {
 # needs to be run as cluster-admin to work properly
 cleanup() {
     echo "🍆 Cleaning up ..."
+    perform_admin_logins
     namespace=${TEAM_NAME}-ci-cd
     cnt=0
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
@@ -488,6 +497,8 @@ shift `expr $OPTIND - 1`
 [ -z "$GITLAB_PASSWORD" ] && echo "Warning: must supply GITLAB_PASSWORD in env" && exit 1
 [ -z "$OCP_USER" ] && echo "Warning: must supply OCP_USER in env" && exit 1
 [ -z "$OCP_PASSWORD" ] && echo "Warning: must supply OCP_PASSWORD in env" && exit 1
+[ -z "$OCP_ADMIN_USER" ] && echo "Warning: must supply OCP_ADMIN_USER in env" && exit 1
+[ -z "$OCP_ADMIN_PASSWORD" ] && echo "Warning: must supply OCP_ADMIN_PASSWORD in env" && exit 1
 
 # Nuke only
 if [ ! -z "${NUKEFROMORBIT}" ]; then
