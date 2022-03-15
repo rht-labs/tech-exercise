@@ -37,16 +37,19 @@ When something is seen as not matching the required state in Git, an application
     {
       NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
+      opp=
       if [ -z $NS ]; then
         NS="${TEAM_NAME}-ci-cd"
+        opp=add
       elif [[ "$NS" =~ .*"${TEAM_NAME}-ci-cd".* ]]; then
         echo "${TEAM_NAME}-ci-cd already added."
         return
       else
         NS="${TEAM_NAME}-ci-cd,${NS}"
+        opp=replace
       fi
       oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \
-        -p '[{"op":"replace","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
+        -p '[{"op":"'$opp'","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
       echo "EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')"
     }
