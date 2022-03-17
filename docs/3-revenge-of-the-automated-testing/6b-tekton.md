@@ -33,7 +33,7 @@
           description: Directory to start build in (handle multiple branches)
       steps:
         - name: zap-proxy
-          image: quay.io/eformat/zap2docker-stable:latest
+          image: quay.io/rht-labs/zap2docker-stable:latest
           env:
             - name: PIPELINERUN_NAME
               valueFrom:
