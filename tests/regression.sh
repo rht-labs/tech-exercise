@@ -203,7 +203,7 @@ gitlab_recreate_project() {
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo -e "${RED}Failed -${projectname} gitlab could not delete, bailing out.${NC}"
+            echo -e "${RED}Failed -${projectname} gitlab could not delete, $ret, bailing out.${NC}"
             exit 1
         fi
     done
@@ -216,7 +216,7 @@ gitlab_recreate_project() {
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo -e "${RED}Failed - ${projectname} gitlab could not create, bailing out.${NC}"
+            echo -e "${RED}Failed - ${projectname} gitlab could not create, $ret, bailing out.${NC}"
             exit 1
         fi
     done
