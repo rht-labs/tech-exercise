@@ -185,6 +185,26 @@ gitlab_create_tekton_webhook() {
     fi
 }
 
+gitlab_delete_group() {
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    if [ -z "$group_id" ]; then
+        echo "⚠️ No group ${TEAM_NAME} found for this user, returning."
+        return;
+    fi
+    ret=1; i=0
+    until [ $ret = "202" ]
+    do
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
+        echo "🧁 Waiting for 202 response to delete group ${TEAM_NAME}"
+        sleep 5
+        ((i=i+1))
+        if [ $i -gt 5 ]; then
+            echo -e "${RED}Failed - ${TEAM_NAME} gitlab could not delete group, check supplied user, $ret, bailing out.${NC}"
+            exit 1
+        fi
+    done
+}
+
 gitlab_recreate_project() {
     projectname=${1}
     local i=0
@@ -333,6 +353,8 @@ cleanup() {
      gitlab_delete_project "tech-exercise"
      gitlab_delete_project "pet-battle"
      gitlab_delete_project "pet-battle-api"
+
+     gitlab_delete_group
 
      echo "🫒 Cleanup Done"
 }
