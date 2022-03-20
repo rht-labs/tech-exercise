@@ -312,13 +312,14 @@ cleanup() {
     perform_admin_logins
     local namespace=${TEAM_NAME}-ci-cd
     cnt=0
+    # FIXME this while loop needs to timeout
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
         ((cnt++))
         helm delete uj argocd --namespace $namespace  2>/dev/null
-        oc -n $namespace delete application.argoproj.io bootstrap argocd jenkins allure nexus ubiquitous-journey tekton-pipeline test-app-of-pb test-keycloak test-pet-battle-api test-pet-battle sealed-secrets 2>/dev/null
+        oc -n $namespace delete application.argoproj.io bootstrap argocd jenkins allure nexus ubiquitous-journey tekton-pipeline test-app-of-pb test-keycloak test-pet-battle-api test-pet-battle sealed-secrets staging-app-of-pb 2>/dev/null
         sleep 10
         if [ $cnt > 3 ]; then
-            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus application.argoproj.io/tekton-pipeline application.argoproj.io/test-app-of-pb application.argoproj.io/test-keycloak application.argoproj.io/test-pet-battle-api application.argoproj.io/test-pet-battle application.argoproj.io/sealed-secrets --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
+            oc -n $namespace patch application.argoproj.io/bootstrap application.argoproj.io/ubiquitous-journey application.argoproj.io/jenkins application.argoproj.io/nexus application.argoproj.io/tekton-pipeline application.argoproj.io/test-app-of-pb application.argoproj.io/test-keycloak application.argoproj.io/test-pet-battle-api application.argoproj.io/test-pet-battle application.argoproj.io/sealed-secrets application.argoproj.io/staging-app-of-pb --type='json' -p='[{"op": "remove" , "path": "/metadata/finalizers" }]' 2>/dev/null
             force_delete_namespace "$namespace"
         fi
      done
@@ -371,7 +372,7 @@ wait_for_nexus_server() {
         echo "🥗 Waiting for pod nexus ready condition to be True"
         sleep 10
         ((i=i+1))
-        if [ $i -gt 30 ]; then
+        if [ $i -gt 120 ]; then
             echo -e "${RED}Failed - nexus pod never ready.${NC}"
             exit 1
         fi
