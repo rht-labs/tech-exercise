@@ -256,8 +256,12 @@ Choose your own adventure, but both groups must be successful to finish the exer
 
 
 #### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/who-app-of-apps.png", class="black-style" data-background-opacity="1"	 -->
-<!--Let's try to find a better quality image here. -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+#### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who-2.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
