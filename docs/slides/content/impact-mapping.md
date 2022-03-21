@@ -125,6 +125,7 @@ Pet Battle Industries (PBI) is a silly app that allows users to upload pictures 
 #### *As a class*
 1. Walk through creating the _`Impacts`_ for one _`Actor`_.
 ![example-pbi](images/impact-mapping/example-pbi.png)
+
 #### *In your team*
 1. Determine _`Impacts`_ for your _`Actors`_.
 
