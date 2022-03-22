@@ -96,13 +96,14 @@ perform_admin_logins() {
 
 gitlab_personal_access_token() {
     if [ ! -z "${personal_access_token}" ]; then return; fi
+    gitlabEncodedPassword=$(echo ${GITLAB_PASSWORD} | perl -MURI::Escape -ne 'chomp;print uri_escape($_)')
     # get csrf from login page
-    gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${GITLAB_PASSWORD} | base64)"
+    gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${gitlabEncodedPassword} | base64)"
     body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # login
     curl -s -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
-                        --data "username=${GITLAB_USER}&password=${GITLAB_PASSWORD}" \
+                        --data "username=${GITLAB_USER}&password=${gitlabEncodedPassword}" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         > /dev/null
     # generate personal access token form
