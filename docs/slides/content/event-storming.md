@@ -140,7 +140,20 @@ The Event Storming Key is specific set of colored sticky notes.
 
 #### Context - PetBattle
 * The PetBattle team decides to use event storming to design part of their system. As with all great teams, they started by defining the example they will map out. This important step frames the end-to-end journey and stops them from modeling too big a piece of the application.
-* Take a deliverable from the _Impact Map_ and reframe it by using the _Friends Notation_ to drill down into the system design.
+
+
+
+#### Context - PetBattle
+* Take a deliverable or two from the highest voted impact on the _Impact Map_ ...
+![impact-map](images/event-storming/pb-impact-map.png)
+
+<p><small>(The highest voted impact was the one with the most amount of dollars - "Increase Site Engagement")</p></small>
+
+
+
+#### Context - PetBattle
+* ...and reframe the deliverables using the _Friends Notation_ (`The One Where..`) to drill down into the system design.
+* Using this notation will help to establish the boundaries of the Event Storm exploration
 ![tow-pb](images/event-storming/tow-pb.png)
 
 
@@ -226,6 +239,5 @@ There are other practices in the space of working on how we might start building
 * Emerging Architecture
 * Non Functional Map
 * Metrics-Based Process Map
-
 
 Together with Event Storming, these practices provide input for creating the Product Backlog.

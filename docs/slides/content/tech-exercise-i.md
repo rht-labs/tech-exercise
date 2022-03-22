@@ -87,11 +87,21 @@ _We will set up Git projects, create dev, test, and stage projects in OpenShift,
 
 
 
-### 💥 Let's Begin 💥
-* In your table teams, form a mob to complete the exercise. Work together as a team to deploy your shared tooling and infrastructure!
+### 💥 Before We Begin 💥
+* In your table teams, form a **mob** to complete the exercise. Work **together as a team** to deploy your shared tooling and infrastructure!
 * You will want to rotate the `driver` at the end of each exercise section to give everyone a chance to get their hands dirty with code!
-* If you finish the exercise early, try your hand at the `Here be dragons` section.
+* If you finish the exercise early, try your hand at the `🐉Here be dragons🐉 ` section.
 * Your facilitator will share links to the instructions, OpenShift Console, CRW, and GitLab server.
+
+
+
+#### Please be careful with the commands you run ...
+![great-power](https://media.giphy.com/media/MCZ39lz83o5lC/giphy.gif)
+
+
+
+#### Seeking Help ...
+![flow-chart](images/tech-exercise-i/flow-chart.png)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
 
@@ -102,6 +112,15 @@ _We will set up Git projects, create dev, test, and stage projects in OpenShift,
 
 ### 💥 Setup the instructions site 💥 <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/instructions.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+### 🧑‍🤝‍🧑Pairing and Mobbing🧑‍🤝‍🧑
+[pairing-and-mobbing](https://rht-labs.com/tech-exercise/slides/content/?name=pair-and-mob-programming)
+
+
+
+### 💥 Let's GO 💥
 
 
 
@@ -117,7 +136,7 @@ _We will set up Git projects, create dev, test, and stage projects in OpenShift,
 
 
 #### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-i/example-who.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
