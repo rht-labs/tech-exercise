@@ -505,6 +505,13 @@ two() {
     test_attack-of-the-pipelines
 }
 
+onetwo() {
+    setup_tests
+    test_the_manual_menance
+    wait_for_the_manual_menace
+    test_attack-of-the-pipelines
+}
+
 # all tests
 all() {
     setup_tests
@@ -572,6 +579,9 @@ case $TOPIC in
       ;;
     2)
       two
+      ;;
+    1+2)
+      onetwo
       ;;
     *)
       all
