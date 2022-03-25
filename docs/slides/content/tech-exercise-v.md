@@ -124,7 +124,7 @@ Using the platform to support running an experiment.
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Lean UX](https://openpracticelibrary.com/)
 - [Split Testing](https://openpracticelibrary.com/)

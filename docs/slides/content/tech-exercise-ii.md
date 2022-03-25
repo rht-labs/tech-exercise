@@ -277,7 +277,7 @@ Choose your own adventure, but both groups must be successful to finish the exer
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
 - [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)

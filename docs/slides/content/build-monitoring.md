@@ -61,6 +61,6 @@ Lab Exercise 6: _Return of the Monitoring_
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Visualization of Work](https://openpracticelibrary.com/practice/visualisation-of-work/)

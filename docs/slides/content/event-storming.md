@@ -227,17 +227,11 @@ The Event Storming Key is specific set of colored sticky notes.
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
- * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog.
-* Impact Map: Forms an input for the scope of the modeling
-<p>&nbsp;</p>
+_An Event Storm focuses on the function design of the system. However when building a backlog we should take into account other aspects of system design such as:_  <!--{.element: style="font-size: smaller; font-weight: 400;"} -->
 
-<!--This bit intro is wordy and unclear. This bit "in the space of working on how we might start building.." is very convoluted and doesn't make sense to me. Suggest "There are other practices to consider as we start building a solution to fix the problem and these can help us recognize new opportunities."
-Also, the <p>&nbsp;</p> bit seems to be forcing an indent on the second paragraph so the alignment looks a bit off.-->
-There are other practices in the space of working on how we might start building a solution that fixes problems or realize some new opportunities:
-* Emerging Architecture
-* Non Functional Map
-* Metrics-Based Process Map
-
-Together with Event Storming, these practices provide input for creating the Product Backlog.
+* [Value Slice](https://openpracticelibrary.com/practice/user-story-mapping/) - The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog.
+* [Impact Map](https://openpracticelibrary.com/practice/impact-mapping/) - Forms an input for the scope of the modeling
+* [Non Functional Map](https://openpracticelibrary.com/practice/non-functional-requirements-map/) - to give us all the things we need to build to support the SDLC
+* [Metrics-Based Process Map](https://openpracticelibrary.com/practice/metrics-based-process-mapping/) - a great tool to measure the throughput of our SDLC

@@ -198,7 +198,7 @@ _We will use **Fluentd** to collect logs, **ElasticSearch** to store them and **
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 * [Observability](https://openpracticelibrary.com/practice/observability)
 * [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
