@@ -130,7 +130,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - Sprint practices:
   - [Planning](https://openpracticelibrary.com/practice/iteration-planning/)

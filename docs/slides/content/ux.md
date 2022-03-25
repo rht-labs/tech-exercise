@@ -182,7 +182,7 @@ Wants to invest in the "people that are late for work" market!
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 #### Technical Practices
 - [Blue Green deployments](https://openpracticelibrary.com/practice/blue-green-deployments/)

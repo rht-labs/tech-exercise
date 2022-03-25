@@ -140,7 +140,20 @@ The Event Storming Key is specific set of colored sticky notes.
 
 #### Context - PetBattle
 * The PetBattle team decides to use event storming to design part of their system. As with all great teams, they started by defining the example they will map out. This important step frames the end-to-end journey and stops them from modeling too big a piece of the application.
-* Take a deliverable from the _Impact Map_ and reframe it by using the _Friends Notation_ to drill down into the system design.
+
+
+
+#### Context - PetBattle
+* Take a deliverable or two from the highest voted impact on the _Impact Map_ ...
+![impact-map](images/event-storming/pb-impact-map.png)
+
+<p><small>(The highest voted impact was the one with the most amount of dollars - "Increase Site Engagement")</p></small>
+
+
+
+#### Context - PetBattle
+* ...and reframe the deliverables using the _Friends Notation_ (`The One Where..`) to drill down into the system design.
+* Using this notation will help to establish the boundaries of the Event Storm exploration
 ![tow-pb](images/event-storming/tow-pb.png)
 
 
@@ -214,18 +227,11 @@ The Event Storming Key is specific set of colored sticky notes.
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
- * Value Slice: The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog.
-* Impact Map: Forms an input for the scope of the modeling
-<p>&nbsp;</p>
+_An Event Storm focuses on the function design of the system. However when building a backlog we should take into account other aspects of system design such as:_  <!--{.element: style="font-size: smaller; font-weight: 400;"} -->
 
-<!--This bit intro is wordy and unclear. This bit "in the space of working on how we might start building.." is very convoluted and doesn't make sense to me. Suggest "There are other practices to consider as we start building a solution to fix the problem and these can help us recognize new opportunities."
-Also, the <p>&nbsp;</p> bit seems to be forcing an indent on the second paragraph so the alignment looks a bit off.-->
-There are other practices in the space of working on how we might start building a solution that fixes problems or realize some new opportunities:
-* Emerging Architecture
-* Non Functional Map
-* Metrics-Based Process Map
-
-
-Together with Event Storming, these practices provide input for creating the Product Backlog.
+* [Value Slice](https://openpracticelibrary.com/practice/user-story-mapping/) - The "commands" naturally become user stories as they're often initiated by a "user". These can be brought into the value slicing process to build the product Backlog.
+* [Impact Map](https://openpracticelibrary.com/practice/impact-mapping/) - Forms an input for the scope of the modeling
+* [Non Functional Map](https://openpracticelibrary.com/practice/non-functional-requirements-map/) - to give us all the things we need to build to support the SDLC
+* [Metrics-Based Process Map](https://openpracticelibrary.com/practice/metrics-based-process-mapping/) - a great tool to measure the throughput of our SDLC

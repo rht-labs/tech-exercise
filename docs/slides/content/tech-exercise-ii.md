@@ -23,7 +23,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise II
-[Attack of the Pipelines](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsn7ZNsj3GYepZrzs)
+[Attack of the Pipelines](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-iwxDFC4PtbRSqbtP)
 
 
 
@@ -256,8 +256,12 @@ Choose your own adventure, but both groups must be successful to finish the exer
 
 
 #### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/who-app-of-apps.png", class="black-style" data-background-opacity="1"	 -->
-<!--Let's try to find a better quality image here. -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+#### WHO - App of Apps <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-ii/example-who-2.png", class="black-style" data-background-opacity="1"	 -->
 
 
 
@@ -273,7 +277,7 @@ Choose your own adventure, but both groups must be successful to finish the exer
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [The Big Picture](https://openpracticelibrary.com/practice/teh-big-picture)
 - [Pair Programming](https://openpracticelibrary.com/practice/pair-programming)

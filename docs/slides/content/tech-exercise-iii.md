@@ -22,7 +22,12 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise III
-[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/BL_hsikixFsVbDNyZ28h)
+[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-oAnbngxHWCVBV7y1)
+
+
+
+### Tech Exercise III - Extended Edition 
+[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-mHg-amHtnYRzz0JH)
 
 
 
@@ -135,6 +140,6 @@ I assume the tasks will be obvious or assigned (although this is vague), but the
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Open Practice Library](https://openpracticelibrary.com/practice/)

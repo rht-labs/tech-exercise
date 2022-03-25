@@ -191,7 +191,7 @@ must be done.<!-- {.element: class="fragment"  data-fragment-index="1"} -->
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 User Story Mapping and Value Slice are connected to multiple practices including:
 * [Target Outcomes](https://openpracticelibrary.com/practice/target-outcomes/)

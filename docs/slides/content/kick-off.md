@@ -162,49 +162,6 @@ Introduce yourself to the group and share your animal.
 
 
 
-### ⚔️ Let the Battle Begin ⚔️
-
-
-
-
-### Pet Battle: Whose cat is the best?
-As a team, you've created an application called Pet Battle to entertain your friends and families and also to decide who's the best cat!
-
-😼 😼 😼
-
-Everyone uploads photos of their cats to Pet Battle and voting to decide which cat is the best! 
-
-👍 👎 👍
-
-
-
-
-![petbattle-ui](images/kick-off/petbattle-ui.png)<!-- .element: class="image-no-shadow image-full-width " -->
-
-
-
-There are very few bells and whistles to the initial architecture. It is deployed on a single virtual machine. It has a simple web-based user interface and an API layer coupled with a NoSQL database.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-
-![petbattle-initial-architecture](images/kick-off/petbattle-initial-architecture.png) <!-- {.element: class="" style="height:550px"} -->
-
-
-
-One day, there was a drastically increased number of players! 
-
-The Pet Battle server crashes, not able to scale and malicious pictures of not cats start appearing on the child-friendly application 😱
-
-
-
-![tweet](images/kick-off/tweet.png)
-
-
-
-Pet Battle became a hit! And as a team, you decided to develop a business and a production-ready version of this hobbyist app! 
-
-And here your journey of embracing *_DevOps Culture and Practices_* begins! 
-<iframe src="https://giphy.com/embed/HVr4gFHYIqeti" width="480" height="192" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/running-adventure-movie-HVr4gFHYIqeti"></a></p>
-
-
 
 <!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
 ### Related & Used Practices

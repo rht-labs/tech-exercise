@@ -119,7 +119,7 @@ How did you reach consensus?
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Priority Sliders](https://openpracticelibrary.com/practice/priority-sliders/)
 - [Voting](https://openpracticelibrary.com/practice/) - eg Dot Voting, Heat Map, etc

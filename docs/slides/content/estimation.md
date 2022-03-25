@@ -68,6 +68,7 @@ _An example_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 * Assuming no, "Okay, then let's say it is a 5 pointer."
 
 
+
 ### Exercise - Fruit Salad 🥗
 #### _Relative Estimation_
 In 60 seconds ⏱...
@@ -123,7 +124,7 @@ A helpful tool for big planning
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png", class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Relative Estimation](https://openpracticelibrary.com/practice/relative-estimation/)
 - [Cost of Delay and WSJF(_Weighted Shortest Job First_)](https://openpracticelibrary.com/practice/weighted-shortest-job-first/)
