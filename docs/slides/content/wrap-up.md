@@ -11,7 +11,10 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 ### Team Walk the Walls 
-In your table groups, run a mini Walk the Walls session, just like we did each morning. Pick the practices that you have created throughout the week and discuss them in your teams.
+#### Pet Battle Industries
+In your table groups, run a mini Walk the Walls session, just like we did each morning. 
+
+Pick the practices that you have created throughout the week and discuss them in your teams.
 
 
 
