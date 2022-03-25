@@ -78,19 +78,22 @@ This is going to feel overwhelming, but we're going to give you a trailer of the
 
 
 ###
-<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/", class="white-style" -->
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-social-contract.png", class="white-style" -->
 
 
 
-#### Together we will discover all the work that needs to be done
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-priority-sliders.png", class="white-style" -->
 
 
 
-#### Together we will prioritize and decide what to do next
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-mob-pair-prog.png", class="white-style" -->
 
 
 
-#### Together we will deliver and measure the most important work
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-retro.png", class="white-style" -->
 
 
 
@@ -98,10 +101,150 @@ This is going to feel overwhelming, but we're going to give you a trailer of the
 
 
 
-#### Together we will have fun!
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-platforms.png", class="white-style" -->
 
 
 
-### PetBattle Journey
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-gitops.png", class="white-style" -->
 
-* images showing the artifacts as we navigate the loops
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-cicd.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-big-picture.png", class="white-style" -->
+
+
+
+#### Together we will discover all the work that needs to be done
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-impact-map.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-target-outcomes.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-es.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-mbpm.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-nfr-map.png", class="white-style" -->
+
+
+
+#### Together we will prioritize and decide what to do next
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-user-story-map.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-value-slice.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-backlog.png", class="white-style" -->
+
+
+
+#### Together we will deliver and measure the most important work
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-ready.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-done.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/pb-scrum.png", class="white-style" -->
+
+
+
+#### Together we will have **FUN***! 🥳🥳
+  
+<iframe src="https://giphy.com/embed/Oz0dBXqaOmIO4" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/cat-interesting-dj-Oz0dBXqaOmIO4"></a></p>
+
+*all employees are contractually obliged to have fun even if they're not <!--{.element: style="font-size: 5px; font-weight: 100;"} -->
+
+
+
+### PetBattle Complete Journey
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey1.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey2.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey3.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey4.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey5.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey6.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey7.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey8.png", class="white-style" -->
+
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey9.png", class="white-style" -->
+
+
+
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/journey-complete.png", class="white-style" -->
