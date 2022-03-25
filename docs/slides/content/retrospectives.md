@@ -175,7 +175,7 @@ Reflect on the first day of class and make adjustments to continuously improve.
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 * [Retrospectives](https://openpracticelibrary.com/practice/retrospectives/)
 * [Realtime Retrospective](https://openpracticelibrary.com/practice/realtime-retrospective/)

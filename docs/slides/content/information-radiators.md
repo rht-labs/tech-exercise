@@ -28,6 +28,6 @@ TL500 <!-- {.element: class="title-color"} -->
 
 
 
-<!-- .slide: data-background-image="images/chef-background.png" class="white-style" -->
+<!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Information Radiators](https://openpracticelibrary.com/practice/visualisation-of-work/)

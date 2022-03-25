@@ -77,6 +77,11 @@ This is going to feel overwhelming, but we're going to give you a trailer of the
 
 
 
+###
+<!-- .slide: data-background-size="contain" data-background-image="images/pet-battle-lightning-talk/", class="white-style" -->
+
+
+
 #### Together we will discover all the work that needs to be done
 
 
@@ -94,3 +99,9 @@ This is going to feel overwhelming, but we're going to give you a trailer of the
 
 
 #### Together we will have fun!
+
+
+
+### PetBattle Journey
+
+* images showing the artifacts as we navigate the loops
