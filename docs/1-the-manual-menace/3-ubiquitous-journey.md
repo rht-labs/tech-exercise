@@ -80,7 +80,7 @@ All of these traits lead to one outcome - the ability to build and release quali
           namespaces:
             - name: <TEAM_NAME>-ci-cd
               bindings: *binds
-              operatorgroup: false
+              operatorgroup: true
             - name: <TEAM_NAME>-dev
               bindings: *binds
               operatorgroup: true
