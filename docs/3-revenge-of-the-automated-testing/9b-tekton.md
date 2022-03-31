@@ -72,7 +72,7 @@
     EOF
     ```
 
-3. Let's add this task into pipeline. Edit `tekton/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+3. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
 
     ```yaml
         # Load Testing
