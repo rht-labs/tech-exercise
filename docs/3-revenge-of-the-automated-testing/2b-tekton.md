@@ -162,7 +162,7 @@
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
           runAfter:
-            - code-analysis
+            - maven
           workspaces:
             - name: output
               workspace: shared-workspace
