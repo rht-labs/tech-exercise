@@ -10,15 +10,17 @@
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed and configured in the cluster for you.
 
-1. Connect to the ACS WebUI Route using the **admin** credentials:
+1. Connect to the ACS WebUI Route:
 
     ```bash
     # get web url
     echo https://$(oc -n stackrox get route central --template='{{ .spec.host }}')
     ```
 
+    Using the **admin** username:
+
     ```bash
-    # get credentials
+    # get password to go with the "admin" username:
     echo $(oc -n stackrox get secret central-htpasswd -o go-template='{{index .data "password" | base64decode}}')
     ```
 
