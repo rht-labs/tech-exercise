@@ -168,7 +168,26 @@
               workspace: shared-workspace
     ```
 
-3. Git add, commit, push your changes
+3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](./3-revenge-of-the-automated-testing%2F1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
+
+    Change the build options from this:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+    - name: maven
+      params:
+        - name: MAVEN_BUILD_OPTS
+          value: "-Dquarkus.package.type=fast-jar <strong>-DskipTests"</strong>
+    </code></pre></div>
+    to this:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+    - name: maven
+      params:
+        - name: MAVEN_BUILD_OPTS
+          value: "-Dquarkus.package.type=fast-jar
+    </code></pre></div>
+
+4. Git add, commit, push your changes
 
     ```bash
     cd /projects/tech-exercise
@@ -177,7 +196,7 @@
     git push 
     ```
 
-4. Trigger a new `PipelineRun` with an empty commit and head over to OpenShift Pipelines to see the execution:
+5. Trigger a new `PipelineRun` with an empty commit and head over to OpenShift Pipelines to see the execution:
 
     ```bash
     cd /projects/pet-battle-api
@@ -187,7 +206,7 @@
 
     ![allure-tekkers](./images/allure-tekkers.png)
 
-5. Browse to the uploaded test results from the pipeline in Allure:
+6. Browse to the uploaded test results from the pipeline in Allure:
 
     ```bash
     echo https://$(oc get route allure --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
