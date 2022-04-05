@@ -41,7 +41,18 @@
         password: AgAtnYz8U0AqIIaqYrj...
     </code></pre></div>
 
-4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the Sealed Secrets entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+4. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the **Sealed Secrets** entry. Copy the output of `username` and `password` from the previous command and update the values. Make sure you indent the data correctly.
+
+    Find the Sealed Secrets entry:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
+      # Sealed Secrets
+      - name: sealed-secrets
+        values:
+          secrets:
+    </code></pre></div>
+
+    and add `allure-auth` entry:
 
     ```yaml
             - name: allure-auth
