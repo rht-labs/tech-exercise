@@ -51,7 +51,7 @@
 
 3. Open up `ubiquitous-journey/values-tooling.yaml` file and extend the **Sealed Secrets** entry. Copy the output of `username`, `password` and `currentAdminPassword` from the previous command and update the values. Make sure you indent the data correctly.
 
-    Find the Sealed Secrets entry:
+    Find the Sealed Secrets entry, it should look like this (don't copy this bit!)
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
       # Sealed Secrets
@@ -60,7 +60,7 @@
           secrets:
     </code></pre></div>
 
-    and add `sonarqube-auth` entry:
+    and add `sonarqube-auth` entry (copy this bit!):
 
     ```yaml
             - name: sonarqube-auth
