@@ -184,7 +184,7 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 
 
 ### The Steps
-1. One person in the pair writes a test, in the form of a question, on a sticky note and places it on the table. For example, "Is there a person?" <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+1. One person in the pair writes a test, in the form of a **DESCRIPTION** on a sticky note and places it on the table. For example, "It should be a person" <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 2. The second person then implements something in LEGO that passes the test. <!-- {.element: class="fragment" data-fragment-index="2"} -->
 3. When the first person is satisfied that the test passes, the two switch positions. <!-- {.element: class="fragment" data-fragment-index="3"} -->
 4. Now, the second person writes a test, puts it on the table, and the first person implements it in LEGO. <!-- {.element: class="fragment" data-fragment-index="4"} -->
@@ -194,13 +194,12 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 ### Some example tests
 
 ![TDD](images/bdd-tdd/lego-tdd-1.jpg) <!-- {.element: class="inline-image"} -->
-- Is there a person in the program? <!-- {.element: class="fragment" data-fragment-index="1"} -->
-- Is there a house in the program? <!-- {.element: class="fragment" data-fragment-index="2"} -->
-- Is there a window in a wall of the house? <!-- {.element: class="fragment" data-fragment-index="3"} -->
-- Is it true that the house is taller than the person? <!-- {.element: class="fragment" data-fragment-index="4"} -->
-- Is the house wider than the person? <!-- {.element: class="fragment" data-fragment-index="5"} -->
-- Is it true that the house has 2 connected walls? <!-- {.element: class="fragment" data-fragment-index="6"} -->
-- Can the person enter the house? <!-- {.element: class="fragment" data-fragment-index="7"} -->
+**Describe("The House")**
+- It should have a roof <!-- {.element: class="fragment" data-fragment-index="1"} -->
+- It should have a door <!-- {.element: class="fragment" data-fragment-index="2"} -->
+- It should have a window in a wall of the house <!-- {.element: class="fragment" data-fragment-index="3"} -->
+- It should have a person smaller inside <!-- {.element: class="fragment" data-fragment-index="4"} -->
+- It should have at least two connected walls <!-- {.element: class="fragment" data-fragment-index="6"} -->
 
 
 
@@ -241,10 +240,10 @@ Many times people will have built cool things that they didn't have tests for. W
 ### The Game Begins Again!
 
 ![TDD](images/bdd-tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
- - As a table group, pick a project to build. Projects must be something complex that has lots of different elements in it. Some examples, if you're stuck, might include a _zoo_, a _shopping center_, a _spaceship_, or a _city_.
- - All tests at the table must continue to pass at all times, regardless of which pair wrote them.  <!-- {.element: class="fragment" data-fragment-index="1"} -->
- - This time is that the implementation has to be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
-- The goal is to integrate the elements that you built previously into the project selected by the table group.<!-- {.element: class="fragment" data-fragment-index="3"} -->
+ - As a table group, pick a project to build. Projects must be something complex that has lots of different elements in it. Some examples could be: _a zoo_, _a shopping center_, _a spaceship_, or _city_.
+ - Spend 2 mins creating a backlog of features for you to build ...  <!-- {.element: class="fragment" data-fragment-index="1"} -->
+ - All tests at the table must continue to pass at all times, regardless of which pair wrote them - this is your CI environment  <!-- {.element: class="fragment" data-fragment-index="2"} -->
+ - All features and tests must be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
 
 
 
