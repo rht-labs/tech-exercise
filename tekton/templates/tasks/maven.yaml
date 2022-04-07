@@ -21,7 +21,7 @@ spec:
     - name: MAVEN_IMAGE
       type: string
       description: Maven base image
-      default: registry.access.redhat.com/ubi8/openjdk-11:1.11
+      default: registry.access.redhat.com/ubi8/openjdk-17:latest
     - name: GOALS
       description: maven goals to run
       type: string
