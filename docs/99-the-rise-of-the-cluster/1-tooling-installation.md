@@ -36,7 +36,7 @@ If you'd like to use the same setup, here are the steps:
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-helm upgrade --install my . --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN>
+helm upgrade --install my . --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
 ```
 FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖, that's what i did!
 
@@ -62,12 +62,9 @@ for i in {1..24};do
   export LAB_NUMBER="lab$i"
   echo 'thisissupersecretpassword' | ipa user-add ${LAB_NUMBER} --first=${LAB_NUMBER} --last=${LAB_NUMBER} --email=${LAB_NUMBER}@redhatlabs.dev --password
   ipa group-add-member ${GROUP_NAME} --users=$LAB_NUMBER
-    printf "\n\n User ${LAB_NUMBER} is created!"
+  printf "\n\n User ${LAB_NUMBER} is created!"
 done
-echo 'ldapsecretpassword' | ipa user-add ldap-sa --first=ldap --last=sa --email=ldap@redhatlabs.dev --password
 ```
-
-[TODO] Add OpenShift OAuth config to use IPA and LDAP sync steps here.
 ## Enablement Framework Installation
 Now let's go and install the tooling!!
 
@@ -88,10 +85,10 @@ helm dep up
 helm upgrade --install tl500-course-content . --namespace tl500 --create-namespace 
 ```
 (again. this could also take some time 🙈)
-#### Verify The Installation
-Log in to the cluster via UI and use `ldap` login with your student username and password. You should only see `tl500-*` namespaces. 
+## Verify The Installation
+Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
 
-#### CodeReady Workspaces Setup
+## CodeReady Workspaces Setup
 
 During the exercises, we use different commandlines like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
