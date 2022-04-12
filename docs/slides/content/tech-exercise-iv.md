@@ -23,7 +23,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise IV
-[Return of the Monitoring](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-n-D05Np8GTLUHwE8)
+[Return of the Monitoring](http://rht-labs.com/StarWarsIntroCreator/#!/AN-PnnCgCljRjZ-cOGBI)
 
 
 

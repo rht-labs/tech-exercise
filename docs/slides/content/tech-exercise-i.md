@@ -22,7 +22,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise I
-[The Manual Menace](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMqYlqu9pjOZKwUq1zvZ)
+[The Manual Menace](http://rht-labs.com/StarWarsIntroCreator/#!/AN-PkHf-k0FgxKTTKRcA)
 
 
 

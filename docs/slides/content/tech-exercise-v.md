@@ -23,7 +23,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise V
-[The Deployments Strike Back](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-rFy0wN7pOGVTpU6t)
+[The Deployments Strike Back](http://rht-labs.com/StarWarsIntroCreator/#!/AN-PogOik9g8YPNIt5-l)
 
 
 

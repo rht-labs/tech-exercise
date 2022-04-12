@@ -22,12 +22,12 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise III
-[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-oAnbngxHWCVBV7y1)
+[Revenge of the Automated Testing](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pm81Gmfs0g0ioQHfw)
 
 
 
 ### Tech Exercise III - Extended Edition 
-[Revenge of the Automated Testing](https://starwarsintrocreator.kassellabs.io/?ref=redirect#!/DMz-mHg-amHtnYRzz0JH)
+[Revenge of the Automated Testing](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pmtuc82D6y3UWPCWq)
 
 
 
