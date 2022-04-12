@@ -89,7 +89,7 @@
     oc get secrets -n <TEAM_NAME>-ci-cd | grep sonarqube-auth
     ```
 
-5. Install **Sonarqube**, the code quality tool. Edit `ubiquitous-journey/value-tooling.yaml` file in your IDE  and add to the `applications` list:
+5. Install **Sonarqube**, the code quality tool. Edit `ubiquitous-journey/values-tooling.yaml` file in your IDE  and add to the `applications` list:
 
     ```yaml
       # Sonarqube
