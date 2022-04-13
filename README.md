@@ -3,7 +3,7 @@
 ## TL500 Mono Repo
 
 This monorepo holds the content for the TL500 (aka DO500). The structure is roughly as follows 
-```bash
+```
 ...
 ├── README.md
 ├── docs
