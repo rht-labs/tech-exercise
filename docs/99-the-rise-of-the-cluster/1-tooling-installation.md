@@ -104,4 +104,4 @@ There is a `tl500-devfile.yaml` which is the _as code_ definition of our workspa
 ...
 ```
 
-We have the explanation of how to get your own CodeRead Workspaces environment in the [first chapter](1-the-manual-menace/1-the-basics).
+We have the explanation of how to get your own CodeReady Workspaces environment in the [first chapter](1-the-manual-menace/1-the-basics).
