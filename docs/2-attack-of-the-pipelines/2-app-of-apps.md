@@ -75,7 +75,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     ```
 
 5. In ArgoCD at this point we should see things start to get a bit more busy:
-![arogcd-app-of-pb.png](images/arogcd-app-of-pb.png)
+![argocd-app-of-pb.png](images/argocd-app-of-pb.png)
 
 ### Deploying Pet Battle
 
