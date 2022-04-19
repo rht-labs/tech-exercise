@@ -61,7 +61,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
     Some of the key things to note above are:
 
-   * `Workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
+   * `workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
    * `secrets` - secure things used by the pipeline
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
@@ -97,16 +97,16 @@ In this snippet of the pipeline used in this exercise, we define:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-    # Pet Battle Apps
-    pet-battle-api:
+      # Pet Battle Apps
+      pet-battle-api:
         name: pet-battle-api
         enabled: true
         source: http://nexus:8081/repository/helm-charts #<- update this
         chart_name: pet-battle-api
         source_ref: 1.2.1 # helm chart version
         values:
-        image_name: pet-battle-api
-        image_version: latest # container image version
+          image_name: pet-battle-api
+          image_version: latest # container image version
     </code></pre></div>
 
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
@@ -149,9 +149,9 @@ In this snippet of the pipeline used in this exercise, we define:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-    // set log level
-    data:
-      loglevel.eventlistener: debug
+      # set log level
+      data:
+        loglevel.eventlistener: debug
     </code></pre></div>
 
 9. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
