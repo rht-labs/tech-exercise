@@ -1,7 +1,7 @@
 ## TL500 Cluster Setup
 
 <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - You need an OpenShift 4.10+ cluster with cluster-admin privilege.
+    ⛷️ <b>NOTE</b> ⛷️ - You need an OpenShift 4.9+ cluster with cluster-admin privilege.
 </p>
 
 Just like we practice through out the course, we keep the cluster configuration as code in a GitHub repository: https://github.com/rht-labs/enablement-framework
