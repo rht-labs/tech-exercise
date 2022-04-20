@@ -20,6 +20,8 @@
     git push
     ```
 
+    <p class="warn">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>
+
 2. Open up `/projects/pet-battle/Jenkinsfile` and add the below stage where `// 🐝 OWASP ZAP STAGE GOES HERE` placeholder is, to trigger ZAP scanning against Pet Battle. This stage will create a report on possible security vulnerabilities.
 
     ```groovy

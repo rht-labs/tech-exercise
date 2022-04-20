@@ -31,6 +31,8 @@
     git push
     ```
 
+    <p class="warn">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>    
+
 2. We need to create a `locustfile.py` for testing scenario and save it in the application repository.
 
     Below scenario calls `/home` endpoint and fails the test if:
