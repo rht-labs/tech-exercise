@@ -134,7 +134,7 @@
     }
     ```
 
-5. Before we commit the changes to the Jenkinsfile, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` under the `<!-- PB - Purple -->` comment and remove the line above it so it appears like this:
+5. Before we commit the changes to the `Jenkinsfile`, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` under the `<!-- PB - Purple -->` comment and remove the line above it so it appears like this:
 
     ```html
     <header>
@@ -163,4 +163,17 @@
 
 8. When Jenkins executes, you should see things progress and the blue green deployment happen automatically.
 
-    This is a simple example to show how we can automate a blue green deployment using gitops. However, we did not remove the previous deployment of pet-battle, in the real world we would do this.
+    The version in production is now the new `1.6.1` published with the latest change. As you can check from the
+    nav bar of the application from the production route `prod-pet-battle` (linked to the `green` service):
+
+    ![prod-pet-battle](images/bg-prod-pet-battle.png)
+
+    The previous `1.2.0` version, now identified as `blue`, is already available from the blue route `blue-pet-battle`:
+
+    ![blue-pet-battle](images/bg-blue-pet-battle.png)
+
+    Every time you change the `version` variable in the `package.json` file the blue and green version will switch. Try it
+    publishing a new version of the application, e.g: `1.6.2`. Which one is in production? Which is `blue`? Which is `green`?
+
+    This is a simple example to show how we can automate a blue green deployment using GitOps. However, we did not remove the
+    previous deployment of pet-battle, in the real world we would do this.
