@@ -62,7 +62,7 @@ for i in {1..24};do
   export LAB_NUMBER="lab$i"
   echo 'thisissupersecretpassword' | ipa user-add ${LAB_NUMBER} --first=${LAB_NUMBER} --last=${LAB_NUMBER} --email=${LAB_NUMBER}@redhatlabs.dev --password
   ipa group-add-member ${GROUP_NAME} --users=$LAB_NUMBER
-  printf "\n\n User ${LAB_NUMBER} is created!"
+  printf "\n\n User ${LAB_NUMBER} is created"
 done
 ```
 ## Enablement Framework Installation
