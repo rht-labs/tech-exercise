@@ -32,7 +32,7 @@ whereby
 ### 🏃‍♀️ Running the docs & slides site locally
 To launch the slides, ensure you have NodeJS installed or run it in a NodeJS container if you prefer.
 ```
-npm i docsify-cli -g
+npm i -g docsify-cli@4.4.3
 docsify serve ./docs
 ```
 
