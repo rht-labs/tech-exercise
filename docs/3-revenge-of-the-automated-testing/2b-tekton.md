@@ -195,7 +195,7 @@
     - name: maven
       params:
         - name: MAVEN_BUILD_OPTS
-          value: "-Dquarkus.package.type=fast-jar
+          value: "-Dquarkus.package.type=fast-jar"
     </code></pre></div>
 
 4. Git add, commit, push your changes
