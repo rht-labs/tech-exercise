@@ -88,7 +88,7 @@ Let's enable the **kube-linter** task in our pipeline.
 
 Let's run through a scenario where we break/fix the build with **kube-linter**.
 
-1. Edit `maven-pipeline.yaml` again and add **required-label-owner** to the includelist to **includelist** list on the **kube-linter** task:
+1. Edit `maven-pipeline.yaml` again and add **required-label-owner** to the **includelist** list on the **kube-linter** task:
 
     ```yaml
             - name: includelist
