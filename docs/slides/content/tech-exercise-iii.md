@@ -142,4 +142,7 @@ I assume the tasks will be obvious or assigned (although this is vague), but the
 
 <!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
-- [Open Practice Library](https://openpracticelibrary.com/practice/)
+- [Test automation](https://openpracticelibrary.com/practice/test-automation/)
+- [Impact & Effort Prioritization (Matrix)](https://openpracticelibrary.com/practice/impact-effort-prioritization-matrix/)
+- [How-Now-Wow Prioritization (Matrix)](https://openpracticelibrary.com/practice/how-now-wow-prioritization-matrix/)
+- [Kanban](https://openpracticelibrary.com/practice/kanban/)
