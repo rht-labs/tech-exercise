@@ -28,9 +28,9 @@ git push
 ```
 --->
 
-#### Setup Pet Battle (front end) Git Repo
+#### Setup Pet Battle (front end) GitLab Project
 
-1. Open the GitLab UI. Create a repo in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
+1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)
 
