@@ -61,14 +61,14 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     export GITLAB_USER=<user>
-    export GITLAB_PASSWORD=<password>
+    export GITLAB_PAT=<pat token>
 
     cat << EOF > /tmp/git-auth.yaml
     kind: Secret
     apiVersion: v1
     data:
       username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
-      password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+      password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
     metadata:
       annotations:
         tekton.dev/git-0: https://${GIT_SERVER}

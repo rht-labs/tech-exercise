@@ -565,6 +565,8 @@ shift `expr $OPTIND - 1`
 [ -z "$OCP_ADMIN_USER" ] && echo "Warning: must supply OCP_ADMIN_USER in env" && exit 1
 [ -z "$OCP_ADMIN_PASSWORD" ] && echo "Warning: must supply OCP_ADMIN_PASSWORD in env" && exit 1
 
+export GITLAB_PAT=${GITLAB_PASSWORD}
+
 # Nuke only
 if [ ! -z "${NUKEFROMORBIT}" ]; then
     cleanup

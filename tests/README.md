@@ -55,8 +55,8 @@ podman run \
 To run testing locally for development:
 
 ```bash
-podman pull quay.io/rht-labs/stack-tl500:3.0.10
-podman run -d --name stack quay.io/rht-labs/stack-tl500:3.0.10 zsh -c 'sleep infinity'
+podman pull quay.io/rht-labs/stack-tl500:3.0.14
+podman run -d --name stack quay.io/rht-labs/stack-tl500:3.0.14 zsh -c 'sleep infinity'
 podman exec -it stack zsh
 
 git clone https://github.com/rht-labs/tech-exercise.git
@@ -72,11 +72,7 @@ cd tech-exercise && cd tests
 
 **_TODO_**
 
-- [ ] may need to remove bash#test tags etc in html redraw
-- [ ] secrets and env vars in rundoc (which has some support?)
 - [ ] regression.sh can generate output files
-- [ ] gitlab delete all other api patoken's when creating a new one
-- [ ] add a tidy function to delete all git resources at end of tests
 - [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
 - [ ] trigger and wait for pipelines first run success
 - [ ] cleanup() must be cluster-admin
@@ -92,8 +88,9 @@ cd tech-exercise && cd tests
 - [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
 - [X] patch rundoc for upto 4 whitespace in markdown -> html
 - [X] remove branch for tests development uj
-
 ```bash
 # FIXME test branch
 --set source_ref=tests
 ```
+- [X] gitlab delete all other api patoken's when creating a new one
+- [X] add a tidy function to delete all git resources at end of tests
