@@ -7,8 +7,8 @@
 ## What to contribute
 
 * 🐛 Fixing typos
-👑 exercises
-🖹 content 
+* 👑 Extending or fixing exercises
+* 🖹 Adding or extending slide content
 * 📝 Adding/Updating commands, blocks, texts, ...
 * 👋 Whatever you want to contribute with some value for this repo
 
