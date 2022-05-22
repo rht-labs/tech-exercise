@@ -37,15 +37,15 @@ All of these traits lead to one outcome - the ability to build and release quali
 5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
-6. We are going to create a gitlab personal access token (PAT). The token is a more secure and reliable method for accessing gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands
+6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
-    Export your gitlab username
+    Export your Gitlab username.
 
     ```bash
     export GITLAB_USER=<YOUR_GITLAB_USER>
     ```
 
-    Export your gitlab password
+    Export your Gitlab password.
 
     ```bash
     export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
@@ -55,13 +55,13 @@ All of these traits lead to one outcome - the ability to build and release quali
     ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
-    Generate your gitlab PAT
+    Generate your Gitlab PAT.
 
     ```bash
     gitlab_pat
     ```
 
-    Echo the `GITLAB_PAT` environment variable
+    Echo the `GITLAB_PAT` environment variable.
 
     ```bash
     echo $GITLAB_PAT
