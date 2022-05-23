@@ -105,3 +105,9 @@ There is a `tl500-devfile.yaml` which is the _as code_ definition of our workspa
 ```
 
 We have the explanation of how to get your own CodeReady Workspaces environment in the [first chapter](1-the-manual-menace/1-the-basics).
+
+## Red Hat Product Demo System
+
+This is currently only available to Red Hat Associates. You can order up your own TL500 environment in [RHPDS](https://rhpds.redhat.com). This will provision for you the latest OpenShift & TL500 workshop environment. You can select cluster size, number or users and region.
+
+![images/tl500-order-rhpds.png](images/tl500-order-rhpds.png)
