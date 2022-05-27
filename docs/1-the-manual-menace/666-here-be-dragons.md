@@ -61,7 +61,7 @@ Lets add our GitLab repo.
 
 ```bash
 export GITLAB_USER=<your gitlab user>
-export GITLAB_PASSWORD=<your gitlab password>
+export GITLAB_PAT=<your gitlab pat token>
 ```
 
 Lets put our git credentials via a Kubernetes secret for now. **We will fix this with a Sealed Secrets in a later exercise**
@@ -70,7 +70,7 @@ Lets put our git credentials via a Kubernetes secret for now. **We will fix this
 cat <<EOF | oc apply -f -
 apiVersion: v1
 data:
-  password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+  password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
   username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 type: kubernetes.io/basic-auth
@@ -116,7 +116,7 @@ We can also add repositories at install time, be sure to use your `GITLAB_URL`.
 
 ```bash
 export GITLAB_USER=<your gitlab user>
-export GITLAB_PASSWORD=<your gitlab password>
+export GITLAB_PAT=<your gitlab pat token>
 ```
 
 Lets our git creds via a secret (**UJ this**)
@@ -125,7 +125,7 @@ Lets our git creds via a secret (**UJ this**)
 cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
 apiVersion: v1
 data:
-  password: "$(echo -n ${GITLAB_PASSWORD} | base64 -w0)"
+  password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
   username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
 kind: Secret
 type: kubernetes.io/basic-auth
