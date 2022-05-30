@@ -571,6 +571,13 @@ if [ ! -z "${NUKEFROMORBIT}" ]; then
     exit 0
 fi
 
+# sanity checks
+if [ "${TEAM_NAME}" == "${GITLAB_USER}" ]; then
+    echo -e "${RED}🍀 You have the luck of the Irish! so you do.
+    The gitlab group api will fail when TEAM_NAME and GITLAB_USER are set the same.
+    So to save you future pain we will exit now 🍀${NC}"
+    exit 1
+fi
 
 # run test suite
 case $TOPIC in
