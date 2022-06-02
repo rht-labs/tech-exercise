@@ -81,7 +81,7 @@ User Story Mapping
 
 
 #### Value Slicing
-_The goal of value slicing is to divide user stories into iterations that form the outline of a plan. Usually the first iteration builds a minimally viable product._
+_The goal of value slicing is to divide user stories into slices that form the outline of a plan. Usually the first slice builds a minimally viable product._
 
 
 
