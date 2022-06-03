@@ -93,3 +93,7 @@
     50+0 records out
     524288000 bytes (524 MB) copied, 11.2603 s, 46.6 MB/s
     </code></pre></div>
+
+7. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see ` PetBattleMongoDBDiskUsage` alert as below:
+
+    ![alert-mongodb](./images/alert-mongodb.png)
