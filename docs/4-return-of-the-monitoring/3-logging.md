@@ -31,12 +31,12 @@
 
     ![kibana-discover](./images/kibana-discover.png)
 
-7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by addint this to the query bar:
+7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by adding this to the query bar:
 `kubernetes.namespace_name="<TEAM_NAME>-test" AND kubernetes.container_name=pet-battle-.*`
 
     ![kibana-example-query](./images/kibana-example-query.png)
 
-8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via rsg and generate logs.
+8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via rsh and generate logs.
 
     ```bash
     oc project ${TEAM_NAME}-test
