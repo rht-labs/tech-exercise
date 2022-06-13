@@ -88,6 +88,12 @@ helm upgrade --install tl500-course-content . --namespace tl500 --create-namespa
 ## Verify The Installation
 Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
 
+## Getting the Necessary Links
+The exercises start with CodeReadyWorkspace link. So here is a one liner to get it:
+
+```bash
+echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.host}}')
+```
 ## CodeReady Workspaces Setup
 
 During the exercises, we use different commandlines like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
