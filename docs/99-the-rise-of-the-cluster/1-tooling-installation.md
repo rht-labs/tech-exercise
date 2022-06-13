@@ -88,6 +88,14 @@ helm upgrade --install tl500-course-content . --namespace tl500 --create-namespa
 ## Verify The Installation
 Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
 
+We also have a tool called `tl500-teamster` to run exercises automatically for you to verify the installation. It is already bundled inside the installation of the toolings. Get the URL from the following command:
+
+```bash
+echo https://$(oc get route/tl500-base-tl500-teamsters -n tl500 --template='{{.spec.host}}')
+```
+
+..and follow the [README](https://github.com/rht-labs/tl500-teamsters) to see how to use it.
+
 ## Getting the Necessary Links
 The exercises start with CodeReadyWorkspace link. So here is a one liner to get it:
 
