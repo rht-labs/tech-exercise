@@ -146,7 +146,7 @@ How writing the test before we write code forces our design to emerge.
 
 
 
-### TDD Lifecylce
+### TDD Lifecycle
 ![TDD-Simplified](https://i0.wp.com/s3.amazonaws.com/production-wordpress-assets/blog/wp-content/uploads/2017/04/11100523/TDD.jpg?zoom=2&fit=400%2C237&ssl=1)
 
 Red - Write a small test that fails <!-- {.element: class="fragment" style="color: red" data-fragment-index="1"} -->
@@ -268,6 +268,87 @@ Was your final design different than you expected? Discuss.
 
 
 ## A Little Competition
+
+
+
+<!-- .slide: id="revenge-automated-testing-part-2" -->
+## Revenge of the Automated Testing
+### Part 2
+Test Driven Development (TDD) in Minecraft
+
+(Virtual Edition)
+
+
+
+### Intent
+Demonstrate the concepts behind Test Driven Development.
+
+How writing the test before we write code forces our design to emerge.
+
+
+
+### TDD Lifecycle
+![TDD-Simplified](https://i0.wp.com/s3.amazonaws.com/production-wordpress-assets/blog/wp-content/uploads/2017/04/11100523/TDD.jpg?zoom=2&fit=400%2C237&ssl=1)
+
+Red - Write a small test that fails <!-- {.element: class="fragment" style="color: red" data-fragment-index="1"} -->
+
+Green - Do the minimum to make the test pass <!-- {.element: class="fragment" style="color: green" data-fragment-index="2"} -->
+
+Refactor - Eliminate duplication and make it beautiful <!-- {.element: class="fragment" data-fragment-index="3"} -->
+
+
+
+### TDD Lifecycle
+![Circle of life](https://media.giphy.com/media/DvMHwFYLVHlZe/giphy.gif)  <!-- {.element: class="" style="height:450px"} -->
+
+
+
+### Prepare your environment
+Our program is made of Minecraf blocks. Get your equipment ready for coding
+
+![minecraft-library](images/bdd-tdd/minecraft-library.png)
+
+
+
+### Rules for Minecraft TDD
+1. The library is closed, you can't duplicate or add more blocks. <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+2. You can't modify the blocks (rotate, extend, change colors). <!-- {.element: class="fragment"  data-fragment-index="2"} -->
+3. Blocks must be inside of your workspace. <!-- {.element: class="fragment"  data-fragment-index="3"} -->
+4. You can only add 2 blocks per round. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
+5. Refactor when you need it, or you want it. <!-- {.element: class="fragment"  data-fragment-index="5"} -->
+6. There can be only one "broken" test at a time. All previous tests must continue to pass. <!-- {.element: class="fragment"  data-fragment-index="6"} -->
+7. Nothing must be built in Minecraft unless a failing test required it. <!-- {.element: class="fragment"  data-fragment-index="7"} -->
+
+
+
+### Two Simple Rules for TDD
+KISS - Keep It Simple Stupid  <!-- {.element: class="fragment"  data-fragment-index="1"} -->
+
+YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragment-index="2"} -->
+
+![simple-house](images/bdd-tdd/simple-lego-home.jpg)  <!-- {.element: class="fragment"  data-fragment-index="1" style="height:250px"} -->
+![complex-house](images/bdd-tdd/complex-home.jpeg)  <!-- {.element: class="fragment" style="height:250px"  data-fragment-index="2"} -->
+
+
+
+### The Game Begins!
+
+![minecraft-start-game](images/bdd-tdd/minecraft-new-start-game.png)
+
+
+
+### Debrief
+<!-- speaker info
+Sometimes people will build something new that breaks an existing test and they either won't have noticed or won't have cared. If this is the case then discuss why tests must always be passing.
+
+Generally not everyone will have done this. They'll be so busy creating interesting requirements that they don't have time to build the five things that the customer actually asked for. Discuss this.
+
+Have each pair demo two or three of their features. Have them read out the test first and then point out how that was implemented in their model. Stress the fact that if there isn't a test for a given feature, we don't care about it.
+Many times people will have built cool things that they didn't have tests for. We stress again that in TDD, we don't build anything until the test has forced us to do that.
+ -->
+ - What did you observe? How did that feel?
+ - Did everyone complete all listed requirements?
+ - Do all tests currently pass?
 
 
 
