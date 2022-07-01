@@ -274,7 +274,7 @@ Was your final design different than you expected? Discuss.
 <!-- .slide: id="revenge-automated-testing-part-2" -->
 ## Revenge of the Automated Testing
 ### Part 2
-Test Driven Development (TDD) in Minecraft
+Test Driven Development (TDD) in Virtual Blocks!!!
 
 (Virtual Edition)
 
@@ -304,20 +304,20 @@ Refactor - Eliminate duplication and make it beautiful <!-- {.element: class="fr
 
 
 ### Prepare your environment
-Our program is made of Minecraf blocks. Get your equipment ready for coding
+Our program is made of virtual blocks. Get your equipment ready for coding
 
-![minecraft-library](images/bdd-tdd/minecraft-library.png)
+![virtual-blocks-library](images/bdd-tdd/virtual-blocks-library.png)
 
 
 
-### Rules for Minecraft TDD
+### Rules for Virtual Blocks TDD
 1. The library is closed, you can't duplicate or add more blocks. <!-- {.element: class="fragment"  data-fragment-index="1"} -->
 2. You can't modify the blocks (rotate, extend, change colors). <!-- {.element: class="fragment"  data-fragment-index="2"} -->
 3. Blocks must be inside of your workspace. <!-- {.element: class="fragment"  data-fragment-index="3"} -->
 4. You can only add 2 blocks per round. <!-- {.element: class="fragment"  data-fragment-index="4"} -->
 5. Refactor when you need it, or you want it. <!-- {.element: class="fragment"  data-fragment-index="5"} -->
 6. There can be only one "broken" test at a time. All previous tests must continue to pass. <!-- {.element: class="fragment"  data-fragment-index="6"} -->
-7. Nothing must be built in Minecraft unless a failing test required it. <!-- {.element: class="fragment"  data-fragment-index="7"} -->
+7. Nothing must be built unless a failing test required it. <!-- {.element: class="fragment"  data-fragment-index="7"} -->
 
 
 
@@ -332,8 +332,6 @@ YAGNI - You Ain't Gonna Need It!  <!-- {.element: class="fragment"  data-fragmen
 
 
 ### The Game Begins!
-
-![minecraft-start-game](images/bdd-tdd/minecraft-new-start-game.png)
 
 
 
