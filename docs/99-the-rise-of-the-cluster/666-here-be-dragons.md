@@ -83,7 +83,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
-    
+
     cat /tmp/sealed-git-auth.yaml| grep -E 'username|password'
     ```
 
@@ -184,7 +184,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     ```bash
     run()
     {
-      NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \
+      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
       if [ -z $NS ]; then
         NS="${TEAM_NAME}-ci-cd"
@@ -194,9 +194,9 @@ Lets take our code from `cluster-a` to `cluster-b`.
       else
         NS="${TEAM_NAME}-ci-cd,${NS}"
       fi
-      oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \
+      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \
         -p '[{"op":"replace","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
-      echo "EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \
+      echo "EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')"
     }
     run
