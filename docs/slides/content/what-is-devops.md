@@ -136,62 +136,6 @@ _The DevOps Handbook_ <!-- {.element: class="small" style="text-align: right;"} 
 
 
 
-### DevOps Anti-Patterns
-#### _Throw it over the wall_
-![ThrowItOverWall](images/what-is-devops/antiA.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _DevOps Team Silo_
-![DevOpsTeamSilo](images/what-is-devops/antiB.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _Dev Doesn't Need Ops_
-![NoNeedOps](images/what-is-devops/antiC.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _DevOps as Tool Team_
-![DevOpsToolTeam](images/what-is-devops/antiD.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _Re-branded Sys Admin_
-![RebrandSysAdmin](images/what-is-devops/antiE.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _Ops Embedded in Dev Team_
-![EmbeddedOps](images/what-is-devops/antiF.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Anti-Patterns
-#### _Dev and DBA Silos_
-![DevOpsDBASilo](images/what-is-devops/antiG.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
-### DevOps Success
-#### _Fully Shared Ops Responsibilities_
-![DevOpsSuccess](images/what-is-devops/dosuccess.png)
-https://web.devopstopologies.com/ <!-- {.element: class="small"} -->
-
-
-
 ### Summary
 #### _Defining DevOps_
 "I know it when I see it."
