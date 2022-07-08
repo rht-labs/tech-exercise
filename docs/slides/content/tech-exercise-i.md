@@ -26,23 +26,6 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/1-the-manual-menace/images/big-picture-tools.jpg", class="white-style" -->
-
-
-
-#### 🧑‍🏫 Learning Outcomes 🧑‍💻
-As a learner, I can perform the following tasks by the end of this exercise:
-* Deploy helm charts manually
-* Do everything as code 
-* Articulate the benefits gained from GitOps
-* Drive tool installations through GitOps
-* Deploy the labs accelerator - 🔥🦄
-<!--
---->
-
-
-
 #### What is it?
 Everything as Code is the practice of treating all parts of the system as code. This means:
 ![what-it-is](images/tech-exercise-i/what-it-is.png) <!-- .element: class="image-no-shadow image-full-width" -->
@@ -74,6 +57,23 @@ Everything as Code is the practice of treating all parts of the system as code. 
 3. Design configuration options as templates.
 4. Check source configuration code into a source control repository.
 5. Use the automated tools to apply your configurations.
+
+
+
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Deploy helm charts manually
+* Do everything as code 
+* Articulate the benefits gained from GitOps
+* Drive tool installations through GitOps
+* Deploy the labs accelerator - 🔥🦄
+<!--
+--->
+
+
+
+##### The Big Picture <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/1-the-manual-menace/images/big-picture-tools.jpg", class="white-style" -->
 
 
 
