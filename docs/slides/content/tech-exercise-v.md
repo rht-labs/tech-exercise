@@ -27,21 +27,6 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/5-the-deployments-strike-back/images/big-picture-matomo.jpg", class="white-style" -->
-
-
-
-#### 🧑‍🏫 Learning Outcomes 🧑‍💻
-As a learner, I can perform the following tasks by the end of this exercise:
-* Enable the Horizontal Pod Autoscaler for my applications
-* Add a Blue/Green deployment method to the pipeline
-* Run a split test on OpenShift with GitOps - splitting traffic between two tests 
-<!--
---->
-
-
-
 #### What is it?
 Advanced Deployments 🚚📦📦📦👷
 * Autoscaling - horizontally scale applications based on observed metrics.
@@ -95,6 +80,21 @@ Using the platform to support running an experiment.
 
 ### 💥 Prioritize and extend your Kanban 💥 <!-- .element: class="title-bottom-left" -->
 <!-- .slide: data-background-size="contain" data-background-image="images/tech-exercise-iii/team-kanban.png", class="black-style" data-background-opacity="1"	 -->
+
+
+
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Enable the Horizontal Pod Autoscaler for my applications
+* Add a Blue/Green deployment method to the pipeline
+* Run a split test on OpenShift with GitOps - splitting traffic between two tests 
+<!--
+--->
+
+
+
+##### The Big Picture <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/5-the-deployments-strike-back/images/big-picture-matomo.jpg", class="white-style" -->
 
 
 

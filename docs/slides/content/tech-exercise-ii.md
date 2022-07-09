@@ -27,19 +27,6 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/2-attack-of-the-pipelines/images/big-picture-first-pipeline.jpg", class="white-style" -->
-
-
-
-#### 🧑‍🏫 Learning Outcomes 🧑‍💻
-As a learner, I can perform the following tasks by the end of this exercise:
-* Manage Application Configs via git
-* Automatically build / bake / deploy software by using Jenkins or Tekton
-* Store secrets used by my pipeline securely in git
-
-
-
 #### What Is a Pipeline?
 ![derek](https://miro.medium.com/max/1400/1*OD6N_1evXg9ffzT47oJx-Q.jpeg)<!-- .element: class="image-no-shadow image-full-width" -->
 
@@ -201,6 +188,19 @@ development team's duty to maintain the software.
 * Automate everything as much as possible.
 * Build "feature toggles" or "dark launches" to allow for quick rollback if needed.
 * Provide adequate automated monitoring of the application.
+
+
+
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Manage Application Configs via git
+* Automatically build / bake / deploy software by using Jenkins or Tekton
+* Store secrets used by my pipeline securely in git
+
+
+
+##### The Big Picture <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/2-attack-of-the-pipelines/images/big-picture-first-pipeline.jpg", class="white-style" -->
 
 
 
