@@ -47,13 +47,12 @@ After the installation, you can use this trick to create users and group:
 
 
 IPA_NAMESPACE="${1:-ipa}"
-IPA_RELEASE_NAME="${2:-my}"
 
 # 1. oc get pod name for freeipa and oc rsh to it...
 # oc login ...
 oc project ${IPA_NAMESPACE}
-oc rsh `oc get po -l deploymentconfig=${IPA_RELEASE_NAME}-ipa -o name -n ${IPA_NAMESPACE}`
 export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
+oc rsh `oc get po -l deploymentconfig=ipa -o name -n ${IPA_NAMESPACE}`
 
 # 2. on the container running IPA Server
 
