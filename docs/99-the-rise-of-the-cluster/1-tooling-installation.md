@@ -48,14 +48,14 @@ After the installation, you can use this trick to create users and group:
 
 IPA_NAMESPACE="${1:-ipa}"
 
-# 1. oc get pod name for freeipa and oc rsh to it...
+# 1. On your host - get the admin passwd and connect to IPA 
 # oc login ...
 oc project ${IPA_NAMESPACE}
 export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
+echo ${IPA_ADMIN_PASSWD}
 oc rsh `oc get po -l deploymentconfig=ipa -o name -n ${IPA_NAMESPACE}`
 
 # 2. on the container running IPA Server
-
 echo ${IPA_ADMIN_PASSWD} | kinit admin
 export GROUP_NAME=student
 ipa group-add ${GROUP_NAME} --desc "TL500 Student Group" || true
