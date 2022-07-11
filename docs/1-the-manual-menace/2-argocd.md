@@ -138,6 +138,8 @@ EOF
    * On the "DESTINATION" box
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TEAM_NAME>-ci-cd`
+   * On the "HELM" box
+      * Values Files: `values.yaml`
 
     Your form should look like this:
     ![argocd-create-application](images/argocd-create-application.png)
