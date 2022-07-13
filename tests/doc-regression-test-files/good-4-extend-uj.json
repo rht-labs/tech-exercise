@@ -1,6 +1,20 @@
 {
     "code_blocks": [
         {
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
             "code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.4\",\"values\":{\"includeRHRepositories\": false,\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
             "interpreter": "bash",
             "runs": [
@@ -35,20 +49,6 @@
                 {
                     "retcode": 0,
                     "user_code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
-                }
-            ],
-            "tags": [
-                "bash",
-                "test"
-            ]
-        },
-        {
-            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n",
-            "interpreter": "bash",
-            "runs": [
-                {
-                    "retcode": 0,
-                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n"
                 }
             ],
             "tags": [
