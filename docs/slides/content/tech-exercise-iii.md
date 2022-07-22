@@ -27,7 +27,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise III - Extended Edition 
-[Revenge of the Automated Testing](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pmtuc82D6y3UWPCWq)
+[A Secure Hope](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pmtuc82D6y3UWPCWq)
 
 
 

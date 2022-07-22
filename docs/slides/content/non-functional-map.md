@@ -89,10 +89,10 @@ Pet Battle Industries have a good handle on the functional design of their appli
 ### Create the NFR Map
 #### *As a class*
 
-1. Ensure that everyone participating is comfortable with the headings and what they mean.
-2. Split the map into two segments and divide among the teams - each team taking at least one half of the map.
+1. Ensure that everyone participating is comfortable with the headings and what they mean by drawing the map on the wall
+2. Have a volunteer from each team come forward and pick two headings off the map back.
 #### *In your team*
-3. For each heading in your area, capture important considerations or requirements for the system or solution and add sticky notes for each item.
+3. For each heading your team has chosen, capture important considerations or requirements for the system or solution and add sticky notes for each item.
 
 
 
