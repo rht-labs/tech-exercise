@@ -27,24 +27,7 @@ TL500 <!-- .element: class="title-color" -->
 
 
 ### Tech Exercise III - Extended Edition 
-[Revenge of the Automated Testing](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pmtuc82D6y3UWPCWq)
-
-
-
-##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/3-revenge-of-the-automated-testing/images/big-picture-pipeline-complete.jpg", class="white-style" -->
-
-
-
-#### 🧑‍🏫 Learning Outcomes 🧑‍💻
-As a learner, I can perform the following tasks by the end of this exercise:
-* Add security gates to the pipeline
-* Add testing gates to the pipeline
-* Add static code analysis gates to the pipeline
-* Add image signing to the pipeline
-* Add load testing to the pipeline
-<!--
---->
+[A Secure Hope](http://rht-labs.com/StarWarsIntroCreator/#!/AN-Pmtuc82D6y3UWPCWq)
 
 
 
@@ -74,6 +57,23 @@ Answering the age old question, "How do I know if my tests are any good?"
 * Improved quality: Applying patterns like TDD or BDD drives up shared understanding
 * Deliver reliably at speed: As features are produced, you can confidently release without a large manual regression each time
 * Fewer bottlenecks: Without automated tests, queues form in front of testers
+
+
+
+#### 🧑‍🏫 Learning Outcomes 🧑‍💻
+As a learner, I can perform the following tasks by the end of this exercise:
+* Add security gates to the pipeline
+* Add testing gates to the pipeline
+* Add static code analysis gates to the pipeline
+* Add image signing to the pipeline
+* Add load testing to the pipeline
+<!--
+--->
+
+
+
+##### The Big Picture <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/3-revenge-of-the-automated-testing/images/big-picture-pipeline-complete.jpg", class="white-style" -->
 
 
 

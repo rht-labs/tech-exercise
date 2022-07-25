@@ -48,17 +48,19 @@
     EOF
     ```
 
-4. Open up `Chart.yaml` and bump the version because you just edited a template within helm chart.
+4. We can now trigger the Pipeline with the new version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us. Increment and change the version number to suit.
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-    apiVersion: v2
-    name: pet-battle-api
-    description: Pet Battle API
-    type: application
-    version: 1.2.1 <- bump this
-    appVersion: 1.2.1
-    </code></pre></div>
+    ```xml
+        <artifactId>pet-battle-api</artifactId>
+        <version>1.3.1</version>
+    ```
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    cd /projects/pet-battle-api
+    mvn -ntp versions:set -DnewVersion=1.3.1
+    ```
 
 5. Now push the changes into the repo:
 

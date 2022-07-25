@@ -85,9 +85,9 @@ _A practice that increases the autonomy of teams_
 
 
 ### Exercise - Priority Sliders
-In this exercise you will create a priortiy slider canvas for Pet Battle. 
+In this exercise you will create a priority slider canvas for Pet Battle.
 #### *In your team*
-1. Choose roles for the team members to role play: 
+1. Choose roles for the team members to role play (1 min): 
    * Head of Architecture
    * Head of Security
    * Head of Business
@@ -97,7 +97,7 @@ In this exercise you will create a priortiy slider canvas for Pet Battle.
 
 ### Exercise - Priority Sliders
 #### *In your team*
-2. Define the topics that are relevant for the Pet Battle use case and place those topics in the row headings. 
+2. Define the topics (*max of five*) that are relevant for the Pet Battle use case and place those topics in the row headings.
 3. Individually write down the priority number for each heading
 4. Try to come to consensus by sliding the priorities against one another.
 

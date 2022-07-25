@@ -145,15 +145,6 @@ In this snippet of the pipeline used in this exercise, we define:
 
     ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
-    <p class="warn"><b>Tip</b> You can enable debug log info for your Tekton webhook pod by setting <div class="highlight" style="background: #f7f7f7"><pre><code class="language-bash">oc -n ${TEAM_NAME}-ci-cd edit cm config-logging-triggers</code></pre></div></p>
-
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      # set log level
-      data:
-        loglevel.eventlistener: debug
-    </code></pre></div>
-
 9. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
     ```xml

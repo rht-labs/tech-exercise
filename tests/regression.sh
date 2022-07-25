@@ -350,6 +350,8 @@ cleanup() {
      force_delete_namespace "$namespace"
      namespace=${TEAM_NAME}-stage
      force_delete_namespace "$namespace"
+     namespace=${TEAM_NAME}-ci-cd
+     force_delete_namespace "$namespace"
 
      gitlab_delete_project "tech-exercise"
      gitlab_delete_project "pet-battle"

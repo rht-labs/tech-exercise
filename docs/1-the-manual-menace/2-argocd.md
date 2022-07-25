@@ -35,7 +35,7 @@ When something is seen as not matching the required state in Git, an application
     ```bash#test
     run()
     {
-      NS=$(oc get subscription/openshift-gitops-operator -n openshift-operators \
+      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
       opp=
       if [ -z $NS ]; then
@@ -48,9 +48,9 @@ When something is seen as not matching the required state in Git, an application
         NS="${TEAM_NAME}-ci-cd,${NS}"
         opp=replace
       fi
-      oc -n openshift-operators patch subscription/openshift-gitops-operator --type=json \
+      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \
         -p '[{"op":"'$opp'","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
-      echo "EnvVar set to: $(oc get subscription/openshift-gitops-operator -n openshift-operators \
+      echo "EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')"
     }
     run
@@ -59,7 +59,7 @@ When something is seen as not matching the required state in Git, an application
     The output should look something like this with other teams appended as well:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-      subscription.operators.coreos.com/openshift-gitops-operator patched
+      subscriptions.operators.coreos.com/openshift-gitops-operator patched
       EnvVar set to: <TEAM_NAME>-ci-cd,anotherteam-ci-cd
     </code></pre></div>
 
@@ -114,7 +114,7 @@ EOF
 4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab.
 
     ```bash#test
-    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)  
+    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
 
     ![argocd-route](./images/argocd-route.png)
@@ -134,10 +134,12 @@ EOF
       * Repository URL: `https://rht-labs.com/todolist/`
       * Select `Helm` from the right drop down menu
       * Chart: `todolist`
-      * Version: `1.0.1` 
+      * Version: `1.0.1`
    * On the "DESTINATION" box
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TEAM_NAME>-ci-cd`
+   * On the "HELM" box
+      * Values Files: `values.yaml`
 
     Your form should look like this:
     ![argocd-create-application](images/argocd-create-application.png)

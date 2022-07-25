@@ -27,22 +27,6 @@ TL500 <!-- .element: class="title-color" -->
 
 
 
-##### The Big Picture <!-- .element: class="title-bottom-left" -->
-<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/4-return-of-the-monitoring/images/big-picture-monitoring.jpg", class="white-style" -->
-
-
-
-#### 🧑‍🏫 Learning outcomes 🧑‍💻
-As a learner, by the end of this exercise I ...
-* can add ServiceMonitor for apps to gather metrics
-* can query Prometheus to see metrics
-* can create alerts with PrometheusRule
-* can install Grafana create dashboards with it
-* can create search index in Kibana
-
-
-
-
 #### What is it?
 With software, there are often two competing forces at work: 
 * Innovation, which inherently is accompanied by system change
@@ -148,6 +132,22 @@ _It is important that SLOs are documentated and iterate over time._
 Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our endusers. When our measurements show if we are not reliable enough - now what?
 
 Let's discuss what would you do if you don't meet with SLOs?
+
+
+
+#### 🧑‍🏫 Learning outcomes 🧑‍💻
+As a learner, by the end of this exercise I ...
+* can add ServiceMonitor for apps to gather metrics
+* can query Prometheus to see metrics
+* can create alerts with PrometheusRule
+* can install Grafana create dashboards with it
+* can create search index in Kibana
+
+
+
+##### The Big Picture <!-- .element: class="title-bottom-left" -->
+<!-- .slide: data-background-size="contain" data-background-image="https://rht-labs.com/tech-exercise/4-return-of-the-monitoring/images/big-picture-monitoring.jpg", class="white-style" -->
+
 
 
 

@@ -45,22 +45,24 @@ After the installation, you can use this trick to create users and group:
 ```bash
 #!/bin/bash
 
+
 IPA_NAMESPACE="${1:-ipa}"
-IPA_RELEASE_NAME="${2:-my}"
 
-# 1. oc get pod name for freeipa and oc rsh to it...
+# 1. On your host - get the admin passwd and connect to IPA 
+# oc login ...
 oc project ${IPA_NAMESPACE}
-oc rsh `oc get po -l deploymentconfig=${IPA_RELEASE_NAME}-ipa -o name -n ${IPA_NAMESPACE}`
-
+export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
+echo ${IPA_ADMIN_PASSWD}
+oc rsh `oc get po -l deploymentconfig=ipa -o name -n ${IPA_NAMESPACE}`
 
 # 2. on the container running IPA Server
-echo 'Passw0rd' | kinit admin
+echo ${IPA_ADMIN_PASSWD} | kinit admin
 export GROUP_NAME=student
 ipa group-add ${GROUP_NAME} --desc "TL500 Student Group" || true
 # in a loop add random users to the group 
 for i in {1..24};do
   export LAB_NUMBER="lab$i"
-  echo 'thisissupersecretpassword' | ipa user-add ${LAB_NUMBER} --first=${LAB_NUMBER} --last=${LAB_NUMBER} --email=${LAB_NUMBER}@redhatlabs.dev --password
+  echo 'thisisthepassword' | ipa user-add ${LAB_NUMBER} --first=${LAB_NUMBER} --last=${LAB_NUMBER} --email=${LAB_NUMBER}@redhatlabs.dev --password
   ipa group-add-member ${GROUP_NAME} --users=$LAB_NUMBER
   printf "\n\n User ${LAB_NUMBER} is created"
 done

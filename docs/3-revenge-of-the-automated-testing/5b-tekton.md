@@ -152,17 +152,19 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
     ...
     </code></pre></div>
 
-7. Since we changed the chart we should update it's version while we're at it. Bump the version in `chart/Chart.yaml`
+7. We can now trigger the Pipeline with the new version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us. Increment and change the version number to suit.
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-    apiVersion: v2
-    name: pet-battle-api
-    description: Pet Battle API
-    type: application
-    version: 1.2.1 <- bump this!!
-    appVersion: 1.2.1
-    </code></pre></div>
+    ```xml
+        <artifactId>pet-battle-api</artifactId>
+        <version>1.3.1</version>
+    ```
+
+    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+
+    ```bash#test
+    cd /projects/pet-battle-api
+    mvn -ntp versions:set -DnewVersion=1.3.1
+    ```
 
 8. We can check the **kube-linter** command again and check these changes in:
 
