@@ -1,6 +1,7 @@
 * [Home](/)
 * [1. The Manual Menace](1-the-manual-menace/README.md)
   * [🐌 The Basics](1-the-manual-menace/1-the-basics.md)
+  * [🐌 Helm 101](1-the-manual-menace/1a-helm-101.md)  
   * [🐙 ArgoCD](1-the-manual-menace/2-argocd.md)
   * [🔥🦄 Ubiquitous Journey](1-the-manual-menace/3-ubiquitous-journey.md)
   * [🦜 Extend UJ](1-the-manual-menace/4-extend-uj.md)
