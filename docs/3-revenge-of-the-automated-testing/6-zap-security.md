@@ -8,9 +8,7 @@ For this exercise, we will use a tool called "OWASP Zed Attack Proxy" or ZAP in 
 
 ![task-owasp](./images/task-owasp.png)
 
-#### In your groups pick the tool you'd like to integrate the pipeline with:
+#### Integrate the pipeline with Tekton:
 
-| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
-|-----------------------|----------------------------|
-| * Add a stage to our pipeline to run the security scan | * Add a task to our pipeline to run the security scan |
-| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/6a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/6b-tekton.md)</span> |
+- Add a stage to our pipeline to run the security scan
+- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/6b-tekton.md)</span>

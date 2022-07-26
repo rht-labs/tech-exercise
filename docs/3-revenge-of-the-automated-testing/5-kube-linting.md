@@ -58,10 +58,8 @@
 
     Let's advance how to include kube-linter into our pipelines.
 
-#### In your groups pick the tool you'd like to integrate the pipeline with:
+#### Integrate the pipeline with Tekton:
 
-| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
-|-----------------------|----------------------------|
-| * Add new jenkins agent to our list | * Add a task from Tekton Hub to our pipeline |
-| * Run kube-lint in the pipeline | * Run kube-lint when code is built in the pipeline |
-| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/5a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/5b-tekton.md)</span> |
+- Add a task from Tekton Hub to our pipeline 
+- Run kube-lint in the pipeline
+- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/5b-tekton.md)</span>

@@ -135,13 +135,11 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     🐌 THIS IS NOT GITOPS - Manually configuring the policy and setup is a good way to play with StackRox. See advanced exercises for creating and storing the policy as code. 🐎
     </p>
 
-#### In your groups pick the tool you'd like to integrate the pipeline with:
+#### Integrate the pipeline with Tekton:
 
 Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will do the following:
 
-| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
-|-----------------------|----------------------------|
-| * Configure your pipeline to `check` build time policy violations | * Configure your pipeline to `check` build time policy violations |
-| * Configure your pipeline to `scan` images for CVE/CVSS | * Configure your pipeline to `scan` images for CVE/CVSS |
-| * Break/Fix your pipeline | * Break/Fix your pipeline |
-| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/7a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/7b-tekton.md)</span> |
+- Configure your pipeline to `check` build time policy violations 
+- Configure your pipeline to `scan` images for CVE/CVSS
+- Break/Fix your pipeline 
+- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/7b-tekton.md)</span>

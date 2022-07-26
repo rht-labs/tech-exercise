@@ -36,9 +36,7 @@ Now let's proceed to extend the pipelines with image signing step.
 
 _This step makes more sense when you use an external image registry and share images across clusters or publicly._
 
-#### In your groups pick the tool you'd like to integrate the pipeline with:
+#### Integrate the pipeline with Tekton:
 
-| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
-|-----------------------|----------------------------|
-| * Add image signing stage to your pipeline | * Add image signing task to your pipeline |
-| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/8a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/8b-tekton.md)</span> |
+- Add image signing stage to your pipeline
+- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/8b-tekton.md)</span> 
