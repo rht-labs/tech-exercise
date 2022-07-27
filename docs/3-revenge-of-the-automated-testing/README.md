@@ -34,4 +34,4 @@ There are lots of things we can do under the heading of `Quality Gates`, so deci
 * Image Security - <span style="color:blue;">[StackRox](https://www.stackrox.com)</span> - Finding vulnerabilities inside the images and hosts with StackRox
 * Image Signing - <span style="color:blue;">[sigstore](https://www.sigstore.dev)</span> - Sign your images with cosign
 * Load Testing - <span style="color:blue;">[locust](https://docs.locust.io/en/stable/index.html)</span> - Automated load tests in your pipeline
-* System Test - test the system before promoting to the next stage
+<!---* System Test - test the system before promoting to the next stage--->

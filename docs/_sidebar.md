@@ -38,9 +38,9 @@
   * [🏋️ Load Testing](3-revenge-of-the-automated-testing/9-load-testing.md)
     * [🌸 Jenkins](3-revenge-of-the-automated-testing/9a-jenkins.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/9b-tekton.md)
-  * [🤖 System Test](3-revenge-of-the-automated-testing/10-system-test.md)
-    * [🌸 Jenkins](3-revenge-of-the-automated-testing/10a-jenkins.md)
-    * [🐈 Tekton](3-revenge-of-the-automated-testing/10b-tekton.md)
+  <!---* [🤖 System Test](3-revenge-of-the-automated-testing/10-system-test.md) --->
+  <!---  * [🌸 Jenkins](3-revenge-of-the-automated-testing/10a-jenkins.md) --->
+  <!---  * [🐈 Tekton](3-revenge-of-the-automated-testing/10b-tekton.md) --->
   * [🐉 Here Be Dragons!](3-revenge-of-the-automated-testing/666-here-be-dragons.md)
 * [4. Return of the Monitoring](4-return-of-the-monitoring/README.md)
   * [🔭 Enable Monitoring](4-return-of-the-monitoring/1-enable-monitoring.md)
