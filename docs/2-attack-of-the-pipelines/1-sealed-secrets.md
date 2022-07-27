@@ -45,6 +45,14 @@ EOF
 
 3. Use `kubeseal` command line to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
 
+    <p class="warn">
+        ⛷️ <b>NOTE</b> ⛷️ - If you get an error "Error: cannot get sealed secret service: Unauthorized" from running the Kubeseal command, just re-login to OpenShift and run the command again. 
+    </p>
+
+    ```bash
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
+    ```
+
     ```bash#test
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
         -n ${TEAM_NAME}-ci-cd \
