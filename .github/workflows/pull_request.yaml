@@ -20,6 +20,15 @@ jobs:
       with:
         ref: ${{github.event.pull_request.head.sha}}
 
+      # Setting up helm binary
+    - name: Set up Helm
+      uses: azure/setup-helm@v1
+
+    - name: Helm Lint
+      run: |
+        cd deployments/kubernetes/chart/workshop-exercise
+        helm lint
+
     - name: Generate Tag
       id: generate_tag
       run: |
@@ -62,5 +71,5 @@ jobs:
       env:
        GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
       with:
-        message: '@${{ github.actor }} Image is available for testing. `docker pull ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}`'
+        message: "@${{ github.actor }} Image is available for testing. `docker pull ${{ env.IMAGE_REPOSITORY }}:$(echo ${{ steps.generate_tag.outputs.GIT_TAG }} | tr '[:upper:]' '[:lower:]')`"
         allow-repeats: false
