@@ -34,12 +34,16 @@ jobs:
 
       - name: Generate Tag
         id: generate_tag
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
+
+      - name: Print new tag
+        run: |
+          NEW_TAG=${{ steps.generate_tag.outputs.new_tag }}
 
       - name: Generate image repository path
         run: |
