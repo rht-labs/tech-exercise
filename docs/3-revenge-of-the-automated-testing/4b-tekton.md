@@ -24,7 +24,7 @@
 
 4. Let's have a look at how we use these tools from the command line.
 
-    By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. So we will only see this on the command line:
+    By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. Let's see this in action on the command line:
 
     ```bash
     mvn checkstyle:check
@@ -93,7 +93,7 @@
 
     We use these phases in out build pipeline. The full lifecycle reference is <span style="color:blue;">[here.](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference)</span>
 
-    We use the checkstyle plugin in Sonarqube which is found under **Rues** - **Java** language, **Repository**
+    **If you have done the Sonarqube item, you'll see additional information in there....** We use the checkstyle plugin in Sonarqube which is found under **Rules** - **Java** language, **Repository**
 
     <p class="warn"><b>TIP</b> You can find the available projects and reports in Sonarqube by navigating to <span style="color:blue;"><a href="https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/">https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/</a></span></p>
 
