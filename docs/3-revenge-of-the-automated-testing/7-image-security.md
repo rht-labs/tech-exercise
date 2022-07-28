@@ -107,11 +107,11 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     git push
     ```
 
-5. As a team we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
+5. As a team we are going to update a *Build* policy that we will use later in the exercise. Browse to the *Platform Configuration -> Policy Management* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
 
     ![images/acs-find-policy.png](images/acs-find-policy.png)
 
-6. Clone this Policy so we can edit it, give it a new name.
+6. Clone this Policy by clicking three dots on the right so we can edit it, give it a new name.
 
     ![images/acs-clone-policy.png](images/acs-clone-policy.png)
 
