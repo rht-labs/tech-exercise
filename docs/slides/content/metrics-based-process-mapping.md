@@ -91,7 +91,7 @@ about how the work is actually done.
 
 * Frequency of deployments (more frequent is better)
 * Lead time for new features from ideation through delivery (shorter is better)
-* Frequency of change failures (fewer changes are better)
+* Frequency of change failures (fewer failures are better)
 * Mean-time-to-repair, or MTTR (shorter recovery times are better)
 
 
