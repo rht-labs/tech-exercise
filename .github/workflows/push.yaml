@@ -25,7 +25,7 @@ jobs:
 
       # Setting up helm binary
       - name: Set up Helm
-        uses: azure/setup-helm@v1
+        uses: azure/setup-helm@v3
 
       - name: Helm Lint
         run: |
@@ -37,7 +37,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
-          WITH_V: false
+          WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
 
@@ -82,10 +82,10 @@ jobs:
       # Generate tag for operator without "v"
       - name: Generate Operator Tag
         id: generate_operator_tag
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
-          WITH_V: false
+          WITH_V: true
           DEFAULT_BUMP: patch
           DRY_RUN: true
 
