@@ -93,12 +93,16 @@ jobs:
       - name: Update Chart Version
         env:
           VERSION: ${{ steps.generate_operator_tag.outputs.new_tag }}
-        run: make bump-chart
+        run: |
+          sed -i "s/^version:.*/version: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/Chart.yaml
+          sed -i "s/^appVersion:.*/appVersion: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/Chart.yaml
+          sed -i "s/tag:.*/tag: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
+          sed -i "s/version:.*/version: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
 
       - name: Helm Template
         run: |
-          helm template reloader deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
-          helm template reloader deployments/kubernetes/chart/workshop-exercise/  --output-dir deployments/kubernetes/manifests/ && mv deployments/kubernetes/manifests/workshop-exercise/templates/* deployments/kubernetes/manifests/ && rm -r deployments/kubernetes/manifests/workshop-exercise
+          helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
+          helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/  --output-dir deployments/kubernetes/manifests/ && mv deployments/kubernetes/manifests/workshop-exercise/templates/* deployments/kubernetes/manifests/ && rm -r deployments/kubernetes/manifests/workshop-exercise
 
       # Publish helm chart
       - name: Publish Helm chart
