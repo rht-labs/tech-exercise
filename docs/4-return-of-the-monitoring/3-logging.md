@@ -27,7 +27,7 @@
 
     ![kibana-create-index-timestamp](./images/kibana-create-index-timestamp.png)
 
-6. Go to the Kibana Dashboard - Hit `Discover` in the top right hand corner, we should now see all logs across all pods. It's a lot of information but we can query it easily.
+6. Go to the Kibana Dashboard - Hit `Discover` in the top left hand corner, we should now see all logs across all pods. It's a lot of information but we can query it easily.
 
     ![kibana-discover](./images/kibana-discover.png)
 
