@@ -85,7 +85,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
-          WITH_V: true
+          WITH_V: false
           DEFAULT_BUMP: patch
           DRY_RUN: true
 
