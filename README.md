@@ -1,6 +1,6 @@
 [![Markdown Rundoc Testsuite](https://github.com/rht-labs/tech-exercise/actions/workflows/run_tests.yaml/badge.svg)](https://github.com/rht-labs/tech-exercise/actions/workflows/run_tests.yaml)
 
-## TL500 Mono Repo
+## Stakater Workshop Exercise
 
 This monorepo holds the content for the TL500 (aka DO500). The structure is roughly as follows:
 

@@ -20,6 +20,15 @@ jobs:
       with:
         ref: ${{github.event.pull_request.head.sha}}
 
+      # Setting up helm binary
+    - name: Set up Helm
+      uses: azure/setup-helm@v1
+
+    - name: Helm Lint
+      run: |
+        cd deployments/kubernetes/chart/workshop-exercise
+        helm lint
+
     - name: Generate Tag
       id: generate_tag
       run: |
@@ -48,19 +57,19 @@ jobs:
         password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
 
     - name: Push To dockerhub
-        id: push-to-docker
-        uses: redhat-actions/push-to-registry@v2
-        with:
-          image: ${{ steps.build-image.outputs.image }}
-          tags: ${{ steps.build-image.outputs.tags }}
-          registry: ${{ env.REGISTRY }}
-          username: ${{ secrets.STAKATER_DOCKERHUB_USERNAME }}
-          password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
+      id: push-to-docker
+      uses: redhat-actions/push-to-registry@v2
+      with:
+        image: ${{ steps.build-image.outputs.image }}
+        tags: ${{ steps.build-image.outputs.tags }}
+        registry: ${{ env.REGISTRY }}
+        username: ${{ secrets.STAKATER_DOCKERHUB_USERNAME }}
+        password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
 
     - name: Comment on PR
       uses: mshick/add-pr-comment@v1
       env:
        GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
       with:
-        message: '@${{ github.actor }} Image is available for testing. `docker pull ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}`'
+        message: "@${{ github.actor }} Image is available for testing. `docker pull ${{ env.IMAGE_REPOSITORY }}:${{ steps.generate_tag.outputs.GIT_TAG }}`"
         allow-repeats: false

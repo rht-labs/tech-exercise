@@ -1,0 +1,141 @@
+name: Push
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CONTAINER_FILE_PATH: docs/Containerfile
+  REGISTRY: docker.io
+  HELM_REGISTRY_URL: "https://stakater.github.io/stakater-charts"
+
+jobs:
+  build:
+    name: Build
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+
+      # Setting up helm binary
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+
+      - name: Helm Lint
+        run: |
+          cd deployments/kubernetes/chart/workshop-exercise
+          helm lint
+
+      - name: Generate Tag
+        id: generate_tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
+
+      - name: Print new tag
+        run: |
+          NEW_TAG=${{ steps.generate_tag.outputs.new_tag }}
+
+      - name: Generate image repository path
+        run: |
+          echo IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+
+      - name: Log in to the dockerhub
+        uses: redhat-actions/podman-login@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.STAKATER_DOCKERHUB_USERNAME }}
+          password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
+
+      - name: Build Image
+        id: build-image
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: ${{ env.IMAGE_REPOSITORY }}
+          tags: ${{ steps.generate_tag.outputs.new_tag }}
+          containerfiles: |
+            ${{ env.CONTAINER_FILE_PATH  }}
+
+      - name: Push To dockerhub
+        id: push-to-docker
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build-image.outputs.image }}
+          tags: ${{ steps.build-image.outputs.tags }}
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.STAKATER_DOCKERHUB_USERNAME }}
+          password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
+
+      ##############################
+      ## Add steps to generate required artifacts for a release here(helm chart, operator manifest etc.)
+      ##############################
+
+      # Generate tag for operator without "v"
+      - name: Generate Operator Tag
+        id: generate_operator_tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          WITH_V: false
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
+
+      # Update chart tag to the latest semver tag
+      - name: Update Chart Version
+        env:
+          VERSION: ${{ steps.generate_operator_tag.outputs.new_tag }}
+        run: |
+          sed -i "s/^version:.*/version: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/Chart.yaml
+          sed -i "s/^appVersion:.*/appVersion: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/Chart.yaml
+          sed -i "s/tag:.*/tag: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
+          sed -i "s/version:.*/version: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
+
+      #- name: Helm Template
+      #  run: |
+      #    helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
+
+      # Publish helm chart
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
+        with:
+          branch: master
+          repository: stakater-charts
+          target_dir: docs
+          token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          charts_dir: deployments/kubernetes/chart/
+          charts_url: ${{ env.HELM_REGISTRY_URL }}
+          owner: stakater
+          linting: on
+          commit_username: stakater-user
+          commit_email: stakater@gmail.com
+          
+      # Commit back changes
+      - name: Commit files
+        run: |
+          git config --local user.email "stakater@gmail.com"
+          git config --local user.name "stakater-user"
+          git status 
+          git add .
+          git commit -m "[skip-ci] Update artifacts" -a
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+
+      - name: Push Latest Tag
+        uses: anothrNick/github-tag-action@1.26.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
