@@ -1,32 +1,32 @@
 ## User Workload Monitoring
 
-> OpenShift's has monitoring capabilities built in. It deploys the prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
+> SAAP (Stakater App Agility Platform) has monitoring capabilities built in. It deploys the prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
 
-### OCP Developer view Monitoring (pods etc)
+### SAAP Developer view Monitoring (pods etc.)
 
-> Out of the box monitoring in OpenShift - this gives us the Kubernetes metrics for our apps such as Memory usage & CPU etc.
+> Out of the box monitoring in SAAP gives us the Kubernetes metrics for our apps such as Memory, CPU, Storage, etc.
 
-1. To enable the User Workload Monitoring, a one line change has to be made to a config map. This is cluster wide so it's already been done for you, but if you're interested how the <span style="color:blue;">[docs are here](https://docs.openshift.com/container-platform/4.9/monitoring/enabling-monitoring-for-user-defined-projects.html#enabling-monitoring-for-user-defined-projects_enabling-monitoring-for-user-defined-projects).</span>
+1. User Workload Monitoring is enabled by default in SAAP.
 
-    On the OpenShift UI, go to *Observe*, it should show basic health indicators
+    On the SAAP UI, go to *Observe*, it should show basic health indicators
 
-    ![petbattle-default-metrics](images/petbattle-default-metrics.png)
+    ![product-review-default-metrics](images/product-review-default-metrics.png)
 
-2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your test namespace
+2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
 
     ```bash
-    sum(container_memory_working_set_bytes{container!='',namespace='<TEAM_NAME>-test'}) by (pod)
+    sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-test'}) by (pod)
     ```
 
-    ![petbattle-promql](images/petbattle-promql.png)
+    ![product-review-promql](images/product-review-promql.png)
 
 ### Add Grafana & Service Monitor
 
 > Let's super charge our monitoring with specific information about our cat based services ...
 
-1. Lets Enable ServiceMonitor in PetBattle apps.
+1. Lets Enable ServiceMonitor in ProductReview apps.
 
-    OpenShift gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or active users etc) alongside the base ones, we need another object: _ServiceMonitor_. ServiceMonitor will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
+    SAAP gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or number of reviews or active users etc) alongside the base ones, we need another object: _ServiceMonitor_. ServiceMonitor will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
     **Example** ServiceMonitor object:
 
@@ -47,12 +47,14 @@
           app: my-app
     </code></pre></div>
 
-    Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
+    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 
-    Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
+    Our Helm Chart for nordmart-review api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
     ```yaml
-          servicemonitor: true
+        ## Service Monitor
+        serviceMonitor:
+            enabled: true    
     ```
 
     Then push it to the git repo.
@@ -67,17 +69,15 @@
     If you want to verify the object exists you can run from your terminal:
 
     ```bash
-    oc get servicemonitor -n ${TEAM_NAME}-test -o yaml
+    oc get servicemonitor -n ${TENANT_NAME}-dev -o yaml
     ```
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
+2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes grafana installation. Add an existing dashboard to norwdmart-review api; the dashboard can be found `nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
 
     ```yaml
-      # Grafana
-      - name: grafana
-        enabled: true
-        source: https://github.com/petbattle/pet-battle-infra.git
-        source_path: grafana
+        # Grafana Dashboard
+        grafanaDashboard:
+            enabled: true
     ```
 
 3. Commit the changes to the repo as you've done before
@@ -85,16 +85,13 @@
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m "📈 Grafana added 📈"
+    git commit -m "📈 Grafana dashboard enabled 📈"
     git push
     ```
 
-4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for Pet Battle;
+4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for nordmart-review api;
 
-    ```bash
-    # get the route and open it in your browser
-    echo https://$(oc get route grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
-    ```
+    ![forecastle-workload-grafana](images/forecastle-workload-grafana.png)
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
 
@@ -109,9 +106,9 @@
     curl -vL -X POST -d '{"OK":"🐶"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
     ```
 
-6. Back in Grafana, we should see some data populated into the `4xx` and `5xx` boards...
+6. Back in Grafana, we should see some data populated into the boards...
 
-    ![grafana-http-reqs](./images/grafana-http-reqs.png)
+    ![grafana-http-reqs](./images/product-review-grafana-dashboard.png)
 
 ### Create a Dashboard
 
