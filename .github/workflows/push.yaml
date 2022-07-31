@@ -102,7 +102,6 @@ jobs:
       - name: Helm Template
         run: |
           helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
-          helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/  --output-dir deployments/kubernetes/manifests/ && mv deployments/kubernetes/manifests/workshop-exercise/templates/* deployments/kubernetes/manifests/ && rm -r deployments/kubernetes/manifests/workshop-exercise
 
       # Publish helm chart
       - name: Publish Helm chart
