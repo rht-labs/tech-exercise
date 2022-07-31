@@ -132,7 +132,7 @@
 4. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Panel settings, set the title to something sensible and add the query below. Hit save!
 
     ```bash
-    sum(kube_pod_status_ready{namespace="<TEAM_NAME>-test",condition="true"})
+    sum(kube_pod_status_ready{namespace="<TENANT_NAME>-dev",condition="true"})
     ```
 
     ![new-panel](./images/new-panel.png)
@@ -140,12 +140,12 @@
 5. With the new panel on our dashboard, let's see it in action by killing off some pods in our namespace
 
     ```bash
-    oc delete pods -l app.kubernetes.io/instance=pet-battle-api -n ${TEAM_NAME}-test
-    oc delete pods -l app.kubernetes.io/instance=pet-battle -n ${TEAM_NAME}-test
+    oc delete pods -l app=review -n ${TENANT_NAME}-dev
+    oc delete pods -l app=review-web -n ${TENANT_NAME}-dev
     ```
 
-    <!--![grafana-less-pods](./images/grafana-less-pods.png) -->
-
+    ![grafana-less-pods](./images/grafana-less-pods.png)
+    
     <p class="tip">
     🐌 THIS IS NOT GITOPS - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
     </p>
