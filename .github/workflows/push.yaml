@@ -99,9 +99,9 @@ jobs:
           sed -i "s/tag:.*/tag: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
           sed -i "s/version:.*/version: v$(VERSION)/" deployments/kubernetes/chart/workshop-exercise/values.yaml
 
-      - name: Helm Template
-        run: |
-          helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
+      #- name: Helm Template
+      #  run: |
+      #    helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
 
       # Publish helm chart
       - name: Publish Helm chart
