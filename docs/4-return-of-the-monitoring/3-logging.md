@@ -1,6 +1,6 @@
 ## Aggregated Logging
 
-> SAAP's built in logging .... Something something installed operator before hand. Very memory intensive, logging is deployed to the infra nodes
+> SAAP's built in logging... Something installed operator before hand. Very memory intensive, logging is deployed to the infra nodes!
 
 1. Observe logs from any given container:
 
@@ -9,7 +9,7 @@
     oc logs `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TENANT_NAME}-dev` --since 10m
     ```
 
-    By default, these logs are not stored in a database, but there are a number of reasons to store them (ie troubleshooting, legal obligations..)
+    By default, these logs are not stored in a database, but there are a number of reasons to store them (i.e. troubleshooting, legal obligations..)
 
 2. SAAP magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected by FluentD and added to Elastic Search. This makes indexing and querrying logs very easy. Kibana is added on top for easy visualisation of the data. Let's take a look at Kibana now. Back to forecastle
 
@@ -39,8 +39,8 @@
 8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via rsh and generate logs.
 
     ```bash
-    oc project ${TEAM_NAME}-test
-    oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TEAM_NAME}-test`
+    oc project ${TENANT_NAME}-test
+    oc rsh `oc get po -l app=review -o name -n ${TENANT_NAME}-dev`
     ```
 
     Then inside the container you've just remote logged on to we'll add some nonsense messages to the logs:
@@ -58,7 +58,7 @@
 9. Back on Kibana we can filter and find these messages with another query:
 
     ```yaml
-    kubernetes.namespace_name="<TEAM_NAME>-test" AND kubernetes.container_name=mongodb AND message=🦄🦄🦄🦄
+    kubernetes.namespace_name:"<TENANT_NAME>-dev" AND kubernetes.container_name:"review" AND message:"🦄🦄🦄🦄"
     ```
 
-    ![kibana-mongodb-unicorn](./images/kibana-mongodb-unicorn.png)
+    ![kibana-review-unicorn](./images/kibana-review-unicorn.png)
