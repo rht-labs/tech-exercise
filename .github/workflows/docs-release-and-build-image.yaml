@@ -13,13 +13,6 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
-      - name: Set image tags
-        id: image_tags
-        run: |
-          echo -n ::set-output name=IMAGE_TAGS::
-           # exposes variable VERSION
-          TAGS=('${{ github.ref_name }}')
-          echo "${TAGS[*]}"
       - name: Build image
         id: build_image
         uses: redhat-actions/buildah-build@v2.6
@@ -28,7 +21,7 @@ jobs:
           dockerfiles: |
             ./${{ env.context }}/Containerfile
           image: ${{ env.image_name }}
-          tags: "${{ steps.image_tags.outputs.IMAGE_TAGS }}"
+          tags: "${{ github.ref_name }}"
       - name: Push to Quay
         id: push_to_quay
         uses: redhat-actions/push-to-registry@v2
