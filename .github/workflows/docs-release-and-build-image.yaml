@@ -1,0 +1,33 @@
+name: Build and publish tl500-tech-exercise image
+
+on:
+  release:
+    types: [published]
+
+
+jobs:
+  build-and-push:
+    env:
+      context: docs
+      image_name: tl500-tech-exercise
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build image
+        id: build_image
+        uses: redhat-actions/buildah-build@v2.6
+        with:
+          context: ${{ env.context }}
+          dockerfiles: |
+            ./${{ env.context }}/Containerfile
+          image: ${{ env.image_name }}
+          tags: "${{ github.ref_name }}"
+      - name: Push to Quay
+        id: push_to_quay
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build_image.outputs.image }}
+          registry: ${{ secrets.REGISTRY_URI }}/${{ secrets.REGISTRY_REPOSITORY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+          tags: ${{ steps.build_image.outputs.tags }}
