@@ -99,7 +99,7 @@
       },
       pagination: {
         crossChapter: true
-      },
+    },
       plugins: [
         function(hook) {
           hook.beforeEach(function(content) {
@@ -125,8 +125,6 @@
         }
       ],
       search: 'auto', // default
-      variablesFile : 'vars/tl500-variables.json',
-      variablesFileType : 'json',
       vueComponents: { }
     }    
   </script>
@@ -137,7 +135,6 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>  
-  <script src="//unpkg.com/docsify-variables/dist/docsify-variables.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script>
