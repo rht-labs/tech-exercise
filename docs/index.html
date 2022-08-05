@@ -104,7 +104,7 @@
         function(hook) {
           hook.beforeEach(function(content) {
 
-            fetch('/config/all.json')
+            fetch('config/all.json')
             .then(function(response) {
               return response.json();
             }).then(function(jsonData) {
