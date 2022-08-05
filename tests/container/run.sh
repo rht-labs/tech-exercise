@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# capture en vars, othwerwise use default values
+# capture en vars, otherwise use default values
 TECH_EXERCISE_REPO="${REPO:=https://github.com/rht-labs/tech-exercise.git}"
 TECH_EXERCISE_BRANCH="${BRANCH:=main}"
 
