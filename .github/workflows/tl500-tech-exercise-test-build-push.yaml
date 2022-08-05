@@ -6,7 +6,7 @@ on:
     tags:
       - '*'
     paths:
-      - codereadyworkspaces/tests
+      - tests/container/VERSION
       - .github/workflows/tl500-tech-exercise-test-build-push.yaml
 jobs:
   build:
