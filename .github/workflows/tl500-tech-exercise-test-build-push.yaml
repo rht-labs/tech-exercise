@@ -33,7 +33,7 @@ jobs:
         with:
           context: ${{ env.context }}
           dockerfiles: |
-            ./${{ env.context }}/Conatinerfile
+            ./${{ env.context }}/Containerfile
           image: ${{ env.image_name }}
           tags: "${{ steps.image_tags.outputs.IMAGE_TAGS }}"
       - name: Push to Quay
