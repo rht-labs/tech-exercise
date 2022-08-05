@@ -6,7 +6,7 @@ on:
     tags:
       - '*'
     paths:
-      - tests/container/VERSION
+      - tests/
       - .github/workflows/tl500-tech-exercise-test-build-push.yaml
 jobs:
   build:
