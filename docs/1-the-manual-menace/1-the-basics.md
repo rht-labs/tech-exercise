@@ -7,7 +7,7 @@
 
     <p class="warn">
     If the workspace has not been set up for you, you can create one from this devfile. On CodeReady Workspaces, "Create Workspace > Custom Workspace". Enter this URL to load the TL500 stack:</br>
-    <span style="color:blue;"><a href="https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml">https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml</a><span>
+    <span style="color:blue;"><a id=crw_dev_filelocation href=""></a><span>
     </p>
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-tl500` from the menu.

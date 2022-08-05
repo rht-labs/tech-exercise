@@ -103,6 +103,18 @@
       plugins: [
         function(hook) {
           hook.beforeEach(function(content) {
+
+            fetch('/config/all.json')
+            .then(function(response) {
+              return response.json();
+            }).then(function(jsonData) {
+              console.info("🥳 YAY! Found the config file 🥳", jsonData);
+              document.getElementById('crw_dev_filelocation').setAttribute('href', jsonData.devfile);
+              document.getElementById('crw_dev_filelocation').innerHTML = jsonData.devfile;
+            }).catch(function(err) {
+              console.warn("😭 Opps, Cannot find the config file 😭", err);
+            })
+
             // Invoked each time before parsing the Markdown file.
             const teamName = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '<TEAM_NAME>';
             const clusterDomain = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '<CLUSTER_DOMAIN>';
@@ -111,6 +123,8 @@
                     .replaceAll('<CLUSTER_DOMAIN>', clusterDomain)
                     .replaceAll('<GIT_SERVER>', gitServer);
           });
+
+
 
           const footer = `<hr/>
             <footer>
