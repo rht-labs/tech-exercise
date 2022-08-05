@@ -99,26 +99,26 @@ gitlab_personal_access_token() {
     gitlabEncodedPassword=$(echo ${GITLAB_PASSWORD} | perl -MURI::Escape -ne 'chomp;print uri_escape($_)')
     # get csrf from login page
     gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${gitlabEncodedPassword} | base64)"
-    body_header=$(curl -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
+    body_header=$(curl -k -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # login
-    curl -s -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
+    curl -k -s -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
                         --data "username=${GITLAB_USER}&password=${gitlabEncodedPassword}" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         > /dev/null
     # generate personal access token form
-    body_header=$(curl -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
+    body_header=$(curl -k -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
     csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # revoke them all 💀 !!
     revoke=$(echo $body_header | perl -nle 'print join " ", m/personal_access_tokens\/(\d+)/g;')
     if [ ! -z "$revoke" ]; then
         for x in $revoke; do
             echo "💀 Revoking $x ..."
-            curl -s -o /dev/null -L -b /tmp/cookies.txt -X POST "https://${GIT_SERVER}/profile/personal_access_tokens/$x/revoke" --data-urlencode "authenticity_token=${csrf_token}" --data-urlencode "_method=put"
+            curl -k -s -o /dev/null -L -b /tmp/cookies.txt -X POST "https://${GIT_SERVER}/profile/personal_access_tokens/$x/revoke" --data-urlencode "authenticity_token=${csrf_token}" --data-urlencode "_method=put"
         done
     fi
     # scrape the personal access token from the response
-    body_header=$(curl -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
+    body_header=$(curl -k -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
     personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
@@ -195,7 +195,7 @@ gitlab_delete_group() {
     ret=1; i=0
     until [ $ret = "202" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
         echo "🧁 Waiting for 202 response to delete group ${TEAM_NAME}"
         sleep 5
         ((i=i+1))
@@ -219,7 +219,7 @@ gitlab_recreate_project() {
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
         echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
@@ -232,7 +232,7 @@ gitlab_recreate_project() {
     ret=1; i=0
     until [ $ret = "201" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
         echo "🍻 Waiting for 201 response to create ${projectname}"
         sleep 5
         ((i=i+1))
@@ -256,7 +256,7 @@ gitlab_delete_project() {
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
         echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
@@ -407,7 +407,7 @@ wait_for_nexus_server() {
 wait_for_pet_battle_api() {
     local i=0
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
-    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
+    until [ $(curl -k -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
         echo "🥯 Waiting for 200 response from ${HOST}"
         sleep 10
@@ -423,7 +423,7 @@ wait_for_pet_battle_api() {
 wait_for_pet_battle() {
     local i=0
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
-    until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
+    until [ $(curl -k -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
         echo "🧅 Waiting for 200 response from ${HOST}"
         sleep 10
