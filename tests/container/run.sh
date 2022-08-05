@@ -1,11 +1,15 @@
 #!/bin/bash
 
+# capture en vars, othwerwise use default values
+TECH_EXERCISE_REPO="${REPO:=https://github.com/rht-labs/tech-exercise.git}"
+TECH_EXERCISE_BRANCH="${BRANCH:=main}"
+
 # setup container user
 /usr/local/bin/entrypoint.sh
 
 # run the test suite
-git clone https://github.com/rht-labs/tech-exercise.git 2>&1
-cd tech-exercise && git checkout main && cd tests
+git clone "${TECH_EXERCISE_REPO}" 2>&1
+cd tech-exercise && git checkout "${TECH_EXERCISE_BRANCH} && cd tests
 
 # nuke and exit
 if [ ! -z "${NUKE_ONLY}" ]; then
