@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     env:
-      context: test/container
+      context: tests/container
       image_name: tl500-tech-exercise-test
     runs-on: ubuntu-18.04
     steps:
