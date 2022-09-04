@@ -6,21 +6,21 @@
 
     _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
 
-    Below scenario calls `/cats` endpoint and fails the test if:
+    Below scenario calls `/api/review/{productId}` endpoint and fails the test if:
     - 1% of calls are not 200 (OK)
-    - Total average response time to `/cats` endpoint is more than 200 ms
+    - Total average response time to `/api/review/{productId}` endpoint is more than 200 ms
     - The max response time in 90 percentile is higher than 800 ms
 
     ```bash
-    cat << EOF > /projects/pet-battle-api/locustfile.py
+    cat << EOF > /projects/nordmart-review/locustfile.py
 
     import logging
     from locust import HttpUser, task, events
 
-    class getCat(HttpUser):
+    class getReviews(HttpUser):
         @task
         def cat(self):
-            self.client.get("/cats")
+            self.client.get("/api/review/{productId}")
 
     @events.quitting.add_listener
     def _(environment, **kw):
@@ -55,7 +55,7 @@
         - name: APPLICATION_NAME
           description: Name of the application
           type: string
-        - name: TEAM_NAME
+        - name: TENANT_NAME
           description: Name of the team that doing this exercise :)
           type: string
         - name: WORK_DIRECTORY
@@ -102,16 +102,16 @@
     git push
     ```
 
-5. Now let's trigger the pet-battle-api pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
+5. Now let's trigger the nordmart-review pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
 
     ```bash
-    cd /projects/pet-battle-api
+    cd /projects/nordmart-review
     git add locustfile.py
     git commit -m  "🌀 ADD - locustfile for load testing 🌀"
     git push
     ```
 
-    🪄 Observe the **pet-battle-api** pipeline running with the **load-testing** task.
+    🪄 Observe the **nordmart-review** pipeline running with the **load-testing** task.
 
     If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
 
