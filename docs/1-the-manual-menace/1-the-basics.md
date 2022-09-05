@@ -1,4 +1,14 @@
 ## 🐌 The Basics - CRW, OCP & Helm
+
+### Stakater Cloud
+
+1. Login to Stakater Cloud https://cloud.stakater.com/
+
+    ![sc-login-page](./images/stakater-cloud-login-page.png)
+
+2. Enter the domain name `workshop`
+
+
 ### CodeReady Workspaces setup
 
 1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
