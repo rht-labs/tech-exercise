@@ -14,7 +14,7 @@ spec:
     name: {{ include "workshop-exercise.fullname" . }}
     weight: 100
   port:
-    targetPort: app
+    targetPort: http
 {{- if .Values.route.tls }}
   tls:
 {{- toYaml .Values.route.tls | nindent 4 }}
