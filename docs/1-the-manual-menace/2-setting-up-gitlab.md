@@ -75,18 +75,27 @@ We are going to create a Gitlab Personal Access Token (PAT). The token is a more
 ## Importing Nordmart projects
 > In this part, we will import the projects we need to deploy on the cluster.
 
+### Stakater Nordmart Review
 1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
        ![create-project-home](images/1-2-7-create-project.png)
 
 2. Now select the "Repository by URL" option and paste in the following repository URL:
     ```
-        https://github.com/stakater-lab/stakater-nordmart-review
+        Project Name: stakater-nordmart-review
+        
+        Git Repository URL: https://github.com/stakater-lab/stakater-nordmart-review
     ```
       ![import-nordmart-review](images/1-2-6-create-repo.png)
 
+### Stakater Nordmart Review UI
+1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
+       ![create-project-home](images/1-2-7-create-project.png)
 
-    Repeat the above process for the following repository:
+2. Now select the "Repository by URL" option and paste in the following repository URL:
+    ```
+        Project Name: stakater-nordmart-review-ui
+        
+        Git Repository URL: https://github.com/stakater-lab/stakater-nordmart-review-ui
+    ```
+      ![import-nordmart-review-ui](images/1-2-6-create-repo.png)
 
-    ```
-        https://github.com/stakater-lab/stakater-nordmart-review-ui
-    ```
