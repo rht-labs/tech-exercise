@@ -44,7 +44,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 4. Login to Openshift UI, Select your project  **<TENANT_NAME>-test** and Navigate to Pods under Workloads in left side bar. 
 
     <p align="center" width="100%">
-    <img width="%" src="images/1-6-2-oc-pods-ui">
+    <img width="%" src="images/1-6-2-oc-pods-ui.jpg">
     </p>
 
 5. You will see a pod named review-web / <application_name> created. Helm also created the following supporting resources.
@@ -64,14 +64,14 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
  - ServiceMonitor
 
 
-6. Navigate to Routes under Network in left side bar. Our application is available via this endpoint. 
+6. Navigate to Routes under Network in left side bar. Our application is available via this route location. 
 
     <p align="center" width="100%">
-    <img width="%" src="images/1-6-3-oc-route-ui">
+    <img width="%" src="images/1-6-3-oc-route-ui.jpg">
     </p>
 
-    Lets send a curl request to this endpoint and see the response.
-        
+7. Lets send a curl request to this endpoint and see the response.
+
         # Get Review
         curl <ROUTE_LOCATION>:8080/api/review/329199
 
