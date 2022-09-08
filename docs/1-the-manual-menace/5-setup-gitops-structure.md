@@ -1,5 +1,5 @@
 # Setup GitOps Repository Structure :rocket: :rocket:
-
+## Introduction
 This section is focused on creating a gitops structure for your tenant that will contains application helm charts, tekton pipelines and their respective argocd applications.
 
 We will create the following types of folders in our gitops repo you ve made in section:
@@ -11,7 +11,7 @@ This folder will contain the pipeline to be run for application.
 3. **For ArgoCD Apps**
 The folder contains argocd applications for all applications & pipelines.  
 
-Lets get started,
+## Lets get started,
 
 1. Lets clone our gitops repo that we created in the previous section 1b.
 
@@ -64,6 +64,8 @@ Lets get started,
             automated:
             prune: true
             selfHeal: true
+
+    > Also available at https://github.com/stakater/workshop-excercise/blob/main/deployments/argocd/gitops-argocd-app-template.yaml
 
     Using the above template, we will create 3 new files with our two nordmart applications and 1 tekton pipeline application.
 
