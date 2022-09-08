@@ -75,20 +75,6 @@ jobs:
           username: ${{ secrets.STAKATER_DOCKERHUB_USERNAME }}
           password: ${{ secrets.STAKATER_DOCKERHUB_PASSWORD }}
 
-      ##############################
-      ## Add steps to generate required artifacts for a release here(helm chart, operator manifest etc.)
-      ##############################
-
-      # Generate tag for operator without "v"
-      - name: Generate Operator Tag
-        id: generate_operator_tag
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
-          WITH_V: false
-          DEFAULT_BUMP: patch
-          DRY_RUN: true
-
       # Update chart tag to the latest semver tag
       - name: Update Chart Version
         env:
@@ -114,7 +100,7 @@ jobs:
           charts_dir: deployments/kubernetes/chart/
           charts_url: ${{ env.HELM_REGISTRY_URL }}
           owner: stakater
-          linting: on
+          linting: off
           commit_username: stakater-user
           commit_email: stakater@gmail.com
           
