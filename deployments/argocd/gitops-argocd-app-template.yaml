@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+name: <TENANT_NAME>-<FOLDER_NAME>
+namespace: openshift-gitops
+spec:
+destination:
+    namespace: <TENANT_NAME>
+    server: 'https://kubernetes.default.svc'
+project: <TENANT_NAME>
+source:
+    path: <FOLDER_IN_GITOPS_REPO>
+    repoURL: <GITOPS_REPO_URL>
+    targetRevision: HEAD
+syncPolicy:
+    automated:
+    prune: true
+    selfHeal: true
