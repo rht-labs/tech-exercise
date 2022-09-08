@@ -1,4 +1,4 @@
-## Deploy Nordmart Review and Nordmart Review UI
+## Deploy Stakater Nordmart Review
 
 ### Architecture
 
