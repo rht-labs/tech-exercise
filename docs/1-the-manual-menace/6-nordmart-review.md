@@ -47,7 +47,9 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
     <img width="%" src="images/1-6-2-oc-pods-ui.jpg">
     </p>
 
-5. You will see a pod named review-web / <application_name> created. Helm also created the following supporting resources.
+    You will see a pod with prefix **review**. This is application.applicationName in our values.yaml
+
+5. Helm chart also created the following supporting resources.
 
  - ServiceAccount
  - ConfigMap
