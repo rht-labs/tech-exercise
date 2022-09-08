@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  CONTAINER_FILE_PATH: docs/Containerfile
+  CONTAINER_FILE_PATH: docs/Dockerfile
   REGISTRY: docker.io
   HELM_REGISTRY_URL: "https://stakater.github.io/stakater-charts"
 
@@ -62,7 +62,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_REPOSITORY }}
           tags: ${{ steps.generate_tag.outputs.new_tag }}
-          containerfiles: |
+          dockerfiles: |
             ${{ env.CONTAINER_FILE_PATH  }}
 
       - name: Push To dockerhub
