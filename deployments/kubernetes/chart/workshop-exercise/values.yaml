@@ -8,7 +8,7 @@ port: 8080
 image:
   repository: stakater/workshop-excercise
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
+  # Overrides the image tag whose default is the chart appVersion. It is bumped by push workflow.
   tag: 0.0.2
 
 imagePullSecrets: []
