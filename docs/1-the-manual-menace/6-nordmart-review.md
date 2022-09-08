@@ -67,7 +67,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 6. Navigate to Routes under Network in left side bar. Our application is available via this endpoint. 
 
     <p align="center" width="100%">
-    <img width="%" src="images/1-6-2-oc-route-ui">
+    <img width="%" src="images/1-6-3-oc-route-ui">
     </p>
 
     Lets send a curl request to this endpoint and see the response.
