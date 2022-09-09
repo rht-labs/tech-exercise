@@ -6,7 +6,7 @@ To set up your workshop environment, go to **insert link** and enter `workshop` 
 
 
 
- ![login-page](./images/workshop_login.png)
+ ![login-page](docs/images/workshop_login.png)
  
  
  
@@ -14,7 +14,7 @@ To set up your workshop environment, go to **insert link** and enter `workshop` 
  
  
  
- ![login-page2](./images/workshop_login2.png)
+ ![login-page2](docs/images/workshop_login2.png)
  
  
  
@@ -22,7 +22,7 @@ To set up your workshop environment, go to **insert link** and enter `workshop` 
  
  
  
- ![register-page](./images/workshop_register.png)
+ ![register-page](docs/images/workshop_register.png)
  
  
  
@@ -30,7 +30,7 @@ To set up your workshop environment, go to **insert link** and enter `workshop` 
 
 
 
-![cluster-page](./images/cluster_management_page.png)
+![cluster-page](docs/images/cluster_management_page.png)
 
 
 
@@ -44,7 +44,7 @@ To access the Forecastle developer console, click on the menu button beside your
 
 
 
-![forecastle-page1](./images/forecastle_login_1.png)
+![forecastle-page1](docs/images/forecastle_login_1.png)
 
 
 
@@ -52,7 +52,7 @@ You will be brought to the `Forecastle` login page. Click on `LOG IN`
 
 
 
-![forecastle-page2](./images/forecastle_login_2.png)
+![forecastle-page2](docs/images/forecastle_login_2.png)
 
 
 
@@ -60,7 +60,7 @@ Log In with your `workshop` single sign-on.
 
 
 
-![login_sso-page](./images/workshop_sso_page_1.png)
+![login_sso-page](docs/images/workshop_sso_page_1.png)
 
 
 
@@ -68,7 +68,7 @@ Forecastle needs a few permissions to operate unperturbed in your cluster. Click
 
 
 
-![permission-page](./images/permission_page.png)
+![permission-page](docs/images/permission_page.png)
 
 
 
@@ -76,7 +76,7 @@ You will now be brought to the Forecastle console, where you can view all your t
 
 
 
-![forecastle_console-page2](./images/forecastle_console.png)
+![forecastle_console-page2](docs/images/forecastle_console.png)
 
 
 
@@ -88,7 +88,7 @@ Additionally, if you prefer the OpenShift Web Console, you can login by clicking
 
 
 
-![forecastle-page1](./images/forecastle_login_1.png)
+![forecastle-page1](docs/images/forecastle_login_1.png)
 
 
 
@@ -96,7 +96,7 @@ Log in with your Stakater `Workshop` single sign-on.
 
 
 
-![login_sso-page](./images/workshop_sso_page_1.png)
+![login_sso-page](docs/images/workshop_sso_page_1.png)
 
 
 
