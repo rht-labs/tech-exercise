@@ -31,6 +31,7 @@ activities. The `slides/content` are written in markdown and automatically publi
 * `pet-battle` - contains the application configs used by the tech exercise
 * `ubiquitous-journey` -  contains a lightweight fork of the rht-labs ci/cd stack
 * `tekton` - contains the OpenShift pipeline definitions used in the tech exercise.
+* `deployments` - contains the helm chart for openshift deployment
 
 ### 🏃‍♀️ Running the docs & slides site locally
 

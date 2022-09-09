@@ -1,0 +1,23 @@
+
+{{- if and .Values.route .Values.route.enabled }}
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: {{ .Values.route.name }} 
+  namespace: {{ .Release.Namespace }}
+spec:
+{{- if .Values.route.host }}
+  host: {{ .Values.route.host }} 
+{{- end }}
+  to:
+    kind: Service
+    name: {{ include "workshop-exercise.fullname" . }}
+    weight: 100
+  port:
+    targetPort: http
+{{- if .Values.route.tls }}
+  tls:
+{{- toYaml .Values.route.tls | nindent 4 }}
+{{- end }}
+  wildcardPolicy: None
+{{- end }}
