@@ -21,11 +21,12 @@ Unlike most CI/CD solutions, the Tekton pipeline definitions are not stored with
 
 
 The above chart contains all necessary resources needed to build and run a tekton pipeline. Some of the key things to note above are:
-
+* `workspace` - TODO
 * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
 * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
 * `triggers` folder stores the configuration for the webhooks. We will add WebHooks from gitlab to trigger our pipeline, using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
+### TODO ADD tasks explanation
 We will be populating the values file for this Chart to deploy our pipelines.
 
 1. Open up the nordmart-apps-gitops-config repository that we created in section 1 on GitLab.
@@ -63,17 +64,6 @@ We will be populating the values file for this Chart to deploy our pipelines.
         finally:
           - taskName: stakater-set-commit-status-v1
             name: set-commit-status-task-result
-          - taskName: stakater-notify-slack-v1
-            name: notify-slack
-            params:
-            - name: namespace
-            - name: author
-            - name: gitrevision
-            - name: repo
-              value: $(params.repoName)
-            - name: gitrepositoryurl
-            - name: tekton-base-url
-            - name: prnumber
         tasks:
           - taskName: stakater-set-commit-status-v1
             params:
