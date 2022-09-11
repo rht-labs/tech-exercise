@@ -24,6 +24,8 @@ jobs:
           echo "$version"
           echo '::echo::off'
           echo "::set-output name=tag::${VERSION}"
+        env:
+          VERSION: ${{ github.ref }}
 
       - name: Generate Tag
         id: generate_tag
