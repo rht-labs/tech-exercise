@@ -2,7 +2,7 @@
 
 ## Stakater Workshop Exercise
 
-This monorepo holds the content for the TL500 (aka DO500). The structure is roughly as follows:
+This monorepo holds the content for the Stakater DevSecOps with GitOps Workshop. The structure is roughly as follows:
 
 ```
 ...
@@ -12,9 +12,6 @@ This monorepo holds the content for the TL500 (aka DO500). The structure is roug
 │   ├── ...
 │   ├── facilitation
 │   └── slides
-├── pet-battle
-│   ├── stage
-│   └── test
 ├── quick-starts
 │   ├── README.md
 │   ├── ...
@@ -28,9 +25,7 @@ whereby
 
 * `docs` - contains the student and teacher guides for the technical exercises as well as the classroom
 activities. The `slides/content` are written in markdown and automatically published to the site when pushed to main.
-* `pet-battle` - contains the application configs used by the tech exercise
 * `ubiquitous-journey` -  contains a lightweight fork of the rht-labs ci/cd stack
-* `tekton` - contains the OpenShift pipeline definitions used in the tech exercise.
 * `deployments` - contains the helm chart for openshift deployment
 
 ### 🏃‍♀️ Running the docs & slides site locally

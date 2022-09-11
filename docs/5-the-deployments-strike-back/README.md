@@ -18,4 +18,4 @@ In this exercise, we will enable autoscale for frontend and run some tests to tr
 
 ## 🔨 Tools used in this exercise!
 
-* Nothing special. OpenShift's existing capabilities help us to deploy these methods.
+* Nothing special. SAAP's existing capabilities help us to deploy these methods.

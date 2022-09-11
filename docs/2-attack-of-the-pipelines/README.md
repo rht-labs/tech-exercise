@@ -12,10 +12,11 @@
 ## 🔮 Learning Outcomes
 
 - Can manage App Config via git
-- Can automatically build / bake / deploy software Jenkins or Tekton
+- Can automatically build / bake / deploy software via Tekton
 - Can store secrets used by my pipeline securely in git
 
 ## 🔨 Tools used in this exercise!
+
 * <span style="color:blue;">[SealedSecrets](https://github.com/bitnami-labs/sealed-secrets)</span> - Helps us to encrypt the secrets to store safely, even to a public repository.
 * <span style="color:blue;">[Tekton](https://tekton.dev/)</span> -  Cloud Native CI/CD tool, allowing us to build, test, and deploy anywhere.
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
