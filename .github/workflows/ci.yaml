@@ -1,0 +1,69 @@
+name: CI
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  build:
+    name: CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out nordmart-infra-gitops-config repo
+        uses: actions/checkout@v3
+        with:
+          repository: stakater/nordmart-infra-gitops-config
+          path: 'nordmart-infra-gitops-config'
+          token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+
+      - name: Update Workshop Version
+        env:
+          VERSION: ${{ github.ref }}
+        run: |
+          cd nordmart-infra-gitops-config
+          sed -i "s/^targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
+
+      - name: Commit files
+        run: |
+          cd nordmart-infra-gitops-config
+          git config --local user.email "stakater@gmail.com"
+          git config --local user.name "stakater-user"
+          git status 
+          git add dev-test/argocd-apps/workshop-exercise.yaml
+          git commit -m "[skip-ci] Update workshop exercise" -a
+
+      # Push workshop-exercise.yaml with Updated Version
+      - name: Push changes
+        shell: bash {0}
+        run: |
+          cd nordmart-infra-gitops-config
+          git config --local user.email "stakater@gmail.com"
+          git config --local user.name "stakater-user"
+          git remote set-url origin https://x-access-token:${{ secrets.STAKATER_GITHUB_TOKEN }}@github.com/stakater/nordmart-infra-gitops-config
+          git push origin
+          if [ $? -eq 0 ]; then
+              echo OK Pushed Succesfully.
+          else
+            for i in 1 2 3
+            do
+              echo "Trying Push Again Attempt:" $i
+              git pull --rebase --strategy-option theirs
+              if [ $? -eq 0 ]; then
+                  echo OK Pulled
+              else
+                  continue
+              fi
+              git push origin
+              if [ $? -eq 0 ]; then
+                  echo OK Pushed
+                  break
+              else
+                  if [ $i -eq 3 ];then
+                  echo "Fail: Couldnt Push to Remote"
+                  exit 1
+                  fi
+                  continue
+              fi
+            done
+          fi
