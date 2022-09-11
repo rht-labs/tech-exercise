@@ -10,17 +10,45 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check out code
+        id: checkout
+        uses: actions/checkout@v3
+        env:
+          VERSION: ${{ github.ref }}
+        with:
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 2  # to be able to obtain files changed in the latest commit
+      - run: |
+          echo "::set-output name=tag::${VERSION}"
+
       - name: Check out nordmart-infra-gitops-config repo
+        id: checkout-ci
         uses: actions/checkout@v3
         with:
           repository: stakater/nordmart-infra-gitops-config
           path: 'nordmart-infra-gitops-config'
           token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
-      - run: mv nordmart-infra-gitops-config /home/runner/work/nordmart-infra-gitops-config
+      - run: |
+          path="$(pwd)"
+          files="$(ls)"
+          echo '::echo::on'
+          echo "$path"
+          echo "$files"
+          echo '::echo::off'
+          mv nordmart-infra-gitops-config /home/runner/work/nordmart-infra-gitops-config
+          echo '::echo::on'
+          echo "$path"
+          echo "$files"
+          echo '::echo::off'
+          cd /home/runner/work/nordmart-infra-gitops-config
+          echo '::echo::on'
+          echo "$path"
+          echo "$files"
+          echo '::echo::off'
 
       - name: Update Workshop Version
         env:
-          VERSION: ${{ github.ref }}
+          VERSION: ${{ steps.checkout.outputs.tag }}
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
           sed -i "s/^targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
