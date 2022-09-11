@@ -6,7 +6,7 @@
 
 
 
- ![login-page](./images/workshop_login.png)
+ ![login-page](./images/workshop-login.png)
  
  
  
@@ -14,30 +14,32 @@
  
  
  
- ![login-page2](./images/workshop_login2.png)
+ ![login-page2](./images/workshop-login2.png)
  
  
  
- 2. Click on `Register` to create a new account. Insert your details in the fields provided. 
+ 2. To create a new account, click on `Register` and insert your details in the fields provided. 
  
  
- ![register-page](./images/workshop_register.png)
+ ![register-page](./images/workshop-register.png)
  
 
-And click on `Register` create your account.
+And click on `Register` to create your account.
+
+![register-page2](./images/workshop-register2.png)
 
 
-3.  Enter your username/email and password, to log in to your workshop account.
+3.  Enter your username/email and password, and click `LOG IN` to log in to your workshop account.
  
  
- ![login-page2](./images/workshop_login2.png)
+ ![login-page2](./images/workshop-login3.png)
  
  
  You will be brought to your `Cluster Management` page where you can view your workshop cluster.
 
 
 
-![cluster-page](./images/cluster_management_page.png)
+![cluster-page](./images/cluster-management-page.png)
 
 
 
