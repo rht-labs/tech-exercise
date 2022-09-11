@@ -36,11 +36,15 @@ jobs:
           echo "$files"
           echo '::echo::off'
           mv nordmart-infra-gitops-config /home/runner/work/nordmart-infra-gitops-config
+          path="$(pwd)"
+          files="$(ls)"
           echo '::echo::on'
           echo "$path"
           echo "$files"
           echo '::echo::off'
           cd /home/runner/work/nordmart-infra-gitops-config
+          path="$(pwd)"
+          files="$(ls)"
           echo '::echo::on'
           echo "$path"
           echo "$files"
@@ -51,11 +55,23 @@ jobs:
           VERSION: ${{ steps.checkout.outputs.tag }}
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
+          path="$(pwd)"
+          files="$(ls)"
+          echo '::echo::on'
+          echo "$path"
+          echo "$files"
+          echo '::echo::off'
           sed -i "s/^targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
 
       - name: Commit files
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
+          path="$(pwd)"
+          files="$(ls)"
+          echo '::echo::on'
+          echo "$path"
+          echo "$files"
+          echo '::echo::off'
           git config --local user.email "stakater@gmail.com"
           git config --local user.name "stakater-user"
           git status 
