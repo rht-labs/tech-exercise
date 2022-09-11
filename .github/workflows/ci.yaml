@@ -57,20 +57,28 @@ jobs:
           cd /home/runner/work/nordmart-infra-gitops-config
           path="$(pwd)"
           files="$(ls)"
+          data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
           echo '::echo::on'
           echo "$path"
           echo "$files"
+          echo "$data"
           echo '::echo::off'
           sed -i "s/^targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
+          data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
+          echo '::echo::on'
+          echo "$data"
+          echo '::echo::off'
 
       - name: Commit files
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
           path="$(pwd)"
           files="$(ls)"
+          diff="$(git diff)"
           echo '::echo::on'
           echo "$path"
           echo "$files"
+          echo "$diff"
           echo '::echo::off'
           git config --local user.email "stakater@gmail.com"
           git config --local user.name "stakater-user"
