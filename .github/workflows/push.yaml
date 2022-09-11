@@ -26,6 +26,8 @@ jobs:
       # Setting up helm binary
       - name: Set up Helm
         uses: azure/setup-helm@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
 
       - name: Helm Lint
         run: |
@@ -110,7 +112,8 @@ jobs:
           git config --local user.email "stakater@gmail.com"
           git config --local user.name "stakater-user"
           git status 
-          git add .
+          git add deployments/kubernetes/chart/workshop-exercise/Chart.yaml
+          git add deployments/kubernetes/chart/workshop-exercise/values.yaml
           git commit -m "[skip-ci] Update artifacts" -a
           
       - name: Push changes
