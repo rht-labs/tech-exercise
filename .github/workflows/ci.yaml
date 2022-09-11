@@ -19,7 +19,20 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 2  # to be able to obtain files changed in the latest commit
       - run: |
+          version="$(VERSION)"
+          echo '::echo::on'
+          echo "$version"
+          echo '::echo::off'
           echo "::set-output name=tag::${VERSION}"
+
+      - name: Generate Tag
+        id: generate_tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+          WITH_V: false
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
 
       - name: Check out nordmart-infra-gitops-config repo
         id: checkout-ci
@@ -52,7 +65,7 @@ jobs:
 
       - name: Update Workshop Version
         env:
-          VERSION: ${{ steps.checkout.outputs.tag }}
+          VERSION: ${{ steps.generate_tag.outputs.tag }}
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
           path="$(pwd)"
