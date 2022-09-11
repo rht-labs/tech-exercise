@@ -19,7 +19,7 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 2  # to be able to obtain files changed in the latest commit
       - run: |
-          version="$(VERSION)"
+          version=${{ github.ref }}
           echo '::echo::on'
           echo "$version"
           echo '::echo::off'
