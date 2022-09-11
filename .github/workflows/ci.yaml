@@ -14,8 +14,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: stakater/nordmart-infra-gitops-config
-          path: '/home/runner/work/nordmart-infra-gitops-config'
+          path: 'nordmart-infra-gitops-config'
           token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
+        run: mv nordmart-infra-gitops-config /home/runner/work/nordmart-infra-gitops-config
 
       - name: Update Workshop Version
         env:
