@@ -57,13 +57,15 @@ jobs:
           cd /home/runner/work/nordmart-infra-gitops-config
           path="$(pwd)"
           files="$(ls)"
+          version=${VERSION}
           data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
           echo '::echo::on'
+          echo "$version"
           echo "$path"
           echo "$files"
           echo "$data"
           echo '::echo::off'
-          sed -i "s/^targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
+          sed -i "s/targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
           data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
           echo '::echo::on'
           echo "$data"
