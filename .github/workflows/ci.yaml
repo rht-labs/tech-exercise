@@ -18,14 +18,6 @@ jobs:
         with:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 2  # to be able to obtain files changed in the latest commit
-      - run: |
-          version=${{ github.ref }}
-          echo '::echo::on'
-          echo "$version"
-          echo '::echo::off'
-          echo "::set-output name=tag::${VERSION}"
-        env:
-          VERSION: ${{ github.ref }}
 
       - name: Generate Tag
         id: generate_tag
@@ -44,57 +36,20 @@ jobs:
           path: 'nordmart-infra-gitops-config'
           token: ${{ secrets.STAKATER_GITHUB_TOKEN }}
       - run: |
-          path="$(pwd)"
-          files="$(ls)"
-          echo '::echo::on'
-          echo "$path"
-          echo "$files"
-          echo '::echo::off'
           mv nordmart-infra-gitops-config /home/runner/work/nordmart-infra-gitops-config
-          path="$(pwd)"
-          files="$(ls)"
-          echo '::echo::on'
-          echo "$path"
-          echo "$files"
-          echo '::echo::off'
-          cd /home/runner/work/nordmart-infra-gitops-config
-          path="$(pwd)"
-          files="$(ls)"
-          echo '::echo::on'
-          echo "$path"
-          echo "$files"
-          echo '::echo::off'
 
       - name: Update Workshop Version
         env:
           VERSION: ${{ steps.generate_tag.outputs.tag }}
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
-          path="$(pwd)"
-          files="$(ls)"
-          version=${VERSION}
-          data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
-          echo '::echo::on'
-          echo "$version"
-          echo "$path"
-          echo "$files"
-          echo "$data"
-          echo '::echo::off'
           sed -i "s/targetRevision:.*/targetRevision: ${VERSION}/" dev-test/argocd-apps/workshop-exercise.yaml
-          data="$(cat dev-test/argocd-apps/workshop-exercise.yaml)"
-          echo '::echo::on'
-          echo "$data"
-          echo '::echo::off'
 
       - name: Commit files
         run: |
           cd /home/runner/work/nordmart-infra-gitops-config
-          path="$(pwd)"
-          files="$(ls)"
           diff="$(git diff)"
           echo '::echo::on'
-          echo "$path"
-          echo "$files"
           echo "$diff"
           echo '::echo::off'
           git config --local user.email "stakater@gmail.com"
