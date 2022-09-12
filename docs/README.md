@@ -1,4 +1,4 @@
-# DevOps Culture & Practice (TL500)
+# Stakater DevSecOps with GitOps Workshop
 
 ![jenkins-crio-ocp-star-wars-kubes](./images/jenkins-crio-ocp-star-wars-kubes.png)
 
