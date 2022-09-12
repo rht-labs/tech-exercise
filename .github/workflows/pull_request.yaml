@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  CONTAINER_FILE_PATH: docs/Containerfile
+  CONTAINER_FILE_PATH: docs/Dockerfile
   REGISTRY: docker.io
 
 jobs:
@@ -46,7 +46,7 @@ jobs:
       with:
         image: ${{ env.IMAGE_REPOSITORY }}
         tags: ${{ steps.generate_tag.outputs.GIT_TAG }}
-        containerfiles: |
+        dockerfiles: |
           ${{ env.CONTAINER_FILE_PATH  }}
 
     - name: Log in to the dockerhub
