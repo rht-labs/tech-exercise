@@ -311,7 +311,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 9. Now let's repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
 10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
 
-1As always, push the code to git ...
+11. As always, push the code to git ...
 
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
