@@ -150,7 +150,7 @@ export GIT_TOKEN=<'YOUR_TOKEN>
 
 ```
 
-
+![git-var](./images/git-var.png)
 
 
 
