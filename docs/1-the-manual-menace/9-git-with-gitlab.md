@@ -2,7 +2,7 @@
 
 Gitlab is an open-source DevSecOps platform with built-in version control, issue tracking, code review, and CI/CD,  giving developers the needed flexibility for managing their application development lifecycle. 
 
-Your cluster comes with a fully managed instance of GitLab.
+SAAP Instance comes with a fully managed instance of GitLab.
 
 To access your GitLab instance, from your `Forecastle` console, click on the `GitLab` tile.
 

@@ -2,7 +2,7 @@
 
 > Stakater [Forecastle](https://github.com/stakater/Forecastle) provides a central control plane for accessing all your tools and applications in your cluster. It also dynamically discovers new applications and installed tools, giving you the much needed convenience to develop and manage your applications.
 
-1. To access the Forecastle developer console, click on the menu button beside your cluster.
+1. To access the Forecastle developer console, click on the menu button beside your SAAP Instance.
 
 ![forecastle-page1](./images/forecastle-login-1.png)
 
