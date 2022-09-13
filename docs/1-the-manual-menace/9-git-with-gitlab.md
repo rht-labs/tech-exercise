@@ -14,7 +14,7 @@ You will be brought to the Gitlab Console.
 
 ## Setting Up Your Gitlab
 
-### Gitlab Groups
+### Gitlab Group
 
 Gitlab Groups allows you group related projects together. You can manage permissions for your projects, collaborate with your team members and view all issues relating to your project.
 
@@ -38,7 +38,6 @@ Gitlab Projects allow you group related codebases in one place for ease of colla
 
 With your project, you can host your code  in repositories, track issues concerning them, make changes using the web IDE, implement CI & CD pipelines and integrate cloud services.
 
-
 You will leverage Gitlab Projects to manage your application code.
 
 1. To create a new project, from your group page, click on `New project`
@@ -47,9 +46,9 @@ You will leverage Gitlab Projects to manage your application code.
 
 Our sample application to be deployed to your cluster, `Nordmart Review`, is a three-tier app consisting of;
 
-- User Interface
-- Backend API
-- Database
+1. Web User Interface
+2. REST API
+3. Database
 
 2. `Nordmart Review` is hosted in a git repository, which you can import the application code by clicking on the `Import Project` tile.
 

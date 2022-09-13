@@ -6,23 +6,15 @@
 
 ![forecastle-page1](./images/forecastle-login-1.png)
 
-
 2. You will be brought to the `Forecastle` login page. Click on `LOG IN` 
-
 
 ![forecastle-page2](./images/forecastle-login-2.png)
 
-
-
-
 3. Log In with your `workshop` single sign-on.
-
-
 
 ![login_sso-page](./images/workshop-sso-page-1.png)
 
 > Forecastle needs a few permissions to operate unperturbed in your cluster. 
-
 
 4. Click on `Allow selected permissions` to enable the required permissions.
 
@@ -31,6 +23,3 @@
 You will now be brought to the Forecastle console, where you can view all your tools and applications from an easy, accessible plane.
 
 ![forecastle_console-page2](./images/forecastle-console.png)
-
-
-
