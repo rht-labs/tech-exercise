@@ -11,19 +11,22 @@ SAAP cluster is shipped with a code-linting task that uses maven checkstyle to c
 Follow the below-mentioned procedure to add code linting to the already deployed main-pr-v1 pipeline.
 
 1. To view the already defined sonarqube cluster task, open up the `Pipelines` section from the left menu and click `Tasks`
-   ![cluster-tasks](./images/cluster-tasks.png)
+    
+  ![cluster-tasks](./images/cluster-tasks.png)
 
 
-2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Scroll down and select the task ` stakater-code-linting-v1`
-   ![stakater-code-lint-task](./images/stakater-code-lint-task.png)
+2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in code-lint in the search box. You will see a task ` stakater-code-linting-v1`
+   
+  ![code-lint-task](./images/code-lint-task.png)
 
-3. CLick YAML to display the tasks definition.
+3. CLick YAML to display the task definition.
+
    ![code-lint-yaml](./images/code-lint-yaml.png)
 
+The SAAP code linting task has one simple code-lint task that uses `mvn checkstyle:check` command to perform code linting.
 
-
-#### Integrate the pipeline with Tekton:
-## TODO
+## Integrate the pipeline with Tekton:
+#### TODO
 1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
 2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the sonarqube task and add a runAfter field to make it run after the skater-sonarqube-scannerv1 task:
 
@@ -37,111 +40,97 @@ The pipeline will now become:
    ````
    apiVersion: v2
    pipeline-charts:
-   name: stakater-main-pr-v1
-   workspaces:
-   - name: source
-     volumeClaimTemplate:
-     accessModes: ReadWriteOnce
-     resourcesRequestsStorage: 1Gi
+     name: stakater-main-pr-v1
+     workspaces:
+     - name: source
+       volumeClaimTemplate:
+       accessModes: ReadWriteOnce
+       resourcesRequestsStorage: 1Gi
      pipelines:
-     finally:
-      - taskName: stakater-set-commit-status-v1
-        name: set-commit-status-task-result
-      - taskName: stakater-notify-slack-v1
-        name: notify-slack
-        params:
-         - name: namespace
-         - name: author
-         - name: gitrevision
-         - name: repo
-           value: $(params.repoName)
-         - name: gitrepositoryurl
-         - name: tekton-base-url
-         - name: prnumber
-           tasks:
-      - taskName: stakater-set-commit-status-v1
-        params:
-         - name: state
-           value: pending
-      - taskName: git-clone
-      - taskName: stakater-create-git-tag-v1
-        params:
-         - name: oldcommit
-         - name: action
-      - taskName: stakater-sonarqube-scanner-v1
-        runAfter:
-         - stakater-create-git-tag-v1
-      - taskName: stakater-code-lint-v1
-        runAfter:
-         - stakater-sonarqube-scanner-v1
-      - taskName: stakater-build-image-flag-v1
-        runAfter:
-         - stakater-create-git-tag-v1
-           workspaces:
-         - name: source
-           workspace: source
+       tasks:
+         - taskName: stakater-set-commit-status-v1
            params:
+           - name: state
+             value: pending
+         - taskName: git-clone
+         - taskName: stakater-create-git-tag-v1
+           params:
+             - name: oldcommit
+             - name: action
+         - taskName: stakater-sonarqube-scanner-v1
+           runAfter:
+             - stakater-create-git-tag-v1
+         - taskName: stakater-code-lint-v1
+           runAfter:
+            - stakater-sonarqube-scanner-v1
+         - taskName: stakater-build-image-flag-v1
+           runAfter:
+            - stakater-create-git-tag-v1
+              workspaces:
+            - name: source
+              workspace: source
+              params:
+               - name: oldcommit
+               - name: newcommit
+         - taskName: stakater-buildah-v1
+           name: build-and-push
+           runAfter:
+            - stakater-build-image-flag-v1
+              params:
+               - name: BUILD_IMAGE
+                 value: $(tasks.stakater-build-image-flag-v1.results.build-image)
+               - name: IMAGE_REGISTRY
+                 value: $(params.image_registry_url)
+               - name: CURRENT_GIT_TAG
+                 value: $(tasks.stakater-create-git-tag-v1.results.CURRENT_GIT_TAG)
+         - taskName: stakater-comment-on-github-pr-v1
+         - taskName: stakater-helm-push-v1
+         - taskName: stakater-update-cd-repo-v3
+         - taskName: stakater-push-main-tag-v1
+         - taskName: stakater-app-sync-and-wait-v1
+           params:
+             - name: timeout
+               value: "120"
+       triggertemplate:
+         serviceAccountName: stakater-tekton-builder
+         pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
+       eventlistener:
+         serviceAccountName: stakater-tekton-builder
+         triggers:
+         - name: pullrequest-create
+           interceptors:
+           - ref:
+             name: "cel"
+             params:
+               - name: "filter"
+                 value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
+           bindings:
+             - ref: stakater-pr-v1
+             - name: oldcommit
+               value: "NA"
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: pullrequest-synchronize
+           interceptors:
+             - ref:
+               name: "cel"            
+               params:
+               - name: "filter"
+                 value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
+            - name: "overlays"
+              value:
+               - key: marshalled-body
+                 expression: "body.marshalJSON()"
+                 bindings:
+            - ref: stakater-pr-v1
             - name: oldcommit
+              value: $(body.object_attributes.oldrev)
             - name: newcommit
-      - taskName: stakater-buildah-v1
-        name: build-and-push
-        runAfter:
-         - stakater-build-image-flag-v1
-           params:
-            - name: BUILD_IMAGE
-              value: $(tasks.stakater-build-image-flag-v1.results.build-image)
-            - name: IMAGE_REGISTRY
-              value: $(params.image_registry_url)
-            - name: CURRENT_GIT_TAG
-              value: $(tasks.stakater-create-git-tag-v1.results.CURRENT_GIT_TAG)
-      - taskName: stakater-comment-on-github-pr-v1
-      - taskName: stakater-helm-push-v1
-      - taskName: stakater-update-cd-repo-v3
-      - taskName: stakater-push-main-tag-v1
-      - taskName: stakater-app-sync-and-wait-v1
-        params:
-         - name: timeout
-           value: "120"
-           triggertemplate:
-           serviceAccountName: stakater-tekton-builder
-           pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
-           eventlistener:
-           serviceAccountName: stakater-tekton-builder
-           triggers:
-      - name: pullrequest-create
-        interceptors:
-         - ref:
-           name: "cel"
-           params:
-         - name: "filter"
-           value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
-         - name: "overlays"
-           value:
-            - key: marshalled-body
-              expression: "body.marshalJSON()"
-              bindings:
-         - ref: stakater-pr-v1
-         - name: oldcommit
-           value: "NA"
-         - name: newcommit
-           value: $(body.object_attributes.last_commit.id)
-      - name: pullrequest-synchronize
-        interceptors:
-         - ref:
-           name: "cel"            
-           params:
-         - name: "filter"
-           value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
-         - name: "overlays"
-           value:
-            - key: marshalled-body
-              expression: "body.marshalJSON()"
-              bindings:
-         - ref: stakater-pr-v1
-         - name: oldcommit
-           value: $(body.object_attributes.oldrev)
-         - name: newcommit
-           value: $(body.object_attributes.last_commit.id)
+              value: $(body.object_attributes.last_commit.id)
       - name: push
         interceptors:
          - ref:
