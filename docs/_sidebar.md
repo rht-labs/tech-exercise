@@ -3,6 +3,7 @@
   * [🐌 The Basics](1-the-manual-menace/1-the-basics.md)
   * [🌞 SAAP 101](1-the-manual-menace/7-SAAP-101.md)
   * [🍄 Forecastle 101](1-the-manual-menace/8-forecastle-101.md)
+  * [🐡Git with GitLab](1-the-manual-menace/9-git-with-gitlab.md)
   * [🐌 Helm 101](1-the-manual-menace/1a-helm-101.md)  
   * [🐙 ArgoCD](1-the-manual-menace/2-argocd.md)
   * [🔥🦄 Ubiquitous Journey](1-the-manual-menace/3-ubiquitous-journey.md)
