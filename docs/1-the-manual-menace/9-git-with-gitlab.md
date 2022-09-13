@@ -125,7 +125,32 @@ Your Project has been imported.
 
 GitLab `Personal Access Token` allows you interact safely with your GitLab repositories from remote enviroments. With your Personal Token, you can push changes directly to your GitLab projects from your workstation. Take the following steps to create your token and add it to your Dev enviroment.
 
-1.
+1. Click on your profile icon at the top right corner of your page, and select `Edit profile`.
+
+![edit-profile](./images/edit-profile.png)
+
+2. At the left corner, Click on `Access Tokens`. You will be brought to the `Personal Access Token` Page
+
+![access token](./images/access-token.png)
+
+3. Give your token a name, as well as the `read_repository` and `write_repository` permissions. Then select `Create Personal Access Token`
+
+![p_access token](./images/personal-access-token.png)
+
+4. Once your Access Token has been created, make sure you copy it and keep in a safe place, as you  will not get a chance to view it again.
+
+
+![p_access token2](./images/token.png)
+
+5. Finally, add your Token to your Dev Workstation by saving them as the following enviroment variables.
+
+```
+export GIT_USER=<YOUR_TOKEN_NAME>
+export GIT_TOKEN=<'YOUR_TOKEN>
+
+```
+
+
 
 
 
