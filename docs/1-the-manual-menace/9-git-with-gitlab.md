@@ -18,43 +18,45 @@ You will be brought to the Gitlab Console.
 
 Gitlab Groups allows you group related projects together. You can manage permissions for your projects, collaborate with your team members and view all issues relating to your project.
 
-1. to create a group, click on `create a group` tile 
+1. To create a group, click on `create a group` tile.
 
 
 ![gitlab-group](./images/gitlab-home-group.png)
 
-2. Give your group a name and set the visibility level to `public`. You can also add your team member. Next click on `create group` 
+2. Give your group a name and set the visibility level to `public`. You can also add team members.
+Click on `create group` 
 
 ![gitlab-group-create](./images/create-group.png)
 
-and your group has been created.
+Your group has been created.
 
 ![gitlab-group-created](./images/gitlab-my-group.png)
 
 ### GitLab Projects
 
-Gitlab Projects allow you to group related codebases in one place for ease of collaboration, management and continuity. 
+Gitlab Projects allow you group related codebases in one place for ease of collaboration, management and continuity. 
 
 With your project, you can host your code  in repositories, track issues concerning them, make changes using the web IDE, implement CI & CD pipelines and integrate cloud services.
 
 
-You will leverage Gitlab Projects to manage our application code.
+You will leverage Gitlab Projects to manage your application code.
 
 1. To create a new project, from your group page, click on `New project`
 
 ![gitlab-new-project](./images/gitlab-new-project.png)
 
-Our sample application to be deployed to your cluster, `Nordmart Review`,is a three-tier app consisting of;
+Our sample application to be deployed to your cluster, `Nordmart Review`, is a three-tier app consisting of;
 
 - User Interface
 - Backend API
 - Database
 
-2. `Nordmart Review` is hosted in a git repository, you can import the application code by clicking on the `Import Project` tile
+2. `Nordmart Review` is hosted in a git repository, which you can import the application code by clicking on the `Import Project` tile.
 
 ![gitlab-new-import](./images/gitlab-import-project.png)
 
-3. To import the `Nordmart Review` User Interface application code, click on the `Repository via URL` tile and input the following URL.
+
+3. To import the `Nordmart Review` User Interface codebase, click on the `Repository via URL` tile and input the following URL.
 
 ```
 https://github.com/stakater-lab/stakater-nordmart-review-ui
@@ -68,7 +70,7 @@ your project has been imported.
 ![nordmart-project](./images/nordmart-project.png)
 
 
-4. Next, import the `Nordmart Review` backend application code by repeating the previous steps. From your groups page, select `New Project` 
+4. Next, import the `Nordmart Review` backend API codebase by repeating the previous steps. From your groups page, select `New Project` 
 
 ![gitlab-new-project](./images/gitlab-new-project.png)
 
@@ -121,6 +123,9 @@ Your Project has been imported.
 
 ### Making Changes to Your Code
 
+GitLab `Personal Access Token` allows you interact safely with your GitLab repositories from remote enviroments. With your Personal Token, you can push changes directly to your GitLab projects from your workstation. Take the following steps to create your token and add it to your Dev enviroment.
+
+1.
 
 
 
