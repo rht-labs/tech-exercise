@@ -1,4 +1,4 @@
-#🐡 Setting Up GitLab
+# 🐡 Setting Up GitLab
 
 Gitlab is an open-source DevSecOps platform with built-in version control, issue tracking, code review, and CI/CD,  giving developers the needed flexibility for managing their application development lifecycle. 
 
