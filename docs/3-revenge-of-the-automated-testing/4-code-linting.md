@@ -121,41 +121,41 @@ The pipeline will now become:
                params:
                - name: "filter"
                  value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
-            - name: "overlays"
-              value:
-               - key: marshalled-body
-                 expression: "body.marshalJSON()"
-                 bindings:
-            - ref: stakater-pr-v1
-            - name: oldcommit
-              value: $(body.object_attributes.oldrev)
-            - name: newcommit
-              value: $(body.object_attributes.last_commit.id)
-      - name: push
-        interceptors:
-         - ref:
-           name: "cel"
-           params:
-         - name: "filter"
-           value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
-         - name: "overlays"
-           value:
-            - key: marshalled-body
-              expression: "body.marshalJSON()"
-              bindings:
-         - name: newcommit
-           value: $(body.after)
-         - name: oldcommit
-           value: $(body.before)
-         - ref: stakater-pr-v1
-           kind: ClusterTriggerBinding
-      - name: stakater-pr-cleaner-v2-pullrequest-merge
-        create: false
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
+           bindings:
+             - ref: stakater-pr-v1
+             - name: oldcommit
+               value: $(body.object_attributes.oldrev)
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: push
+           interceptors:
+             - ref:
+               name: "cel"
+               params:
+             - name: "filter"
+               value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
+             - name: "overlays"
+               value:
+                 - key: marshalled-body
+                   expression: "body.marshalJSON()"
+           bindings:
+             - name: newcommit
+               value: $(body.after)
+             - name: oldcommit
+               value: $(body.before)
+             - ref: stakater-pr-v1
+               kind: ClusterTriggerBinding
+         - name: stakater-pr-cleaner-v2-pullrequest-merge
+           create: false
         rbac:
-        enabled: false
+          enabled: false
         serviceAccount:
-        name: stakater-tekton-builder
-        create: false
+          name: stakater-tekton-builder
+          create: false
 
 ````
 4. Now open Argocd and check if the changes were synchronized.

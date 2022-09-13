@@ -152,9 +152,6 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         accessModes: ReadWriteOnce
         resourcesRequestsStorage: 1Gi
       pipelines:
-        finally:
-          - taskName: stakater-set-commit-status-v1
-            name: set-commit-status-task-result
         tasks:
           - taskName: stakater-set-commit-status-v1
             params:
@@ -193,6 +190,9 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
             params:
             - name: timeout
               value: "120"
+        finally:
+          - taskName: stakater-set-commit-status-v1
+            name: set-commit-status-task-result
         triggertemplate:
            serviceAccountName: stakater-tekton-builder
            pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
@@ -203,54 +203,54 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
              interceptors:
              - ref:
                name: "cel"
-             params:
-             - name: "filter"
-               value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
-             - name: "overlays"
-               value:
-                 - key: marshalled-body
-                   expression: "body.marshalJSON()"
+               params:
+                 - name: "filter"
+                   value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
+                 - name: "overlays"
+                   value:
+                     - key: marshalled-body
+                       expression: "body.marshalJSON()"
              bindings:
-             - ref: stakater-pr-v1
-             - name: oldcommit
-               value: "NA"
-             - name: newcommit
-               value: $(body.object_attributes.last_commit.id)
+               - ref: stakater-pr-v1
+               - name: oldcommit
+                 value: "NA"
+               - name: newcommit
+                 value: $(body.object_attributes.last_commit.id)
            - name: pullrequest-synchronize
              interceptors:
              - ref:
                name: "cel"            
-             params:
-             - name: "filter"
-               value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
-             - name: "overlays"
-               value:
-                 - key: marshalled-body
-                   expression: "body.marshalJSON()"
+               params:
+               - name: "filter"
+                 value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
              bindings:
-             - ref: stakater-pr-v1
-             - name: oldcommit
-               value: $(body.object_attributes.oldrev)
-             - name: newcommit
-               value: $(body.object_attributes.last_commit.id)
+               - ref: stakater-pr-v1
+               - name: oldcommit
+                 value: $(body.object_attributes.oldrev)
+               - name: newcommit
+                 value: $(body.object_attributes.last_commit.id)
            - name: push
              interceptors:
              - ref:
                name: "cel"
-             params:
-             - name: "filter"
-               value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
-             - name: "overlays"
-               value:
-                 - key: marshalled-body
-                   expression: "body.marshalJSON()"
+               params:
+               - name: "filter"
+                 value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
              bindings:
-             - name: newcommit
-               value: $(body.after)
-             - name: oldcommit
-               value: $(body.before)
-             - ref: stakater-pr-v1
-               kind: ClusterTriggerBinding
+               - name: newcommit
+                 value: $(body.after)
+               - name: oldcommit
+                 value: $(body.before)
+               - ref: stakater-pr-v1
+                 kind: ClusterTriggerBinding
            - name: stakater-pr-cleaner-v2-pullrequest-merge
              create: false
         rbac:
