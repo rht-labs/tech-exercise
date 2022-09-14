@@ -1,6 +1,6 @@
 # 🐓 Tenant Operator 101
 
-Stakater’s Tenant-Operator makes it easy to implement multi-tenancy in your organisation. When Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC are configured for a tenant, all the namespaces and users inherit these policies.
+Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organisation. When Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC are configured for a tenant, all the namespaces and users inherit these policies.
 
 With Tenant-Operator custom resources, you can help your developers self-service, reliving your admins of some engineering toil.
 
