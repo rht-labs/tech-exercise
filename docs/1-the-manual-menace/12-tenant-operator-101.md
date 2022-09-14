@@ -2,9 +2,9 @@
 
 Stakater’s Tenant-Operator makes it easy to implement multi-tenancy in your organisation. When Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC are configured for a tenant, all the namespaces and users inherit these policies.
 
-Tenant-Operator custom resources, you can help your developers self-service, reliving your admins of some engineering toil.
+With Tenant-Operator custom resources, you can help your developers self-service, reliving your admins of some engineering toil.
 
-With your Tenant Operator, You can configure the following custom resources;
+Your Tenant Operator can configure the following custom resources;
 
 - Tenants
 - Quotas
@@ -12,11 +12,11 @@ With your Tenant Operator, You can configure the following custom resources;
 - ResourceSupervisor
 - Namespaces
 
-Tenant-Operator resources is designed 100% cloud-native, this means that you can manage your tenants as code allowing you to integrate Gitops into your multi-tenancy workflow.
+Tenant-Operator resources is designed 100% cloud-native, this means that you can manage your tenants as code allowing you to integrate Gitops best practices into your multi-tenancy workflow.
 
 ## Creating Tentants with Gitop
 
-The following Repository contains ArgoCD app configurations to help automate the creation of your tenant.
+The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/my-group/nordmart-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
 1. From the repository, click on the `workshop` folder.
 
