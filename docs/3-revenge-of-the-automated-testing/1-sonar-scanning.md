@@ -6,25 +6,44 @@
 
 ![task-sonar](./images/task-sonar.png)
 
-## Deploy Sonarqube using GitOps
+## Integrate sonarqube into pipeline
 
-In this section we are going to improve our already built `main-pr-v1` pipeline and add sonarqube scaning to it. 
+In this section we are going to improve our already built `main-pr-v1` pipeline and add sonarqube scanning to it. 
 The SAAP cluster is shipped with many useful predefined cluster tasks. A sonarqube cluster task is also present amongst these tasks. We will use the same task and incorporate it in to our pipeline.
 
 1. To view the already defined sonarqube cluster task, open up the `Pipelines` section from the left menu and click `Tasks`
+
+
    ![cluster-tasks](./images/cluster-tasks.png)
     
 
-2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Scroll down and select the task `stakater-sonarqube-scanner-v1`
-   ![stakater-sonarqube-scanner](./images/stakater-sonarqube-scanner.png)
+2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in `sonarqube` in the search box that is displayed.
+   You will see a  `stakater-sonarqube-scanner-v1` task.
+
+
+   ![sonarqube-search](./images/sonarqube-search.png)
    
-3. CLick YAML to display the tasks definition.
+3. CLick YAML to display the task definition.
+
+
    ![sonarqube-tasks](./images/sonarqube-task.png)
 
+Sonarqube scanner requires `sonar-project.properties` file along with the source code for it to run.
+The nordmart projects already contain a sonar-project.properties file with dummy values. 
 
+The SAAP sonarqube task has two steps:
+
+* sonar-properties-create - The first step sets the properties in sonar-project.properties file. If the file is not found, it is skipped.
+  
+   
+ ![sonar-properties](./images/sonar-properties.png)
+
+* sonar-scan - The task run sonar scanner on the code.
+
+ ![sonar-scanner](./images/sonar-scanner.png)
 
 #### Integrate the pipeline with Tekton:
-## TODO
+##### TODO
 1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
 2. Open the values file in the editor. After the `stakater-create-git-tag-v1`, reference the sonarqube task and add a runAfter field to make it run after the create-git-tag-v1 task:
 
@@ -96,64 +115,64 @@ The pipeline will now become:
            serviceAccountName: stakater-tekton-builder
            triggers:
            - name: pullrequest-create
-              interceptors:
-              - ref:
-                name: "cel"
-                params:
-              - name: "filter"
-                value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
-              - name: "overlays"
-                value:
-                 - key: marshalled-body
-                   expression: "body.marshalJSON()"
-               bindings:
-              - ref: stakater-pr-v1
-              - name: oldcommit
-                value: "NA"
-              - name: newcommit
-                value: $(body.object_attributes.last_commit.id)
+             interceptors:
+               - ref:
+                 name: "cel"
+                 params:
+                   - name: "filter"
+                     value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
+                   - name: "overlays"
+                     value:
+                       - key: marshalled-body
+                         expression: "body.marshalJSON()"
+             bindings:
+               - ref: stakater-pr-v1
+               - name: oldcommit
+                 value: "NA"
+               - name: newcommit
+                 value: $(body.object_attributes.last_commit.id)
            - name: pullrequest-synchronize
              interceptors:
-                 - ref:
-                   name: "cel"            
-             params:
-                - name: "filter"
-                  value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
-                - name: "overlays"
-                  value:
-                    - key: marshalled-body
-                      expression: "body.marshalJSON()"
+               - ref:
+                 name: "cel"            
+                 params:
+                   - name: "filter"
+                     value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
+                   - name: "overlays"
+                     value:
+                       - key: marshalled-body
+                         expression: "body.marshalJSON()"
              bindings:
-                - ref: stakater-pr-v1
-                - name: oldcommit
-                  value: $(body.object_attributes.oldrev)
-                - name: newcommit
-                  value: $(body.object_attributes.last_commit.id)
+               - ref: stakater-pr-v1
+               - name: oldcommit
+                 value: $(body.object_attributes.oldrev)
+               - name: newcommit
+                 value: $(body.object_attributes.last_commit.id)
            - name: push
-               interceptors:
-                - ref:
-                  name: "cel"
-                params:
-                  - name: "filter"
-                    value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
-                  - name: "overlays"
-                    value:
-                     - key: marshalled-body
-                       expression: "body.marshalJSON()"
-                bindings:
-                  - name: newcommit
-                    value: $(body.after)
-                  - name: oldcommit
-                    value: $(body.before)
-                  - ref: stakater-pr-v1
-                    kind: ClusterTriggerBinding
+             interceptors:
+               - ref:
+                 name: "cel"
+                 params:
+                   - name: "filter"
+                     value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
+                   - name: "overlays"
+                     value:
+                       - key: marshalled-body
+                         expression: "body.marshalJSON()"
+             bindings:
+               - name: newcommit
+                 value: $(body.after)
+               - name: oldcommit
+                 value: $(body.before)
+               - ref: stakater-pr-v1
+                 kind: ClusterTriggerBinding
            - name: stakater-pr-cleaner-v2-pullrequest-merge
              create: false
        rbac:
-        enabled: false
+         enabled: false
        serviceAccount:
-        name: stakater-tekton-builder
-        create: false
+         name: stakater-tekton-builder
+         create: false
 
 ````
 4. Now open Argocd and check if the changes were synchronized. 
