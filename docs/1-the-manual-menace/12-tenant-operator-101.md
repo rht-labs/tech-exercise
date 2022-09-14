@@ -73,4 +73,4 @@ spec:
 
 5. Select `commit changes` to create your tenant. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance.
 
-![mto-commit](./image/mto-commit.png)
+![mto-commit](./images/mto-commit.png)
