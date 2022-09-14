@@ -3,7 +3,7 @@
 
 ## Task
 
-#### Integrate the pipeline with Tekton:
+#### Integrate code linting into the pipeline:
 
 We will be using maven Checkstyle plugin to check the code in nordamrt-review and nordmart-review-ui repositories.
 SAAP cluster is shipped with a code-linting task that uses maven checkstyle to check the quality of code. We will be using this task to integrate code-lint in our pipeline.
@@ -28,10 +28,10 @@ The SAAP code linting task has one simple code-lint task that uses `mvn checksty
 ## Integrate the pipeline with Tekton:
 #### TODO
 1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
-2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the sonarqube task and add a runAfter field to make it run after the skater-sonarqube-scannerv1 task:
+2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a runAfter field to make it run after the stakater-sonarqube-scanner-v1 task:
 
 ```
-- taskName: stakater-code-lint-v1
+- taskName: stakater-code-linting-v1
   runAfter:
     - stakater-sonarqube-scanner-v1
 
@@ -60,7 +60,7 @@ The pipeline will now become:
          - taskName: stakater-sonarqube-scanner-v1
            runAfter:
              - stakater-create-git-tag-v1
-         - taskName: stakater-code-lint-v1
+         - taskName: stakater-code-linting-v1
            runAfter:
             - stakater-sonarqube-scanner-v1
          - taskName: stakater-build-image-flag-v1
@@ -159,6 +159,7 @@ The pipeline will now become:
 
 ````
 4. Now open Argocd and check if the changes were synchronized.
+  ###### todo add screenshot
 5. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline!
 
 
