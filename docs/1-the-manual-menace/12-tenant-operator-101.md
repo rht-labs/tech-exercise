@@ -39,7 +39,7 @@ The `workshop` folder contains the following folders:
 
 3. Click on the `tenants` folder.
 
-![mto-tenants](./image/mto-tenants.png)
+![mto-tenants](./images/mto-tenants.png)
 
 > The `tenants` folder contains the configuration for all the tenants in your SAAP managed instance.
 
