@@ -34,7 +34,7 @@ The `workshop` folder contains the following folders:
 
 2. Click on the `tenant-operator-config` folder.
 
-![mto-config](docs/1-the-manual-menace/images/mto-config.png)
+![mto-config](./images/mto-config.png)
 
 
 3. Click on the `tenants` folder.
