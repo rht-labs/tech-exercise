@@ -1,6 +1,6 @@
 ### Helm 101
 
-> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
+> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `Deployments`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
 Let's deploy a simple application using Helm.
 
@@ -13,13 +13,13 @@ Let's deploy a simple application using Helm.
 2. Let's install a chart from this repo. First search the repository to see what is available.
 
     ```bash#test
-    helm search repo nordmart-review-instance
+    helm search repo nordmart-review
     ```
 
     Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
 
     ```bash#test
-    helm install my-nordmart-review stakater/nordmart-review-instance --namespace ${TENANT_NAME}-test
+    helm install my-nordmart-review stakater/nordmart-review --namespace ${TENANT_NAME}-test
     ```
     ![nordmart-review-installed](./images/1a-7-nordmart-review-installed.png)
 
@@ -33,7 +33,7 @@ Let's deploy a simple application using Helm.
 
     ![nordmart-review-ui](./images/1a-1-nordmart-review-ui.png)
 
-4. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review-instance/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
+4. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
 
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test
@@ -44,7 +44,7 @@ Let's deploy a simple application using Helm.
     By default, we only have one replica of our application. Let's use helm to set this to 5.
 
     ```bash#test
-    helm upgrade my-nordmart-review stakater/nordmart-review-instance --set nordmartReviewUi.deployment.replicas=5 --namespace ${TENANT_NAME}-test
+    helm upgrade my-nordmart-review stakater/nordmart-review --set nordmartReviewUi.deployment.replicas=5 --namespace ${TENANT_NAME}-test
     ```
     ![nordmart-review-ui-updated-replica](./images/1a-4-nordmart-review-ui-updated-replica-5.png)  
 
@@ -67,7 +67,7 @@ Let's deploy a simple application using Helm.
     ```
     ![nordmart-review-removed](images/1a-6-nordmart-review-removed.png)
 
-6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/stakater/charts/blob/main/stakater/nordmart-review-instance)</span>, but the basic structure is as follows:
+6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/stakater/charts/blob/main/stakater/nordmart-review)</span>, but the basic structure is as follows:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">

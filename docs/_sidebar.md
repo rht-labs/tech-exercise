@@ -5,6 +5,7 @@
   * [🍄 Forecastle 101](1-the-manual-menace/8-forecastle-101.md)
   * [🍄 Nordmart Review 101](1-the-manual-menace/10-nordmart-101.md)
   * [🐡Git with GitLab](1-the-manual-menace/9-git-with-gitlab.md)
+  * [🐋Nexus 101](1-the-manual-menace/11-nexus-101.md)
   * [🐌 Helm 101](1-the-manual-menace/1a-helm-101.md)  
   * [🐙 ArgoCD](1-the-manual-menace/2-argocd.md)
   * [🔥🦄 Ubiquitous Journey](1-the-manual-menace/3-ubiquitous-journey.md)
