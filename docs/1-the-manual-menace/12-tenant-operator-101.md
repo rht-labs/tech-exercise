@@ -45,7 +45,7 @@ The `workshop` folder contains the following folders:
 
 4. Click the `+`icon to create a new  yaml file. This file will contain your tenant configurations.
 
-![mto-file](./image/mto-file.png)
+![mto-file](./images/mto-file.png)
 
 4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
