@@ -6,7 +6,7 @@ SAAP Instance comes with a fully managed instance of GitLab.
 
 To access your GitLab instance, from your `Forecastle` console, click on the `GitLab` tile.
 
-![permission-page](./images/forecastle-gitlab1.png)
+![forecastle-page](./images/forecastle-gitlab1.png)
 
 You will be brought to the Gitlab Console.
 
