@@ -20,7 +20,7 @@ The following Repository contains ArgoCD app configurations to help automate the
 
 1. From the repository, click on the `workshop` folder.
 
-![mto-workshop](./image/mto-workshop.png)
+![mto-workshop](./images/mto-workshop.png)
 
 
 The `workshop` folder contains the following folders:
