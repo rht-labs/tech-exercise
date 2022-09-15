@@ -15,7 +15,7 @@ Your Tenant Operator can configure the following custom resources;
 
 Tenant-Operator resources is designed 100% cloud-native, this means that you can manage your tenants as code allowing you to integrate Gitops best practices into your multi-tenancy workflow.
 
-## Creating Tentants with Gitop
+## Creating Tentants with GitOps
 
 The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/my-group/nordmart-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
