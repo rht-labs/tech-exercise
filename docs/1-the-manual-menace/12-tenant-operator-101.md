@@ -38,7 +38,7 @@ The `workshop` folder contains the following folders:
 
 ![mto-tenants](./images/mto-tenants.png)
 
-> The `tenants` folder contains the configuration for all the tenants. Each tenant representing a fully manages SAAP instance.
+> The `tenants` folder contains the configuration for all the tenants. Each tenant representing a fully managed SAAP instance.
 
 4. Click the `+`icon to create a new  yaml file. This file will contain your tenant configurations.
 
@@ -46,7 +46,6 @@ The `workshop` folder contains the following folders:
 
 4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
-> Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant and user name.
 
 ```yaml
 apiVersion: tenantoperator.stakater.com/v1beta1
@@ -69,6 +68,9 @@ spec:
   - test
   - prod
 ```
+
+> Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant and user name.
+
 
 5. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
 
