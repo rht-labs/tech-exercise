@@ -92,7 +92,7 @@ Your project has been imported.
 
 ![normart-review2](./images/nordmart-review.png)
 
-7. Finally, you will import the `Nordmart Review` gitops configurations by also following the previous steps. From your groups page, click on `New Project`
+7. Finally, import the `Nordmart Review` gitops configurations by also following the previous steps. From your groups page, click on `New Project`
 
 ![gitlab-new-project](./images/gitlab-new-project.png)
 
