@@ -1,19 +1,13 @@
 # 🐓 Tenant Operator 101
 
 Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organisation. When you create a tenant, you get a dedicated SAAP instance.
-Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC policies which are configured for a tenant, are inherited by all the namespaces and users of that tenant.
+Tenant operator provides wrappers around OpenShift resources to provide a higher level of abstraction to the users. With Tenant Operator admins can configure Network and Security Policies, Resource Quotas, Limit Ranges, RBAC for every tenant, which are automatically inherited by all the namespaces and users in the tenant. Depending on users role, they are free to operate within their tenants in complete autonomy. Tenant Operator supports initializing new tenants using GitOps management pattern. Changes can be managed via PRs just like a typical GitOps workflow, so tenants can request changes; add new user or remove user.
 
-With Tenant-Operator custom resources, you can help your developers self-service, reliving your admins of some engineering toil.
+The idea of Tenant Operator is to use namespaces as independent sandboxes, where tenant applications can run independently from each other. To minimize cluster admin efforts, cluster admins shall configure Tenant Operator's custom resources, which then become a self-service system for tenants. Tenant Operator enables cluster admins to host multiple tenants in a single OpenShift Cluster, i.e.
 
-Your Tenant Operator can configure the following custom resources;
-
-- Tenants
-- Quotas
-- Templates for your application deployments
-- ResourceSupervisor
-- Namespaces
-
-Tenant-Operator resources is designed 100% cloud-native, this means that you can manage your tenants as code allowing you to integrate Gitops best practices into your multi-tenancy workflow.
+Share an OpenShift cluster with multiple tenants
+Share managed applications with multiple tenants
+Configure and manage tenants and their sandboxes
 
 ## Creating Tentants with GitOps
 
@@ -79,7 +73,7 @@ spec:
 
 ![mto-commit](./images/mto-commit.png)
 
-6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance makeing tenant creation seamless.
+6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
 You can view your created tenant and namespaces via your OpenShift Console.
 
 ![mto-project](./images/mto-project.png)
