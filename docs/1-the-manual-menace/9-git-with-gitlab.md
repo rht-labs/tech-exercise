@@ -50,7 +50,7 @@ Our sample application to be deployed to your cluster, `Nordmart Review`, is a t
 2. REST API
 3. Database
 
-> You will be importing three repositories containing the Nordmart review application code and its configuration.
+> You will be importing three repositories containing the Nordmart review application and its configuration.
 
 2. `Nordmart Review` is hosted in a git repository, which you can import by clicking on the `Import Project` tile.
 
