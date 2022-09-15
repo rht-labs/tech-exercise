@@ -13,7 +13,7 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 ## Creating Tentants with GitOps
 
-The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/my-group/nordmart-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
+The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
 1. From the repository, click on the `workshop` folder.
 
