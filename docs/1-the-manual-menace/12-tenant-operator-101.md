@@ -50,7 +50,7 @@ The `workshop` folder contains the following folders:
 
 4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
-> Replace "<INSERT_YOUR_TENANT_NAME>" and "<INSERT_YOUR_USER_NAME>" with your preferred tenent and user name.
+> Replace "<INSERT_YOUR_TENANT_NAME>" and "<INSERT_YOUR_USER_NAME>" with your preferred tenant and user name.
 
 ```yaml
 apiVersion: tenantoperator.stakater.com/v1beta1
