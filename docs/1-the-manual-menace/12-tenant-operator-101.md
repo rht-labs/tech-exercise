@@ -5,9 +5,11 @@ Tenant operator provides wrappers around OpenShift resources to provide a higher
 
 The idea of Tenant Operator is to use namespaces as independent sandboxes, where tenant applications can run independently from each other. To minimize cluster admin efforts, cluster admins shall configure Tenant Operator's custom resources, which then become a self-service system for tenants. Tenant Operator enables cluster admins to host multiple tenants in a single OpenShift Cluster, i.e.
 
-Share an OpenShift cluster with multiple tenants
-Share managed applications with multiple tenants
-Configure and manage tenants and their sandboxes
+- Share an OpenShift cluster with multiple tenants
+
+- Share managed applications with multiple tenants
+
+- Configure and manage tenants and their sandboxes
 
 ## Creating Tentants with GitOps
 
@@ -36,7 +38,7 @@ The `workshop` folder contains the following folders:
 
 ![mto-tenants](./images/mto-tenants.png)
 
-> The `tenants` folder contains the configuration for all the tenants in your SAAP managed instance.
+> The `tenants` folder contains the configuration for all the tenants. Each tenant representing a fully manages SAAP instance.
 
 4. Click the `+`icon to create a new  yaml file. This file will contain your tenant configurations.
 
@@ -44,7 +46,7 @@ The `workshop` folder contains the following folders:
 
 4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
-> Replace "<INSERT_YOUR_TENANT_NAME>" and "<INSERT_YOUR_USER_NAME>" with your preferred tenant and user name.
+> Replace "INSERT_YOUR_TENANT_NAME" and "INSERT_YOUR_USER_NAME" with your preferred tenant and user name.
 
 ```yaml
 apiVersion: tenantoperator.stakater.com/v1beta1
