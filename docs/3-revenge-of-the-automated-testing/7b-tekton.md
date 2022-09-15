@@ -53,7 +53,7 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
                 params:
                 - name: BUILD_IMAGE
                   value: "true"
-          <span style="color:#FA936A"># Add rox-image-scan after build-and-push
+          <span style="color:orange"># Add rox-image-scan after build-and-push
           - taskName: rox-image-check
           - taskName: rox-image-scan
           # End</span>
