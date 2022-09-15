@@ -1,6 +1,7 @@
 # 🐓 Tenant Operator 101
 
-Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organisation. When Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC are configured for a tenant, all the namespaces and users inherit these policies.
+Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organisation. When you create a tenant, you get a dedicated SAAP instance.
+Network and Security Policies, Resource Quotas, Limit Ranges, and RBAC policies which are configured for a tenant, are inherited by all the namespaces and users of that tenant.
 
 With Tenant-Operator custom resources, you can help your developers self-service, reliving your admins of some engineering toil.
 
@@ -71,6 +72,9 @@ spec:
   - prod
 ```
 
-5. Select `commit changes` to create your tenant. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance.
+5. Add a usefull commit message indicating the changes you wish to make. In the `Target Branch` tile, input ypur branch name and select `commit changes` to create a merge request.
+
 
 ![mto-commit](./images/mto-commit.png)
+
+6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance makes tenant creation seamless.
