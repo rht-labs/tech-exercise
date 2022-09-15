@@ -31,8 +31,8 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
     ```
 
     The pipeline will now become:
-
-   ```yaml
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">
     pipeline-charts:
         name: stakater-main-pr-v1
         workspaces:
@@ -93,7 +93,7 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
         serviceAccount:
           name: stakater-tekton-builder
           create: false
-   ```
+    </code></pre></div>
 4. Now open Argocd and check if the changes were synchronized.
 
     TODO: Add screenshot
