@@ -74,7 +74,7 @@ spec:
   - prod
 ```
 
-5. Add a usefull commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
+5. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
 
 
 ![mto-commit](./images/mto-commit.png)
