@@ -50,12 +50,14 @@ Our sample application to be deployed to your cluster, `Nordmart Review`, is a t
 2. REST API
 3. Database
 
-2. `Nordmart Review` is hosted in a git repository, which you can import the application code by clicking on the `Import Project` tile.
+> You will be importing three repositories containing the Nordmart review application code and its configuration.
+
+2. `Nordmart Review` is hosted in a git repository, which you can import by clicking on the `Import Project` tile.
 
 ![gitlab-new-import](./images/gitlab-import-project.png)
 
 
-3. To import the `Nordmart Review` User Interface codebase, click on the `Repository via URL` tile and input the following URL.
+3. To import the `Nordmart Review` User Interface repository, click on the `Repository via URL` tile and input the following URL.
 
 ```
 https://github.com/stakater-lab/stakater-nordmart-review-ui
@@ -69,7 +71,7 @@ your project has been imported.
 ![nordmart-project](./images/nordmart-project.png)
 
 
-4. Next, import the `Nordmart Review` backend API codebase by repeating the previous steps. From your groups page, select `New Project` 
+4. Next, import the `Nordmart Review` RESTFUL API repository by repeating the previous steps. From your groups page, select `New Project` 
 
 ![gitlab-new-project](./images/gitlab-new-project.png)
 
@@ -77,7 +79,7 @@ your project has been imported.
 
 ![gitlab-new-import](./images/gitlab-import-project.png)
 
-6. Import the `Nordmart Review` backend application code by clicking the `Repository via URL` tile and inputing the following URL. 
+6. Import the `Nordmart Review` RESTFUL API repository by clicking the `Repository via URL` tile and inputing the following URL. 
 
 ```
 https://github.com/stakater-lab/stakater-nordmart-review
@@ -92,7 +94,7 @@ Your project has been imported.
 
 ![normart-review2](./images/nordmart-review.png)
 
-7. Finally, import the `Nordmart Review` gitops configurations by also following the previous steps. From your groups page, click on `New Project`
+7. Finally, import the `Nordmart Review` gitops configurations repository by also following the previous steps. From your groups page, click on `New Project`
 
 ![gitlab-new-project](./images/gitlab-new-project.png)
 
