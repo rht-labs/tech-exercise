@@ -14,12 +14,14 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
 2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in `rox-image-scan` in the search box that is displayed.
    You will see a  `rox-image-scan` task. Click to view details.
 
-   ![rox-image-search](./images/rox-image-search.png)
+   ![rox-image-search](./images/7b-tekton-rox-image-search.png)
    
 3. CLick YAML to display the task definition.
 
-   ![rox-image-scan-task](./images/rox-image-scan-task.png)  
-   ![rox-image-check-task](./images/rox-image-check-task.png)
+    <p align="center" width="100%">
+        <img width="40%" src="images/7b-tekton-rox-image-check-yaml.png">
+        <img width="40%" src="images/7b-tekton-rox-image-check-yaml.png">
+    </p>
 
 4. Open the Chart we added to 00-tekton-pipelines folder to our nordmart-apps-gitops-repository in section 2.
 
@@ -128,6 +130,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
     ```
 
 4. This should now fail on the **image-scan/rox-image-check** task.  
+    
     TODO: Add screenshot
     ![images/acs-image-fail.png](images/acs-image-fail.png)
 
@@ -144,4 +147,4 @@ Let's run through a scenario where we break/fix the build using a build policy v
     git push
     ```
 
-🪄 Observe the **stakater-nordmart-review** pipeline running successfully again.
+🪄🪄 Observe the **stakater-nordmart-review** pipeline running successfully again 🪄🪄
