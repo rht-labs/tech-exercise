@@ -15,7 +15,7 @@
 2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
 
     ```bash
-    sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-test'}) by (pod)
+    sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-dev'}) by (pod)
     ```
 
     ![product-review-promql](images/product-review-promql.png)
@@ -36,15 +36,21 @@
     apiVersion: monitoring.coreos.com/v1
     kind: ServiceMonitor
     metadata:
-      name: my-app
+      labels:
+         app: review
+      name: review-svc-monitor
+      namespace: (TENANT_NAME)-dev
     spec:
       endpoints:
-        - interval: 30s
-          port: tcp-8080 # port that metrics are exposed
-          scheme: http
+        - interval: 5s
+          port: http # port that metrics are exposed
+          path: /actuator/prometheus
+      namespaceSelector:
+       matchNames:
+       - (TENANT_NAME)-dev
       selector:
         matchLabels:
-          app: my-app
+          app: review
     </code></pre></div>
 
     Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
@@ -71,6 +77,11 @@
     ```bash
     oc get servicemonitor -n ${TENANT_NAME}-dev -o yaml
     ```
+
+   This is how the serviceMonitor will look like in openshift cluster
+
+   ![sevice-monitor](./images/review-service-monitor.png)
+
 
 2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes grafana installation. Add an existing dashboard to norwdmart-review api; the dashboard can be found `nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
 
@@ -106,8 +117,10 @@
     curl -L -X DELETE $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/6323904100aeb66032db19dc
     ```
 
-6. Back in Grafana, we should see some data populated into the boards...
+6. Back in Grafana, we should see some data populated into the boards... Go to the Manage and then click on your <TENANT_NAME>-dev.
 
+    ![grafana-http-reqs](./images/product-review-grafana-dashboard-manage.png)
+    ![grafana-http-reqs](./images/product-review-grafana-dashboard-tanent.png)
     ![grafana-http-reqs](./images/product-review-grafana-dashboard.png)
 
 ### Create a Dashboard

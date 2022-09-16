@@ -3,34 +3,32 @@
 > SAAP's built in alerts.... blah
 ### Workload Alerts
 
-1. The Nordmart Review API and UI charts both have one basic `rule` for firing off an alert. If you open up the `/projects/pet-battle-api/chart/templates/prometheusrule.yaml` you'll see one configured to alert when a pod is not available for one minute. The alert rules are written in PromQL.
+1. The Nordmart Review API and UI charts both have one basic `rule` for firing off an alert. If you open up the `stakater-nordmart-review/deploy/values.yaml` file, you'll find an alert that gets triggered when total ratings below 2 has crossed the threshold 8. The alert rules are written in PromQL. You can also add an extra alert which will be triggered when a pod is not available for one minute. In `values.yaml`add the following alert after existing `nordmart-review-low-rating-warning` alert under `prometheusRule.group`
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-    spec:
-      groups:
       - name: nordmart-review-api-rules
         rules:
         - alert: NordmartReviewApiNotAvailable
           annotations:
-            message: 'Nordmart Review API in namespace {{ .Release.Namespace }} is not available for the last 1 minutes.'
-          expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * 
+            message: 'Nordmart Review API in namespace (TENANT_NAME)-dev is not available for the last 1 minutes.'
+          expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="(TENANT_NAME)-dev"} * 
                 on(pod) group_left(label_app) 
-                kube_pod_labels{label_app="review",namespace="{{ .Release.Namespace }}"})) == 0
+                kube_pod_labels{label_app="review",namespace="(TENANT_NAME)-dev"})) == 0
           for: 1m
           labels:
-            severity: {{ .Values.prometheusrules.severity | default "critical" }}
+            severity: critical
     </code></pre></div>
-
-    ![sevice-monitor](./images/review-service-monitor.png)
 
     ![prometheus-rule](./images/review-prometheus-rule.png)
 
     ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
 
-_TODOs_
+   Once the alert is in place, you can trigger it by scaling down the deployment manually
 
-- Validate the rule is firing by scaling down deployment
+   ![prometheus-rule](./images/Deployment_Scale_Down.png)
+   ![prometheus-rule](./images/Prometheus-Alert-Triggered.png)
+   ![prometheus-rule](./images/Alertmanager-Alert-Triggered.png)
 
 2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full
 
