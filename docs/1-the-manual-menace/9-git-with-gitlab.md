@@ -6,11 +6,11 @@ SAAP Instance comes with a fully managed instance of GitLab.
 
 To access your GitLab instance, from your `Forecastle` console, click on the `GitLab` tile.
 
-![forecastle-page](./images/forecastle-gitlab1.png)
+   ![forecastle-page](./images/forecastle-gitlab1.png)
 
 You will be brought to the Gitlab Console.
 
-![gitlab-home](./images/gitlab-home.png)
+   ![gitlab-home](./images/gitlab-home.png)
 
 ## Setting Up Your Gitlab
 
@@ -21,16 +21,16 @@ Gitlab Groups allows you group related projects together. You can manage permiss
 1. To create a group, click on `create a group` tile.
 
 
-![gitlab-group](./images/gitlab-home-group.png)
+   ![gitlab-group](./images/gitlab-home-group.png)
 
 2. Give your group a name and set the visibility level to `public`. You can also add team members.
 Click on `create group` 
 
-![gitlab-group-create](./images/create-group.png)
+   ![gitlab-group-create](./images/create-group.png)
 
 Your group has been created.
 
-![gitlab-group-created](./images/gitlab-my-group.png)
+   ![gitlab-group-created](./images/gitlab-my-group.png)
 
 ### GitLab Projects
 
