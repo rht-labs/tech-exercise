@@ -42,7 +42,7 @@ You will leverage Gitlab Projects to manage your application code.
 
 1. To create a new project, from your group page, click on `New project`
 
-![gitlab-new-project](./images/gitlab-new-project.png)
+   ![gitlab-new-project](./images/gitlab-new-project.png)
 
 Our sample application to be deployed to your cluster, `Nordmart Review`, is a three-tier app consisting of;
 
@@ -54,7 +54,7 @@ Our sample application to be deployed to your cluster, `Nordmart Review`, is a t
 
 2. `Nordmart Review` is hosted in a git repository, which you can import by clicking on the `Import Project` tile.
 
-![gitlab-new-import](./images/gitlab-import-project.png)
+   ![gitlab-new-import](./images/gitlab-import-project.png)
 
 
 3. To import the `Nordmart Review` User Interface repository, click on the `Repository via URL` tile and input the following URL.
@@ -64,20 +64,20 @@ https://github.com/stakater-lab/stakater-nordmart-review-ui
 ```
 add your project name and select `internal` for the visibility level. Then click `Create Project`
 
-![gitlab-new-import](./images/nordmart-ui-import.png)
+   ![gitlab-new-import](./images/nordmart-ui-import.png)
 
 your project has been imported.
 
-![nordmart-project](./images/nordmart-project.png)
+   ![nordmart-project](./images/nordmart-project.png)
 
 
 4. Next, import the `Nordmart Review` RESTFUL API repository by repeating the previous steps. From your groups page, select `New Project` 
 
-![gitlab-new-project](./images/gitlab-new-project.png)
+   ![gitlab-new-project](./images/gitlab-new-project.png)
 
 5. Select the `Import Project` tile.
 
-![gitlab-new-import](./images/gitlab-import-project.png)
+   ![gitlab-new-import](./images/gitlab-import-project.png)
 
 6. Import the `Nordmart Review` RESTFUL API repository by clicking the `Repository via URL` tile and inputing the following URL. 
 
@@ -88,19 +88,19 @@ https://github.com/stakater-lab/stakater-nordmart-review
 
 include your project name and select `internal` for your project visibility. Import your project by clicking on `Create Project`
 
-![normart-review](./images/normart-review.png)
+   ![normart-review](./images/normart-review.png)
 
 Your project has been imported.
 
-![normart-review2](./images/nordmart-review.png)
+   ![normart-review2](./images/nordmart-review.png)
 
 7. Finally, import the `Nordmart Review` gitops configurations repository by also following the previous steps. From your groups page, click on `New Project`
 
-![gitlab-new-project](./images/gitlab-new-project.png)
+   ![gitlab-new-project](./images/gitlab-new-project.png)
 
 then select `Import Project` tile.
 
-![gitlab-new-import](./images/gitlab-import-project.png)
+   ![gitlab-new-import](./images/gitlab-import-project.png)
 
 8. Import the `Nordmart Review` Gitops configuration  by clicking the `Repository via URL` tile and inputing the following URL. 
 
@@ -111,16 +111,16 @@ then select `Import Project` tile.
  
 include your project name and select `internal` for your project visibility. Import your project by clicking on `Create Project`
 
-![nordmart-gitops](./images/nordmart-gitops.png)
+   ![nordmart-gitops](./images/nordmart-gitops.png)
 
 Your Project has been imported.
 
 
-![nordmart-gitops-project](./images/nordmart-gitops-project.png)
+   ![nordmart-gitops-project](./images/nordmart-gitops-project.png)
 
 9. You can see all your projects from your groups page.
 
-![project](./images/projects.png)
+   ![project](./images/projects.png)
 
 ### Making Changes to Your Code
 
@@ -128,20 +128,20 @@ GitLab `Personal Access Token` allows you interact safely with your GitLab repos
 
 1. Click on your profile icon at the top right corner of your page, and select `Edit profile`.
 
-![edit-profile](./images/edit-profile.png)
+   ![edit-profile](./images/edit-profile.png)
 
 2. At the left corner, Click on `Access Tokens`. You will be brought to the `Personal Access Token` Page
 
-![access token](./images/access-token.png)
+   ![access token](./images/access-token.png)
 
 3. Give your token a name, as well as the `read_repository` and `write_repository` permissions. Then select `Create Personal Access Token`
 
-![p_access token](./images/personal-access-token.png)
+   ![p_access token](./images/personal-access-token.png)
 
 4. Once your Access Token has been created, make sure you copy it and keep in a safe place, as you  will not get a chance to view it again.
 
 
-![p_access token2](./images/token.png)
+   ![p_access token2](./images/token.png)
 
 5. Finally, add your Token to your Dev Workstation by saving them as the following enviroment variables.
 
@@ -151,7 +151,7 @@ export GIT_TOKEN=<'YOUR_TOKEN>
 
 ```
 
-![git-var](./images/git-var.png)
+   ![git-var](./images/git-var.png)
 
 
 
