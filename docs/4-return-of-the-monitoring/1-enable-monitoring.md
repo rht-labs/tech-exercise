@@ -98,12 +98,12 @@
 5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `nordmart-review` api. In your IDE, run on your terminal:
 
     ```bash
-    curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/dogs
-    curl -vL -X POST -d '{"OK":"🐈"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
-    curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
-    curl -vL -X POST -d '{"OK":"🦆"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
-    curl -vL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
-    curl -vL -X POST -d '{"OK":"🐶"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
+    # Get the reviews for a specific Product (i.e. 329199)
+    curl -L $(oc get route/review ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199
+    # Add a review for a specific Product (i.e. 329199)
+    curl -L -X POST $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199/John/5/Great
+    # Delete a review for a specific review (First get the review id from Get request)
+    curl -L -X DELETE $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/6323904100aeb66032db19dc
     ```
 
 6. Back in Grafana, we should see some data populated into the boards...
