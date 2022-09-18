@@ -26,9 +26,9 @@
 
    Once the alert is in place, you can trigger it by scaling down the deployment manually
 
-   ![prometheus-rule](./images/Deployment_Scale_Down.png)
-   ![prometheus-rule](./images/Prometheus-Alert-Triggered.png)
-   ![prometheus-rule](./images/Alertmanager-Alert-Triggered.png)
+   ![prometheus-rule](./images/deployment-scale-down.png)
+   ![prometheus-rule](./images/prometheus-alert-triggered.png)
+   ![prometheus-rule](./images/alertmanager-alert-triggered.png)
 
 2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.prometheusRule
 
@@ -51,7 +51,7 @@
     git push
     ```
 
-    This push will trigger the pipeline which updates the chart version for Nordmart Review API in `/projects/tech-exercise/pet-battle/test`.
+    This push will trigger the pipeline which updates the chart version for Nordmart Review API in `stakater-nordmart-review/deploy/`.
 
     When the chart version is updated automatically, ArgoCD will detect your new changes and apply them to the cluster 🔥🔥🔥
 
@@ -76,7 +76,7 @@
     7806468096 bytes (7.8 GB, 7.3 GiB) copied, 152.028 s, 51.3 MB/s
     </code></pre></div>
 
-5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see ` PetBattleMongoDBDiskUsage` alert as below:
+5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `NordmartReviewApiMongoDBDiskUsage` alert as below:
 
-    ![prometheus-rule](./images/Mongodb-Alert-Triggered.png)
-    ![prometheus-rule](./images/Mongodb-PVC.png)
+    ![prometheus-rule](./images/mongodb-alert-triggered.png)
+    ![prometheus-rule](./images/mongodb-pvc.png)

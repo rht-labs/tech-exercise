@@ -79,8 +79,8 @@
 
 6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
 
-    ![HPA_hey_command](./images/HPA_hey_command.png)
-    ![Pod_Scaled_Up](./images/Pod_Scaled_Up.png)
-    ![HPA_Action1](./images/HPA_Action1.png)
-    ![HPA_Action2](./images/HPA_Action2.png)
+    ![HPA_hey_command](./images/hpa-hey-command.png)
+    ![Pod_Scaled_Up](./images/pod-scaled-up.png)
+    ![HPA_Action1](./images/hpa_action1.png)
+    ![HPA_Action2](./images/hpa_action2.png)
 
