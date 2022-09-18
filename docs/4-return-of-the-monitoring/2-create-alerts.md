@@ -37,7 +37,7 @@
         - alert: NordmartReviewApiMongoDBDiskUsage
           annotations:
             message: 'Review MongoDB disk usage in namespace gabbar-dev higher than 80%'
-          expr: (kubelet_volume_stats_used_bytes{persistentvolumeclaim="review-mongodb",namespace="gabbar-dev"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim="review-mongodb",namespace="gabbar-dev"}) * 100 > 80
+          expr: (kubelet_volume_stats_used_bytes{persistentvolumeclaim="review-mongodb",namespace="<TENANT_NAME>-dev"} / kubelet_volume_stats_capacity_bytes{persistentvolumeclaim="review-mongodb",namespace="<TENANT_NAME>-dev"}) * 100 > 80
           labels:
             severity: warning
     ```
