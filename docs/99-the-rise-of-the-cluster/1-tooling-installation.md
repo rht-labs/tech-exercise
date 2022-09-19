@@ -36,7 +36,7 @@ If you'd like to use the same setup, here are the steps:
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-helm upgrade --install my . --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
+helm upgrade --install my redhat-cop/ipa --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
 ```
 FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖, that's what i did!
 
