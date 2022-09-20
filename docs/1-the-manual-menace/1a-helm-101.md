@@ -17,13 +17,13 @@ Let's deploy a simple application using Helm.
     ```
 
     Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
-
+     
     ```bash#test
     helm install my-nordmart-review stakater/nordmart-review --namespace ${TENANT_NAME}-test
     ```
     ![nordmart-review-installed](./images/1a-7-nordmart-review-installed.png)
 
-
+    ##### TODO: CHANGE SCREENSHOTS
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
 
     ```bash#test
