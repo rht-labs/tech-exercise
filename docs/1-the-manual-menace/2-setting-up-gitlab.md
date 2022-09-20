@@ -1,3 +1,4 @@
+delete file
 # Getting GitLab Ready for GitOps
 > In this section we will get gitlab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
 
