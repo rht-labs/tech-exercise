@@ -66,10 +66,10 @@
 
 4. With the change synchronized, we should see a new HorizontalPodAutoscaler object in ArgoCD and the cluster. Feel free to check those out.
 
-5. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of pet-battle. This should trigger an autoscale due to the increased load on the pods. `hey` is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
+5. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of review microservice. This should trigger an autoscale due to the increased load on the pods. [hey](https://github.com/rakyll/hey) is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
 
     ```bash
-    hey -t 30 -c 10 -n 10000 -H "Content-Type: application/json" -m GET https://$(oc get route/review -n ${TEAM_NAME}-test --template='{{.spec.host}}')/cats 
+    hey -t 30 -c 10 -n 10000 -H "Content-Type: application/json" -m GET https://$(oc get route/review -n <TENANT_NAME>-dev --template='{{.spec.host}}')/api/review/329199
     ```
 
     Where:
@@ -79,10 +79,8 @@
 
 6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
 
-    ![petbattle-api-hpa](./images/petbattle-api-hpa.png)
-    ![petbattle-api-hpa-topology](./images/petbattle-api-hpa-topology.png)
-    ![petbattle-api-deployment](./images/petbattle-api-deployment.png)
+    ![HPA_hey_command](./images/hpa-hey-command.png)
+    ![Pod_Scaled_Up](./images/pod-scaled-up.png)
+    ![HPA_Action1](./images/hpa_action1.png)
+    ![HPA_Action2](./images/hpa_action2.png)
 
-7. After a few moments you should see the autoscaler settle back down and the replicas are reduced.
-
-    ![petbattle-api-scale-down](./images/petbattle-api-scale-down.png)
