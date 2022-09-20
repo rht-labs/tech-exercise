@@ -76,8 +76,8 @@ When something is seen as not matching the required state in Git, an application
     namespaces:
       - ${TEAM_NAME}-ci-cd
     argocd_cr:
-      repositoryCredentials: |
-        - url: https://${GIT_SERVER}
+      initialRepositories: | 
+        - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
           type: git
           passwordSecret:
             key: password
@@ -85,6 +85,25 @@ When something is seen as not matching the required state in Git, an application
           usernameSecret:
             key: username
             name: git-auth
+          insecure: true
+        - url: https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
+          type: git
+          passwordSecret:
+            key: password
+            name: git-auth
+          usernameSecret:
+            key: username
+            name: git-auth
+          insecure: true
+        - url: https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
+          type: git
+          passwordSecret:
+            key: password
+            name: git-auth
+          usernameSecret:
+            key: username
+            name: git-auth
+          insecure: true
 EOF
     ```
 
