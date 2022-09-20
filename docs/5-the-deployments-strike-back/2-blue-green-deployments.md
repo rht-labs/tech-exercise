@@ -4,7 +4,7 @@
 
 <span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GITOPS! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
-![blue-green-diagram](images/blue-green-diagram.jpg)
+![blue-green-diagram](images/blue-green-diagram.png)
 
 1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
 

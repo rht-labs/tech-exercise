@@ -4,7 +4,7 @@
 
 <span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-ab-testing_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual A/B deployment. But in the real world you'll want to automate this by increasing the load of the alternative service based on some tests or other metric. Plus this is GITOPS! So how do we do a A/B with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
-![a-b-diagram](images/a-b-diagram.jpg)
+![a-b-diagram](images/a-b-diagram.png)
 
 - As you see in the diagram, OpenShift can distribute the traffic that coming to Route. But how does it do it? Let's explore `route` definition. This is a classic Route definition:
 
