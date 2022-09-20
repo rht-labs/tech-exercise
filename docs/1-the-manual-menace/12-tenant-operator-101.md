@@ -43,7 +43,7 @@ The `workshop` folder contains the following folders:
 
 4. Click the `+`icon to create a new  yaml file. This file will contain your tenant configurations.
 
-   ![mto-file](./images/mto-file.png)
+   ![nordmart-infra-gitops](./images/nordmart-infra-gitops.png)
 
 4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
@@ -60,10 +60,11 @@ spec:
       - <INSERT_YOUR_USER_NAME>
   argocd:
     sourceRepos:
-      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/dominators/workshop-infra-gitops-config.git'
-      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/genesis/nordmart-apps-gitops-config.git'
+      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
+      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<INSERT_YOUR_TENANT_NAME>/nordmart-apps-gitops-config.git'
       - 'https://stakater.github.io/stakater-charts'
   namespaces:
+  - preview
   - dev
   - build
   - test
@@ -76,11 +77,11 @@ spec:
 5. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
 
 
-   ![mto-commit](./images/mto-commit.png)
+   ![mto-commit](./images/create-tenant.png)
 
 6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
 You can view your created tenant and namespaces via your OpenShift Console.
 
-   ![mto-project](./images/mto-project.png)
+   ![mto-project](./images/tenants-created.png)
 
 
