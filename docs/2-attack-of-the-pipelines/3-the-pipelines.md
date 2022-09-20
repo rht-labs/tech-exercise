@@ -11,30 +11,10 @@ Why create pipelines:
   * More prod like infrastructure increases assurance
   * “We have already done it” behavior de-risks go live
 
-<p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
-</p>
+### Pre-requisites
 
-```bash
-cd /projects/tech-exercise
-git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
-git pull
-```
-
-### Choose your own adventure
-
-Split into 2 groups within your team. Choose your own adventure! Each group will get to perform similar tasks:
-
-| 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
-|-----------------------|----------------------------|
-| * We need to fork PetBattle (clone from GitHub and push to GitLab) | * We need to fork PetBattle API (clone from GitHub and push to GitLab) |
-| * Update `Jenkinsfile` task to leave out some stuff for participants | * Update Tekton task to leave out some stuff for participants |
-| * Add webhook into GitLab repositories for triggering jobs | * Add webhook into GitLab repositories for triggering jobs |
-| * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) 
-| * By updating version files (pom.xml etc), kick the pipelines | * By updating version files (pom.xml etc), kick the pipelines |
-| <span style="color:blue;">[jenkins](2-attack-of-the-pipelines/3a-jenkins.md)</span> | <span style="color:blue;">[tekton](2-attack-of-the-pipelines/3b-tekton.md)</span> |
+* Team/Participant tenant added to the cluster.
+* Running version of nordmart review and nordmart review ui deployed through the cluster.
 
 
-🐈 <span style="color:purple;" >Expected Outcome</span>: Working pipelines that build the Pet Battle applications (front end and back) - yes .. **Cats** !! 🐈
-
-![daisy-cat.png](images/daisy-cat.png)
+<span style="color:green;" >Expected Outcome</span>: Working pipelines that build the nordmart applications (front end and back) 
