@@ -196,6 +196,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 
 5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to argocd and search for Application `<TENANT_NAME>-build-tekton-pipelines`
    
+
   ![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
 
 If you open up the application by clicking on it, you should see a similar screen

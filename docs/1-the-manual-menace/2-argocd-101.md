@@ -24,15 +24,14 @@ When something is seen as not matching the required state in Git, an application
 
 Lets install an Argocd Application that deploy the nordmart-review application onto the cluster.
 
-1. Open the forecastle page,  
-    Navigate to CI & CD tab and Open the ArgoCD link.  
-    **or**  
-    Search argocd in search bar and Open the ArgoCD link. 
+1. Open the forecastle page, Navigate to CI & CD tab and Open the ArgoCD link.  
+    ![argocd-ui](images/2-argocd-forecastle.jpg)
     
-    <p align="center" width="100%">
-        <img width="40%" src="images/2-argocd-forecastle.jpg">
-        <img width="40%" src="images/2-argocd-forecastle-search.jpg">
-    </p>
+    **or**  
+
+    Search `argocd` in search bar and Open the ArgoCD link. 
+    ![argocd-ui-](images/2-argocd-forecastle-search.jpg)
+
 
     You will automatically be logged in via KeyCloak SSO.  
 
@@ -41,9 +40,8 @@ Lets install an Argocd Application that deploy the nordmart-review application o
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
 3. You just logged into ArgoCD 👏👏👏! 
-<p align="center" width="100%">
-    <img width="70%" src="images/2-argocd-ui.png">
-</p>
+![argocd-ui](images/2-argocd-ui.png)
+
 
 4. Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `nordmart-review` app you manually deployed previously using Helm. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form.
     > Make sure you have deleted previous helm release deployed in Helm 101.
