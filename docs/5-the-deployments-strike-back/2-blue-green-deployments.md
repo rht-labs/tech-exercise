@@ -6,7 +6,7 @@
 
 ![blue-green-diagram](images/blue-green-diagram.png)
 
-1. Let's create two new deployments in our ArgoCD Repo for the nordmart-review front end. We'll call one Blue and the other Green. Add 3 new applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
+1. Let's create two new deployments in our ArgoCD Repo for the nordmart-review front end. We'll call one Blue and the other Green. Add 3 new argocd applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
 
     a. stakater-nordmart-review-ui-bg-blue.yaml
 
@@ -226,7 +226,7 @@ and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m "🔵 ADD - Blue / Green deployment to pipeline 🟩"
+    git commit -m "🔵 Update - Blue / Green deployment 🟩"
     git push
     ```
 
