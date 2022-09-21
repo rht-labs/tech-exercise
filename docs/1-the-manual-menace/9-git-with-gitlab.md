@@ -74,7 +74,7 @@ Add member to the group using the "Invite member" option.
 
 2. Now select the "Repository by URL" option and paste in the following repository URL:
     ```
-        https://github.com/stakater-lab/stakater-nordmart-review.git
+    https://github.com/stakater-lab/stakater-nordmart-review.git
     ```
    > Make sure you mark the repository as public and choose the group you previously created as the group name. 
     
@@ -89,10 +89,25 @@ Add member to the group using the "Invite member" option.
 
 2. Now select the "Repository by URL" option and paste in the following repository URL:
     ```
-        https://github.com/stakater-lab/stakater-nordmart-review-ui.git
+    https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
    
    > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
     
     ![import-nordmart-review](images/import-nordmart-review-ui.png)
+
+
+## Importing Nordmart Apps Gitops Config
+1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
+   ![create-project-home](images/create-project-home.png)
+
+2. Now select the "Repository by URL" option and paste in the following repository URL:
+    ```
+    https://github.com/stakater-lab/nordmart-apps-gitops-config.git
+    ```
+   > Make sure you mark the repository as public and choose the group you previously created as the group name.
+   
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
+    
+    ![import-nordmart-review](images/import-nordmart-apps.png)
