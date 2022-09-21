@@ -1,7 +1,7 @@
 # Getting GitLab Ready for GitOps
 > In this section we will get gitlab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
 
-1. Log into GitLab with your credentials. GitLab URL:
+1. Log into GitLab with your credentials. You can find the Gitlab URL in Forecastle UI. GitLab URL:
 
     ```bash
      https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/
@@ -16,14 +16,14 @@
 
    ![create-group-home](images/create-group-home.png)
 
-
-
 2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
    For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
    ![gitlab-group-create](images/gitlab-group-create.png)
 
    Gitlab will redirect you to the group's home page, once the group is created.
+
+    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in nordmart-infra-gitops-config repo.
 
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
@@ -41,32 +41,31 @@ Add member to the group using the "Invite member" option.
    Export your Gitlab username.
 
     ```bash
-    export GITLAB_USER=<YOUR_GITLAB_USER>
+    export GIT_USERNAME=<YOUR_GITLAB_USERNAME>
+    ```
+   Export your Email. (use the email used in registering)
+
+    ```bash
+    export GIT_EMAIL=<YOUR_GITLAB_EMAIL>
     ```
 
    Export your Gitlab password.
 
     ```bash
-    export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
+    export GIT_PASSWORD=<YOUR_GITLAB_PERSONAL_ACCESS_TOKEN>
     ```
 
     <p class="tip">
     ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
-   Generate your Gitlab PAT.
-
+    Lets add these config to git 
     ```bash
-    gitlab_pat
+        git config --global user.name $GIT_USERNAME
+        git config --global user.email $GIT_EMAIL
+        git config --global user.password $GIT_PASSWORD
     ```
 
-   Echo the `GITLAB_PAT` environment variable.
-
-    ```bash
-    echo $GITLAB_PAT
-    ```
-
-   We can see the PAT printed out on the command line, it is also stored in an environment variable called `GITLAB_PAT`
 
 
 ## Importing Nordmart projects
