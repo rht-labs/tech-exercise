@@ -116,7 +116,7 @@
             imagePullSecrets: []
             image:
               repository: stakater/stakater-nordmart-review-ui
-              tag: 1.0.14-blue
+              tag: 1.0.15-blue
           service:
             additionalLabels:
               blue_green: active
@@ -151,7 +151,7 @@
               blue_green: inactive
             image:
               repository: stakater/stakater-nordmart-review-ui
-              tag: 1.0.14-green
+              tag: 1.0.15-green
           service:
             additionalLabels:
               blue_green: inactive
