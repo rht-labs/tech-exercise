@@ -1,104 +1,143 @@
 ## Extend Tekton Pipeline with Code Linting Task
 
-1. Lets try some code formatting as part of the maven build lifecycle using the <span style="color:blue;">[maven formatter plugin](https://code.revelc.net/formatter-maven-plugin/usage.html).</span> Run this command in your shell to format your code.
+## Integrate the pipeline with Tekton:
+1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
 
-    ```bash
-    cd /projects/pet-battle-api
-    mvn formatter:format
-    ```
+2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a runAfter field to make it run after the stakater-sonarqube-scanner-v1 task:
 
-2. Now edit a java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
+```
+- taskName: stakater-code-linting-v1
+  runAfter:
+    - stakater-sonarqube-scanner-v1
 
-    ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
+```
+The pipeline will now become:
+   ````
+   apiVersion: v2
+   pipeline-charts:
+     name: stakater-main-pr-v1
+     workspaces:
+     - name: source
+       volumeClaimTemplate:
+         accessModes: ReadWriteOnce
+         resourcesRequestsStorage: 1Gi
+     pipelines:
+       tasks:
+         - defaultTaskName: git-clone
+         - defaultTaskName: stakater-create-git-tag-v1
+           params:
+             - name: oldcommit
+             - name: action
+         - defaultTaskName: stakater-sonarqube-scanner-v1
+           runAfter:
+             - stakater-create-git-tag-v1
+         - defaultTaskName: stakater-code-linting-v1
+           runAfter:
+            - stakater-sonarqube-scanner-v1
+         - taskRef:
+             task: stakater-build-image-flag-v1
+             kind: ClusterTask
+           name: stakater-build-image-flag-v1
+           runAfter: 
+             - stakater-create-git-tag-v1
+           workspaces:
+             - name: source
+               workspace: source
+           params:
+             - name: oldcommit
+             - name: newcommit
+         - defaultTaskName: stakater-buildah-v1
+           name: build-and-push
+           runAfter:
+            - stakater-build-image-flag-v1
+              params:
+               - name: BUILD_IMAGE
+                 value: $(tasks.stakater-build-image-flag-v1.results.build-image)
+               - name: IMAGE_REGISTRY
+                 value: $(params.image_registry_url)
+               - name: CURRENT_GIT_TAG
+                 value: $(tasks.stakater-create-git-tag-v1.results.CURRENT_GIT_TAG)
+         - defaultTaskName: stakater-helm-push-v1
+         - defaultTaskName: stakater-update-cd-repo-v3
+         - defaultTaskName: stakater-push-main-tag-v1
+         - defaultTaskName: stakater-app-sync-and-wait-v1
+           params:
+             - name: timeout
+               value: "120"
+     triggertemplate:
+         serviceAccountName: stakater-workshop-tekton-builder
+         pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
+         params:
+           - name: repoName
+           - name: prnumberBranch
+             default: "main"
+     eventlistener:
+         serviceAccountName: stakater-workshop-tekton-builder
+         triggers:
+         - name: pullrequest-create
+           interceptors:
+           - ref:
+               name: "cel"
+             params:
+               - name: "filter"
+                 value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
+           bindings:
+             - ref: stakater-gitlab-merge-request-v1
+             - name: oldcommit
+               value: "NA"
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: pullrequest-synchronize
+           interceptors:
+             - ref:
+                 name: "cel"            
+               params:
+               - name: "filter"
+                 value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
+               - name: "overlays"
+                 value:
+                   - key: marshalled-body
+                     expression: "body.marshalJSON()"
+           bindings:
+             - ref: stakater-gitlab-merge-request-v1
+             - name: oldcommit
+               value: $(body.object_attributes.oldrev)
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: push
+           interceptors:
+             - ref:
+                 name: "cel"
+             params:
+             - name: "filter"
+               value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
+             - name: "overlays"
+               value:
+                 - key: marshalled-body
+                   expression: "body.marshalJSON()"
+           bindings:
+             - name: newcommit
+               value: $(body.after)
+             - name: oldcommit
+               value: $(body.before)
+             - ref: stakater-pr-v1
+               kind: ClusterTriggerBinding
+         - name: stakater-pr-cleaner-v2-pullrequest-merge
+           create: false
+     rbac:
+       enabled: false
+     serviceAccount:
+       name: stakater-workshop-tekton-builder
+        create: false
 
-    Then rerun the `formatting:format` maven command which will remove these spaces.
+````
+4. Commit the changes.
+5. Now open Argocd and check if the changes were synchronized.
+###### todo add screenshot
+6. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline!
 
-    ![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
 
-3. Linting and Formatting using Checkstyle (`checkstyle.xml`). Unfortunately we haven't installed these in our Cloud IDE yet so you may not be able to try these directly, but we will get to use the command line equivalents in the next step. For those using VCode you can checkout these links:
-
-    - There are some plugins to help us here. For example, if you are a user of VSCode, you can install <span style="color:blue;">[an IDE extension](https://code.visualstudio.com/docs/java/java-linting)</span> for realtime feedback.
-    ![images/checkstyle-extension.png](images/checkstyle-extension.png)
-
-    - There is also a <span style="color:blue;">[Sonar Lint Extension](https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode)</span> for realtime checking in your IDE.
-
-4. Let's have a look at how we use these tools from the command line.
-
-    By default we have an overall checkstyle severity of `warning` in our Pet Battle API `checkstyle.xml` config file. This means we don't stop the build when codestyle is not met. So we will only see this on the command line:
-
-    ```bash
-    mvn checkstyle:check
-    ```
-
-5. Open up `/project/pet-battle-api/checkstyle.xml` file and search for `EmptyCatchBlock`. Then set the severity value as **error**. You can read about <span style="color:blue;">[EmptyCatchBlock here.](https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock)</span>
-
-    ```xml
-            <module name="EmptyCatchBlock">
-                <property name="severity" value="error"/>
-                <property name="exceptionVariableName" value="expected"/>
-            </module>
-    ```
-
-    We can turn on checkstyle debugging by adding `consoleOutput` true to our pom.xml
-
-    ```xml
-                    <configuration>
-                        <configLocation>checkstyle.xml</configLocation>
-                        <consoleOutput>true</consoleOutput>
-                    </configuration>
-    ```
-
-6. Edit the `CatResource.java` class file and remove the stack trace in the catch block that is part of the `loadlitter()`method, making it empty.
-
-    From this:
-
-    ![images/codestyle-violation2.png](images/codestyle-violation1.png)
-
-    To this:
-
-    ![images/codestyle-violation2.png](images/codestyle-violation2.png)
-
-    Now when we run the check we should get a hard error telling us we have an empty code block.
-
-    ```bash
-    mvn checkstyle:check
-    ```
-
-    ![images/checkstyle-error.png](images/checkstyle-error.png)
-
-7. These types of checks (as well as tests) are included in the Maven lifecycle phase called **verify**
-
-    ```bash
-    mvn verify
-    ```
-
-8. We can stash these checkstyle changes and revert our code for now.
-
-    ```bash
-    cd /projects/pet-battle-api
-    git stash
-    ```
-
-9. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
-
-    A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
-
-    Here are some of the most important phases in the default build lifecycle:
-
-    - clean: remove all files generated by the previous build
-    - validate: check if all information necessary for the build is available
-    - compile: compile the source code
-    - verify: run any checks to verify the package is valid and meets quality criteria
-    - test: run unit tests
-
-    We use these phases in out build pipeline. The full lifecycle reference is <span style="color:blue;">[here.](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference)</span>
-
-    We use the checkstyle plugin in Sonarqube which is found under **Rues** - **Java** language, **Repository**
-
-    <p class="warn"><b>TIP</b> You can find the available projects and reports in Sonarqube by navigating to <span style="color:blue;"><a href="https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/">https://sonarqube-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/</a></span></p>
-
-    ![images/checkstyle-sonar.png](images/checkstyle-sonar.png)
-
-    Sonarqube reports warnings under **Code Smells*.
-
-    ![images/sonar-code-smells.png](images/sonar-code-smells.png)

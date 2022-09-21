@@ -12,7 +12,9 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
-## Creating Tentants with GitOps
+> Normart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+
+## Creating Tenants with GitOps
 
 The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
@@ -21,13 +23,13 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    ![mto-workshop](./images/mto-workshop.png)
 
 
-The `workshop` folder contains the following folders:
+   The `workshop` folder contains the following folders:
 
-- `argocd-apps` This contains all the argocd apps “watching” your repositories.
+   - `argocd-apps` This contains all the argocd apps “watching” your repositories.
 
-- `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
+   - `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
 
-- `tenant-operator-config` which contains your Tenants configurations.
+   - `tenant-operator-config` which contains your Tenants configurations.
 
 
 2. Click on the `tenant-operator-config` folder.
@@ -43,7 +45,11 @@ The `workshop` folder contains the following folders:
 
 4. Click the `Edit Fork in Web IDE` tile to fork the repository.
 
+<<<<<<< HEAD
    ![mto-file](./images/mto-fork.png)
+=======
+   ![nordmart-infra-gitops](./images/nordmart-infra-gitops.png)
+>>>>>>> bf7b0ed82828280022819ee0803e0588826f4b27
 
 5. Create a new file by clicking on the `file` icon at the right corner of your IDE console.
 
@@ -73,10 +79,11 @@ spec:
       - <INSERT_YOUR_USER_NAME>
   argocd:
     sourceRepos:
-      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/dominators/workshop-infra-gitops-config.git'
-      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/genesis/nordmart-apps-gitops-config.git'
+      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
+      - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<INSERT_YOUR_TENANT_NAME>/nordmart-apps-gitops-config.git'
       - 'https://stakater.github.io/stakater-charts'
   namespaces:
+  - preview
   - dev
   - build
   - test
@@ -89,6 +96,7 @@ spec:
 8. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
 
 
+<<<<<<< HEAD
    ![mto-commit](./images/mto-commit.png)
 
 9. Create a merge request by adding a suitable description and clicking `Create Merge Request`
@@ -97,8 +105,13 @@ spec:
 
 
 10. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
+=======
+   ![mto-commit](./images/create-tenant.png)
+####add argocd here
+6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
+>>>>>>> bf7b0ed82828280022819ee0803e0588826f4b27
 You can view your created tenant and namespaces via your OpenShift Console.
 
-   ![mto-project](./images/mto-project.png)
+   ![mto-project](./images/tenants-created.png)
 
 
