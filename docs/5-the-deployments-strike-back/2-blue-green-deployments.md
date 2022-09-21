@@ -219,7 +219,7 @@ and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
 
     b. Change the service label to `active` in green service `03-stakater-nordmart-review-ui-bg-green\01-dev\values.yaml`
 
-    c. Change the `name` of service in `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml` route to `review-ui-blue`
+    c. Change the `name` of service in `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml` route to `review-ui-green`
 
 6. Commit all these changes:
 
