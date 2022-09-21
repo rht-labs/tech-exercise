@@ -2,178 +2,237 @@
 
 > Blue/Green deployments involve running two versions of an application at the same time and moving the traffic from the old version to the new version. Blue/Green deployments make switching between two different versions very easy.
 
-<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GITOPS! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Pet Battle UI!
+<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GITOPS! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Nordmart review UI!
 
 ![blue-green-diagram](images/blue-green-diagram.png)
 
-1. Let's create two new deployments in our ArgoCD Repo for the pet-battle front end. We'll call one Blue and the other Green. Add 2 new application in `tech-exercise/pet-battle/test/values.yaml`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
+1. Let's create two new deployments in our ArgoCD Repo for the nordmart-review front end. We'll call one Blue and the other Green. Add 3 new applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
 
-    ```bash
-    cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
-      # Pet Battle UI Blue
-      blue-pet-battle:
-        name: blue-pet-battle
-        enabled: true
-        source: http://nexus:8081/repository/helm-charts
-        chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version - may need adjusting!
-        values:
-          image_version: latest # container image version - may need adjusting!
-          fullnameOverride: blue-pet-battle
-          blue_green: active
-          # we controll the prod route via the "blue" chart for simplicity
-          prod_route: true
-          prod_route_svc_name: blue-pet-battle
-          config_map: '{
-            "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
-            "keycloak": {
-              "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
-              "realm": "pbrealm",
-              "clientId": "pbclient",
-              "redirectUri": "http://localhost:4200/tournament",
-              "enableLogging": true
-            }
-          }'
+    a. stakater-nordmart-review-ui-bg-blue.yaml
 
-      # Pet Battle UI Green
-      green-pet-battle:
-        name: green-pet-battle
-        enabled: true
-        source: http://nexus:8081/repository/helm-charts
-        chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version - may need adjusting!
-        values:
-          image_version: latest # container image version - may need adjusting!
-          fullnameOverride: green-pet-battle
-          blue_green: inactive
-          config_map: '{
-            "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
-             "keycloak": {
-              "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
-              "realm": "pbrealm",
-              "clientId": "pbclient",
-              "redirectUri": "http://localhost:4200/tournament",
-              "enableLogging": true
-            }
-          }'
-    EOF
+    ```yaml
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: gabbar-dev-stakater-nordmart-review-ui-bg-blue
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: gabbar
+          stakater.com/env: dev
+          stakater.com/kind: dev            
+      spec:
+        destination:
+          namespace: gabbar-dev
+          server: 'https://kubernetes.default.svc'
+        project: gabbar
+        source:
+          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-blue/01-dev
+          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+    ```
+
+    b. stakater-nordmart-review-ui-bg-green.yaml
+
+    ```yaml
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: gabbar-dev-stakater-nordmart-review-ui-bg-green
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: gabbar
+          stakater.com/env: dev
+          stakater.com/kind: dev            
+      spec:
+        destination:
+          namespace: gabbar-dev
+          server: 'https://kubernetes.default.svc'
+        project: gabbar
+        source:
+          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-green/01-dev
+          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+    ```
+
+    c. stakater-nordmart-review-ui-bg-route.yaml
+
+    ```yaml
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: gabbar-dev-stakater-nordmart-review-ui-bg-route
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: gabbar
+          stakater.com/env: dev
+          stakater.com/kind: dev            
+      spec:
+        destination:
+          namespace: gabbar-dev
+          server: 'https://kubernetes.default.svc'
+        project: gabbar
+        source:
+          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-route/01-dev
+          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+    ```
+
+    and then create 3 charts, which will be used by above applications
+
+    a. chart and values.yaml file for blue deployment
+    
+    `03-stakater-nordmart-review-ui-bg-blue\01-dev\Chart.yaml`
+
+    ```yaml
+      apiVersion: v2
+      name: review-web-blue
+      description: A Helm chart for Kubernetes
+      dependencies:
+      - name: stakater-nordmart-review-ui
+        version: 1.0.14
+        repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
+      version: 1.0.14
+    ```
+
+    `03-stakater-nordmart-review-ui-bg-blue\01-dev\values.yaml`
+
+    ```yaml
+      stakater-nordmart-review-ui:
+        application:
+          applicationName: "review-ui-blue"
+          deployment:
+            imagePullSecrets: []
+            image:
+              repository: stakater/stakater-nordmart-review-ui
+              tag: 1.0.14-blue
+          service:
+            additionalLabels:
+              blue_green: active
+          route:
+            enabled: false
+    ```
+
+    b. chart and values.yaml file for green deployment
+    
+    `03-stakater-nordmart-review-ui-bg-green\01-dev\Chart.yaml`
+
+    ```yaml
+      apiVersion: v2
+      name: review-web-green
+      description: A Helm chart for Kubernetes
+      dependencies:
+        - name: stakater-nordmart-review-ui
+          version: 1.0.14
+          repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
+      version: 1.0.14
+    ```
+
+    `03-stakater-nordmart-review-ui-bg-green\01-dev\values.yaml`
+
+    ```yaml
+      stakater-nordmart-review-ui:
+        application:
+          applicationName: "review-ui-green"
+          deployment:
+            imagePullSecrets: []
+            additionalLabels:
+              blue_green: inactive
+            image:
+              repository: stakater/stakater-nordmart-review-ui
+              tag: 1.0.14-green
+          service:
+            additionalLabels:
+              blue_green: inactive
+          route:
+            enabled: false
+    ```
+
+    c. route.yaml file for green deployment
+    
+    `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml`
+
+    ```yaml
+      kind: Route
+      apiVersion: route.openshift.io/v1
+      metadata:
+        name: review-ui-bg
+      spec:
+        host: review-ui-bg-<tenant-name>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud
+        to:
+          kind: Service
+          name: review-ui-blue
+          weight: 100
+        port:
+          targetPort: http
+        tls:
+          termination: edge
+          insecureEdgeTerminationPolicy: Redirect
+        wildcardPolicy: None
     ```
 
 2. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
 
     ```bash
     cd /projects/tech-exercise
-    git add pet-battle/test/values.yaml
+    git add --all
     git commit -m  "🍔 ADD - blue & green environments 🍔"
     git push
     ```
 
-3. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`. Our pipeline will push new deployments to the inactive one before switching the labels around:
+3. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`.
 
     ```bash
-    oc get svc -l blue_green=inactive --no-headers -n <TEAM_NAME>-test
-    oc get svc -l blue_green=active --no-headers -n <TEAM_NAME>-test
+    oc get svc -l blue_green=inactive --no-headers -n <TEAM_NAME>-dev
+    oc get svc -l blue_green=active --no-headers -n <TEAM_NAME>-dev
     ```
 
-4. With both deployed, let's Update the `Jenkinsfile` to do the deployment for the `inactive` one. Jenkins will over write the currently labelled `inactive` deployment. Jenkins will then run some tests (🪞💨) and verify things working fine. Finally he will switch the traffic to it and swap the labels so this becomes the active service. The other svc will be labelled `inactive` and wait ready to switch back in case of an unwanted result.
+4. With both deployed, let's assume that our blue deployment is the active one with the service having `active` label pointing towards blue deployment and service having `inactive` label pointing towards green deployment. 
 
-    To do this, add the below stage in the right placeholder:
+We can validate that blue service is currently running by getting the host of our route
 
-    ```groovy
-    // 💥🔨 BLUE / GREEN DEPLOYMENT GOES HERE 
-    stage("🔷✅ Blue Green Deploy") {
-      agent {
-        label "jenkins-agent-argocd"
-      }
-      steps {
-        echo '### set env to test against ###'
-        sh '''
-          #🌻 1. Get the current active / inactive
-          export INACTIVE=$(oc get svc -l blue_green=inactive --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
-          export ACTIVE=$(oc get svc -l blue_green=active --no-headers -n ${DESTINATION_NAMESPACE} | cut -d' ' -f 1)
+```bash
+oc get route/review-ui-bg -n (TENANT_NAME)-dev --template='{{.spec.host}}'
+```
+and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
 
-          #🌻 2. Deploy the new changes to hte current `inactive`
-          printenv
-          git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
-          cd config-repo
-          git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
-          yq eval -i .applications.\\"${INACTIVE}\\".source_ref=\\"${CHART_VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
-          yq eval -i .applications.\\"${INACTIVE}\\".values.image_version=\\"${VERSION}\\" "${ARGOCD_CONFIG_REPO_PATH}"
-          # Commit the changes :P
-          git config --global user.email "jenkins@rht-labs.bot.com"
-          git config --global user.name "Jenkins"
-          git config --global push.default simple
-          git add ${ARGOCD_CONFIG_REPO_PATH}
-          git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
-          git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
-          git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
 
-          #🌻 3. do some kind of verification of the deployment  
-          sleep 10
-          echo "🪞💨 TODO - some kinda test to validate blue or green is working as expected ... 🪞💨"
-          curl -L -f $(oc get route --no-headers ${INACTIVE//_/-} -n $DESTINATION_NAMESPACE | cut -d' ' -f 4) 
+![nordmart-review-bg-blue](images/nordmart-review-bg-blue.png)
 
-          #🌻 4. If "tests" have passed swap inactive to active to and vice versa
-          yq eval -i .applications.\\"${INACTIVE}\\".values.blue_green=\\"active\\" "${ARGOCD_CONFIG_REPO_PATH}"
-          yq eval -i .applications.\\"${ACTIVE}\\".values.blue_green=\\"inactive\\" "${ARGOCD_CONFIG_REPO_PATH}"
 
-          #🌻 5. update the 'prod' route to point to the new active svc
-          export NEW_ACTIVE=${INACTIVE//_/-}
-          echo "🐥 - ${NEW_ACTIVE}"
-          yq eval -i .applications.blue-pet-battle.values.prod_route_svc_name=\\"${NEW_ACTIVE}\\" "${ARGOCD_CONFIG_REPO_PATH}"
-          git add ${ARGOCD_CONFIG_REPO_PATH}
-          git commit -m "🚀 AUTOMATED COMMIT - Deployment of ${APP_NAME} at version ${VERSION} 🚀" || rc1=$?
-          git remote set-url origin  https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO}
-          git push -u origin ${ARGOCD_CONFIG_REPO_BRANCH}
-        '''
-      }
-    }
-    ```
+5. let's update the values.yaml for our deployments and switch the labels for services to point the active service towards green deployment. And then update the route to point towards active green service as well. 
 
-5. Before we commit the changes to the `Jenkinsfile`, let's make a simple application change to make this more visual. In the frontend, we'll change the banner along the top of the app. In your IDE, open `pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` under the `<!-- PB - Purple -->` comment and remove the line above it so it appears like this:
+    To do this, change the following
 
-    ```html
-    <header>
-        <!-- PB - Purple -->
-        <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #563D7C;">
-    ```
+    a. Change the service label to `inactive` in blue service `03-stakater-nordmart-review-ui-bg-blue\01-dev\values.yaml`
 
-6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository
+    b. Change the service label to `active` in green service `03-stakater-nordmart-review-ui-bg-green\01-dev\values.yaml`
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-    "name": "pet-battle",
-    "version": "1.6.1",  <- bump this
-    "private": true,
-    "scripts": ...
-    </code></pre></div>
+    c. Change the `name` of service in `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml` route to `review-ui-blue`
 
-7. Commit all these changes:
+6. Commit all these changes:
 
     ```bash
-    cd /projects/pet-battle
+    cd /projects/tech-exercise
     git add .
     git commit -m "🔵 ADD - Blue / Green deployment to pipeline 🟩"
     git push
     ```
 
-8. When Jenkins executes, you should see things progress and the blue green deployment happen automatically.
+8. When arocd syncs, you should see things progress and the blue green deployment happen automatically. You can go to this url again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
 
-    The version in production is now the new `1.6.1` published with the latest change. As you can check from the
-    nav bar of the application from the production route `prod-pet-battle` (linked to the `green` service):
-
-    ![prod-pet-battle](images/bg-prod-pet-battle.png)
-
-    The previous `1.2.0` version, now identified as `blue`, is already available from the blue route `blue-pet-battle`:
-
-    ![blue-pet-battle](images/bg-blue-pet-battle.png)
-
-    Every time you change the `version` variable in the `package.json` file the blue and green version will switch. Try it
-    publishing a new version of the application, e.g: `1.6.2`. Which one is in production? Which is `blue`? Which is `green`?
+![nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 
     This is a simple example to show how we can automate a blue green deployment using GitOps. However, we did not remove the
-    previous deployment of pet-battle, in the real world we would do this.
+    previous deployment of nordmart-review, in the real world we would do this.
