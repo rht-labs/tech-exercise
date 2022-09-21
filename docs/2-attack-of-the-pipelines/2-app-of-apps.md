@@ -1,71 +1,31 @@
 ## Deploy App of Apps
 
-We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
+We need a way to bundle up all of our applications and deploy them into each environment. The nordmart application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
 A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
 
-We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In PetBattle we generate the app-of-apps definitions using a Helm chart.
+We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In nordmart we generate the app-of-apps definitions using a Helm chart.
 
 ### Deploying Pet Battle - Keycloak
 
-> In this exercise we'll deploy PetBattle and a supporting piece of tech it uses (Keycloak) using the same pattern. We'll deploy PetBattle to two environments - `test` and `stage` by configuring the values files in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
+> In this exercise we'll deploy nordmart-review. We'll deploy nordmart to dev environment. And then get the build environment ready for deploying our pipelines
 
-1. In your IDE - open `tech-exercises/values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
+1. Head over to the below url.
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      # Test app of app
-      - name: test-app-of-pb
-        enabled: true
-        source_path: "."
-        helm_values:
-          - pet-battle/test/values.yaml
-      # Staging App of Apps
-      - name: staging-app-of-pb
-        enabled: true
-        source_path: "."
-        helm_values:
-          - pet-battle/stage/values.yaml
-    </code></pre></div>
+   `https://github.com/stakater-lab/nordmart-apps-gitops-config-template`
+    
+This is the template that we will use to create our own apps-of-apps repository.
+ 
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+2. Copy the clone url.
 
-    ```bash#test
-    yq e '(.applications[] | (select(.name=="test-app-of-pb").enabled)) |=true' -i /projects/tech-exercise/values.yaml
-    yq e '(.applications[] | (select(.name=="staging-app-of-pb").enabled)) |=true' -i /projects/tech-exercise/values.yaml
-    ```
+   `https://github.com/stakater-lab/nordmart-apps-gitops-config-template.git`
+ 
 
-2. Our app is made up of N apps. We define the list of apps we want to deploy in the `applications` property in our `pet-battle/test/values.yaml`. Let's add a keycloak service to this list by appending to it as follows. This will take the helm-chart from the repo and apply the additional configuration to it from the `values` section. *Please make sure your text is aligned with the existing placeholder comments.*
+3. Now open gitlab and select create project. In the screen that appears, choose `Import project`.
 
-    ```yaml
-      # Keycloak
-      keycloak:
-        name: keycloak
-        enabled: true
-        source: https://github.com/petbattle/pet-battle-infra
-        source_ref: main
-        source_path: keycloak
-        values:
-          app_domain: <CLUSTER_DOMAIN>
-    ```
+   ![argocd-app-of-pb.png](images/argocd-app-of-pb.png)
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
-
-    ```bash#test
-    if [[ $(yq e '.applications[] | select(.name=="keycloak") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
-        yq e '.applications.keycloak = {"name": "keycloak","enabled": true,"source": "https://github.com/petbattle/pet-battle-infra","source_ref": "main","source_path": "keycloak","values": {"app_domain": "CLUSTER_DOMAIN"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
-        sed -i "s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|" /projects/tech-exercise/pet-battle/test/values.yaml
-    fi
-    ```
-
-3. Let's get this deployed of course - it's not real unless its in git!
-
-    ```bash#test
-    cd /projects/tech-exercise
-    git add .
-    git commit -m  "🐰 ADD - app-of-apps and keycloak to test 🐰"
-    git push 
-    ```
 
 4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
 
