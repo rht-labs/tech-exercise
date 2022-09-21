@@ -12,14 +12,16 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 1. Head over to the below url.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config-template`
+   ```
+   https://github.com/stakater-lab/nordmart-apps-gitops-config.git
+    ```
     
 This is the template that we will use to create our own apps-of-apps repository.
  
 
 2. Copy the clone url.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config-template.git`
+   `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
  
 
 3. Now open gitlab and select create project. In the screen that appears, choose `Import project`.
@@ -29,11 +31,14 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 4. Select import repository from url and paste in the url that you copied in step 2. 
 
-   Note: Make the repository public. Add `nordmart-apps-gitops-config` and `Nordmart Apps Gitops Config` as the repository name. Also make sure that you use the correct group name.
+   Note: Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
+   > Make sure you mark the repository as public and choose the group you previously created as the group name.
+
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
 
    ![import-gitops-apps](images/import-gitops-apps.png)
 
-5. Once the repository is import. Clone the repository. 
+5. Once the repository is imported, clone the repository to your local system. 
 
 6. cd into the repository. Now in the terminal type:
 
@@ -102,7 +107,7 @@ stakater-nordmart-review:
 5. Now head over to argocd and search for <TENANT_NAME>-dev.
 
 
-   ![search-argocd](images/search-argocd.png)
+   ![search-argocd](images/sorcerers-dev.png)
 
 
 6. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
