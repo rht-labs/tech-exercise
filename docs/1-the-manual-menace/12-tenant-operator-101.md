@@ -80,7 +80,7 @@ spec:
 
 
    ![mto-commit](./images/create-tenant.png)
-
+####add argocd here
 6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
 You can view your created tenant and namespaces via your OpenShift Console.
 
