@@ -19,7 +19,7 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 * <span style="color:blue;">[ArgoCD](https://argoproj.github.io/argo-cd/)</span> - A controller which continuously monitors application and compare the current state against the desired
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
 * <span style="color:blue;">[Tekton](https://tekton.dev/)</span> - Tekton is a powerful and flexible open-source framework for creating CI/CD systems, allowing developers to build, test, and deploy across cloud providers and on-premise systems.
-
+* <span style="color:blue;">[Vault](https://www.vaultproject.io/)</span> - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
 
 ## :link: Here are some usefull repository links you will require for this exercise 
 
