@@ -17,6 +17,6 @@
 
 ## 🔨 Tools used in this exercise!
 
-* <span style="color:blue;">[SealedSecrets](https://github.com/bitnami-labs/sealed-secrets)</span> - Helps us to encrypt the secrets to store safely, even to a public repository.
+* <span style="color:blue;">[ExternalSecrets](https://external-secrets.io/v0.6.0-rc1/api/externalsecret/)</span> - Helps us to encrypt the secrets to store safely, even to a public repository.
 * <span style="color:blue;">[Tekton](https://tekton.dev/)</span> -  Cloud Native CI/CD tool, allowing us to build, test, and deploy anywhere.
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
