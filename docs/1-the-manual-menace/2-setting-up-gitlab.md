@@ -68,7 +68,7 @@ Add member to the group using the "Invite member" option.
 
 
 
-## Importing Nordmart projects
+## Importing Nordmart Review
 > In this part, we will import the projects we need to deploy on the cluster.
 
 1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
@@ -78,13 +78,23 @@ Add member to the group using the "Invite member" option.
     ```
         https://github.com/stakater-lab/stakater-nordmart-review.git
     ```
-   Make sure you mark the repository as public and choose the group you previously created as the group name.
+   > Make sure you mark the repository as public and choose the group you previously created as the group name. 
+    
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.  
 
    ![import-nordmart-review](images/import-nordmart-review.png)
 
-   Repeat the above process for the following repository:
 
+## Importing Nordmart Review UI 
+1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
+   ![create-project-home](images/create-project-home.png)
+
+2. Now select the "Repository by URL" option and paste in the following repository URL:
     ```
         https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
+   > Make sure you mark the repository as public and choose the group you previously created as the group name.
    
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
+    
+    ![import-nordmart-review](images/import-nordmart-review-ui.png)
