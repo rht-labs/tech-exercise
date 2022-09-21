@@ -24,7 +24,11 @@
 
     ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
 
-   Once the alert is in place, you can trigger it by scaling down the deployment manually
+
+
+   Once the alert is in place, you can trigger it by scaling down the deployment manually.
+
+
 
    ![prometheus-rule](./images/deployment-scale-down.png)
    ![prometheus-rule](./images/prometheus-alert-triggered.png)
