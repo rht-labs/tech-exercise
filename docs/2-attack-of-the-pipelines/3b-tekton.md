@@ -62,23 +62,10 @@ Below is the code snipped from the task:
 
 ![create-git-tag-task](./images/create-git-tag-task.png)
 
-#### 3 - stakater-build-image-flag-v1 🚩
 
-This task determines whether there is a change in the application source code. If the code has change, it will mark build flag as true. When the source code hasn't changed but there is a change in other files, it will mark build flag as false. This flag will be used in the proceeding tasks to determine whether they should run or not.
-Where `imageTag` will be the tag it outputs.
-
-**Parameters:**
-* oldcommit - sha hash of the previous commit
-* newcommit - sha hash of the current commit
-
-![build-image-flag-task](./images/build-image-flag-task.png)
-
-When any files aother than the files included in `tektonIgnore` change, build-image flag is marked as true.
-
-#### 4 - stakater-buildah-v1 🏗
+#### 3 - stakater-buildah-v1 🏗
 
 The task contains a small buildah script that builds image using the source code and pushes it to nexus repository.
-If `BUILD_IMAGE` flag obtained from the previous task is set to false, this task only retags the previous image and does not build it again.
 
 The task takes parameter needed to build and push the image as params, such as the image repository, image tag, and dockerfile, etc
 
@@ -91,27 +78,24 @@ The task takes parameter needed to build and push the image as params, such as t
 
 ![image-push-script](./images/image-push-script.png)
 
-#### 5 - stakater-helm-push-v1 🅿
+#### 4 - stakater-helm-push-v1 🅿
 
 The helm-push task packages the application helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
 The repo path, chart repository url, prnumber, git revision, and git tag are taken as parameters
 
-#### 6 - stakater-update-cd-repo-v3 ⚙️
+#### 5 - stakater-update-cd-repo-v3 ⚙️
 
 When the pipeline is triggered by merge on default branch, this task is responsible for updating the image and chart version for the application in the gitops repo.
 The gitops repo in our case is the nordmart-apps-gitops-config repo.
 In case the pipeline is triggered by a PR, this task creates a Environment Provisioner CR for dynamic test environment.
 
-#### 7 - stakater-push-main-tag-v1 📤
+#### 6 - stakater-push-main-tag-v1 📤
 
 The task updates the tag in git repository when change is pushed to main/master.
 
 ![push-main-tag-task](./images/push-main-tag-task.png)
 
-#### 8 - stakater-app-sync-and-wait-v1 🔄
-
-Finally, the app-sync-and-wait checks the argocd application that sync and deploys our application. This tasks re-sync the application and waits for it to be in a synced state.
 
 ![app-sync-and-wait](./images/app-sync-and-wait.png)
 
@@ -124,7 +108,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
 1. Open up the nordmart-apps-gitops-config repository that we created in section 1 on GitLab.
 
 
-2. Navigate to `01-TEAM-NAME >  01-tekton-pipelines > 00-build` folder.
+2. Navigate to `01-TENANT-NAME >  01-tekton-pipelines > 00-build` folder.
 
 
 3. Inside the `00-build` folder that you just created, add the following Chart.yaml
@@ -134,7 +118,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
    dependencies:
      - name: pipeline-charts
        repository: https://stakater.github.io/stakater-charts  
-       version: 0.0.29
+       version: 0.0.30
    description: Helm chart for Tekton Pipelines
    name: main-pr-v1
    version: 0.0.1
@@ -146,7 +130,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
    ```
    apiVersion: v2
    pipeline-charts:
-      name: stakater-main-pr-v1
+      name: main-pr-v1
       workspaces:
       - name: source
         volumeClaimTemplate:
@@ -156,37 +140,17 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         tasks:
           - defaultTaskName: git-clone
           - defaultTaskName: stakater-create-git-tag-v1
-            params:
-              - name: oldcommit
-              - name: action
-          - taskRef:
-              task: stakater-build-image-flag-v1
-              kind: ClusterTask
-            name: stakater-build-image-flag-v1
-            runAfter: 
-              - stakater-create-git-tag-v1
-            workspaces:
-              - name: source
-                workspace: source
-            params:
-              - name: oldcommit
-              - name: newcommit
           - defaultTaskName: stakater-buildah-v1
             name: build-and-push
-            runAfter:
-            - stakater-build-image-flag-v1
             params:
               - name: BUILD_IMAGE
                 value: $(tasks.stakater-build-image-flag-v1.results.build-image)
-              - name: IMAGE_REGISTRY
-                value: $(params.image_registry_url)
-              - name: CURRENT_GIT_TAG
-                value: $(tasks.stakater-create-git-tag-v1.results.CURRENT_GIT_TAG)
           - defaultTaskName: stakater-helm-push-v1
           - defaultTaskName: stakater-create-environment-v1
           - defaultTaskName: stakater-gitlab-update-cd-repo-v1
+            params:
+              - name: gitlab_group
           - defaultTaskName: stakater-push-main-tag-v1
-          - defaultTaskName: stakater-app-sync-and-wait-v1
             params:
               - name: timeout
                 value: "120"
@@ -200,60 +164,27 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
       eventlistener:
         serviceAccountName: stakater-workshop-tekton-builder
         triggers:               
-          - name: pullrequest-create
-            interceptors:
-            - ref:
-               name: "cel"
-              params:
-                - name: "filter"
-                  value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'open' )"
-                - name: "overlays"
-                  value:
-                    - key: marshalled-body
-                      expression: "body.marshalJSON()"
+          - name: gitlab-mergerequest-create
             bindings:
               - ref: stakater-gitlab-merge-request-v1
               - name: oldcommit
                 value: "NA"
               - name: newcommit
                 value: $(body.object_attributes.last_commit.id)
-          - name: pullrequest-synchronize
-            interceptors:
-            - ref:
-               name: "cel"            
-              params:
-                - name: "filter"
-                  value: "(header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'update' )"
-                - name: "overlays"
-                  value:
-                    - key: marshalled-body
-                      expression: "body.marshalJSON()"
+          - name: gitlab-mergerequest-synchronize
             bindings:
               - ref: stakater-gitlab-merge-request-v1
               - name: oldcommit
                 value: $(body.object_attributes.oldrev)
               - name: newcommit
                 value: $(body.object_attributes.last_commit.id)
-          - name: push
-            interceptors:
-            - ref:
-               name: "cel"
-              params:
-                - name: "filter"
-                  value: (header.match('X-Gitlab-Event', 'Merge Request Hook') && body.object_attributes.action == 'merge' )
-                - name: "overlays"
-                  value:
-                    - key: marshalled-body
-                      expression: "body.marshalJSON()"
+          - name: gitlab-push
             bindings:
               - name: newcommit
                 value: $(body.after)
               - name: oldcommit
                 value: $(body.before)
-              - ref: stakater-pr-v1
-                kind: ClusterTriggerBinding
-          - name: stakater-pr-cleaner-v2-pullrequest-merge
-            create: false
+              - ref: stakater-gitlab-push-v1
       rbac:
         enabled: false
       serviceAccount:
@@ -261,42 +192,25 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         create: false
 
 Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and helm chart, and finally updates the version of application.
-5. To deploy our helm chart to the cluster, we need an argocd application that points to this chart.
-   Navigate to <TEAM_NAME>/00-argocd-apps/00-build in the nordmart-apps-gitops-config. You will see a file named `tekton-pipelines.yaml` with the folowing content:
-```
+
+
+5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to argocd and search for Application `<TENANT_NAME>-build-tekton-pipelines`
    
-   apiVersion: argoproj.io/v1alpha1
-   kind: Application
-   metadata:
-     name: <TEAN_NAME>-build-tekton-pipelines
-     namespace: openshift-gitops
-     labels:
-       stakater.com/tenant: <TEAN_NAME>
-       stakater.com/env: build
-       stakater.com/kind: build    
-     spec:
-       destination:
-         namespace: <TEAN_NAME>-build
-         server: 'https://kubernetes.default.svc'
-       project: <TEAM_NAME>
-       source:
-         path: <TEAM_NAME>/00-tekton-pipelines/00-build
-         repoURL: <URL_FOR_THIS REPOSITORY>
-         targetRevision: HEAD
-       syncPolicy:
-         automated:
-           prune: true
-           selfHeal: true
- ```        
-This is the application that will deploy our pipelines. Now we need to check if the application was synchronised successfully.
+  ![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
 
-6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to argocd and search for Application `tekton-pipelines`
-###### TODO Add screenshot
+If you open up the application by clicking on it, you should see a similar screen
 
-7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `nordmart-review` and `nordmart-review-ui` projects. First, grab the URL we're going to invoke to trigger the pipeline:
+![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines2.png)
 
+6. Let's see our pipeline definition in the SAAP console now. Select <TENANT_NAME>-build name in the console. Now in the pipelines section, click pipelines. You should be able to see the pipeline that you just creted using the chart.
 
+![pipeline-basic.png](./images/pipeline-basic.png)
 
+    With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `nordmart-review` and `nordmart-review-ui` projects. 
+
+7. Grab the URL we're going to invoke to trigger the pipeline by checking the event listener route in <TENANT_NAME>-build project
+
+   ![add-route.png](./images/add-route.png)
 8. Once you have the URL, over on GitLab go to `nordmart-review > Settings > Webhook ` to add the webhook:
 
    * Add the url we obtained through the last step in the URL box
@@ -304,18 +218,20 @@ This is the application that will deploy our pipelines. Now we need to check if 
    * select `SSL Verification`
    * Click `Add webhook` button.
 
-   ![nordmart-review-webhook-integration.png](images/nordmart-review-webhook-integration.png)
+   ![nordmart-review-webhook-integration.png](images/webhook.png)
 
-   You can test the webhook works from GitLab.
+9. Repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
 
-   ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
-9. Now let's repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
-10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
+10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for nordmart review.
 
-11. As always, push the code to git ...
+11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
+
+12. Create a merge request ...
 
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
 
+![pipeline-running.png](images/pipeline-running.png)
 
+![pipeline-running.png](images/pipeline-running-2.png)
 🪄OBSERVE PIPELINE RUNNING :D 
