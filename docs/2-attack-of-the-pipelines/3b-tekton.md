@@ -295,8 +295,7 @@ This is the application that will deploy our pipelines. Now we need to check if 
 
 7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `nordmart-review` and `nordmart-review-ui` projects. First, grab the URL we're going to invoke to trigger the pipeline. From your `Openshift Console` select `Routes`. Search for the name of your pipeline ate the right corner. Then copy the URL your pipelin. This will be the webhook URL for your pipeline.
 
-
-8. 
+![tekton-routes](./images/tekton-routes.png)
 
 
 
