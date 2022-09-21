@@ -86,24 +86,6 @@ When something is seen as not matching the required state in Git, an application
             key: username
             name: git-auth
           insecure: true
-        - url: https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
-          type: git
-          passwordSecret:
-            key: password
-            name: git-auth
-          usernameSecret:
-            key: username
-            name: git-auth
-          insecure: true
-        - url: https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
-          type: git
-          passwordSecret:
-            key: password
-            name: git-auth
-          usernameSecret:
-            key: username
-            name: git-auth
-          insecure: true
 EOF
     ```
 
