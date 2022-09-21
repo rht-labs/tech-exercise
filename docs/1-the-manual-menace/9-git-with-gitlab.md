@@ -16,14 +16,14 @@
 
    ![create-group-home](images/create-group-home.png)
 
-2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your TENANT_NAME (`<TENANT_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
    For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
    ![gitlab-group-create](images/gitlab-group-create.png)
 
    Gitlab will redirect you to the group's home page, once the group is created.
 
-    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in nordmart-infra-gitops-config repo.
+    > Remember that **group name** and **tenant name** should be the same. 
 
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
@@ -31,8 +31,7 @@
 
    ![add-member](images/add-member.png)
 
-
-Add member to the group using the "Invite member" option.
+   Add member to the group using the "Invite member" option.
 
 4. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
