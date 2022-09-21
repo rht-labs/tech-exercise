@@ -12,7 +12,19 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
+## Normart Infra Gitops Config  
+
 > Normart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+
+The `Nordmart Infra Gitops Config` folder contains separate folder for seprate clusters with the following content:
+
+   - `nordmart-apps-gitops-config` contains argocd-apps pointing to tenants **nordmart-apps-gitops-config** `argocd-apps` folder
+
+   - `tenant-operator-config` contains your cluster **tenants**.
+
+   - `other opeartors` contains other **operators,services** common among tenants within a cluster
+   
+   - `argocd-apps` contains argocd-apps for your folders eg nordmart-apps-gitops-config, tenant-operator-config, other operators.
 
 ## Creating Tenants with GitOps
 
@@ -26,16 +38,6 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
 
    ![mto-workshop](./images/mto-workshop.png)
 
-
-   The `workshop` folder contains the following folders:
-
-   - `argocd-apps` This contains all the argocd apps “watching” your repositories.
-
-   - `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
-
-   - `tenant-operator-config` which contains your Tenants configurations.
-
-
 3. Click on the `tenant-operator-config` folder.
 
    ![mto-config](./images/mto-config.png)
@@ -45,7 +47,6 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
 
    ![mto-tenants](./images/mto-tenants.png)
 
-   > The `tenants` folder contains the configuration for all the tenants. The idea of Tenant Operator is to use namespaces as independent sandboxes, where tenant applications can run independently from each other.
 
 5. Click the `Edit in Web IDE` tile to fork the repository.
 
@@ -63,41 +64,40 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    ![mto-filename](./images/mto-filename.png)
 
 
-
 8. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
    ```yaml
    apiVersion: tenantoperator.stakater.com/v1beta1
    kind: Tenant
    metadata:
-   name: <TENANT_NAME>
+      name: <TENANT_NAME>
    spec:
-   quota: workshop-medium
-   owners:
-      users:
-         - <USER_NAME>
-   argocd:
-      sourceRepos:
-         - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
-         - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
-         - 'https://stakater.github.io/stakater-charts'
-         - 'https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/'
-   namespaces:
-   - dev
-   - build
-   - preview
-   - test
-   - prod
-   templateInstances:
-   - spec:
-         template: tenant-vault-access
-         sync: true
-   specificMetadata:
-      - namespaces:
-         - <TENANT_NAME>-build
-         annotations:
-         openshift.io/node-selector: node-role.kubernetes.io/pipeline=
-
+      quota: workshop-medium
+      owners:
+         users:
+            - <USER_NAME>
+      argocd:
+         sourceRepos:
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
+            - 'https://stakater.github.io/stakater-charts'
+            - 'https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/'
+      namespaces:
+      - dev
+      - build
+      - preview
+      - test
+      - prod
+      sandbox: true
+      templateInstances:
+      - spec:
+            template: tenant-vault-access
+            sync: true
+      specificMetadata:
+         - namespaces:
+            - <TENANT_NAME>-build
+           annotations:
+               openshift.io/node-selector: node-role.kubernetes.io/pipeline=
    ```
 
    > Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant name and the username you and your team members registered with.
