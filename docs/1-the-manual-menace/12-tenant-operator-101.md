@@ -12,7 +12,9 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
-## Creating Tentants with GitOps
+> Normart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+
+## Creating Tenants with GitOps
 
 The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
@@ -21,13 +23,13 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    ![mto-workshop](./images/mto-workshop.png)
 
 
-The `workshop` folder contains the following folders:
+   The `workshop` folder contains the following folders:
 
-- `argocd-apps` This contains all the argocd apps “watching” your repositories.
+   - `argocd-apps` This contains all the argocd apps “watching” your repositories.
 
-- `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
+   - `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
 
-- `tenant-operator-config` which contains your Tenants configurations.
+   - `tenant-operator-config` which contains your Tenants configurations.
 
 
 2. Click on the `tenant-operator-config` folder.
