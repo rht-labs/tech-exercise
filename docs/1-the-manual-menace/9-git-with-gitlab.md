@@ -8,6 +8,7 @@
     ```
 
    First, we need to create a Gitlab group with name as the <team_name> or <participant_name>
+
    For this open up the menu and select "Create group" from the "Groups" tab:
 
    ![create-group-tab](images/create-group-tab.png)

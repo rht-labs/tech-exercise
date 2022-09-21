@@ -1,6 +1,7 @@
-## Adding Secrets
+## Adding External Secrets through vault
 
-When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets using the `Secret` resource.
+When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store Secret manifest files openly
+We will use ExternalSecret and Vault to add secrets.
 
 To run our pipelines, we need to provide a secret to our tasks. This secret will contain the token for gitlab. We will store this secret in Vault and then through ExternalSecret, add a secret to Workloads.
 
@@ -12,7 +13,7 @@ To run our pipelines, we need to provide a secret to our tasks. This secret will
 
 2. Click on the name of your tenant. 
 
-  ![vault-tenant-view](./images/vault-tenant-view.png)
+  ![vault-folder](./images/vault-logged-in.png)
 
 3. Click on Create Secret
 
