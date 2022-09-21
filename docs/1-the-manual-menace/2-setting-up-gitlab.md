@@ -81,11 +81,11 @@ Add member to the group using the "Invite member" option.
     ```
    Make sure you mark the repository as public and choose the group you previously created as the group name.
 
-   ![import-nordmart-review](images/import-nordmart-review.png)
+   ![import-nordmart-review](images/review-1.png)
 
    Repeat the above process for the following repository:
 
     ```
         https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
-   
+   ![import-nordmart-review](images/review-2.png)

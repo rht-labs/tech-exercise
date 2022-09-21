@@ -24,126 +24,61 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 3. Now open gitlab and select create project. In the screen that appears, choose `Import project`.
 
-   ![argocd-app-of-pb.png](images/argocd-app-of-pb.png)
+   ![clone-apps-config](images/clone-apps-config.png)
 
 
-4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
+4. Select import repository from url and paste in the url that you copied in step 2. 
 
-    ```bash#test
-    cd /projects/tech-exercise
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
-    ```
+   Note: Make the repository public. Add `nordmart-apps-gitops-config` and `Nordmart Apps Gitops Config` as the repository name. Also make sure that you use the correct group name.
 
-5. In ArgoCD at this point we should see things start to get a bit more busy:
-![argocd-app-of-pb.png](images/argocd-app-of-pb.png)
+   ![import-gitops-apps](images/import-gitops-apps.png)
 
-### Deploying Pet Battle
+5. Once the repository is import. Clone the repository. 
 
-> Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. Each environment folder (test / stage) contains the configuration for the corresponding projects in OpenShift. All we need to do is extend or edit the list of `applications` for the changes to be synced to the cluster. We can also separate test environment config from staging or even prod using this method.
+6. cd into the repository. Now in the terminal type:
 
-1. In your IDE, open up the `pet-battle/test/values.yaml` file and copy the following:
+   curl https://raw.githubusercontent.com/stakater/workshop-excercise/main/scripts/update-nordmart-apps-with-tenant-info.py > script.py
 
-    ```yaml
-      # Pet Battle Apps
-      pet-battle-api:
-        name: pet-battle-api
-        enabled: true
-        source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts
-        chart_name: pet-battle-api
-        source_ref: 1.2.1 # helm chart version
-        values:
-          image_name: pet-battle-api
-          image_version: latest # container image version
-          hpa:
-            enabled: false
+This will download a python script.
 
-      pet-battle:
-        name: pet-battle
-        enabled: true
-        source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts 
-        chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
-        values:
-          image_version: latest # container image version
-    ```
+7. Now run this python script by typing in:
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+   `python3 script.py . <TENANT_NAME> <GROUP_NAME>
+   `
+Doing this will replace all instances of <TENANT_NAME> and <GROUP_NAME> with your tenant name and group name. Do not push the changes yet.
 
-    ```bash#test
-    if [[ $(yq e '.applications[] | select(.name=="pet-battle-api") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
-        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.2.1","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
-    fi
-    if [[ $(yq e '.applications[] | select(.name=="pet-battle") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
-        yq e '.applications.pet-battle = {"name": "pet-battle","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle","source_ref": "1.0.6","values": {"image_version": "latest"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
-    fi
-    sed -i '/^$/d' /projects/tech-exercise/pet-battle/test/values.yaml
-    sed -i '/^# Keycloak/d' /projects/tech-exercise/pet-battle/test/values.yaml
-    sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml
-    ```
+### Deploying Nordmart
 
-2. The front end needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the values supplied to this chart as such.
+> Now we need to add a chart in the dev environment for deploying our application.
 
-    ```bash#test
-    export JSON="'"'{
-            "catsUrl": "https://pet-battle-api-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'",
-            "tournamentsUrl": "https://pet-battle-tournament-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'",
-            "matomoUrl": "https://matomo-'${TEAM_NAME}'-ci-cd.'${CLUSTER_DOMAIN}'/",
-            "keycloak": {
-              "url": "https://keycloak-'${TEAM_NAME}'-test.'${CLUSTER_DOMAIN}'/auth/",
-              "realm": "pbrealm",
-              "clientId": "pbclient",
-              "redirectUri": "http://localhost:4200/tournament",
-              "enableLogging": true
-            }
-          }'"'"
-    yq e '.applications.pet-battle.values.config_map = env(JSON) | .applications.pet-battle.values.config_map style="single"' -i /projects/tech-exercise/pet-battle/test/values.yaml
-    ```
+1. Navigate to 01-TENANT_NAME > 02-stakater-nordmart-review > 01-dev.
 
-3. The `pet-battle/test/values.yaml` file should now look something like this (but with your team name and domain)
+2. We need to add the Helm chart for the nordmart review here. Create a file named Chart.yaml here and paste in the following content.
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      pet-battle:
-        name: pet-battle
-        enabled: true
-        source: https://petbattle.github.io/helm-charts  # http://nexus:8081/repository/helm-charts 
-        chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
-        values:
-          image_version: latest # container image version
-          config_map: '{
-            "catsUrl": "https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "tournamentsUrl": "https://pet-battle-tournament-<TEAM_NAME>-test.<CLUSTER_DOMAIN>",
-            "matomoUrl": "https://matomo-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/",
-            "keycloak": {
-              "url": "https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth/",
-              "realm": "pbrealm",
-              "clientId": "pbclient",
-              "redirectUri": "http://localhost:4200/tournament",
-              "enableLogging": true
-            }
-          }'
-    </code></pre></div>
+```
+apiVersion: v2
+dependencies:
+  - name: stakater-nordmart-review
+    repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
+    version: 1.0.35
+description: A Helm chart for Kubernetes
+name: stakater-nordmart-review
+version: 1.0.35
 
-4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
+```
 
-    ```bash#test
-    cd /projects/tech-exercise
-    git add .
-    git commit -m  "🐩 ADD - pet battle apps 🐩"
-    git push 
-    ```
+3. Now create a values.yaml and add the below content. 
 
-5. You should see the two Pet Battle apps for `test` and `stage` deployed in ArgoCD and if you drill into one eg `test-app-of-pb` you'll see each of the three components of PetBattle:
-![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
+```
+stakater-nordmart-review:
+  application:
+    deployment:
+      image:
+        repository: nexus-docker-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/sorcerers/stakater-nordmart-review
+        tag: 1.0.35
 
-6. Finally - let's see if the whole thing in working. Some pods - like keycloak - may take a little while to become ready. Go to `OpenShift -> Developer View -> Topology` and select your `<TEAM_NAME>-test` project.
-    </br>
-    🪄 🪄 You should be able to see the Pet Battle Applications running. 🪄 🪄
+```
+4. Once the above files are added, commit the changes, and push to the repository.
 
-    ![test-pet-battle-apps-topology.png](images/test-pet-battle-apps-topology.png)
+5. Now head over to argocd and search for 
 
-    </br>
-    😻😻 Select the Pet Battle URL link highlighted above and you should see ... 😻😻
-
-    ![test-pet-battle-apps-first.png](images/test-pet-battle-apps-first.png)
