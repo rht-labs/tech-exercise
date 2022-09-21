@@ -66,8 +66,6 @@ Add member to the group using the "Invite member" option.
         git config --global user.password $GIT_PASSWORD
     ```
 
-
-
 ## Importing Nordmart Review
 > In this part, we will import the projects we need to deploy on the cluster.
 
