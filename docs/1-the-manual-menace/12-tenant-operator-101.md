@@ -12,7 +12,9 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
-## Creating Tentants with GitOps
+> Normart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+
+## Creating Tenants with GitOps
 
 The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
 
@@ -21,13 +23,13 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    ![mto-workshop](./images/mto-workshop.png)
 
 
-The `workshop` folder contains the following folders:
+   The `workshop` folder contains the following folders:
 
-- `argocd-apps` This contains all the argocd apps “watching” your repositories.
+   - `argocd-apps` This contains all the argocd apps “watching” your repositories.
 
-- `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
+   - `nordmart-apps-gitops-config` Which containing the argocd configuration “watching” your apps
 
-- `tenant-operator-config` which contains your Tenants configurations.
+   - `tenant-operator-config` which contains your Tenants configurations.
 
 
 2. Click on the `tenant-operator-config` folder.
@@ -41,11 +43,24 @@ The `workshop` folder contains the following folders:
 
 > The `tenants` folder contains the configuration for all the tenants. Each tenant representing a fully managed SAAP instance.
 
-4. Click the `+`icon to create a new  yaml file. This file will contain your tenant configurations.
+4. Click the `Edit Fork in Web IDE` tile to fork the repository.
 
-   ![nordmart-infra-gitops](./images/nordmart-infra-gitops.png)
+   ![mto-file](./images/mto-fork.png)
 
-4. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
+5. Create a new file by clicking on the `file` icon at the right corner of your IDE console.
+
+    
+   ![mto-IDE](./images/mto-IDE.png)
+
+
+6. Name your file using the following directory prefix `workshop/tenant-operator-config/tenants/ <TENANT-NAME>.yaml`   
+
+
+   ![mto-filename](./images/mto-filename.png)
+
+
+
+7. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
 
 ```yaml
@@ -71,15 +86,20 @@ spec:
   - prod
 ```
 
-> Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant and user name.
+> Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant and the username you and your team members registered with.
 
 
-5. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
+8. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
 
 
-   ![mto-commit](./images/create-tenant.png)
-####add argocd here
-6. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
+   ![mto-commit](./images/mto-commit.png)
+
+9. Create a merge request by adding a suitable description and clicking `Create Merge Request`
+
+   ![mto-merge](./images/mto-merge.png)
+
+
+10. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
 You can view your created tenant and namespaces via your OpenShift Console.
 
    ![mto-project](./images/tenants-created.png)
