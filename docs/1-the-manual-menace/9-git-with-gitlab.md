@@ -7,7 +7,9 @@
      https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/
     ```
 
+
    First, we need to create a Gitlab group with name as the <TENANT_NAME> or <TENANT_NAME>
+
    For this open up the menu and select "Create group" from the "Groups" tab:
 
    ![create-group-tab](images/create-group-tab.png)
