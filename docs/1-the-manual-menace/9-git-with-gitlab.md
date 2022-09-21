@@ -1,168 +1,98 @@
-# 🐡 Setting Up GitLab
+# Getting GitLab Ready for GitOps
+> In this section we will get gitlab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
 
-Gitlab is an open-source DevSecOps platform with built-in version control, issue tracking, code review, and CI/CD,  giving developers the needed flexibility for managing their application development lifecycle. 
+1. Log into GitLab with your credentials. You can find the Gitlab URL in Forecastle UI. GitLab URL:
 
-SAAP Instance comes with a fully managed instance of GitLab.
+    ```bash
+     https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/
+    ```
 
-To access your GitLab instance, from your `Forecastle` console, click on the `GitLab` tile.
+   First, we need to create a Gitlab group with name as the <team_name> or <participant_name>
+   For this open up the menu and select "Create group" from the "Groups" tab:
 
-   ![forecastle-page](./images/forecastle-gitlab1.png)
+   ![create-group-tab](images/create-group-tab.png)
 
-You will be brought to the Gitlab Console.
+   This will redirect you to the following screen. Select "Create group" option.
 
-   ![gitlab-home](./images/gitlab-home.png)
+   ![create-group-home](images/create-group-home.png)
 
-## Setting Up Your Gitlab
+2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+   For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
-### Gitlab Group
+   ![gitlab-group-create](images/gitlab-group-create.png)
 
-Gitlab Groups allows you group related projects together. You can manage permissions for your projects, collaborate with your team members and view all issues relating to your project.
+   Gitlab will redirect you to the group's home page, once the group is created.
 
-1. To create a group, click on `create a group` tile.
+    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in nordmart-infra-gitops-config repo.
 
 
-   ![gitlab-group](./images/gitlab-home-group.png)
+3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
+   To do this, select "Group information from the left panel" and click member
 
-2. Give your group a name and set the visibility level to `public`. You can also add team members.
-Click on `create group` 
+   ![add-member](images/add-member.png)
 
-   ![gitlab-group-create](./images/create-group.png)
 
-Your group has been created.
+Add member to the group using the "Invite member" option.
 
-   ![gitlab-group-created](./images/gitlab-my-group.png)
+4. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
-### GitLab Projects
+   ![gitlab_pat](images/gitlab_pat.png)
 
-Gitlab Projects allow you group related codebases in one place for ease of collaboration, management and continuity. 
+   Export your Gitlab username.
 
-With your project, you can host your code  in repositories, track issues concerning them, make changes using the web IDE, implement CI & CD pipelines and integrate cloud services.
+    ```bash
+    export GIT_USERNAME=<YOUR_GITLAB_USERNAME>
+    ```
+   Export your Email. (use the email used in registering)
 
-You will leverage Gitlab Projects to manage your application code.
+    ```bash
+    export GIT_EMAIL=<YOUR_GITLAB_EMAIL>
+    ```
 
-1. To create a new project, from your group page, click on `New project`
+   Export your Gitlab password.
 
-   ![gitlab-new-project](./images/gitlab-new-project.png)
+    ```bash
+    export GIT_PASSWORD=<YOUR_GITLAB_PERSONAL_ACCESS_TOKEN>
+    ```
 
-Our sample application to be deployed to your cluster, `Nordmart Review`, is a three-tier app consisting of;
+    <p class="tip">
+    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
+    </p>
 
-1. Web User Interface
-2. REST API
-3. Database
+    Lets add these config to git 
+    ```bash
+        git config --global user.name $GIT_USERNAME
+        git config --global user.email $GIT_EMAIL
+        git config --global user.password $GIT_PASSWORD
+    ```
 
-> You will be importing three repositories containing the Nordmart review application and its configuration.
+## Importing Nordmart Review
+> In this part, we will import the projects we need to deploy on the cluster.
 
-2. `Nordmart Review` is hosted in a git repository, which you can import by clicking on the `Import Project` tile.
+1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
+   ![create-project-home](images/create-project-home.png)
 
-   ![gitlab-new-import](./images/gitlab-import-project.png)
+2. Now select the "Repository by URL" option and paste in the following repository URL:
+    ```
+        https://github.com/stakater-lab/stakater-nordmart-review.git
+    ```
+   > Make sure you mark the repository as public and choose the group you previously created as the group name. 
+    
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.  
 
+   ![import-nordmart-review](images/import-nordmart-review.png)
 
-3. To import the `Nordmart Review` User Interface repository, click on the `Repository via URL` tile and input the following URL.
 
-```
-https://github.com/stakater-lab/stakater-nordmart-review-ui
-```
-add your project name and select `internal` for the visibility level. Then click `Create Project`
+## Importing Nordmart Review UI 
+1. Select "Projects" from the menu and click "Create project". This will redirect you to the following screen. Select "Import Project".
+   ![create-project-home](images/create-project-home.png)
 
-   ![gitlab-new-import](./images/nordmart-ui-import.png)
-
-your project has been imported.
-
-   ![nordmart-project](./images/nordmart-project.png)
-
-
-4. Next, import the `Nordmart Review` RESTFUL API repository by repeating the previous steps. From your groups page, select `New Project` 
-
-   ![gitlab-new-project](./images/gitlab-new-project.png)
-
-5. Select the `Import Project` tile.
-
-   ![gitlab-new-import](./images/gitlab-import-project.png)
-
-6. Import the `Nordmart Review` RESTFUL API repository by clicking the `Repository via URL` tile and inputing the following URL. 
-
-```
-https://github.com/stakater-lab/stakater-nordmart-review
-
-```
-
-include your project name and select `internal` for your project visibility. Import your project by clicking on `Create Project`
-
-   ![normart-review](./images/normart-review.png)
-
-Your project has been imported.
-
-   ![normart-review2](./images/nordmart-review.png)
-
-7. Finally, import the `Nordmart Review` gitops configurations repository by also following the previous steps. From your groups page, click on `New Project`
-
-   ![gitlab-new-project](./images/gitlab-new-project.png)
-
-then select `Import Project` tile.
-
-   ![gitlab-new-import](./images/gitlab-import-project.png)
-
-8. Import the `Nordmart Review` Gitops configuration  by clicking the `Repository via URL` tile and inputing the following URL. 
-
-```
- https://github.com/stakater-lab/nordmart-apps-gitops-config-template
- 
- ```
- 
-include your project name and select `internal` for your project visibility. Import your project by clicking on `Create Project`
-
-   ![nordmart-gitops](./images/nordmart-gitops.png)
-
-Your Project has been imported.
-
-
-   ![nordmart-gitops-project](./images/nordmart-gitops-project.png)
-
-9. You can see all your projects from your groups page.
-
-   ![project](./images/projects.png)
-
-### Making Changes to Your Code
-
-GitLab `Personal Access Token` allows you interact safely with your GitLab repositories from remote enviroments. With your Personal Token, you can push changes directly to your GitLab projects from your workstation. Take the following steps to create your token and add it to your Dev enviroment.
-
-1. Click on your profile icon at the top right corner of your page, and select `Edit profile`.
-
-   ![edit-profile](./images/edit-profile.png)
-
-2. At the left corner, Click on `Access Tokens`. You will be brought to the `Personal Access Token` Page
-
-   ![access token](./images/access-token.png)
-
-3. Give your token a name, as well as the `read_repository` and `write_repository` permissions. Then select `Create Personal Access Token`
-
-   ![p_access token](./images/personal-access-token.png)
-
-4. Once your Access Token has been created, make sure you copy it and keep in a safe place, as you  will not get a chance to view it again.
-
-
-   ![p_access token2](./images/token.png)
-
-5. Finally, add your Token to your Dev Workstation by saving them as the following enviroment variables.
-
-```
-export GIT_USER=<YOUR_TOKEN_NAME>
-export GIT_TOKEN=<'YOUR_TOKEN>
-
-```
-
-   ![git-var](./images/git-var.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+2. Now select the "Repository by URL" option and paste in the following repository URL:
+    ```
+        https://github.com/stakater-lab/stakater-nordmart-review-ui.git
+    ```
+   > Make sure you mark the repository as public and choose the group you previously created as the group name.
+   
+   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
+    
+    ![import-nordmart-review](images/import-nordmart-review-ui.png)
