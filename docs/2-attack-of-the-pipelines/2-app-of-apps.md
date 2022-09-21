@@ -47,7 +47,25 @@ This will download a python script.
    `
 Doing this will replace all instances of <TENANT_NAME> and <GROUP_NAME> with your tenant name and group name. Do not push the changes yet.
 
+### Apps of Apps structure
+
+Now that we have renamed all the values and files that needed to changed, let's look at the structure of this repository.
+
+  ![apps-of-apps-tree](images/apps-of-apps-tree.png)
+
+1. At the root level, we have a `00-argocd-apps` folder and a `01-<TENAANT_NAME>`folder
+
+2. Inside the `00-argocd-apps` folder there will be another `workshop` folder which represents the cluster name.
+
+3. Inside the workshop folder, you will see multiple environments.
+
+4. The environment folders contain argocd application for tenant that point to the particular tenant's environment.
+
+5. In each tenant env folder, we will have argocd applciations for all the applications we want to deploy in a patricular environment. These apps will eventually point to a helm chart. 
+
+
 ### Deploying Nordmart
+
 
 > Now we need to add a chart in the dev environment for deploying our application.
 
@@ -80,9 +98,12 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, commit the changes, and push to the repository.
 
+
 5. Now head over to argocd and search for <TENANT_NAME>-dev.
 
+
    ![search-argocd](images/search-argocd.png)
+
 
 6. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
 
