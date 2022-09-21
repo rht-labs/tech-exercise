@@ -56,7 +56,7 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
 6. Name your file using the following directory prefix `workshop/tenant-operator-config/tenants/ <TENANT-NAME>.yaml`   
 
 
-   ![mto-filename](./imagesmto-filename)
+   ![mto-filename](./images/mto-filename)
 
 
 
