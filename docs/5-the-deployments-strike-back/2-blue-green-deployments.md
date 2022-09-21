@@ -208,6 +208,9 @@ oc get route/review-ui-bg -n (TENANT_NAME)-dev --template='{{.spec.host}}'
 and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
 
 
+![nordmart-review-bg-blue](images/nordmart-review-bg-blue.png)
+
+
 5. let's update the values.yaml for our deployments and switch the labels for services to point the active service towards green deployment. And then update the route to point towards active green service as well. 
 
     To do this, change the following
@@ -228,6 +231,8 @@ and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
     ```
 
 8. When arocd syncs, you should see things progress and the blue green deployment happen automatically. You can go to this url again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
+
+![nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 
     This is a simple example to show how we can automate a blue green deployment using GitOps. However, we did not remove the
     previous deployment of nordmart-review, in the real world we would do this.
