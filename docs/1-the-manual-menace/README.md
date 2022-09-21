@@ -19,3 +19,14 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 * <span style="color:blue;">[ArgoCD](https://argoproj.github.io/argo-cd/)</span> - A controller which continuously monitors application and compare the current state against the desired
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
 * <span style="color:blue;">[Tekton](https://tekton.dev/)</span> - Tekton is a powerful and flexible open-source framework for creating CI/CD systems, allowing developers to build, test, and deploy across cloud providers and on-premise systems.
+
+
+## :link: Here are some usefull repository links you will require for this exercise 
+
+| Repository Name              | URL                                                                                            |
+|------------------------------|-----------------------------------------------------------------------------------------------------|
+| SAAP Login                   | https://managedopenshiftfrontend-stakater-managed-openshift-apps.apps.stage.2cc6dtsv.kubeapp.cloud/ |
+| Workshop Infra Repo          | https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config/           |
+| Stakater Nordmart Review     | https://github.com/stakater-lab/stakater-nordmart-review/                                           |
+|  Stakater Nordmart Review UI | https://github.com/stakater-lab/stakater-nordmart-review-ui/                                        |
+| Nordmart Apps Gitops Config  | https://github.com/stakater-lab/nordmart-apps-gitops-config-template/                               |
