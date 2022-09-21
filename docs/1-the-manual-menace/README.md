@@ -29,4 +29,4 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 | Workshop Infra Repo          | https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config/           |
 | Stakater Nordmart Review     | https://github.com/stakater-lab/stakater-nordmart-review/                                           |
 |  Stakater Nordmart Review UI | https://github.com/stakater-lab/stakater-nordmart-review-ui/                                        |
-| Nordmart Apps Gitops Config  | https://github.com/stakater-lab/nordmart-apps-gitops-config-template/                               |
+| Nordmart Apps Gitops Config  | https://github.com/stakater-lab/nordmart-apps-gitops-config/                               |
