@@ -5,7 +5,7 @@
 In this exercise, we will walk through the steps we take in order to have a ready cluster for all the other exercises. 
 
 ## 🖼️ Big Picture
-![empty-big-picture](images/big-picture-empty.jpg)
+![empty-big-picture](images/big-picture-empty.png)
 
 ## 🔮 Learning Outcomes
 

@@ -8,7 +8,7 @@
 
 ## 🖼️ Big Picture
 
-![big-picture-first-pipeline](images/big-picture-first-pipeline.jpg)
+![big-picture-first-pipeline](images/big-picture-first-pipeline2.png)
 ## 🔮 Learning Outcomes
 
 - Can manage App Config via git
