@@ -6,7 +6,7 @@ A developer can get the same experience and end result installing an application
 
 We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In nordmart we generate the app-of-apps definitions using a Helm chart.
 
-### Deploying Pet Battle - Keycloak
+### Deploying Nordmart Review
 
 > In this exercise we'll deploy nordmart-review. We'll deploy nordmart to dev environment. And then get the build environment ready for deploying our pipelines
 
