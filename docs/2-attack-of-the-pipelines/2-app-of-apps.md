@@ -80,5 +80,11 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, commit the changes, and push to the repository.
 
-5. Now head over to argocd and search for 
+5. Now head over to argocd and search for <TENANT_NAME>-dev.
 
+   ![search-argocd](images/search-argocd.png)
+
+6. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
+
+
+   ![sorceres-build](images/sorcerers-build.png)
