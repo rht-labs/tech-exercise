@@ -12,7 +12,7 @@
   * [🐙 ArgoCD 101](1-the-manual-menace/2-argocd-101.md)
   * [🐉 Here Be Dragons!](1-the-manual-menace/666-here-be-dragons.md)
 * [2. Attack of the Pipelines](2-attack-of-the-pipelines/README.md)
-  * [🕵🏻‍♂️ Add Pipelines Secret](2-attack-of-the-pipelines/1-external-secrets.md)
+  * [🕵🏻‍♂️ ## Secrets through Vault and External Secrets](2-attack-of-the-pipelines/1-external-secrets.md)
   * [🙌🏻 Application of Applications](2-attack-of-the-pipelines/2-app-of-apps.md)
     * [🏃🏻‍♀️ This is GitOps](2-attack-of-the-pipelines/5-this-is-gitops.md)
   * [🏃🏻‍♀️ The Pipelines](2-attack-of-the-pipelines/3-the-pipelines.md)

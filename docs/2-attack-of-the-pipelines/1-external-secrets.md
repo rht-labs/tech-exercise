@@ -1,11 +1,11 @@
-## Adding External Secrets through vault
+## Add Secrets through Vault and External Secrets
 
 When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store Secret manifest files openly
 We will use ExternalSecret and Vault to add secrets.
 
 To run our pipelines, we need to provide a secret to our tasks. This secret will contain the token for gitlab. We will store this secret in Vault and then through ExternalSecret, add a secret to Workloads.
 
-### Adding Gitlab Personal Access Token secret to vault
+### Add Gitlab Personal Access Token secret to vault
 
 1. To access your Vault Service, from your Forecastle console, click on the Vault tile.
 
@@ -69,8 +69,10 @@ Next step is the create an external secret CR that will connect to Vault and cre
 4. Navigate to Secrets under Workloads, you will find gitlab-pat present.
 
     ![external-secret-secret](./images/external-secret-secret.png)
-
- Tekton Service Account will use this secret as credentials for tasks with git commands.  
  
- 🪄🪄 Congratulations. You've added the secret! 🪄🪄
+    Click on `Reveal Values` to see If the values match to the ones you added in Vault.
+
+    Tekton Service Account will use this secret as credentials for tasks with git commands.  
+ 
+🪄🪄 Congratulations. You've added the secret! 🪄🪄
  
