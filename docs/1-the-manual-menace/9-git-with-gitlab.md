@@ -79,9 +79,16 @@
     ```
    > Make sure you mark the repository as public and choose the group you previously created as the group name. 
     
-   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.  
+   > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.  
 
    ![import-nordmart-review](images/import-nordmart-review.png)
+
+3. Once you have imported the repository, open the .tronador file present at the base and replace the tenant field with your tenant.
+
+   ![tronador](images/tronador1.png)
+
+
+   ![tronador](images/tronador2.png)
 
 
 ## Importing Nordmart Review UI 
@@ -98,3 +105,4 @@
     
     ![import-nordmart-review](images/import-nordmart-review-ui.png)
 
+3. Once you have imported the repository, open the .tronador file present at the base and replace the tenant field with your tenant_ 
