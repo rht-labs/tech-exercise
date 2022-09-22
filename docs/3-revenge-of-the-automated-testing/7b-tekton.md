@@ -137,5 +137,4 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 6. Remove the `EXPOSE 22` from the `Dockerfile` in the same merge request branch and the pipeline will succeed.
 
-
 🪄🪄 Observe the **stakater-nordmart-review** pipeline running successfully again 🪄🪄
