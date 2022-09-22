@@ -103,19 +103,18 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    > Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant name and the username you and your team members registered with.
 
 
-9. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name and select `commit changes` to create a merge request.
-
+9. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name or use and select `commit changes` to create a merge request.
 
    ![mto-commit](./images/mto-commit.png)
 
 10. Create a merge request by adding a suitable description and clicking `Create Merge Request`
 
-   ![mto-merge](./images/mto-merge.png)
+      ![mto-merge](./images/mto-merge.png)
 
 
 11. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
 You can view your created tenant and namespaces via your OpenShift Console.
 
-   ![mto-project](./images/tenants-created.png)
+      ![mto-project](./images/tenants-created.png)
 
 
