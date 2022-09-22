@@ -70,16 +70,16 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
    apiVersion: tenantoperator.stakater.com/v1beta1
    kind: Tenant
    metadata:
-      name: <TENANT_NAME>
+      name: <INSERT_YOUR_TENANT_NAME>
    spec:
       quota: workshop-medium
       owners:
          users:
-            - <USER_NAME>
+            - <INSERT_YOUR_USER_NAME>
       argocd:
          sourceRepos:
             - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
-            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<INSERT_YOUR_TENANT_NAME>/nordmart-apps-gitops-config.git'
             - 'https://stakater.github.io/stakater-charts'
             - 'https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/'
       namespaces:
@@ -95,7 +95,7 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
             sync: true
       specificMetadata:
          - namespaces:
-            - <TENANT_NAME>-build
+            - <INSERT_YOUR_TENANT_NAME>-build
            annotations:
                openshift.io/node-selector: node-role.kubernetes.io/pipeline=
    ```
