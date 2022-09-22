@@ -39,6 +39,10 @@ The above chart contains all necessary resources needed to build and run a tekto
 ### SAAP preconfigured cluster tasks:
 SAAP is shipped with many ready-to-use tekton cluster tasks. Let's take a look at some of the tasks that we will be using to construct a basic pipeline.
 
+Navigate to the Openshift Console using Forecastle. Select Tasks under Pipeline in sidebar. Select the ClusterTasks tab and search stakater. Here you will see all the tasks shipped with SAAP.
+
+![stakater-clustertasks](./images/stakater-clustertasks.png)
+
 #### 1 - git-clone 🤖🤖🤖
 
 This task clones the repository/code on which pipeline is to executed in the `workspace`
