@@ -34,7 +34,7 @@ The pipeline will now become:
            name: build-and-push
               params:
                - name: BUILD_IMAGE
-                 value: $(tasks.stakater-build-image-flag-v1.results.build-image)
+                 value: "true"
          - defaultTaskName: stakater-helm-push-v1
          - defaultTaskName: stakater-create-environment-v1
          - defaultTaskName: stakater-gitlab-update-cd-repo-v1
