@@ -1,10 +1,10 @@
 ## Extend Tekton Pipeline with System Test
 
-You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to teast all the endpoints of our applications to ensure they are reachable and functioning as expected.
+You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to test all the endpoints of our applications to ensure they are reachable and functioning as expected.
 
-1. To add the Systems Tests task to your pipeline, open the `values.yaml` file containing our pipleline definition with your preferred editor.
+1. To add the Systems Tests task to your pipeline, open the `values.yaml` file containing our pipleline definitions with your preferred editor.
 
-2. After the `stakater-create-enviromenttask-v1`, add the following task.
+2. After the `stakater-create-enviroment-v1` task, add the following task.
 
     ````   
      - defaultTaskName: stakater-e2e-test-v1
@@ -82,4 +82,4 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
 
 ![e2e-test](./images/e2e-test.png)
 
-5. You have succesfully added end to end testing in your pipeline.
+5. You have succesfully added End to End testing in your pipeline.
