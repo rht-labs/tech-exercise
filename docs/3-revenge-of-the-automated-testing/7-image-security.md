@@ -6,7 +6,7 @@
 
 ![task-image-security](./images/task-image-security.png)
 
-## Set Up StackRox Access
+## Access StackRox Access
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed and configured in the cluster for you.
 
