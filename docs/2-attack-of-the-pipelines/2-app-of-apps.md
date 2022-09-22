@@ -103,14 +103,49 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, commit the changes, and push to the repository.
 
+5. We are not done yet. We need to somehow connect this repository to an argocd application directly watched by the cluster. For this, head over to ``nordmart-infra-gitops-config
 
-5. Now head over to argocd and search for <TENANT_NAME>-dev.
+```https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+```
+We know that this repository is being watched by the cluster. So we will add an argocd application here and point it to our `nordmart-apps-gitops-config`
+
+6. Navigate to workshop > nordmart-apps-gitops-config.
+ 
+7. Add a file here named <TENANT_NAME>-nordmart-apps-gitops-config.yaml with the following content:
+
+```
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: <TENANT_NAME>-nordmart-apps-gitops-config
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: 'https://kubernetes.default.svc'
+  project: hogwarts
+  source:
+    path: 00-argocd-apps/01-workshop
+    repoURL: https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  syncPolicy:
+    automated:
+      prune: true
+
+```
+Note: Replace all instance of <TENANT_NAME> with your tenant name in above file.
+
+![nord-apps](images/nord-apps.png)
+
+8. Now head over to argocd and search for <TENANT_NAME>-dev.
 
 
    ![search-argocd](images/sorcerers-dev.png)
 
 
-6. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
+9. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
 
 
    ![sorceres-build](images/sorcerers-build.png)
