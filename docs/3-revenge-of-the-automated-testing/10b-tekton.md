@@ -79,6 +79,7 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
     ```    
     
 4. Commit your changes. You will be able to see your newly added task from your `OpenShift Console` 
+   Thanks to your GitOps workflow with ArgoCD
 
 ![e2e-test](./images/e2e-test.png)
 
