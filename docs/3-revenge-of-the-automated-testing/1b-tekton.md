@@ -100,7 +100,8 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 8. Once the task completes, head over to `sonarqube` by opening the following url.
 
-```https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
+```
+https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
 ```
 It will take you to the projects page. You should be able to see nordmart-review project in the console. 
 
