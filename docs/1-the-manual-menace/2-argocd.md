@@ -76,7 +76,7 @@ When something is seen as not matching the required state in Git, an application
     namespaces:
       - ${TEAM_NAME}-ci-cd
     argocd_cr:
-      initialRepositories: | 
+      initialRepositories: |
         - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
           type: git
           passwordSecret:
