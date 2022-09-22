@@ -6,7 +6,7 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
 
 2. After the `stakater-create-enviroment-v1` task, add the following task.
 
-    ````   
+    ````yaml   
      - defaultTaskName: stakater-e2e-test-v1
        params:
          - name: namespace
@@ -15,7 +15,7 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
 
 3. Your pipeline will now have the following tasks.
 
-   ````
+   ````yaml
    apiVersion: v2
    pipeline-charts:
       name: stakater-main-pr-v1
