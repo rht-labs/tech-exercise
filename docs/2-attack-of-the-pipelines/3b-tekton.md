@@ -148,7 +148,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
             name: build-and-push
             params:
               - name: BUILD_IMAGE
-                value: $(tasks.stakater-build-image-flag-v1.results.build-image)
+                value: "true"
           - defaultTaskName: stakater-helm-push-v1
           - defaultTaskName: stakater-create-environment-v1
           - defaultTaskName: stakater-gitlab-update-cd-repo-v1
@@ -229,14 +229,33 @@ If you open up the application by clicking on it, you should see a similar scree
 
 10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for nordmart review.
 
-11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
+11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file. Push commits directly to the main.
 
-12. Create a merge request ...
+12. Navigate to the Openshift Console ...
 
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
 
-![pipeline-running.png](images/pipeline-running.png)
+    ![pipeline-running.png](images/pipeline-running.png)
 
-![pipeline-running.png](images/pipeline-running-2.png)
-🪄OBSERVE PIPELINE RUNNING :D 
+    ![pipeline-running.png](images/pipeline-running-2.png)
+  
+    🪄OBSERVE PIPELINE RUNNING :D 
+
+13. Open the logs tab and click build-and-push. Remember the **tag** and **image_sha** for our image that we will later match with pod spec.. 
+
+    ![build-and-push-details](images/build-and-push-details.png)
+
+
+14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
+
+    ![updated-nordmart-apps-gitops-config](images/updated-nordmart-apps-gitops-config.png)
+
+    For pushes to main branch, application is updated in <TENANT_NAME>-dev namespace.
+
+15. Open our <TENANT>-stakater-nordmart-review-dev argocd application and click refresh so that our changes are applied to the cluster.
+    ![tenant-dev-nordmart-review](images/tenant-dev-nordmart-review.png)
+
+15. Navigate to Pods under Workloads in the sidebar in <TENANT_NAME>-dev namespace, Open the yaml
+of review- pod and scroll down to status key, you ll see that the **tag** and **sha** in the build-and-push step match.
+    ![pod-image-updated](images/pod-image-updated.png)
