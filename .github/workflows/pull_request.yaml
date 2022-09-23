@@ -10,13 +10,46 @@ env:
   REGISTRY: docker.io
 
 jobs:
+  link_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Link check
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
+        with:
+          config-file: .github/md_config.json
+  spell_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Spell check
+        uses: errata-ai/vale-action@v2.0.1
+        with:
+          styles: https://github.com/errata-ai/write-good/releases/latest/download/write-good.zip
+          files: src
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Style check
+        uses: reviewdog/action-languagetool@v1
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          reporter: github-pr-review
+          level: warning
+          language: 'en-US'
+          patterns: '**/*.md'
   build:
     runs-on: ubuntu-latest
     name: Build
     if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"    
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         ref: ${{github.event.pull_request.head.sha}}
 
