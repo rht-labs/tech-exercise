@@ -7,22 +7,6 @@ In this section we are going to improve our already built `main-pr-v1` pipeline 
 The SAAP cluster is shipped with many useful predefined cluster tasks. 
 Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
 
-1. To view the already defined Image Scanning/Checking Cluster Task, Open up the `Pipelines` section from the left menu and click `Tasks`
-
-   ![cluster-tasks](./images/cluster-tasks.png)
-    
-2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in `rox-image-scan` in the search box that is displayed.
-   You will see a  `rox-image-scan` task. Click to view details.
-
-   ![rox-image-search](./images/7b-tekton-rox-image-search.png)
-   
-3. CLick YAML to display the task definition.
-
-    <p align="center" width="100%">
-        <img width="40%" src="images/7b-tekton-rox-image-check-yaml.png">
-        <img width="40%" src="images/7b-tekton-rox-image-check-yaml.png">
-    </p>
-
 4. Open the Chart we added to 00-tekton-pipelines folder to our nordmart-apps-gitops-repository in section 2.
 
 5. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 

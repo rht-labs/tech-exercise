@@ -6,6 +6,28 @@
 
 ![task-image-security](./images/task-image-security.png)
 
+## SAAP Image Security:
+
+SAAP cluster is shipped with a two image security tasks **rox image scan** to `scan` images for CVE/CVSS and **rox image check** to `check` build time policy violations using **ACS**
+
+> StackRox / Advanced Cluster Security (ACS) performs a risk analysis of the container environment, delivers visibility and runtime alerts, and provides recommendations to proactively improve security by hardening the environment. 
+
+Lets view this task in our cluster:
+
+1. To view the already defined Image Scanning/Checking Cluster Task, Open up the `Pipelines` section from the left menu and click `Tasks`
+
+   ![cluster-tasks](./images/cluster-tasks.png)
+    
+2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in `rox-image-scan` in the search box that is displayed.
+   You will see a  `rox-image-scan` task. Click to view details.
+
+   ![rox-image-search](./images/7b-tekton-rox-image-search.png)
+   
+3. CLick YAML to display the task definition.
+
+    ![rox-image-check](./images/7b-tekton-rox-image-check-yaml.png)
+    ![7b-tekton-rox-image-check-yam](./images/7b-tekton-rox-image-check-yaml.png)
+
 ## Access StackRox Access
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed and configured in the cluster for you.
@@ -30,3 +52,4 @@ Now we can use ACS to help move security **LEFT** in our build pipeline. In each
 - Configure your pipeline to `scan` images for CVE/CVSS
 - Break/Fix your pipeline 
 - <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/7b-tekton.md)</span>
+
