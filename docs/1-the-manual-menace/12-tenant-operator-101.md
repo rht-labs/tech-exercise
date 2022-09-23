@@ -87,8 +87,10 @@ The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/st
       - build
       - preview
       - test
-      - prod
+      - prod      
       sandbox: true
+      onDelete:
+         cleanNamespaces: false
       templateInstances:
       - spec:
             template: tenant-vault-access
