@@ -32,7 +32,10 @@ Lets view this task in our cluster:
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed and configured in the cluster for you.
 
-> Redhat ACS UI: central-rhacs-operator.apps.devtest.vxdqgl7u.kubeapp.cloud/
+Below is the URL to ACS (Available on Forecastle UI):
+
+> Redhat ACS UI: **central-rhacs-operator.apps.devtest.vxdqgl7u.kubeapp.cloud/**
+
 
 1. Navigate to the Redhat ACS UI URL specified above and select Openshift as Auth Provider. Login via workshop.
 

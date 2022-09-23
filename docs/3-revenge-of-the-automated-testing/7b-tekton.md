@@ -7,9 +7,10 @@ In this section we are going to improve our already built `main-pr-v1` pipeline 
 The SAAP cluster is shipped with many useful predefined cluster tasks. 
 Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
 
-4. Open the Chart we added to 00-tekton-pipelines folder to our nordmart-apps-gitops-repository in section 2.
+1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-5. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
+2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
 
     ```
     - taskName: rox-image-check
@@ -80,11 +81,13 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
           name: stakater-tekton-builder
           create: false
     </code></pre></div>
-4. Now open Argocd and check if the changes were synchronized.
+3. Now open Argocd and check if the changes were synchronized.
 
-    TODO: Add screenshot
+    ![sorcerers-build-tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
+    ![sorcerers-build-tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
 
-5. If the sync is green, you're good to go. You have successfully added rox-image-scan to your pipeline!
+
+4. If the sync is green, you're good to go. You have successfully added rox-image-scan to your pipeline!
     TODO: See Pipeline
 
 🪄🪄 Observe the **stakater-nordmart-review** pipeline running with the **rox-image-scan** & **rox-image-check** task.🪄🪄
@@ -113,6 +116,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 4. This should now fail on the **image-scan/rox-image-check** task.  
 
+    ## TODO Replace Screenshot
     ![images/acs-image-fail.png](images/acs-image-fail.png)
 
 5. Back in ACS we can also see the failure in the *Violations* view.  
