@@ -44,7 +44,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 
 3. This policy indetifies for image build voilations and fails whenever we expose ssh port. We will expose port 22 in our application dockerfile and image check scan in our pipeline in the next section.
 
-#### Integrate the pipeline with Tekton:
+### Integrate the pipeline with Tekton:
 
 Now we can use ACS to help move security **LEFT** in our build pipeline. In each group we will do the following:
 
