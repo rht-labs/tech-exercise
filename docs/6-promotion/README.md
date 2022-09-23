@@ -8,7 +8,7 @@ _TODO_
 
 ## 🖼️ Big Picture
 
-![big-picture-monitoring](images/big-picture-monitoring.jpg)
+![big-picture-monitoring](../4-return-of-the-monitoring/images/big-picture-monitoring.jpg)
 ## 🔮 Learning Outcomes
 
 _TODO_

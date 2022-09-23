@@ -8,7 +8,7 @@ Nordmart Review product is composed of three components:
 2. **stakater-nordmart-review-ui:** A react based frontend to managing reviews
 3. **mongodb:** A database to hold reviews
 
-![stakater-nordmart-review-architecture](images/stakater-nordmart-review-architecture.jpg)
+![stakater-nordmart-review-architecture](images/nordmart-architecture.png)
 
 ### Lets get started 
 

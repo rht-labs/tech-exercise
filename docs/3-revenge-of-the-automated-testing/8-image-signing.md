@@ -39,4 +39,4 @@ _This step makes more sense when you use an external image registry and share im
 #### Integrate the pipeline with Tekton:
 
 - Add image signing stage to your pipeline
-- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/8b-tekton.md)</span> 
+- <span style="color:blue;">[tekton](8b-tekton.md)</span> 

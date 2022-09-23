@@ -52,7 +52,7 @@ pipelines with stage information
 
 
 ### The Big Picture
-![BP6](images/bp-6-return-monitoring.jpg)
+![BP6](../../4-return-of-the-monitoring/images/big-picture-monitoring.jpg)
 
 
 

@@ -5,4 +5,4 @@
 #### Integrate the pipeline with Tekton:
 
 - Add a load test task to our pipeline
-- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/9b-tekton.md)</span>
+- <span style="color:blue;">[tekton](9b-tekton.md)</span>

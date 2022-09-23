@@ -10,4 +10,4 @@ Our System Test checks all the end points of our applications and ensures they a
 
 #### Integrate the pipeline with Tekton:
 
-- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/10b-tekton.md)</span>
+- <span style="color:blue;">[tekton](10b-tekton.md)</span>

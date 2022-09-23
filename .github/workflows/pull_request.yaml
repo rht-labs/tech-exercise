@@ -39,7 +39,7 @@ jobs:
         uses: errata-ai/vale-action@v2.0.1
         with:
           styles: https://github.com/errata-ai/write-good/releases/latest/download/write-good.zip
-          files: src
+          files: docs
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
   style_check:

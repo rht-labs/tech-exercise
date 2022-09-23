@@ -11,4 +11,4 @@ For this exercise, we will use a tool called "OWASP Zed Attack Proxy" or ZAP in 
 #### Integrate the pipeline with Tekton:
 
 - Add a stage to our pipeline to run the security scan
-- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/6b-tekton.md)</span>
+- <span style="color:blue;">[tekton](6b-tekton.md)</span>

@@ -179,7 +179,7 @@
               workspace: shared-workspace
     ```
 
-3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](./3-revenge-of-the-automated-testing%2F1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
+3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
 
     Change the build options from this:
     <div class="highlight" style="background: #f7f7f7">

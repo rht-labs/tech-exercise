@@ -6,7 +6,7 @@
 
 Because all of our code and configuration is in git, we can easily move our whole continuous delivery stack to another OpenShift cluster. This is useful if you wanted to try out all the exercises at a later stage using the code from this run.
 
-As a prerequisite - you will need to have setup TL500 using the previous section [Tooling Installation](99-the-rise-of-the-cluster/1-tooling-installation). Lets cover the steps once you have a cluster and tooling installed to get going with your code.
+As a prerequisite - you will need to have setup TL500 using the previous section [Tooling Installation](1-tooling-installation). Lets cover the steps once you have a cluster and tooling installed to get going with your code.
 
 Lets take our code from `cluster-a` to `cluster-b`.
 
