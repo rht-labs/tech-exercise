@@ -57,6 +57,15 @@ jobs:
         level: warning
         language: 'en-US'
         patterns: '**/*.md'
+  test:
+    runs-on: ubuntu-latest
+    name: TEST
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"    
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+        ref: ${{github.event.pull_request.head.sha}}
   build:
     runs-on: ubuntu-latest
     name: Build
