@@ -2,7 +2,8 @@
 
 ## Integrate the pipeline with Tekton:
 1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
-
+  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+  
 2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a runAfter field to make it run after the stakater-sonarqube-scanner-v1 task:
 
 ```

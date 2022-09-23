@@ -3,6 +3,8 @@
 Let's enable the **kube-linter** task in our pipeline.
 
 1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+
 2. Open the values file in the editor. After the `stakater-code-linting-v1`, reference the kube-linting task and add a runAfter field to make it run after the stakater-code-linting-v1 task:
 
 ```
