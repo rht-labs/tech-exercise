@@ -23,7 +23,7 @@ git pull
 
 2. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
 
-    ![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
+    ![gitlab-ArgoCD-webhook](images/gitlab-argocd-webhook.png)
 
 
 ### Add Nexus to our tool box
@@ -62,7 +62,7 @@ git pull
     ```
 
 3. ArgoCD will detect the change in `ubiquitous-journey/values-tooling.yaml` and deploy Nexus on our behalf in order to match what is in git also in the cluster. You can see it also in ArgoCD UI.
-![argocd-nexus](images/argocd-nexus.png)
+![ArgoCD-nexus](images/argocd-nexus.png)
 
 4. With the Webhook in place, it should only take a few seconds for things to become available. But you can verify it is all working by opening the Nexus URL in a new tab (admin / admin123 is the default credential):
 

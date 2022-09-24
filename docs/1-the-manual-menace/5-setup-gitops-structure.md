@@ -1,6 +1,6 @@
 # Setup GitOps Repository Structure :rocket: :rocket:
 ## Introduction
-This section is focused on creating a gitops structure for your tenant that will contains application helm charts, tekton pipelines and their respective argocd applications.
+This section is focused on creating a gitops structure for your tenant that will contains application helm charts, tekton pipelines and their respective ArgoCD applications.
 
 We will create the following types of folders in our gitops repo you ve made in section:
 
@@ -9,7 +9,7 @@ This folder will contain application helm chart which will be updated with newly
 2. **For Tekton Manifests**
 This folder will contain the pipeline to be run for application.
 3. **For ArgoCD Apps**
-The folder contains argocd applications for all applications & pipelines.  
+The folder contains ArgoCD applications for all applications & pipelines.  
 
 ## Lets get started,
 
@@ -18,7 +18,7 @@ The folder contains argocd applications for all applications & pipelines.
         # git clone https://gitlab.com/<group-name>/<gitops-repo>
         git clone https://gitlab.com/workshop-exercise/nordmart-gitops
 
-2. Now lets create argocd apps folder that will point to our application & pipelines directory and make sure that resource manifest inside these are deployed and synced in the cluster
+2. Now lets create ArgoCD apps folder that will point to our application & pipelines directory and make sure that resource manifest inside these are deployed and synced in the cluster
 
         # mkdir <argocd-apps-dir-name>
         mkdir 00-argocd-apps

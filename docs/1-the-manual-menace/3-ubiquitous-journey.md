@@ -180,7 +180,7 @@ EOF
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
-    ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
+    ![ArgoCD-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 
 6. As ArgoCD sync's the resources we can see them in the cluster:
 
