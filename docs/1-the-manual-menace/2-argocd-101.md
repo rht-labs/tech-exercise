@@ -22,7 +22,7 @@ When something is seen as not matching the required state in Git, an application
 
 ## Nordmart App on ArgoCD
 
-Lets install an Argocd Application that deploy the nordmart-review application onto the cluster.
+Lets install an Argocd Application that deploy the `nordmart-review application` onto the cluster.
 
 1. Open the forecastle page, Navigate to CI & CD tab and Open the ArgoCD link.  
     ![ArgoCD-ui](images/2-argocd-forecastle.jpg)
@@ -44,7 +44,7 @@ Lets install an Argocd Application that deploy the nordmart-review application o
 
 
 4. Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `nordmart-review` app you manually deployed previously using Helm. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form.
-    > Make sure you have deleted previous helm release deployed in Helm 101.
+    > Make sure you have deleted previous Helm release deployed in Helm 101.
   
 Let's fill it out by setting the following:
 

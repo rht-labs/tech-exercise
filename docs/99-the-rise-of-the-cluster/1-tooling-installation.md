@@ -23,14 +23,14 @@ Here is the list of the tools and objects we deploy on OpenShift for TL500 setup
 * Some shared namespaces to install above components
 * RBAC definition for `student` group
 
-All of them are defined as helm charts in the repository. You can update `values.yaml` files locally if you'd like to change some naming or skip to install some components.
+All of them are defined as Helm charts in the repository. You can update `values.yaml` files locally if you'd like to change some naming or skip to install some components.
 
 But before we installing the tooling, we need to talk about the user management.
 
 ## User Management
 Students do not have cluster-admin privilege. We have an OpenShift user group called `student` which has an RBAC definition applied in order to run the exercises successfully.
 
-You can choose to use your own user management system and create a group called `student` to add the students to it. We use IPA for this! An IPA helm chart can be found [here](https://github.com/redhat-cop/helm-charts/tree/master/charts/ipa).
+You can choose to use your own user management system and create a group called `student` to add the students to it. We use IPA for this! An IPA Helm chart can be found [here](https://github.com/redhat-cop/helm-charts/tree/master/charts/ipa).
 
 If you'd like to use the same setup, here are the steps:
 

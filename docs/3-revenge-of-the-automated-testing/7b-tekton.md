@@ -100,7 +100,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we viewed earlier. We will create a merge request for our code repo and see what happens when its pipeline runs.
 
-2. Open the <GROUP_NAME>/stakater-nordmart-review repository on gitlab. Edit the Dockerfile.
+2. Open the `<GROUP_NAME>/stakater-nordmart-review` repository on gitlab. Edit the Dockerfile.
 
     ![images/build-time-violation-dockerfile.png](images/build-time-violation-dockerfile.png)
 

@@ -5,7 +5,7 @@
 
 #### SAAP Code Linting:
 
-We will be using maven Checkstyle plugin to check the code in nordamrt-review and nordmart-review-ui repositories.
+We will be using maven Checkstyle plugin to check the code in nordamrt-review and `nordmart-review-ui` repositories.
 SAAP cluster is shipped with a code-linting task that uses maven checkstyle to check the quality of code. We will be using this task to integrate code-lint in our pipeline.
 
 Follow the below-mentioned procedure to add code linting to the already deployed main-pr-v1 pipeline.

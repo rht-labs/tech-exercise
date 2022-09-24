@@ -55,7 +55,7 @@
 
     Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 
-    Our Helm Chart for nordmart-review api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
+    Our Helm Chart for `nordmart-review` api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
     ```yaml
         ## Service Monitor
@@ -100,7 +100,7 @@
     git push
     ```
 
-4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for nordmart review api;
+4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `nordmart-review` api;
 
     ![forecastle-workload-grafana](images/forecastle-workload-grafana.png)
 

@@ -95,7 +95,7 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 6. If the sync is green, you're good to go. You have successfully added sonarqube to your pipeline!
 
-7. Now make a small change on the nordmart-review application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see sonarqube task running.
+7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see sonarqube task running.
 
 ![sonar-running](./images/sonar-running.png)
 
@@ -104,7 +104,7 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 ```
 https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
 ```
-It will take you to the projects page. You should be able to see nordmart-review project in the console. 
+It will take you to the projects page. You should be able to see `nordmart-review` project in the console. 
 
 ![sonar-scanned](./images/sonar-scanned.png)
 

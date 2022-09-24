@@ -10,7 +10,7 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 ## 🔮 Learning Outcomes
 
 * Understand the benefits gained from GitOps approach
-* Deploy helm charts manually
+* Deploy Helm charts manually
 * Drive tool installations through GitOps
 
 ## 🔨 Tools used in this exercise

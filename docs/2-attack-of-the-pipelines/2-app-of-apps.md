@@ -1,14 +1,14 @@
 ## Deploy App of Apps
 
-We need a way to bundle up all of our applications and deploy them into each environment. The nordmart application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
+We need a way to bundle up all of our applications and deploy them into each environment. The Nordmart application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
 A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
 
-We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In nordmart we generate the app-of-apps definitions using a Helm chart.
+We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In Nordmart we generate the app-of-apps definitions using a Helm chart.
 
 ### The apps of apps structure
 
-> In this exercise we'll deploy nordmart-review. We'll deploy nordmart to dev environment. And then get the build environment ready for deploying our pipelines
+> In this exercise we'll deploy `nordmart-review`. We'll deploy Nordmart to dev environment. And then get the build environment ready for deploying our pipelines
 
 1. Head over to the below url.
 
@@ -66,7 +66,7 @@ Now that we have renamed all the values and files that needed to changed, let's 
 
 4. The environment folders contain argocd application for tenant that point to the particular tenant's environment.
 
-5. In each tenant env folder, we will have argocd applciations for all the applications we want to deploy in a patricular environment. These apps will eventually point to a helm chart. 
+5. In each tenant env folder, we will have argocd applciations for all the applications we want to deploy in a patricular environment. These apps will eventually point to a Helm chart. 
 
 
 ### Deploying Nordmart
@@ -74,9 +74,9 @@ Now that we have renamed all the values and files that needed to changed, let's 
 
 > Now we need to add a chart in the dev environment for deploying our application.
 
-1. Navigate to 01-TENANT_NAME > 02-stakater-nordmart-review > 01-dev.
+1. Navigate to `01-TENANT_NAME > 02-stakater-nordmart-review > 01-dev`.
 
-2. We need to add the Helm chart for the nordmart review here. Create a file named Chart.yaml here and paste in the following content.
+2. We need to add the Helm chart for the Nordmart review here. Create a file named Chart.yaml here and paste in the following content.
 
 ```
 apiVersion: v2

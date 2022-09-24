@@ -41,7 +41,7 @@ Let's deploy a simple application using Helm.
 
     ![nordmart-review-ui-pods](./images/1a-2-nordmart-review-ui-pods.png)
 
-    By default, we only have one replica of our application. Let's use helm to set this to 5.
+    By default, we only have one replica of our application. Let's use Helm to set this to 5.
 
     ```bash#test
     helm upgrade my-nordmart-review stakater/nordmart-review --set nordmartReviewUi.deployment.replicas=5 --namespace ${TENANT_NAME}-test
@@ -54,7 +54,7 @@ Let's deploy a simple application using Helm.
     oc get pods -n ${TENANT_NAME}-test
     ```
     ![nordmart-review-ui-pods-5](./images/1a-3-nordmart-review-ui-pods-5.png)
-5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run helm uninstall to remove our release of the chart.
+5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run `helm uninstall` to remove our release of the chart.
 
     ```bash#test
     helm uninstall my-nordmart-review --namespace ${TENANT_NAME}-test

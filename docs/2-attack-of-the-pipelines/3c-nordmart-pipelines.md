@@ -93,14 +93,14 @@ The task takes parameter needed to build and push the image as params, such as t
 
 #### 5 - stakater-helm-push-v1 🅿
 
-The helm-push task packages the application helm chart, creates the tag for chart, and finally pushes it to the chart repository.
+The `helm-push` task packages the application Helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
 The repo path, chart repository url, prnumber, git revision, and git tag are taken as parameters
 
 #### 6 - stakater-update-cd-repo-v3 ⚙️
 
 When the pipeline is triggered by merge on default branch, this task is responsible for updating the image and chart version for the application in the gitops repo.
-The gitops repo in our case is the nordmart-apps-gitops-config repo.
+The gitops repo in our case is the `nordmart-apps-gitops-config` repo.
 In case the pipeline is triggered by a PR, this task creates a Environment Provisioner CR for dynamic test environment. 
 
 #### 7 - stakater-push-main-tag-v1 📤
@@ -121,7 +121,7 @@ It's finally time to get our hands dirty. Let's use the `tekton-pipeline-chart` 
 
 Firstly, we will be populating the values file for the tekton pipeline Chart to create our pipeline.
 
-1. Open up the nordmart-apps-gitops-config repository that we created in section 1 on GitLab.
+1. Open up the `nordmart-apps-gitops-config` repository that we created in section 1 on GitLab.
 
 
 2. Navigate to `01-TEAM-NAME >  01-tekton-pipelines > 00-build` folder.
@@ -260,9 +260,9 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         name: stakater-workshop-tekton-builder
         create: false
 
-Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and helm chart, and finally updates the version of application.
-5. To deploy our helm chart to the cluster, we need an argocd application that points to this chart.
-   Navigate to <TEAM_NAME>/00-argocd-apps/00-build in the nordmart-apps-gitops-config. You will see a file named `tekton-pipelines.yaml` with the folowing content:
+Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and Helm chart, and finally updates the version of application.
+5. To deploy our Helm chart to the cluster, we need an argocd application that points to this chart.
+   Navigate to `<TEAM_NAME>/00-argocd-apps/00-build` in the `nordmart-apps-gitops-config`. You will see a file named `tekton-pipelines.yaml` with the folowing content:
 ```
    
    apiVersion: argoproj.io/v1alpha1
@@ -309,7 +309,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
    You can test the webhook works from GitLab.
 
    ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
-9. Now let's repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
+9. Now let's repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
 10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
 
 11. As always, push the code to git ...

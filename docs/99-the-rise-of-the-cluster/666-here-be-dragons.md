@@ -202,7 +202,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     run
     ```
 
-    Deploy helm chart
+    Deploy Helm chart
 
     ```bash
     oc new-project ${TEAM_NAME}-ci-cd
@@ -241,7 +241,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     git push
     ```
 
-12. Kick off builds, make sure they work, fix up any helm chart version mismatches etc.
+12. Kick off builds, make sure they work, fix up any Helm chart version mismatches etc.
 
     ```bash
     cd /projects/pet-battle-api; git commit -m "test" --allow-empty; git push

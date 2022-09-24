@@ -2,7 +2,7 @@
 
 ## Architecture
 
-This is review sub module of Stakater nordmart fictious online e-commerce store.
+This is review sub module of Stakater Nordmart fictious online e-commerce store.
 
 ![nordmart-architecture](./images/nordmart-architecture.png)
 

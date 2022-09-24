@@ -84,7 +84,7 @@ The task takes parameter needed to build and push the image as params, such as t
 
 #### 4 - stakater-helm-push-v1 🅿
 
-The helm-push task packages the application helm chart, creates the tag for chart, and finally pushes it to the chart repository.
+The `helm-push` task packages the application Helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
 The repo path, chart repository url, prnumber, git revision, and git tag are taken as parameters
 
@@ -109,7 +109,7 @@ It's finally time to get our hands dirty. Let's use the `tekton-pipeline-chart` 
 
 Firstly, we will be populating the values file for the tekton pipeline Chart to create our pipeline.
 
-1. Open up the nordmart-apps-gitops-config repository that we created in section 1 on GitLab.
+1. Open up the `nordmart-apps-gitops-config` repository that we created in section 1 on GitLab.
 
 
 2. Navigate to `01-TENANT-NAME >  01-tekton-pipelines > 00-build` folder.
@@ -195,7 +195,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         name: stakater-workshop-tekton-builder
         create: false
 
-Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and helm chart, and finally updates the version of application.
+Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and Helm chart, and finally updates the version of application.
 
 
 5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to argocd and search for Application `<TENANT_NAME>-build-tekton-pipelines`
@@ -225,9 +225,9 @@ If you open up the application by clicking on it, you should see a similar scree
 
    ![nordmart-review-webhook-integration.png](images/webhook.png)
 
-9. Repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
+9. Repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
 
-10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for nordmart review.
+10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Nordmart review.
 
 11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file. Push commits directly to the main.
 
@@ -247,15 +247,15 @@ If you open up the application by clicking on it, you should see a similar scree
     ![build-and-push-details](images/build-and-push-details.png)
 
 
-14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
+14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new Helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
 
     ![updated-nordmart-apps-gitops-config](images/updated-nordmart-apps-gitops-config.png)
 
-    For pushes to main branch, application is updated in <TENANT_NAME>-dev namespace.
+    For pushes to main branch, application is updated in `<TENANT_NAME>-dev` namespace.
 
-15. Open our <TENANT>-stakater-nordmart-review-dev argocd application and click refresh so that our changes are applied to the cluster.
+15. Open our `<TENANT>-stakater-nordmart-review-dev` argocd application and click refresh so that our changes are applied to the cluster.
     ![tenant-dev-nordmart-review](images/tenant-dev-nordmart-review.png)
 
-15. Navigate to Pods under Workloads in the sidebar in <TENANT_NAME>-dev namespace, Open the yaml
-of review- pod and scroll down to status key, you ll see that the **tag** and **sha** in the build-and-push step match.
+15. Navigate to Pods under Workloads in the sidebar in `<TENANT_NAME>-dev` namespace, open the yaml
+of `review-` pod and scroll down to status key, you'll see that the **`tag`** and **`sha`** in the `build-and-push` step match.
     ![pod-image-updated](images/pod-image-updated.png)

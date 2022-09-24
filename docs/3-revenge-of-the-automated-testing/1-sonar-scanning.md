@@ -28,7 +28,7 @@ The SAAP cluster is shipped with many useful predefined cluster tasks. A sonarqu
    ![sonarqube-tasks](./images/sonarqube-task.png)
 
 Sonarqube scanner requires `sonar-project.properties` file along with the source code for it to run.
-The nordmart projects already contain a sonar-project.properties file with dummy values. 
+The Nordmart projects already contain a sonar-project.properties file with dummy values. 
 
 The SAAP sonarqube task has two steps:
 

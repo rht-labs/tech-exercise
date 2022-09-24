@@ -99,11 +99,11 @@ The pipeline will now become:
 
    ![kube-lint-openshift](./images/kube-lint-openshift.png)
 
-7. Trigger the pipeline by making a small change in the nordmart-review application and head over to the openshift console to see the pipeline run.
+7. Trigger the pipeline by making a small change in the `nordmart-review` application and head over to the openshift console to see the pipeline run.
 
 ![kube-lint-running](./images/kube-lint-running.png)
 
-8. Let's try to fail code linting now. Open up the nordmart review application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
+8. Let's try to fail code linting now. Open up the `nordmart-review` application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
    This should make the kube linting task to fail.
 
 ![kube-lint-failing](./images/kube-lint-fail.png)

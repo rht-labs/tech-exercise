@@ -45,7 +45,7 @@
         weight: 20       <-- based on the percentage we give
     </code></pre></div>
 
-    PetBattle UI helm chart already has this capability. We just need to enable it through `values`. But before that, we need to install a helper tool.
+    PetBattle UI Helm chart already has this capability. We just need to enable it through `values`. But before that, we need to install a helper tool.
 
 ### A/B and Analytics
 
@@ -92,7 +92,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
 ### A/B Deployment
 
-1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
+1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` Helm chart version and `image_version` to match what you have built.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
@@ -102,7 +102,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version - may need adjusting!
+        source_ref: 1.0.6 # Helm chart version - may need adjusting!
         values:
           image_version: latest # container image version - may need adjusting!
           fullnameOverride: pet-battle-b
@@ -142,7 +142,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         enabled: true
         source: http://nexus:8081/repository/helm-charts 
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
+        source_ref: 1.0.6 # Helm chart version
         values:
           image_version: latest # container image version  
           <strong>a_b_deploy:

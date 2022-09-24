@@ -102,7 +102,7 @@
     git push
     ```
 
-5. Now let's trigger the nordmart-review pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
+5. Now let's trigger the `nordmart-review` pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
 
     ```bash
     cd /projects/nordmart-review

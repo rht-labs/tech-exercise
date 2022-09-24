@@ -62,7 +62,7 @@
                 password: AgAtnYz8U0AqIIaqYrj...
     ```
 
-5. While in the `ubiquitous-journey/value-tooling.yaml` file - install Allure by adding it's helm chart:
+5. While in the `ubiquitous-journey/value-tooling.yaml` file - install Allure by adding it's Helm chart:
 
     ```yaml
       # Allure

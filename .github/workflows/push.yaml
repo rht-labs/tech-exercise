@@ -23,7 +23,7 @@ jobs:
           persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
           fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
-      # Setting up helm binary
+      # Setting up Helm binary
       - name: Set up Helm
         uses: azure/setup-helm@v3
         env:
@@ -91,7 +91,7 @@ jobs:
       #  run: |
       #    helm template workshop-exercise deployments/kubernetes/chart/workshop-exercise/ > deployments/kubernetes/workshop-exercise.yaml
 
-      # Publish helm chart
+      # Publish Helm chart
       - name: Publish Helm chart
         uses: stefanprodan/helm-gh-pages@master
         with:

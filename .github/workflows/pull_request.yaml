@@ -64,7 +64,7 @@ jobs:
       with:
         ref: ${{github.event.pull_request.head.sha}}
 
-      # Setting up helm binary
+      # Setting up Helm binary
     - name: Set up Helm
       uses: azure/setup-helm@v1
 

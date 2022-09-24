@@ -6,7 +6,7 @@
 
 #### SAAP Kube Linting:
 
-SAAP cluster is shipped with a kube-linting task that uses kube linter and helm to verify the YAML files. We will be using this task to integrate kube linting in our pipeline.
+SAAP cluster is shipped with a kube-linting task that uses kube linter and Helm to verify the YAML files. We will be using this task to integrate kube linting in our pipeline.
 
 Follow the below-mentioned procedure to add kube linting to the already deployed main-pr-v1 pipeline.
 
@@ -24,7 +24,7 @@ Follow the below-mentioned procedure to add kube linting to the already deployed
    ![kube-lint-yaml](./images/kube-lint-yaml.png)
 
 The kube linting tasks has two steps:
-* helm - this step uses helm template and helm dry run to check the helm chart files.
+* `helm` - this step uses Helm template and Helm dry run to check the Helm chart files.
 
 ![helm-step-yaml](./images/helm-step.png)
 

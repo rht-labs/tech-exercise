@@ -91,12 +91,12 @@ The pipeline will now become:
 
    ![code-lint-openshift](./images/code-lint-openshift.png)
 
-7. Now make a small change on the nordmart-review application to trigger the pipeline. Add an extra line at the end of pom.xml. This should not appear as a code linting issue. Commit the change and head over to the console and check the running pipeline. You should be able to see code-lint task running.
+7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Add an extra line at the end of pom.xml. This should not appear as a code linting issue. Commit the change and head over to the console and check the running pipeline. You should be able to see code-lint task running.
 
    ![code-lint-running](./images/code-lint-running.png)
 
 
-8. Let try to fail code linting now. Open up the nordmart review application and navigate to` src > main > java > com > stakater > nordmart` and open `ReviewServiceApplication.java`. Add 5-6 extra lines in the main function. This is a linting issue so it should cause the code lint task to fail. Commit the change.
+8. Let try to fail code linting now. Open up the `nordmart-review` application and navigate to` src > main > java > com > stakater > nordmart` and open `ReviewServiceApplication.java`. Add 5-6 extra lines in the main function. This is a linting issue so it should cause the code lint task to fail. Commit the change.
 
    ![code-lint-change](./images/code-lint-change.png)
 

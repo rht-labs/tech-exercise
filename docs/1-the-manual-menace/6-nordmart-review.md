@@ -4,18 +4,18 @@
 
 Nordmart Review product is composed of three components:
 
-1. **stakater-nordmart-review:** A spring boot based REST API
-2. **stakater-nordmart-review-ui:** A react based frontend to managing reviews
-3. **mongodb:** A database to hold reviews
+1. `stakater-nordmart-review`: A spring boot based REST API
+2. `stakater-nordmart-review-ui`: A react based frontend to managing reviews
+3. `mongodb`: A database to hold reviews
 
 ![stakater-nordmart-review-architecture](images/nordmart-architecture.png)
 
 ### Lets get started 
 
-We will first setup the stakater-nordmart-review repository and deploy it on our cluster via helm chart.
+We will first setup the stakater-nordmart-review repository and deploy it on our cluster via Helm chart.
 
 ## Stakater-Nordmart-Review
-1. Clone the stakater-nordmart-review repository that you imported from github to your gitlab account.
+1. Clone the `stakater-nordmart-review` repository that you imported from github to your gitlab account.
 
         # git clone https://<GITLAB_SERVER>/<YOUR_GITLAB_GROUP>/<YOUR_REPO_NAME>
         git clone https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/workshop-exercise/stakater-nordmart-review
@@ -33,7 +33,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
     <img width="100%" src="images/1-6-1-change-image-tag.jpg">
     </p>
 
-3. Lets use helm to install our stakater-nordmart-review application to the cluster. Run following command in stakater-nordmart-review directory.
+3. Lets use Helm to install our `stakater-nordmart-review` application to the cluster. Run following command in `stakater-nordmart-review` directory.
 
         helm install <TENANT_NAME> deploy/ -n <TENANT_NAME>-test --dependency-update
 

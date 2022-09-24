@@ -288,7 +288,7 @@ Let's learn how to use the **roxctl** command line.
 
 6. The following command checks build-time and deploy-time violations of your security policies in YAML deployment files.
 
-    Use this command to validate Kubernetes resources in our helm template
+    Use this command to validate Kubernetes resources in our Helm template
 
     ```bash
     cd /projects/pet-battle-api/chart

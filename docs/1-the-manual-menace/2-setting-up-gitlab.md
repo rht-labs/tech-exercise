@@ -23,7 +23,7 @@
 
    Gitlab will redirect you to the group's home page, once the group is created.
 
-    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in nordmart-infra-gitops-config repo.
+    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in `nordmart-infra-gitops-config` repo.
 
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
