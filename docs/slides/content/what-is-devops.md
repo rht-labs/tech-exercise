@@ -1,8 +1,6 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
+## Stakater DevSecOps Workshop <!-- {.element: class="course-title"} -->
 ### What is DevOps? <!-- {.element: class="title-color"} -->
-TL500 <!-- {.element: class="title-color"} -->
-
 
 
 #### _Choose one of the two exercises that you like most :)_

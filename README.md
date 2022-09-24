@@ -2,7 +2,7 @@
 
 ## Stakater Workshop Exercise
 
-This monorepo holds the content for the Stakater DevSecOps with GitOps Workshop. The structure is roughly as follows:
+This monorepo holds the content for the Stakater DevSecOps Workshop. The structure is roughly as follows:
 
 ```
 ...
