@@ -1,8 +1,6 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png"  -->
-## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
-### Pet Battle <!-- {.element: class="title-color"} -->
-TL500 <!-- {.element: class="title-color"} -->
-
+## Stakater DevSecOps Workshop <!-- {.element: class="course-title"} -->
+### Nordmart <!-- {.element: class="title-color"} -->
 
 
 #### The Backstory 

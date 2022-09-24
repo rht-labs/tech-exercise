@@ -1,10 +1,7 @@
 <!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
-### DevOps Culture and Practice <!-- .element: class="course-title" -->
+### Stakater DevSecOps Workshop <!-- .element: class="course-title" -->
 ### Tech Exercise II - Attack of the Pipelines<!-- .element: class="title-color" -->
 ### CI, CD & CD2<!-- .element: class="title-color" -->
-
-TL500 <!-- .element: class="title-color" -->
-
 
 
 <div class="r-stack">
