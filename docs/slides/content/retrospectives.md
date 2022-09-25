@@ -116,7 +116,7 @@ _But they are done poorly and teams do not follow up on identified items_
 
 ![retrospective](images/retrospectives/retro-primedirective.png) <!-- {.element: class="image-no-shadow image-full-width"} -->
 
-~ Norm Kerth, Project Retrospectives: A Handbook for Team Review 
+~ `Norm Kerth`, Project Retrospectives: A Handbook for Team Review 
 
 
 
