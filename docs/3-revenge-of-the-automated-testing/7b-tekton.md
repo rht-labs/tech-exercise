@@ -13,8 +13,8 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
 2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
 
     ```
-    - taskName: rox-image-check
-    - taskName: rox-image-scan
+    - defaultTaskName: rox-image-check
+    - defaultTaskName: rox-image-scan
     ```
 
     The pipeline will now become:
@@ -29,25 +29,25 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
           resourcesRequestsStorage: 1Gi
       pipelines:
         tasks:
-          - taskName: git-clone
-          - taskName: stakater-create-git-tag-v1
+          - defaultTaskName: git-clone
+          - defaultTaskName: stakater-create-git-tag-v1
             params:
               - name: oldcommit
               - name: action
-          - taskName: stakater-sonarqube-scanner-v1
-          - taskName: stakater-buildah-v1
+          - defaultTaskName: stakater-sonarqube-scanner-v1
+          - defaultTaskName: stakater-buildah-v1
             name: build-and-push
                 params:
                 - name: BUILD_IMAGE
                   value: "true"
           <span style="color:orange"># Add rox-image-scan after build-and-push
-          - taskName: rox-image-check
-          - taskName: rox-image-scan
+          - defaultTaskName: rox-image-check
+          - defaultTaskName: rox-image-scan
           # End</span>
-          - taskName: stakater-comment-on-github-pr-v1
-          - taskName: stakater-helm-push-v1
-          - taskName: stakater-update-cd-repo-v3
-          - taskName: stakater-push-main-tag-v1
+          - defaultTaskName: stakater-comment-on-github-pr-v1
+          - defaultTaskName: stakater-helm-push-v1
+          - defaultTaskName: stakater-update-cd-repo-v3
+          - defaultTaskName: stakater-push-main-tag-v1
         eventlistener:
             serviceAccountName: stakater-tekton-builder
             triggers:
