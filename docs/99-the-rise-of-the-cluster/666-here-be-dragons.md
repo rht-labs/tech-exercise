@@ -16,7 +16,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
 1. You will need to git clone the `tech-exercise`, `pet-battle`, `pet-battle-api` repositories to your laptop for safe-keeping after taking this course.
 
-2. Use `vscode` IDE or similar to replace all the occurrances of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
+2. Use `vscode` IDE or similar to replace all the occurrences of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
 
 3. Login to GitLab and create your ${TEAM_NAME}
 

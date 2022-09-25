@@ -22,7 +22,7 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 * <span style="color:blue;">[Vault](https://www.vaultproject.io/)</span> - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
 * <span style="color:blue;">[External Secret](https://external-secrets.io/)</span> - Kubernetes operator that integrates external secret management systems like AWS Secrets Manager, HashiCorp Vault, Google Secrets Manager, Azure Key Vault and many more. The operator reads information from external APIs and automatically injects the values into a Kubernetes Secret.
 
-## :link: Here are some usefull repository links you will require for this exercise 
+## :link: Here are some useful repository links you will require for this exercise 
 
 | Repository Name              | URL                                                                                            |
 |------------------------------|-----------------------------------------------------------------------------------------------------|

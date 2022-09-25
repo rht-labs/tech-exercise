@@ -19,7 +19,7 @@
             severity: critical
     </code></pre></div>
 
-    ![prometheus-rule](./images/review-prometheus-rule.png)
+    ![Prometheus-rule](./images/review-prometheus-rule.png)
 
     ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
 
@@ -29,11 +29,11 @@
 
 
 
-   ![prometheus-rule](./images/deployment-scale-down.png)
-   ![prometheus-rule](./images/prometheus-alert-triggered.png)
-   ![prometheus-rule](./images/alertmanager-alert-triggered.png)
+   ![Prometheus-rule](./images/deployment-scale-down.png)
+   ![Prometheus-rule](./images/prometheus-alert-triggered.png)
+   ![Prometheus-rule](./images/alertmanager-alert-triggered.png)
 
-2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.prometheusRule
+2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.`prometheusRule`:
 
     ```yaml
         rules:
@@ -81,5 +81,5 @@
 
 5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `NordmartReviewApiMongoDBDiskUsage` alert as below:
 
-    ![prometheus-rule](./images/mongodb-alert-triggered.png)
-    ![prometheus-rule](./images/mongodb-pvc.png)
+    ![Prometheus-rule](./images/mongodb-alert-triggered.png)
+    ![Prometheus-rule](./images/mongodb-pvc.png)

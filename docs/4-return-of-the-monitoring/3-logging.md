@@ -11,9 +11,9 @@
 
     By default, these logs are not stored in a database, but there are a number of reasons to store them (i.e. troubleshooting, legal obligations..)
 
-2. SAAP magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected by FluentD and added to Elastic Search. This makes indexing and querrying logs very easy. Kibana is added on top for easy visualisation of the data. Let's take a look at Kibana now. Back to forecastle
+2. SAAP magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected by FluentD and added to Elastic Search. This makes indexing and querrying logs very easy. Kibana is added on top for easy visualisation of the data. Let's take a look at Kibana now. Back to Forecastle:
 
-    ![forecastle-kibana](./images/forecastle-kibana.png)
+    ![Forecastle-kibana](./images/forecastle-kibana.png)
 
 3. Login using your standard credentials. On first login you'll need to `Allow selected permissions` for OpenShift to pull your permissions.
 

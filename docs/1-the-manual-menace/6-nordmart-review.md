@@ -12,7 +12,7 @@ Nordmart Review product is composed of three components:
 
 ### Lets get started 
 
-We will first setup the stakater-nordmart-review repository and deploy it on our cluster via Helm chart.
+We will first setup the `stakater-nordmart-review` repository and deploy it on our cluster via Helm chart.
 
 ## Stakater-Nordmart-Review
 1. Clone the `stakater-nordmart-review` repository that you imported from GitHub to your GitLab account.
@@ -26,7 +26,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 2. Open values.yaml file in the editor and change the **application.deployment.image.repository** and **application.deployment.image.tag** keys in yaml
     > **NOTE:**  We have already built an image for the application and pushed it to nexus image repository.  
 
-    repository: <NEXUS_URL>/stakater-nordmart-review
+    repository: `<NEXUS_URL>/stakater-nordmart-review`
     tag: latest
 
     <p align="center" width="100%">
@@ -37,7 +37,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 
         helm install <TENANT_NAME> deploy/ -n <TENANT_NAME>-test --dependency-update
 
-    > **NOTE**: Make sure you are logged into the OpenShift cluster via cli.
+    > **NOTE**: Make sure you are logged into the OpenShift cluster via CLI.
 
     > Thanks to **tenant operator** this **<TENANT_NAME>-test** project is already available to us in the cluster where we can deploy this application
 

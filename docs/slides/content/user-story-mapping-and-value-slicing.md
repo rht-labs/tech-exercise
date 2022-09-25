@@ -61,7 +61,7 @@ User Story Mapping
 <div class="container">
 <div class="col" data-markdown>
 
-![USMBook](images/user-story-mapping-and-value-slicing/book-user-story-map.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:80%; float:left;" } -->
+![user-story-map](images/user-story-mapping-and-value-slicing/book-user-story-map.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:80%; float:left;" } -->
 
 </div>
 <div class="col" style="padding-left: 10px" data-markdown>

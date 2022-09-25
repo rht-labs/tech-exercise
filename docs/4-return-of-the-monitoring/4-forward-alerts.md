@@ -3,7 +3,7 @@
 
 _TODO_
 
-Forward alerts to a mattermost channel
+Forward alerts to a Mattermost channel
 
 ### Log Alerts
 

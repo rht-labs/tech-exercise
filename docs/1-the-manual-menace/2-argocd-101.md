@@ -16,9 +16,9 @@ From ArgoCD's website, it is described as a tool that:
     to a specific version of manifests at a Git commit.
 </pre></div>
 
-When something is seen as not matching the required state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then resync the changes to apply whatever is in Git immediately or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
+When something is seen as not matching the required state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then re-sync the changes to apply whatever is in Git immediately or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
 
-> Stakater App Agility Plateform (SAAP) already deploys ArgoCD for you hence we can directly move on to logging in and deploying our application.
+> Stakater App Agility Platform (SAAP) already deploys ArgoCD for you hence we can directly move on to logging in and deploying our application.
 
 ## Nordmart App on ArgoCD
 
@@ -43,7 +43,7 @@ Lets install an ArgoCD Application that deploy the `nordmart-review application`
 ![ArgoCD-ui](images/2-argocd-ui.png)
 
 
-5. Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `stakater-nordmart-review` app you manually deployed previously using Helm. On ArgoCD - click `+ NEW APP`. You should see see an empty form.
+5. Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `stakater-nordmart-review` app you manually deployed previously using Helm. On ArgoCD - click `+ NEW APP`. You should see an empty form.
     > Make sure you have deleted previous Helm release deployed in Helm 101.
   
 Let's fill it out by setting the following:
@@ -87,4 +87,4 @@ Your form should look like the follow image, if so click `Create`
 
 🪄🪄 Magic! You've now got ArgoCD to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
 
-🪄🪄Thanks to SAAP, We didnt have to deploy ArgoCD ourselves.🪄🪄
+🪄🪄Thanks to SAAP, We didn't have to deploy ArgoCD ourselves.🪄🪄
