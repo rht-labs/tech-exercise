@@ -119,7 +119,7 @@ SLI Specification: Request to access Pet Battle complete successfully
 SLI Implementations:
   - measured from API metrics.
 SLO:
-  99% of successfull requests in the past 28 days served are less than 150ms
+  99% of successful requests in the past 28 days served are less than 150ms
 ```
 
 _It is important that SLOs are documented and iterated over time._
