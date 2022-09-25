@@ -117,7 +117,7 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
 
 3. Inside the `00-build` folder that you just created, add the following Chart.yaml
 
-   ```
+   ```yaml
    apiVersion: v2
    dependencies:
      - name: pipeline-charts
@@ -130,7 +130,7 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
    This Chart.yaml uses the pipeline chart as a dependency.
 
 4. Now let's fill in the values file for our chart. Create a values.yaml in the same folder and add the following values:
-   ```
+   ```yaml
    pipeline-charts:
       name: main-pr-v1
       workspaces:
@@ -222,6 +222,7 @@ If you open up the application by clicking on it, you should see a similar scree
    * select `SSL Verification`
    * Click `Add webhook` button.
 
+
    ![Nordmart-review-webhook-integration.png](images/webhook.png)
 
 9. Repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
@@ -235,9 +236,9 @@ If you open up the application by clicking on it, you should see a similar scree
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
 
-    ![pipeline-running.png](images/pipeline-running.png)
+![pipeline-running.png](images/pipeline-running.png)
 
-    ![pipeline-running.png](images/pipeline-running-2.png)
+![pipeline-running.png](images/pipeline-running-2.png)
   
     🪄OBSERVE PIPELINE RUNNING :D 
 
@@ -253,8 +254,10 @@ If you open up the application by clicking on it, you should see a similar scree
     For pushes to main branch, application is updated in `<TENANT_NAME>-dev` namespace.
 
 15. Open our `<TENANT>-stakater-Nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
-    ![tenant-dev-Nordmart-review](images/tenant-dev-nordmart-review.png)
+    
+   ![tenant-dev-Nordmart-review](images/tenant-dev-nordmart-review.png)
 
 15. Navigate to Pods under Workloads in the sidebar in `<TENANT_NAME>-dev` namespace, open the yaml
 of `review-` pod and scroll down to status key, you'll see that the **`tag`** and **`sha`** in the `build-and-push` step match.
-    ![pod-image-updated](images/pod-image-updated.png)
+    
+   ![pod-image-updated](images/pod-image-updated.png)
