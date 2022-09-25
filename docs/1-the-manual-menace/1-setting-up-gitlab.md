@@ -19,7 +19,7 @@
 2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
    For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
-   ![gitlab-group-create](images/gitlab-group-create.png)
+   ![GitLab-group-create](images/gitlab-group-create.png)
 
    GitLab will redirect you to the group's home page, once the group is created.
 
@@ -36,7 +36,7 @@ Add member to the group using the "Invite member" option.
 
 4. We are going to create a GitLab Personal Access Token (PAT). The token is a more secure and reliable method for accessing GitLab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in GitLab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
-   ![gitlab_pat](images/gitlab_pat.png)
+   ![GitLab_pat](images/gitlab_pat.png)
 
    Export your GitLab username.
 

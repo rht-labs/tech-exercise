@@ -23,7 +23,7 @@ git pull
 
 2. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
 
-    ![gitlab-ArgoCD-webhook](images/gitlab-argocd-webhook.png)
+    ![GitLab-ArgoCD-webhook](images/gitlab-argocd-webhook.png)
 
 
 ### Add Nexus to our tool box

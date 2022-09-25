@@ -15,7 +15,7 @@
 
 2. Use your `<TENANT_NAME>` as the group name, select `Public` for Visibility level > leave the rest of the defaults and click `Create group`.  
 
-   ![gitlab-group-create](images/gitlab-group-create.png)
+   ![GitLab-group-create](images/gitlab-group-create.png)
 
    GitLab will redirect you to the group's home page, once the group is created.
 
