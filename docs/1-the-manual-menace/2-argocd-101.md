@@ -79,7 +79,7 @@ Your form should look like the follow image, if so click `Create`
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-pods.png)
 
-9. Now go to `Networking` > `Routes` and click the `location` uri to visit `nordmart-review-ui` website.
+9. Now go to `Networking` > `Routes` and click the `location` URI to visit `nordmart-review-ui` website.
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-route.png)
 

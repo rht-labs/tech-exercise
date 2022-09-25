@@ -97,16 +97,16 @@ The pipeline will now become:
 
 6. Open up the console and navigate to your pipeline definition by going to Pipelines and selecting your pipeline from the list. You should see a SonarQube task there as well.
 
-   ![kube-lint-OpenShift](./images/kube-lint-openshift.png)
+   ![Kube-lint-OpenShift](./images/kube-lint-openshift.png)
 
 7. Trigger the pipeline by making a small change in the `nordmart-review` application and head over to the OpenShift console to see the pipeline run.
 
-![kube-lint-running](./images/kube-lint-running.png)
+![Kube-lint-running](./images/kube-lint-running.png)
 
 8. Let's try to fail code linting now. Open up the `nordmart-review` application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
    This should make the `kube-linting` task to fail.
 
-![kube-lint-failing](./images/kube-lint-fail.png)
+![Kube-lint-failing](./images/kube-lint-fail.png)
 
 
-![kube-lint-failing](./images/kube-lint-failing.png)
+![Kube-lint-failing](./images/kube-lint-failing.png)

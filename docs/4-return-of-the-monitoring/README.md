@@ -11,7 +11,7 @@ of issues
 
 ## 👨‍🍳 Exercise Intro
 
-In this exercise, we will use SAAP out-of-the-box monitoring and logging stack. We will collect Nordmart Review API metrics with `Prometheus` and set alerts with some sensible thresholds. Also visualize Nordmart Review API metrics with `Grafana` to have a better understanding of Nordmart Reviews's status. Moreover, we will gather logs of the apps to store in `ElasticSearch` and visualize them with the help of `Kibana`.
+In this exercise, we will use SAAP out-of-the-box monitoring and logging stack. We will collect Nordmart Review API metrics with `Prometheus` and set alerts with some sensible thresholds. Also visualize Nordmart Review API metrics with `Grafana` to have a better understanding of Nordmart Review status. Moreover, we will gather logs of the apps to store in `ElasticSearch` and visualize them with the help of `Kibana`.
 ## 🖼️ Big Picture
 
 ![big-picture-monitoring](images/big-picture-monitoring.png)

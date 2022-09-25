@@ -7,10 +7,10 @@
 Just like we practice through out the course, we keep the cluster configuration as code in a GitHub repository: https://github.com/rht-labs/enablement-framework
 
 This repository has two part:
-- Helm charts to deploy some cluster-wide toolings to run the exercises
+- Helm charts to deploy some cluster-wide tools to run the exercises
 - Red Hat CodeReady Workspaces setup
 
-## Helm Charts for Toolings
+## Helm Charts for Tools
 
 Here is the list of the tools and objects we deploy on OpenShift for TL500 setup:
 
@@ -67,7 +67,7 @@ for i in {1..24};do
   printf "\n\n User ${LAB_NUMBER} is created"
 done
 ```
-## Enablement Framework Installation
+## `Enablement Framework Installation`
 Now let's go and install the tooling!!
 
 First step is installing the base operators.
@@ -79,7 +79,7 @@ helm dep up
 helm upgrade --install tl500-base . --namespace tl500 --create-namespace
 ```
 
-When the above is successfull (which might take time up to 15 min), you can run the following to complete the installation:
+When the above is successful (which might take time up to 15 min), you can run the following to complete the installation:
 
 ```bash
 cd ../tl500-course-content
@@ -90,7 +90,7 @@ helm upgrade --install tl500-course-content . --namespace tl500 --create-namespa
 ## Verify The Installation
 Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
 
-We also have a tool called `tl500-teamster` to run exercises automatically for you to verify the installation. It is already bundled inside the installation of the toolings. Get the URL from the following command:
+We also have a tool called `tl500-teamster` to run exercises automatically for you to verify the installation. It is already bundled inside the installation of the tools. Get the URL from the following command:
 
 ```bash
 echo https://$(oc get route/tl500-base-tl500-teamsters -n tl500 --template='{{.spec.host}}')
@@ -106,7 +106,7 @@ echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.ho
 ```
 ## CodeReady Workspaces Setup
 
-During the exercises, we use different command line tools like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
+During the exercises, we use different command line tools like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLI and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
 We utilize GitHub Actions in order to build and store this image publicly. 
 

@@ -97,7 +97,7 @@ Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace
 
 9. Click `Create commit...` 
 
-   ![mto-commit1](./images/mto-commit1.png)
+   ![mto-commit](./images/mto-commit.png)
 
 10. Select `Commit to main branch` > Click `Commit` and navigate back to your project view by clicking the `W` in the top left corner.  
 
