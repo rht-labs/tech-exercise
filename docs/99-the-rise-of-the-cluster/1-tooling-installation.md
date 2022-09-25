@@ -79,7 +79,7 @@ helm dep up
 helm upgrade --install tl500-base . --namespace tl500 --create-namespace
 ```
 
-When the above is successfull (which might take time up to 15 mins), you can run the following to complete the installation:
+When the above is successfull (which might take time up to 15 min), you can run the following to complete the installation:
 
 ```bash
 cd ../tl500-course-content

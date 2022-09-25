@@ -100,7 +100,7 @@ Pet Battle Industries have a good handle on the functional design of their appli
 #### *As a class*
 3. Merge all the map areas together.
 4. For each heading, play back the top two or three sticky notes as a group.
-5. During the playback, think about whether each sticky would update the DoD / ACs on a story or form an experiment for the sprint.
+5. During the playback, think about whether each sticky would update the DoD (Definition of Done)/AC on a story or form an experiment for the sprint.
 
 
 

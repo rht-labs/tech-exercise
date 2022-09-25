@@ -148,7 +148,7 @@ leadership so that priorities and future work can be adapted accordingly
 
 
 
-#### 📗🐛 Get a copy of our Bookie Wookie 🍪🍪
+#### 📗🐛 Get a copy of our `Bookie Wookie` 🍪🍪
 
 ![bookie-wookie](images/wrap-up/book.png)<!-- {.element: class="" style="max-height: 600px!important;" } -->
 

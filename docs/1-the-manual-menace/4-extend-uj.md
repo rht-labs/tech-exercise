@@ -13,7 +13,7 @@ git pull
 
 
 ### Add ArgoCD Webhook from GitLab
-> ArgoCD has a cycle time of about 3ish mins - this is too slow for us, so we can make ArgoCD sync our changes AS SOON AS things hit the git repo.
+> ArgoCD has a cycle time of about 3 min - this is too slow for us, so we can make ArgoCD sync our changes AS SOON AS things hit the git repo.
 
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 
@@ -44,7 +44,7 @@ git pull
             name: nexus
     ```
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+    You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
     if [[ $(yq e '.applications[] | select(.name=="nexus") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then

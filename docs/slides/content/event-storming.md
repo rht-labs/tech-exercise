@@ -57,7 +57,7 @@ some **very** heated debate
 
 #### _Where did it come from?_
 ![Brandolini](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
-It was introduced in 2013 in a blog by Alberto Brandolini.
+It was introduced in 2013 in a blog by `Alberto Brandolini`.
 ![ubiquitous-language](images/event-storming/es-ubiquitous-language.png) <!-- {.element: class="" style="max-width:450px;"} -->
 
 It provides a kind of Domain Driven Design (DDD) "Lite," but with more business focus and less jargon and complexity.
