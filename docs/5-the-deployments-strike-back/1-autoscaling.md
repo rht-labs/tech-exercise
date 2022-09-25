@@ -2,7 +2,7 @@
 
 > Horizontal pod autoscaler (HPA) helps us to specify how OpenShift should automatically increase or decrease the scale of an application, based on metrics collected from the pods. After we define an HPA (based on CPU and/or memory usage metrics), the platform calculates the current usage and compare it with the desired utilization, then scales pods up or down accordingly.
 
-1. The `stakater-nordmart-review` API helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
+1. The `stakater-nordmart-review` API Helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">

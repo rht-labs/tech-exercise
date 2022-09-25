@@ -1,8 +1,8 @@
 # Setup GitOps Repository Structure :rocket: :rocket:
 ## Introduction
-This section is focused on creating a gitops structure for your tenant that will contains application Helm charts, tekton pipelines and their respective ArgoCD applications.
+This section is focused on creating a GitOps structure for your tenant that will contains application Helm charts, Tekton pipelines and their respective ArgoCD applications.
 
-We will create the following types of folders in our gitops repo you ve made in section:
+We will create the following types of folders in our GitOps repo you ve made in section:
 
 1. **For Each Application**
 This folder will contain application Helm chart which will be updated with newly built image whenever main of application repo is updated. 
@@ -13,25 +13,25 @@ The folder contains ArgoCD applications for all applications & pipelines.
 
 ## Lets get started,
 
-1. Lets clone our gitops repo that we created in the previous section 1b.
-
+1. Lets clone our GitOps repo that we created in the previous section 1b.
+```
         # git clone https://gitlab.com/<group-name>/<gitops-repo>
         git clone https://gitlab.com/workshop-exercise/nordmart-gitops
-
+```
 2. Now lets create ArgoCD apps folder that will point to our application & pipelines directory and make sure that resource manifest inside these are deployed and synced in the cluster
-
+```
         # mkdir <argocd-apps-dir-name>
         mkdir 00-argocd-apps
         touch 00-argocd-apps/.gitkeep
-
-3. Lets create a tekton pipelines folder and it will contain our manifests for pipeline for our Nordmart review and Nordmart review ui applications.
-
+```
+3. Lets create a Tekton pipelines folder and it will contain our manifests for pipeline for our Nordmart review and Nordmart review ui applications.
+```
         # mkdir <tekton-manifests-dir-name>
         mkdir 01-tekton-pipelines
         touch 01-tekton-pipelines/.gitkeep
-
+```
 4. Add folder for our apps we cloned in previous section 1b. Run following commands:
-
+```
         # cd <gitops-repo-name>
         cd nordmart-gitops
 
@@ -41,10 +41,10 @@ The folder contains ArgoCD applications for all applications & pipelines.
 
         mkdir 03-stakater-nordmart-review
         touch 03-stakater-nordmart-review/.gitkeep
+```
+5. For each folder present at root level (application folders, `tekton-pipeline`), create an ArgoCD application inside this folder using the template given below. This will create an application inside ArgoCD which will make sure the manifests in these folder are deployed and synced inside our cluster. 
 
-5. For each folder present at root level (application folders,tekton-pipeline) , create an argocd application inside this folder using the template given below. This will create an application inside argocd which will make sure the manifests in these folder are deployed and synced inside our cluster. 
-
-    Following is the argocd app template:
+    Following is the ArgoCD app template:
 
         apiVersion: argoproj.io/v1alpha1
         kind: Application
@@ -67,9 +67,9 @@ The folder contains ArgoCD applications for all applications & pipelines.
 
     > Also available at https://github.com/stakater/workshop-excercise/blob/main/deployments/argocd/gitops-argocd-app-template.yaml
 
-    Using the above template, we will create 3 new files with our two Nordmart applications and 1 tekton pipeline application.
+    Using the above template, we will create three new files with our two Nordmart applications and one Tekton pipeline application.
 
-    Create an argocd app `/00-argocd-apps/stakater-nordmart-review-ui.yaml` for our `stakater-nordmart-review-ui` application inside argocdcd-apps folder:
+    Create an ArgoCD app `/00-argocd-apps/stakater-nordmart-review-ui.yaml` for our `stakater-nordmart-review-ui` application inside `argocdcd-apps` folder:
 
         apiVersion: argoproj.io/v1alpha1
         kind: Application
@@ -90,7 +90,7 @@ The folder contains ArgoCD applications for all applications & pipelines.
             prune: true
             selfHeal: true
 
-    Create an argocd app `/00-argocd-apps/stakater-nordmart-review.yaml` for our `stakater-nordmart-review` application inside argocdcd-apps folder:
+    Create an ArgoCD app `/00-argocd-apps/stakater-nordmart-review.yaml` for our `stakater-nordmart-review` application inside `argocdcd-apps` folder:
 
         apiVersion: argoproj.io/v1alpha1
         kind: Application
@@ -111,7 +111,7 @@ The folder contains ArgoCD applications for all applications & pipelines.
             prune: true
             selfHeal: true
 
-    Create an argocd app `/00-argocd-apps/tekton-pipelines.yaml` for tekton pipelines inside argocdcd-apps folder:
+    Create an ArgoCD app `/00-argocd-apps/tekton-pipelines.yaml` for Tekton pipelines inside `argocdcd-apps` folder:
 
         apiVersion: argoproj.io/v1alpha1
         kind: Application

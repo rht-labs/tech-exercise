@@ -20,7 +20,7 @@
           type: string
           default: "zap-scan"
         - name: APP_URL
-          description: The application under test url
+          description: The application under test URL
         - name: ALLURE_HOST
           type: string
           description: "Allure Host"

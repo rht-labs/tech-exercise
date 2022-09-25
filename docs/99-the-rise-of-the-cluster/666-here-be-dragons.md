@@ -18,9 +18,9 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
 2. Use `vscode` IDE or similar to replace all the occurrances of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
 
-3. Login to `gitlab` and create your ${TEAM_NAME}
+3. Login to GitLab and create your ${TEAM_NAME}
 
-4. Let's push our code into the hosted `gitlab` instance in our new cluster:
+4. Let's push our code into the hosted GitLab instance in our new cluster:
 
     ```bash
     export GIT_SERVER=gitlab-ce.apps.cluster-b.com
@@ -53,7 +53,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     git push -u origin main
     ```
 
-5. Login to `gitlab` and make sure your newly created projects are set to **public** (they will be private by default).
+5. Login to GitLab and make sure your newly created projects are set to **public** (they will be private by default).
 
 6. Regenerate the `sealed-secrets` for this new cluster. This assumes we did _not_ migrate the secret master key to the new cluster when setting up (obviously skip this step if you did migrate it!).
 
@@ -221,7 +221,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
-10. Add the integrations and web hooks to gitlab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
+10. Add the integrations and web hooks to GitLab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
 
 11. Create new cosign signing keys.
 

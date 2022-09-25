@@ -10,7 +10,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 > In this exercise we'll deploy `nordmart-review`. We'll deploy Nordmart to dev environment. And then get the build environment ready for deploying our pipelines
 
-1. Head over to the below url.
+1. Head over to the below URL.
 
    ```
    https://github.com/stakater-lab/nordmart-apps-gitops-config.git
@@ -19,17 +19,17 @@ We deploy each of our applications using an Argo CD `application` definition. We
 This is the template that we will use to create our own apps-of-apps repository.
  
 
-2. Copy the clone url.
+2. Copy the clone URL.
 
    `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
  
 
-3. Now open gitlab and select create project. In the screen that appears, choose `Import project`.
+3. Now open GitLab and select create project. In the screen that appears, choose `Import project`.
 
    ![clone-apps-config](images/clone-apps-config.png)
 
 
-4. Select import repository from url and paste in the url that you copied in step 2. 
+4. Select import repository from URL and paste in the URL that you copied in step 2. 
 
    Note: Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
@@ -64,9 +64,9 @@ Now that we have renamed all the values and files that needed to changed, let's 
 
 3. Inside the workshop folder, you will see multiple environments.
 
-4. The environment folders contain argocd application for tenant that point to the particular tenant's environment.
+4. The environment folders contain ArgoCD application for tenant that point to the particular tenant's environment.
 
-5. In each tenant env folder, we will have argocd applciations for all the applications we want to deploy in a patricular environment. These apps will eventually point to a Helm chart. 
+5. In each tenant env folder, we will have ArgoCD applciations for all the applications we want to deploy in a patricular environment. These apps will eventually point to a Helm chart. 
 
 
 ### Deploying Nordmart
@@ -103,11 +103,11 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, commit the changes, and push to the repository.
 
-5. We are not done yet. We need to somehow connect this repository to an argocd application directly watched by the cluster. For this, head over to ``nordmart-infra-gitops-config
+5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to ``nordmart-infra-gitops-config
 
 ```https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
 ```
-We know that this repository is being watched by the cluster. So we will add an argocd application here and point it to our `nordmart-apps-gitops-config`
+We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
 
 6. Navigate to workshop > nordmart-apps-gitops-config.
  
@@ -139,7 +139,7 @@ Note: Replace all instance of <TENANT_NAME> with your tenant name in above file.
 
 ![nord-apps](images/nord-apps.png)
 
-8. Now head over to argocd and search for <TENANT_NAME>-dev.
+8. Now head over to ArgoCD and search for `<TENANT_NAME>-dev`.
 
 
    ![search-argocd](images/sorcerers-dev.png)

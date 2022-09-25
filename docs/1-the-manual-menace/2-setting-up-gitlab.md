@@ -1,13 +1,13 @@
 # Getting GitLab Ready for GitOps
-> In this section we will get gitlab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
+> In this section we will get GitLab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
 
-1. Log into GitLab with your credentials. You can find the Gitlab URL in Forecastle UI. GitLab URL:
+1. Log into GitLab with your credentials. You can find the GitLab URL in Forecastle UI. GitLab URL:
 
     ```bash
      https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/
     ```
 
-   First, we need to create a Gitlab group with name as the <team_name> or <participant_name>
+   First, we need to create a GitLab group with name as the <team_name> or <participant_name>
    For this open up the menu and select "Create group" from the "Groups" tab:
 
    ![create-group-tab](images/create-group-tab.png)
@@ -21,7 +21,7 @@
 
    ![gitlab-group-create](images/gitlab-group-create.png)
 
-   Gitlab will redirect you to the group's home page, once the group is created.
+   GitLab will redirect you to the group's home page, once the group is created.
 
     > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in `nordmart-infra-gitops-config` repo.
 
@@ -34,11 +34,11 @@
 
 Add member to the group using the "Invite member" option.
 
-4. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
+4. We are going to create a GitLab Personal Access Token (PAT). The token is a more secure and reliable method for accessing GitLab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in GitLab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
    ![gitlab_pat](images/gitlab_pat.png)
 
-   Export your Gitlab username.
+   Export your GitLab username.
 
     ```bash
     export GIT_USERNAME=<YOUR_GITLAB_USERNAME>
@@ -49,7 +49,7 @@ Add member to the group using the "Invite member" option.
     export GIT_EMAIL=<YOUR_GITLAB_EMAIL>
     ```
 
-   Export your Gitlab password.
+   Export your GitLab password.
 
     ```bash
     export GIT_PASSWORD=<YOUR_GITLAB_PERSONAL_ACCESS_TOKEN>

@@ -54,5 +54,5 @@ Now we can use ACS to help move security **LEFT** in our build pipeline. In each
 - Configure your pipeline to `check` build time policy violations 
 - Configure your pipeline to `scan` images for CVE/CVSS
 - Break/Fix your pipeline 
-- <span style="color:blue;">[tekton](7b-tekton.md)</span>
+- <span style="color:blue;">[Tekton](7b-tekton.md)</span>
 

@@ -39,7 +39,7 @@
     EOF
     ```
 
-2. Add a task to the tekton pipeline for running the load testing:
+2. Add a task to the Tekton pipeline for running the load testing:
 
     ```bash
     cd /projects/tech-exercise

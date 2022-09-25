@@ -18,13 +18,13 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 The `Nordmart Infra Gitops Config` folder contains separate folder for seprate clusters with the following content:
 
-   - `nordmart-apps-gitops-config` contains argocd-apps pointing to tenants `nordmart-apps-gitops-config` `argocd-apps` folder
+   - `nordmart-apps-gitops-config` contains `argocd-apps` pointing to tenants `nordmart-apps-gitops-config` `argocd-apps` folder
 
    - `tenant-operator-config` contains your cluster **tenants**.
 
    - `other opeartors` contains other **operators,services** common among tenants within a cluster
    
-   - `argocd-apps` contains argocd-apps for your folders eg `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
+   - `argocd-apps` contains `argocd-apps` for your folders eg `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
 
 ## Creating Tenants with GitOps
 

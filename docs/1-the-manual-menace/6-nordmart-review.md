@@ -15,7 +15,7 @@ Nordmart Review product is composed of three components:
 We will first setup the stakater-nordmart-review repository and deploy it on our cluster via Helm chart.
 
 ## Stakater-Nordmart-Review
-1. Clone the `stakater-nordmart-review` repository that you imported from github to your gitlab account.
+1. Clone the `stakater-nordmart-review` repository that you imported from github to your GitLab account.
 
         # git clone https://<GITLAB_SERVER>/<YOUR_GITLAB_GROUP>/<YOUR_REPO_NAME>
         git clone https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/workshop-exercise/stakater-nordmart-review
@@ -72,7 +72,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
     <img width="%" src="images/1-6-3-oc-route-ui.jpg">
     </p>
 
-7. Lets send a curl request to this endpoint and see the response.
+7. Lets send a `curl` request to this endpoint and see the response.
     - **Get Review**
 
             # Get Review

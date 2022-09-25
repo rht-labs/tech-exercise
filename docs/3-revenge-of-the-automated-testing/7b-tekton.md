@@ -7,7 +7,7 @@ In this section we are going to improve our already built `main-pr-v1` pipeline 
 The SAAP cluster is shipped with many useful predefined cluster tasks. 
 Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
 
-1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
   ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
 
 2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
@@ -100,7 +100,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we viewed earlier. We will create a merge request for our code repo and see what happens when its pipeline runs.
 
-2. Open the `<GROUP_NAME>/stakater-nordmart-review` repository on gitlab. Edit the Dockerfile.
+2. Open the `<GROUP_NAME>/stakater-nordmart-review` repository on GitLab. Edit the Dockerfile.
 
     ![images/build-time-violation-dockerfile.png](images/build-time-violation-dockerfile.png)
 

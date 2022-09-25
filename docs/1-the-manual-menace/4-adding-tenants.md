@@ -1,6 +1,6 @@
-# infra-gitops-config
+# `infra-gitops-config`
 
-Infra gitops config contains the configuration for tenants. The tenants are created using tenant operator.
+Infra GitOps config contains the configuration for tenants. The tenants are created using tenant operator.
 Tenant operator provides wrappers around OpenShift resources to provide a higher level of abstraction to the users. 
 With Tenant Operator admins can configure Network and Security Policies, Resource Quotas, Limit Ranges, RBAC for every tenant, which are automatically inherited by all the namespaces and users in the tenant.
 For the purpose of this workshop, we will consider each participant as a tenant.

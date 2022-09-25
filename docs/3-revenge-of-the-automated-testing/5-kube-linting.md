@@ -26,7 +26,7 @@ Follow the below-mentioned procedure to add kube linting to the already deployed
 The kube linting tasks has two steps:
 * `helm` - this step uses Helm template and Helm dry run to check the Helm chart files.
 
-![helm-step-yaml](./images/helm-step.png)
+![Helm-step-yaml](./images/helm-step.png)
 
 * kube-lint - this step uses kube-linter to analyse the kubernetes yaml files.
 

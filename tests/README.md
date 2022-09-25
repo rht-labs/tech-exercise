@@ -80,10 +80,10 @@ cd tech-exercise && cd tests
 **_DONE_**
 
 - [X] `oc login` manual for now
-- [X] gitlab create team and public repos first
-- [X] gitlab adding webhooks
-- [X] gitlab creds first time we commit / cache
-- [X] gitlab secret manual for now
+- [X] GitLab create team and public repos first
+- [X] GitLab adding webhooks
+- [X] GitLab creds first time we commit / cache
+- [X] GitLab secret manual for now
 - [X] add a tidy function to delete all ocp resources at end of tests
 - [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
 - [X] patch rundoc for upto 4 whitespace in markdown -> html
@@ -92,5 +92,5 @@ cd tech-exercise && cd tests
 # FIXME test branch
 --set source_ref=tests
 ```
-- [X] gitlab delete all other api patoken's when creating a new one
+- [X] GitLab delete all other api patoken's when creating a new one
 - [X] add a tidy function to delete all git resources at end of tests

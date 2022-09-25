@@ -100,7 +100,7 @@
 
 ### Part 2 - Testing Tasks
 
-1. In our IDE, let's create a tekton task to push our test scores to allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder.
+1. In our IDE, let's create a Tekton task to push our test scores to allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder.
 
     ```yaml
     cd /projects/tech-exercise

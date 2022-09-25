@@ -28,7 +28,7 @@
     You just generated two keys (one private key, one public key). Private key is used to sign the images and it is automatically saved as a secret in your `ci-cd` namespace alongside the password you choose. Public key is used to verify the signed images. You can share your public key for people to verify your images but private one should not be shared or at least sealed before storing publicly.
 
     <p class="tip">
-    🐌 THIS IS NOT GITOPS - The generated private key is stored in a Kubernetes secret in you <TEAM_NAME>-ci-cd project. We'll leave it as an exercise to the reader to extract and store this as a SealedSecret instead! 🐎
+    🐌 THIS IS NOT GitOps - The generated private key is stored in a Kubernetes secret in you <TEAM_NAME>-ci-cd project. We'll leave it as an exercise to the reader to extract and store this as a SealedSecret instead! 🐎
     </p>
 
 
@@ -39,4 +39,4 @@ _This step makes more sense when you use an external image registry and share im
 #### Integrate the pipeline with Tekton:
 
 - Add image signing stage to your pipeline
-- <span style="color:blue;">[tekton](8b-tekton.md)</span> 
+- <span style="color:blue;">[Tekton](8b-tekton.md)</span> 

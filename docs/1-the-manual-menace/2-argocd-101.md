@@ -77,7 +77,7 @@ Your form should look like this:
 
 ![ArgoCD-nordmart-review-detail](images/2-argocd-nordmart-review-pods.png)
 
-    Now go to Routes Under Networking tab. Visit nordmart-review-ui url.
+    Now go to Routes Under Networking tab. Visit `nordmart-review-ui` URL.
 
 ![ArgoCD-nordmart-review-detail](images/2-argocd-nordmart-review-route.png)
 

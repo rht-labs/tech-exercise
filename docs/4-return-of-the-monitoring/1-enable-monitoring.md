@@ -53,7 +53,7 @@
           app: review
     </code></pre></div>
 
-    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
+    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
     Our Helm Chart for `nordmart-review` api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
@@ -151,5 +151,5 @@
     ![grafana-less-pods](./images/grafana-less-pods.png)
 
     <p class="tip">
-    🐌 THIS IS NOT GITOPS - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
+    🐌 THIS IS NOT GitOps - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
     </p>

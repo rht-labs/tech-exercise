@@ -3,7 +3,7 @@
 > In this section we are going to improve our already built pipeline and add sonarqube scanning to it.
 
 
-1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
   ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
   
 2. Open the values file in the editor. After the `stakater-create-git-tag-v1`, reference the sonarqube task and add a runAfter field to make it run after the create-git-tag-v1 task:
@@ -83,7 +83,7 @@ The pipeline will now become:
 4. Commit the changes.
 
 
-5. Now open Argocd and check if the changes were synchronized. Click refresh if argocd has not synced the changes yet.
+5. Now open Argocd and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
 
 ![sonar](./images/sonar-argocd.png)
    
@@ -99,7 +99,7 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 ![sonar-running](./images/sonar-running.png)
 
-8. Once the task completes, head over to `sonarqube` by opening the following url.
+8. Once the task completes, head over to `sonarqube` by opening the following URL.
 
 ```
 https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
