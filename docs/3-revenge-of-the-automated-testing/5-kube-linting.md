@@ -6,7 +6,7 @@
 
 #### SAAP KubeLinter:
 
-SAAP cluster is shipped with a kube-linting task that uses KubeLinter and Helm to verify the YAML files. We will be using this task to integrate KubeLinter in our pipeline.
+SAAP cluster is shipped with a `kube-lint` task that uses KubeLinter and Helm to verify the YAML files. We will be using this task to integrate KubeLinter in our pipeline.
 
 Follow the below-mentioned procedure to add KubeLinter to the already deployed main-pr-v1 pipeline.
 
@@ -15,20 +15,20 @@ Follow the below-mentioned procedure to add KubeLinter to the already deployed m
 ![cluster-tasks](./images/cluster-tasks.png)
 
 
-2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in kube-lint in the search box. You will see a task ` stakater-kube-linting-v1`
+2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in `kube-lint` in the search box. You will see a task ` stakater-kube-linting-v1`
 
-![kube-lint-task](./images/kube-lint-task.png)
+![Kube-lint-task](./images/kube-lint-task.png)
 
 3. CLick YAML to display the task definition.
 
-   ![kube-lint-yaml](./images/kube-lint-yaml.png)
+   ![Kube-lint-yaml](./images/kube-lint-yaml.png)
 
 The KubeLinter tasks has two steps:
 * `helm` - this step uses Helm template and Helm dry run to check the Helm chart files.
 
 ![Helm-step-yaml](./images/helm-step.png)
 
-* kube-lint - this step uses kube-linter to analyse the Kubernetes yaml files.
+* `kube-lint` - this step uses `kube-lint` to analyse the Kubernetes yaml files.
 
-![kube-lint-step-yaml](./images/kube-lint-step.png)
+![Kube-lint-step-yaml](./images/kube-lint-step.png)
 

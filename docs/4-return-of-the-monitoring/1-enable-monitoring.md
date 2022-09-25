@@ -78,7 +78,7 @@
     oc get servicemonitor -n ${TENANT_NAME}-dev -o yaml
     ```
 
-   This is how the serviceMonitor will look like in OpenShift cluster
+   This is how the `serviceMonitor` will look like in OpenShift cluster:
 
    ![sevice-monitor](./images/review-service-monitor.png)
 

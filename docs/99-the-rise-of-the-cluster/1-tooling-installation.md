@@ -10,7 +10,7 @@ This repository has two part:
 - Helm charts to deploy some cluster-wide tools to run the exercises
 - Red Hat CodeReady Workspaces setup
 
-## Helm Charts for Toolings
+## Helm Charts for Tools
 
 Here is the list of the tools and objects we deploy on OpenShift for TL500 setup:
 
@@ -67,7 +67,7 @@ for i in {1..24};do
   printf "\n\n User ${LAB_NUMBER} is created"
 done
 ```
-## Enablement Framework Installation
+## `Enablement Framework Installation`
 Now let's go and install the tooling!!
 
 First step is installing the base operators.
@@ -106,7 +106,7 @@ echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.ho
 ```
 ## CodeReady Workspaces Setup
 
-During the exercises, we use different command line tools like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
+During the exercises, we use different command line tools like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLI and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
 We utilize GitHub Actions in order to build and store this image publicly. 
 

@@ -69,12 +69,12 @@ User Story Mapping
 </br>
 "User Story Mapping is about having a good old-fashioned conversation and then organizing it in the form of a map."
 
-~ Jeff Patton
+~ `Jeff Patton`
 
 </br>
 "User Story Mapping is a visualization tool that drives groups towards a shared understanding."
 
-~ Tim Beattie
+~ `Tim Beattie`
 </div>
 </div>
 
