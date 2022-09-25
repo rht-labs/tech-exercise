@@ -33,6 +33,9 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
 You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here  
 as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred. 
 
+Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace it with your new tenant name.
+
+
 1. If not already signed into your workshop user, sign into GitLab by clicking `Sign in / Register` 
 
    ![infra-access](./images/infra-access.png)
@@ -43,11 +46,10 @@ as a group you can also share a tenant. We would recommend using your company na
 
 3. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
 
-   ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
+   ![edit-fork-in-web-ide](./images/workshop-3-dots.png)
 
-4. Name your file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
-   We need to update `<TENANT_NAME>` with your    
-
+4. Name the file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
+   We need to update `<TENANT_NAME>` with name you came up with earlier.    
 
    ![mto-filename](./images/mto-filename.png)
 
@@ -58,16 +60,16 @@ as a group you can also share a tenant. We would recommend using your company na
    apiVersion: tenantoperator.stakater.com/v1beta1
    kind: Tenant
    metadata:
-      name: <INSERT_YOUR_TENANT_NAME>
+      name: <TENANT_NAME>
    spec:
       quota: workshop-medium
       owners:
          users:
-            - <INSERT_YOUR_USER_NAME>
+            - <INSERT_YOUR_USER_NAME> # This is the username you registered with at the beginning.
       argocd:
          sourceRepos:
             - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
-            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<INSERT_YOUR_TENANT_NAME>/nordmart-apps-gitops-config.git'
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
             - 'https://stakater.github.io/stakater-charts'
             - 'https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/'
       namespaces:
@@ -85,25 +87,36 @@ as a group you can also share a tenant. We would recommend using your company na
             sync: true
       specificMetadata:
          - namespaces:
-            - <INSERT_YOUR_TENANT_NAME>-build
+            - <TENANT_NAME>-build
            annotations:
                openshift.io/node-selector: node-role.kubernetes.io/pipeline=
    ```
 
-   > Replace INSERT_YOUR_TENANT_NAME and INSERT_YOUR_USER_NAME with your preferred tenant name and the username you and your team members registered with.
+   > Replace <TENANT_NAME> and <INSERT_YOUR_USER_NAME> with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
 
 
-9. Add a useful commit message indicating the changes you wish to make. In the `Target Branch` tile, input your branch name or use and select `commit changes` to create a merge request.
+9. Click `Create commit...` 
 
-   ![mto-commit](./images/mto-commit.png)
+   ![mto-commit1](./images/mto-commit1.png)
 
-10. Create a merge request by adding a suitable description and clicking `Create Merge Request`
+10. Select `Commit to main branch` > Click `Commit` and navigate back to your project view by clicking the `W` in the top left corner.  
+
+   ![mto-commit2](./images/mto-commit2.png)
+
+11. Navigate to `Merge Requests` > Click `New merge request` > Select `main` for the `source branch` > Select `Compare branches and continue`
+
+      ![mto-merge](./images/mto-merge1.png)
+
+12. you can leave everything as default and click `Create merge request`.
 
       ![mto-merge](./images/mto-merge.png)
 
+13. Once your merge request is accepted, your tenant will be created.  
 
-11. Once your merge request is accepted, your tenant will be created. ArgoCD automates the creation of tenants by syncing your desired state with the actual state of your SAAP instance making tenant creation seamless.
-You can view your created tenant and namespaces via your OpenShift Console.
+    ArgoCD is busy syncing your changes to the workshop SAAP instance and passing off the manifests to the components that automate  
+    the creation of the tenants, by syncing your recent changes to the desired state with the actual state of your SAAP instance.
+
+    After some ~3-5 mins you can view your created tenant and namespaces via your [OpenShift Console](https://console-openshift-console.apps.devtest.vxdqgl7u.kubeapp.cloud/k8s/cluster/projects).
 
       ![mto-project](./images/tenants-created.png)
 
