@@ -103,7 +103,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     team: <TEAM_NAME>
     ```
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+    You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
     yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml
@@ -132,7 +132,7 @@ All of these traits lead to one outcome - the ability to build and release quali
               operatorgroup: true
     ```
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+    You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
     sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml

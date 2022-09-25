@@ -173,7 +173,7 @@ development team's duty to maintain the software.
 * Helps the team maintain deployable code and configuration over new features
 * Provides fast feedback from end users
 * Enables pushing features out after completion
-* Enforces a best practice of **eveything as code**
+* Enforces a best practice of **everything as code**
 * Includes configuration and deployment orchestration as part of automation
 * Enables quick rollbacks and recovery from failures
 

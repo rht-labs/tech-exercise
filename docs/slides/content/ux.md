@@ -9,7 +9,7 @@ TL500 <!-- {.element: class="title-color"} -->
 
 ![UserTopics](images/ux/ux_topics.png) <!-- {.element: class="" style="border:none; box-shadow:none;"} -->
 
-![Excercise](images/ux/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
+![Exercise](images/ux/exercise.png) <!-- {.element: class="" style="border:none; box-shadow:none; height:100px; float:left; margin-left:100px;"} -->
 1. Break out into teams and research a topic [5mins]
 2. Generate a presentation with a graphic [5mins]
 3. Playback your findings [3mins]
@@ -131,10 +131,10 @@ Wants to invest in the "people that are late for work" market!
 ![LeanUX](images/ux/lean_ux.jpg) <!-- {.element: class="" style="border:none; box-shadow:none; height:300px; float:right;"} -->
 <p align="left" width="200px">Invent a product based on your value slicing exercise information.  <!-- {.element: class="" style="width:500px;"} -->
 
-* **Step 1** - User Interview [5 mins]
-* **Step 2** - Sketch - Prototype [10 mins]
-* **Step 3** - User Testing [5 mins]
-* **Step 4** - Build with Lego [15 mins]
+* **Step 1** - User Interview [5 min]
+* **Step 2** - Sketch - Prototype [10 min]
+* **Step 3** - User Testing [5 min]
+* **Step 4** - Build with Lego [15 min]
 
 <p>Quick Tips - Use an empathy map, or Ask 5 ladder technique: WHY? WHY? WHY? WHY? WHY?</p><!--{.element: class="" style="text-align:left; font-size: smaller; font-weight: 100;"} -->
 

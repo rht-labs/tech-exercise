@@ -116,7 +116,7 @@ Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace
     ArgoCD is busy syncing your changes to the workshop SAAP instance and passing off the manifests to the components that automate  
     the creation of the tenants, by syncing your recent changes to the desired state with the actual state of your SAAP instance.
 
-    After some ~3-5 mins you can view your created tenant and namespaces via your [OpenShift Console](https://console-openshift-console.apps.devtest.vxdqgl7u.kubeapp.cloud/k8s/cluster/projects).
+    After about 3-5 min you can view your created tenant and namespaces via your [OpenShift Console](https://console-openshift-console.apps.devtest.vxdqgl7u.kubeapp.cloud/k8s/cluster/projects).
 
       ![mto-project](./images/tenants-created.png)
 

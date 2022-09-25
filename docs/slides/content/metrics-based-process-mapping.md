@@ -115,7 +115,7 @@ How To ...
 
 <div class="r-stack">
   <div> 
-    <h4 class="fragment fade-out" data-fragment-index="1">Create the swimlanes</h4>
+    <h4 class="fragment fade-out" data-fragment-index="1">Create the swim lanes</h4>
     <img class="image-no-shadow image-full-width" src="images/mbpm/mbpm-swim-lanes.png">
   </div>
   <div class="fragment fade-in-then-out" data-fragment-index="1" > 
@@ -252,7 +252,7 @@ Document all activities and steps (the things)
 
 * You can map the MBPM steps with the Big Picture flow and improvements for a better visualization of work.
 * Use a spreadsheet to calculate numbers for metrics because it's much easier.
-* Iterate Iterate Iterate! Start with small teams and compare over and over again.
+* Iterate! Start with small teams and compare over and over again.
 * If psychological safety is low, postpone gathering the numbers until trust is established.
 * Tools with numbers on them can be very intimidating to people.
 * Don't be too specific about the numbers, just use them as a gauge. It's not about the seconds, it's bigger than that.
