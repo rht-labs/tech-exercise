@@ -12,13 +12,13 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
-## Nordmart Infra Gitops Config  
+## Workshop Infra GitOps Config  
 
-> Nordmart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+> Workshop Infra GitOps Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
 
-The `Nordmart Infra Gitops Config` folder contains separate folder for seprate clusters with the following content:
+The `workshop` folder contains separate folder for separate clusters with the following content:
 
-   - `nordmart-apps-gitops-config` contains `argocd-apps` pointing to tenants `nordmart-apps-gitops-config` `argocd-apps` folder
+   - `nordmart-apps-gitops-config` contains `argocd-apps` pointing to tenants `nordmart-apps-gitops-config` and `argocd-apps` folder
 
    - `tenant-operator-config` contains your cluster **tenants**.
 
@@ -28,37 +28,25 @@ The `Nordmart Infra Gitops Config` folder contains separate folder for seprate c
 
 ## Creating Tenants with GitOps
 
-The following [Repository](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) contains ArgoCD app configurations to help automate the creation of your tenant.
+We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
 
-1. Open the Nordmart Infra GitOps Config, Click on the `request access` button near project name and wait for admin to approve the access.
+You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here  
+as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred. 
+
+1. If not already signed into your workshop user, sign into GitLab by clicking `Sign in / Register` 
 
    ![infra-access](./images/infra-access.png)
 
-2. Once the access request is approved, from the repository, click on the `workshop` folder.
+2. From the repository, click on the `Edit fork in Web IDE` button.
 
-   ![mto-workshop](./images/mto-workshop.png)
+   ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
 
-3. Click on the `tenant-operator-config` folder.
+3. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
 
-   ![mto-config](./images/mto-config.png)
+   ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
 
-
-4. Click on the `tenants` folder.
-
-   ![mto-tenants](./images/mto-tenants.png)
-
-
-5. Click the `Edit in Web IDE` tile to fork the repository.
-
-   ![mto-file](./images/mto-fork.png)
-
-6. Create a new file by clicking on the `file` icon at the right corner of your IDE console.
-
-    
-   ![mto-IDE](./images/mto-IDE.png)
-
-
-7. Name your file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`   
+4. Name your file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
+   We need to update `<TENANT_NAME>` with your    
 
 
    ![mto-filename](./images/mto-filename.png)

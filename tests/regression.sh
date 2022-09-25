@@ -125,7 +125,7 @@ gitlab_personal_access_token() {
 }
 
 gitlab_setup() {
-    echo "🍓 Setting up Gitlab ..."
+    echo "🍓 Setting up GitLab ..."
     gitlab_personal_access_token
     # get or create group id
     group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
@@ -136,7 +136,7 @@ gitlab_setup() {
 }
 
 gitlab_create_argo_webhook() {
-    echo "🌶️ Create ArgoCD Gitlab Webhook ..."
+    echo "🌶️ Create ArgoCD GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
@@ -153,7 +153,7 @@ gitlab_create_argo_webhook() {
 }
 
 gitlab_create_jenkins_webhook() {
-    echo "🍅 Create Jenkins Gitlab Webhook ..."
+    echo "🍅 Create Jenkins GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
@@ -170,7 +170,7 @@ gitlab_create_jenkins_webhook() {
 }
 
 gitlab_create_tekton_webhook() {
-    echo "🍎 Create Tekton Gitlab Webhook ..."
+    echo "🍎 Create Tekton GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
     project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
