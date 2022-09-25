@@ -1,9 +1,9 @@
-# Stakater DevSecOps with GitOps Workshop
+# Stakater DevSecOps Workshop
 
 ![Jenkins-crio-ocp-star-wars-kubes](./images/jenkins-crio-ocp-star-wars-kubes.png)
 
 ## Slide Decks
-Slide decks are now published along side the tech exercise. The raw Markdown files for each of the tech exercise is in the same monorepo used by learners and facilitators. To add a new slide deck or update any existing ones, simply navigate to `docs/slides/content` and edit and existing file or create a new `.md` file. This will auto generate the slide deck once published. You can view or edit the for testing by running the docsify server. See the GitHub repo for more information
+Slide decks are published along side the tech exercise. The raw Markdown files for each of the tech exercise is in the same monorepo used by learners and facilitators. To add a new slide deck or update any existing ones, simply navigate to `docs/slides/content` and edit and existing file or create a new `.md` file. This will auto generate the slide deck once published. You can view or edit the for testing by running the docsify server. See the GitHub repo for more information.
 
 👨‍🏫 👉 [The Published Slides Live Here](https://rht-labs.com/tech-exercise/slides/) 👈 🧑‍💻
 

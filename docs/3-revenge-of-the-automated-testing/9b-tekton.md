@@ -1,44 +1,24 @@
-## Extend Tekton Pipeline with Load Testing
+# Extend Tekton Pipeline with Load Testing (WIP)
 
+<<<<<<< HEAD
 1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (i.e.if average response time ratio is higher 200ms, the pipeline fails).
+=======
+In this section we are going to improve our already built `main-pr-v1` pipeline and add stakater-load-test-v1 task into the pipeline.
+The SAAP cluster is shipped with many useful predefined cluster tasks including **stakater-load-testing-v1**.  
+>>>>>>> main
 
-    We need to create a `locustfile.py` for testing scenario and save it in the application repository.
+Lets add this task into our pipeline  **stakater-load-testing-v1**.
 
-    _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
+1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-    Below scenario calls `/api/review/{productId}` endpoint and fails the test if:
-    - 1% of calls are not 200 (OK)
-    - Total average response time to `/api/review/{productId}` endpoint is more than 200 ms
-    - The max response time in 90 percentile is higher than 800 ms
+2. Open the `values.yaml` file in the editor. 
 
-    ```bash
-    cat << EOF > /projects/nordmart-review/locustfile.py
-
-    import logging
-    from locust import HttpUser, task, events
-
-    class getReviews(HttpUser):
-        @task
-        def cat(self):
-            self.client.get("/api/review/{productId}")
-
-    @events.quitting.add_listener
-    def _(environment, **kw):
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
-        else:
-            environment.process_exit_code = 0
-
-    EOF
+    ```
+    - defaultTaskName: stakater-load-testing-v1
     ```
 
+<<<<<<< HEAD
 2. Add a task to the Tekton pipeline for running the load testing:
 
     ```bash
@@ -49,80 +29,127 @@
     metadata:
       name: load-testing
     spec:
+=======
+    The pipeline will now become:
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-yaml">apiVersion: v2
+   pipeline-charts:
+      name: stakater-main-pr-v1
+>>>>>>> main
       workspaces:
-        - name: output
-      params:
-        - name: APPLICATION_NAME
-          description: Name of the application
-          type: string
-        - name: TENANT_NAME
-          description: Name of the team that doing this exercise :)
-          type: string
-        - name: WORK_DIRECTORY
-          description: Directory to start build in (handle multiple branches)
-          type: string
-      steps:
-        - name: load-testing
-          image: quay.io/centos7/python-38-centos7:latest
-          workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-          script: |
-            #!/usr/bin/env bash
-            pip3 install locust
-            locust --headless --users 10 --spawn-rate 1 -H https://$(params.APPLICATION_NAME)-$(params.TEAM_NAME)-test.{{ .Values.cluster_domain }} --run-time 1m --loglevel INFO --only-summary 
-    EOF
-    ```
+      - name: source
+        volumeClaimTemplate:
+          accessModes: ReadWriteOnce
+          resourcesRequestsStorage: 1Gi
+      pipelines:
+        tasks:
+          - defaultTaskName: git-clone
+          - defaultTaskName: stakater-create-git-tag-v1
+          - defaultTaskName: stakater-unit-test-v1
+          - taskRef:
+              task: allure-post-report
+              kind: Task
+            name: allure-post-report
+            workspaces:
+              - name: source
+                workspace: source
+            params: 
+              - name: APPLICATION_NAME
+              - name: IMAGE
+              - name: WORK_DIRECTORY
+              - name: ALLURE_HOST
+          - defaultTaskName: stakater-sonarqube-scanner-v1
+            runAfter:
+              - allure-post-report
+          - defaultTaskName: stakater-code-linting-v1
+            runAfter:
+              - stakater-sonarqube-scanner-v1
+          - defaultTaskName: stakater-kube-linting-v1
+            runAfter:
+              - stakater-code-linting-v1
+            params:
+              - name: namespace
+          - defaultTaskName: stakater-buildah-v1
+            params:
+              - name: BUILD_IMAGE
+                value: "true"
+            name: build-and-push
+          - defaultTaskName: rox-image-check
+          - defaultTaskName: rox-image-scan
+          - defaultTaskName: stakater-helm-push-v1
+          - defaultTaskName: stakater-create-environment-v1
+          - defaultTaskName: stakater-gitlab-update-cd-repo-v1
+          <span style="color:orange">- defaultTaskName: stakater-load-testing-v1</span>          
+            params:
+              - name: gitlab_group
+          - defaultTaskName: stakater-push-main-tag-v1
+      triggertemplate:
+           params:
+             - name: repoName
+             - name: prnumberBranch
+               default: "main"
+      eventlistener:
+        triggers:               
+          - name: gitlab-mergerequest-create
+            bindings:
+              - ref: stakater-gitlab-merge-request-v1
+              - name: oldcommit
+                value: "NA"
+              - name: newcommit
+                value: $(body.object_attributes.last_commit.id)
+          - name: gitlab-mergerequest-synchronize
+            bindings:
+              - ref: stakater-gitlab-merge-request-v1
+              - name: oldcommit
+                value: $(body.object_attributes.oldrev)
+              - name: newcommit
+                value: $(body.object_attributes.last_commit.id)
+          - name: gitlab-push
+            bindings:
+              - ref: stakater-gitlab-push-v1
+              - name: oldcommit
+                value: $(body.before)
+              - name: newcommit
+                value: $(body.after)
+          - name: nordmart-ci-mustafa-gitlab-push
+            create: false
+      rbac:
+        enabled: false
+      serviceAccount:
+        name: stakater-workshop-tekton-builder
+        create: false</code></pre></div>
 
-3. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+3. Now open Argocd, Open the <TENANT_NAME>-build-tekton-pipelines application, trigger Refresh and  wait for the changes were synchronized.
 
-    ```yaml
-        # Load Testing
-        - name: load-testing
-          runAfter:
-            - verify-deployment
-          taskRef:
-            name: load-testing
-          workspaces:
-            - name: output
-              workspace: shared-workspace
-          params:
-            - name: APPLICATION_NAME
-              value: "$(params.APPLICATION_NAME)"
-            - name: TEAM_NAME
-              value: "$(params.TEAM_NAME)"
-            - name: WORK_DIRECTORY
-              value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-    ```
+    ![sorcerers-build-tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
 
-4. Remember -  if it's not in git, it's not real.
 
-    ```bash
-    cd /projects/tech-exercise/tekton
-    git add .
-    git commit -m  "🌀 ADD - load testing task 🌀"
-    git push
-    ```
+4. If the sync is green, you're good to go. You have successfully added stakater-load-testing-v1 to your pipeline!
+    ![sorcerers-build-tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
+🪄🪄 Now lets observe the **stakater-nordmart-review** pipeline running with the **stakater-load-testing-v1** task.🪄🪄
 
+<<<<<<< HEAD
 5. Now let's trigger the `nordmart-review` pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
+=======
+>>>>>>> main
 
-    ```bash
-    cd /projects/nordmart-review
-    git add locustfile.py
-    git commit -m  "🌀 ADD - locustfile for load testing 🌀"
-    git push
-    ```
+5. Lets trigger our pipeline again by making a commit onto README.md in the main branch.
 
+<<<<<<< HEAD
     🪄 Observe the **`nordmart-review`** pipeline running with the **`load-testing`** task.
 
     If the pipeline fails due to the thresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+=======
+    ![pipeline-with-load-testing](./images/pipeline-with-load-testing.png)
 
-    ```py
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
-    ```
+>>>>>>> main
+
+6. Navigate to TaskRuns and open the task `stakater-load-testing-v1` logs. We ll notice that our pipeline fails because our locustfile.py was configured to fail if average response time < 30ms.
+
+7. Open the stakater-nordmart-review repository and edit the `locustfile.py` and change the average response time  to < 100ms.
+    ![pipeline-with-load-testing](./images/pipeline-with-load-testing.png)
+
+8. Navigate to TaskRuns and open the task `stakater-load-testing-v1` logs. You ll see that the pipeline has succeeded after increasing the average response time in failure scenario.
+
+    ![pipeline-with-load-testing-logs](./images/pipeline-with-load-testing-logs.png)
+

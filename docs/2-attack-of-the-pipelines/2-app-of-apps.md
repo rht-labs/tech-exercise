@@ -95,7 +95,7 @@ stakater-nordmart-review:
   application:
     deployment:
       image:
-        repository: nexus-docker-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/sorcerers/stakater-nordmart-review
+        repository: nexus-docker-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater-nordmart-review
         tag: 1.0.35
 
 ```
