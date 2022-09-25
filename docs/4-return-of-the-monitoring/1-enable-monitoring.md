@@ -55,7 +55,7 @@
 
     Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
-    Our Helm Chart for `nordmart-review` api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
+    Our Helm Chart for `nordmart-review` API Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
     ```yaml
         ## Service Monitor
@@ -78,7 +78,7 @@
     oc get servicemonitor -n ${TENANT_NAME}-dev -o yaml
     ```
 
-   This is how the serviceMonitor will look like in openshift cluster
+   This is how the serviceMonitor will look like in OpenShift cluster
 
    ![sevice-monitor](./images/review-service-monitor.png)
 

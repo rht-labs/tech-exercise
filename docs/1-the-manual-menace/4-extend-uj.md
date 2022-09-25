@@ -1,4 +1,4 @@
-## Extend UJ with a another tool, eg Nexus 
+## Extend UJ with a another tool, e.g. Nexus 
 Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to manage and store our artifacts. Nexus is here to help! We can use Nexus Helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
 <p class="warn">

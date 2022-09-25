@@ -80,10 +80,16 @@
     ```
     https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
+<<<<<<< HEAD
 
 3. Change the `Project name` to `stakater-nordmart-review-ui` > select your GitLab group to complete the `Project URL` and check the `Visibility Level` is `Public` then click `Create project`
 
    > Make sure you mark the repository as public and choose the group you previously created as the group name so we can easily find your work and help with any debugging. 
+=======
+   > Make sure you mark the repository as public and choose the group you previously created as the group name.
+   
+   > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.
+>>>>>>> 93b0d07f47428134e4b296a6b07ac9c2a18e5498
     
    > Make sure that Project Name is lower case and spaces are replaced with '-' so our automation doesn't break ;).  
 

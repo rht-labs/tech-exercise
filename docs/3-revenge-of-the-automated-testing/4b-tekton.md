@@ -2,9 +2,9 @@
 
 ## Integrate the pipeline with Tekton:
 1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
-  ![images/pipelines-Nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+  ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
   
-2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a runAfter field to make it run after the stakater-sonarqube-scanner-v1 task:
+2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a `runAfter` field to make it run after the `stakater-sonarqube-scanner-v1` task:
 
 ```
 - defaultTaskName: stakater-code-linting-v1
@@ -83,13 +83,13 @@ The pipeline will now become:
 ````
 4. Commit the changes.
 
-5. Now open Argocd and check if the changes were synchronized. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline
+5. Now open ArgoCD and check if the changes were synchronized. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline
 
 ![sonar](./images/sonar-argocd.png)
 
-6. Open up the console and navigate to your pipeline definition by going to Pipelines and selecting your pipeline from the list. You should see a sonarqube task there as well.
+6. Open up the console and navigate to your pipeline definition by going to Pipelines and selecting your pipeline from the list. You should see a SonarQube task there as well.
 
-   ![code-lint-openshift](./images/code-lint-openshift.png)
+   ![code-lint-OpenShift](./images/code-lint-openshift.png)
 
 7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Add an extra line at the end of pom.xml. This should not appear as a code linting issue. Commit the change and head over to the console and check the running pipeline. You should be able to see code-lint task running.
 

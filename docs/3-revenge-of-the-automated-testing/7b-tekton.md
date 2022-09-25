@@ -1,20 +1,20 @@
-# Extend Tekton Pipeline with Stackrox (WIP)
+# Extend Tekton Pipeline with StackRox (WIP)
 
-## Integrate Rox Image Scan into pipeline
-> With **StackRox**, you can analyze images for vulnerabilities. Scanner analyzes all image layers to check for known vulnerabilities by comparing them with the Common Vulnerabilities and Exposures (CVEs) list using **rox-image-scan**. You can also Check Build/Deploy Time Violations using **rox-image-check**
+## Integrate `Rox Image Scan` into pipeline
+> With **StackRox**, you can analyze images for vulnerabilities. Scanner analyzes all image layers to check for known vulnerabilities by comparing them with the Common Vulnerabilities and Exposures (CVEs) list using **`rox-image-scan`**. You can also Check Build/Deploy Time Violations using **`rox-image-check`**.
 
-In this section we are going to improve our already built `main-pr-v1` pipeline and add Rox Image Scan task into the pipeline.  
+In this section we are going to improve our already built `main-pr-v1` pipeline and add `Rox Image Scan` task into the pipeline.  
 The SAAP cluster is shipped with many useful predefined cluster tasks. 
-Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
+Lets add two tasks into our pipeline **`rox-image-scan`** and **`rox-image-check`**. 
 
-1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
-  ![images/pipelines-Nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+1. Open the chart we added to `00-tekton-pipelines` folder in section 2.
+  ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
+2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the `rox-image-scan` task. 
 
     ```
-    - taskName: rox-image-check
-    - taskName: rox-image-scan
+    - defaultTaskName: rox-image-check
+    - defaultTaskName: rox-image-scan
     ```
 
     The pipeline will now become:
@@ -29,25 +29,25 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
           resourcesRequestsStorage: 1Gi
       pipelines:
         tasks:
-          - taskName: git-clone
-          - taskName: stakater-create-git-tag-v1
+          - defaultTaskName: git-clone
+          - defaultTaskName: stakater-create-git-tag-v1
             params:
               - name: oldcommit
               - name: action
-          - taskName: stakater-sonarqube-scanner-v1
-          - taskName: stakater-buildah-v1
+          - defaultTaskName: stakater-sonarqube-scanner-v1
+          - defaultTaskName: stakater-buildah-v1
             name: build-and-push
                 params:
                 - name: BUILD_IMAGE
                   value: "true"
           <span style="color:orange"># Add rox-image-scan after build-and-push
-          - taskName: rox-image-check
-          - taskName: rox-image-scan
+          - defaultTaskName: rox-image-check
+          - defaultTaskName: rox-image-scan
           # End</span>
-          - taskName: stakater-comment-on-github-pr-v1
-          - taskName: stakater-helm-push-v1
-          - taskName: stakater-update-cd-repo-v3
-          - taskName: stakater-push-main-tag-v1
+          - defaultTaskName: stakater-comment-on-github-pr-v1
+          - defaultTaskName: stakater-helm-push-v1
+          - defaultTaskName: stakater-update-cd-repo-v3
+          - defaultTaskName: stakater-push-main-tag-v1
         eventlistener:
             serviceAccountName: stakater-tekton-builder
             triggers:
@@ -81,10 +81,10 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
           name: stakater-tekton-builder
           create: false
     </code></pre></div>
-3. Now open Argocd and check if the changes were synchronized.
+3. Now open ArgoCD and check if the changes were synchronized.
 
-    ![sorcerers-build-tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
-    ![sorcerers-build-tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
+    ![sorcerers-build-Tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
+    ![sorcerers-build-Tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
 
 
 4. If the sync is green, you're good to go. You have successfully added `rox-image-scan` to your pipeline!

@@ -17,7 +17,7 @@
   * [🏃🏻‍♀️ The Pipelines](2-attack-of-the-pipelines/3-the-pipelines.md)
     * [🐈 Tekton](2-attack-of-the-pipelines/3b-tekton.md)
 * [3. Revenge of the Automated Testing](3-revenge-of-the-automated-testing/README.md)
-  * [✈️ Sonarqube](3-revenge-of-the-automated-testing/1-sonar-scanning.md)
+  * [✈️ SonarQube](3-revenge-of-the-automated-testing/1-sonar-scanning.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/1b-tekton.md)
   * [🧪 Testing](3-revenge-of-the-automated-testing/todo-automated-testing.md)
     * [🐈 Tekton](3-revenge-of-the-automated-testing/todo-2b-tekton.md)
@@ -43,4 +43,3 @@
   * [📈 Autoscaling](5-the-deployments-strike-back/1-autoscaling.md)
   * [🔵🟩 Blue/Green Deployments](5-the-deployments-strike-back/2-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
-  * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)

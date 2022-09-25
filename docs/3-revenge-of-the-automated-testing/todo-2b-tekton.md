@@ -1,6 +1,6 @@
 ## Extend Tekton Pipeline with Automated Testing
 
-> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
+> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using GitOps and then add the tests to our pipeline
 
 ### Part 1 - Allure 
 
@@ -18,7 +18,7 @@
     EOF
     ```
 
-2. Use `kubeseal` commandline to seal the secret definition.
+2. Use `kubeseal` command line to seal the secret definition.
 
     ```bash
     kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
@@ -160,7 +160,7 @@
     EOF
     ```
 
-2. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and add the `save-test-results` step to our pipeline.
+2. Open the Maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and add the `save-test-results` step to our pipeline.
 
     ```yaml
         # Save Test Results
@@ -179,7 +179,7 @@
               workspace: shared-workspace
     ```
 
-3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
+3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / SonarQube / Tekton](1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the Maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
 
     Change the build options from this:
     <div class="highlight" style="background: #f7f7f7">
@@ -231,6 +231,6 @@
 
     ![images/allure-behaviours.png](images/allure-behaviours.png)
 
-    <p class="warn"><b>TIP</b> You can also find the available projects and test reports from Allure swagger api by navigating to <span style="color:blue;"><a href="https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/">https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/</a></span></p>
+    <p class="warn"><b>TIP</b> You can also find the available projects and test reports from Allure swagger API by navigating to <span style="color:blue;"><a href="https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/">https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/</a></span></p>
 
     ![images/allure-api.png](images/allure-api.png)

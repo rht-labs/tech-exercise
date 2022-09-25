@@ -209,7 +209,7 @@ _By separating CI from CD, we will first deploy Pet Battle and its supporting in
 
 _With this in place, we will create two pipelines, one for the front end and one for the API._
 
-_The front end (AngularJS) will use Jenkins and the back end (Quarkus with MongoDB) will use Tekton._
+_The front end (AngularJS) will use Jenkins and the back end (`Quarkus` with MongoDB) will use Tekton._
 
 
 

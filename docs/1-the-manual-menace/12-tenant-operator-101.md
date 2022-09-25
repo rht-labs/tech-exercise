@@ -24,7 +24,7 @@ The `workshop` folder contains separate folder for separate clusters with the fo
 
    - `other operators` contains other **operators,services** common among tenants within a cluster
    
-   - `argocd-apps` contains `argocd-apps` for your folders eg `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
+   - `argocd-apps` contains `argocd-apps` for your folders e.g. `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
 
 ## Creating Tenants with GitOps
 

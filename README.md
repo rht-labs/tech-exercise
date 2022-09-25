@@ -26,7 +26,7 @@ whereby
 * `docs` - contains the student and teacher guides for the technical exercises as well as the classroom
 activities. The `slides/content` are written in markdown and automatically published to the site when pushed to main.
 * `ubiquitous-journey` -  contains a lightweight fork of the rht-labs ci/cd stack
-* `deployments` - contains the Helm chart for openshift deployment
+* `deployments` - contains the Helm chart for OpenShift deployment
 
 ### 🏃‍♀️ Running the docs & slides site locally
 

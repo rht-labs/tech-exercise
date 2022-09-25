@@ -8,7 +8,7 @@
 
 ### Continuous Testing
 
-Quarkus <span style="color:blue;">[Continuous Testing](https://quarkus.io/guides/continuous-testing)</span>
+`Quarkus` <span style="color:blue;">[Continuous Testing](https://quarkus.io/guides/continuous-testing)</span>
 
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-yaml">
@@ -75,7 +75,7 @@ Allure new test added, test trend shown.
 - [ ] Document the steps
 - [ ] Allure Task should this be in repo already?
 - [ ] Allure Annotations, Add a new test, Historical test results
-- [ ] DevUI: `mvn quarkus:dev` mode - would need mongodb running in image
+- [ ] DevUI: `mvn quarkus:dev` mode - would need MongoDB running in image
 
 ![images/quarkus-dev-mode.png](images/quarkus-dev-mode.png)
 
@@ -145,7 +145,7 @@ git push
 - [ ] Setup a code quality gate e.g. chart <span style="color:blue;">[here](https://github.com/eformat/sonarqube-jobs)</span>
 
 ```yaml
-  # Sonarqube setup
+  # SonarQube setup
   - name: sonarqube-setup
     enabled: true
     source: https://github.com/eformat/sonarqube-jobs
@@ -163,13 +163,13 @@ git push
 ### ACS/StackRox Command Line fun
 
 > We are going to make use of ACS to move security checks into our pipeline. We will look at:
-> - **roxctl** - using the ACS/StackRox CLI
-> - **kube-linter** - adding the ACS/StackRox kube linter Task to check deployment configurations
-> - **scan,check** - container image scanning and policy checking as part of our pipeline using ACS/StackRox
+> - **`roxctl`** - using the ACS/StackRox CLI
+> - **`kube-linter`** - adding the ACS/StackRox `kube-linter` Task to check deployment configurations
+> - **`scan,check`** - container image scanning and policy checking as part of our pipeline using ACS/StackRox
 
-## roxctl command line
+## `roxctl` command line
 
-Let's learn how to use the **roxctl** command line.
+Let's learn how to use the **`roxctl`** command line.
 
 1. Export these environment variables, your facilitator will give you these from the group exercise.
 
@@ -245,9 +245,9 @@ Let's learn how to use the **roxctl** command line.
     roxctl image scan --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image quay.io/petbattle/pet-battle:latest -o table
     ```
 
-    We can run the **scan** command with a format of *json, csv, and table. default "json"*.
+    We can run the **`scan`** command with a format of *json, csv, and table. default "json"*.
 
-4. We can try this on the **pet-battle-api** image we built using the image reference (this is printed out in the **bake** stage of our pipeline)
+4. We can try this on the **`pet-battle-api`** image we built using the image reference (this is printed out in the **`bake`** stage of our pipeline)
 
     ```bash
     roxctl image check --insecure-skip-tls-verify -e $ROX_ENDPOINT:443 --image \
