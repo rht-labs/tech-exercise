@@ -83,7 +83,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```bash#test
     cd /projects/tech-exercise
     git add .
-    git commit -am "🐙 ADD - argocd values file 🐙"
+    git commit -am "🐙 ADD - ArgoCD values file 🐙"
     git push -u origin --all
     ```
 

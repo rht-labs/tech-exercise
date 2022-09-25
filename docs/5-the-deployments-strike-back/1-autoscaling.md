@@ -77,10 +77,10 @@
     * -n: Number of requests to run (10,000)
     * -t: Timeout for each request in seconds (30)
 
-6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
+6. While this is running, we should see in OpenShift land the autoscaler is kicking in and spinning up additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
 
     ![HPA_hey_command](./images/hpa-hey-command.png)
-    ![Pod_Scaled_Up](./images/pod-scaled-up.png)
+    ![pod-scaled-up](./images/pod-scaled-up.png)
     ![HPA_Action1](./images/hpa_action1.png)
     ![HPA_Action2](./images/hpa_action2.png)
 
