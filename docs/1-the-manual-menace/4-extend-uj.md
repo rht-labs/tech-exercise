@@ -27,7 +27,7 @@ git pull
 
 
 ### Add Nexus to our tool box
-> In this exercise we'll add Sonatype's Nexus repository manager to our tooling - this tool will be used to host our application binaries and Helm charts!
+> In this exercise we'll add Sonatype Nexus repository manager to our tooling - this tool will be used to host our application binaries and Helm charts!
 
 1. Update your `ubiquitous-journey/values-tooling.yaml` to include Nexus with some sensible defaults. In this example we're just pointing our ArgoCD config to a Helm chart. Add the following into the file under the `# Nexus` placeholder
 

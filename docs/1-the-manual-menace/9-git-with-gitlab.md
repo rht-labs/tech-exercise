@@ -30,7 +30,7 @@
 
    ![add-member](images/add-member.png)
 
-   Click `Invite members` and add your colleagues usernames or emails that they logged into gitlab with.
+   Click `Invite members` and add your colleagues usernames or emails that they logged into GitLab with.
 
 ## Importing Nordmart Review
 
