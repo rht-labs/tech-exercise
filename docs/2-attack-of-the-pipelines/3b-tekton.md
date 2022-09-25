@@ -117,7 +117,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
 
 3. Inside the `00-build` folder that you just created, add the following Chart.yaml
 
-      ```
+   ```
    apiVersion: v2
    dependencies:
      - name: pipeline-charts
@@ -126,13 +126,11 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
    description: Helm chart for Tekton Pipelines
    name: main-pr-v1
    version: 0.0.1
-
-      ```
+   ```
    This Chart.yaml uses the pipeline chart as a dependency.
 
 4. Now let's fill in the values file for our chart. Create a values.yaml in the same folder and add the following values:
    ```
-   apiVersion: v2
    pipeline-charts:
       name: main-pr-v1
       workspaces:
@@ -194,6 +192,7 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
       serviceAccount:
         name: stakater-workshop-tekton-builder
         create: false
+   ```
 
 Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and helm chart, and finally updates the version of application.
 
