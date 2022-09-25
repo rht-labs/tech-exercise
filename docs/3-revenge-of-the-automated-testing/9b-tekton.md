@@ -111,7 +111,7 @@
     git push
     ```
 
-    🪄 Observe the **nordmart-review** pipeline running with the **load-testing** task.
+    🪄 Observe the **`nordmart-review`** pipeline running with the **`load-testing`** task.
 
     If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
 

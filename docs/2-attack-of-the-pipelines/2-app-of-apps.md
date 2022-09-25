@@ -109,9 +109,9 @@ stakater-nordmart-review:
 ```
 We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
 
-6. Navigate to workshop > nordmart-apps-gitops-config.
+6. Navigate to workshop > `nordmart-apps-gitops-config`.
  
-7. Add a file here named <TENANT_NAME>-nordmart-apps-gitops-config.yaml with the following content:
+7. Add a file here named `<TENANT_NAME>-nordmart-apps-gitops-config.yaml` with the following content:
 
 ```
 apiVersion: argoproj.io/v1alpha1

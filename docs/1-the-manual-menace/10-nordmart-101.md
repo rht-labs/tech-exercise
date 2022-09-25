@@ -4,7 +4,7 @@
 
 This is review sub module of Stakater Nordmart fictious online e-commerce store.
 
-![nordmart-architecture](./images/nordmart-architecture.png)
+![Nordmart-architecture](./images/nordmart-architecture.png)
 
 It is composed of three components
 

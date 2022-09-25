@@ -21,7 +21,7 @@ Let's deploy a simple application using Helm.
     ```bash#test
     helm install my-nordmart-review stakater/nordmart-review --namespace ${TENANT_NAME}-test
     ```
-    ![nordmart-review-installed](./images/1a-7-nordmart-review-installed.png)
+    ![Nordmart-review-installed](./images/1a-7-nordmart-review-installed.png)
 
     ##### TODO: CHANGE SCREENSHOTS
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
@@ -31,7 +31,7 @@ Let's deploy a simple application using Helm.
     ```
     Visit this link to view to following page :
 
-    ![nordmart-review-ui](./images/1a-1-nordmart-review-ui.png)
+    ![Nordmart-review-ui](./images/1a-1-nordmart-review-ui.png)
 
 4. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
 
@@ -39,21 +39,21 @@ Let's deploy a simple application using Helm.
     oc get pods -n ${TENANT_NAME}-test
     ```
 
-    ![nordmart-review-ui-pods](./images/1a-2-nordmart-review-ui-pods.png)
+    ![Nordmart-review-ui-pods](./images/1a-2-nordmart-review-ui-pods.png)
 
     By default, we only have one replica of our application. Let's use Helm to set this to 5.
 
     ```bash#test
     helm upgrade my-nordmart-review stakater/nordmart-review --set nordmartReviewUi.deployment.replicas=5 --namespace ${TENANT_NAME}-test
     ```
-    ![nordmart-review-ui-updated-replica](./images/1a-4-nordmart-review-ui-updated-replica-5.png)  
+    ![Nordmart-review-ui-updated-replica](./images/1a-4-nordmart-review-ui-updated-replica-5.png)  
 
     Verify the deployment has scaled up to 5 replicas.
 
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test
     ```
-    ![nordmart-review-ui-pods-5](./images/1a-3-nordmart-review-ui-pods-5.png)
+    ![Nordmart-review-ui-pods-5](./images/1a-3-nordmart-review-ui-pods-5.png)
 5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run `helm uninstall` to remove our release of the chart.
 
     ```bash#test
@@ -65,7 +65,7 @@ Let's deploy a simple application using Helm.
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test | grep nordmart
     ```
-    ![nordmart-review-removed](images/1a-6-nordmart-review-removed.png)
+    ![Nordmart-review-removed](images/1a-6-nordmart-review-removed.png)
 
 6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/stakater/charts/blob/main/stakater/nordmart-review)</span>, but the basic structure is as follows:
 

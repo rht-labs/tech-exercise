@@ -8,7 +8,7 @@ The SAAP cluster is shipped with many useful predefined cluster tasks.
 Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
 
 1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
-  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+  ![images/pipelines-Nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
 
 2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
 
@@ -87,10 +87,10 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
     ![sorcerers-build-tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
 
 
-4. If the sync is green, you're good to go. You have successfully added rox-image-scan to your pipeline!
+4. If the sync is green, you're good to go. You have successfully added `rox-image-scan` to your pipeline!
     TODO: See Pipeline
 
-🪄🪄 Observe the **stakater-nordmart-review** pipeline running with the **rox-image-scan** & **rox-image-check** task.🪄🪄
+🪄🪄 Observe the **`stakater-nordmart-review`** pipeline running with the **`rox-image-scan`** & **`rox-image-check`** task.🪄🪄
 
 🩴🔑🐉
 
@@ -112,7 +112,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
     Commit this change with `Start with Merge Request` option checked.
     ![images/build-time-violation-dockerfile-merge-req.png](images/build-time-violation-dockerfile-merge-req.png)
 
-4. Navigate to the UI, Goto Pipelines under Piplines section in sidebar and open the pipeline for your merge request.
+4. Navigate to the UI, go to Pipelines under Piplines section in sidebar and open the pipeline for your merge request.
 
 4. This should now fail on the **image-scan/rox-image-check** task.  
 
@@ -125,4 +125,4 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 6. Remove the `EXPOSE 22` from the `Dockerfile` in the same merge request branch and the pipeline will succeed.
 
-🪄🪄 Observe the **stakater-nordmart-review** pipeline running successfully again 🪄🪄
+🪄🪄 Observe the **`stakater-nordmart-review`** pipeline running successfully again 🪄🪄

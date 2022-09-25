@@ -81,7 +81,7 @@
     
    > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.  
 
-   ![import-nordmart-review](images/import-nordmart-review.png)
+   ![import-Nordmart-review](images/import-nordmart-review.png)
 
 3. Once you have imported the repository, open the .tronador file present at the base and replace the tenant field with your tenant.
 
@@ -103,6 +103,6 @@
    
    > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
     
-    ![import-nordmart-review](images/import-nordmart-review-ui.png)
+    ![import-Nordmart-review](images/import-nordmart-review-ui.png)
 
 3. Once you have imported the repository, open the .tronador file present at the base and replace the tenant field with your tenant_ 

@@ -201,11 +201,11 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to ArgoCD and search for Application `<TENANT_NAME>-build-tekton-pipelines`
    
 
-  ![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
+  ![sorcerers-build-Tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
 
 If you open up the application by clicking on it, you should see a similar screen
 
-![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines2.png)
+![sorcerers-build-Tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines2.png)
 
 6. Let's see our pipeline definition in the SAAP console now. Select <TENANT_NAME>-build name in the console. Now in the pipelines section, click pipelines. You should be able to see the pipeline that you just creted using the chart.
 
@@ -223,7 +223,7 @@ If you open up the application by clicking on it, you should see a similar scree
    * select `SSL Verification`
    * Click `Add webhook` button.
 
-   ![nordmart-review-webhook-integration.png](images/webhook.png)
+   ![Nordmart-review-webhook-integration.png](images/webhook.png)
 
 9. Repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
 
@@ -242,12 +242,12 @@ If you open up the application by clicking on it, you should see a similar scree
   
     🪄OBSERVE PIPELINE RUNNING :D 
 
-13. Open the logs tab and click build-and-push. Remember the **tag** and **image_sha** for our image that we will later match with pod spec.. 
+13. Open the logs tab and click build-and-push. Remember the **`tag`** and **`image_sha`** for our image that we will later match with pod spec.. 
 
     ![build-and-push-details](images/build-and-push-details.png)
 
 
-14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new Helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
+14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new Helm chart version that contains the latest application image. Go to your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
 
     ![updated-Nordmart-apps-GitOps-config](images/updated-nordmart-apps-gitops-config.png)
 

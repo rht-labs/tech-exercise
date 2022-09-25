@@ -82,7 +82,7 @@ Add member to the group using the "Invite member" option.
     
    > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.  
 
-      ![import-nordmart-review](images/review-1.png)
+      ![import-Nordmart-review](images/review-1.png)
 
 
 ## Importing Nordmart Review UI 
@@ -94,7 +94,7 @@ Add member to the group using the "Invite member" option.
         https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
 
-   ![import-nordmart-review](images/review-2.png)
+   ![import-Nordmart-review](images/review-2.png)
 
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
    

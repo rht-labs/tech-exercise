@@ -33,7 +33,7 @@ Next step is the create an external secret CR that will connect to Vault and cre
 1. Login to the openshift console. Open the API Explorer Under Home on left sidebar and Search External Secret, Open the details `ExternalSecret`.
   ![external-secret-console](./images/external-secret-console.png)
 
-2. Goto the `Instances` tab and Select `Create ExternalSecret`
+2. Go to the `Instances` tab and Select `Create ExternalSecret`
 
     ![external-secret-info](./images/external-secret-info.png)
 
