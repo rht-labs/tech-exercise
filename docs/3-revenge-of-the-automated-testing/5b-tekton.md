@@ -16,8 +16,7 @@ Let's enable the **`kube-linter`** task in our pipeline.
 
 ```
 The pipeline will now become:
-   ````
-   apiVersion: v2
+   ````yaml
    pipeline-charts:
      name: stakater-main-pr-v1
      workspaces:
@@ -32,21 +31,23 @@ The pipeline will now become:
          - defaultTaskName: stakater-sonarqube-scanner-v1
            runAfter:
              - stakater-create-git-tag-v1
-         - defaultTaskName: stakater-code-lint-v1
-           runAfter:
-            - stakater-sonarqube-scanner-v1
+         - defaultTaskName: stakater-unit-test-v1
+           runAfter: 
+             - stakater-sonarqube-scanner-v1
+         - defaultTaskName: stakater-gitlab-save-allure-report-v1
+         - defaultTaskName: stakater-code-linting-v1
          - defaultTaskName: stakater-kube-linting-v1
            runAfter:
             - stakater-code-linting-v1
-            params:
-              - name: namespace
+           params:
+             - name: namespace
          - defaultTaskName: stakater-buildah-v1
            name: build-and-push
            runAfter:
             - stakater-build-image-flag-v1
-              params:
-               - name: BUILD_IMAGE
-                 value: "true"
+           params:
+             - name: BUILD_IMAGE
+               value: "true"
          - defaultTaskName: stakater-helm-push-v1
          - defaultTaskName: stakater-create-environment-v1
          - defaultTaskName: stakater-gitlab-update-cd-repo-v1

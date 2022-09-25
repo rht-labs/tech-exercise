@@ -4,17 +4,14 @@
 1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
   
-2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the code-linting task and add a `runAfter` field to make it run after the `stakater-sonarqube-scanner-v1` task:
+2. Open the values file in the editor. After the `stakater-gitlab-save-allure-report-v1`, reference the code-linting task.
 
 ```
 - defaultTaskName: stakater-code-linting-v1
-  runAfter:
-    - stakater-sonarqube-scanner-v1
 
 ```
 The pipeline will now become:
-   ````
-   apiVersion: v2
+   ````yaml
    pipeline-charts:
      name: stakater-main-pr-v1
      workspaces:
@@ -29,14 +26,16 @@ The pipeline will now become:
          - defaultTaskName: stakater-sonarqube-scanner-v1
            runAfter:
              - stakater-create-git-tag-v1
+         - defaultTaskName: stakater-unit-test-v1
+           runAfter: 
+             - stakater-sonarqube-scanner-v1
+         - defaultTaskName: stakater-gitlab-save-allure-report-v1
          - defaultTaskName: stakater-code-linting-v1
-           runAfter:
-            - stakater-sonarqube-scanner-v1
          - defaultTaskName: stakater-buildah-v1
            name: build-and-push
-              params:
-               - name: BUILD_IMAGE
-                 value: "true"
+           params:
+             - name: BUILD_IMAGE
+               value: "true"
          - defaultTaskName: stakater-helm-push-v1
          - defaultTaskName: stakater-create-environment-v1
          - defaultTaskName: stakater-gitlab-update-cd-repo-v1
@@ -78,7 +77,7 @@ The pipeline will now become:
        enabled: false
      serviceAccount:
        name: stakater-workshop-tekton-builder
-        create: false
+       create: false
 
 ````
 4. Commit the changes.

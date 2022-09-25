@@ -13,94 +13,81 @@ Lets add this task into our pipeline **`stakater-load-testing-v1`**.
     ```
     - defaultTaskName: stakater-load-testing-v1
     ```
-
-    The pipeline will now become:
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">apiVersion: v2
+The pipeline will now become:
+   ```yaml
    pipeline-charts:
-      name: stakater-main-pr-v1
-      workspaces:
-      - name: source
-        volumeClaimTemplate:
-          accessModes: ReadWriteOnce
-          resourcesRequestsStorage: 1Gi
-      pipelines:
-        tasks:
-          - defaultTaskName: git-clone
-          - defaultTaskName: stakater-create-git-tag-v1
-          - defaultTaskName: stakater-unit-test-v1
-          - taskRef:
-              task: allure-post-report
-              kind: Task
-            name: allure-post-report
-            workspaces:
-              - name: source
-                workspace: source
-            params: 
-              - name: APPLICATION_NAME
-              - name: IMAGE
-              - name: WORK_DIRECTORY
-              - name: ALLURE_HOST
-          - defaultTaskName: stakater-sonarqube-scanner-v1
-            runAfter:
-              - allure-post-report
-          - defaultTaskName: stakater-code-linting-v1
-            runAfter:
-              - stakater-sonarqube-scanner-v1
-          - defaultTaskName: stakater-kube-linting-v1
-            runAfter:
-              - stakater-code-linting-v1
-            params:
-              - name: namespace
-          - defaultTaskName: stakater-buildah-v1
-            params:
-              - name: BUILD_IMAGE
-                value: "true"
-            name: build-and-push
-          - defaultTaskName: rox-image-check
-          - defaultTaskName: rox-image-scan
-          - defaultTaskName: stakater-helm-push-v1
-          - defaultTaskName: stakater-create-environment-v1
-          - defaultTaskName: stakater-gitlab-update-cd-repo-v1
-          <span style="color:orange">- defaultTaskName: stakater-load-testing-v1</span>          
-            params:
-              - name: gitlab_group
-          - defaultTaskName: stakater-push-main-tag-v1
-      triggertemplate:
+     name: stakater-main-pr-v1
+     workspaces:
+     - name: source
+       volumeClaimTemplate:
+         accessModes: ReadWriteOnce
+         resourcesRequestsStorage: 1Gi
+     pipelines:
+       tasks:
+         - defaultTaskName: git-clone
+         - defaultTaskName: stakater-create-git-tag-v1
+         - defaultTaskName: stakater-sonarqube-scanner-v1
+           runAfter:
+             - stakater-create-git-tag-v1
+         - defaultTaskName: stakater-unit-test-v1
+           runAfter: 
+             - stakater-sonarqube-scanner-v1
+         - defaultTaskName: stakater-gitlab-save-allure-report-v1
+         - defaultTaskName: stakater-code-linting-v1
+         - defaultTaskName: stakater-kube-linting-v1
+           runAfter:
+            - stakater-code-linting-v1
            params:
-             - name: repoName
-             - name: prnumberBranch
-               default: "main"
-      eventlistener:
-        triggers:               
-          - name: gitlab-mergerequest-create
-            bindings:
-              - ref: stakater-gitlab-merge-request-v1
-              - name: oldcommit
-                value: "NA"
-              - name: newcommit
-                value: $(body.object_attributes.last_commit.id)
-          - name: gitlab-mergerequest-synchronize
-            bindings:
-              - ref: stakater-gitlab-merge-request-v1
-              - name: oldcommit
-                value: $(body.object_attributes.oldrev)
-              - name: newcommit
-                value: $(body.object_attributes.last_commit.id)
-          - name: gitlab-push
-            bindings:
-              - ref: stakater-gitlab-push-v1
-              - name: oldcommit
-                value: $(body.before)
-              - name: newcommit
-                value: $(body.after)
-          - name: nordmart-ci-mustafa-gitlab-push
-            create: false
-      rbac:
+             - name: namespace
+         - defaultTaskName: stakater-buildah-v1
+           name: build-and-push
+           runAfter:
+            - stakater-build-image-flag-v1
+           params:
+             - name: BUILD_IMAGE
+               value: "true"
+         - defaultTaskName: rox-image-check
+         - defaultTaskName: rox-image-scan
+         - defaultTaskName: stakater-helm-push-v1
+         - defaultTaskName: stakater-create-environment-v1
+         - defaultTaskName: stakater-gitlab-update-cd-repo-v1
+           params: 
+             - name: gitlab_group
+         - defaultTaskName: stakater-load-testing-v1
+         - defaultTaskName: stakater-push-main-tag-v1
+     triggertemplate:
+         serviceAccountName: stakater-workshop-tekton-builder
+         pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
+     eventlistener:
+         serviceAccountName: stakater-workshop-tekton-builder
+         triggers:
+         - name: gitlab-mergerequest-create
+           bindings:
+             - ref: stakater-gitlab-merge-request-v1
+             - name: oldcommit
+               value: "NA"
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: gitlab-mergerequest-synchronize
+           bindings:
+             - ref: stakater-gitlab-merge-request-v1
+             - name: oldcommit
+               value: $(body.object_attributes.oldrev)
+             - name: newcommit
+               value: $(body.object_attributes.last_commit.id)
+         - name: gitlab-push
+           bindings:
+             - name: newcommit
+               value: $(body.after)
+             - name: oldcommit
+               value: $(body.before)
+             - ref: stakater-gitlab-push-v1
+     rbac:
         enabled: false
-      serviceAccount:
+     serviceAccount:
         name: stakater-workshop-tekton-builder
-        create: false</code></pre></div>
+        create: false
+  ```
 
 3. Now open ArgoCD, Open the `<TENANT_NAME>-build-tekton-pipelines` application, trigger Refresh and  wait for the changes were synchronized.
 
