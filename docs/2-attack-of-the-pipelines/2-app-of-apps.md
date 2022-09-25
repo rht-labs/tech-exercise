@@ -12,17 +12,17 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 1. Head over to the below URL.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
+   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
     
 This is the template that we will use to create our own apps-of-apps repository.
  
 
 2. Copy the clone URL.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
+   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
  
 
-3. Now open GitLab and select create project. In the screen that appears, choose `Import project`.
+3. Back in GitLab navigate to `Menu` > `Projects` > `Create new project` > Select `Import project`
 
    ![clone-apps-config](images/clone-apps-config.png)
 

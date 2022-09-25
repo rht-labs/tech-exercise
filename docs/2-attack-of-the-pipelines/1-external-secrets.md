@@ -48,21 +48,20 @@ Now we can add the secret to our Vault instance.
 
 Next step is the create an external secret CR that will connect to Vault and create a secret in console using the secret added to the Vault in previous step. 
 
-1. Login to the OpenShift console. Open the API Explorer Under Home on left sidebar and Search External Secret, Open the details `ExternalSecret`.
-  ![external-secret-console](./images/external-secret-console.png)
+1. Login to the OpenShift console. 
 
-2. Go to the `Instances` tab and Select `Create ExternalSecret`
+2. Select the `+` sign in the top right corner of the console
 
-    ![external-secret-info](./images/external-secret-info.png)
+  ![the-plus-sign](./images/the-plus-sign.png)
 
-3. Paste the following YAML in dialog box and make sure to replace tenant name in namespace field.
+3. Paste the following YAML in dialog box and make sure to replace tenant name in namespace field and replace the `<TENANT_NAME>` > Click `Create`
 
     ```
     apiVersion: external-secrets.io/v1alpha1
     kind: ExternalSecret
     metadata:
       name: gitlab-pat
-      namespace: `<TENANT_NAME>-build`
+      namespace: <TENANT_NAME>-build
     spec:
       secretStoreRef:
         name: tenant-vault-secret-store
@@ -84,7 +83,7 @@ Next step is the create an external secret CR that will connect to Vault and cre
 
     A secret with the `spec.target.name` from External Secret yaml will be created in build namespace.  
 
-4. Navigate to Secrets under Workloads, you will find `gitlab-pat` present.
+4. Navigate to `Workloads` > `Secrets`, you will find `gitlab-pat` present.
 
     ![external-secret-secret](./images/external-secret-secret.png)
  
