@@ -49,7 +49,7 @@
 
 ### A/B and Analytics
 
-> The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our endusers, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
+> The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our end users, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
 
 Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
@@ -178,7 +178,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #009B00;">
     ```
 
-6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository.
+6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend repository.
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">

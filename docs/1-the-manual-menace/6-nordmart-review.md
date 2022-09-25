@@ -41,7 +41,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 
     > Thanks to **tenant operator** this **<TENANT_NAME>-test** project is already available to us in the cluster where we can deploy this application
 
-4. Login to Openshift UI, Select your project  **<TENANT_NAME>-test** and Navigate to Pods under Workloads in left side bar. 
+4. Login to OpenShift UI, Select your project  **<TENANT_NAME>-test** and Navigate to Pods under Workloads in left side bar. 
 
     <p align="center" width="100%">
     <img width="%" src="images/1-6-2-oc-pods-ui.jpg">

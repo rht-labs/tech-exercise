@@ -19,7 +19,7 @@ In this snippet of the pipeline used in this exercise, we define:
 Unlike most CI/CD solutions, the Tekton pipeline definitions are not stored with the codebase. Instead, they are deployed directly onto the cluster that they will run on. 
 
 ### Tekton Pipeline Chart
-We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as pipeline, task, eventlistener, triggers, etc. We will fill in the values for these resources and deploy a functioning pipeline.
+We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as `pipeline`, `task`, `eventlistener`, `triggers`, etc. We will fill in the values for these resources and deploy a functioning pipeline.
 (Hiding complexity using Tekton pipeline chart)
 
 ![pipeline-charts-structure](./images/pipeline-charts-structure.png)
@@ -27,12 +27,12 @@ We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resourc
 
 The above chart contains all necessary resources needed to build and run a Tekton pipeline. Some of the key things to note above are:
 * `eventlistener` -  listens to incoming events like a push to a branch.
-* `trigger` - the eventlisterner specifies a trigger which in turn specifies:
+* `trigger` - the `eventlistener` specifies a trigger which in turn specifies:
   * `interceptor` - it receives data from the event
   * `triggerbinding` - extracts values from the event interceptor
   * `triggertemplate` - defines `pipeline` run resource template in its definition which in turn references the pipeline
 
-(- **Note**: We do not need to define interceptor and triggertemplates in every trigger while using stakater Tekton pipeline chart.)
+(- **Note**: We do not need to define interceptor and trigger templates in every trigger while using stakater Tekton pipeline chart.)
 * `pipeline` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
 * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
 
@@ -54,9 +54,9 @@ This task creates the tag for our repository. For push to main branch, it uses g
 
 **Parameters:**
    The task takes in the following parameters: 
-   * gitrevision - head SHA in case of PR and 'master/main' incase of merge to main/master 
-   * oldcommit - hash of the previous commit
-   * prnumber- this represents the pr number. It is set to 'NA' incase of merge to main
+   * `gitrevision` - head SHA in case of PR and 'master/main' in case of merge to main/master 
+   * `oldcommit` - hash of the previous commit
+   * `prnumber`- this represents the pr number. It is set to 'NA' in case of merge to main
 
 Below is the code snipped from the task:
 
@@ -68,17 +68,17 @@ This task determines whether there is a change in the application source code. I
 Where `imageTag` will be the tag it outputs. 
 
 **Parameters:**
-   * oldcommit - SHA hash of the previous commit
-   * newcommit - SHA hash of the current commit
+   * `oldcommit` - SHA hash of the previous commit
+   * `newcommit` - SHA hash of the current commit
 
 ![build-image-flag-task](./images/build-image-flag-task.png)
 
-When any files aother than the files included in `tektonIgnore` change, build-image flag is marked as true.
+When any files other than the files included in `tektonIgnore` change, build-image flag is marked as true.
 
 #### 4 - stakater-buildah-v1 🏗
 
 The task contains a small buildah script that builds image using the source code and pushes it to nexus repository.
-If `BUILD_IMAGE` flag obtained from the previous task is set to false, this task only retags the previous image and does not build it again.
+If `BUILD_IMAGE` flag obtained from the previous task is set to false, this task only re-tags the previous image and does not build it again.
 
 The task takes parameter needed to build and push the image as parameters, such as the image repository, image tag, and dockerfile, etc
 
@@ -293,7 +293,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to ArgoCD and search for Application `tekton-pipelines`
 ###### TODO Add screenshot
 
-7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `nordmart-review` and `nordmart-review-ui` projects. First, grab the URL we're going to invoke to trigger the pipeline:
+7. With our pipelines definitions synchronized to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `nordmart-review` and `nordmart-review-ui` projects. First, grab the URL we're going to invoke to trigger the pipeline:
 
   
 
@@ -304,11 +304,11 @@ Here we have defined a basic pipeline which clones the repository when it is tri
     * select `SSL Verification`
     * Click `Add webhook` button.
 
-   ![nordmart-review-webhook-integration.png](images/nordmart-review-webhook-integration.png)
+   ![Nordmart-review-webhook-integration.png](images/nordmart-review-webhook-integration.png)
 
    You can test the webhook works from GitLab.
 
-   ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
+   ![GitLab-test-webhook.png](images/gitlab-test-webhook.png)
 9. Now let's repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
 10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application. Edit  `pom.xml` by adding new line in the file.
 

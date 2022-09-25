@@ -55,7 +55,7 @@
               averageUtilization: 60
     ```
 
-3. Git commit the changes. We probably don't need to tell you the commands to do this by now, but just incase... here they are again 🐎🐎🐎 !
+3. Git commit the changes. We probably don't need to tell you the commands to do this by now, but just in case... here they are again 🐎🐎🐎 !
 
     ```bash
     cd /projects/stakater-nordmart-review

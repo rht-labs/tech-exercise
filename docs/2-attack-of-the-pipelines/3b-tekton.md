@@ -19,7 +19,7 @@ In this snippet of the pipeline used in this exercise, we define:
 Unlike most CI/CD solutions, the Tekton pipeline definitions are not stored with the codebase. Instead, they are deployed directly onto the cluster that they will run on.
 
 ### Tekton Pipeline Chart
-We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as pipeline, task, eventlistener, triggers, etc. We will fill in the values for these resources and deploy a functioning pipeline.
+We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as `pipeline`, `task`, `eventlistener`, `triggers`, etc. We will fill in the values for these resources and deploy a functioning pipeline.
 (Hiding complexity using Tekton pipeline chart)
 
 ![pipeline-charts-structure](./images/pipeline-charts-structure.png)
@@ -27,19 +27,19 @@ We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resourc
 
 The above chart contains all necessary resources needed to build and run a Tekton pipeline. Some of the key things to note above are:
 * `eventlistener` -  listens to incoming events like a push to a branch.
-* `trigger` - the eventlisterner specifies a trigger which in turn specifies:
+* `trigger` - the `eventlistener` specifies a trigger which in turn specifies:
    * `interceptor` - it receives data from the event
    * `triggerbinding` - extracts values from the event interceptor
    * `triggertemplate` - defines `pipeline` run resource template in its definition which in turn references the pipeline
 
-(- **Note**: We do not need to define interceptor and triggertemplates in every trigger while using stakater Tekton pipeline chart.)
+(- **Note**: We do not need to define interceptor and trigger templates in every trigger while using stakater Tekton pipeline chart.)
 * `pipeline` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
 * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
 
 ### SAAP preconfigured cluster tasks:
 SAAP is shipped with many ready-to-use Tekton cluster tasks. Let's take a look at some of the tasks that we will be using to construct a basic pipeline.
 
-Navigate to the Openshift Console using Forecastle. Select Tasks under Pipeline in sidebar. Select the ClusterTasks tab and search stakater. Here you will see all the tasks shipped with SAAP.
+Navigate to the OpenShift Console using Forecastle. Select Tasks under Pipeline in sidebar. Select the ClusterTasks tab and search stakater. Here you will see all the tasks shipped with SAAP.
 
 ![stakater-clustertasks](./images/stakater-clustertasks.png)
 
@@ -50,7 +50,7 @@ This task clones the repository/code on which pipeline is to executed in the `wo
 **Parameters:**
 The task takes in the following Tekton parameters:
 * `url` - this is the URL to clone the repository from. We extract this URL from the payload received by the interceptor
-* revision - this is the revision or 'branch' of the repository
+* `revision` - this is the revision or 'branch' of the repository
 
 #### 2 - stakater-create-git-tag-v1 🏷
 
@@ -58,9 +58,9 @@ This task creates the tag for our repository. For push to main branch, it uses g
 
 **Parameters:**
 The task takes in the following parameters:
-* gitrevision - head SHA in case of PR and 'master/main' incase of merge to main/master
-* oldcommit - hash of the previous commit
-* prnumber- this represents the pr number. It is set to 'NA' incase of merge to main
+* `gitrevision` - head SHA in case of PR and 'master/main' in case of merge to main/master
+* `oldcommit` - hash of the previous commit
+* `prnumber`- this represents the pr number. It is set to 'NA' in case of merge to main
 
 Below is the code snipped from the task:
 
@@ -231,7 +231,7 @@ If you open up the application by clicking on it, you should see a similar scree
 
 11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file. Push commits directly to the main.
 
-12. Navigate to the Openshift Console ...
+12. Navigate to the OpenShift Console ...
 
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
@@ -249,12 +249,12 @@ If you open up the application by clicking on it, you should see a similar scree
 
 14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new Helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
 
-    ![updated-nordmart-apps-gitops-config](images/updated-nordmart-apps-gitops-config.png)
+    ![updated-Nordmart-apps-GitOps-config](images/updated-nordmart-apps-gitops-config.png)
 
     For pushes to main branch, application is updated in `<TENANT_NAME>-dev` namespace.
 
-15. Open our `<TENANT>-stakater-nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
-    ![tenant-dev-nordmart-review](images/tenant-dev-nordmart-review.png)
+15. Open our `<TENANT>-stakater-Nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
+    ![tenant-dev-Nordmart-review](images/tenant-dev-nordmart-review.png)
 
 15. Navigate to Pods under Workloads in the sidebar in `<TENANT_NAME>-dev` namespace, open the yaml
 of `review-` pod and scroll down to status key, you'll see that the **`tag`** and **`sha`** in the `build-and-push` step match.

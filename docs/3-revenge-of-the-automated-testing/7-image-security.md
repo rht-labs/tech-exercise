@@ -37,7 +37,7 @@ Below is the URL to ACS (Available on Forecastle UI):
 > Redhat ACS UI: **central-rhacs-operator.apps.devtest.vxdqgl7u.kubeapp.cloud/**
 
 
-1. Navigate to the Redhat ACS UI URL specified above and select Openshift as Auth Provider. Login via workshop.
+1. Navigate to the Redhat ACS UI URL specified above and select OpenShift as Auth Provider. Login via workshop.
 
     ![central-rhacs-login](./images/central-rhacs-login.png)
 

@@ -230,7 +230,7 @@ and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
     git push
     ```
 
-8. When arocd syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
+8. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
 
 ![nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 

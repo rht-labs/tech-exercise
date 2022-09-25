@@ -73,7 +73,7 @@ Your form should look like this:
 
 ![ArgoCD-nordmart-review-detail](images/2-argocd-nordmart-review-argocd-app-details.png)
 
-10. You can verify the application is running and behaving as expected by navigating to Pods under Workloads section in your Openshift Console.
+10. You can verify the application is running and behaving as expected by navigating to Pods under Workloads section in your OpenShift Console.
 
 ![ArgoCD-nordmart-review-detail](images/2-argocd-nordmart-review-pods.png)
 

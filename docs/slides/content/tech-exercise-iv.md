@@ -128,7 +128,7 @@ _It is important that SLOs are documentated and iterate over time._
 
 
 #### Error Budgets
-Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our endusers. When our measurements show if we are not reliable enough - now what?
+Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our end users. When our measurements show if we are not reliable enough - now what?
 
 Let's discuss what would you do if you don't meet with SLOs?
 

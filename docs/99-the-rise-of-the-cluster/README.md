@@ -12,5 +12,5 @@ In this exercise, we will walk through the steps we take in order to have a read
 - [ ] Can install the components which are necessary to run the exercises
 
 ## 🔨 Tools used in this exercise!
-* Openshift 4.9+
+* OpenShift 4.9+
 * <span style="color:blue;">[Helm](https://helm.sh/)</span> - Helps us to define, install, and upgrade Kubernetes application.
