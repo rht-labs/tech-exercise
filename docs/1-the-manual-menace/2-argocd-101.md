@@ -61,11 +61,11 @@ Let's fill it out by setting the following:
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TENANT_NAME>-test`
 
-Your form should look like this:
+Your form should look like the follow image, if so click `Create`
 
 ![ArgoCD-create-application](images/2-argocd-create-application.png)
 
-6. After you hit create, you'll see `argocd-nordmart-review` application is created and should start deploying in your `${TENANT_NAME}-test` namespace.
+6. After you hit `Create`, you'll see `argocd-nordmart-review` application is created and should start deploying in your `<TENANT_NAME>-test` namespace.
 
 ![ArgoCD-Nordmart-review](images/2-argocd-nordmart-review-argocd-app.png)
 
@@ -73,11 +73,13 @@ Your form should look like this:
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-argocd-app-details.png)
 
-8. You can verify the application is running and behaving as expected by navigating to Pods under Workloads section in your OpenShift Console.
+8. You can verify the application is running and behaving as expected by navigating to `Pods` under `Workloads` section in your `OpenShift Console`.
+
+  > Select the drop down and switch to `Administrator` view in the OpenShift console if you are not already there
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-pods.png)
 
-    Now go to Routes Under Networking tab. Visit `nordmart-review-ui` URL.
+9. Now go to `Networking` > `Routes` and click the `location` uri to visit `nordmart-review-ui` website.
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-route.png)
 
