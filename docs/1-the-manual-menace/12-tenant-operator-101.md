@@ -12,9 +12,9 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 - Configure and manage tenants and their sandboxes
 
-## Normart Infra Gitops Config  
+## Nordmart Infra Gitops Config  
 
-> Normart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
+> Nordmart Infra Gitops Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
 
 The `Nordmart Infra Gitops Config` folder contains separate folder for seprate clusters with the following content:
 
@@ -22,7 +22,7 @@ The `Nordmart Infra Gitops Config` folder contains separate folder for seprate c
 
    - `tenant-operator-config` contains your cluster **tenants**.
 
-   - `other opeartors` contains other **operators,services** common among tenants within a cluster
+   - `other operators` contains other **operators,services** common among tenants within a cluster
    
    - `argocd-apps` contains `argocd-apps` for your folders eg `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
 
