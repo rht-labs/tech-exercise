@@ -28,7 +28,7 @@ The `workshop` folder contains separate folder for separate clusters with the fo
 
 ## Creating Tenants with GitOps
 
-We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
+We will now collaborate on [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
 
 You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here  
 as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred. 
@@ -54,7 +54,7 @@ Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace
    ![mto-filename](./images/mto-filename.png)
 
 
-8. Paste the code below to create a new tenant with a user, a list of argoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
+8. Paste the code below to create a new tenant with a user, a list of ArgoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
    ```yaml
    apiVersion: tenantoperator.stakater.com/v1beta1

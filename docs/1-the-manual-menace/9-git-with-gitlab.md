@@ -60,11 +60,11 @@
 
 3. Once you have imported the repository select the `.tronador.yaml` file from the repository root  
 
-   ![tronador](images/tronador1.png)
+   ![Tronador](images/tronador1.png)
 
 4. Edit the file via the `Open in Web IDE` and replace the existing tenant named `gabbar` with your tenant name and `Commit the changes to main`.   
 
-   ![tronador](images/tronador2.png)
+   ![Tronador](images/tronador2.png)
 
 
 ## Importing Nordmart Review UI 

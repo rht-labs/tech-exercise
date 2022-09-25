@@ -37,7 +37,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 
         helm install <TENANT_NAME> deploy/ -n <TENANT_NAME>-test --dependency-update
 
-    > **NOTE**: Make sure you are logged into the OpenShift cluster via cli.
+    > **NOTE**: Make sure you are logged into the OpenShift cluster via CLI.
 
     > Thanks to **tenant operator** this **<TENANT_NAME>-test** project is already available to us in the cluster where we can deploy this application
 

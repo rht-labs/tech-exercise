@@ -56,7 +56,7 @@ Add member to the group using the "Invite member" option.
     ```
 
     <p class="tip">
-    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
+    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes, i.e.: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
     Lets add these config to git 

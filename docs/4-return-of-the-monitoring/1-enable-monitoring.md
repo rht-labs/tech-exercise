@@ -102,7 +102,7 @@
 
 4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `nordmart-review` api;
 
-    ![forecastle-workload-grafana](images/forecastle-workload-grafana.png)
+    ![Forecastle-workload-grafana](images/forecastle-workload-grafana.png)
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
 
