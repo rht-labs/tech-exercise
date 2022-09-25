@@ -9,7 +9,7 @@
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Testing Testing Testing 🔨🔨</h2>
+  <h2>Testing 🔨🔨</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>
@@ -239,7 +239,7 @@ Many times people will have built cool things that they didn't have tests for. W
 
 ![TDD](images/bdd-tdd/lego-tdd-2.png) <!-- {.element: class="inline-image" style="height:500px"} -->
  - As a table group, pick a project to build. Projects must be something complex that has lots of different elements in it. Some examples could be: _a zoo_, _a shopping center_, _a spaceship_, or _city_.
- - Spend 2 mins creating a backlog of features for you to build ...  <!-- {.element: class="fragment" data-fragment-index="1"} -->
+ - Spend 2 min creating a backlog of features for you to build ...  <!-- {.element: class="fragment" data-fragment-index="1"} -->
  - All tests at the table must continue to pass at all times, regardless of which pair wrote them - this is your CI environment  <!-- {.element: class="fragment" data-fragment-index="2"} -->
  - All features and tests must be integrated with the main project in the center of the table. <!-- {.element: class="fragment" data-fragment-index="2"} -->
 

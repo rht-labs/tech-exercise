@@ -36,7 +36,7 @@ TL500 <!-- {.element: class="title-color"} -->
 ![Pair Programming](images/pair-and-mob-programming/coaching-coders-coding.jpg) <!-- {.element: class="inline-image"} -->
 </br>
 </br>
-**Pair programming** is a practice used in e**X**treme **P**rogramming in which
+**Pair programming** is a practice used in eXtreme Programming in which
 two programmers work together at one computer.
 
 
