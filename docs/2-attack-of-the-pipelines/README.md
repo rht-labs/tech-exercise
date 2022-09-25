@@ -1,6 +1,6 @@
 # Exercise 2 - Attack of the Pipelines
 
-> The Job of a Pipeline is to prove that your code is not ready for production.
+> The Job of a Pipeline is to prove that your code is ready for production.
 
 ## 👨‍🍳 Exercise Intro
 
@@ -12,11 +12,11 @@
 ## 🔮 Learning Outcomes
 
 - Can manage App Config via git
-- Can automatically build / bake / deploy software via Tekton
-- Can store secrets used by my pipeline securely in git
+- Can automatically build / test / deploy software via Tekton
+- Can fetch secrets used by my pipeline from our secure secrets vault
 
 ## 🔨 Tools used in this exercise!
 
-* <span style="color:blue;">[ExternalSecrets](https://external-secrets.io/v0.6.0-rc1/api/externalsecret/)</span> - Helps us to encrypt the secrets to store safely, even to a public repository.
-* <span style="color:blue;">[Tekton](https://tekton.dev/)</span> -  Cloud Native CI/CD tool, allowing us to build, test, and deploy anywhere.
-* <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
+- [ExternalSecrets](https://external-secrets.io/v0.6.0-rc1/api/externalsecret/) - Helps us to fetch secrets from a secure secrets store.
+- [Tekton](https://tekton.dev/) - Cloud Native CI/CD tool, allowing us to build, test, and deploy anywhere.
+- [Nexus](https://www.sonatype.com/nexus-repository-sonatype) - Repository manager for storing lots of application types. Can also host npm and Docker registries.
