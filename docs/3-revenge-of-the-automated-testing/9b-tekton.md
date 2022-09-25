@@ -1,6 +1,6 @@
 ## Extend Tekton Pipeline with Load Testing
 
-1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
+1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (i.e.if average response time ratio is higher 200ms, the pipeline fails).
 
     We need to create a `locustfile.py` for testing scenario and save it in the application repository.
 
@@ -113,7 +113,7 @@
 
     🪄 Observe the **`nordmart-review`** pipeline running with the **`load-testing`** task.
 
-    If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+    If the pipeline fails due to the thresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
 
     ```py
         if environment.stats.total.fail_ratio > 0.01:

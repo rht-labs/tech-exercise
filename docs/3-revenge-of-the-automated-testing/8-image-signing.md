@@ -8,7 +8,7 @@
 
 ## Before starting, generate your keys
 
-1. Generate a keypair to use for signing images. It expects you to enter a password for private key. Feel free to select anything you like :)
+1. Generate a key pair to use for signing images. It expects you to enter a password for private key. Feel free to select anything you like :)
 
     ```bash
     cd /tmp

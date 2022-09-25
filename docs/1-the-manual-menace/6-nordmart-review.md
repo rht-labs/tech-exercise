@@ -15,7 +15,7 @@ Nordmart Review product is composed of three components:
 We will first setup the stakater-nordmart-review repository and deploy it on our cluster via Helm chart.
 
 ## Stakater-Nordmart-Review
-1. Clone the `stakater-nordmart-review` repository that you imported from github to your GitLab account.
+1. Clone the `stakater-nordmart-review` repository that you imported from GitHub to your GitLab account.
 
         # git clone https://<GITLAB_SERVER>/<YOUR_GITLAB_GROUP>/<YOUR_REPO_NAME>
         git clone https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/workshop-exercise/stakater-nordmart-review
@@ -37,7 +37,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 
         helm install <TENANT_NAME> deploy/ -n <TENANT_NAME>-test --dependency-update
 
-    > **NOTE**: Make sure you are logged into the openshift cluster via cli.
+    > **NOTE**: Make sure you are logged into the OpenShift cluster via cli.
 
     > Thanks to **tenant operator** this **<TENANT_NAME>-test** project is already available to us in the cluster where we can deploy this application
 

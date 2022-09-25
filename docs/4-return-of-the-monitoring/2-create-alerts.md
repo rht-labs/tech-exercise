@@ -58,7 +58,7 @@
 
     When the chart version is updated automatically, ArgoCD will detect your new changes and apply them to the cluster 🔥🔥🔥
 
-4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the mongodb alert.
+4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the MongoDB alert.
 
     ```bash
     oc project ${TENANT_NAME}-test

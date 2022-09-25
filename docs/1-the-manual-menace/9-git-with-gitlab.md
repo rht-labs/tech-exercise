@@ -101,7 +101,7 @@
     ```
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
    
-   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
+   > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.
     
     ![import-Nordmart-review](images/import-nordmart-review-ui.png)
 

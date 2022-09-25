@@ -5,12 +5,12 @@
 
 #### SAAP Code Linting:
 
-We will be using maven Checkstyle plugin to check the code in nordamrt-review and `nordmart-review-ui` repositories.
-SAAP cluster is shipped with a code-linting task that uses maven checkstyle to check the quality of code. We will be using this task to integrate code-lint in our pipeline.
+We will be using Maven `Checkstyle` plugin to check the code in nordamrt-review and `nordmart-review-ui` repositories.
+SAAP cluster is shipped with a code-linting task that uses Maven `Checkstyle` to check the quality of code. We will be using this task to integrate code-lint in our pipeline.
 
 Follow the below-mentioned procedure to add code linting to the already deployed main-pr-v1 pipeline.
 
-1. To view the already defined sonarqube cluster task, open up the `Pipelines` section from the left menu and click `Tasks`
+1. To view the already defined SonarQube cluster task, open up the `Pipelines` section from the left menu and click `Tasks`
     
   ![cluster-tasks](./images/cluster-tasks.png)
 

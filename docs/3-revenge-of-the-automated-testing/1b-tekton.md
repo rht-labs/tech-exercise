@@ -1,12 +1,12 @@
 ## Extend Tekton Pipeline with Sonar Scanning
 
-> In this section we are going to improve our already built pipeline and add sonarqube scanning to it.
+> In this section we are going to improve our already built pipeline and add SonarQube scanning to it.
 
 
 1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
-  ![images/pipelines-Nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+  ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
   
-2. Open the values file in the editor. After the `stakater-create-git-tag-v1`, reference the sonarqube task and add a runAfter field to make it run after the create-git-tag-v1 task:
+2. Open the values file in the editor. After the `stakater-create-git-tag-v1`, reference the SonarQube task and add a `runAfter` field to make it run after the create-git-tag-v1 task:
 
 ```
 - defaultTaskName: stakater-sonarqube-scanner-v1
@@ -83,19 +83,19 @@ The pipeline will now become:
 4. Commit the changes.
 
 
-5. Now open Argocd and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
+5. Now open ArgoCD and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
 
 ![sonar](./images/sonar-argocd.png)
    
-Open up the console and navigate to your pipeline definition by going to `Pipelines` and selecting your pipeline from the list. You should see a sonarqube task there as well.
+Open up the console and navigate to your pipeline definition by going to `Pipelines` and selecting your pipeline from the list. You should see a SonarQube task there as well.
 
-![sonar-openshift](./images/sonar-openshift.png)
+![sonar-OpenShift](./images/sonar-openshift.png)
 
 
 
-6. If the sync is green, you're good to go. You have successfully added sonarqube to your pipeline!
+6. If the sync is green, you're good to go. You have successfully added SonarQube to your pipeline!
 
-7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see sonarqube task running.
+7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
 
 ![sonar-running](./images/sonar-running.png)
 
@@ -109,4 +109,4 @@ It will take you to the projects page. You should be able to see `nordmart-revie
 ![sonar-scanned](./images/sonar-scanned.png)
 
 
-CONGRATULATIONS!!! Sonarqube scanning is now integrated into your pipelines.
+CONGRATULATIONS!!! SonarQube scanning is now integrated into your pipelines.

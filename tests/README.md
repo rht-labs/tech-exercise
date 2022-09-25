@@ -11,7 +11,7 @@ We check the command and success return codes (we filter output for now) against
 A `non zero` exit code signifies some tests failed. See the test logs for details.
 
 Testing Requirements:
-- A running openshift cluster with tl500 tooling installed to run against
+- A running OpenShift cluster with tl500 tooling installed to run against
 
 ### Running tests in OpenShift
 
@@ -73,7 +73,7 @@ cd tech-exercise && cd tests
 **_TODO_**
 
 - [ ] regression.sh can generate output files
-- [ ] Jenkinsfile replacer test in 3a-jenkins uses a file :( instead of docs for now
+- [ ] Jenkinsfile replacer test in 3a-Jenkins uses a file :( instead of docs for now
 - [ ] trigger and wait for pipelines first run success
 - [ ] cleanup() must be cluster-admin
 
@@ -85,12 +85,12 @@ cd tech-exercise && cd tests
 - [X] GitLab creds first time we commit / cache
 - [X] GitLab secret manual for now
 - [X] add a tidy function to delete all ocp resources at end of tests
-- [X] waits on resources .. e.g for nexus, jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
+- [X] waits on resources .. e.g for Nexus, Jenkins pods - ho do we sync this ? hardcode between tests with a test markdown ?
 - [X] patch rundoc for upto 4 whitespace in markdown -> html
 - [X] remove branch for tests development uj
 ```bash
 # FIXME test branch
 --set source_ref=tests
 ```
-- [X] GitLab delete all other api patoken's when creating a new one
+- [X] GitLab delete all other API patoken's when creating a new one
 - [X] add a tidy function to delete all git resources at end of tests

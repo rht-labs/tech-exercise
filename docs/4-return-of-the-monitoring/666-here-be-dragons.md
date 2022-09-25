@@ -7,7 +7,7 @@
 #### Dashboards
 
 1. ADVANCED - Create a new Grafana Dashboard and have ArgoCD sync it. Dashboard-as-code!
-2. ADVANCED - Using Quarkus create a new custom counter or metric to visualise
+2. ADVANCED - Using `Quarkus` create a new custom counter or metric to visualise
 3. ADVANCED - Tekton Metrics
 
 #### Alerts & Notifications

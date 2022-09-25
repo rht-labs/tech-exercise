@@ -22,7 +22,7 @@ When something is seen as not matching the required state in Git, an application
 
 ## Nordmart App on ArgoCD
 
-Lets install an Argocd Application that deploy the `nordmart-review application` onto the cluster.
+Lets install an ArgoCD Application that deploy the `nordmart-review application` onto the cluster.
 
 1. Open the forecastle page, Navigate to CI & CD tab and Open the ArgoCD link.  
     ![ArgoCD-ui](images/2-argocd-forecastle.jpg)

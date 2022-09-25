@@ -106,7 +106,7 @@ echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.ho
 ```
 ## CodeReady Workspaces Setup
 
-During the exercises, we use different commandlines like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
+During the exercises, we use different command line tools like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
 We utilize GitHub Actions in order to build and store this image publicly. 
 

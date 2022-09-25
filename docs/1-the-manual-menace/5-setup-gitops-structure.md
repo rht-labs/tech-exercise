@@ -132,7 +132,7 @@ The folder contains ArgoCD applications for all applications & pipelines.
             prune: true
             selfHeal: true
 
-    Argocd apps folder contains three files with the above manifests specified.     
+    ArgoCD apps folder contains three files with the above manifests specified.     
 <p align="center" width="100%">
     <img width="33%" src="images/gitops-folder-structure.png">
 </p>
