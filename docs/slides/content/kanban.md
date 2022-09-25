@@ -22,8 +22,8 @@
 ### Origins of Kanban
 ![Kanban](images/kanban/toyota-production-system.png) <!-- {.element: class="inline-image"} -->
 * Kanban is a Japanese word that means the _card you can see_.
-* In 1950, Taiichi Onho defined the [Toyota Production System](http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/origin_of_the_toyota_production_system.html) based on customer demands (Just in Time)
-* In 2007, David J. Anderson introduced Kanban as method for software development.
+* In 1950, `Taiichi Onho` defined the [Toyota Production System](http://www.toyota-global.com/company/vision_philosophy/toyota_production_system/origin_of_the_toyota_production_system.html) based on customer demands (Just in Time)
+* In 2007, `David J. Anderson` introduced Kanban as method for software development.
 
 
 

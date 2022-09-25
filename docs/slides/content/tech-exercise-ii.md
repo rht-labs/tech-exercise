@@ -25,7 +25,7 @@
 
 
 #### What Is a Pipeline?
-![derek](https://miro.medium.com/max/1400/1*OD6N_1evXg9ffzT47oJx-Q.jpeg)<!-- .element: class="image-no-shadow image-full-width" -->
+![image](https://miro.medium.com/max/1400/1*OD6N_1evXg9ffzT47oJx-Q.jpeg)<!-- .element: class="image-no-shadow image-full-width" -->
 
 
 
@@ -173,7 +173,7 @@ development team's duty to maintain the software.
 * Helps the team maintain deployable code and configuration over new features
 * Provides fast feedback from end users
 * Enables pushing features out after completion
-* Enforces a best practice of **eveything as code**
+* Enforces a best practice of **everything as code**
 * Includes configuration and deployment orchestration as part of automation
 * Enables quick rollbacks and recovery from failures
 
@@ -209,7 +209,7 @@ _By separating CI from CD, we will first deploy Pet Battle and its supporting in
 
 _With this in place, we will create two pipelines, one for the front end and one for the API._
 
-_The front end (AngularJS) will use Jenkins and the back end (Quarkus with MongoDB) will use Tekton._
+_The front end (AngularJS) will use Jenkins and the back end (`Quarkus` with MongoDB) will use Tekton._
 
 
 

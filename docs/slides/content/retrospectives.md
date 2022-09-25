@@ -66,7 +66,7 @@ _- 12th Principle of the Agile Manifesto_
 
 
 ### Realtime Retrospectives
-![realtime-retro](images/retrospectives/realtime-retro.jpg)<!-- {.element: class="inline-image"} -->
+![Realtime-retro](images/retrospectives/realtime-retro.jpg)<!-- {.element: class="inline-image"} -->
 * Enables faster, more accurate, and more direct feedback from everyone involved.
 * Has a more continuous and "always on" self-service approach to capturing feedback
 * Provides a simple, visual tool for anyone to add retrospective feedback on any item at any time, both positive and negative
@@ -89,7 +89,7 @@ Retrospectives improve:
 #### _Why use it?_
 Realtime Retros are particularly useful because you don't want to learn feedback at the end of the week/project/workshop (or even the end of one of the days) that a simple improvement or resolution could have been applied much earlier.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
-![realtime-retro-2](images/retrospectives/realtime-retro-2.jpg)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
+![Realtime-retro-2](images/retrospectives/realtime-retro-2.jpg)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:40%;" } -->
 
 For long running days or weeks with multiple sessions or activities, you can visibly see people's moods or grasp the information in real time.<!--{.element: style="font-size: smaller; font-weight: 100;"} -->
 
@@ -116,7 +116,7 @@ _But they are done poorly and teams do not follow up on identified items_
 
 ![retrospective](images/retrospectives/retro-primedirective.png) <!-- {.element: class="image-no-shadow image-full-width"} -->
 
-~ Norm Kerth, Project Retrospectives: A Handbook for Team Review 
+~ `Norm Kerth`, Project Retrospectives: A Handbook for Team Review 
 
 
 

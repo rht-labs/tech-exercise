@@ -60,7 +60,7 @@ Everything as Code is the practice of treating all parts of the system as code. 
 
 #### 🧑‍🏫 Learning Outcomes 🧑‍💻
 As a learner, I can perform the following tasks by the end of this exercise:
-* Deploy helm charts manually
+* Deploy Helm charts manually
 * Do everything as code 
 * Articulate the benefits gained from GitOps
 * Drive tool installations through GitOps

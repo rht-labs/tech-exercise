@@ -61,7 +61,7 @@ User Story Mapping
 <div class="container">
 <div class="col" data-markdown>
 
-![USMBook](images/user-story-mapping-and-value-slicing/book-user-story-map.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:80%; float:left;" } -->
+![user-story-map](images/user-story-mapping-and-value-slicing/book-user-story-map.png)<!-- {.element: class="" style="border:none; box-shadow:none; max-width:80%; float:left;" } -->
 
 </div>
 <div class="col" style="padding-left: 10px" data-markdown>
@@ -69,12 +69,12 @@ User Story Mapping
 </br>
 "User Story Mapping is about having a good old-fashioned conversation and then organizing it in the form of a map."
 
-~ Jeff Patton
+~ `Jeff Patton`
 
 </br>
 "User Story Mapping is a visualization tool that drives groups towards a shared understanding."
 
-~ Tim Beattie
+~ `Tim Beattie`
 </div>
 </div>
 

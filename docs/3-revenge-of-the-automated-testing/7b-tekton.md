@@ -1,16 +1,16 @@
-# Extend Tekton Pipeline with Stackrox (WIP)
+# Extend Tekton Pipeline with StackRox (WIP)
 
-## Integrate Rox Image Scan into pipeline
-> With **StackRox**, you can analyze images for vulnerabilities. Scanner analyzes all image layers to check for known vulnerabilities by comparing them with the Common Vulnerabilities and Exposures (CVEs) list using **rox-image-scan**. You can also Check Build/Deploy Time Violations using **rox-image-check**
+## Integrate `Rox Image Scan` into pipeline
+> With **StackRox**, you can analyze images for vulnerabilities. Scanner analyzes all image layers to check for known vulnerabilities by comparing them with the Common Vulnerabilities and Exposures (CVEs) list using **`rox-image-scan`**. You can also Check Build/Deploy Time Violations using **`rox-image-check`**.
 
-In this section we are going to improve our already built `main-pr-v1` pipeline and add Rox Image Scan task into the pipeline.  
+In this section we are going to improve our already built `main-pr-v1` pipeline and add `Rox Image Scan` task into the pipeline.  
 The SAAP cluster is shipped with many useful predefined cluster tasks. 
-Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**. 
+Lets add two tasks into our pipeline **`rox-image-scan`** and **`rox-image-check`**. 
 
-1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
-  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+1. Open the chart we added to `00-tekton-pipelines` folder in section 2.
+  ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the rox-image-scan task. 
+2. Open the `values.yaml` file in the editor. After the `build-and-push`, reference the `rox-image-scan` task. 
 
     ```
     - defaultTaskName: rox-image-check
@@ -81,16 +81,16 @@ Lets add two tasks into our pipeline  **rox-image-scan** and **rox-image-check**
           name: stakater-tekton-builder
           create: false
     </code></pre></div>
-3. Now open Argocd and check if the changes were synchronized.
+3. Now open ArgoCD and check if the changes were synchronized.
 
-    ![sorcerers-build-tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
-    ![sorcerers-build-tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
+    ![sorcerers-build-Tekton-pipelines](./images/sorcerers-build-tekton-pipelines.png)
+    ![sorcerers-build-Tekton-pipelines2](./images/sorcerers-build-tekton-pipelines2.png)
 
 
-4. If the sync is green, you're good to go. You have successfully added rox-image-scan to your pipeline!
+4. If the sync is green, you're good to go. You have successfully added `rox-image-scan` to your pipeline!
     TODO: See Pipeline
 
-🪄🪄 Observe the **stakater-nordmart-review** pipeline running with the **rox-image-scan** & **rox-image-check** task.🪄🪄
+🪄🪄 Observe the **`stakater-nordmart-review`** pipeline running with the **`rox-image-scan`** & **`rox-image-check`** task.🪄🪄
 
 🩴🔑🐉
 
@@ -100,7 +100,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we viewed earlier. We will create a merge request for our code repo and see what happens when its pipeline runs.
 
-2. Open the <GROUP_NAME>/stakater-nordmart-review repository on gitlab. Edit the Dockerfile.
+2. Open the `<GROUP_NAME>/stakater-nordmart-review` repository on GitLab. Edit the Dockerfile.
 
     ![images/build-time-violation-dockerfile.png](images/build-time-violation-dockerfile.png)
 
@@ -112,7 +112,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
     Commit this change with `Start with Merge Request` option checked.
     ![images/build-time-violation-dockerfile-merge-req.png](images/build-time-violation-dockerfile-merge-req.png)
 
-4. Navigate to the UI, Goto Pipelines under Piplines section in sidebar and open the pipeline for your merge request.
+4. Navigate to the UI, go to Pipelines under Piplines section in sidebar and open the pipeline for your merge request.
 
 4. This should now fail on the **image-scan/rox-image-check** task.  
 
@@ -125,4 +125,4 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 6. Remove the `EXPOSE 22` from the `Dockerfile` in the same merge request branch and the pipeline will succeed.
 
-🪄🪄 Observe the **stakater-nordmart-review** pipeline running successfully again 🪄🪄
+🪄🪄 Observe the **`stakater-nordmart-review`** pipeline running successfully again 🪄🪄

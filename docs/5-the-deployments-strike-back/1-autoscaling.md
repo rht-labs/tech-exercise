@@ -2,7 +2,7 @@
 
 > Horizontal pod autoscaler (HPA) helps us to specify how OpenShift should automatically increase or decrease the scale of an application, based on metrics collected from the pods. After we define an HPA (based on CPU and/or memory usage metrics), the platform calculates the current usage and compare it with the desired utilization, then scales pods up or down accordingly.
 
-1. The stakater-nordmart-review API helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
+1. The `stakater-nordmart-review` API Helm chart contains the Horizontal Pod Autoscaler yaml. By default we've switched it off. This is what it looks like:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -55,7 +55,7 @@
               averageUtilization: 60
     ```
 
-3. Git commit the changes. We probably don't need to tell you the commands to do this by now, but just incase... here they are again 🐎🐎🐎 !
+3. Git commit the changes. We probably don't need to tell you the commands to do this by now, but just in case... here they are again 🐎🐎🐎 !
 
     ```bash
     cd /projects/stakater-nordmart-review
@@ -77,10 +77,10 @@
     * -n: Number of requests to run (10,000)
     * -t: Timeout for each request in seconds (30)
 
-6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
+6. While this is running, we should see in OpenShift land the autoscaler is kicking in and spinning up additional pods. If you navigate to the review deployment, you should see the replica count has jumped.
 
     ![HPA_hey_command](./images/hpa-hey-command.png)
-    ![Pod_Scaled_Up](./images/pod-scaled-up.png)
+    ![pod-scaled-up](./images/pod-scaled-up.png)
     ![HPA_Action1](./images/hpa_action1.png)
     ![HPA_Action2](./images/hpa_action2.png)
 

@@ -1,6 +1,5 @@
 ## Alerting and Notifications
 
-> SAAP's built in alerts.... blah
 ### Workload Alerts
 
 1. The Nordmart Review API and UI charts both have one basic `rule` for firing off an alert. If you open up the `stakater-nordmart-review/deploy/values.yaml` file, you'll find an alert that gets triggered when total ratings below 2 has crossed the threshold 8. The alert rules are written in PromQL. You can also add an extra alert which will be triggered when a pod is not available for one minute. In `values.yaml`add the following alert after existing `nordmart-review-low-rating-warning` alert under `prometheusRule.group`
@@ -20,7 +19,7 @@
             severity: critical
     </code></pre></div>
 
-    ![prometheus-rule](./images/review-prometheus-rule.png)
+    ![Prometheus-rule](./images/review-prometheus-rule.png)
 
     ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
 
@@ -30,11 +29,11 @@
 
 
 
-   ![prometheus-rule](./images/deployment-scale-down.png)
-   ![prometheus-rule](./images/prometheus-alert-triggered.png)
-   ![prometheus-rule](./images/alertmanager-alert-triggered.png)
+   ![Prometheus-rule](./images/deployment-scale-down.png)
+   ![Prometheus-rule](./images/prometheus-alert-triggered.png)
+   ![Prometheus-rule](./images/alertmanager-alert-triggered.png)
 
-2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.prometheusRule
+2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.`prometheusRule`:
 
     ```yaml
         rules:
@@ -59,7 +58,7 @@
 
     When the chart version is updated automatically, ArgoCD will detect your new changes and apply them to the cluster 🔥🔥🔥
 
-4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the mongodb alert.
+4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the MongoDB alert.
 
     ```bash
     oc project ${TENANT_NAME}-test
@@ -82,5 +81,5 @@
 
 5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `NordmartReviewApiMongoDBDiskUsage` alert as below:
 
-    ![prometheus-rule](./images/mongodb-alert-triggered.png)
-    ![prometheus-rule](./images/mongodb-pvc.png)
+    ![Prometheus-rule](./images/mongodb-alert-triggered.png)
+    ![Prometheus-rule](./images/mongodb-pvc.png)

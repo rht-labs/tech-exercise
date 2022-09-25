@@ -1,6 +1,6 @@
 ## User Workload Monitoring
 
-> SAAP (Stakater App Agility Platform) has monitoring capabilities built in. It deploys the prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
+> SAAP (Stakater App Agility Platform) has monitoring capabilities built in. It deploys the Prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
 
 ### SAAP Developer view Monitoring (pods etc.)
 
@@ -12,7 +12,7 @@
 
     ![product-review-default-metrics](images/product-review-default-metrics.png)
 
-2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
+2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
 
     ```bash
     sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-dev'}) by (pod)
@@ -24,11 +24,11 @@
 
 > Let's super charge our monitoring with specific information about our cat based services ...
 
-1. Lets Enable ServiceMonitor in ProductReview apps.
+1. Lets Enable `ServiceMonitor` in `ProductReview` apps.
 
-    SAAP gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or number of reviews or active users etc) alongside the base ones, we need another object: _ServiceMonitor_. ServiceMonitor will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
+    SAAP gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or number of reviews or active users etc) alongside the base ones, we need another object: _`ServiceMonitor`_. It will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
-    **Example** ServiceMonitor object:
+    **Example** `ServiceMonitor` object:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -53,9 +53,9 @@
           app: review
     </code></pre></div>
 
-    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
+    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
-    Our Helm Chart for nordmart-review api Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
+    Our Helm Chart for `nordmart-review` API Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
     ```yaml
         ## Service Monitor
@@ -78,12 +78,12 @@
     oc get servicemonitor -n ${TENANT_NAME}-dev -o yaml
     ```
 
-   This is how the serviceMonitor will look like in openshift cluster
+   This is how the `serviceMonitor` will look like in OpenShift cluster:
 
    ![sevice-monitor](./images/review-service-monitor.png)
 
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes grafana installation. Add an existing dashboard to norwdmart-review api; the dashboard can be found `nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
+2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to norwdmart-review API; the dashboard can be found `nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
 
     ```yaml
         # Grafana Dashboard
@@ -100,13 +100,13 @@
     git push
     ```
 
-4. Once this change has been sync'd (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for nordmart review api;
+4. Once this change has been synchronized (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `nordmart-review` API;
 
-    ![forecastle-workload-grafana](images/forecastle-workload-grafana.png)
+    ![Forecastle-workload-Grafana](images/forecastle-workload-grafana.png)
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
 
-5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `nordmart-review` api. In your IDE, run on your terminal:
+5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `nordmart-review` API. In your IDE, run on your terminal:
 
     ```bash
     # Get the reviews for a specific Product (i.e. 329199)
@@ -119,9 +119,9 @@
 
 6. Back in Grafana, we should see some data populated into the boards... Go to the Manage and then click on your <TENANT_NAME>-dev.
 
-    ![grafana-http-reqs](./images/product-review-grafana-dashboard-manage.png)
-    ![grafana-http-reqs](./images/product-review-grafana-dashboard-tanent.png)
-    ![grafana-http-reqs](./images/product-review-grafana-dashboard.png)
+    ![Grafana-http-reqs](./images/product-review-grafana-dashboard-manage.png)
+    ![Grafana-http-reqs](./images/product-review-grafana-dashboard-tanent.png)
+    ![Grafana-http-reqs](./images/product-review-grafana-dashboard.png)
 
 ### Create a Dashboard
 
@@ -131,7 +131,7 @@
 
 2. Once you've signed in, add a new panel:
 
-    ![grafana-add-panel](./images/grafana-add-panel.png)
+    ![Grafana-add-panel](./images/grafana-add-panel.png)
 
 3. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Panel settings, set the title to something sensible and add the query below. Hit save!
 
@@ -148,8 +148,8 @@
     oc delete pods -l app=review-web -n ${TENANT_NAME}-dev
     ```
 
-    ![grafana-less-pods](./images/grafana-less-pods.png)
+    ![Grafana-less-pods](./images/grafana-less-pods.png)
 
     <p class="tip">
-    🐌 THIS IS NOT GITOPS - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
+    🐌 THIS IS NOT GitOps - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
     </p>

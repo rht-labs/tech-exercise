@@ -119,7 +119,7 @@ If you work on multiple teams, think about the aspects of your Social Contract t
 * Core hours
 * No blame culture
 * No Rock Stars!
-* Timebox debates
+* Time box debates
 * Celebrate success!
 
 </div>
@@ -128,7 +128,7 @@ If you work on multiple teams, think about the aspects of your Social Contract t
 
 
 #### Facilitation Tips
-Ensure that things in the Social Contract are actionable. For example  "Be Open" has good intent, but lacks specificity. Ask questions to tease our greater meanings.
+Ensure that things in the Social Contract are actionable. For example "Be Open" has good intent, but lacks specificity. Ask questions to tease our greater meanings.
 </br>
 
 _"Can you give me an example of not being open?" can lead to actionable items like "Listen to others as I would like to be heard" or "Give space to the quiet person"._ <!--{.element: style="font-size: ; font-weight: 300!important;"} -->

@@ -58,7 +58,7 @@ _Impact mapping is a lightweight, collaborative planning technique for teams tha
 
 _It helps delivery teams and stakeholders visualize roadmaps, explain how deliverables connect to user needs, and communicate how user outcomes relate to higher-level organizational goals_.
 
-~ Gojko Adzic
+~ `Gojko Adzic`
 </div>
 </div>
 
@@ -155,7 +155,7 @@ Pet Battle Industries (PBI) is a silly app that allows users to upload pictures 
 #### Facilitation Tips
 
 * Don't spend too long on the goal - get it to good enough and move on.
-* Have a goal preprepared in advance to really speed up the workshop.
+* Have a goal prepared in advance to really speed up the workshop.
 * If time is a constraint, forget about deliverables and focus just on the impacts.
  
 

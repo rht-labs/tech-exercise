@@ -6,7 +6,7 @@
 
 Because all of our code and configuration is in git, we can easily move our whole continuous delivery stack to another OpenShift cluster. This is useful if you wanted to try out all the exercises at a later stage using the code from this run.
 
-As a prerequisite - you will need to have setup TL500 using the previous section [Tooling Installation](99-the-rise-of-the-cluster/1-tooling-installation). Lets cover the steps once you have a cluster and tooling installed to get going with your code.
+As a prerequisite - you will need to have setup TL500 using the previous section [Tooling Installation](1-tooling-installation.md). Lets cover the steps once you have a cluster and tooling installed to get going with your code.
 
 Lets take our code from `cluster-a` to `cluster-b`.
 
@@ -16,11 +16,11 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
 1. You will need to git clone the `tech-exercise`, `pet-battle`, `pet-battle-api` repositories to your laptop for safe-keeping after taking this course.
 
-2. Use `vscode` IDE or similar to replace all the occurrances of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
+2. Use `vscode` IDE or similar to replace all the occurrences of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
 
-3. Login to `gitlab` and create your ${TEAM_NAME}
+3. Login to GitLab and create your ${TEAM_NAME}
 
-4. Let's push our code into the hosted `gitlab` instance in our new cluster:
+4. Let's push our code into the hosted GitLab instance in our new cluster:
 
     ```bash
     export GIT_SERVER=gitlab-ce.apps.cluster-b.com
@@ -53,7 +53,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     git push -u origin main
     ```
 
-5. Login to `gitlab` and make sure your newly created projects are set to **public** (they will be private by default).
+5. Login to GitLab and make sure your newly created projects are set to **public** (they will be private by default).
 
 6. Regenerate the `sealed-secrets` for this new cluster. This assumes we did _not_ migrate the secret master key to the new cluster when setting up (obviously skip this step if you did migrate it!).
 
@@ -202,7 +202,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     run
     ```
 
-    Deploy helm chart
+    Deploy Helm chart
 
     ```bash
     oc new-project ${TEAM_NAME}-ci-cd
@@ -221,7 +221,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
-10. Add the integrations and web hooks to gitlab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
+10. Add the integrations and web hooks to GitLab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
 
 11. Create new cosign signing keys.
 
@@ -241,7 +241,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     git push
     ```
 
-12. Kick off builds, make sure they work, fix up any helm chart version mismatches etc.
+12. Kick off builds, make sure they work, fix up any Helm chart version mismatches etc.
 
     ```bash
     cd /projects/pet-battle-api; git commit -m "test" --allow-empty; git push

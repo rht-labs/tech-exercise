@@ -72,10 +72,10 @@ So the question is; what does the user care about?
 
 
 #### Example: Pet Battle
-During Impact Mapping, we've identified some actors like _Uploaders, Animal Lovers, or Casual Viewers_. 
+During Impact Mapping, we've identified some actors like _`Uploaders`, `Animal Lovers`, or `Casual Viewers`_. 
 
 Let's take one of them and define how they interact with Pet Battle. 
-* **Uploaders want to:** 
+* **`Uploaders` want to:** 
     - Access to Pet Battle fast
     - Upload multiple cat photos successfully
     - View their own cat photos on the dashboard 
@@ -83,7 +83,7 @@ Let's take one of them and define how they interact with Pet Battle.
 
 
 #### _Uploading Photos Successfully_
-From an Uploader perspective here “good” means:
+From an `Uploader` perspective here “good” means:
 1. Pet Battle is always available
 2. Upload button functions
 3. Upload happens successfully when right type of file is provided
@@ -119,16 +119,16 @@ SLI Specification: Request to access Pet Battle complete successfully
 SLI Implementations:
   - measured from API metrics.
 SLO:
-  99% of successfull requests in the past 28 days served are less than 150ms
+  99% of successful requests in the past 28 days served are less than 150ms
 ```
 
-_It is important that SLOs are documentated and iterate over time._
+_It is important that SLOs are documented and iterated over time._
 
 
 
 
 #### Error Budgets
-Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our endusers. When our measurements show if we are not reliable enough - now what?
+Now that we have SLOs defined for Pet Battle - next step is deciding what to do when we don’t meet with them. We define SLOs as a way to make sure that our services are reliable enough for our end users. When our measurements show if we are not reliable enough - now what?
 
 Let's discuss what would you do if you don't meet with SLOs?
 

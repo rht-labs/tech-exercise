@@ -19,7 +19,7 @@ spec:
     - description: >
         ### Add Helm Repo
 
-        1. Add the redhat-cop helm repository locally
+        1. Add the redhat-cop Helm repository locally
         ```
          helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
          helm repo list

@@ -56,8 +56,8 @@ some **very** heated debate
 
 
 #### _Where did it come from?_
-![Brandolini](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
-It was introduced in 2013 in a blog by Alberto Brandolini.
+![event-storming](images/event-storming/brandolini.jpg) <!-- {.element: class="inline-image" style="max-width:300px;"} -->
+It was introduced in 2013 in a blog by `Alberto Brandolini`.
 ![ubiquitous-language](images/event-storming/es-ubiquitous-language.png) <!-- {.element: class="" style="max-width:450px;"} -->
 
 It provides a kind of Domain Driven Design (DDD) "Lite," but with more business focus and less jargon and complexity.
@@ -152,7 +152,7 @@ The Event Storming Key is specific set of colored sticky notes.
 
 
 #### Context - PetBattle
-* ...and reframe the deliverables using the _Friends Notation_ (`The One Where..`) to drill down into the system design.
+* ...and re-frame the deliverables using the _Friends Notation_ (`The One Where..`) to drill down into the system design.
 * Using this notation will help to establish the boundaries of the Event Storm exploration
 ![tow-pb](images/event-storming/tow-pb.png)
 
@@ -172,7 +172,7 @@ The Event Storming Key is specific set of colored sticky notes.
 #### Questions to help guide you
 * Who is Mary? Does she need to authenticate to enter the competition?
 * What is the daily prize? How does Mary know about it?
-* How will Mary know that she's won the competition? Does she get notified? Is there a leaderboard?
+* How will Mary know that she's won the competition? Does she get notified? Is there a leader-board?
 
 
 

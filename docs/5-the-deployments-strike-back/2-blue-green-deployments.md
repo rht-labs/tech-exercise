@@ -2,13 +2,13 @@
 
 > Blue/Green deployments involve running two versions of an application at the same time and moving the traffic from the old version to the new version. Blue/Green deployments make switching between two different versions very easy.
 
-<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GITOPS! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Nordmart review UI!
+<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GitOps! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Nordmart review UI!
 
 ![blue-green-diagram](images/blue-green-diagram.png)
 
-1. Let's create two new deployments in our ArgoCD Repo for the nordmart-review front end. We'll call one Blue and the other Green. Add 3 new argocd applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
+1. Let's create two new deployments in our ArgoCD Repo for the `nordmart-review` front end. We'll call one Blue and the other Green. Add 3 new ArgoCD applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
 
-    a. stakater-nordmart-review-ui-bg-blue.yaml
+    a. `stakater-nordmart-review-ui-bg-blue.yaml`
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
@@ -35,7 +35,7 @@
             selfHeal: true
     ```
 
-    b. stakater-nordmart-review-ui-bg-green.yaml
+    b. `stakater-nordmart-review-ui-bg-green.yaml`
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
@@ -62,7 +62,7 @@
             selfHeal: true
     ```
 
-    c. stakater-nordmart-review-ui-bg-route.yaml
+    c. `stakater-nordmart-review-ui-bg-route.yaml`
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
@@ -205,10 +205,10 @@ We can validate that blue service is currently running by getting the host of ou
 ```bash
 oc get route/review-ui-bg -n (TENANT_NAME)-dev --template='{{.spec.host}}'
 ```
-and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
+and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
 
 
-![nordmart-review-bg-blue](images/nordmart-review-bg-blue.png)
+![Nordmart-review-bg-blue](images/nordmart-review-bg-blue.png)
 
 
 5. let's update the values.yaml for our deployments and switch the labels for services to point the active service towards green deployment. And then update the route to point towards active green service as well. 
@@ -230,9 +230,9 @@ and then using this url in browser: `https://(ROUTE_HOST)/#/reviews`
     git push
     ```
 
-8. When arocd syncs, you should see things progress and the blue green deployment happen automatically. You can go to this url again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
+8. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
 
-![nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
+![Nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 
     This is a simple example to show how we can automate a blue green deployment using GitOps. However, we did not remove the
-    previous deployment of nordmart-review, in the real world we would do this.
+    previous deployment of `nordmart-review`, in the real world we would do this.

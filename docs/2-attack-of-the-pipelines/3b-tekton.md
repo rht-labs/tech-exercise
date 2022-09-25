@@ -19,27 +19,27 @@ In this snippet of the pipeline used in this exercise, we define:
 Unlike most CI/CD solutions, the Tekton pipeline definitions are not stored with the codebase. Instead, they are deployed directly onto the cluster that they will run on.
 
 ### Tekton Pipeline Chart
-We will use stakater's `pipeline-charts` Helm chart to deploy the tekton resources. The chart contains templates for all required tekton resources such as pipeline, task, eventlistener, triggers, etc. We will fill in the values for these resources and deploy a functioning pipeline.
-(Hiding complexity using tekton pipeline chart)
+We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as `pipeline`, `task`, `eventlistener`, `triggers`, etc. We will fill in the values for these resources and deploy a functioning pipeline.
+(Hiding complexity using Tekton pipeline chart)
 
 ![pipeline-charts-structure](./images/pipeline-charts-structure.png)
 
 
-The above chart contains all necessary resources needed to build and run a tekton pipeline. Some of the key things to note above are:
+The above chart contains all necessary resources needed to build and run a Tekton pipeline. Some of the key things to note above are:
 * `eventlistener` -  listens to incoming events like a push to a branch.
-* `trigger` - the eventlisterner specifies a trigger which in turn specifies:
+* `trigger` - the `eventlistener` specifies a trigger which in turn specifies:
    * `interceptor` - it receives data from the event
    * `triggerbinding` - extracts values from the event interceptor
    * `triggertemplate` - defines `pipeline` run resource template in its definition which in turn references the pipeline
 
-(- **Note**: We do not need to define interceptor and triggertemplates in every trigger while using stakater tekton pipeline chart.)
+(- **Note**: We do not need to define interceptor and trigger templates in every trigger while using stakater Tekton pipeline chart.)
 * `pipeline` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
 * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
 
 ### SAAP preconfigured cluster tasks:
-SAAP is shipped with many ready-to-use tekton cluster tasks. Let's take a look at some of the tasks that we will be using to construct a basic pipeline.
+SAAP is shipped with many ready-to-use Tekton cluster tasks. Let's take a look at some of the tasks that we will be using to construct a basic pipeline.
 
-Navigate to the Openshift Console using Forecastle. Select Tasks under Pipeline in sidebar. Select the ClusterTasks tab and search stakater. Here you will see all the tasks shipped with SAAP.
+Navigate to the OpenShift Console using Forecastle. Select Tasks under Pipeline in sidebar. Select the ClusterTasks tab and search stakater. Here you will see all the tasks shipped with SAAP.
 
 ![stakater-clustertasks](./images/stakater-clustertasks.png)
 
@@ -48,19 +48,19 @@ Navigate to the Openshift Console using Forecastle. Select Tasks under Pipeline 
 This task clones the repository/code on which pipeline is to executed in the `workspace`
 
 **Parameters:**
-The task takes in the following tekton params:
-* url - this is the url to clone the repository from. We extract this url from the payload received by the interceptor
-* revision - this is the revision or 'branch' of the repository
+The task takes in the following Tekton parameters:
+* `url` - this is the URL to clone the repository from. We extract this URL from the payload received by the interceptor
+* `revision` - this is the revision or 'branch' of the repository
 
 #### 2 - stakater-create-git-tag-v1 🏷
 
 This task creates the tag for our repository. For push to main branch, it uses git semantic versioning to increment the tag. While for pull requests, it creates a new tag using the commit hash.
 
 **Parameters:**
-The task takes in the following params:
-* gitrevision - head sha in case of PR and 'master/main' incase of merge to main/master
-* oldcommit - hash of the previous commit
-* prnumber- this represents the pr number. It is set to 'NA' incase of merge to main
+The task takes in the following parameters:
+* `gitrevision` - head SHA in case of PR and 'master/main' in case of merge to main/master
+* `oldcommit` - hash of the previous commit
+* `prnumber`- this represents the pr number. It is set to 'NA' in case of merge to main
 
 Below is the code snipped from the task:
 
@@ -71,7 +71,7 @@ Below is the code snipped from the task:
 
 The task contains a small buildah script that builds image using the source code and pushes it to nexus repository.
 
-The task takes parameter needed to build and push the image as params, such as the image repository, image tag, and dockerfile, etc
+The task takes parameter needed to build and push the image as parameters, such as the image repository, image tag, and dockerfile, etc
 
 
 **Build script:**
@@ -82,16 +82,16 @@ The task takes parameter needed to build and push the image as params, such as t
 
 ![image-push-script](./images/image-push-script.png)
 
-#### 4 - stakater-helm-push-v1 🅿
+#### 4 - `stakater-helm-push-v1` 🅿
 
-The helm-push task packages the application helm chart, creates the tag for chart, and finally pushes it to the chart repository.
+The `helm-push` task packages the application Helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
-The repo path, chart repository url, prnumber, git revision, and git tag are taken as parameters
+The repo path, chart repository URL, pull request number, git revision, and git tag are taken as parameters
 
 #### 5 - stakater-update-cd-repo-v3 ⚙️
 
-When the pipeline is triggered by merge on default branch, this task is responsible for updating the image and chart version for the application in the gitops repo.
-The gitops repo in our case is the nordmart-apps-gitops-config repo.
+When the pipeline is triggered by merge on default branch, this task is responsible for updating the image and chart version for the application in the GitOps repo.
+The GitOps repo in our case is the `nordmart-apps-gitops-config` repo.
 In case the pipeline is triggered by a PR, this task creates a Environment Provisioner CR for dynamic test environment.
 
 #### 6 - stakater-push-main-tag-v1 📤
@@ -107,9 +107,9 @@ The task updates the tag in git repository when change is pushed to main/master.
 
 It's finally time to get our hands dirty. Let's use the `tekton-pipeline-chart` and the above tasks to create a working pipeline.
 
-Firstly, we will be populating the values file for the tekton pipeline Chart to create our pipeline.
+Firstly, we will be populating the values file for the Tekton pipeline Chart to create our pipeline.
 
-1. Open up the nordmart-apps-gitops-config repository that we created in section 1 on GitLab.
+1. Open up the `nordmart-apps-gitops-config` repository that we created in section 1 on GitLab.
 
 
 2. Navigate to `01-TENANT-NAME >  01-tekton-pipelines > 00-build` folder.
@@ -194,17 +194,17 @@ Firstly, we will be populating the values file for the tekton pipeline Chart to 
         create: false
    ```
 
-Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and helm chart, and finally updates the version of application.
+Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and Helm chart, and finally updates the version of application.
 
 
-5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to argocd and search for Application `<TENANT_NAME>-build-tekton-pipelines`
+5. Commit the changes and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to ArgoCD and search for Application `<TENANT_NAME>-build-tekton-pipelines`
    
 
-  ![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
+  ![sorcerers-build-Tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines.png)
 
 If you open up the application by clicking on it, you should see a similar screen
 
-![sorcerers-build-tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines2.png)
+![sorcerers-build-Tekton-pipelines.png](./images/sorcerers-build-tekton-pipelines2.png)
 
 6. Let's see our pipeline definition in the SAAP console now. Select <TENANT_NAME>-build name in the console. Now in the pipelines section, click pipelines. You should be able to see the pipeline that you just creted using the chart.
 
@@ -217,20 +217,20 @@ If you open up the application by clicking on it, you should see a similar scree
    ![add-route.png](./images/add-route.png)
 8. Once you have the URL, over on GitLab go to `nordmart-review > Settings > Webhook ` to add the webhook:
 
-   * Add the url we obtained through the last step in the URL box
+   * Add the URL we obtained through the last step in the URL box
    * select `Push Events`, leave the branch empty for now
    * select `SSL Verification`
    * Click `Add webhook` button.
 
-   ![nordmart-review-webhook-integration.png](images/webhook.png)
+   ![Nordmart-review-webhook-integration.png](images/webhook.png)
 
-9. Repeat the process for `nordmart-review-ui`. Go to nordmart-review-ui project and add the webhook there through the same process.
+9. Repeat the process for `nordmart-review-ui`. Go to `nordmart-review-ui` project and add the webhook there through the same process.
 
-10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for nordmart review.
+10. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Nordmart review.
 
 11. Let's make a simple change to the application. Edit  `pom.xml` by adding new line in the file. Push commits directly to the main.
 
-12. Navigate to the Openshift Console ...
+12. Navigate to the OpenShift Console ...
 
 
     🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
@@ -241,20 +241,20 @@ If you open up the application by clicking on it, you should see a similar scree
   
     🪄OBSERVE PIPELINE RUNNING :D 
 
-13. Open the logs tab and click build-and-push. Remember the **tag** and **image_sha** for our image that we will later match with pod spec.. 
+13. Open the logs tab and click build-and-push. Remember the **`tag`** and **`image_sha`** for our image that we will later match with pod spec.. 
 
     ![build-and-push-details](images/build-and-push-details.png)
 
 
-14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new helm chart version that contains the latest application image. Goto your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
+14. When the pipeline is finished, Our Nordmart Apps GitOps Config is updated with the new Helm chart version that contains the latest application image. Go to your Nordmart Apps GitOps Config and View the latest commits at `01-<TENANT_NAME>/stakater-nordmart-revew/01-dev/Chart.yaml`
 
-    ![updated-nordmart-apps-gitops-config](images/updated-nordmart-apps-gitops-config.png)
+    ![updated-Nordmart-apps-GitOps-config](images/updated-nordmart-apps-gitops-config.png)
 
-    For pushes to main branch, application is updated in <TENANT_NAME>-dev namespace.
+    For pushes to main branch, application is updated in `<TENANT_NAME>-dev` namespace.
 
-15. Open our <TENANT>-stakater-nordmart-review-dev argocd application and click refresh so that our changes are applied to the cluster.
-    ![tenant-dev-nordmart-review](images/tenant-dev-nordmart-review.png)
+15. Open our `<TENANT>-stakater-Nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
+    ![tenant-dev-Nordmart-review](images/tenant-dev-nordmart-review.png)
 
-15. Navigate to Pods under Workloads in the sidebar in <TENANT_NAME>-dev namespace, Open the yaml
-of review- pod and scroll down to status key, you ll see that the **tag** and **sha** in the build-and-push step match.
+15. Navigate to Pods under Workloads in the sidebar in `<TENANT_NAME>-dev` namespace, open the yaml
+of `review-` pod and scroll down to status key, you'll see that the **`tag`** and **`sha`** in the `build-and-push` step match.
     ![pod-image-updated](images/pod-image-updated.png)

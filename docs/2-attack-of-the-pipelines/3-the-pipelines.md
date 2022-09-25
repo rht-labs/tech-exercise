@@ -14,6 +14,6 @@ Why create pipelines:
 ### Pre-requisites
 
 * Team/Participant tenant added to the cluster.
-* Running version of nordmart review and nordmart review ui deployed through the cluster.
+* Running version of Nordmart review and Nordmart review UI deployed through the cluster.
 
-<span style="color:green;" >Expected Outcome</span>: Working pipelines that build and deploy the nordmart review applications (frontend and backend) 
+<span style="color:green;" >Expected Outcome</span>: Working pipelines that build and deploy the Nordmart review applications (frontend and backend) 

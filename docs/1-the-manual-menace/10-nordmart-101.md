@@ -2,9 +2,9 @@
 
 ## Architecture
 
-This is review sub module of Stakater nordmart fictious online e-commerce store.
+This is review sub module of Stakater Nordmart fictitious online e-commerce store.
 
-![nordmart-architecture](./images/nordmart-architecture.png)
+![Nordmart-architecture](./images/nordmart-architecture.png)
 
 It is composed of three components
 

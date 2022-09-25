@@ -14,7 +14,7 @@ This repo is available on the Red Hat Labs GitHub organization – <span style="
 All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
 
 ### Get GitLab Ready for GitOps
-> In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
+> In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our GitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
  
 1. Log into GitLab with your credentials. GitLab URL:
 
@@ -23,39 +23,39 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```
 
     We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
-    ![gitlab-initial-login](images/gitlab-initial-login.png)
+    ![GitLab-initial-login](images/gitlab-initial-login.png)
 
 2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
-![gitlab-create-group](images/gitlab-create-group.png)
+![GitLab-create-group](images/gitlab-create-group.png)
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if your are not working as a team.
-![gitlab-group-add-members](images/gitlab-group-add-members.png)
+![GitLab-group-add-members](images/gitlab-group-add-members.png)
 
 4. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
-![gitlab-new-project](images/gitlab-new-project.png)
+![GitLab-new-project](images/gitlab-new-project.png)
 
 5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
-![gitlab-new-project](images/gitlab-new-project-2.png)
+![GitLab-new-project](images/gitlab-new-project-2.png)
 
-6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
+6. We are going to create a GitLab Personal Access Token (PAT). The token is a more secure and reliable method for accessing GitLab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in GitLab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
-    Export your Gitlab username.
+    Export your GitLab username.
 
     ```bash
     export GITLAB_USER=<YOUR_GITLAB_USER>
     ```
 
-    Export your Gitlab password.
+    Export your GitLab password.
 
     ```bash
     export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
     ```
 
     <p class="tip">
-    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
+    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes, i.e.: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
-    Generate your Gitlab PAT.
+    Generate your GitLab PAT.
 
     ```bash
     gitlab_pat
@@ -69,7 +69,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     We can see the PAT printed out on the command line, it is also stored in an environment variable called `GITLAB_PAT`
 
-    ![gitlab-pat](images/gitlab-pat.png)
+    ![GitLab-pat](images/gitlab-pat.png)
 
 7. Let's push our code to the GitLab server. Back in your CodeReady Workspace from the terminal
 
@@ -83,7 +83,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```bash#test
     cd /projects/tech-exercise
     git add .
-    git commit -am "🐙 ADD - argocd values file 🐙"
+    git commit -am "🐙 ADD - ArgoCD values file 🐙"
     git push -u origin --all
     ```
 
@@ -103,14 +103,14 @@ All of these traits lead to one outcome - the ability to build and release quali
     team: <TEAM_NAME>
     ```
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+    You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
     yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml
     yq eval ".source = \"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
     ```
 
-2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for boostrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
+2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for bootstrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
 
     ```bash
             - name: jenkins
@@ -132,13 +132,13 @@ All of these traits lead to one outcome - the ability to build and release quali
               operatorgroup: true
     ```
 
-    You can also run this bit of code to do the replacement if you are feeling uber lazy!
+    You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
     sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     ```
 
-3. This is GITOPS - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
+3. This is GitOps - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
 
     ```bash#test
     cd /projects/tech-exercise/
@@ -180,7 +180,7 @@ EOF
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
-    ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
+    ![ArgoCD-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
 
 6. As ArgoCD sync's the resources we can see them in the cluster:
 

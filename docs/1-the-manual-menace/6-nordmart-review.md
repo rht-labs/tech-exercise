@@ -4,18 +4,18 @@
 
 Nordmart Review product is composed of three components:
 
-1. **stakater-nordmart-review:** A spring boot based REST API
-2. **stakater-nordmart-review-ui:** A react based frontend to managing reviews
-3. **mongodb:** A database to hold reviews
+1. `stakater-nordmart-review`: A spring boot based REST API
+2. `stakater-nordmart-review-ui`: A react based frontend to managing reviews
+3. `mongodb`: A database to hold reviews
 
-![stakater-nordmart-review-architecture](images/stakater-nordmart-review-architecture.jpg)
+![stakater-Nordmart-review-architecture](images/nordmart-architecture.png)
 
 ### Lets get started 
 
-We will first setup the stakater-nordmart-review repository and deploy it on our cluster via helm chart.
+We will first setup the `stakater-nordmart-review` repository and deploy it on our cluster via Helm chart.
 
 ## Stakater-Nordmart-Review
-1. Clone the stakater-nordmart-review repository that you imported from github to your gitlab account.
+1. Clone the `stakater-nordmart-review` repository that you imported from GitHub to your GitLab account.
 
         # git clone https://<GITLAB_SERVER>/<YOUR_GITLAB_GROUP>/<YOUR_REPO_NAME>
         git clone https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/workshop-exercise/stakater-nordmart-review
@@ -26,22 +26,22 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
 2. Open values.yaml file in the editor and change the **application.deployment.image.repository** and **application.deployment.image.tag** keys in yaml
     > **NOTE:**  We have already built an image for the application and pushed it to nexus image repository.  
 
-    repository: <NEXUS_URL>/stakater-nordmart-review
+    repository: `<NEXUS_URL>/stakater-nordmart-review`
     tag: latest
 
     <p align="center" width="100%">
     <img width="100%" src="images/1-6-1-change-image-tag.jpg">
     </p>
 
-3. Lets use helm to install our stakater-nordmart-review application to the cluster. Run following command in stakater-nordmart-review directory.
+3. Lets use Helm to install our `stakater-nordmart-review` application to the cluster. Run following command in `stakater-nordmart-review` directory.
 
         helm install <TENANT_NAME> deploy/ -n <TENANT_NAME>-test --dependency-update
 
-    > **NOTE**: Make sure you are logged into the openshift cluster via cli.
+    > **NOTE**: Make sure you are logged into the OpenShift cluster via CLI.
 
     > Thanks to **tenant operator** this **<TENANT_NAME>-test** project is already available to us in the cluster where we can deploy this application
 
-4. Login to Openshift UI, Select your project  **<TENANT_NAME>-test** and Navigate to Pods under Workloads in left side bar. 
+4. Login to OpenShift UI, Select your project  **<TENANT_NAME>-test** and Navigate to Pods under Workloads in left side bar. 
 
     <p align="center" width="100%">
     <img width="%" src="images/1-6-2-oc-pods-ui.jpg">
@@ -72,7 +72,7 @@ We will first setup the stakater-nordmart-review repository and deploy it on our
     <img width="%" src="images/1-6-3-oc-route-ui.jpg">
     </p>
 
-7. Lets send a curl request to this endpoint and see the response.
+7. Lets send a `curl` request to this endpoint and see the response.
     - **Get Review**
 
             # Get Review

@@ -66,7 +66,7 @@ Show, Not Tell - Open up the Pet Battle app and explore
 
 
 
-This is going to feel overwhelming, but we're going to give you a trailer of the week in 7 mins or less
+This is going to feel overwhelming, but we're going to give you a trailer of the week in 7 min or less
 🍿🎞
 
 

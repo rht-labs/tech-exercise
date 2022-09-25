@@ -2,7 +2,7 @@
 
 > A/B deployments generally imply running two (or more) versions of the application at the same time for testing or experimentation purposes.
 
-<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-ab-testing_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual A/B deployment. But in the real world you'll want to automate this by increasing the load of the alternative service based on some tests or other metric. Plus this is GITOPS! So how do we do a A/B with all of this automation and new tech, let's take a look with our Pet Battle UI!
+<span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-ab-testing_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual A/B deployment. But in the real world you'll want to automate this by increasing the load of the alternative service based on some tests or other metric. Plus this is GitOps! So how do we do a A/B with all of this automation and new tech, let's take a look with our Pet Battle UI!
 
 ![a-b-diagram](images/a-b-diagram.png)
 
@@ -45,11 +45,11 @@
         weight: 20       <-- based on the percentage we give
     </code></pre></div>
 
-    PetBattle UI helm chart already has this capability. We just need to enable it through `values`. But before that, we need to install a helper tool.
+    PetBattle UI Helm chart already has this capability. We just need to enable it through `values`. But before that, we need to install a helper tool.
 
 ### A/B and Analytics
 
-> The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our endusers, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
+> The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our end users, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
 
 Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
@@ -69,7 +69,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m  "📈 ADD - matomo app 📈"
+    git commit -m  "📈 ADD - Matomo app 📈"
     git push 
     ```
 
@@ -92,7 +92,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 
 ### A/B Deployment
 
-1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` helm chart version and `image_version` to match what you have built.
+1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` Helm chart version and `image_version` to match what you have built.
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
@@ -102,7 +102,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version - may need adjusting!
+        source_ref: 1.0.6 # Helm chart version - may need adjusting!
         values:
           image_version: latest # container image version - may need adjusting!
           fullnameOverride: pet-battle-b
@@ -142,7 +142,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         enabled: true
         source: http://nexus:8081/repository/helm-charts 
         chart_name: pet-battle
-        source_ref: 1.0.6 # helm chart version
+        source_ref: 1.0.6 # Helm chart version
         values:
           image_version: latest # container image version  
           <strong>a_b_deploy:
@@ -178,7 +178,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
         <nav class="navbar  navbar-expand-lg navbar-dark" style="background-color: #009B00;">
     ```
 
-6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend's repository.
+6. Bump the version of the application to trigger a new release by updating the `version` in the `package.json` at the root of the frontend repository.
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">

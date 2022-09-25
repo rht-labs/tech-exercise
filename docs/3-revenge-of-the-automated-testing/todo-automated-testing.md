@@ -12,5 +12,5 @@ Continuous Delivery needs rapid and reliable feedback. Investing in continuous t
 #### Integrate the pipeline with Tekton:
 
 - Add Jest Testing to the pipeline 
-- Add Junit and Alure test reporting to the pipeline 
-- <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/2b-tekton.md)</span>
+- Add JUnit and Allure test reporting to the pipeline 
+- <span style="color:blue;">[Tekton](todo-2b-tekton.md)</span>

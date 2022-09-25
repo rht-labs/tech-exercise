@@ -1,13 +1,13 @@
 # Getting GitLab Ready for GitOps
-> In this section we will get gitlab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
+> In this section we will get GitLab ready for our exercise. We will then import a couple of projects and prep them up to be deployed to the cluster.
 
-1. Log into GitLab with your credentials. You can find the Gitlab URL in Forecastle UI. GitLab URL:
+1. Log into GitLab with your credentials. You can find the GitLab URL in Forecastle UI. GitLab URL:
 
     ```bash
      https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/
     ```
 
-   First, we need to create a Gitlab group with name as the <team_name> or <participant_name>
+   First, we need to create a GitLab group with name as the <team_name> or <participant_name>
    For this open up the menu and select "Create group" from the "Groups" tab:
 
    ![create-group-tab](images/create-group-tab.png)
@@ -19,11 +19,11 @@
 2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
    For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
-   ![gitlab-group-create](images/gitlab-group-create.png)
+   ![GitLab-group-create](images/gitlab-group-create.png)
 
-   Gitlab will redirect you to the group's home page, once the group is created.
+   GitLab will redirect you to the group's home page, once the group is created.
 
-    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in nordmart-infra-gitops-config repo.
+    > Remember that **group name** and **tenant name** should be the same. Make the tenant with the same name in `nordmart-infra-gitops-config` repo.
 
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
@@ -34,11 +34,11 @@
 
 Add member to the group using the "Invite member" option.
 
-4. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
+4. We are going to create a GitLab Personal Access Token (PAT). The token is a more secure and reliable method for accessing GitLab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in GitLab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
-   ![gitlab_pat](images/gitlab_pat.png)
+   ![GitLab_pat](images/gitlab_pat.png)
 
-   Export your Gitlab username.
+   Export your GitLab username.
 
     ```bash
     export GIT_USERNAME=<YOUR_GITLAB_USERNAME>
@@ -49,14 +49,14 @@ Add member to the group using the "Invite member" option.
     export GIT_EMAIL=<YOUR_GITLAB_EMAIL>
     ```
 
-   Export your Gitlab password.
+   Export your GitLab password.
 
     ```bash
     export GIT_PASSWORD=<YOUR_GITLAB_PERSONAL_ACCESS_TOKEN>
     ```
 
     <p class="tip">
-    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
+    ⛷️ <b>TIP</b> ⛷️ - If your password includes special characters, try putting it in single quotes, i.e.: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
     Lets add these config to git 
@@ -78,9 +78,9 @@ Add member to the group using the "Invite member" option.
     ```
    > Make sure you mark the repository as public and choose the group you previously created as the group name. 
     
-   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.  
+   > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.  
 
-   ![import-nordmart-review](images/review-1.png)
+   ![import-Nordmart-review](images/review-1.png)
 
 
 ## Importing Nordmart Review UI 
@@ -92,9 +92,9 @@ Add member to the group using the "Invite member" option.
         https://github.com/stakater-lab/stakater-nordmart-review-ui.git
     ```
 
-   ![import-nordmart-review](images/review-2.png)
+   ![import-Nordmart-review](images/review-2.png)
 
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
    
-   > Make sure that Project Name is lower case and doesnt contain spaces. Use '-' instead.
+   > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.
 

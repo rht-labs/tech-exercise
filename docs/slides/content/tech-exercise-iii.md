@@ -11,7 +11,7 @@
   <img src="images/opl-complete.png">
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
-  <h2>Testing Testing Testing 🔨🔨</h2>
+  <h2>Testing 🔨🔨</h2>
   <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
   <img src="images/opl-foundation.png">
   </a>

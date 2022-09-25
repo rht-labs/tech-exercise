@@ -4,11 +4,11 @@
 
 1. To access the Forecastle developer console, click on the three dots and select Forecastle from the dropdown.
 
-![forecastle-page1](./images/forecastle-login-1.png)
+![Forecastle-page1](./images/forecastle-login-1.png)
 
 2. You will be brought to the `Forecastle` login page. Click on `LOG IN` 
 
-![forecastle-page2](./images/forecastle-login-2.png)
+![Forecastle-page2](./images/forecastle-login-2.png)
 
 3. Log In with your `workshop` single sign-on.
 
@@ -22,4 +22,4 @@
 
 You will now be brought to the Forecastle console, where you can view all your tools and applications from an easy, accessible plane.
 
-![forecastle_console-page2](./images/forecastle-console.png)
+![Forecastle_console-page2](./images/forecastle-console.png)

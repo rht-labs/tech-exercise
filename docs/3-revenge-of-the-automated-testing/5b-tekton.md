@@ -1,11 +1,11 @@
-# Extend Tekton Pipeline with Kube Linting Task
+# Extend Tekton Pipeline with `Kube Linting` Task
 
-Let's enable the **kube-linter** task in our pipeline.
+Let's enable the **`kube-linter`** task in our pipeline.
 
-1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
-  ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)
+1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
+  ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the values file in the editor. After the `stakater-code-linting-v1`, reference the kube-linting task and add a runAfter field to make it run after the stakater-code-linting-v1 task:
+2. Open the values file in the editor. After the `stakater-code-linting-v1`, reference the `kube-linting` task and add a `runAfter` field to make it run after the stakater-code-linting-v1 task:
 
 ```
 - taskName: stakater-kube-linting-v1
@@ -89,24 +89,24 @@ The pipeline will now become:
 ````
 4. Commit the changes
 
-5. Now open Argocd and check if the changes were synchronized. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline
+5. Now open ArgoCD and check if the changes were synchronized. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline
 
 ![sonar](./images/sonar-argocd.png)
 
-5. If the sync is green, you're good to go. You have successfully added kube-linting to your pipeline.
+5. If the sync is green, you're good to go. You have successfully added `kube-linting` to your pipeline.
 
-6. Open up the console and navigate to your pipeline definition by going to Pipelines and selecting your pipeline from the list. You should see a sonarqube task there as well.
+6. Open up the console and navigate to your pipeline definition by going to Pipelines and selecting your pipeline from the list. You should see a SonarQube task there as well.
 
-   ![kube-lint-openshift](./images/kube-lint-openshift.png)
+   ![Kube-lint-OpenShift](./images/kube-lint-openshift.png)
 
-7. Trigger the pipeline by making a small change in the nordmart-review application and head over to the openshift console to see the pipeline run.
+7. Trigger the pipeline by making a small change in the `nordmart-review` application and head over to the OpenShift console to see the pipeline run.
 
-![kube-lint-running](./images/kube-lint-running.png)
+![Kube-lint-running](./images/kube-lint-running.png)
 
-8. Let's try to fail code linting now. Open up the nordmart review application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
-   This should make the kube linting task to fail.
+8. Let's try to fail code linting now. Open up the `nordmart-review` application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
+   This should make the `kube-linting` task to fail.
 
-![kube-lint-failing](./images/kube-lint-fail.png)
+![Kube-lint-failing](./images/kube-lint-fail.png)
 
 
-![kube-lint-failing](./images/kube-lint-failing.png)
+![Kube-lint-failing](./images/kube-lint-failing.png)

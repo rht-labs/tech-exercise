@@ -43,8 +43,8 @@ Agile is an ideology. It is underpinned by those values and principles set out i
 ### Origins of Scrum
 ![Scrum](images/scrum/scrum.jpg) <!-- {.element: class="inline-image"} -->
 * A Rugby term used to restart play
-* In 1986, Hirotaka Takeuchi and Ikujiro Nonaka published [The New New Product Development Game](https://hbr.org/1986/01/the-new-new-product-development-game).
-* In 1990, Jeff Sutherland and Ken Schwaber used Scrum for software development.
+* In 1986, `Hirotaka Takeuchi` and `Ikujiro Nonaka` published [`The New New Product Development Game`](https://hbr.org/1986/01/the-new-new-product-development-game).
+* In 1990, `Jeff Sutherland` and `Ken Schwaber` used Scrum for software development.
 
 
 
