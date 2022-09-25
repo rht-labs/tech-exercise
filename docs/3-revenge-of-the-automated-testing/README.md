@@ -29,7 +29,7 @@ There are lots of things we can do under the heading of `Quality Gates`, so deci
 * <span style="color:blue;">[Sonar](https://www.sonarqube.org/)</span> - Add static code analysis to the pipelines
 * Testing Tools - <span style="color:blue;">[Jest](https://jestjs.io/)</span>, <span style="color:blue;">[Allure](https://github.com/allure-framework/allure2)</span>, <span style="color:blue;">[`RESTassured`](https://quarkus.io/guides/getting-started-testing)</span> - Add API and front end tests
 * Code Linting - <span style="color:blue;">[npm lint](https://www.npmjs.com/package/lint)</span>, <span style="color:blue;">[`checkstyle`](https://checkstyle.sourceforge.io)</span> - Static code linter and coverage reports for our tests
-* Kubernetes Linting - <span style="color:blue;">[`kubelinter`](https://github.com/stackrox/kube-linter)</span>- Validate K8S yamls against best practices
+* Kube Linting - <span style="color:blue;">[`kubelinter`](https://github.com/stackrox/kube-linter)</span>- Validate K8S yamls against best practices
 * <span style="color:blue;">[ZAP - OWASP](https://owasp.org/www-project-zap)</span> application scanning to check for common attack patterns
 * Image Security - <span style="color:blue;">[`StackRox`](https://www.stackrox.com)</span> - Finding vulnerabilities inside the images and hosts with StackRox
 * Image Signing - <span style="color:blue;">[`sigstore`](https://www.sigstore.dev)</span> - Sign your images with cosign
