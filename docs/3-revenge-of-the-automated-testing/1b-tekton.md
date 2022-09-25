@@ -15,15 +15,14 @@
 
 ```
 The pipeline will now become:
-   ````
-   apiVersion: v2
+ ```yaml
    pipeline-charts:
-      name: stakater-main-pr-v1
-      workspaces:
-      - name: source
-        volumeClaimTemplate:
-          accessModes: ReadWriteOnce
-          resourcesRequestsStorage: 1Gi
+     name: stakater-main-pr-v1
+     workspaces:
+     - name: source
+       volumeClaimTemplate:
+         accessModes: ReadWriteOnce
+         resourcesRequestsStorage: 1Gi
      pipelines:
        tasks:
          - defaultTaskName: git-clone
@@ -33,9 +32,9 @@ The pipeline will now become:
              - stakater-create-git-tag-v1
          - defaultTaskName: stakater-buildah-v1
            name: build-and-push
-              params:
-               - name: BUILD_IMAGE
-                 value: "true"
+           params:
+             - name: BUILD_IMAGE
+               value: "true"
          - defaultTaskName: stakater-helm-push-v1
          - defaultTaskName: stakater-create-environment-v1
          - defaultTaskName: stakater-gitlab-update-cd-repo-v1
@@ -74,12 +73,12 @@ The pipeline will now become:
                  value: $(body.before)
                - ref: stakater-gitlab-push-v1
      rbac:
-         enabled: false
+       enabled: false
      serviceAccount:
-         name: stakater-workshop-tekton-builder
-         create: false
+       name: stakater-workshop-tekton-builder
+       create: false
+ ```
 
-````
 4. Commit the changes.
 
 
