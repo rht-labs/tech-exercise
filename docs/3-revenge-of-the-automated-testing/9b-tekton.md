@@ -112,17 +112,31 @@ Lets add this task into our pipeline  **stakater-load-testing-v1**.
 🪄🪄 Now lets observe the **stakater-nordmart-review** pipeline running with the **stakater-load-testing-v1** task.🪄🪄
 
 
-5. Lets trigger our pipeline again by making a commit onto README.md in the main branch.
+5. Lets trigger our pipeline again by making a commit onto README.md in the main branch. Open the pipeline on openshift console. You ll notice our pipeline failed.
 
-    ![pipeline-with-load-testing](./images/pipeline-with-load-testing.png)
+    ![pipeline-runs-openshift](./images/pipeline-runs-openshift.png)
+
+    ![pipeline-with-load-testing](./images/pipeline-with-load-testing-failed.png)
 
 
 6. Navigate to TaskRuns and open the task `stakater-load-testing-v1` logs. We ll notice that our pipeline fails because our locustfile.py was configured to fail if average response time < 30ms.
 
+    ![pipeline-with-load-testing-failed](./images/pipeline-with-load-testing-failed-logs.png)
+
+
 7. Open the stakater-nordmart-review repository and edit the `locustfile.py` and change the average response time  to < 100ms.
-    ![pipeline-with-load-testing](./images/pipeline-with-load-testing.png)
+
+    ![change-locust-file-100ms-rt](./images/change-locust-file-100ms-rt.png)
+
+    Commit to main branch and A pipeline will be initiated. Open the openshift console and navigate to PipelineRun.
+
+    ![pipeline-runs-openshift](./images/pipeline-runs-openshift.png)
 
 8. Navigate to TaskRuns and open the task `stakater-load-testing-v1` logs. You ll see that the pipeline has succeeded after increasing the average response time in failure scenario.
 
+    ![pipeline-with-load-testing](./images/pipeline-with-load-testing.png)
+
     ![pipeline-with-load-testing-logs](./images/pipeline-with-load-testing-logs.png)
+
+🪄🪄 TADA. You ve successfully added load-testing to your pipeline🪄🪄
 
