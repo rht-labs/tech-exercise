@@ -26,16 +26,16 @@ Lets view this task in our cluster:
 
 ## Integrate Load Test into pipeline
 
-For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
+For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (i.e. if average response time ratio is higher 200ms, the pipeline fails).
 
 
-We have added the following scenario into our stakater-nordmart-review repositories.
+We have added the following scenario into our `stakater-nordmart-review` repositories.
 
 _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
     
 Below scenario calls `/api/review/{productId}` endpoint and fails the test if:  
   - 1% of calls are not 200 (OK)
-  - Total average response time to `/api/review/{productId}`   oint is more than 100 ms
+  - Total average response time to `/api/review/{productId}` is more than 100 ms
   - The max response time in 90 percentile is higher than 800 ms
 
     ```bash
@@ -66,9 +66,9 @@ Below scenario calls `/api/review/{productId}` endpoint and fails the test if:
 
     EOF
     ```
-    If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+    If the pipeline fails due to the thresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
 
-      Open Repo stakater-nordmart-review to view the locustfile.py present at root folder.
+      Open repo `stakater-nordmart-review` to view the `locustfile.py` present at the root folder.
    
       ![load-test-locustfile](./images/load-test-locustfile.png)
 
