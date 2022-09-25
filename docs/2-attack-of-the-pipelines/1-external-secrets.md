@@ -10,9 +10,9 @@ To run our pipelines, we need to provide a secret to our tasks. This secret will
 
 ### Add GitLab Group Access Token secret to Vault
 
-First we need to generate a Group Access Token in gitlab to be used later for our automation to interact with GitLab.
+First we need to generate a Group Access Token in GitLab to be used later for our automation to interact with GitLab.
 
-1. In GitLab goto `Menu` > `Groups` > `Your Groups` > Select your `<TENANT_NAME>` group created earlier
+1. In GitLab go to `Menu` > `Groups` > `Your Groups` > Select your `<TENANT_NAME>` group created earlier
 
 2. Select `Settings` > `Access Tokens` > enter `Token name` as `pipeline`
 
@@ -42,7 +42,7 @@ Now we can add the secret to our Vault instance.
 `username` = `pipeline` - Yes the literal string "pipeline"
 
 
-  ![gitlab-pat-secret](./images/gitlab-pat-secret.png)
+  ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
 
 ### Add ExternalSecret
 

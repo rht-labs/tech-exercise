@@ -13,7 +13,7 @@
 
 - Can manage App Config via git
 - Can automatically build / test / deploy software via Tekton
-- Can fetch secrets used by my pipeline from our secure secrets vault
+- Can fetch secrets used by my pipeline from our secure secrets Vault
 
 ## 🔨 Tools used in this exercise!
 

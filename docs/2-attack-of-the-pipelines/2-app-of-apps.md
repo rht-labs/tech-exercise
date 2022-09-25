@@ -36,7 +36,7 @@ This is the template that we will use to create our own apps-of-apps repository.
 
    ![import-GitOps-apps](images/import-gitops-apps.png)
 
-5. Now we need to make some updates to the contents of these templatized repos
+5. Now we need to make some updates to the contents of these template based repos
 
 6. Navigate to the `nordmart-apps-gitops-config` project in your GitLab group and select `Web IDE`
 
@@ -104,7 +104,7 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, `Commit` the changes, and push to the repository.
 
-5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
+5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
 We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
 
