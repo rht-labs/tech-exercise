@@ -12,22 +12,22 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 1. Head over to the below URL.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
+   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
     
 This is the template that we will use to create our own apps-of-apps repository.
  
 
 2. Copy the clone URL.
 
-   `https://github.com/stakater-lab/nordmart-apps-gitops-config.git`
+   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
  
 
-3. Now open GitLab and select create project. In the screen that appears, choose `Import project`.
+3. Back in GitLab navigate to `Menu` > `Projects` > `Create new project` > Select `Import project`
 
    ![clone-apps-config](images/clone-apps-config.png)
 
 
-4. Select import repository from URL and paste in the URL that you copied in step 2. 
+4. Select `import repository from URL` and paste in the URL that you copied in step 2. 
 
    Note: Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
@@ -36,19 +36,22 @@ This is the template that we will use to create our own apps-of-apps repository.
 
    ![import-GitOps-apps](images/import-gitops-apps.png)
 
-5. Once the repository is imported, clone the repository to your local system. 
+5. Now we need to make some updates to the contents of these template based repos
 
-6. cd into the repository. Now in the terminal type:
+6. Navigate to the `nordmart-apps-gitops-config` project in your GitLab group and select `Web IDE`
 
-   curl https://raw.githubusercontent.com/stakater/workshop-excercise/main/scripts/update-nordmart-apps-with-tenant-info.py > script.py
+7. Select the `README.md` and click your mouse inside the text body of the editor then Click `F1` on your keyboard to open the `command pallet` 
 
-This will download a python script.
+8. Search for `file finder` and select it > search for `<TENANT_NAME>` > work through the found files to rename them.
 
-7. Now run this python script by typing in:
+9. Now work down though the folder and file structure replacing the `<TENANT_NAME>` with your actual tenant name.  
 
-   `python3 script.py . <TENANT_NAME> <GROUP_NAME>
-   `
-Doing this will replace all instances of <TENANT_NAME> and <GROUP_NAME> with your tenant name and group name. Do not push the changes yet.
+  This is easier if you open `command pallet` again by clicking `F1` and then opening `Replace` to have a Find and Replace tool.
+
+   ![find-and-replace](images/find-and-replace.png)
+
+  Use `ctrl + alt + Enter` to replace all instances of `<TENANT_NAME>` to your actual tenant name if you prefer keyboard.
+
 
 ### Apps of Apps structure
 
@@ -56,13 +59,13 @@ Now that we have renamed all the values and files that needed to changed, let's 
 
   ![apps-of-apps-tree](images/apps-of-apps-tree.png)
 
-1. At the root level, we have a `00-argocd-apps` folder and a `01-<TENAANT_NAME>`folder
+1. At the root level, we have a `00-argocd-apps` folder and a `01-<TENANT_NAME>`folder
 
-2. Inside the `00-argocd-apps` folder there will be another `workshop` folder which represents the cluster name.
+2. Inside the `00-argocd-apps` folder there will be another `01-workshop` folder which represents the cluster name.
 
 3. Inside the workshop folder, you will see multiple environments.
 
-4. The environment folders contain ArgoCD application for tenant that point to the particular tenant's environment.
+4. The environment folders contain ArgoCD applications that point to the particular tenant's environment.
 
 5. In each tenant environment folder, we will have ArgoCD applications for all the applications we want to deploy in a particular environment. These apps will eventually point to a Helm chart.
 
@@ -72,9 +75,9 @@ Now that we have renamed all the values and files that needed to changed, let's 
 
 > Now we need to add a chart in the dev environment for deploying our application.
 
-1. Navigate to `01-TENANT_NAME > 02-stakater-nordmart-review > 01-dev`.
+1. Navigate to `01-TENANT_NAME` > `02-stakater-nordmart-review` > `01-dev`.
 
-2. We need to add the Helm chart for the Nordmart review here. Create a file named Chart.yaml here and paste in the following content.
+2. We need to add the Helm chart for the Nordmart review service here. Create a file named `Chart.yaml` here and paste in the following content.
 
 ```
 apiVersion: v2
@@ -88,7 +91,7 @@ version: 1.0.35
 
 ```
 
-3. Now create a values.yaml and add the below content. 
+3. Now create a `values.yaml` file and add the below content. 
 
 ```
 stakater-nordmart-review:
@@ -99,15 +102,13 @@ stakater-nordmart-review:
         tag: 1.0.35
 
 ```
-4. Once the above files are added, commit the changes, and push to the repository.
+4. Once the above files are added, `Commit` the changes, and push to the repository.
 
-5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to `nordmart-infra-gitops-config`
-
-`https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config`
+5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
 We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
 
-6. Navigate to workshop > `nordmart-apps-gitops-config`.
+6. Navigate to `workshop` > `nordmart-apps-gitops-config`.
  
 7. Add a file here named `<TENANT_NAME>-nordmart-apps-gitops-config.yaml` with the following content:
 
@@ -121,7 +122,7 @@ spec:
   destination:
     namespace: openshift-gitops
     server: 'https://kubernetes.default.svc'
-  project: hogwarts
+  project: <TENANT_NAME>
   source:
     path: 00-argocd-apps/01-workshop
     repoURL: https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git
@@ -133,7 +134,7 @@ spec:
       prune: true
 
 ```
-Note: Replace all instance of <TENANT_NAME> with your tenant name in above file.
+Note: Replace all instance of `<TENANT_NAME>` with your tenant name in above file.
 
 ![nord-apps](images/nord-apps.png)
 
@@ -143,7 +144,7 @@ Note: Replace all instance of <TENANT_NAME> with your tenant name in above file.
    ![search-ArgoCD](images/sorcerers-dev.png)
 
 
-9. Open up the app and press sync. Once sync finishes, everything should have synced, `green` status. 
+9. Open up the app and press `sync`. Once sync finishes, everything should have a synced, `green` status. 
 
 
    ![sorceres-build](images/sorcerers-build.png)

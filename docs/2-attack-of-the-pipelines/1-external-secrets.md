@@ -1,11 +1,24 @@
 ## Add Secrets through Vault and External Secrets
 
-When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store Secret manifest files openly
-We will use ExternalSecret and Vault to add secrets.
+With GitOps you will face the challenge of how to handle secrets and credentials when these should never be committed to git, at least not as plain text or base64. 
+
+There is tooling out there for storing secrets in your GitOps with an additional layer of encryption, such as Sealed Secrets operator but we find this to be a fairly poor developer experience and prefer to maintain secrets in a specialized Vault and fetch these secrets when needed.
 
 To run our pipelines, we need to provide a secret to our tasks. This secret will contain the token for GitLab. We will store this secret in Vault and then through ExternalSecret, add a secret to Workloads.
 
-### Add GitLab Personal Access Token secret to Vault
+   > SAAP comes with a fully managed instance of Vault OSS. 
+
+### Add GitLab Group Access Token secret to Vault
+
+First we need to generate a Group Access Token in GitLab to be used later for our automation to interact with GitLab.
+
+1. In GitLab go to `Menu` > `Groups` > `Your Groups` > Select your `<TENANT_NAME>` group created earlier
+
+2. Select `Settings` > `Access Tokens` > enter `Token name` as `pipeline`
+
+3. Select `read_repository` and `write_repository` > click `Create group access token` > copy the value and make a note of it for later.
+
+Now we can add the secret to our Vault instance.
 
 1. To access your Vault Service, from your Forecastle console, click on the Vault tile.
 
@@ -23,28 +36,32 @@ To run our pipelines, we need to provide a secret to our tasks. This secret will
 
 4. Here add the name of secret `gitlab-pat` and add key-value pairs with your git credentials as shown in the screenshot. 
 
-    ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
+`email` = The email you registered for the workshop  
+`password` = The Group access token  
+`token` = The Group access token  
+`username` = `pipeline` - Yes the literal string "pipeline"
 
+
+  ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
 
 ### Add ExternalSecret
 
 Next step is the create an external secret CR that will connect to Vault and create a secret in console using the secret added to the Vault in previous step. 
 
-1. Login to the OpenShift console. Open the API Explorer Under Home on left sidebar and Search External Secret, Open the details `ExternalSecret`.
-  ![external-secret-console](./images/external-secret-console.png)
+1. Login to the OpenShift console. 
 
-2. Go to the `Instances` tab and Select `Create ExternalSecret`
+2. Select the `+` sign in the top right corner of the console
 
-    ![external-secret-info](./images/external-secret-info.png)
+  ![the-plus-sign](./images/the-plus-sign.png)
 
-3. Paste the following YAML in dialog box and make sure to replace tenant name in namespace field.
+3. Paste the following YAML in dialog box and make sure to replace tenant name in namespace field and replace the `<TENANT_NAME>` > Click `Create`
 
     ```
     apiVersion: external-secrets.io/v1alpha1
     kind: ExternalSecret
     metadata:
       name: gitlab-pat
-      namespace: `<TENANT_NAME>-build`
+      namespace: <TENANT_NAME>-build
     spec:
       secretStoreRef:
         name: tenant-vault-secret-store
@@ -66,7 +83,7 @@ Next step is the create an external secret CR that will connect to Vault and cre
 
     A secret with the `spec.target.name` from External Secret yaml will be created in build namespace.  
 
-4. Navigate to Secrets under Workloads, you will find `gitlab-pat` present.
+4. Navigate to `Workloads` > `Secrets`, you will find `gitlab-pat` present.
 
     ![external-secret-secret](./images/external-secret-secret.png)
  
