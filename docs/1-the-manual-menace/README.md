@@ -5,7 +5,7 @@
 In this exercise, we will use GitOps to set up our working environment. We will set up Git projects, create `dev`, `test` and `stage` projects in OpenShift, and explore the tools like ArgoCD, Tekton and Nexus to enable CI/CD/CT in the next exercise. In order to do that, we'll use a popular approach called _GitOps_
 
 ## 🖼️ Big Picture
-![big-picture-matomo](images/big-picture-matomo2.png)
+![big-picture-Matomo](images/big-picture-matomo2.png)
 
 ## 🔮 Learning Outcomes
 

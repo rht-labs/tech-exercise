@@ -69,7 +69,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     ```bash
     cd /projects/tech-exercise
     git add .
-    git commit -m  "📈 ADD - matomo app 📈"
+    git commit -m  "📈 ADD - Matomo app 📈"
     git push 
     ```
 

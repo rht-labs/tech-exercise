@@ -1,6 +1,6 @@
 ## Aggregated Logging
 
-> SAAP's built in logging... Something installed operator before hand. Very memory intensive, logging is deployed to the infra nodes!
+> SAAP built in logging... Something installed operator before hand. Very memory intensive, logging is deployed to the infra nodes!
 
 1. Observe logs from any given container:
 

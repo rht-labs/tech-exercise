@@ -9,7 +9,7 @@ The time between software being written and tested, till it is deployed in produ
 In this exercise, we will enable autoscale for frontend and run some tests to trigger scaling. Then, we will experience Blue/Green and A/B deployments with OpenShift's existing capabilities: deployments, services and routes. 
 ## 🖼️ Big Picture
 
-![big-picture-matomo](images/big-picture-matomo.png)
+![big-picture-Matomo](images/big-picture-matomo.png)
 ## 🔮 Learning Outcomes
 
 - [ ] Can enable Horizontal Pod Autoscaler
@@ -18,4 +18,4 @@ In this exercise, we will enable autoscale for frontend and run some tests to tr
 
 ## 🔨 Tools used in this exercise!
 
-* Nothing special. SAAP's existing capabilities help us to deploy these methods.
+* Nothing special. SAAP existing capabilities help us to deploy these methods.
