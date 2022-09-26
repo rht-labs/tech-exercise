@@ -1,6 +1,6 @@
 FROM node:16.14-alpine
 
-RUN apk add --no-cache tini && npm install -g docsify-cli@latest
+RUN apk add --no-cache tini && npm install -g docsify-cli@4.4.3
 
 COPY . /docs
 WORKDIR /docs
