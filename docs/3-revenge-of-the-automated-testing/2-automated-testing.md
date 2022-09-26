@@ -46,4 +46,4 @@ In the allure task, we run a script that gets the test result files returned by 
 Now let's head over to the next section to integrate automated testing to our pipelines.
 
 - Add `mvn` test and Allure test reporting to the pipeline 
-- <span style="color:blue;">[Tekton](3-revenge-of-the-automated-testing/2b-tekton.md)</span>
+- <span style="color:blue;">[Tekton](2b-tekton.md)</span>
