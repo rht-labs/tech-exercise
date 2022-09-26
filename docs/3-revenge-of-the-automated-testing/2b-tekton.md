@@ -23,7 +23,7 @@
       destination:
         namespace: <TENANT_NAME>-dev
         server: 'https://kubernetes.default.svc'
-      project: sorcerers 
+      project: <TENANT_NAME> 
       source:
         path: stakater/allure
         repoURL: 'https://github.com/stakater/charts.git'
