@@ -68,9 +68,15 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
    Click `Invite members` and add your colleagues usernames or emails that they logged into GitLab with.
 
 
-4. Next from the [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository, click on the `Edit fork in Web IDE` button.
+4. Next from the [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository, click on the `Web IDE` button.
 
-   ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
+   ![WEB-IDE](./images/WEB-IDE.png)
+
+Gitlab will prompt you and ask you if you want to fork the repo. Click `Fork Project`.
+
+  ![Fork-project](./images/Fork-project.png)
+
+Gitlab will now take you to your forked repository.
 
 5. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
 
@@ -97,10 +103,11 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
             - <INSERT_YOUR_USER_NAME> # This is the username you registered with at the beginning.
       argocd:
          sourceRepos:
-            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
-            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
+            - 'https://github.com/stakater/charts.git'
             - 'https://stakater.github.io/stakater-charts'
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config.git'
             - 'https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/'
+            - 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
       namespaces:
       - dev
       - build
