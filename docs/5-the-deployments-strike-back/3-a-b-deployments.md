@@ -51,42 +51,48 @@
 
 > The reason we are doing these advanced deployment strategies is to experiment, to see if our newly introduced features are liked by our end users, to see how the performance is of the new version and so on. But splitting traffic is not enough for this. We need to track and measure the effect of the changes. Therefore, we will use a tool called `Matomo` to get detailed reports on our PetBattle and the users' behaviour.
 
-Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
+Before we jump to A/B deployment, let's deploy Matomo through Argo CD.
 
-1. Open up `tech-exercise/ubiquitous-journey/values-tooling.yaml` file and add the following application definition:
+Note: Each user will have a separate deployment of Matomo running in your tenant.
+
+1. Open up `<TENANT-NAME>/00-argocd-apps/01-workshop/01-dev` path, create a new file named `<TENANT-NAME>-matomo.yaml` and add the following config to deploy Matomo through ArgoCD
+
+![a-b-create-new-file](images/a-b-add-argo-app.png)
+
+![a-b-add-argo-app](images/a-b-add-argo-app-tenant.png)
 
     ```yaml
       # Matomo
-      - name: matomo
-        enabled: true
-        source: https://petbattle.github.io/helm-charts
-        chart_name: matomo
-        source_ref: "4.1.1+01"
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: <TENANT-NAME>-matomo
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: <TENANT-NAME>
+          stakater.com/env: dev
+          stakater.com/kind: dev         
+      spec:
+        destination:
+          namespace: <TENANT-NAME>-dev
+          server: 'https://kubernetes.default.svc'
+        project: <TENANT-NAME> 
+        source:
+          path: stakater/matomo
+          repoURL: 'https://github.com/stakater/charts.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
     ```
+  Track the change through ArgoCD. An app `<TENANT-NAME>-matomo` should appear in ArgoCD.
 
-    Push the changes:
+  ![a-b-argo-app](images/a-b-matomo-argo-app.png)
 
-    ```bash
-    cd /projects/tech-exercise
-    git add .
-    git commit -m  "📈 ADD - Matomo app 📈"
-    git push 
-    ```
+  Once matomo is deployed and synced in argoCD, head over to Openshift Console and in you `<TENANT-NAME>-dev` namespace, click on `Networking>Routes` and copy the link for `<TENANT-NAME>-matomo` route. 
 
-    See Matomo is deploying:
-
-    ```bash
-    oc get pod -n ${TENANT_NAME}-ci-cd -w
-    ```
-
-    When Matomo pods are running, get the URL and connect it:
-
-    ```bash
-    echo https://$(oc get route/matomo -n ${TENANT_NAME}-ci-cd --template='{{.spec.host}}')
-    ```
-
-    - Username: `admin`
-    - Password: `My$uper$ecretPassword123#`
+  ![a-b-matomo-route](images/a-b-matomo-route.png)
 
 2. Currently, there is no data yet. But Pet Battle is already configured to send data to Matomo every time a connection happens. (open up `tech-exercise/pet-battle/test/values.yaml` file and look for `matomo`) Let's start experimenting with A/B deployment and check Matomo UI on the way.
 
