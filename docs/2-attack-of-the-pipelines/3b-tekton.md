@@ -127,7 +127,7 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
    dependencies:
      - name: pipeline-charts
        repository: https://stakater.github.io/stakater-charts  
-       version: 0.0.33
+       version: 0.0.34
    description: Helm chart for Tekton Pipelines
    name: main-pr-v1
    version: 0.0.1
