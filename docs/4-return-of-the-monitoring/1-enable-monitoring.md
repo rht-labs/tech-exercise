@@ -72,7 +72,7 @@
    ![service-monitor](./images/review-service-monitor.png)
 
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to stakater-nordmart-review API; the dashboard can be found `stakater-nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
+2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to `stakater-nordmart-review` API; the dashboard can be found `stakater-nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
 
     ```yaml
         # Grafana Dashboard

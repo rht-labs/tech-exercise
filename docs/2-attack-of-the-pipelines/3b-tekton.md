@@ -48,7 +48,7 @@ The above chart contains all necessary resources needed to build and run a Tekto
 
 ![stakater-clustertasks](./images/stakater-clustertasks.png)
 
-#### 1 - git-clone 🤖🤖🤖
+#### 1 - `git-clone` 🤖🤖🤖
 
 This task clones the repository/code on which pipeline is to executed in the `workspace`
 
@@ -57,7 +57,7 @@ The task takes in the following Tekton parameters:
 * `url` - this is the URL to clone the repository from. We extract this URL from the payload received by the interceptor
 * `revision` - this is the revision or 'branch' of the repository
 
-#### 2 - stakater-create-git-tag-v1 🏷
+#### 2 - `stakater-create-git-tag-v1` 🏷
 
 This task creates the tag for our repository. For push to main branch, it uses git semantic versioning to increment the tag. While for pull requests, it creates a new tag using the commit hash.
 
@@ -72,7 +72,7 @@ Below is the code snipped from the task:
 ![create-git-tag-task](./images/create-git-tag-task.png)
 
 
-#### 3 - stakater-buildah-v1 🏗
+#### 3 - `stakater-buildah-v1` 🏗
 
 The task contains a small buildah script that builds image using the source code and pushes it to nexus repository.
 
@@ -87,19 +87,19 @@ The task takes parameter needed to build and push the image as parameters, such 
 
 ![image-push-script](./images/image-push-script.png)
 
-#### 4 - stakater-helm-push-v1 🅿
+#### 4 - `stakater-helm-push-v1` 🅿
 
 The `helm-push` task packages the application Helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
 The repo path, chart repository URL, pull request number, git revision, and git tag are taken as parameters
 
-#### 5 - stakater-update-cd-repo-v3 ⚙️
+#### 5 - `stakater-update-cd-repo-v3` ⚙️
 
 When the pipeline is triggered by merge on default branch, this task is responsible for updating the image and chart version for the application in the GitOps repo.
 The GitOps repo in our case is the `nordmart-apps-gitops-config` repo.
 In case the pipeline is triggered by a PR, this task creates a Environment Provisioner CR for dynamic test environment.
 
-#### 6 - stakater-push-main-tag-v1 📤
+#### 6 - `stakater-push-main-tag-v1` 📤
 
 The task updates the tag in git repository when change is pushed to main/master.
 
@@ -256,7 +256,7 @@ With all these components in place - now it's time to trigger pipeline via webho
 
     ![updated-Nordmart-apps-GitOps-config](images/updated-nordmart-apps-gitops-config.png)
 
-  > For pushes to `main` branch, your application is automagically updated in the `<TENANT_NAME>-dev` namespace.
+  > For pushes to `main` branch, your application is automatically updated in the `<TENANT_NAME>-dev` namespace.
 
 15. Open our `<TENANT>-stakater-nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
     
