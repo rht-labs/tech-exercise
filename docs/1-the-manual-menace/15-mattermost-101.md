@@ -1,14 +1,10 @@
-# 🐓 Mattermost 101
+# :mega: Mattermost 101
 
-## Mattermost Config 
+[Mattermost](https://docs.mattermost.com/) is a secure, open source platform for communication, collaboration, and workflow orchestration across tools and teams. SAAP configures Mattermost teams for each tenant, so that tenant members can collaborate among themselves easily. Application alerts can be configured to be received in specific channels, so that no alert goes unchecked. 
 
-1. Open the Mattermost web page using the URL provided in Forecastle. Use the saml to log in to the Mattermost server. 
+1. Log in to your Mattermost by selecting the `Mattermost` tile from your Forecastle Console.
 
-    ![mattermost-home-page](images/mattermost-home-page.png)
-
-    ```bash
-    https://stakater-mattermost-instance.apps.devtest.vxdqgl7u.kubeapp.cloud/
-    ```
+   ![Mattermost-forecastle](./images/Mattermost-Forecastle.png)
 
 2. If you are not redirected directly, use your credentials created during the SAAP-101 part.
 
@@ -21,7 +17,13 @@
 
     ![mattermost-no-team-back-page](images/mattermost-no-team-back-page.png)
 
-5. Every tenant will have a team with their notification channels. Only tenant members will be part of this team.
+5. Every tenant will have a team with their notification channels. Only tenant members will be part of this team. Following channels will be created and can be configured to receive alerts from configured applications.
+    - application-metrics-alerts
+	- application-outage-alerts
+	- application-e2e-release-notifications
+	- application-e2e-test-notifications
+	- application-e2e-pipeline-notifications
+	- application-logs-alerts
 
     ![mattermost-tenant-team-page](images/mattermost-tenant-team-page.png)
 
