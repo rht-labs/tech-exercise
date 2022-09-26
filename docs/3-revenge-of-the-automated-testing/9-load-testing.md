@@ -55,8 +55,8 @@ Below scenario calls `/api/review/{productId}` endpoint and fails the test if:
         if environment.stats.total.fail_ratio > 0.01:
             logging.error("Test failed due to failure ratio > 1%")
             environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
+        elif environment.stats.total.avg_response_time > 30:
+            logging.error("Test failed due to average response time ratio > 30 ms")
             environment.process_exit_code = 1
         elif environment.stats.total.get_response_time_percentile(0.95) > 800:
             logging.error("Test failed due to 95th percentile response time > 800 ms")
