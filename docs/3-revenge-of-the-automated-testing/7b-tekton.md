@@ -127,13 +127,9 @@ Let's run through a scenario where we break/fix the build using a build policy v
 
 4. This should now fail on the **image-scan/rox-image-check** task.  
 
-    ## TODO Replace Screenshot
-    ![images/acs-image-fail.png](images/acs-image-fail.png)
+    ![images/rox-image-check-ssh-fail.png](images/rox-image-check-ssh-fail.png)
+    ![images/rox-image-check-ssh-fail-logs](images/rox-image-check-ssh-fail-logs.png)
 
-5. Back in ACS we can also see the failure in the *Violations* view.  
-
-    ![images/acs-violations.png](images/acs-violations.png)
-
-6. Remove the `EXPOSE 22` from the `Dockerfile` in the same merge request branch and the pipeline will succeed.
+5. Remove the `EXPOSE 22` from the `Dockerfile` in the same merge request branch and the pipeline will succeed.
 
 🪄🪄 Observe the **`stakater-nordmart-review`** pipeline running successfully again 🪄🪄

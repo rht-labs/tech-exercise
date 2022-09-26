@@ -41,7 +41,7 @@ Below is the URL to ACS (Available on Forecastle UI):
 
     ![central-RHACS-login](./images/central-rhacs-login.png)
 
-2. Browse to the `Platform Configuration` > `Policies` view. Type in and select `Policy` and then `secure shell`, select the `Secure Shell (ssh) Port Exposed in Image` policy.
+2. Browse to the `Platform Configuration` > `Policies` view. Type in and select `Policy` and then `secure shell`, select the `Secure Shell (ssh) Port Exposed in Image (workshop)` policy.
 
     ![images/central-RHACS-policy.png](images/central-rhacs-policy.png)
 
