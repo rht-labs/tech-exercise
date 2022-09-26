@@ -123,7 +123,7 @@
 5. Check report in *Allure*
 
     ```bash
-    echo https://allure-<TEAM_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/zap-scan/reports/latest/index.html
+    echo https://allure-<TENANT_NAME>-ci-cd.<CLUSTER_DOMAIN>/allure-docker-service/projects/zap-scan/reports/latest/index.html
     ```
 
 Drill down to test body attachments.

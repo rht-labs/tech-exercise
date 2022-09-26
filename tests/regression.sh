@@ -30,14 +30,14 @@ strip_output() {
 
 replace_env_vars() {
     local file_path=$1
-    sed -i -e "s|<TEAM_NAME>|${TEAM_NAME}|" $file_path
+    sed -i -e "s|<TENANT_NAME>|${TENANT_NAME}|" $file_path
     sed -i -e "s|<CLUSTER_DOMAIN>|${CLUSTER_DOMAIN}|" $file_path
     sed -i -e "s|<GIT_SERVER>|${GIT_SERVER}|" $file_path
 }
 
 sanitize_env_vars() {
     local file_path=$1
-    sed -i -e "s|${TEAM_NAME}|<TEAM_NAME>|" $file_path
+    sed -i -e "s|${TENANT_NAME}|<TENANT_NAME>|" $file_path
     sed -i -e "s|${CLUSTER_DOMAIN}|<CLUSTER_DOMAIN>|" $file_path
     sed -i -e "s|${GIT_SERVER}|<GIT_SERVER>|" $file_path
 }
@@ -128,9 +128,9 @@ gitlab_setup() {
     echo "🍓 Setting up GitLab ..."
     gitlab_personal_access_token
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TENANT_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TENANT_NAME}&path=${TENANT_NAME}&visibility=public" | jq -c '.id')
     fi
     gitlab_recreate_project "tech-exercise"
 }
@@ -139,15 +139,15 @@ gitlab_create_argo_webhook() {
     echo "🌶️ Create ArgoCD GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TENANT_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
     if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
-            argocd_url=https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook -n ${TEAM_NAME}-ci-cd)
+            argocd_url=https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook -n ${TENANT_NAME}-ci-cd)
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
         fi
     else
-        echo -e "${RED}No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TENANT_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -156,15 +156,15 @@ gitlab_create_jenkins_webhook() {
     echo "🍅 Create Jenkins GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TENANT_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
     if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
-            jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}'/multibranch-webhook-trigger/invoke%3Ftoken=pet-battle -n ${TEAM_NAME}-ci-cd)
+            jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}'/multibranch-webhook-trigger/invoke%3Ftoken=pet-battle -n ${TENANT_NAME}-ci-cd)
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
     else
-        echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TENANT_NAME}%2Fpet-battle found ?, bailing out.${NC}"
         exit 1
     fi
 }
@@ -173,34 +173,34 @@ gitlab_create_tekton_webhook() {
     echo "🍎 Create Tekton GitLab Webhook ..."
     gitlab_personal_access_token
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TENANT_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
     if [ ! -z "$project_id" ]; then
         hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
-            tekton_url=https://webhook-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}
+            tekton_url=https://webhook-${TENANT_NAME}-ci-cd.${CLUSTER_DOMAIN}
             curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
-        echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
+        echo -e "${RED}No project ${TENANT_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
         exit 1
     fi
 }
 
 gitlab_delete_group() {
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TENANT_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        echo "⚠️ No group ${TEAM_NAME} found for this user, returning."
+        echo "⚠️ No group ${TENANT_NAME} found for this user, returning."
         return;
     fi
     ret=1; i=0
     until [ $ret = "202" ]
     do
         ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
-        echo "🧁 Waiting for 202 response to delete group ${TEAM_NAME}"
+        echo "🧁 Waiting for 202 response to delete group ${TENANT_NAME}"
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
-            echo -e "${RED}Failed - ${TEAM_NAME} gitlab could not delete group, check supplied user, $ret, bailing out.${NC}"
+            echo -e "${RED}Failed - ${TENANT_NAME} gitlab could not delete group, check supplied user, $ret, bailing out.${NC}"
             exit 1
         fi
     done
@@ -211,15 +211,15 @@ gitlab_recreate_project() {
     local i=0
     gitlab_personal_access_token
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TENANT_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TENANT_NAME}&path=${TENANT_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete project
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TENANT_NAME}%2F${projectname}")
         echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
@@ -248,15 +248,15 @@ gitlab_delete_project() {
     local i=0
     gitlab_personal_access_token
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TENANT_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TENANT_NAME}&path=${TENANT_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete project
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        ret=$(curl -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TENANT_NAME}%2F${projectname}")
         echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
@@ -331,7 +331,7 @@ force_delete_namespace() {
 cleanup() {
     echo "🍆 Cleaning up ..."
     perform_admin_logins
-    local namespace=${TEAM_NAME}-ci-cd
+    local namespace=${TENANT_NAME}-ci-cd
     cnt=0
     # FIXME this while loop needs to timeout
     while [ 0 != $(oc -n $namespace get applications -o name 2>/dev/null | wc -l) ]; do
@@ -344,13 +344,13 @@ cleanup() {
             force_delete_namespace "$namespace"
         fi
      done
-     namespace=${TEAM_NAME}-dev
+     namespace=${TENANT_NAME}-dev
      force_delete_namespace "$namespace"
-     namespace=${TEAM_NAME}-test
+     namespace=${TENANT_NAME}-test
      force_delete_namespace "$namespace"
-     namespace=${TEAM_NAME}-stage
+     namespace=${TENANT_NAME}-stage
      force_delete_namespace "$namespace"
-     namespace=${TEAM_NAME}-ci-cd
+     namespace=${TENANT_NAME}-ci-cd
      force_delete_namespace "$namespace"
 
      gitlab_delete_project "tech-exercise"
@@ -364,7 +364,7 @@ cleanup() {
 
 wait_for_argocd_server() {
     local i=0
-    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    until [ $(oc -n ${TENANT_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
         echo "🍞 Waiting for pod argocd-server ready condition to be True"
         sleep 10
@@ -378,7 +378,7 @@ wait_for_argocd_server() {
 
 wait_for_jenkins_server() {
     local i=0
-    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l deploymentconfig=jenkins,name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    until [ $(oc -n ${TENANT_NAME}-ci-cd get pod -l deploymentconfig=jenkins,name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
         echo "🥕 Waiting for pod jenkins ready condition to be True"
         sleep 10
@@ -392,7 +392,7 @@ wait_for_jenkins_server() {
 
 wait_for_nexus_server() {
     local i=0
-    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app=sonatype-nexus -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    until [ $(oc -n ${TENANT_NAME}-ci-cd get pod -l app=sonatype-nexus -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
         echo "🥗 Waiting for pod nexus ready condition to be True"
         sleep 10
@@ -406,12 +406,12 @@ wait_for_nexus_server() {
 
 wait_for_pet_battle_api() {
     local i=0
-    HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
+    HOST=https://$(oc -n ${TENANT_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
     until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
         echo "🥯 Waiting for 200 response from ${HOST}"
         sleep 10
-        HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
+        HOST=https://$(oc -n ${TENANT_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
         ((i=i+1))
         if [ $i -gt 400 ]; then
             echo -e "${RED}.Failed - pet-battle-api ${HOST} never ready.${NC}"
@@ -422,12 +422,12 @@ wait_for_pet_battle_api() {
 
 wait_for_pet_battle() {
     local i=0
-    HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
+    HOST=https://$(oc -n ${TENANT_NAME}-test get route pet-battle --template='{{ .spec.host }}')
     until [ $(curl -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
     do
         echo "🧅 Waiting for 200 response from ${HOST}"
         sleep 10
-        HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
+        HOST=https://$(oc -n ${TENANT_NAME}-test get route pet-battle --template='{{ .spec.host }}')
         ((i=i+1))
         if [ $i -gt 100 ]; then
             echo -e "${RED}Failed - pet-battle ${HOST} never ready.${NC}"
@@ -557,7 +557,7 @@ done
 shift `expr $OPTIND - 1`
 
 # Check for EnvVars
-[ -z "$TEAM_NAME" ] && echo "Warning: must supply TEAM_NAME in env" && exit 1
+[ -z "$TENANT_NAME" ] && echo "Warning: must supply TENANT_NAME in env" && exit 1
 [ -z "$CLUSTER_DOMAIN" ] && echo "Warning: must supply CLUSTER_DOMAIN in env" && exit 1
 [ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && exit 1
 [ -z "$GITLAB_USER" ] && echo "Warning: must supply GITLAB_USER in env" && exit 1
@@ -576,9 +576,9 @@ if [ ! -z "${NUKEFROMORBIT}" ]; then
 fi
 
 # sanity checks
-if [ "${TEAM_NAME}" == "${GITLAB_USER}" ]; then
+if [ "${TENANT_NAME}" == "${GITLAB_USER}" ]; then
     echo -e "${RED}🍀 You have the luck of the Irish! so you do.
-    The gitlab group api will fail when TEAM_NAME and GITLAB_USER are set the same.
+    The gitlab group api will fail when TENANT_NAME and GITLAB_USER are set the same.
     So to save you future pain we will exit now 🍀${NC}"
     exit 1
 fi

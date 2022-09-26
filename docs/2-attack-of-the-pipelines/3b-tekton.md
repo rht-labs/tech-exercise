@@ -234,7 +234,7 @@ If you open up the application by clicking on it, you should see a similar scree
 12. Navigate to the OpenShift Console ...
 
 
-    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
+    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TENANT_NAME>-build` project:
 
 ![pipeline-running.png](images/pipeline-running.png)
 

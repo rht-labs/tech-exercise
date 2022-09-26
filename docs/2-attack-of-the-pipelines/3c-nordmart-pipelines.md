@@ -262,13 +262,13 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
 
 Here we have defined a basic pipeline which clones the repository when it is triggered, builds its image and Helm chart, and finally updates the version of application.
 5. To deploy our Helm chart to the cluster, we need an ArgoCD application that points to this chart.
-   Navigate to `<TEAM_NAME>/00-argocd-apps/00-build` in the `nordmart-apps-gitops-config`. You will see a file named `tekton-pipelines.yaml` with the following content:
+   Navigate to `<TENANT_NAME>/00-argocd-apps/00-build` in the `nordmart-apps-gitops-config`. You will see a file named `tekton-pipelines.yaml` with the following content:
 ```
    
    apiVersion: argoproj.io/v1alpha1
    kind: Application
    metadata:
-     name: <TEAN_NAME>-build-tekton-pipelines
+     name: <TENANT_NAME>-build-tekton-pipelines
      namespace: openshift-gitops
      labels:
        stakater.com/tenant: <TEAN_NAME>
@@ -276,11 +276,11 @@ Here we have defined a basic pipeline which clones the repository when it is tri
        stakater.com/kind: build    
      spec:
        destination:
-         namespace: <TEAN_NAME>-build
+         namespace: <TENANT_NAME>-build
          server: 'https://kubernetes.default.svc'
-       project: <TEAM_NAME>
+       project: <TENANT_NAME>
        source:
-         path: <TEAM_NAME>/00-tekton-pipelines/00-build
+         path: <TENANT_NAME>/00-tekton-pipelines/00-build
          repoURL: <URL_FOR_THIS REPOSITORY>
          targetRevision: HEAD
        syncPolicy:
@@ -288,7 +288,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
            prune: true
            selfHeal: true
  ```        
-   This is the application that will deploy our pipelines. Now we need to check if the application was synchronised successfully.
+   This is the application that will deploy our pipelines. Now we need to check if the application was synchronized successfully.
 
 6. Update git and wait for our Tekton pipelines to deploy out in ArgoCD. Head over to ArgoCD and search for Application `tekton-pipelines`
 ###### TODO Add screenshot
@@ -297,7 +297,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 
   
 
-8. Once you have the URL, over on GitLab go to `nordmart-review > Settings > Webhook ` to add the webhook:
+8. Once you have the URL, over on GitLab go to `nordmart-review` > `Settings` > `Webhook ` to add the webhook:
 
     * Add the URL we obtained through the last step in the URL box
     * select `Push Events`, leave the branch empty for now
@@ -315,7 +315,7 @@ Here we have defined a basic pipeline which clones the repository when it is tri
 11. As always, push the code to git ...
 
 
-    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-build` project:
+    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TENANT_NAME>-build` project:
 
 
 🪄OBSERVE PIPELINE RUNNING :D 

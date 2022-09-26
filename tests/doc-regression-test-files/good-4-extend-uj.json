@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n",
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TENANT_NAME}-ci-cd)\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)\n"
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TENANT_NAME}-ci-cd)\n"
                 }
             ],
             "tags": [
@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n",
+            "code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
+                    "user_code": "    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n"
                 }
             ],
             "tags": [

@@ -16,7 +16,7 @@
         - name: APPLICATION_NAME
           description: Name of the application
           type: string
-        - name: TEAM_NAME
+        - name: TENANT_NAME
           description: Name of the team that doing this exercise :)
           type: string
         - name: VERSION
@@ -39,7 +39,7 @@
             chmod -R 775 /tmp/cosign
 
             oc registry login
-            /tmp/cosign sign -key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
+            /tmp/cosign sign -key k8s://$(params.TENANT_NAME)-ci-cd/$(params.TENANT_NAME)-cosign `oc registry info`/$(params.TENANT_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
     EOF
     ```
 
@@ -58,8 +58,8 @@
           params:
             - name: APPLICATION_NAME
               value: "$(params.APPLICATION_NAME)"
-            - name: TEAM_NAME
-              value: "$(params.TEAM_NAME)"
+            - name: TENANT_NAME
+              value: "$(params.TENANT_NAME)"
             - name: VERSION
               value: "$(tasks.maven.results.VERSION)"
             - name: WORK_DIRECTORY
@@ -97,17 +97,17 @@
     ```bash
     cd /projects/pet-battle-api
     oc registry login $(oc registry info) --insecure=true
-    cosign verify --key k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1
+    cosign verify --key k8s://<TENANT_NAME>-ci-cd/<TENANT_NAME>-cosign default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TENANT_NAME>-test/pet-battle-api:1.3.1
     ```
 
     The output should be like:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1 --
+    Verification for default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TENANT_NAME>-test/pet-battle-api:1.3.1 --
     The following checks were performed on each of these signatures:
       - The cosign claims were validated
       - The signatures were verified against the specified public key
       - Any certificates were verified against the Fulcio roots.
-    {"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:1545e1d2cf0afe5df99fe5f1d39eef8429a2018c3734dd3bdfcac5a068189e39"},"type":"cosign container image signature"},"optional":null}
+    {"critical":{"identity":{"docker-reference":"default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TENANT_NAME>-test/pet-battle-api"},"image":{"docker-manifest-digest":"sha256:1545e1d2cf0afe5df99fe5f1d39eef8429a2018c3734dd3bdfcac5a068189e39"},"type":"cosign container image signature"},"optional":null}
     </code></pre></div>

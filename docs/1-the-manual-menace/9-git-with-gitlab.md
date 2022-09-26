@@ -24,9 +24,9 @@
 
 3. If you are working as a team, and you haven't already done at group creation, you can add your colleagues to this group now.   
 
-   This will give them permissions to work on the projects created in this group. Select `Members` from the left panel and invite your colleagues via `Invite member` option. Make sure to choose `Maintainer` or `Owner` role permission. You can ignore this step if you are not working as a team.
+   This will give them permissions to work on the projects created in this group. Select `Group information` > `Members` from the left panel and invite your colleagues via `Invite member` option. Make sure to choose `Maintainer` or `Owner` role permission. You can ignore this step if you are not working as a team.
 
-   To do this, select `Group information` from the left panel and click `Members`
+   Select `Group information` from the left panel and click `Members`
 
    ![add-member](images/add-member.png)
 

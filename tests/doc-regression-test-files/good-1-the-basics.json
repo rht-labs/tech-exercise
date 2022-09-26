@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    echo export TEAM_NAME=\"<TEAM_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n",
+            "code": "    echo export TENANT_NAME=\"<TENANT_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo export TEAM_NAME=\"<TEAM_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n"
+                    "user_code": "    echo export TENANT_NAME=\"<TENANT_NAME>\" | tee -a ~/.bashrc -a ~/.zshrc\n"
                 }
             ],
             "tags": [
@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    source ~/.zshrc\n    echo ${TEAM_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n",
+            "code": "    source ~/.zshrc\n    echo ${TENANT_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n",
             "interpreter": "zsh",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    source ~/.zshrc\n    echo ${TEAM_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n"
+                    "user_code": "    source ~/.zshrc\n    echo ${TENANT_NAME}\n    echo ${CLUSTER_DOMAIN}\n    echo ${GIT_SERVER}\n"
                 }
             ],
             "tags": [
@@ -57,12 +57,12 @@
             ]
         },
         {
-            "code": "    oc new-project ${TEAM_NAME}-ci-cd || true\n",
+            "code": "    oc new-project ${TENANT_NAME}-ci-cd || true\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc new-project ${TEAM_NAME}-ci-cd || true\n"
+                    "user_code": "    oc new-project ${TENANT_NAME}-ci-cd || true\n"
                 }
             ],
             "tags": [
@@ -99,12 +99,12 @@
             ]
         },
         {
-            "code": "    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true\n",
+            "code": "    helm install my tl500/todolist --namespace ${TENANT_NAME}-ci-cd || true\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true\n"
+                    "user_code": "    helm install my tl500/todolist --namespace ${TENANT_NAME}-ci-cd || true\n"
                 }
             ],
             "tags": [
@@ -113,12 +113,12 @@
             ]
         },
         {
-            "code": "    echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')\n",
+            "code": "    echo https://$(oc get route/my-todolist -n ${TENANT_NAME}-ci-cd --template='{{.spec.host}}')\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')\n"
+                    "user_code": "    echo https://$(oc get route/my-todolist -n ${TENANT_NAME}-ci-cd --template='{{.spec.host}}')\n"
                 }
             ],
             "tags": [
@@ -127,12 +127,12 @@
             ]
         },
         {
-            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                    "user_code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n"
                 }
             ],
             "tags": [
@@ -141,12 +141,12 @@
             ]
         },
         {
-            "code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd\n",
+            "code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TENANT_NAME}-ci-cd\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd\n"
+                    "user_code": "    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TENANT_NAME}-ci-cd\n"
                 }
             ],
             "tags": [
@@ -155,12 +155,12 @@
             ]
         },
         {
-            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                    "user_code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n"
                 }
             ],
             "tags": [
@@ -169,12 +169,12 @@
             ]
         },
         {
-            "code": "    helm uninstall my --namespace ${TEAM_NAME}-ci-cd\n",
+            "code": "    helm uninstall my --namespace ${TENANT_NAME}-ci-cd\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    helm uninstall my --namespace ${TEAM_NAME}-ci-cd\n"
+                    "user_code": "    helm uninstall my --namespace ${TENANT_NAME}-ci-cd\n"
                 }
             ],
             "tags": [
@@ -183,12 +183,12 @@
             ]
         },
         {
-            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist\n",
+            "code": "    oc get pods -n ${TENANT_NAME}-ci-cd | grep todolist\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist\n"
+                    "user_code": "    oc get pods -n ${TENANT_NAME}-ci-cd | grep todolist\n"
                 }
             ],
             "tags": [

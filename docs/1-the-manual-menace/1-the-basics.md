@@ -26,10 +26,10 @@
 
 3. Notice the nifty default shell in the stack-tl500 container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
+4. Setup your `TENANT_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TENANT_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TENANT_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
     ```bash#test
-    echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
+    echo export TENANT_NAME="<TENANT_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 5. Add the `CLUSTER_DOMAIN` to the environment:
@@ -48,7 +48,7 @@
 
     ```zsh#test
     source ~/.zshrc
-    echo ${TEAM_NAME}
+    echo ${TENANT_NAME}
     echo ${CLUSTER_DOMAIN}
     echo ${GIT_SERVER}
     ```
@@ -66,11 +66,11 @@
 9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 
     ```bash#test
-    oc new-project ${TEAM_NAME}-ci-cd || true
+    oc new-project ${TENANT_NAME}-ci-cd || true
     ```
 
     ![new-project](./images/new-project.png)
 
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If you are working as a team and are using the same TEAM_NAME, you may receive a message saying this project already exists. One of your team mates would have already created this project. It's all good!
+        ⛷️ <b>NOTE</b> ⛷️ - If you are working as a team and are using the same TENANT_NAME, you may receive a message saying this project already exists. One of your team mates would have already created this project. It's all good!
     </p>

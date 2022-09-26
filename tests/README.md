@@ -22,7 +22,7 @@ oc new-project tech-exercise-test
 oc -n tech-exercise-test run test-$(date +"%Y-%m-%d-%H-%M-%S") --image=quay.io/eformat/tech-exercise-test:latest \
   --env="CLUSTER_DOMAIN=${CLUSTER_DOMAIN}" \
   --env="GIT_SERVER=${GIT_SERVER}" \
-  --env="TEAM_NAME=${TEAM_NAME}" \
+  --env="TENANT_NAME=${TENANT_NAME}" \
   --env="GITLAB_USER=${GITLAB_USER}" \
   --env="GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
   --env="OCP_USER=${OCP_USER}" \
@@ -40,7 +40,7 @@ The tests run in a container on your laptop:
 podman run \
   -e "CLUSTER_DOMAIN=${CLUSTER_DOMAIN}" \
   -e "GIT_SERVER=${GIT_SERVER}" \
-  -e "TEAM_NAME=${TEAM_NAME}" \
+  -e "TENANT_NAME=${TENANT_NAME}" \
   -e "GITLAB_USER=${GITLAB_USER}" \
   -e "GITLAB_PASSWORD=${GITLAB_PASSWORD}" \
   -e "OCP_USER=${OCP_USER}" \

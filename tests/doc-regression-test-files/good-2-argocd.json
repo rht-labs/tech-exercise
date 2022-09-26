@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    run()\n    {\n      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      opp=\n      if [ -z $NS ]; then\n        NS=\"${TEAM_NAME}-ci-cd\"\n        opp=add\n      elif [[ \"$NS\" =~ .*\"${TEAM_NAME}-ci-cd\".* ]]; then\n        echo \"${TEAM_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TEAM_NAME}-ci-cd,${NS}\"\n        opp=replace\n      fi\n      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"'$opp'\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n",
+            "code": "    run()\n    {\n      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      opp=\n      if [ -z $NS ]; then\n        NS=\"${TENANT_NAME}-ci-cd\"\n        opp=add\n      elif [[ \"$NS\" =~ .*\"${TENANT_NAME}-ci-cd\".* ]]; then\n        echo \"${TENANT_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TENANT_NAME}-ci-cd,${NS}\"\n        opp=replace\n      fi\n      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"'$opp'\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    run()\n    {\n      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      opp=\n      if [ -z $NS ]; then\n        NS=\"${TEAM_NAME}-ci-cd\"\n        opp=add\n      elif [[ \"$NS\" =~ .*\"${TEAM_NAME}-ci-cd\".* ]]; then\n        echo \"${TEAM_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TEAM_NAME}-ci-cd,${NS}\"\n        opp=replace\n      fi\n      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"'$opp'\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n"
+                    "user_code": "    run()\n    {\n      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\n      opp=\n      if [ -z $NS ]; then\n        NS=\"${TENANT_NAME}-ci-cd\"\n        opp=add\n      elif [[ \"$NS\" =~ .*\"${TENANT_NAME}-ci-cd\".* ]]; then\n        echo \"${TENANT_NAME}-ci-cd already added.\"\n        return\n      else\n        NS=\"${TENANT_NAME}-ci-cd,${NS}\"\n        opp=replace\n      fi\n      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \\\n        -p '[{\"op\":\"'$opp'\",\"path\":\"/spec/config/env/1\",\"value\":{\"name\": \"ARGOCD_CLUSTER_CONFIG_NAMESPACES\", \"value\":\"'${NS}'\"}}]'\n      echo \"EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \\\n        -o jsonpath='{.spec.config.env[?(@.name==\"ARGOCD_CLUSTER_CONFIG_NAMESPACES\")].value}')\"\n    }\n    run\n"
                 }
             ],
             "tags": [
@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n",
+            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TENANT_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n"
+                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TENANT_NAME}-ci-cd\n    argocd_cr:\n      repositoryCredentials: |\n        - url: https://${GIT_SERVER}\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\nEOF\n"
                 }
             ],
             "tags": [
@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n",
+            "code": "    helm upgrade --install argocd \\\n      --namespace ${TENANT_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n"
+                    "user_code": "    helm upgrade --install argocd \\\n      --namespace ${TENANT_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n"
                 }
             ],
             "tags": [
@@ -57,12 +57,12 @@
             ]
         },
         {
-            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n",
+            "code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
+                    "user_code": "    echo https://$(oc get route argocd-server --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n"
                 }
             ],
             "tags": [
