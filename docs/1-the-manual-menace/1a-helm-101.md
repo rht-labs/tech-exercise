@@ -1,60 +1,76 @@
 ### Helm 101
 
-> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `Deployments`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
+> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that define our applications. The Kubernetes resources such as `Deployments`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
 Let's deploy a simple application using Helm.
 
-1. Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores the version history of our charts as well as the packaged tar file.
+Helm charts are packaged and stored in repositories. They can be added as dependencies of other charts or used directly. Let's add a chart repository now. The chart repository stores the version history of our charts as well as the packaged tar file.
+
+> Your CodeReady Workspace comes with the helm command line preinstalled.
+
+1. From your CodeReady Workspace Terminal, add the `Stakater` repo using the following command.
 
     ```bash#test
     helm repo add stakater https://stakater.github.io/stakater-charts
     ```
 
-2. Let's install a chart from this repo. First search the repository to see what is available.
+   ![helm101-repoadd](./images/helm101-repoadd.png)
+
+
+2. Install a chart from this repo. Start by searching the repository to see what is available.
 
     ```bash#test
     helm search repo nordmart-review
     ```
 
-    Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
+
+   ![helm101-reposearch](./images/helm101-reposearch.png)
+
+
+3. Now install the latest version. Helm likes to give each install its own release, for convenience  we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
      
     ```bash#test
     helm install my-nordmart-review stakater/nordmart-review --namespace ${TENANT_NAME}-test
     ```
-    ![Nordmart-review-installed](./images/1a-7-nordmart-review-installed.png)
+   ![helm101-install](./images/helm101-install.png)
 
-    ##### TODO: CHANGE SCREENSHOTS
-3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
+3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the URL of the app.
 
     ```bash#test
     echo https://$(oc get route/nordmart-review-ui -n ${TENANT_NAME}-test --template='{{.spec.host}}')
     ```
-    Visit this link to view to following page :
+
+    ![helm101-link](./images/helm101-link.png)
+
+
+4.   Visit the link provided to view your application.
 
     ![Nordmart-review-ui](./images/1a-1-nordmart-review-ui.png)
 
-4. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
+5. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review/values.yaml)</span> in a chart from the command line. You can upgrade your deployment. By default, your application has only 1 replica. You can view this using the following command.
 
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test
     ```
 
-    ![Nordmart-review-ui-pods](./images/1a-2-nordmart-review-ui-pods.png)
+    ![helm101-pods](./images/helm101-pods.png)
 
-    By default, we only have one replica of our application. Let's use Helm to set this to 5.
+    By default, there is one replica of your application. Let's use Helm to set this to 5.
 
     ```bash#test
     helm upgrade my-nordmart-review stakater/nordmart-review --set nordmartReviewUi.deployment.replicas=5 --namespace ${TENANT_NAME}-test
     ```
-    ![Nordmart-review-ui-updated-replica](./images/1a-4-nordmart-review-ui-updated-replica-5.png)  
+    ![helm101-upgrade](./images/helm101-upgrade.png)  
 
     Verify the deployment has scaled up to 5 replicas.
 
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test
     ```
-    ![Nordmart-review-ui-pods-5](./images/1a-3-nordmart-review-ui-pods-5.png)
-5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run `helm uninstall` to remove our release of the chart.
+    ![helm101-scale](./images/helm101-scale.png)
+
+
+6. If you're done playing with the `Nordmart Review App`. You can tidy up your work by removing the chart. To do this, run `helm uninstall` to remove your release of the chart.
 
     ```bash#test
     helm uninstall my-nordmart-review --namespace ${TENANT_NAME}-test
@@ -65,9 +81,9 @@ Let's deploy a simple application using Helm.
     ```bash#test
     oc get pods -n ${TENANT_NAME}-test | grep nordmart
     ```
-    ![Nordmart-review-removed](images/1a-6-nordmart-review-removed.png)
+    ![helm101-uninstalled](images/helm101-uninstalled.png)
 
-6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/stakater/charts/blob/main/stakater/nordmart-review)</span>, but the basic structure is as follows:
+6. You can view the anatomy of your Helm chart <span style="color:blue;">[found here](https://github.com/stakater/charts/blob/main/stakater/nordmart-review)</span>, but the basic structure is as follows:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
