@@ -283,19 +283,22 @@ This will trigger the same pipeline.
 
 3. Navigate to  `nordmart-apps-gitops-config > 01-TENANT_NAME >  02-stakater-nordmart-review > 00-preview`. You should be able to see a yaml file for environment resource.
    
-  ![env-cr2](images/env-cr2.png)
+  ![pr-27](images/pr-27.png)
 
-  ![env-cr2](images/env-cr.png)
+  ![pr27-env](images/pr-27-env.png)
 
 
 4. Now head over to the openshift console and navigate to projects.
 
-5. Once tronador creates the dynamic environment for you, you should be able to see its project listed there. It will start with the prefix `pr-` followed by your pr number and commit hash.
+5. Once tronador creates the dynamic environment for you, you should be able to see its project listed there. It will start with the prefix `pr-` followed by your pr number.
+
+![pr27-project](images/pr-27-project.png)
 
 
+6. Open up the project and click on workload. You will see that it deployed the application in this project for you. 
 
+![pr27-workloads](images/pr-27-workloads.png)
 
-
-   
+   Congratulations! You have a dynamic test environment for your PR!
 
 
