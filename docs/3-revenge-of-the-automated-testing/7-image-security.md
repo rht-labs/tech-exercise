@@ -34,7 +34,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 
 Below is the URL to ACS (Available on Forecastle UI):
 
-> Red Hat ACS UI: **`https://central-stakater-stackrox.apps.devtest.vxdqgl7u.kubeapp.cloud/login`**
+> Red Hat ACS UI: [https://central-stakater-stackrox.apps.devtest.vxdqgl7u.kubeapp.cloud/login](https://central-stakater-stackrox.apps.devtest.vxdqgl7u.kubeapp.cloud/login)
 
 
 1. Navigate to the Red Hat ACS via the URL above and select OpenShift as Auth Provider. Login via `workshop` SSO flow.

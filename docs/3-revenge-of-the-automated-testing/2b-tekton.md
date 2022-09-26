@@ -4,10 +4,9 @@
 
 ### Part 1 - Allure 
 
-1. For this exercise, we will use a tool called **Allure**.
-    ```
+1. For this exercise, we will use a tool called `Allure`.
 
-2. Open the `nordmart-apps-gitops-config` and navigate to `01-<TENANT_NAME> > 00-argocd-apps > 01-dev`
+2. Open the `nordmart-apps-gitops-config` and navigate to `01-<TENANT_NAME>` > `00-argocd-apps` > `01-dev`
 
 3. Add the following ArgoCD application and commit the changes.
 ```yaml
@@ -36,7 +35,7 @@
 
 ```
 
-4. Now head over to ArgoCD and refresh <TENANT_NAME>-dev application. You should be able to see allure resources being deployed
+4. Now head over to ArgoCD and refresh `<TENANT_NAME>-dev` application. You should be able to see allure resources being deployed
 
 ![allure-ArgoCD](./images/allure-argocd.png)
 

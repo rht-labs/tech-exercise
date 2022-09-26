@@ -14,9 +14,13 @@ First we need to generate a `Group Access Token` in GitLab to be used later for 
 
 1. In GitLab go to `Menu` > `Groups` > `Your Groups` > Select your `<TENANT_NAME>` group created earlier
 
-2. Select `Settings` > `Access Tokens` > enter `Token name` as `pipeline`
+2. Select `Settings` > `Access Tokens` > enter `Token name` as `pipeline` 
 
-3. Select `read_repository` and `write_repository` > click `Create group access token` > copy the value and make a note of it for later.
+  > Its important you name group your token `pipeline` for future steps
+
+3. Set `Select a role` to `Maintainer`
+
+4. Select `read_repository` and `write_repository` > click `Create group access token` > copy the value and make a note of it for later.
 
 Now we can add the secret to our Vault instance.
 
