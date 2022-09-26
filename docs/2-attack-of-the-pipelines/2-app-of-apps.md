@@ -12,14 +12,14 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 1. Head over to the below URL.
 
-   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
+  [https://github.com/stakater-lab/nordmart-apps-gitops-config.git](https://github.com/stakater-lab/nordmart-apps-gitops-config.git)
     
 This is the template that we will use to create our own apps-of-apps repository.
  
 
 2. Copy the clone URL.
 
-   ```https://github.com/stakater-lab/nordmart-apps-gitops-config.git```
+  [https://github.com/stakater-lab/nordmart-apps-gitops-config.git](https://github.com/stakater-lab/nordmart-apps-gitops-config.git)
  
 
 3. Back in GitLab navigate to `Menu` > `Projects` > `Create new project` > Select `Import project`
@@ -109,7 +109,7 @@ stakater-nordmart-review:
 
 5. Head over to [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
-  ```https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config```
+  [https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
   > We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
 
