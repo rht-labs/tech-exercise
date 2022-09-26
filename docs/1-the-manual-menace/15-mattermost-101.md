@@ -8,7 +8,7 @@
 
 2. Select the `saml` log in method to log in to the Mattermost server
 
-    ![mattermost-home-page](images/mattermost-home-page.png)
+    ![Mattermost-home-page](images/mattermost-home-page.png)
 
 3. If you are not redirected directly, use your credentials created during the SAAP-101 part.
 
@@ -17,7 +17,7 @@
 4. When you log in to the Mattermost for the first time, you aren't part of any team, so you can't access your message channels. You can see the `Logout` button in the top-left corner.
     ![mattermost-no-team-logout-page](images/mattermost-no-team-logout-page.png)
 
-5. We have automation running that will onboard your tenant to MatterMost, when your team and channels are created for you, the `Logout` button in the top-left corner will turn to `Back` button. You can click on this to access your teams and associated channels.
+5. We have automation running that will onboard your tenant to Mattermost, when your team and channels are created for you, the `Logout` button in the top-left corner will turn to `Back` button. You can click on this to access your teams and associated channels.
 
     ![mattermost-no-team-back-page](images/mattermost-no-team-back-page.png)
 
