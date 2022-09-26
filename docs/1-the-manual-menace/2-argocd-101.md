@@ -49,7 +49,7 @@ Lets install an ArgoCD Application that deploy the `nordmart-review application`
 Let's fill it out by setting the following:
 
    * On the **GENERAL** box
-      * Application Name: `argocd-nordmart-review`
+      * Application Name: `<TENANT_NAME>-argocd-nordmart-review`
       * Project: `<TENANT_NAME>`
       * Sync Policy: `Automatic`
    * On the **SOURCE** box
