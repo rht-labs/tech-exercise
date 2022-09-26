@@ -26,7 +26,7 @@ def fileNameChange(file_path, tenant_name):
 
 
     for d in dirs:
-         shutil.move(os.path.join(root, d), os.path.join(root, d.replace('TENANT_NAME', tenant_name)))        
+         shutil.move(os.path.join(root, d), os.path.join(root, d.replace('TENANT_NAME', tenant_name)))
 
 
 def tntWordChange(file_path, tenant_name):
@@ -40,7 +40,7 @@ def tntWordChange(file_path, tenant_name):
     for file in [ f for f in rootdir.glob("**/*.yaml") ]:
         file_contents = file.read_text()
         new_file_contents = re.sub(f"{pattern}", f"{replace}", file_contents)
-        file.write_text(new_file_contents)            
+        file.write_text(new_file_contents)
 
 
 def grpWordChange(file_path, group_name):
@@ -49,7 +49,7 @@ def grpWordChange(file_path, group_name):
 
 
     rootdir = Path(file_path)
-    pattern = r'<GROUP_NAME>'
+    pattern = r'<TENANT_NAME>'
     replace = group_name
     for file in [ f for f in rootdir.glob("**/*.yaml") ]:
         file_contents = file.read_text()

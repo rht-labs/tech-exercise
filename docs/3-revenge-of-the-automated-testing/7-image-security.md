@@ -28,24 +28,24 @@ Lets view this task in our cluster:
     ![rox-image-check](./images/7b-tekton-rox-image-check-yaml.png)
     ![7b-Tekton-rox-image-check-yam](./images/7b-tekton-rox-image-check-yaml.png)
 
-## Access StackRox Access
+## Access StackRox
 
 StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope. It can be used to monitor multiple clusters. The ACS/StackRox operator is already deployed and configured in the cluster for you.
 
 Below is the URL to ACS (Available on Forecastle UI):
 
-> Red Hat ACS UI: **`central-rhacs-operator.apps.devtest.vxdqgl7u.kubeapp.cloud/`**
+> Red Hat ACS UI: **`https://central-stakater-stackrox.apps.devtest.vxdqgl7u.kubeapp.cloud/login`**
 
 
-1. Navigate to the Red Hat ACS UI URL specified above and select OpenShift as Auth Provider. Login via workshop.
+1. Navigate to the Red Hat ACS via the URL above and select OpenShift as Auth Provider. Login via `workshop` SSO flow.
 
     ![central-RHACS-login](./images/central-rhacs-login.png)
 
-2. Browse to the *Platform Configuration -> System Policies* view. Type in *Policy* and then *secure shell*, select the **Secure Shell (ssh) Port Exposed in Image** policy.
+2. Browse to the `Platform Configuration` > `Policies` view. Type in and select `Policy` and then `secure shell`, select the `Secure Shell (ssh) Port Exposed in Image` policy.
 
     ![images/central-RHACS-policy.png](images/central-rhacs-policy.png)
 
-3. This policy identifies for image build violations and fails whenever we expose ssh port. We will expose port 22 in our application dockerfile and image check scan in our pipeline in the next section.
+3. This policy identifies image build violations and fails whenever we expose ssh port. We will expose port 22 in our application dockerfile and image check scan in our pipeline in the next section.
 
 ### Integrate the pipeline with Tekton:
 
@@ -53,6 +53,5 @@ Now we can use ACS to help move security **LEFT** in our build pipeline. In each
 
 - Configure your pipeline to `check` build time policy violations 
 - Configure your pipeline to `scan` images for CVE/CVSS
-- Break/Fix your pipeline 
-- <span style="color:blue;">[Tekton](7b-tekton.md)</span>
+- Break/Fix your pipeline
 

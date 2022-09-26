@@ -2,12 +2,13 @@
 
 Let's enable the **`kube-linter`** task in our pipeline.
 
-1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
+1. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
+
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the values file in the editor. After the `stakater-code-linting-v1`, reference the `kube-linting` task and add a `runAfter` field to make it run after the stakater-code-linting-v1 task:
+2. Open the `values.yaml` file in the editor. After the `stakater-code-linting-v1`, reference the `kube-linting` task and add a `runAfter` field to make it run after the `stakater-code-linting-v1` task:
 
-```
+```yaml
 - taskName: stakater-kube-linting-v1
   runAfter:
     - stakater-code-linting-v1
@@ -16,7 +17,7 @@ Let's enable the **`kube-linter`** task in our pipeline.
 
 ```
 The pipeline will now become:
-   ````yaml
+   ```yaml
    pipeline-charts:
      name: stakater-main-pr-v1
      workspaces:
@@ -87,7 +88,7 @@ The pipeline will now become:
         name: stakater-workshop-tekton-builder
         create: false
 
-````
+```
 4. Commit the changes
 
 5. Now open ArgoCD and check if the changes were synchronized. If the sync is green, you're good to go. You have successfully added code-linting to your pipeline
@@ -100,12 +101,13 @@ The pipeline will now become:
 
    ![Kube-lint-OpenShift](./images/kube-lint-openshift.png)
 
-7. Trigger the pipeline by making a small change in the `nordmart-review` application and head over to the OpenShift console to see the pipeline run.
+7. Trigger the pipeline by making a small change in the `stakater-nordmart-review` application and head over to the OpenShift console to see the pipeline run.
 
 ![Kube-lint-running](./images/kube-lint-running.png)
 
-8. Let's try to fail code linting now. Open up the `nordmart-review` application and navigate to `deploy` and open `values.yaml`. Add incorrect indentation . Commit the change.
-   This should make the `kube-linting` task to fail.
+8. Let's try to fail code linting now. Open up the `stakater-nordmart-review` application and navigate to `deployment` and open `values.yaml`. Add incorrect indentation . Commit the change.
+  
+  > This should make the `kube-linting` task to fail.
 
 ![Kube-lint-failing](./images/kube-lint-fail.png)
 

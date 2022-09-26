@@ -1,8 +1,8 @@
 ## Extend Tekton Pipeline with System Test
 
-You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to test all the endpoints of our applications to ensure they are reachable and functioning as expected.
+You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-test-v1` to test all the endpoints of our applications to ensure they are reachable and functioning as expected.
 
-1. To add the Systems Tests task to your pipeline, open the `values.yaml` file containing our pipleline definitions with your preferred editor.
+1. To add the Systems Tests task to your pipeline, open the `values.yaml` file containing our pipeline definitions with your preferred editor.
 
 2. After the `stakater-create-enviroment-v1` task, add the following task.
 
@@ -15,7 +15,7 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
 
 3. Your pipeline will now have the following tasks.
 
-   ````yaml
+   ```yaml
    apiVersion: v2
    pipeline-charts:
       name: stakater-main-pr-v1
@@ -76,7 +76,7 @@ You will use Stakater's End-to-End systems tests task `stakater-e2e-test-v1` to 
       serviceAccount:
         name: stakater-workshop-tekton-builder
         create: false
-    ```    
+    ```
     
 4. Commit your changes. You will be able to see your newly added task from your `OpenShift Console` 
    thanks to your GitOps workflow with ArgoCD.

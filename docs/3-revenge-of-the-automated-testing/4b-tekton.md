@@ -1,7 +1,8 @@
 ## Extend Tekton Pipeline with Code Linting Task
 
 ## Integrate the pipeline with Tekton:
-1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
+1. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
+
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
   
 2. Open the values file in the editor. After the `stakater-gitlab-save-allure-report-v1`, reference the code-linting task.
