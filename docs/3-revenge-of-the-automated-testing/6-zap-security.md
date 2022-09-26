@@ -23,7 +23,7 @@ SAAP cluster is shipped with a `zap-proxy` task that scan your application for a
 
 ![zap-proxy-task](./images/zap-proxy-task.png)
 
-3. CLick YAML to display the task definition.
+3. Click YAML to display the task definition.
 
    ![zap-yaml](./images/zap-yaml.png)
 

@@ -8,7 +8,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
 ### The apps of apps structure
 
-> In this exercise we'll deploy `nordmart-review`. We'll deploy Nordmart to dev environment. And then get the build environment ready for deploying our pipelines
+> In this exercise we'll deploy [nordmart-review](https://github.com/stakater-lab/stakater-nordmart-review)  to dev environment. And then get the build environment ready for deploying our pipelines
 
 1. Head over to the below URL.
 
@@ -29,7 +29,7 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 4. Select `import repository from URL` and paste in the URL that you copied in step 2. 
 
-5. Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
+5. Make the project public. Add `nordmart-apps-gitops-config` as the project name. 
 
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
 

@@ -11,7 +11,8 @@
 This is the URL for your application. 
 
 2. We want to be able to send result to allure. So we need to get the URL for allure as well. Run the below oc command to get allure URL.
-**Replace the `<TENANT_NAME>` with your tenant**
+Replace the `<TENANT_NAME>` with your tenant.
+
 ```bash
  echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
 ```
@@ -50,7 +51,7 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 ![sonar](./images/sonar-argocd.png)
 
-8. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Push directly to main. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
+8. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Push directly to main. Head over to the console and check the running pipeline. You should be able to see zap-proxy task running.
 
 ![zap-running](./images/zap-running.png)
 

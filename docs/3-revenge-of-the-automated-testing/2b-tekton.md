@@ -8,7 +8,7 @@
 
 2. Open the `nordmart-apps-gitops-config` and navigate to `01-<TENANT_NAME>` > `00-argocd-apps` > `01-dev`
 
-3. Add the following ArgoCD application and commit the changes.
+3. Create a file named `Allure` and add the following ArgoCD application and commit the changes. Remember to replace `TENANT_NAME` with your tenant.
 ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application

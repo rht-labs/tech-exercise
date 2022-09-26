@@ -144,7 +144,7 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
 4. Now let's fill in the values file for our chart. Create a `values.yaml` in the same folder and add the following values:
    ```yaml
    pipeline-charts:
-      name: main-pr-v1
+      name: stakater-main-pr-v1
       workspaces:
       - name: source
         volumeClaimTemplate:
