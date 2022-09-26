@@ -23,7 +23,7 @@ Lets view this task in our cluster:
 
    ![rox-image-search](./images/7b-tekton-rox-image-search.png)
    
-3. CLick YAML to display the task definition.
+3. Click `YAML` to display the task definition.
 
     ![rox-image-check](./images/7b-tekton-rox-image-check-yaml.png)
     ![7b-Tekton-rox-image-check-yam](./images/7b-tekton-rox-image-check-yaml.png)

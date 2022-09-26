@@ -19,7 +19,7 @@ Follow the below-mentioned procedure to add KubeLinter to the already deployed m
 
 ![Kube-lint-task](./images/kube-lint-task.png)
 
-3. CLick YAML to display the task definition.
+3. Click `YAML` to display the task definition.
 
    ![Kube-lint-yaml](./images/kube-lint-yaml.png)
 
