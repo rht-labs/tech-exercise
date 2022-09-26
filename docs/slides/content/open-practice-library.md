@@ -1,11 +1,11 @@
-<!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
+<!-- .slide: data-background-image="images/Stakater_NewBrand_Background.png" -->
 ## DevOps Culture and Practice <!-- {.element: class="course-title"} -->
 ### Open Practice Library <!-- {.element: class="title-color"} -->
 TL500 <!-- {.element: class="title-color"} -->
 
 
 
-<!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
+<!-- .slide: data-background-image="images/Stakater_NewBrand_Background.png" -->
 <!-- .slide: data-background-size="stretch" data-background-image="images/opl-logo.png", class="white-style" -->
 <div class="r-stack">
 <div >

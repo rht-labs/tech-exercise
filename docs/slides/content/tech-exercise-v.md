@@ -1,4 +1,4 @@
-<!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
+<!-- .slide: data-background-image="images/Stakater_NewBrand_Background.png" -->
 ### Stakater DevSecOps Workshop <!-- .element: class="course-title" -->
 ### Tech Exercise V - The Deployments Strike Back  <!-- .element: class="title-color" -->
 ### Advanced Deployments & Scalability <!-- .element: class="title-color" -->
