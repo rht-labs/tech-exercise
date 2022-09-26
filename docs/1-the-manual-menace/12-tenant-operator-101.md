@@ -30,10 +30,9 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 ## Creating Tenants with GitOps
 
-We will now collaborate on [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
+We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
 
-You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here  
-as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred. 
+**You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred.**
 
   > Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace it with your new tenant name.
 

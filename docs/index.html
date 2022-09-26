@@ -10,18 +10,18 @@
 </head>
 
 <body>
-  <!--div class="team-name-form">
-      <div class="team-inputs">
+  <div class="tenant-name-form">
+      <div class="tenant-inputs">
         <label for="tname">Team Name</label><br/>
-        <input type="text" id="tname" name="teamname" placeholder="Your team name..">
+        <input type="text" id="tname" name="tenantname" placeholder="Your tenant name..">
       </div>
 
-      <div class="team-inputs">
+      <div class="tenant-inputs">
         <label for="cdomain">Cluster Domain</label><br/>
         <input type="text" id="cdomain" name="clusterdomain" placeholder="Your cluster domain..">
       </div>
 
-      <div class="team-inputs">
+      <div class="tenant-inputs">
         <label for="gitserver">Git Server (optional)</label><br/>
         <input type="text" id="gitserver" name="gitserver" placeholder="Your git server..">
       </div>
@@ -30,7 +30,7 @@
         <button class="storage-btns" onclick="setNamesInStorage()">Save</button>
         <button class="storage-btns" onclick="clearStorage()">Clear</button>
       </div>
-  </div-->
+  </div>
 
   <div id="app"></div>
 
@@ -50,7 +50,7 @@
 
       // Check inputs
       if (tname == '') {
-        alert('Please enter a team name');
+        alert('Please enter a tenant name');
         return;
       }
       if (cdomain == '') {
@@ -58,7 +58,7 @@
         return;
       }
 
-      console.info('INFO - setting team, cluster and git to :', tname, cdomain, gitserver);
+      console.info('INFO - setting tenant, cluster and git to :', tname, cdomain, gitserver);
       localStorage.setItem('TENANT_NAME', tname);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
       // gitserver is not nullable
@@ -72,7 +72,7 @@
     }
 
     function clearStorage () {
-      console.info('INFO - clearing team and cluster');
+      console.info('INFO - clearing tenant and cluster');
       localStorage.removeItem('TENANT_NAME');
       localStorage.removeItem('CLUSTER_DOMAIN');
       localStorage.removeItem('GIT_SERVER');
@@ -105,10 +105,10 @@
         function(hook) {
           hook.beforeEach(function(content) {
             // Invoked each time before parsing the Markdown file.
-            const teamName = localStorage.getItem('TENANT_NAME') ? localStorage.getItem('TENANT_NAME') : '<TENANT_NAME>';
+            const tenantName = localStorage.getItem('TENANT_NAME') ? localStorage.getItem('TENANT_NAME') : '<TENANT_NAME>';
             const clusterDomain = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '<CLUSTER_DOMAIN>';
             const gitServer = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '<GIT_SERVER>';
-            return content.replaceAll('<TENANT_NAME>', teamName)
+            return content.replaceAll('<TENANT_NAME>', tenantName)
                     .replaceAll('<CLUSTER_DOMAIN>', clusterDomain)
                     .replaceAll('<GIT_SERVER>', gitServer);
           });
@@ -153,7 +153,7 @@
       outline: none !important;
       border: 2px solid #F5606D;
     }
-    .team-name-form {
+    .tenant-name-form {
       margin-left: 0%;
       background-color: #f3f3f3;
       padding-left: 20%;
@@ -163,13 +163,13 @@
       display: flex;
       align-items: center;
     }
-    .team-inputs {
+    .tenant-inputs {
       flex: 1;
     }
-    .team-inputs:first-child {
+    .tenant-inputs:first-child {
       /* margin-right: 30%; */
     }
-    .team-inputs:input,label {
+    .tenant-inputs:input,label {
       font-size: 12px;
       display: block;
     }
@@ -207,4 +207,3 @@
     }
   </style>
 </body>
-</html>

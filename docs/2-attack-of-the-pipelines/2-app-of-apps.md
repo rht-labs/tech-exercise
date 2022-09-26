@@ -107,7 +107,7 @@ stakater-nordmart-review:
 
   > We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. 
 
-5. Head over to [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
+5. Head over to [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
   ```https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config```
 
