@@ -59,7 +59,3 @@
    > Remember we are only making public repos with no branch protection or merge approval flows for sake of simplicity during the workshop, these are very important settings that always should be used where appropriate. 
 
     ![import-Nordmart-review](images/import-nordmart-review-ui.png)
-
-3. Once you have imported the repository select the `.tronador.yaml` file from the repository root.  
-  
-4. Edit the file via the `Open in Web IDE` and replace the existing tenant named `gabbar` with your tenant name and `Commit the changes to main`. 
