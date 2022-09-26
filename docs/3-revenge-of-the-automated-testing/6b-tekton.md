@@ -11,18 +11,19 @@
 This is the URL for your application. 
 
 2. We want to be able to send result to allure. So we need to get the URL for allure as well. Run the below oc command to get allure URL.
-**Replace the <TENANT_NAME> with your tenant**
+**Replace the `<TENANT_NAME>` with your tenant**
 ```bash
  echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
 ```
 Now that you have both the URLs require. Let's add our task to the pipeline.
 
-3. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
+3. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
+
    ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the values file in the editor. After the `stakater-gitlab-update-cd-repo-v1`. We need to add a couple of params as well. `app_url` and `allure_host`
-Replace <APP_URL> with the URL you obtained from step 1.
-Replace <ALLURE_HOST> with URL you obtained from step 2.
+2. Open the `values.yaml` file in the editor. After the `stakater-gitlab-update-cd-repo-v1`. We need to add a couple of params as well. `app_url` and `allure_host`
+Replace `<APP_URL>` with the URL you obtained from step 1.
+Replace `<ALLURE_HOST>` with URL you obtained from step 2.
 
 ```yaml
 - defaultTaskName: stakater-zap-proxy-v1
