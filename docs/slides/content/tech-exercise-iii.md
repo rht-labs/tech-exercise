@@ -1,4 +1,4 @@
-<!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
+<!-- .slide: data-background-image="images/Stakater_NewBrand_Background.png" -->
 ### Stakater DevSecOps Workshop <!-- .element: class="course-title" -->
 ## Tech Exercise III <!-- .element: class="title-color" -->
 ### Automate All the Testing <!-- .element: class="title-color" -->

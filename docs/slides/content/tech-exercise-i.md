@@ -1,4 +1,4 @@
-<!-- .slide: data-background-image="images/RH_NewBrand_Background.png" -->
+<!-- .slide: data-background-image="images/Stakater_NewBrand_Background.png" -->
 ### Stakater DevSecOps Workshop <!-- .element: class="course-title" -->
 ### Tech Exercise I  - The Manual Menace <!-- .element: class="title-color" -->
 ### Everything as Code <!-- .element: class="title-color" -->
