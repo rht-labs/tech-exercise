@@ -1,6 +1,6 @@
 ## User Workload Monitoring
 
-> SAAP (Stakater App Agility Platform) has monitoring capabilities built in. It deploys the Prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
+> SAAP has monitoring capabilities built in. It deploys the Prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
 
 ### SAAP Developer view Monitoring (pods etc.)
 
@@ -8,7 +8,7 @@
 
 1. User Workload Monitoring is enabled by default in SAAP.
 
-    On the SAAP UI, go to *Observe*, it should show basic health indicators
+    In the `OpenShift console` in `Developer` view, go to `Observe`, it should show basic health indicators
 
     ![product-review-default-metrics](images/product-review-default-metrics.png)
 
@@ -30,16 +30,14 @@
 
     **Example** `ServiceMonitor` object:
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-    ---
+    ```yaml
     apiVersion: monitoring.coreos.com/v1
     kind: ServiceMonitor
     metadata:
       labels:
          app: review
       name: review-svc-monitor
-      namespace: (TENANT_NAME)-dev
+      namespace: <TENANT_NAME>-dev
     spec:
       endpoints:
         - interval: 5s
@@ -47,29 +45,20 @@
           path: /actuator/prometheus
       namespaceSelector:
        matchNames:
-       - (TENANT_NAME)-dev
+       - <TENANT_NAME>-dev
       selector:
         matchLabels:
           app: review
-    </code></pre></div>
+    ```
 
     Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
-    Our Helm Chart for `nordmart-review` API Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
+    Our Helm Chart for `stakater-nordmart-review` API Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
 
     ```yaml
         ## Service Monitor
         serviceMonitor:
             enabled: true    
-    ```
-
-    Then push it to the git repo.
-
-    ```bash
-    cd /projects/tech-exercise
-    git add .
-    git commit -m "🖥️ ServiceMonitor enabled 🖥️"
-    git push
     ```
 
     If you want to verify the object exists you can run from your terminal:
@@ -80,10 +69,10 @@
 
    This is how the `serviceMonitor` will look like in OpenShift cluster:
 
-   ![sevice-monitor](./images/review-service-monitor.png)
+   ![service-monitor](./images/review-service-monitor.png)
 
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to norwdmart-review API; the dashboard can be found `nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
+2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to stakater-nordmart-review API; the dashboard can be found `stakater-nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
 
     ```yaml
         # Grafana Dashboard
@@ -100,13 +89,15 @@
     git push
     ```
 
-4. Once this change has been synchronized (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `nordmart-review` API;
+4. Once this change has been synchronized (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `stakater-nordmart-review` API;
 
     ![Forecastle-workload-Grafana](images/forecastle-workload-grafana.png)
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
 
-5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `nordmart-review` API. In your IDE, run on your terminal:
+  > In order to complete the next steps you will need the OpenShift CLI installed locally, credentials can be retrieved from the OpenShift UI
+
+5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `stakater-nordmart-review` API. In your IDE, run on your terminal:
 
     ```bash
     # Get the reviews for a specific Product (i.e. 329199)
@@ -117,7 +108,7 @@
     curl -L -X DELETE $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/6323904100aeb66032db19dc
     ```
 
-6. Back in Grafana, we should see some data populated into the boards... Go to the Manage and then click on your <TENANT_NAME>-dev.
+6. Back in Grafana, we should see some data populated into the boards... Go to the `Manage` and then click on your `<TENANT_NAME>-dev`.
 
     ![Grafana-http-reqs](./images/product-review-grafana-dashboard-manage.png)
     ![Grafana-http-reqs](./images/product-review-grafana-dashboard-tanent.png)

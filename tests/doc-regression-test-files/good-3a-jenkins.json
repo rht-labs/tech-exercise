@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TENANT_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env<TENANT_NAME>' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TENANT_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                    "user_code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env<TENANT_NAME>' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
                 }
             ],
             "tags": [

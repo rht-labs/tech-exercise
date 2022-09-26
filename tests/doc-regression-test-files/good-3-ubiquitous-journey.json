@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    yq eval -i '.team=env(TENANT_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n",
+            "code": "    yq eval -i '.team=env<TENANT_NAME>' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq eval -i '.team=env(TENANT_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n"
+                    "user_code": "    yq eval -i '.team=env<TENANT_NAME>' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n"
                 }
             ],
             "tags": [

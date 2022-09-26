@@ -203,7 +203,7 @@
 We can validate that blue service is currently running by getting the host of our route
 
 ```bash
-oc get route/review-ui-bg -n (TENANT_NAME)-dev --template='{{.spec.host}}'
+oc get route/review-ui-bg -n <TENANT_NAME>-dev --template='{{.spec.host}}'
 ```
 and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
 

@@ -106,7 +106,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
-    yq eval -i '.team=env(TENANT_NAME)' /projects/tech-exercise/values.yaml
+    yq eval -i '.team=env(<TENANT_NAME>)' /projects/tech-exercise/values.yaml
     yq eval ".source = \"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
     ```
 
