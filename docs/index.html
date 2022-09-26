@@ -33,33 +33,33 @@
   </div>
 
   <div id="app"></div>
-    
+
   <script>
-    document.getElementById("tname").value = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '';
+    document.getElementById("tname").value = localStorage.getItem('TENANT_NAME') ? localStorage.getItem('TENANT_NAME') : '';
     document.getElementById("cdomain").value = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '';
     document.getElementById("gitserver").value = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '';
 
     function setNamesInStorage () {
       let tname = document.getElementById('tname').value.toLowerCase();
-      let cdomain = (document.getElementById('cdomain').value.toLowerCase().indexOf('https://') > -1) 
-                    ? document.getElementById('cdomain').value.toLowerCase().substring(8) 
+      let cdomain = (document.getElementById('cdomain').value.toLowerCase().indexOf('https://') > -1)
+                    ? document.getElementById('cdomain').value.toLowerCase().substring(8)
                     : document.getElementById('cdomain').value.toLowerCase();
-      let gitserver = (document.getElementById('gitserver').value.toLowerCase().indexOf('https://') > -1) 
-                    ? document.getElementById('gitserver').value.toLowerCase().substring(8) 
+      let gitserver = (document.getElementById('gitserver').value.toLowerCase().indexOf('https://') > -1)
+                    ? document.getElementById('gitserver').value.toLowerCase().substring(8)
                     : document.getElementById('gitserver').value.toLowerCase();
 
       // Check inputs
-      if (tname == '') {        
+      if (tname == '') {
         alert('Please enter a team name');
         return;
       }
-      if (cdomain == '') {        
+      if (cdomain == '') {
         alert('Please enter a cluster domain');
         return;
       }
 
       console.info('INFO - setting team, cluster and git to :', tname, cdomain, gitserver);
-      localStorage.setItem('TEAM_NAME', tname);
+      localStorage.setItem('TENANT_NAME', tname);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
       // gitserver is not nullable
       if (gitserver !== '') {
@@ -73,7 +73,7 @@
 
     function clearStorage () {
       console.info('INFO - clearing team and cluster');
-      localStorage.removeItem('TEAM_NAME');
+      localStorage.removeItem('TENANT_NAME');
       localStorage.removeItem('CLUSTER_DOMAIN');
       localStorage.removeItem('GIT_SERVER');
       document.getElementById('tname').value = '';
@@ -86,7 +86,7 @@
       auto2top: true,
       executeScript: true,
       name: 'Stakater DevSecOps Workshop',
-      repo: 'https://github.com/stakater/workshop-excercise',
+      repo: 'https://github.com/stakater/workshop-exercise',
       loadSidebar: true,
       subMaxLevel: 0,
       sidebarDisplayLevel: 0,
@@ -105,10 +105,10 @@
         function(hook) {
           hook.beforeEach(function(content) {
             // Invoked each time before parsing the Markdown file.
-            const teamName = localStorage.getItem('TEAM_NAME') ? localStorage.getItem('TEAM_NAME') : '<TEAM_NAME>';
+            const teamName = localStorage.getItem('TENANT_NAME') ? localStorage.getItem('TENANT_NAME') : '<TENANT_NAME>';
             const clusterDomain = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '<CLUSTER_DOMAIN>';
             const gitServer = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '<GIT_SERVER>';
-            return content.replaceAll('<TEAM_NAME>', teamName)
+            return content.replaceAll('<TENANT_NAME>', teamName)
                     .replaceAll('<CLUSTER_DOMAIN>', clusterDomain)
                     .replaceAll('<GIT_SERVER>', gitServer);
           });
@@ -118,7 +118,7 @@
             <span  style="float:right;><a href="https://www.stakater.com/saap-kubernetes-openshift">🧑‍🏫 Stakater App Agility Platform</a></span>
             </footer>
             `;
-          
+
           hook.afterEach(function(html) {
             return html + footer;
           });
@@ -126,7 +126,7 @@
       ],
       search: 'auto', // default
       vueComponents: { }
-    }    
+    }
   </script>
 
   <!-- Docsify v4 -->
@@ -134,7 +134,7 @@
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>  
+  <script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-bash.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
   <script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script>
@@ -180,8 +180,8 @@
       cursor: pointer;
       background-color: #FAB6B6;
       color: black;
-      border: 2px solid #FAB6B6; 
-      width: 130px; 
+      border: 2px solid #FAB6B6;
+      width: 130px;
       text-align: center;
     }
     p.tip {

@@ -194,8 +194,8 @@
 3. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`.
 
     ```bash
-    oc get svc -l blue_green=inactive --no-headers -n <TEAM_NAME>-dev
-    oc get svc -l blue_green=active --no-headers -n <TEAM_NAME>-dev
+    oc get svc -l blue_green=inactive --no-headers -n <TENANT_NAME>-dev
+    oc get svc -l blue_green=active --no-headers -n <TENANT_NAME>-dev
     ```
 
 4. With both deployed, let's assume that our blue deployment is the active one with the service having `active` label pointing towards blue deployment and service having `inactive` label pointing towards green deployment. 
@@ -203,7 +203,7 @@
 We can validate that blue service is currently running by getting the host of our route
 
 ```bash
-oc get route/review-ui-bg -n (TENANT_NAME)-dev --template='{{.spec.host}}'
+oc get route/review-ui-bg -n <TENANT_NAME>-dev --template='{{.spec.host}}'
 ```
 and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
 

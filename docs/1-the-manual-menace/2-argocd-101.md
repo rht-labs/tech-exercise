@@ -33,15 +33,15 @@ Lets install an ArgoCD Application that deploy the `nordmart-review application`
     ![ArgoCD-ui-](images/2-argocd-forecastle-search.jpg)
 
 
-2. If you are not automatically be logged in via KeyCloak SSO the Click `LOG IN VIA OPENSHIFT` > Select `workshop` as the login method 
+2. If you are not automatically logged in via KeyCloak SSO > Click `LOG IN VIA OPENSHIFT` > Select `workshop` as the login method 
 
 3. Select `Allow selected permissions` for the initial login.
 
 ![ArgoCD-allow-permission](images/argocd-allow-permission.png)
 
 4. You just logged into ArgoCD 👏👏👏! 
-![ArgoCD-ui](images/2-argocd-ui.png)
 
+![ArgoCD-ui](images/2-argocd-ui.png)
 
 5. Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `stakater-nordmart-review` app you manually deployed previously using Helm. On ArgoCD - click `+ NEW APP`. You should see an empty form.
     > Make sure you have deleted previous Helm release deployed in Helm 101.
@@ -73,7 +73,7 @@ Your form should look like the follow image, if so click `Create`
 
 ![ArgoCD-Nordmart-review-detail](images/2-argocd-nordmart-review-argocd-app-details.png)
 
-8. You can verify the application is running and behaving as expected by navigating to `Pods` under `Workloads` section in your `OpenShift Console`.
+8. You can verify the application is running and behaving as expected by navigating to `Workloads` > `Pods` section in your `OpenShift Console`.
 
   > Select the drop down and switch to `Administrator` view in the OpenShift console if you are not already there
 

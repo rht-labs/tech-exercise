@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git\n    git branch -M main\n    git push -u origin main\n",
+            "code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle-api.git\n    git branch -M main\n    git push -u origin main\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git\n    git branch -M main\n    git push -u origin main\n"
+                    "user_code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle-api.git\n    git branch -M main\n    git push -u origin main\n"
                 }
             ],
             "tags": [
@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n",
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TENANT_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TENANT_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TENANT_NAME|$TENANT_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n"
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TENANT_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TENANT_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TENANT_NAME|$TENANT_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n"
                 }
             ],
             "tags": [
@@ -57,12 +57,12 @@
             ]
         },
         {
-            "code": "    echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')\n",
+            "code": "    echo https://$(oc -n ${TENANT_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')\n"
+                    "user_code": "    echo https://$(oc -n ${TENANT_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')\n"
                 }
             ],
             "tags": [

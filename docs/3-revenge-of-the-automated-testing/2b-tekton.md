@@ -50,10 +50,11 @@ echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }
 
 > In this part, we will add a unit test to our pipeline and then send the results to allure.
 
-1. Open the Chart we added to 00-tekton-pipelines folder in section 2.
+1.  Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
+
 ![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)` folder.
 
-2. Open the values file in the editor. After the ` stakater-sonarqube-scanner-v1`, reference the unit test task and add a runAfter field to make it run after the  stakater-sonarqube-scanner-v1 task:
+2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the unit test task and add a `runAfter` field to make it run after the `stakater-sonarqube-scanner-v1` task:
 
 ```yaml
 - defaultTaskName: stakater-unit-test-v1
@@ -143,21 +144,19 @@ Also add the stakater-gitlab-save-allure-report-v1 after the unit test task
 
 ![allure](./images/allure-argocd.png)
 
-Open up the console and navigate to your pipeline definition by going to `Pipelines` and selecting your pipeline from the list. You should see a unit tast and allure task there as well.
+Open up the console and navigate to your pipeline definition by going to `Pipelines` and selecting your pipeline from the list. You should see a unit test and allure task there as well.
 
 ![allure-pipeline](./images/allure-pipeline.png)
 
 6. If the sync is green, you're good to go. You have successfully added automated to your pipeline!
 
-7. Now make a small change on the nordmart-review application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see unit test and allure task running.
+7. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see unit test and allure task running.
 
 ![allure-running](./images/allure-running.png)
 
-8. Once the task completes, head over to `allure` by opening the link returned by the below command. Don't forget to change the <TENANT_NAME>!
+8. Once the task completes, head over to `allure` by opening the link found in the OpenShift console via `Networking` > `Routes` in the `TENANT_NAME-dev` namespace.
 
-```bash
-echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html
-```
+![allure-ui-nordmart](./images/allure-ui-nordmart.png)
 ![allure-ui-nordmart](./images/allure-ui-nordmart.png)
 
 CONGRATULATION!!! You have added automated testing to your pipeline.

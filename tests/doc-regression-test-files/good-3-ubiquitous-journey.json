@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n",
+            "code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/tech-exercise.git\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n"
+                    "user_code": "    cd /projects/tech-exercise\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/tech-exercise.git\n"
                 }
             ],
             "tags": [
@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n",
+            "code": "    yq eval -i '.team=env<TENANT_NAME>' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n"
+                    "user_code": "    yq eval -i '.team=env<TENANT_NAME>' /projects/tech-exercise/values.yaml\n    yq eval \".source = \\\"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\\\"\" -i /projects/tech-exercise/values.yaml\n"
                 }
             ],
             "tags": [
@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "code": "    sed -i \"s|TENANT_NAME|$TENANT_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                    "user_code": "    sed -i \"s|TENANT_NAME|$TENANT_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
                 }
             ],
             "tags": [
@@ -71,12 +71,12 @@
             ]
         },
         {
-            "code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PAT} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n",
+            "code": "    cat <<EOF | oc apply -n ${TENANT_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PAT} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PAT} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n"
+                    "user_code": "    cat <<EOF | oc apply -n ${TENANT_NAME}-ci-cd -f -\n      apiVersion: v1\n      data:\n        password: \"$(echo -n ${GITLAB_PAT} | base64 -w0)\"\n        username: \"$(echo -n ${GITLAB_USER} | base64 -w0)\"\n      kind: Secret\n      type: kubernetes.io/basic-auth\n      metadata:\n        annotations:\n          tekton.dev/git-0: https://${GIT_SERVER}\n          sealedsecrets.bitnami.com/managed: \"true\"\n        labels:\n          credential.sync.jenkins.openshift.io: \"true\"\n        name: git-auth\nEOF\n"
                 }
             ],
             "tags": [
@@ -85,12 +85,12 @@
             ]
         },
         {
-            "code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n",
+            "code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TENANT_NAME}-ci-cd .\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .\n"
+                    "user_code": "    cd /projects/tech-exercise\n    helm upgrade --install uj --namespace ${TENANT_NAME}-ci-cd .\n"
                 }
             ],
             "tags": [
@@ -99,12 +99,12 @@
             ]
         },
         {
-            "code": "    oc get projects | grep ${TEAM_NAME}\n",
+            "code": "    oc get projects | grep ${TENANT_NAME}\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc get projects | grep ${TEAM_NAME}\n"
+                    "user_code": "    oc get projects | grep ${TENANT_NAME}\n"
                 }
             ],
             "tags": [
@@ -113,12 +113,12 @@
             ]
         },
         {
-            "code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n",
+            "code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    oc get pods -n ${TEAM_NAME}-ci-cd\n"
+                    "user_code": "    oc get pods -n ${TENANT_NAME}-ci-cd\n"
                 }
             ],
             "tags": [

@@ -3,12 +3,13 @@
 > In this section we are going to improve our already built pipeline and add SonarQube scanning to it.
 
 
-1. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
+1. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
+
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
   
-2. Open the values file in the editor. After the `stakater-create-git-tag-v1`, reference the SonarQube task and add a `runAfter` field to make it run after the create-git-tag-v1 task:
+2. Edit the `values.yaml` file. After the `stakater-create-git-tag-v1`, reference the SonarQube task and add a `runAfter` field to make it run after the create-git-tag-v1 task:
 
-```
+```yaml
 - defaultTaskName: stakater-sonarqube-scanner-v1
   runAfter:
     - stakater-create-git-tag-v1
@@ -90,20 +91,18 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 ![sonar-OpenShift](./images/sonar-openshift.png)
 
-
-
 6. If the sync is green, you're good to go. You have successfully added SonarQube to your pipeline!
 
-7. Now make a small change on the `nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
+7. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
 
 ![sonar-running](./images/sonar-running.png)
 
-8. Once the task completes, head over to `sonarqube` by opening the following URL.
+8. Once the task completes, head over to `sonarqube` by opening the following URL, and login using the SSO flow if prompted.
 
 ```
 https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
 ```
-It will take you to the projects page. You should be able to see `nordmart-review` project in the console. 
+It will take you to the projects page. You should be able to see `stakater-nordmart-review` project in the console. 
 
 ![sonar-scanned](./images/sonar-scanned.png)
 

@@ -16,7 +16,7 @@
 
    ![create-group-home](images/create-group-home.png)
 
-2. Put your TEAM_NAME (`<TEAM_NAME>`) or YOUR_NAME (`<YOUR_NAME>`)  as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your `<TENANT_NAME>` as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
    For the purpose of this manual, we will use the group name `sorcerers`. Please choose your own unique name.
 
    ![GitLab-group-create](images/gitlab-group-create.png)

@@ -4,20 +4,19 @@
 
 1. The Nordmart Review API and UI charts both have one basic `rule` for firing off an alert. If you open up the `stakater-nordmart-review/deploy/values.yaml` file, you'll find an alert that gets triggered when total ratings below 2 has crossed the threshold 8. The alert rules are written in PromQL. You can also add an extra alert which will be triggered when a pod is not available for one minute. In `values.yaml`add the following alert after existing `nordmart-review-low-rating-warning` alert under `prometheusRule.group`
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
+  ```yaml
       - name: nordmart-review-api-rules
         rules:
         - alert: NordmartReviewApiNotAvailable
           annotations:
-            message: 'Nordmart Review API in namespace (TENANT_NAME)-dev is not available for the last 1 minutes.'
-          expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="(TENANT_NAME)-dev"} * 
+            message: 'Nordmart Review API in namespace <TENANT_NAME>-dev is not available for the last 1 minutes.'
+          expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="<TENANT_NAME>-dev"} * 
                 on(pod) group_left(label_app) 
-                kube_pod_labels{label_app="review",namespace="(TENANT_NAME)-dev"})) == 0
+                kube_pod_labels{label_app="review",namespace="<TENANT_NAME>-dev"})) == 0
           for: 1m
           labels:
             severity: critical
-    </code></pre></div>
+  ```
 
     ![Prometheus-rule](./images/review-prometheus-rule.png)
 

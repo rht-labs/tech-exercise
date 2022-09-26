@@ -22,10 +22,10 @@ All of these traits lead to one outcome - the ability to build and release quali
     https://<GIT_SERVER>
     ```
 
-    We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
+    We need to create a group in GitLab as `<TENANT_NAME>`.  Click "Create a group" on the screen:
     ![GitLab-initial-login](images/gitlab-initial-login.png)
 
-2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
+2. Put your TENANT_NAME (`<TENANT_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
 ![GitLab-create-group](images/gitlab-create-group.png)
 
 3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if your are not working as a team.
@@ -75,7 +75,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash#test
     cd /projects/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/tech-exercise.git
     ```
 
     Use the `GITLAB_PAT` from above when you are prompted for the password (this will be cached)
@@ -99,35 +99,35 @@ All of these traits lead to one outcome - the ability to build and release quali
 1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in to create App of Apps in ArgoCD. Let's get right into it - in the your IDE, Open the `values.yaml` file in the root of the project. Update it to reference the git repo you just created and your team name. This values file is the default ones for the chart and will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (`services`, `deployments` & `routes`) but an ArgoCD application definition, just like the one we manually created in the previous exercise when we deployed an app in the UI of ArgoCD.
 
     ```yaml
-    source: "https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git"
-    team: <TEAM_NAME>
+    source: "https://<GIT_SERVER>/<TENANT_NAME>/tech-exercise.git"
+    team: <TENANT_NAME>
     ```
 
     You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
-    yq eval -i '.team=env(TEAM_NAME)' /projects/tech-exercise/values.yaml
-    yq eval ".source = \"https://$GIT_SERVER/$TEAM_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
+    yq eval -i '.team=env(<TENANT_NAME>)' /projects/tech-exercise/values.yaml
+    yq eval ".source = \"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
     ```
 
-2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for bootstrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TEAM_NAME\>` in the bootstrap section so it looks like this:
+2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc. will all live in here eventually, but let's start small with two objects. One for bootstrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TENANT_NAME\>` in the bootstrap section, so it looks like this:
 
     ```bash
             - name: jenkins
               kind: ServiceAccount
               role: admin
-              namespace: <TEAM_NAME>-ci-cd
+              namespace: <TENANT_NAME>-ci-cd
           namespaces:
-            - name: <TEAM_NAME>-ci-cd
+            - name: <TENANT_NAME>-ci-cd
               bindings: *binds
               operatorgroup: true
-            - name: <TEAM_NAME>-dev
+            - name: <TENANT_NAME>-dev
               bindings: *binds
               operatorgroup: true
-            - name: <TEAM_NAME>-test
+            - name: <TENANT_NAME>-test
               bindings: *binds
               operatorgroup: true
-            - name: <TEAM_NAME>-stage
+            - name: <TENANT_NAME>-stage
               bindings: *binds
               operatorgroup: true
     ```
@@ -135,7 +135,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     You can also run this bit of code to do the replacement if you are feeling lazy!
 
     ```bash#test
-    sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+    sed -i "s|TENANT_NAME|$TENANT_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     ```
 
 3. This is GitOps - so in order to affect change, we now need to commit things! Let's get the configuration into git, before telling ArgoCD to sync the changes for us.
@@ -148,7 +148,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```
 
   <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - Bootstrap step also provides the necessary rolebindings. That means now the other users in the same team can access <b><TEAM_NAME></b> environments.
+    ⛷️ <b>NOTE</b> ⛷️ - Bootstrap step also provides the necessary rolebindings. That means now the other users in the same team can access <b><TENANT_NAME></b> environments.
   </p>
 
 4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. In your terminal
@@ -156,7 +156,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     Add the Secret to the cluster:
 
     ```bash#test
-    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+    cat <<EOF | oc apply -n ${TENANT_NAME}-ci-cd -f -
       apiVersion: v1
       data:
         password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
@@ -177,7 +177,7 @@ EOF
 
     ```bash#test
     cd /projects/tech-exercise
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace ${TENANT_NAME}-ci-cd .
     ```
 
     ![ArgoCD-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
@@ -185,11 +185,11 @@ EOF
 6. As ArgoCD sync's the resources we can see them in the cluster:
 
     ```bash#test
-    oc get projects | grep ${TEAM_NAME}
+    oc get projects | grep ${TENANT_NAME}
     ```
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd
+    oc get pods -n ${TENANT_NAME}-ci-cd
     ```
 
 🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄

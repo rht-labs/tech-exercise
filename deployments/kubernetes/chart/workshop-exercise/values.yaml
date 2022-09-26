@@ -6,7 +6,7 @@ replicaCount: 1
 port: 8080
 
 image:
-  repository: stakater/workshop-excercise
+  repository: stakater/workshop-exercise
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion. It is bumped by push workflow.
   tag: 0.0.163

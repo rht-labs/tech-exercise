@@ -22,7 +22,7 @@ The SAAP cluster is shipped with many useful predefined cluster tasks. A SonarQu
 
    ![SonarQube-search](./images/sonarqube-search.png)
    
-3. CLick YAML to display the task definition.
+3. Click `YAML` to display the task definition.
 
 
    ![SonarQube-tasks](./images/sonarqube-task.png)

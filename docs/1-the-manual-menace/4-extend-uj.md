@@ -7,7 +7,7 @@ Now, we have our projects, necessary rolebindings and Jenkins up and running. We
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
+git remote set-url origin https://<GIT_SERVER>/<TENANT_NAME>/tech-exercise.git
 git pull
 ```
 
@@ -18,7 +18,7 @@ git pull
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 
     ```bash#test
-    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TENANT_NAME}-ci-cd)
     ```
 
 2. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
@@ -67,7 +67,7 @@ git pull
 4. With the Webhook in place, it should only take a few seconds for things to become available. But you can verify it is all working by opening the Nexus URL in a new tab (admin / admin123 is the default credential):
 
     ```bash#test
-    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)
     ```
 
     ![nexus](images/nexus.png)

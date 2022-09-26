@@ -65,7 +65,7 @@ The folder contains ArgoCD applications for all applications & pipelines.
             prune: true
             selfHeal: true
 
-    > Also available at https://github.com/stakater/workshop-excercise/blob/main/deployments/argocd/gitops-argocd-app-template.yaml
+    > Also available at https://github.com/stakater/workshop-exercise/blob/main/deployments/argocd/gitops-argocd-app-template.yaml
 
     Using the above template, we will create three new files with our two Nordmart applications and one Tekton pipeline application.
 

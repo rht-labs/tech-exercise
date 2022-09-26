@@ -3,21 +3,22 @@
 
 
 
-1. In OpenShift UI, go to your `<TENANT_NAME>-dev` project. Navigate to `Workloads > Replicasets >`. Click on one of the replica sets.
+1. In OpenShift UI, go to your `<TENANT_NAME>-dev` project. Navigate to `Workloads` > `Deployments` > Click on one of the `Deployments`.
 
-    ![demiguise1](images/demiguise1.png)
+    ![manual-update-environment](images/manual-update-environment.png)
 
-2. On the `Environment` tab, add a new variable. For example, click `➕ Add more` and on the text box put in something new or random for example `DEMIGUISE` with a value of `watch-me-disappear`. Hit save!
+2. On the `Environment` tab, add a new key-value pair. For example:  
 
-   ![demiguise1](images/demiguise2.png)
+`NEW_EXAMPLE_VARIABLE` with a value of `some-value`. Hit `Save`
+
+   ![manual-update-environment-click-save](images/manual-update-environment-click-save.png)
 
     
+    If you wait a few seconds (or if like me you're lazy, you can spam refresh on the page)
 
-    If you wait a few seconds (or if like me you're lazy, you could refresh the page)
+    Look at that! The `NEW_EXAMPLE_VARIABLE` has disappeared!!!!
 
-    Look at that! The Demiguise has disappeared!!!!
-
-    That's right, they've been over written by ArgoCD who's taken the configuration in git and applied it on top. The `DEMIMGUISE` variable was **not** in git so it was removed. If we want to persist the variable, we can of course add it to out git repo!
+    That's right, they've been over written by ArgoCD who's taken the configuration in git and applied it on top. The `NEW_EXAMPLE_VARIABLE` was **not** in git, so it was removed. If we want to persist the variable, we can of course add it to out git repo!
 
 
 🪄🪄 You've just experienced how great and powerful the GitOps is! Let's advance to see how we utilize it in our application development! 🪄🪄

@@ -21,7 +21,7 @@ pipeline {
 		GIT_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-git-auth")
 		NEXUS_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-nexus-password")
 
-		// Nexus Artifact repo 
+		// Nexus Artifact repo
 		NEXUS_REPO_NAME="labs-static"
 		NEXUS_REPO_HELM = "helm-charts"
 	}
@@ -48,10 +48,10 @@ pipeline {
 					steps {
 						script {
 							// ensure the name is k8s compliant
-							env.TEAM_NAME = "${GITLAB_GROUP_NAME}"
+							env.TENANT_NAME = "${GITLAB_GROUP_NAME}"
 							env.NAME = "${JOB_NAME}".split("/")[0]
 							env.APP_NAME = "${NAME}".replace("/", "-").toLowerCase()
-							env.DESTINATION_NAMESPACE = "${TEAM_NAME}-test"
+							env.DESTINATION_NAMESPACE = "${TENANT_NAME}-test"
 							env.IMAGE_NAMESPACE = "${DESTINATION_NAMESPACE}"
 							env.IMAGE_REPOSITORY = 'image-registry.openshift-image-registry.svc:5000'
 							// env.ARGOCD_CONFIG_REPO = "${ARGOCD_CONFIG_REPO}"
@@ -70,8 +70,8 @@ pipeline {
 					}
 					steps {
 						script {
-							env.TEAM_NAME = "${TEAM_NAME}"
-							env.DESTINATION_NAMESPACE = "${TEAM_NAME}-dev"
+							env.TENANT_NAME = "${TENANT_NAME}"
+							env.DESTINATION_NAMESPACE = "${TENANT_NAME}-dev"
 							env.IMAGE_NAMESPACE = "${DESTINATION_NAMESPACE}"
 							env.IMAGE_REPOSITORY = 'image-registry.openshift-image-registry.svc:5000'
 
@@ -86,7 +86,7 @@ pipeline {
 			}
 		}
 
-        // 💥🔨 PIPELINE EXERCISE GOES HERE 
+        // 💥🔨 PIPELINE EXERCISE GOES HERE
         stage("🧰 Build (Compile App)") {
             agent { label "jenkins-agent-npm" }
             steps {
@@ -108,7 +108,7 @@ pipeline {
                 echo '### Running build ###'
                 sh 'npm run build '
 
-                // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
+                // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE
                 echo '### Running SonarQube ###'
 
                 echo '### Packaging App for Nexus ###'
@@ -132,7 +132,7 @@ pipeline {
 				sh  '''
 					rm -rf package-contents*
 					curl -v -f -u ${NEXUS_CREDS} http://nexus:8081/repository/${NEXUS_REPO_NAME}/${APP_NAME}/${PACKAGE} -o ${PACKAGE}
-					# clean up   
+					# clean up
 					oc delete bc/${APP_NAME} is/${APP_NAME} || rc=$?
 				'''
 				echo '### Run OpenShift Build ###'
@@ -167,18 +167,18 @@ pipeline {
 
 					# over write the chart name for features / sandbox dev
 					yq eval -i .name=\\"${APP_NAME}\\" "chart/Chart.yaml"
-					
+
 					# probs point to the image inside ocp cluster or perhaps an external repo?
 					yq eval -i .image_repository=\\"${IMAGE_REPOSITORY}\\" "chart/values.yaml"
 					yq eval -i .image_name=\\"${APP_NAME}\\" "chart/values.yaml"
 					yq eval -i .image_namespace=\\"${IMAGE_NAMESPACE}\\" "chart/values.yaml"
-					
+
 					# latest built image
 					yq eval -i .image_version=\\"${VERSION}\\" "chart/values.yaml"
 				'''
 				echo '### Publish Helm Chart ###'
 				sh '''
-					# package and release helm chart - could only do this if release candidate only 
+					# package and release helm chart - could only do this if release candidate only
     			helm package --dependency-update chart/  --app-version ${VERSION}
 					curl -v -f -u ${NEXUS_CREDS} http://nexus:8081/repository/${NEXUS_REPO_HELM}/ --upload-file ${APP_NAME}-*.tgz
 				'''
@@ -191,7 +191,7 @@ pipeline {
 				stage("🏖️ Sandbox - Helm Install"){
 					options {
 						skipDefaultCheckout(true)
-					}  
+					}
 					agent { label "jenkins-agent-helm" }
 					when {
 						expression { return !(GIT_BRANCH.startsWith("master") || GIT_BRANCH.startsWith("main") )}
@@ -216,7 +216,7 @@ pipeline {
 							git clone https://${GIT_CREDS}@${ARGOCD_CONFIG_REPO} config-repo
 							cd config-repo
 							git checkout ${ARGOCD_CONFIG_REPO_BRANCH} # master or main
-				
+
 							PREVIOUS_VERSION=$(yq eval .applications.\\"${APP_NAME}\\".values.image_version "${ARGOCD_CONFIG_REPO_PATH}")
 							PREVIOUS_CHART_VERSION=$(yq eval .applications.\\"${APP_NAME}\\".source_ref "${ARGOCD_CONFIG_REPO_PATH}")
 
@@ -269,22 +269,22 @@ pipeline {
 		// stage("🥾 Trigger System Tests") {
 		// 	options {
 		// 		skipDefaultCheckout(true)
-		// 	}            
+		// 	}
 		// 	agent { label "master" }
 		// 	when {
 		// 		expression { GIT_BRANCH.startsWith("master") || GIT_BRANCH.startsWith("main") }
 		// 	}
 		// 	steps {
 		// 			echo "TODO - Run tests"
-		// 			build job: "system-tests/main", 
+		// 			build job: "system-tests/main",
 		// 						parameters: [[$class: 'StringParameterValue', name: 'APP_NAME', value: "${APP_NAME}" ],
 		// 													[$class: 'StringParameterValue', name: 'CHART_VERSION', value: "${CHART_VERSION}"],
-		// 													[$class: 'StringParameterValue', name: 'VERSION', value: "${VERSION}"]], 
+		// 													[$class: 'StringParameterValue', name: 'VERSION', value: "${VERSION}"]],
 		// 						wait: false
 		// 	}
 		// }
 
-		// 💥🔨 BLUE / GREEN DEPLOYMENT GOES HERE 
+		// 💥🔨 BLUE / GREEN DEPLOYMENT GOES HERE
 
 	}
 }

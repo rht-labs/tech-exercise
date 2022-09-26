@@ -1,12 +1,12 @@
 {
     "code_blocks": [
         {
-            "code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n",
+            "code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n"
+                    "user_code": "    cd /projects\n    git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle\n    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle.git\n    git branch -M main\n    git push -u origin main\n"
                 }
             ],
             "tags": [
@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n",
+            "code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n"
+                    "user_code": "    echo \"https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle\"\n"
                 }
             ],
             "tags": [
@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
+            "code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env<TENANT_NAME>' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
+                    "user_code": "    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_HOST\")).value)|=env(GIT_SERVER)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    yq e '(.applications[] | (select(.name==\"jenkins\").values.deployment.env_vars[] | select(.name==\"GITLAB_GROUP_NAME\")).value)|=env<TENANT_NAME>' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n"
                 }
             ],
             "tags": [
@@ -71,12 +71,12 @@
             ]
         },
         {
-            "code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n",
+            "code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)\n"
+                    "user_code": "    # to get the Jenkins route on your terminal\n    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)\n"
                 }
             ],
             "tags": [

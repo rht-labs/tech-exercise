@@ -19,7 +19,7 @@ Lets view this task in our cluster:
 
    ![stakater-load-testing-v1](./images/9b-tekton-stakater-load-testing-v1.png)
    
-3. CLick YAML to display the task definition.
+3. Click `YAML` to display the task definition.
 
     ![stakater-load-testing-v1](./images/9b-tekton-stakater-load-testing-v1-yaml.png)
 

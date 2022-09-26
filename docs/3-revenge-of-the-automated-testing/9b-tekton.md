@@ -5,7 +5,7 @@ The SAAP cluster is shipped with many useful predefined cluster tasks including 
 
 Lets add this task into our pipeline **`stakater-load-testing-v1`**.
 
-1. Open the chart we added to `00-tekton-pipelines` folder in section 2.
+1. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
 2. Open the `values.yaml` file in the editor. 

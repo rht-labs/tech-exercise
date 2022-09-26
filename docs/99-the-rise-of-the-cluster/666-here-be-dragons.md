@@ -18,13 +18,13 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
 2. Use `vscode` IDE or similar to replace all the occurrences of `apps.cluster-a.com -> apps.cluster-b.com` in the code.
 
-3. Login to GitLab and create your ${TEAM_NAME}
+3. Login to GitLab and create your ${TENANT_NAME}
 
 4. Let's push our code into the hosted GitLab instance in our new cluster:
 
     ```bash
     export GIT_SERVER=gitlab-ce.apps.cluster-b.com
-    export TEAM_NAME=ateam
+    export TENANT_NAME=ateam
     ```
 
     I'm assuming the code is in this folder locally on my laptop, adjust to suit. For each of the repos:
@@ -33,7 +33,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     cd ~/git/tl500/pet-battle
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
+    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle.git
     git push -u origin main
     ```
 
@@ -41,7 +41,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     cd ~/git/tl500/pet-battle-api
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
+    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/pet-battle-api.git
     git push -u origin main
     ```
 
@@ -49,7 +49,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     cd ~/git/tl500/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GIT_SERVER}/${TENANT_NAME}/tech-exercise.git
     git push -u origin main
     ```
 
@@ -79,7 +79,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     EOF
 
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n ${TENANT_NAME}-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -90,7 +90,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     Need to apply this to temporarily kick thins off
 
     ```bash
-    oc apply -n ${TEAM_NAME} -f /tmp/git-auth.yaml
+    oc apply -n ${TENANT_NAME} -f /tmp/git-auth.yaml
     ```
 
     Set `sonarqube-auth`
@@ -110,7 +110,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     EOF
 
     kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n ${TENANT_NAME}-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -132,7 +132,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     EOF
 
     kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n ${TENANT_NAME}-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -159,7 +159,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     EOF
 
     kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n ${TENANT_NAME}-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -170,7 +170,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 7. Run the basics
 
     ```bash
-    export TEAM_NAME="ateam"
+    export TENANT_NAME="ateam"
     export CLUSTER_DOMAIN="apps.cluster-b.com"
     export GIT_SERVER="gitlab-ce.apps.cluster-b.com"
 
@@ -187,12 +187,12 @@ Lets take our code from `cluster-a` to `cluster-b`.
       NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
       if [ -z $NS ]; then
-        NS="${TEAM_NAME}-ci-cd"
-      elif [[ "$NS" =~ .*"${TEAM_NAME}-ci-cd".* ]]; then
-        echo "${TEAM_NAME}-ci-cd already added."
+        NS="${TENANT_NAME}-ci-cd"
+      elif [[ "$NS" =~ .*"${TENANT_NAME}-ci-cd".* ]]; then
+        echo "${TENANT_NAME}-ci-cd already added."
         return
       else
-        NS="${TEAM_NAME}-ci-cd,${NS}"
+        NS="${TENANT_NAME}-ci-cd,${NS}"
       fi
       oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \
         -p '[{"op":"replace","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
@@ -205,11 +205,11 @@ Lets take our code from `cluster-a` to `cluster-b`.
     Deploy Helm chart
 
     ```bash
-    oc new-project ${TEAM_NAME}-ci-cd
+    oc new-project ${TENANT_NAME}-ci-cd
     helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
 
     helm upgrade --install argocd \
-    --namespace ${TEAM_NAME}-ci-cd \
+    --namespace ${TENANT_NAME}-ci-cd \
     -f tech-exercise/argocd-values.yaml \
     redhat-cop/gitops-operator
     ```
@@ -218,7 +218,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     cd tech-exercise
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace ${TENANT_NAME}-ci-cd .
     ```
 
 10. Add the integrations and web hooks to GitLab for `tech-exercise`, `pet-battle`, `pet-battle-api` git repos
@@ -227,7 +227,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
 
     ```bash
     cd /tmp
-    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign
+    cosign generate-key-pair k8s://${TENANT_NAME}-ci-cd/${TENANT_NAME}-cosign
 
     cd /projects/tech-exercise
     git add ubiquitous-journey/values-tooling.yaml

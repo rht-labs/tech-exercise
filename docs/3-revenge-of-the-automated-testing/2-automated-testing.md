@@ -34,7 +34,7 @@ We will be using mvn clean test to run the unit tests in nordmart application
 
 ![allure-openshift.png](./images/allure-openshift.png)
 
-2. CLick YAML to display the task definition.
+2. Click `YAML` to display the task definition.
 
    ![allure-yaml.png](./images/allure-yaml.png)
 
