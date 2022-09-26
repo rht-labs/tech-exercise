@@ -11,6 +11,7 @@
   * [🍄 Nordmart Review 101](1-the-manual-menace/10-nordmart-101.md) 
   * [🐌 Helm 101](1-the-manual-menace/1a-helm-101.md)  
   * [🐙 ArgoCD 101](1-the-manual-menace/2-argocd-101.md)
+  * [🐋 Tronador 101](1-the-manual-menace/16-tronador-101.md)
 * [2. Attack of the Pipelines](2-attack-of-the-pipelines/README.md)
   * [🕵🏻‍♂️ Vault and External Secrets](2-attack-of-the-pipelines/1-external-secrets.md)
   * [🙌🏻 Application of Applications](2-attack-of-the-pipelines/2-app-of-apps.md)
