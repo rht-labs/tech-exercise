@@ -32,16 +32,47 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository which is already setup to bootstrap your access via the creation of your cluster tenants.  
 
-**You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred.**
+**You will need to come up with a name for your tenant and we will need them to be unique amongst the participants, but if you are here as a group you can also share a tenant. We would recommend using your company name for simplicity but feel free to use something factitious if preferred.**  
 
-  > Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace it with your new tenant name.
+  > Everywhere we see `<TENANT_NAME>` in the rest of the tutorial we need to replace it with your new tenant name.  
+
+1. Navigate to [GitLab](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/) and Sign-in if required. You can also go via the GitLab tile in [Forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud). 
+
+   First, we need to create a GitLab group with name as the `<TENANT_NAME>`
+
+   For this open up the `Menu` and select `Groups` > `Create group`:
+
+   ![create-group-tab](images/create-group-tab.png)
+
+   This will redirect you to the following screen. Select `Create group`.
+
+   ![create-group-home](images/create-group-home.png)
+
+2. Use your `<TENANT_NAME>` as the group name, select `Public` for Visibility level > leave the rest of the defaults and click `Create group`.  
+
+   ![GitLab-group-create](images/gitlab-group-create.png)
+
+   GitLab will redirect you to the group's home page, once the group is created.
+
+    > Remember that `group name` and should match your **tenant name**. 
+
+
+3. If you are working as a team, and you haven't already done at group creation, you can add your colleagues to this group now.   
+
+   This will give them permissions to work on the projects created in this group. Select `Group information` > `Members` from the left panel and invite your colleagues via `Invite member` option. Make sure to choose `Maintainer` or `Owner` role permission. You can ignore this step if you are not working as a team.
+
+   Select `Group information` from the left panel and click `Members`
+
+   ![add-member](images/add-member.png)
+
+   Click `Invite members` and add your colleagues usernames or emails that they logged into GitLab with.
 
 
 1. If not already signed into your workshop user, sign into GitLab by clicking `Sign in / Register` 
 
    ![infra-access](./images/infra-access.png)
 
-2. From the repository, click on the `Edit fork in Web IDE` button.
+2. From the [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository, click on the `Edit fork in Web IDE` button.
 
    ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
 
