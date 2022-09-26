@@ -2,27 +2,27 @@
 
 > In this section we are going to improve our already built pipeline and add ZAP scanning to it.
 
-1. To run zap scanning, we first need to get the application url on which we will perform our vulnerability scanning.
-    Below the command below in your crw workspace to retrieve you application url:
+1. To run zap scanning, we first need to get the application URL on which we will perform our vulnerability scanning.
+    Below the command below in your crw workspace to retrieve you application URL:
 
 ```bash
  echo https://$(oc get route review --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
 ```
-This is the url for your application. 
+This is the URL for your application. 
 
-2. We want to be able to send result to allure. So we need to get the url for allure as well. Run the below oc command to get allure url.
+2. We want to be able to send result to allure. So we need to get the URL for allure as well. Run the below oc command to get allure URL.
 **Replace the <TENANT_NAME> with your tenant**
 ```bash
  echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
 ```
-Now that you have both the urls require. Let's add our task to the pipeline.
+Now that you have both the URLs require. Let's add our task to the pipeline.
 
 3. Open the Chart we added to `00-tekton-pipelines` folder in section 2.
    ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
 2. Open the values file in the editor. After the `stakater-gitlab-update-cd-repo-v1`. We need to add a couple of params as well. `app_url` and `allure_host`
-Replace <APP_URL> with the url you obtained from step 1.
-Replace <ALLURE_HOST> with url you obtained from step 2.
+Replace <APP_URL> with the URL you obtained from step 1.
+Replace <ALLURE_HOST> with URL you obtained from step 2.
 ```
 - defaultTaskName: stakater-zap-proxy-v1
   params:
@@ -38,7 +38,7 @@ Replace <ALLURE_HOST> with url you obtained from step 2.
 
 
 5. Now open ArgoCD and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
-   You can check the pipelines definition by clicking the three dots next to it, opening `details` and checking the livemmanifest
+   You can check the pipelines definition by clicking the three dots next to it, opening `details` and checking the live manifest.
 ![zap](./images/zap-argocd.png)
 
 Open up the console and navigate to your pipeline definition by going to `Pipelines` and selecting your pipeline from the list. You should see a zap-proxy task there as well.
