@@ -23,21 +23,20 @@ Now that you have both the URLs require. Let's add our task to the pipeline.
 2. Open the values file in the editor. After the `stakater-gitlab-update-cd-repo-v1`. We need to add a couple of params as well. `app_url` and `allure_host`
 Replace <APP_URL> with the URL you obtained from step 1.
 Replace <ALLURE_HOST> with URL you obtained from step 2.
-```
+
+```yaml
 - defaultTaskName: stakater-zap-proxy-v1
   params:
     - name: app_url
       value: <APP_URL>
     - name: allure_host
       value: <ALLURE_HOST>
-
 ```
-
 
 3. Commit the changes.
 
 
-5. Now open ArgoCD and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
+4. Now open ArgoCD and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
    You can check the pipelines definition by clicking the three dots next to it, opening `details` and checking the live manifest.
 ![zap](./images/zap-argocd.png)
 
@@ -46,15 +45,15 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 ![OpenShift](./images/openshift-zap.png)
 
 
-6. If the sync is green, you're good to go. You have successfully added zap to your pipeline!
+5. If the sync is green, you're good to go. You have successfully added zap to your pipeline!
 
 ![sonar](./images/sonar-argocd.png)
 
-7. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Push directly to main. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
+6. Now make a small change on the `stakater-nordmart-review` application to trigger the pipeline. Push directly to main. Head over to the console and check the running pipeline. You should be able to see SonarQube task running.
 
 ![zap-running](./images/zap-running.png)
 
-8. Once the task completes, head over to `allure` by opening the following URL.
+7. Once the task completes, head over to `allure` by opening the following URL.
 
 ```bash
 echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html

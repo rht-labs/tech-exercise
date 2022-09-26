@@ -10,7 +10,7 @@
 2. Open the `nordmart-apps-gitops-config` and navigate to `01-<TENANT_NAME> > 00-argocd-apps > 01-dev`
 
 3. Add the following ArgoCD application and commit the changes.
-```
+```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
