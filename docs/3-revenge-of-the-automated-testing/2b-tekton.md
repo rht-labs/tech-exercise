@@ -1,6 +1,6 @@
 ## Extend Tekton Pipeline with Automated Testing
 
-> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
+> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using GitOps and then add the tests to our pipeline
 
 ### Part 1 - Allure 
 
@@ -9,7 +9,7 @@
 
 2. Open the `nordmart-apps-gitops-config` and navigate to `01-<TENANT_NAME> > 00-argocd-apps > 01-dev`
 
-3. Add the following argocd application and commit the changes.
+3. Add the following ArgoCD application and commit the changes.
 ```
     apiVersion: argoproj.io/v1alpha1
     kind: Application
@@ -36,9 +36,9 @@
 
 ```
 
-4. Now head over to argocd and refresh <TENANT_NAME>-dev application. You should be able to see allure resources being deployed
+4. Now head over to ArgoCD and refresh <TENANT_NAME>-dev application. You should be able to see allure resources being deployed
 
-![allure-argocd](./images/allure-argocd.png)
+![allure-ArgoCD](./images/allure-argocd.png)
 
 You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running 
 
@@ -52,7 +52,7 @@ echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }
 
 1.  Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
 
-![images/pipelines-nordmart-apps-gitops-config](images/pipelines-nordmart-apps-gitops-config.png)` folder.
+![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)` folder.
 
 2. Open the values file in the editor. After the `stakater-sonarqube-scanner-v1`, reference the unit test task and add a `runAfter` field to make it run after the `stakater-sonarqube-scanner-v1` task:
 
@@ -61,7 +61,7 @@ echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }
   runAfter:
     - stakater-sonarqube-scanner-v1
 ```
-Also add the stakater-gitlab-save-allure-report-v1 after the unit test task
+Also add the `stakater-gitlab-save-allure-report-v1` after the unit test task
 ```yaml
 - defaultTaskName: stakater-gitlab-save-allure-report-v1
 ```
@@ -140,7 +140,7 @@ Also add the stakater-gitlab-save-allure-report-v1 after the unit test task
 4. Commit the changes.
 
 
-5. Now open Argocd and check if the changes were synchronized. Click refresh if argocd has not synced the changes yet.
+5. Now open ArgoCD and check if the changes were synchronized. Click refresh if ArgoCD has not synced the changes yet.
 
 ![allure](./images/allure-argocd.png)
 
@@ -156,7 +156,6 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 8. Once the task completes, head over to `allure` by opening the link found in the OpenShift console via `Networking` > `Routes` in the `TENANT_NAME-dev` namespace.
 
-![allure-ui-nordmart](./images/allure-ui-nordmart.png)
-![allure-ui-nordmart](./images/allure-ui-nordmart.png)
+![allure-ui-Nordmart](./images/allure-ui-nordmart.png)
 
 CONGRATULATION!!! You have added automated testing to your pipeline.

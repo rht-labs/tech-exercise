@@ -87,7 +87,7 @@ The task takes parameter needed to build and push the image as parameters, such 
 
 ![image-push-script](./images/image-push-script.png)
 
-#### 4 - stakater-helm-push-v1 🅿
+#### 4 - `stakater-helm-push-v1` 🅿
 
 The `helm-push` task packages the application Helm chart, creates the tag for chart, and finally pushes it to the chart repository.
 
@@ -256,7 +256,7 @@ With all these components in place - now it's time to trigger pipeline via webho
 
     ![updated-Nordmart-apps-GitOps-config](images/updated-nordmart-apps-gitops-config.png)
 
-  > For pushes to `main` branch, your application is automagically updated in the `<TENANT_NAME>-dev` namespace.
+  > For pushes to `main` branch, your application is automatically updated in the `<TENANT_NAME>-dev` namespace.
 
 15. Open our `<TENANT>-stakater-nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
     
