@@ -6,18 +6,22 @@
 
    ![Mattermost-Forecastle](./images/Mattermost-Forecastle.png)
 
-2. If you are not redirected directly, use your credentials created during the SAAP-101 part.
+2. Select the `saml` log in method to log in to the Mattermost server
+
+    ![mattermost-home-page](images/mattermost-home-page.png)
+
+3. If you are not redirected directly, use your credentials created during the SAAP-101 part.
 
     ![mattermost-saml-login-page](images/mattermost-saml-login-page.png)
 
-3. When you log in to the Mattermost for the first time, you aren't part of any team, so you can't access your message channels. You can see the `Logout` button in the top-left corner.
+4. When you log in to the Mattermost for the first time, you aren't part of any team, so you can't access your message channels. You can see the `Logout` button in the top-left corner.
     ![mattermost-no-team-logout-page](images/mattermost-no-team-logout-page.png)
 
-4. We have automation running that will onboard your tenant to MatterMost, when your team and channels are created for you, the `Logout` button in the top-left corner will turn to `Back` button. You can click on this to access your teams and associated channels.
+5. We have automation running that will onboard your tenant to MatterMost, when your team and channels are created for you, the `Logout` button in the top-left corner will turn to `Back` button. You can click on this to access your teams and associated channels.
 
     ![mattermost-no-team-back-page](images/mattermost-no-team-back-page.png)
 
-5. Every tenant will have a team with their notification channels. Only tenant members will be part of this team. Following channels will be created and can be configured to receive alerts from configured applications.
+6. Every tenant will have a team with their notification channels. Only tenant members will be part of this team. Following channels will be created and can be configured to receive alerts from configured applications.
     - application-metrics-alerts
 	- application-outage-alerts
 	- application-e2e-release-notifications
@@ -27,6 +31,6 @@
 
     ![mattermost-tenant-team-page](images/mattermost-tenant-team-page.png)
 
-6. A common team is created for all the members, so that they can easily have across tenant members conversation.
+7. A common team is created for all the members, so that they can easily have across tenant members conversation.
 
     ![mattermost-common-team-page](images/mattermost-common-team-page.png)
