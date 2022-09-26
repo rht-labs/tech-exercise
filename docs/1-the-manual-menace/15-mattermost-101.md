@@ -2,7 +2,7 @@
 
 [Mattermost](https://docs.mattermost.com/) is a secure, open source platform for communication, collaboration, and workflow orchestration across tools and teams. SAAP configures Mattermost teams for each tenant, so that tenant members can collaborate among themselves easily. Application alerts can be configured to be received in specific channels, so that no alert goes unchecked. 
 
-1. Log in to your Mattermost by selecting the `Mattermost` tile from your Forecastle Console.
+1. Open the Mattermost web UI by selecting the `Mattermost` tile from your Forecastle Console.
 
    ![Mattermost-Forecastle](./images/Mattermost-Forecastle.png)
 
