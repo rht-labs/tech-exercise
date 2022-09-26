@@ -83,4 +83,4 @@ You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-t
 
 ![e2e-test](./images/e2e-test.png)
 
-5. You have successfully added End to End testing in your pipeline.
+5. You have successfully added End-to-End testing in your pipeline.

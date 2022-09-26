@@ -1,6 +1,6 @@
 ## Deploy App of Apps
 
-We need a way to bundle up all of our applications and deploy them into each environment. The Nordmart application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
+We need a way to bundle up all of our applications and deploy them into each environment. The Nordmart application has its own Git repository and Helm chart, making it easier to code and deploy independently of other apps.
 
 A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a usability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
 

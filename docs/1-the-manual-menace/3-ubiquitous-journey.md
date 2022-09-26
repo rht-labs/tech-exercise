@@ -110,7 +110,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     yq eval ".source = \"https://$GIT_SERVER/$TENANT_NAME/tech-exercise.git\"" -i /projects/tech-exercise/values.yaml
     ```
 
-2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc will all live in here eventually, but let's start small with two objects. One for bootstrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TENANT_NAME\>` in the bootstrap section so it looks like this:
+2. The `values.yaml` file refers to the `ubiquitous-journey/values-tooling.yaml` which is where we store all the definitions of things we'll need for our CI/CD pipelines. The definitions for things like Jenkins, Nexus, Sonar etc. will all live in here eventually, but let's start small with two objects. One for bootstrapping the cluster with some namespaces and permissions. And another to deploy our good friend Jenkins. Update your `ubiquitous-journey/values-tooling.yaml` by changing your `\<TENANT_NAME\>` in the bootstrap section, so it looks like this:
 
     ```bash
             - name: jenkins

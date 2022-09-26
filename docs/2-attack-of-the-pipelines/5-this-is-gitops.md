@@ -18,7 +18,7 @@
 
     Look at that! The `NEW_EXAMPLE_VARIABLE` has disappeared!!!!
 
-    That's right, they've been over written by ArgoCD who's taken the configuration in git and applied it on top. The `NEW_EXAMPLE_VARIABLE` was **not** in git so it was removed. If we want to persist the variable, we can of course add it to out git repo!
+    That's right, they've been over written by ArgoCD who's taken the configuration in git and applied it on top. The `NEW_EXAMPLE_VARIABLE` was **not** in git, so it was removed. If we want to persist the variable, we can of course add it to out git repo!
 
 
 🪄🪄 You've just experienced how great and powerful the GitOps is! Let's advance to see how we utilize it in our application development! 🪄🪄
