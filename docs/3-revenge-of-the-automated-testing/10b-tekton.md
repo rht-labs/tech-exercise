@@ -83,4 +83,8 @@ You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-t
 
 ![e2e-test](./images/e2e-task.png)
 
-5. You have successfully added End-to-End testing in your pipeline.
+5. Let's run end to end test on `stakater-nordmart-review-ui`. Trigger the pipeline by making a change in the `stakter-nordmart-revoew-ui` project
+
+6. You will see the e2e task running.
+
+You have successfully added End-to-End testing in your pipeline.
