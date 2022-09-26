@@ -46,7 +46,7 @@ Now we can add the secret to our Vault instance.
 
 ### Add ExternalSecret
 
-Next step is the create an external secret CR that will connect to Vault and create a secret in OpenSHift using the secret added to the Vault in previous step.  
+Next step is the create an external secret CR that will connect to Vault and create a secret in OpenShift using the secret added to the Vault in previous step.  
 
 1. Login to the `OpenShift console`. 
 
