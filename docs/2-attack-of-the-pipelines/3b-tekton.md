@@ -108,6 +108,13 @@ The task updates the tag in git repository when change is pushed to main/master.
 
 ![app-sync-and-wait](./images/app-sync-and-wait.png)
 
+#### 7 - `stakater-create-environment-v1`
+
+In the Tronador 101 section, we mentioned that we will later add a task to our pipelines that will provision dynamic test environments for our merge/pull request.
+The `stakater-create-environment-v1` is that.
+
+![tronador-code](./images/tronador-code.png)
+
 ### Deploying a working pipeline
 
   > It's finally time to get our hands dirty. Let's use the `tekton-pipeline-chart` and the above tasks to create a working pipeline.
@@ -265,3 +272,33 @@ With all these components in place - now it's time to trigger pipeline via webho
 15. Navigate to `Workloads` > `Pods` in the sidebar in `<TENANT_NAME>-dev` namespace >  Select the `Pod` named `review-*` > select `YAML` and scroll down to `status:` key. You'll see that the **`tag`** and **`sha`** in the `build-and-push` step match.
     
    ![pod-image-updated](images/pod-image-updated.png)
+
+#### Checking Dynamic Test Environment
+
+Now, let's test out the dynamic test environment. 
+
+1. Go back to `stakater-nordmart-review` and open up a Merge Request this time instead of pushing directly to main. 
+This will trigger the same pipeline.
+
+![pipeline-running.png](images/pipeline-running-2.png)
+
+2. Wait for the pipeline to succeed and then head over to `nordmart-apps-gitops-config`.
+
+3. Navigate to  `nordmart-apps-gitops-config > 01-TENANT_NAME >  02-stakater-nordmart-review > 00-preview`. You should be able to see a yaml file for environment resource.
+   
+  ![env-cr2](images/env-cr2.png)
+
+  ![env-cr2](images/env-cr.png)
+
+
+4. Now head over to the openshift console and navigate to projects.
+
+5. Once tronador creates the dynamic environment for you, you should be able to see its project listed there. It will start with the prefix `pr-` followed by your pr number and commit hash.
+
+
+
+
+
+   
+
+

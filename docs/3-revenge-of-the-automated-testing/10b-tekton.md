@@ -81,6 +81,6 @@ You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-t
 4. Commit your changes. You will be able to see your newly added task from your `OpenShift Console` 
    thanks to your GitOps workflow with ArgoCD.
 
-![e2e-test](./images/e2e-test.png)
+![e2e-test](./images/e2e-task.png)
 
 5. You have successfully added End-to-End testing in your pipeline.
