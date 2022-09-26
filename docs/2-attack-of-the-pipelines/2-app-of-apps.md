@@ -4,7 +4,7 @@ We need a way to bundle up all of our applications and deploy them into each env
 
 A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a usability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
 
-We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In Nordmart we generate the app-of-apps definitions using a Helm chart.
+We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps` pattern to bundle all of these up; some might call this an application suite or a system! In Nordmart we generate the app-of-apps definitions using a Helm chart.
 
 ### The apps of apps structure
 
@@ -29,14 +29,15 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 4. Select `import repository from URL` and paste in the URL that you copied in step 2. 
 
-   Note: Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
+5. Make the repository public. Add `nordmart-apps-gitops-config` as the repository name. 
+
    > Make sure you mark the repository as public and choose the group you previously created as the group name.
 
    > Make sure that Project Name is lower case and doesn't contain spaces. Use '-' instead.
 
    ![import-GitOps-apps](images/import-gitops-apps.png)
 
-5. Now we need to make some updates to the contents of these template based repos
+Now we need to make some updates to the contents of these template based repos
 
 6. Navigate to the `nordmart-apps-gitops-config` project in your GitLab group and select `Web IDE`
 
@@ -104,11 +105,15 @@ stakater-nordmart-review:
 ```
 4. Once the above files are added, `Commit` the changes, and push to the repository.
 
-5. We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. For this, head over to [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
+  > We are not done yet. We need to somehow connect this repository to an ArgoCD application directly watched by the cluster. 
 
-We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
+5. Head over to [workshop-infra-GitOps-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config)
 
-6. Navigate to `workshop` > `nordmart-apps-gitops-config`.
+  ```https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config```
+
+  > We know that this repository is being watched by the cluster. So we will add an ArgoCD application here and point it to our `nordmart-apps-gitops-config`
+
+6. From `stakater/workshop-infra-gitops-config` click `Edit fork in Web IDE` then Navigate to `workshop` > `nordmart-apps-gitops-config`.
  
 7. Add a file here named `<TENANT_NAME>-nordmart-apps-gitops-config.yaml` with the following content:
 
@@ -134,7 +139,7 @@ spec:
       prune: true
 
 ```
-Note: Replace all instance of `<TENANT_NAME>` with your tenant name in above file.
+  > Note: Be sure to replace all instances of `<TENANT_NAME>` with your tenant name in above file.
 
 ![nord-apps](images/nord-apps.png)
 
