@@ -165,9 +165,6 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
             params:
               - name: gitlab_group
           - defaultTaskName: stakater-push-main-tag-v1
-            params:
-              - name: timeout
-                value: "120"
       triggertemplate:
            serviceAccountName: stakater-workshop-tekton-builder
            pipelineRunNamePrefix: $(tt.params.repoName)-$(tt.params.prnumberBranch)
