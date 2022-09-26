@@ -105,15 +105,18 @@ The pipeline will now become:
 
     ![cosign-pipeline](images/cosign-pipeline.png)
 
-6. View the task logs to see, if image was signed succesfully.
+6. View the task logs to see, if image was signed successfully.
 
     ![cosign-pipeline-logs](images/cosign-pipeline-logs.png)
 
-7. We have also implemented a policy in Redhad ACS to make sure all images are signed by this particular key.
-When images arent signed, rox-image-check task we added to our pipeline in previous section will show a violation that image signature isnt verified. 
+7. We have also implemented a policy in Redhat ACS to make sure all images are signed by this particular key.
+`rox-image-check` task we added to our pipeline in previous section shows image signature is verified.
 Open the `rox-image-check` tasks logs. You ll see that our image is signed and verified by Redhat ACS.
 
     ![cosign-pipeline-rox-image-check-logs](images/cosign-pipeline-rox-image-check-logs.png)
 
-🪄🪄 Your pipeline should run successfully if everythings fine 🪄🪄
+    Otherwise it shows `Image signature is unverified`
+      ![task-without-cosign](images/task-without-cosign.png)
+
+🪄🪄 Your pipeline should run successfully if everything is fine 🪄🪄
 

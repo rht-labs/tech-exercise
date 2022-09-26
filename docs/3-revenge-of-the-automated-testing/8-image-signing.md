@@ -27,7 +27,7 @@ Lets view this task in our cluster:
 
 Private key is used to sign the images and it is automatically saved as a secret in your `build` namespace alongside the password. Public key is used to verify the signed images. You can share your public key for people to verify your images but private one should not be shared or at least sealed before storing publicly. We are using Redhat Advanced Cluster Security to verify whether are images are signed or not.   
 
-Navigate to Secrets under Workloads search for `cosign-key-password` in <TENANT_NAME>-build namesapce
+Navigate to Secrets under Workloads search for `cosign-key-password` in <TENANT_NAME>-build namespace
 
 ![cosign-secret](images/cosign-secret.png)
 
