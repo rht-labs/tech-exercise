@@ -68,26 +68,22 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
    Click `Invite members` and add your colleagues usernames or emails that they logged into GitLab with.
 
 
-1. If not already signed into your workshop user, sign into GitLab by clicking `Sign in / Register` 
-
-   ![infra-access](./images/infra-access.png)
-
-2. From the [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository, click on the `Edit fork in Web IDE` button.
+4. Next from the [workshop-infra-gitops-config](https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config) repository, click on the `Edit fork in Web IDE` button.
 
    ![edit-fork-in-web-ide](./images/edit-fork-in-web-ide.png)
 
-3. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
+5. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
 
    ![edit-fork-in-web-ide](./images/workshop-3-dots.png)
 
-4. Name the file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
+6. Name the file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
    
    > We need to update `<TENANT_NAME>` with name you came up with earlier.    
 
    ![mto-filename](./images/mto-filename.png)
 
 
-8. Paste the code below to create a new tenant with a user, a list of ArgoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
+7. Paste the code below to create a new tenant with a user, a list of ArgoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
 
    ```yaml
    apiVersion: tenantoperator.stakater.com/v1beta1
@@ -128,23 +124,23 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
    > Replace `<TENANT_NAME>` and `<INSERT_YOUR_USER_NAME>` with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
 
 
-9. Click `Create commit...` 
+8. Click `Create commit...` 
 
    ![mto-commit](./images/mto-commit.png)
 
-10. Select `Commit to main branch` > Click `Commit` and navigate back to your project view by clicking the `W` in the top left corner.  
+9. Select `Commit to main branch` > Click `Commit` and navigate back to your project view by clicking the `W` in the top left corner.  
 
    ![mto-commit2](./images/mto-commit2.png)
 
-11. Navigate to `Merge Requests` > Click `New merge request` > Select `main` for the `source branch` > Select `Compare branches and continue`
+10. Navigate to `Merge Requests` > Click `New merge request` > Select `main` for the `source branch` > Select `Compare branches and continue`
 
       ![mto-merge](./images/mto-merge1.png)
 
-12. you can leave everything as default and click `Create merge request`.
+11. you can leave everything as default and click `Create merge request`.
 
       ![mto-merge](./images/mto-merge.png)
 
-13. Once your merge request is accepted, your tenant will be created.  
+12. Once your merge request is accepted, your tenant will be created.  
 
     ArgoCD is busy syncing your changes to the workshop SAAP instance and passing off the manifests to the components that automate  
     the creation of the tenants, by syncing your recent changes to the desired state with the actual state of your SAAP instance.
