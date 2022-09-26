@@ -1,6 +1,6 @@
 # Image Signing
 
-> It is important to verify that the container image we deploy to our clusters has not been tampered and comes from a valid source. This is generally achieved by signing the image after building and verifying the signature before deployment. In this exercise, we will user `cosign` for creating, storing and verifying container image signatures.
+> It is important to verify that the container image we deploy to our clusters has not been tampered and comes from a valid source. This is generally achieved by signing the image after building and verifying the signature before deployment. In this exercise, we will use `cosign` for signing images and Redhat ACS for verifying container image signatures.
 
 _You can find more info about cosign here <span style="color:blue;">[Cosign documentation](https://docs.sigstore.dev/cosign/overview/)_</span>
 
