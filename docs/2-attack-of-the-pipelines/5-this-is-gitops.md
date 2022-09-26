@@ -7,14 +7,13 @@
 
     ![manual-update-environment](images/manual-update-environment.png)
 
-2. On the `Environment` tab, add a new key-value pair. For example:
+2. On the `Environment` tab, add a new key-value pair. For example:  
 
 `NEW_EXAMPLE_VARIABLE` with a value of `some-value`. Hit `Save`
 
    ![manual-update-environment-click-save](images/manual-update-environment-click-save.png)
 
     
-
     If you wait a few seconds (or if like me you're lazy, you can spam refresh on the page)
 
     Look at that! The `NEW_EXAMPLE_VARIABLE` has disappeared!!!!
