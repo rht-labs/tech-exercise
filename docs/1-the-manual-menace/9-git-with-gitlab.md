@@ -3,7 +3,7 @@
 
 ## About Stakater's Nordmart
 
-Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will deploy for the workshop. For simplicity we will import only 2 microservices of nordmart application as described in below sections.
+Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will deploy for the workshop. For simplicity, we will import only 2 microservices of nordmart application as described in below sections.
 
 ## Importing Nordmart Review
 

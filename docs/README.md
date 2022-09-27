@@ -3,7 +3,7 @@
 This workshop will teach you everything about DevSecOps.
 
 ## 🦆 Conventions
-When running through the exercise, we have have put some placeholders where substitution is required. Anything inside an `<>` should be replaced. For example, if your team is called `biscuits` then in the instructions if you see `\<TENANT_NAME\>` this should be replaced with `biscuits` like so:
+When running through the exercise, we have put some placeholders where substitution is required. Anything inside an `<>` should be replaced. For example, if your team is called `biscuits` then in the instructions if you see `\<TENANT_NAME\>` this should be replaced with `biscuits` like so:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
     name: <\TENANT_NAME\>
