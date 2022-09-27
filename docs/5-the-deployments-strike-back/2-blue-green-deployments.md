@@ -6,82 +6,86 @@
 
 ![blue-green-diagram](images/blue-green-diagram.png)
 
-1. Let's create two new deployments in our ArgoCD Repo for the `nordmart-review` front end. We'll call one Blue and the other Green. Add 3 new ArgoCD applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
+1. Let's create two new deployments in our ArgoCD Repo, `nordmart-apps-gitops-config` for the `nordmart-review-ui` front end.We'll call one Blue and the other Green.
+   
 
-    a. `stakater-nordmart-review-ui-bg-blue.yaml`
+2. Navigate to `<TENANT_NAME> > 00-argocd-apps > 01-dev` . 
+3. Add a new ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue` with the following content. 
+
+    > Make sure you replace all instances of <TENANT_NAME> with your tenant.
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-blue
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue
         namespace: openshift-gitops
         labels:
-          stakater.com/tenant: gabbar
+          stakater.com/tenant: <TENANT_NAME>
           stakater.com/env: dev
           stakater.com/kind: dev            
       spec:
         destination:
-          namespace: gabbar-dev
+          namespace: <TENANT_NAME>-dev
           server: 'https://kubernetes.default.svc'
-        project: gabbar
+        project: <TENANT_NAME>
         source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-blue/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-blue/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
           targetRevision: HEAD
         syncPolicy:
           automated:
             prune: true
             selfHeal: true
     ```
-
-    b. `stakater-nordmart-review-ui-bg-green.yaml`
+3. Now add another ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green` with the following content.
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-green
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green
         namespace: openshift-gitops
         labels:
-          stakater.com/tenant: gabbar
+          stakater.com/tenant: <TENANT_NAME>
           stakater.com/env: dev
           stakater.com/kind: dev            
       spec:
         destination:
-          namespace: gabbar-dev
+          namespace: <TENANT_NAME>-dev
           server: 'https://kubernetes.default.svc'
-        project: gabbar
+        project: <TENANT_NAME>
         source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-green/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-green/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
           targetRevision: HEAD
         syncPolicy:
           automated:
             prune: true
             selfHeal: true
     ```
+The above two ArgoCD applications will point to the Helm charts for our `Blue` and `Green` application versions.
 
-    c. `stakater-nordmart-review-ui-bg-route.yaml`
+4. Now lets add an ArgoCD application that points to the route. Name this ArgoCD application `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-route` and add the below content to it. 
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-route
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-route
         namespace: openshift-gitops
         labels:
-          stakater.com/tenant: gabbar
+          stakater.com/tenant: <TENANT_NAME>
           stakater.com/env: dev
           stakater.com/kind: dev            
       spec:
         destination:
-          namespace: gabbar-dev
+          namespace: <TENANT_NAME>-dev
           server: 'https://kubernetes.default.svc'
-        project: gabbar
+        project: <TENANT_NAME>
         source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-route/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-route/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
           targetRevision: HEAD
         syncPolicy:
           automated:
