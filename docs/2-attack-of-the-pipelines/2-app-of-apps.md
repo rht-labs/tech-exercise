@@ -39,19 +39,31 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 Now we need to make some updates to the contents of these template based repos
 
-6. Navigate to the `nordmart-apps-gitops-config` project in your GitLab group and select `Web IDE`
+6. Navigate to the [CodeReady Workspaces](https://codeready-openshift-workspaces.apps.devtest.vxdqgl7u.kubeapp.cloud/) and login if not already. Navigate to your `workspace` and wait for the IDE to initialize if not already open.
 
-7. Select the `README.md` and click your mouse inside the text body of the editor then Click `F1` on your keyboard to open the `command pallet` 
+7. From the Terminal run:
 
-8. Search for `file finder` and select it > search for `<TENANT_NAME>` > work through the found files to rename them.
+```bash
+git clone https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git
+curl https://raw.githubusercontent.com/stakater/workshop-excercise/main/scripts/update-nordmart-apps-with-tenant-info.py > script.py
+python script.py nordmart-apps-gitops-config <TENANT_NAME>
+```
 
-9. Now work down though the folder and file structure replacing the `<TENANT_NAME>` with your actual tenant name.  
+   ![crw-replace](images/crw-replace.png)
 
-  This is easier if you open `command pallet` again by clicking `F1` and then opening `Replace` to have a Find and Replace tool.
+8. Add, commit and push the changes back to your repo in GitLab
 
-   ![find-and-replace](images/find-and-replace.png)
+```bash
+cd nordmart-apps-gitops-config
+git add -A
+git commit -m "bulk replace <TENANT_NAME>"
+git push
+```
 
-  Use `ctrl + alt + Enter` to replace all instances of `<TENANT_NAME>` to your actual tenant name if you prefer keyboard.
+9. Enter your GitLab Group Access Token when prompted for credentials
+
+username = `pipeline`  
+password = token saved in `Vault` earlier  
 
 
 ### Apps of Apps structure
