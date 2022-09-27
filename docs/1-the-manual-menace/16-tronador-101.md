@@ -35,7 +35,7 @@ Let's add the tronador config file that we just talked about to our repository. 
 
    ![Tronador](images/tronador2.png)
 
-Now let's reqeat the process for `stakater-nordmart-review-ui`
+Now let's repeat the process for `stakater-nordmart-review-ui`
 
 1. Head over to your  `stakater-nordmart-review-ui` repository. You will see a `.tronador.yaml` file at the repository root
 

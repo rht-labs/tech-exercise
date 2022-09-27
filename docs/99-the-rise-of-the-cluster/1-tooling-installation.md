@@ -93,6 +93,7 @@ Log in to the cluster via UI and use `LDAP` login with your student username and
 We also have a tool called `tl500-teamster` to run exercises automatically for you to verify the installation. It is already bundled inside the installation of the tools. Get the URL from the following command:
 
 ```bash
+oc project tl500
 echo https://$(oc get route/tl500-base-tl500-teamsters -n tl500 --template='{{.spec.host}}')
 ```
 
@@ -102,6 +103,7 @@ echo https://$(oc get route/tl500-base-tl500-teamsters -n tl500 --template='{{.s
 The exercises start with CodeReadyWorkspace link. So here is a one liner to get it:
 
 ```bash
+oc project tl500-workspaces
 echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.host}}')
 ```
 ## CodeReady Workspaces Setup

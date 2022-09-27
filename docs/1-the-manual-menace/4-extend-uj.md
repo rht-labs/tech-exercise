@@ -18,6 +18,7 @@ git pull
 1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
 
     ```bash#test
+    oc project ${TENANT_NAME}-ci-cd
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TENANT_NAME}-ci-cd)
     ```
 
@@ -67,6 +68,7 @@ git pull
 4. With the Webhook in place, it should only take a few seconds for things to become available. But you can verify it is all working by opening the Nexus URL in a new tab (admin / admin123 is the default credential):
 
     ```bash#test
+    oc project ${TENANT_NAME}-ci-cd
     echo https://$(oc get route nexus --template='{{ .spec.host }}' -n ${TENANT_NAME}-ci-cd)
     ```
 
