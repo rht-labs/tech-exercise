@@ -117,6 +117,8 @@ pipeline-charts:
 
 Let's run through a scenario where we break/fix the build using a build policy violation.
 
+> We need to open a **merge request** for this part.
+
 1. Let's try breaking a *Build Policy* within ACS by triggering the *Build* policy we viewed earlier. We will create a merge request for our code repo and see what happens when its pipeline runs.
 
 2. Open the `<TENANT_NAME>/stakater-nordmart-review` repository on GitLab. Edit the `Dockerfile`.
