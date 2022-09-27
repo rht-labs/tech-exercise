@@ -45,7 +45,7 @@ Helm charts are packaged and stored in repositories. They can be added as depend
 
 4.   Visit the link provided to view your application.
 
-    ![Nordmart-review-ui](./images/1a-1-nordmart-review-ui.png)
+   ![nortmart-review](./images/1a-1-nordmart-review-ui.png)
 
 5. You can overwrite the default <span style="color:blue;">[values](https://github.com/stakater/charts/blob/main/stakater/nordmart-review/values.yaml)</span> in a chart from the command line. You can upgrade your deployment. By default, your application has only 1 replica. You can view this using the following command.
 
