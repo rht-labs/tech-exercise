@@ -1,4 +1,4 @@
-# Getting GitLab Ready for GitOps
+# 🐡 Getting GitLab Ready for GitOps
 > In this section we will get GitLab ready for our exercise. We will then import a couple of projects and prepare them for deployment to the cluster.
 
 ## Importing Nordmart Review

@@ -1,4 +1,4 @@
-### Helm 101
+# 🐌 Helm 101
 
 > Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that define our applications. The Kubernetes resources such as `Deployments`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
 
