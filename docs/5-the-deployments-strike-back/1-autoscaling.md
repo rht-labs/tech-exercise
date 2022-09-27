@@ -32,7 +32,7 @@
 
 
 5. With the change synchronized, we should see a new HorizontalPodAutoscaler object in ArgoCD and the cluster.
-   Let's check this by going to argocd and opening up application `<TENANT_NAME>-dev-stakater-nordmart-review`
+   Let's check this by going to ArgoCD and opening up application `<TENANT_NAME>-dev-stakater-nordmart-review`
 
    You will be able to see HPA deployed once the pipeline that we have deployed in section 3 succeeds!! If it isn't, refresh the application.
    ![hpa-argocd.png](./images/hpa-argocd.png)
@@ -62,7 +62,7 @@
    ![replicas-hpa](./images/replicas-hpa.png)
 
 
-9. Now let's wait for a couple of minutes for load to ease. Navuigate back to the `review` HorizontalPodAutoscaler. You will see that the CPU utilization and desired replicas have started going down.
+9. Now let's wait for a couple of minutes for load to ease. Navigate back to the `review` HorizontalPodAutoscaler. You will see that the CPU utilization and desired replicas have started going down.
 
 
    ![scale-down](./images/scale-down.png)
