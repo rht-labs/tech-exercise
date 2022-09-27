@@ -123,9 +123,9 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
       version: 0.0.0
     ```
     
-  ![ab-new-chart-a](ab-new-chart-a.png)
+  ![ab-new-chart-a](images/ab-new-chart-a.png)
 
-  ![ab-new-chartyaml-a](ab-new-chartyaml-a.png)
+  ![Chart with yaml](images/ab-new-chartyaml-a.png)
 
 3. Create another file named `values.yaml` in the same directory and paste below yaml in it.
 
@@ -148,9 +148,9 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
             enabled: false
 
     ```
-  ![ab-values-a](ab-values-a.png)
+  ![ab-values-a](images/ab-values-a.png)
 
-  ![ab-values-data-a](ab-values-data-a.png)
+  ![ab-values-data-a](images/ab-values-data-a.png)
 
 4. Now we will create an ArgoCD app that deploys our `A` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `stakater-nordmart-review-ui-ab-a.yaml` and paste below yaml in it.
 
@@ -180,9 +180,9 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
 
     ```
   
-    ![ab-argo-a](ab-argo-a.png)
+    ![ab-argo-a](images/ab-argo-a.png)
 
-    ![ab-argoyaml-a](ab-argoyaml-a.png)
+    ![ab-argoyaml-a](images/ab-argoyaml-a.png)
 
 
 
