@@ -8,10 +8,11 @@
 ![blue-green-diagram](images/blue-green-diagram.png)
 
 1. Let's create two new deployments in our ArgoCD Repo, `nordmart-apps-gitops-config` for the `nordmart-review-ui` front end.We'll call one Blue and the other Green.
+    You can perform the below steps through crw or through Web IDE.
 
-2. Navigate to `<TENANT_NAME> > 00-argocd-apps > 01-dev` . 
+2. Navigate to `<TENANT_NAME> > 00-argocd-apps > 01-dev`
 
-3. Add a new ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue` with the following content. 
+3. Add a new ArgoCD application with name `<TENANT_NAME>-stakater-nordmart-review-ui-bg-blue.yaml` with the following content. 
 
     > Make sure you replace all instances of <TENANT_NAME> with your tenant.
 
@@ -19,7 +20,7 @@
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue
+        name: <TENANT_NAME>-stakater-nordmart-review-ui-bg-blue
         namespace: openshift-gitops
         labels:
           stakater.com/tenant: <TENANT_NAME>
@@ -39,13 +40,14 @@
             prune: true
             selfHeal: true
     ```
-3. Now add another ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green` with the following content.
+   ![blue-app](./images/blue-app.png)
+3. Now add another ArgoCD applications with name `<TENANT_NAME>-stakater-nordmart-review-ui-bg-green` with the following content.
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green
+        name: <TENANT_NAME>-stakater-nordmart-review-ui-bg-green
         namespace: openshift-gitops
         labels:
           stakater.com/tenant: <TENANT_NAME>
@@ -65,9 +67,10 @@
             prune: true
             selfHeal: true
     ```
+   ![green-app](./images/green-app.png)
 The above two ArgoCD applications will point to the Helm charts for our `Blue` and `Green` application versions.
 
-4. Now let's add an ArgoCD application that points to the route. Name this ArgoCD application `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-route` and add the below content to it. 
+4. Now let's add an ArgoCD application in the same folder that points to a route. Name this ArgoCD application `<TENANT_NAME>-stakater-nordmart-review-ui-bg-route` and add the below content to it. 
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
@@ -93,12 +96,16 @@ The above two ArgoCD applications will point to the Helm charts for our `Blue` a
             prune: true
             selfHeal: true
     ```
+  ![route-app](./images/route-app.png)
 
 Now we need to deploy two charts for our green and blue application versions and also a route that handles the traffic to these applications.
 
-5. Open up the 01-<TENANT_NAME> folder and create a folder named `03-stakater-nordmart-review-ui-bg-blue` in it. Inside the folder, create a `01-dev` folder. 
+5. Open up the <01-TENANT_NAME> folder at the root and create a folder named `03-stakater-nordmart-review-ui-bg-blue` in it. Inside the folder, create a `01-dev` folder. 
 
-6. Add a Chart.yaml file in this folder with the following content:
+   ![blue-dir](./images/blue-dir.png)
+
+6. Add a Chart.yaml file in this folder with the following content: 
+   You can do this either through the Web IDE or from your CRW.
 
     ```yaml
       apiVersion: v2
@@ -110,6 +117,7 @@ Now we need to deploy two charts for our green and blue application versions and
         repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
       version: 1.0.14
     ```
+   ![blue-dir](./images/blue-chart.png)
 7. Now in the same folder, add a values.yaml with the below content:
 
     ```yaml
@@ -127,8 +135,11 @@ Now we need to deploy two charts for our green and blue application versions and
           route:
             enabled: false
     ```
+   ![blue-values](./images/blue-values.png)
 
-8. Let's deploy the chart for our green environment now. Open up the 01-<TENANT_NAME> folder present at the project root level again and create a folder named `03-stakater-nordmart-review-ui-bg-green` in it. Inside the folder, create a `01-dev` folder.
+8. Let's deploy the chart for our green environment now. Open up the <01-TENANT_NAME> folder present at the project root level again and create a folder named `03-stakater-nordmart-review-ui-bg-green` in it. Inside the folder, create a `01-dev` folder.
+   
+   ![green-dir](./images/green-dir.png)
 
 9. Inside this dev folder, add a Chart.yaml with the following content.
 
@@ -142,6 +153,8 @@ Now we need to deploy two charts for our green and blue application versions and
           repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
       version: 1.0.14
     ```
+   ![green-chart](./images/green-chart.png)
+
 10. In the same folder, add a values.yaml with the below content.
     ```yaml
       stakater-nordmart-review-ui:
@@ -160,13 +173,15 @@ Now we need to deploy two charts for our green and blue application versions and
           route:
             enabled: false
     ```
+    ![blue-values](./images/green-values.png)
 > If you notice, we are using different images in both the values file, meaning that both the application versions are different. 
 > Also notice that we added a label to the service in the values chart. Green application service has an inactive label and blue has an active label.
 
 11. Let's add a route for these applications.
 
-12. Go back to the 01-<TENANT_NAME> folder and create a folder named `03-stakater-nordmart-review-ui-bg-route` in it. Inside the folder, create a `01-dev` folder.
+12. Go back to the <01-TENANT_NAME> folder and create a folder named `03-stakater-nordmart-review-ui-bg-route` in it. Inside the folder, create a `01-dev` folder.
     
+    ![route-dir](./images/route-dir.png)
 13. Now add a route.yaml to it with the below content. 
      
     > Replace the <TENANT_NAME> with your tenant.
@@ -189,9 +204,12 @@ Now we need to deploy two charts for our green and blue application versions and
           insecureEdgeTerminationPolicy: Redirect
         wildcardPolicy: None
     ```
+   ![route-yaml](./images/route-yaml.png)
 
 14. Commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
-
+     ![blue-synced](./images/blue-synced.png)
+     ![green-synced](./images/green-synced.png)
+     ![route-synced](./images/route-synced.png)
 
 
 15. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`. Run the commands below on your CRW workspace.
@@ -203,7 +221,7 @@ Now we need to deploy two charts for our green and blue application versions and
 
 16. With both deployed, let's assume that our blue deployment is the active one with the service having `active` label pointing towards blue deployment and the service having `inactive` label pointing towards green deployment. 
 
-We can validate that blue service is currently running by getting the host of our route
+We can validate that blue service is currently running by getting the host of our route. You can run this command in CRW.
 
 ```bash
 oc get route/review-ui-bg -n <TENANT_NAME>-dev --template='{{.spec.host}}'
@@ -219,16 +237,18 @@ and then using this URL in browser: `https://review-ui-bg-<TENANT_NAME>-dev.apps
     To do this, change the following
 
     a. Change the service label to `inactive` in blue service `03-stakater-nordmart-review-ui-bg-blue\01-dev\values.yaml`
+      ![blue-inactive](./images/blue-inactive.png)
 
     b. Change the service label to `active` in green service `03-stakater-nordmart-review-ui-bg-green\01-dev\values.yaml`
-
+       ![green-active](./images/green-active.png) 
     c. Change the `name` of service in `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml` route to `review-ui-green`
+        ![route-green](./images/route-green.png)
 
 18. Commit all these changes:
 
 
 
-8. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://review-ui-bg-<TENANT_NAME>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud/#/reviews` and see the green deployment working
+19. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://review-ui-bg-<TENANT_NAME>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud/#/reviews` and see the green deployment working
 
 ![Nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 
