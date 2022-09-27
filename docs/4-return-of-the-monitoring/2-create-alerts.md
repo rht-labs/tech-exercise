@@ -83,4 +83,6 @@
 5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `NordmartReviewApiMongoDBDiskUsage` alert as below:
 
     ![Prometheus-rule](./images/mongodb-alert-triggered.png)
+
+    
     ![Prometheus-rule](./images/mongodb-pvc.png)
