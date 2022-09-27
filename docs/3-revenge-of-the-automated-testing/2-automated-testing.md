@@ -16,7 +16,7 @@ We will be using `mvn` clean test to run the unit tests in Nordmart application
 
 ![cluster-tasks](./images/cluster-tasks.png)
 
-2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in stakater-unit-test in the search box. You will see a task ` sstakater-unit-test-v1`
+2. Select `ClusterTasks`. A number of tasks will be displayed on your screen. Type in stakater-unit-test in the search box. You will see a task `stakater-unit-test-v1`
    
   ![stakater-unit-test](./images/stakater-unit-test.png)
 

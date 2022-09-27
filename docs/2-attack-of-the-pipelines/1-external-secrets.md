@@ -16,7 +16,7 @@ First we need to generate a `Group Access Token` in GitLab to be used later for 
 
 2. Select `Settings` > `Access Tokens` > enter `Token name` as `pipeline` 
 
-  > Its important you name group your token `pipeline` for future steps
+  > The group token name should be `pipeline`
 
 3. Set `Select a role` to `Maintainer`
 
@@ -38,7 +38,7 @@ Now we can add the secret to our Vault instance.
 
 3. Click on `Create Secret`
 
-4. Here add the name of secret `gitlab-pat` and add key-value pairs with your git credentials as shown in the screenshot. 
+4. Add the path of secret as `gitlab-pat` and add key-value pairs with your git credentials as shown in the screenshot. 
 
 `email` = The email you registered for the workshop (If you are a group any one of the emails is fine)   
 `password` = The Group access token  
