@@ -1,5 +1,7 @@
 ## User Workload Monitoring
 
+> Before we move to the next section, we need to remove all tasks we added in Section 3 from our pipeline.
+
 > SAAP has monitoring capabilities built in. It deploys the Prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
 
 ### SAAP Developer view Monitoring (pods etc.)
@@ -135,3 +137,5 @@
     <p class="tip">
     🐌 THIS IS NOT GitOps - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
     </p>
+
+> Before we move to the next section, we need to remove all tasks we added in Section 3 from our pipeline.
