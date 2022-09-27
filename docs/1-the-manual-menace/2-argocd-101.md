@@ -1,4 +1,4 @@
-## 🐙 ArgoCD 101
+# 🐙 ArgoCD 101
 
 GitOps can be seen as a developer-centric approach to Ops. It teaches developers good practices around taking ownership of code once it leaves their machines and the approach to deploying and monitoring this code once it's running.
 
