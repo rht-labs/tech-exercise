@@ -9,7 +9,7 @@ image:
   repository: stakater/workshop-exercise
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion. It is bumped by push workflow.
-  tag: 0.0.202
+  tag: 0.0.203
 
 imagePullSecrets: []
 nameOverride: ""
