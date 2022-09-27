@@ -37,6 +37,7 @@ Helm charts are packaged and stored in repositories. They can be added as depend
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the URL of the app.
 
     ```bash#test
+    oc project ${TENANT_NAME}-test
     echo https://$(oc get route/nordmart-review-ui -n ${TENANT_NAME}-test --template='{{.spec.host}}')
     ```
 

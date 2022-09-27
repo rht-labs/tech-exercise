@@ -42,6 +42,7 @@
 You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running 
 
 ```bash
+oc project ${TENANT_NAME}-dev
 echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/default/reports/latest/index.html
 ```
 
