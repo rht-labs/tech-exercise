@@ -63,7 +63,7 @@ Let's fill it out by setting the following:
 
 Your form should look like the follow image, if so click `Create`
 
-![ArgoCD-create-application](images/2-argocd-app-create.png)
+![ArgoCD-create-application](images/argocd-app-create.png)
 
 6. After you hit `Create`, you'll see `<TENANT_NAME>-argocd-nordmart-review` application is created and should start deploying in your `<TENANT_NAME>-test` namespace.
 
