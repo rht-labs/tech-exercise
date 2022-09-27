@@ -90,15 +90,109 @@ Note: Each user will have a separate deployment of Matomo running in your tenant
 
   ![a-b-argo-app](images/a-b-matomo-argo-app.png)
 
-  Once matomo is deployed and synced in argoCD, head over to Openshift Console and in you `<TENANT-NAME>-dev` namespace, click on `Networking>Routes` and copy the link for `<TENANT-NAME>-matomo` route. 
+  Once matomo is deployed and synced in argoCD, head over to Openshift Console and in you `<TENANT-NAME>-dev` namespace, click on `Networking>Routes` and copy the link for `<TENANT-NAME>-matomo` route, we will use this in the steps to follow.
 
   ![a-b-matomo-route](images/a-b-matomo-route.png)
 
-2. Currently, there is no data yet. But Pet Battle is already configured to send data to Matomo every time a connection happens. (open up `tech-exercise/pet-battle/test/values.yaml` file and look for `matomo`) Let's start experimenting with A/B deployment and check Matomo UI on the way.
+2. Currently, there is no data yet. But Stakater Nordmart Review UI is already configured to send data to Matomo every time a connection happens. Let's start experimenting with A/B deployment and check Matomo UI on the way.
 
 ### A/B Deployment
 
-1. Let's deploy our experiment we want to compare -  let's call this `B`. Adjust the `source_ref` Helm chart version and `image_version` to match what you have built.
+For this experiment, we are going to deploy 2 instances of Stakater Nordmart Review UI. We will call them `A` and `B`.
+
+1. Let's deploy `A`. In your Gitlab, navigate to `nordmart-apps-gitops-config/01-<TENANT_NAME>`and create a New Directory with name `stakater-nordmart-review-ui-ab-a/01-dev`. 
+
+  ![a-b-create-directory](images/a-b-create-directory.png)
+
+  ![a-b-create-directory-name](images/a-b-create-directory-name.png)
+
+2. Create a file with name `Chart.yaml` and paste below yaml in it.
+
+    ```yaml
+      apiVersion: v2
+      name: stakater-nordmart-review-ui
+      description: A Helm chart for Kubernetes
+      dependencies:
+      - name: application
+        version: 1.1.14
+        repository: https://stakater.github.io/stakater-charts
+
+      # DON'T TOUCH THIS
+      # This is the chart version. This version number is incremented automatically each time you make changes
+      # to the application or helm values file; and pushed to artifact store.
+      version: 0.0.0
+    ```
+    
+  ![ab-new-chart-a](ab-new-chart-a.png)
+
+  ![ab-new-chartyaml-a](ab-new-chartyaml-a.png)
+
+3. Create another file named `values.yaml` in the same directory and paste below yaml in it.
+
+    **Note: Substitute the value of Matomo route we copied in the previous section in `MATOMO_BASE_URL` in the yaml below**
+
+    ```yaml
+      stakater-nordmart-review-ui:
+        application:
+          applicationName: "review-ui-ab-a"
+          deployment:
+            image:
+              repository: stakater/stakater-nordmart-review-ui
+              tag: 1.0.24-a
+            env:
+              REVIEW_API:
+                  value: "https://review-{{ .Release.Namespace }}.apps.devtest.vxdqgl7u.kubeapp.cloud/"
+              MATOMO_BASE_URL:
+                  value: "<YOUR_MATOMO_URL_HERE>"
+          route:
+            enabled: false
+
+    ```
+  ![ab-values-a](ab-values-a.png)
+
+  ![ab-values-data-a](ab-values-data-a.png)
+
+4. Now we will create an ArgoCD app that deploys our `A` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `stakater-nordmart-review-ui-ab-a.yaml` and paste below yaml in it.
+
+    ```yaml
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: <TENANT-NAME>-dev-stakater-nordmart-review-ui-ab-a
+      namespace: openshift-gitops
+      labels:
+        stakater.com/tenant: <TENANT-NAME>
+        stakater.com/env: dev
+        stakater.com/kind: dev
+    spec:
+      destination:
+        namespace: <TENANT-NAME>-dev
+        server: 'https://kubernetes.default.svc'
+      project: <TENANT-NAME>
+      source:
+        path: 01-<TENANT-NAME>/stakater-nordmart-review-ui-ab-a/01-dev
+        repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT-NAME>/nordmart-apps-gitops-config.git'
+        targetRevision: HEAD
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+
+    ```
+  
+    ![ab-argo-a](ab-argo-a.png)
+
+    ![ab-argoyaml-a](ab-argoyaml-a.png)
+
+
+
+
+
+
+
+
+
+
 
     ```bash
     cat << EOF >> /projects/tech-exercise/pet-battle/test/values.yaml
