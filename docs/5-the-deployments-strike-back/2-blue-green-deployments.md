@@ -1,33 +1,92 @@
 ## Blue/Green Deployments
 
-> Blue/Green deployments involve running two versions of an application at the same time and moving the traffic from the old version to the new version. Blue/Green deployments make switching between two different versions very easy.
+> Blue/Green deployments involve running two versions of an application at the same time. While the blue environment runs the current version of the application being used, the green environment runs the new application version
+> Once the green environment has been thoroughly tested, traffic is diverted towards it and the blue environment is deprecated. The Blue/Green strategy is followed to increase application availability. It makes switching between application versions easy.
 
 <span style="color:blue;">[OpenShift Docs](https://docs.openshift.com/container-platform/4.9/applications/deployments/route-based-deployment-strategies.html#deployments-blue-green_route-based-deployment-strategies)</span> is pretty good at showing an example of how to do a manual Blue/Green deployment. But in the real world you'll want to automate this switching of the active routes based on some test or other metric. Plus this is GitOps! So how do we do a Blue/Green with all of this automation and new tech, let's take a look with our Nordmart review UI!
 
 ![blue-green-diagram](images/blue-green-diagram.png)
 
-1. Let's create two new deployments in our ArgoCD Repo for the `nordmart-review` front end. We'll call one Blue and the other Green. Add 3 new ArgoCD applications in `<tenant-name>/00-argocd-apps/01-dev/`. Adjust the `project` and `source.path` to match what you have built.
+1. Let's create two new deployments in our ArgoCD Repo, `nordmart-apps-gitops-config` for the `nordmart-review-ui` front end.We'll call one Blue and the other Green.
 
-    a. `stakater-nordmart-review-ui-bg-blue.yaml`
+2. Navigate to `<TENANT_NAME> > 00-argocd-apps > 01-dev` . 
+
+3. Add a new ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue` with the following content. 
+
+    > Make sure you replace all instances of <TENANT_NAME> with your tenant.
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
       kind: Application
       metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-blue
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-blue
         namespace: openshift-gitops
         labels:
-          stakater.com/tenant: gabbar
+          stakater.com/tenant: <TENANT_NAME>
           stakater.com/env: dev
           stakater.com/kind: dev            
       spec:
         destination:
-          namespace: gabbar-dev
+          namespace: <TENANT_NAME>-dev
           server: 'https://kubernetes.default.svc'
-        project: gabbar
+        project: <TENANT_NAME>
         source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-blue/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-blue/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+    ```
+3. Now add another ArgoCD applications with name `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green` with the following content.
+
+    ```yaml
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-green
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: <TENANT_NAME>
+          stakater.com/env: dev
+          stakater.com/kind: dev            
+      spec:
+        destination:
+          namespace: <TENANT_NAME>-dev
+          server: 'https://kubernetes.default.svc'
+        project: <TENANT_NAME>
+        source:
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-green/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
+          targetRevision: HEAD
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+    ```
+The above two ArgoCD applications will point to the Helm charts for our `Blue` and `Green` application versions.
+
+4. Now let's add an ArgoCD application that points to the route. Name this ArgoCD application `<TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-route` and add the below content to it. 
+
+    ```yaml
+      apiVersion: argoproj.io/v1alpha1
+      kind: Application
+      metadata:
+        name: <TENANT_NAME>-dev-stakater-nordmart-review-ui-bg-route
+        namespace: openshift-gitops
+        labels:
+          stakater.com/tenant: <TENANT_NAME>
+          stakater.com/env: dev
+          stakater.com/kind: dev            
+      spec:
+        destination:
+          namespace: <TENANT_NAME>-dev
+          server: 'https://kubernetes.default.svc'
+        project: <TENANT_NAME>
+        source:
+          path: 01-<TENANT_NAME>/03-stakater-nordmart-review-ui-bg-route/01-dev
+          repoURL: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/<TENANT_NAME>/nordmart-apps-gitops-config.git'
           targetRevision: HEAD
         syncPolicy:
           automated:
@@ -35,65 +94,11 @@
             selfHeal: true
     ```
 
-    b. `stakater-nordmart-review-ui-bg-green.yaml`
+Now we need to deploy two charts for our green and blue application versions and also a route that handles the traffic to these applications.
 
-    ```yaml
-      apiVersion: argoproj.io/v1alpha1
-      kind: Application
-      metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-green
-        namespace: openshift-gitops
-        labels:
-          stakater.com/tenant: gabbar
-          stakater.com/env: dev
-          stakater.com/kind: dev            
-      spec:
-        destination:
-          namespace: gabbar-dev
-          server: 'https://kubernetes.default.svc'
-        project: gabbar
-        source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-green/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
-          targetRevision: HEAD
-        syncPolicy:
-          automated:
-            prune: true
-            selfHeal: true
-    ```
+5. Open up the 01-<TENANT_NAME> folder and create a folder named `03-stakater-nordmart-review-ui-bg-blue` in it. Inside the folder, create a `01-dev` folder. 
 
-    c. `stakater-nordmart-review-ui-bg-route.yaml`
-
-    ```yaml
-      apiVersion: argoproj.io/v1alpha1
-      kind: Application
-      metadata:
-        name: gabbar-dev-stakater-nordmart-review-ui-bg-route
-        namespace: openshift-gitops
-        labels:
-          stakater.com/tenant: gabbar
-          stakater.com/env: dev
-          stakater.com/kind: dev            
-      spec:
-        destination:
-          namespace: gabbar-dev
-          server: 'https://kubernetes.default.svc'
-        project: gabbar
-        source:
-          path: 01-gabbar/03-stakater-nordmart-review-ui-bg-route/01-dev
-          repoURL: 'https://github.com/stakater/nordmart-apps-gitops-config.git'
-          targetRevision: HEAD
-        syncPolicy:
-          automated:
-            prune: true
-            selfHeal: true
-    ```
-
-    and then create 3 charts, which will be used by above applications
-
-    a. chart and values.yaml file for blue deployment
-    
-    `03-stakater-nordmart-review-ui-bg-blue\01-dev\Chart.yaml`
+6. Add a Chart.yaml file in this folder with the following content:
 
     ```yaml
       apiVersion: v2
@@ -105,8 +110,7 @@
         repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
       version: 1.0.14
     ```
-
-    `03-stakater-nordmart-review-ui-bg-blue\01-dev\values.yaml`
+7. Now in the same folder, add a values.yaml with the below content:
 
     ```yaml
       stakater-nordmart-review-ui:
@@ -124,9 +128,9 @@
             enabled: false
     ```
 
-    b. chart and values.yaml file for green deployment
-    
-    `03-stakater-nordmart-review-ui-bg-green\01-dev\Chart.yaml`
+8. Let's deploy the chart for our green environment now. Open up the 01-<TENANT_NAME> folder present at the project root level again and create a folder named `03-stakater-nordmart-review-ui-bg-green` in it. Inside the folder, create a `01-dev` folder.
+
+9. Inside this dev folder, add a Chart.yaml with the following content.
 
     ```yaml
       apiVersion: v2
@@ -138,9 +142,7 @@
           repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
       version: 1.0.14
     ```
-
-    `03-stakater-nordmart-review-ui-bg-green\01-dev\values.yaml`
-
+10. In the same folder, add a values.yaml with the below content.
     ```yaml
       stakater-nordmart-review-ui:
         application:
@@ -158,8 +160,13 @@
           route:
             enabled: false
     ```
+> If you notice, we are using different images in both the values file, meaning that both the application versions are different. 
+> Also notice that we added a label to the service in the values chart. Green application service has an inactive label and blue has an active label.
+> The route will use these labels to attach itself to the service with `active` label.
 
-    c. route.yaml file for green deployment
+11. Let's add a route for these applications.
+
+12.
     
     `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml`
 
