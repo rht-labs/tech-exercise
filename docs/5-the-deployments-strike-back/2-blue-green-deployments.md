@@ -162,13 +162,14 @@ Now we need to deploy two charts for our green and blue application versions and
     ```
 > If you notice, we are using different images in both the values file, meaning that both the application versions are different. 
 > Also notice that we added a label to the service in the values chart. Green application service has an inactive label and blue has an active label.
-> The route will use these labels to attach itself to the service with `active` label.
 
 11. Let's add a route for these applications.
 
-12.
+12. Go back to the 01-<TENANT_NAME> folder and create a folder named `03-stakater-nordmart-review-ui-bg-route` in it. Inside the folder, create a `01-dev` folder.
     
-    `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml`
+13. Now add a route.yaml to it with the below content. 
+     
+    > Replace the <TENANT_NAME> with your tenant.
 
     ```yaml
       kind: Route
@@ -176,7 +177,7 @@ Now we need to deploy two charts for our green and blue application versions and
       metadata:
         name: review-ui-bg
       spec:
-        host: review-ui-bg-<tenant-name>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud
+        host: review-ui-bg-<TENANT_NAME>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud
         to:
           kind: Service
           name: review-ui-blue
@@ -189,36 +190,31 @@ Now we need to deploy two charts for our green and blue application versions and
         wildcardPolicy: None
     ```
 
-2. Git commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
+14. Commit the changes and in OpenShift UI, you'll see two new deployments are coming alive.
 
-    ```bash
-    cd /projects/tech-exercise
-    git add --all
-    git commit -m  "🍔 ADD - blue & green environments 🍔"
-    git push
-    ```
 
-3. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`.
+
+15. Verify each of the services contains the correct labels - one should be `active` and the other `inactive`. Run the commands below on your CRW workspace.
 
     ```bash
     oc get svc -l blue_green=inactive --no-headers -n <TENANT_NAME>-dev
     oc get svc -l blue_green=active --no-headers -n <TENANT_NAME>-dev
     ```
 
-4. With both deployed, let's assume that our blue deployment is the active one with the service having `active` label pointing towards blue deployment and service having `inactive` label pointing towards green deployment. 
+16. With both deployed, let's assume that our blue deployment is the active one with the service having `active` label pointing towards blue deployment and the service having `inactive` label pointing towards green deployment. 
 
 We can validate that blue service is currently running by getting the host of our route
 
 ```bash
 oc get route/review-ui-bg -n <TENANT_NAME>-dev --template='{{.spec.host}}'
 ```
-and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
+and then using this URL in browser: `https://review-ui-bg-<TENANT_NAME>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud/#/reviews`
 
 
 ![Nordmart-review-bg-blue](images/nordmart-review-bg-blue.png)
 
 
-5. let's update the values.yaml for our deployments and switch the labels for services to point the active service towards green deployment. And then update the route to point towards active green service as well. 
+17. Let's update the values.yaml for our deployments and switch the labels for services to point the active service towards green deployment. And then update the route to point towards active green service as well. 
 
     To do this, change the following
 
@@ -228,16 +224,11 @@ and then using this URL in browser: `https://(ROUTE_HOST)/#/reviews`
 
     c. Change the `name` of service in `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml` route to `review-ui-green`
 
-6. Commit all these changes:
+18. Commit all these changes:
 
-    ```bash
-    cd /projects/tech-exercise
-    git add .
-    git commit -m "🔵 Update - Blue / Green deployment 🟩"
-    git push
-    ```
 
-8. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://(ROUTE_HOST)/#/reviews` and see the green deployment working
+
+8. When ArgoCD syncs, you should see things progress and the blue green deployment happen automatically. You can go to this URL again in browser: `https://review-ui-bg-<TENANT_NAME>-dev.apps.devtest.vxdqgl7u.kubeapp.cloud/#/reviews` and see the green deployment working
 
 ![Nordmart-review-bg-blue](images/nordmart-review-bg-green.png)
 
