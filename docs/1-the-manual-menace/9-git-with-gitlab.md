@@ -3,7 +3,7 @@
 
 ## About Stakater's Nordmart
 
-Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will deploy for the workshop. For simplicity, we will import only 2 microservices of nordmart application as described in below sections.
+Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will deploy for the workshop. For simplicity, we will import only 2 microservices of Nordmart application as described in below sections.
 
 ## Importing Nordmart Review
 
@@ -25,7 +25,7 @@ Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will de
     
    > Make sure that Project Name is lower case and spaces are replaced with '-' so our automation doesn't break ;).  
 
-   > Remember we are only making public repos with no branch protection or merge approval flows for sake of simplicity during the workshop. Branch Protection and atleast one review must be configured in production. 
+   > Remember we are only making public repos with no branch protection or merge approval flows for sake of simplicity during the workshop. Branch Protection and one review must be configured in production. 
 
    ![import-Nordmart-review](images/import-nordmart-review.png)
 
