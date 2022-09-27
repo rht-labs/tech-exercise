@@ -147,13 +147,13 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
 
   ![ab-values-data-a](images/ab-values-data-a.png)
 
-4. Now we will create an ArgoCD app that deploys our `A` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `stakater-nordmart-review-ui-ab-a.yaml` and paste below yaml in it.
+4. Now we will create an ArgoCD app that deploys our `A` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `<TENANT_NAME>-stakater-nordmart-review-ui-ab-a.yaml` and paste below yaml in it.
 
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
-      name: <TENANT-NAME>-dev-stakater-nordmart-review-ui-ab-a
+      name: <TENANT-NAME>-stakater-nordmart-review-ui-ab-a
       namespace: openshift-gitops
       labels:
         stakater.com/tenant: <TENANT-NAME>
@@ -177,7 +177,7 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
   
     ![ab-argo-a](images/ab-argo-a.png)
 
-    ![ab-argoyaml-a](images/ab-argoyaml-a.png)
+    ![ab-argoyaml-a](images/a-values.png)
 
 
 5. Now let's deploy `B`. Navigate to `01-<TENANT_NAME>` again and create a New Directory with name `stakater-nordmart-review-ui-ab-b/01-dev`.
@@ -222,15 +222,15 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
             enabled: false
 
     ```
-  ![b-values](images/b-values.png)
+   ![argo-b](images/b-valuesyaml.png)
 
-8. Now we will create a ArgoCD app for deploying `B` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `stakater-nordmart-review-ui-ab-b.yaml` and paste below yaml in it.
+8. Now we will create a ArgoCD app for deploying `B` application. Navigate to `nordmart-apps-gitops-config/01-sorcerers/00-argocd-apps/01-dev` and create a new file named `<TENANT_NAME>-stakater-nordmart-review-ui-ab-b.yaml` and paste below yaml in it.
 
     ```yaml
     apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
-      name: <TENANT-NAME>-dev-stakater-nordmart-review-ui-ab-b
+      name: <TENANT-NAME>-stakater-nordmart-review-ui-ab-b
       namespace: openshift-gitops
       labels:
         stakater.com/tenant: <TENANT-NAME>
@@ -254,7 +254,7 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
 
    
 
-   ![argo-b](images/argo-b.png)
+   ![argo-b](images/b-argocd.png)
 
 2. Extend the configuration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the `values` section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
 
