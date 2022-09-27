@@ -109,13 +109,13 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
 
     ```yaml
       apiVersion: v2
-      name: stakater-nordmart-review-ui
+      name: stakater-nordmart-review-ui-ab-a
       description: A Helm chart for Kubernetes
       dependencies:
-      - name: stakater-nordmart-review-ui
-        version: 1.1.14
-        repository:  https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
-      version: 0.0.0
+        - name: stakater-nordmart-review-ui
+          version: 1.0.14
+          repository:  https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
+      version: 1.0.14
     ```
     
   ![ab-new-chart-a](images/ab-new-chart-a.png)
@@ -188,11 +188,11 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
 
     ```yaml
       apiVersion: v2
-      name: stakater-nordmart-review-ui
+      name: stakater-nordmart-review-ui-ab-b
       description: A Helm chart for Kubernetes
       dependencies:
       - name: stakater-nordmart-review-ui
-        version: 1.1.14
+        version: 1.0.14
         repository: https://nexus-helm-stakater-nexus.apps.devtest.vxdqgl7u.kubeapp.cloud/repository/helm-charts/
       version: 0.0.0
     ```
@@ -255,6 +255,11 @@ For this experiment, we are going to deploy 2 instances of Stakater Nordmart Rev
    
 
    ![argo-b](images/b-argocd.png)
+
+9. Now lets head over to ArgoCD to check if our application B was deployed.
+   
+   ![argo-b-sync](images/argocd-sync.png)
+
 
 2. Extend the configuration for the existing Pet Battle deployment (`A`) by adding the `a_b_deploy` properties to the `values` section. Copy the below lines under `pet-battle` application definition in `/projects/tech-exercise/pet-battle/test/values.yaml` file.
 
