@@ -41,7 +41,7 @@
             selfHeal: true
     ```
    ![blue-app](./images/blue-app.png)
-3. Now add another ArgoCD applications with name `<TENANT_NAME>-stakater-nordmart-review-ui-bg-green` with the following content.
+3. Now add another ArgoCD applications with name `<TENANT_NAME>-stakater-nordmart-review-ui-bg-green.yaml` with the following content.
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
@@ -70,7 +70,7 @@
    ![green-app](./images/green-app.png)
 The above two ArgoCD applications will point to the Helm charts for our `Blue` and `Green` application versions.
 
-4. Now let's add an ArgoCD application in the same folder that points to a route. Name this ArgoCD application `<TENANT_NAME>-stakater-nordmart-review-ui-bg-route` and add the below content to it. 
+4. Now let's add an ArgoCD application in the same folder that points to a route. Name this ArgoCD application `<TENANT_NAME>-stakater-nordmart-review-ui-bg-route.yaml` and add the below content to it. 
 
     ```yaml
       apiVersion: argoproj.io/v1alpha1
