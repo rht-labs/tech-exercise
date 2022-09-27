@@ -1,4 +1,4 @@
-# Extend Tekton Pipeline with Load Testing (WIP)
+# Extend Tekton Pipeline with Load Testing
 
 In this section we are going to improve our already built `main-pr-v1` pipeline and add stakater-load-test-v1 task into the pipeline.
 The SAAP cluster is shipped with many useful predefined cluster tasks including **`stakater-load-testing-v1`**.  

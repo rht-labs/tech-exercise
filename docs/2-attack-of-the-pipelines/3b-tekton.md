@@ -23,7 +23,7 @@ In this snippet of the pipeline used in this exercise, we define:
 ### Tekton Pipeline Chart
 We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as `pipeline`, `task`, `eventlistener`, `triggers`, etc.  
 
-We will fill in the values for these resources and deploy a functioning pipeline with most of the complexity extracted away using our Tekton pipeline chart.  
+We will fill in the values for these resources and deploy a functioning pipeline with most of the complexity abstracted away using our Tekton pipeline chart.  
 
 ![pipeline-charts-structure](./images/pipeline-charts-structure.png)
 
