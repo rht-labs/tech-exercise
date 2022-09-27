@@ -54,7 +54,7 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
 
    GitLab will redirect you to the group's home page, once the group is created.
 
-    > Remember that `group name` and should match your **tenant name**. 
+    > Remember that `group name` should match your **tenant name**. 
 
 
 3. If you are working as a team, and you haven't already done at group creation, you can add your colleagues to this group now.   
@@ -116,7 +116,7 @@ Gitlab will now take you to your forked repository.
       - prod      
       sandbox: true
       onDelete:
-         cleanNamespaces: false
+         cleanNamespaces: true
       templateInstances:
       - spec:
             template: tenant-vault-access
