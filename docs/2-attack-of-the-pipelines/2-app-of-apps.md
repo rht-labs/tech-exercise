@@ -49,6 +49,8 @@ curl https://raw.githubusercontent.com/stakater/workshop-excercise/main/scripts/
 python script.py nordmart-apps-gitops-config <TENANT_NAME>
 ```
 
+   ![crw-replace](images/crw-replace.png)
+
 8. Add, commit and push the changes back to your repo in GitLab
 
 ```bash
@@ -58,7 +60,7 @@ git commit -m "bulk replace <TENANT_NAME>"
 git push
 ```
 
-9. Enter your gitLab Group Access Token when prompted for credentials
+9. Enter your GitLab Group Access Token when prompted for credentials
 
 username = `pipeline`  
 password = token saved in `Vault` earlier  
