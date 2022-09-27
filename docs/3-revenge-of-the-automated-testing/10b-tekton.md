@@ -87,4 +87,6 @@ You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-t
 
 6. You will see the e2e task running.
 
+![e2e-running](./images/e2e-running.png)
+
 You have successfully added End-to-End testing in your pipeline.
