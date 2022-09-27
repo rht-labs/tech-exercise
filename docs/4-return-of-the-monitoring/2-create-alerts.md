@@ -18,19 +18,21 @@
             severity: critical
   ```
 
+   You can check your prometheus rule in Openshift UI.
+
     ![Prometheus-rule](./images/review-prometheus-rule.png)
 
-    ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
-
-
+   You can access the Prometheus web UI using Forecastle
+   ![forecastle-prometheus](./images/forecastle-promethus.png)
 
    Once the alert is in place, you can trigger it by scaling down the deployment manually.
 
-
-
    ![Prometheus-rule](./images/deployment-scale-down.png)
+
+   You can see that the alert has been triggered for the pods scaled down
+
    ![Prometheus-rule](./images/prometheus-alert-triggered.png)
-   ![Prometheus-rule](./images/alertmanager-alert-triggered.png)
+
 
 2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.`prometheusRule`:
 
