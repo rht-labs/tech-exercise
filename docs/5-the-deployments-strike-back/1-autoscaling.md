@@ -1,6 +1,6 @@
 ## Autoscaling
 
-> Horizontal pod autoscaler (HPA) helps us to specify how OpenShift should automatically increase or decrease the scale of an application, based on metrics collected from the pods. After we define an HPA (based on CPU and/or memory usage metrics), the platform calculates the current usage and compare it with the desired utilization, then scales pods up or down accordingly.
+> Horizontal pod autoscaler (HPA) helps us to specify how OpenShift should automatically increase or decrease the number of pod replicas of an application, based on metrics collected from the pods. When we define an HPA (based on CPU and/or memory usage metrics), the platform calculates the current usage and compare it with the utilization threshold and scales pods up or down accordingly.
 
 1. The `stakater-nordmart-review` uses stakater's [application chart](https://github.com/stakater-charts/application/tree/master/application) as a dependency. This chart already contains a template for Horizontal Pod Autoscaler.
    By default, the horizontal pod autoscaler is disabled in our `stakater-nordmart-review` chart.
@@ -38,7 +38,8 @@
    ![hpa-argocd.png](./images/hpa-argocd.png)
 
 
-6. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of review microservice. This should trigger an autoscale due to the increased load on the pods. [hey](https://github.com/rakyll/hey) is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
+6. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of review microservice. This should trigger an autoscaling event due to the increased load on the pods. [hey](https://github.com/rakyll/hey) is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
+
    Run the following command in your **CRW**.
 
     ```bash
