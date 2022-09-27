@@ -13,7 +13,7 @@ The folder contains ArgoCD applications for all applications & pipelines.
 
 ## Lets get started,
 
-1. Lets clone our GitOps repo that we created in the previous section 1b. 
+1. Lets clone our GitOps repo that we created in the previous section 1b.
 ```
         # git clone https://gitlab.com/<group-name>/<gitops-repo>
         git clone https://gitlab.com/workshop-exercise/nordmart-gitops
