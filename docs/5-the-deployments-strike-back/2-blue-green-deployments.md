@@ -160,8 +160,13 @@ Now we need to deploy two charts for our green and blue application versions and
           route:
             enabled: false
     ```
-If you notice, we are using different images in both the values file, meaning that both the application versions are different.
-    c. route.yaml file for green deployment
+> If you notice, we are using different images in both the values file, meaning that both the application versions are different. 
+> Also notice that we added a label to the service in the values chart. Green application service has an inactive label and blue has an active label.
+> The route will use these labels to attach itself to the service with `active` label.
+
+11. Let's add a route for these applications.
+
+12.
     
     `03-stakater-nordmart-review-ui-bg-route\01-dev\route.yaml`
 
