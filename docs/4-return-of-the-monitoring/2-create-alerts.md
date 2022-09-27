@@ -57,6 +57,10 @@
 
     This push will trigger the pipeline which updates the chart version for Nordmart Review API in `stakater-nordmart-review/deploy/`.
 
+    Head over to the Openshift Console -> Pipelines and see your pipelines against your changes
+    
+    ![Prometheus-rule](./images/prometheus-rule-pipeline.png)
+
     When the chart version is updated automatically, ArgoCD will detect your new changes and apply them to the cluster 🔥🔥🔥
 
 4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the MongoDB alert.
