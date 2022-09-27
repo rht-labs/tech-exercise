@@ -39,7 +39,7 @@ This is the template that we will use to create our own apps-of-apps repository.
 
 Now we need to make some updates to the contents of these template based repos
 
-6. Navigate to the [CodeReady Workspaces](https://codeready-openshift-workspaces.apps.devtest.vxdqgl7u.kubeapp.cloud/) and login if not already.
+6. Navigate to the [CodeReady Workspaces](https://codeready-openshift-workspaces.apps.devtest.vxdqgl7u.kubeapp.cloud/) and login if not already. Navigate to your `workspace` and wait for the IDE to initialize if not already open.
 
 7. From the Terminal run:
 
