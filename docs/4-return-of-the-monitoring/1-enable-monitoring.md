@@ -8,11 +8,11 @@
 
 1. User Workload Monitoring is enabled by default in SAAP.
 
-    In the `OpenShift console` in `Developer` view, go to `Observe`, it should show basic health indicators
+    In the `OpenShift console` in `Developer` view, go to `Observe`, it should show basic health indicators under `<TENANT_NAME>-dev` Project
 
     ![product-review-default-metrics](images/product-review-default-metrics.png)
 
-2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
+2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `<TENANT_NAME>-dev` namespace/project
 
     ```bash
     sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-dev'}) by (pod)
@@ -22,9 +22,9 @@
 
 ### Add Grafana & Service Monitor
 
-> Let's super charge our monitoring with specific information about our cat based services ...
+> Let's super charge our monitoring with specific information about our Nordmart review service...
 
-1. Lets check `ServiceMonitor` in `ProductReview` apps.
+1. Lets check `ServiceMonitor` in `stakater-nordmart-review` app.
 
     SAAP gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or number of reviews or active users etc) alongside the base ones, we need another object: _`ServiceMonitor`_. It will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
@@ -51,7 +51,7 @@
           app: review
     ```
 
-    Now, let's check the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
+    Now, let's check the `ServiceMonitor` for our `stakater-nordmart-review` app! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
     Open up `stakater-nordmart-review/deploy/values.yaml` file. You can see `serviceMonitor` has been enabled:
 
@@ -92,7 +92,7 @@
 
     ```bash
     # Get the reviews for a specific Product (i.e. 329199)
-    curl -L $(oc get route/review ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199
+    curl -L $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199
     # Add a review for a specific Product (i.e. 329199)
     curl -L -X POST $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199/John/5/Great
     # Delete a review for a specific review (First get the review id from Get request)
