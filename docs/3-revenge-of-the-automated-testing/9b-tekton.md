@@ -8,13 +8,15 @@ Lets add this task into our pipeline **`stakater-load-testing-v1`**.
 1. Open the chart directory found in GitLab at `<TENANT_NAME>/nordmart-apps-gitops-config/01-<TENANT_NAME>/01-tekton-pipelines/00-build/`
   ![images/pipelines-Nordmart-apps-GitOps-config](images/pipelines-nordmart-apps-gitops-config.png)
 
-2. Open the `values.yaml` file in the editor. 
+2. Open the `values.yaml` file in the editor.
 
-    ```
+```
     - defaultTaskName: stakater-load-testing-v1
-    ```
+```
+
 The pipeline will now become:
-   ```yaml
+
+```yaml
 pipeline-charts:
   name: stakater-main-pr-v1
   workspaces:
@@ -96,7 +98,7 @@ pipeline-charts:
   serviceAccount:
     name: stakater-workshop-tekton-builder
     create: false
-  ```
+```
 
 3. Now open ArgoCD, Open the `<TENANT_NAME>-build-tekton-pipelines` application, trigger Refresh and  wait for the changes were synchronized.
 
