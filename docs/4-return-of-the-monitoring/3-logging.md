@@ -5,8 +5,8 @@
 1. Observe logs from any given container:
 
     ```bash
-    oc project ${TENANT_NAME}-test
-    oc logs `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TENANT_NAME}-test` --since 10m
+    oc project ${TENANT_NAME}-dev
+    oc logs `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TENANT_NAME}-dev` --since 10m
     ```
 
     By default, these logs are not stored in a database, but there are a number of reasons to store them (i.e. troubleshooting, legal obligations..)
@@ -32,7 +32,7 @@
     ![Kibana-discover](./images/kibana-discover.png)
 
 7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test namespace by adding this to the query bar:
-`kubernetes.namespace_name:"<TENANT_NAME>-test" AND kubernetes.container_name:"review"`
+`kubernetes.namespace_name:"<TENANT_NAME>-dev" AND kubernetes.container_name:"review"`
 
     ![Kibana-example-query](./images/kibana-example-query-2.png)
 
@@ -58,7 +58,7 @@
 9. Back on Kibana we can filter and find these messages with another query:
 
     ```yaml
-    kubernetes.namespace_name:"<TENANT_NAME>-test" AND kubernetes.container_name:"review" AND message:"🦄🦄🦄🦄"
+    kubernetes.namespace_name:"<TENANT_NAME>-dev" AND kubernetes.container_name:"review" AND message:"🦄🦄🦄🦄"
     ```
 
     ![Kibana-review-unicorn](./images/kibana-review-unicorn.png)
