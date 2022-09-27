@@ -1,6 +1,6 @@
 # 🐓 Tenant Operator 101
 
-Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organization.  
+> Stakater's [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organization.  
 
 OpenShift is designed to support a single tenant platform, hence making it difficult for cluster admins to host multi-tenancy in a single OpenShift cluster. If multi-tenancy is achieved by sharing a cluster, it can have many advantages, e.g. efficient resource utilization, less configuration effort and easier sharing of cluster-internal resources among different tenants.  
 
@@ -50,11 +50,12 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
 
 2. Use your `<TENANT_NAME>` as the group name, select `Public` for Visibility level > leave the rest of the defaults and click `Create group`.  
 
+    > Remember that `group name` should match your **tenant name**. 
+
    ![GitLab-group-create](images/gitlab-group-create.png)
 
    GitLab will redirect you to the group's home page, once the group is created.
 
-    > Remember that `group name` should match your **tenant name**. 
 
 
 3. If you are working as a team, and you haven't already done at group creation, you can add your colleagues to this group now.   
@@ -90,6 +91,8 @@ Gitlab will now take you to your forked repository.
 
 
 7. Paste the code below to create a new tenant with a user, a list of ArgoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
+
+> Replace `<TENANT_NAME>` and `<INSERT_YOUR_USER_NAME>` with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
 
    ```yaml
    apiVersion: tenantoperator.stakater.com/v1beta1
@@ -127,8 +130,6 @@ Gitlab will now take you to your forked repository.
            annotations:
                openshift.io/node-selector: node-role.kubernetes.io/pipeline=
    ```
-
-   > Replace `<TENANT_NAME>` and `<INSERT_YOUR_USER_NAME>` with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
 
 
 8. Click `Create commit...` 

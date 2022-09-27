@@ -39,7 +39,7 @@
 
 ![allure-ArgoCD](./images/allure-argocd.png)
 
-You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running 
+You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
 
 ```bash
 oc project ${TENANT_NAME}-dev
