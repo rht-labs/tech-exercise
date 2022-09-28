@@ -39,7 +39,7 @@
 8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via `rsh` and generate logs.
 
     ```bash
-    oc project ${TENANT_NAME}-test
+    oc project ${TENANT_NAME}-dev
     oc rsh `oc get po -l app=review -o name -n ${TENANT_NAME}-dev`
     ```
 

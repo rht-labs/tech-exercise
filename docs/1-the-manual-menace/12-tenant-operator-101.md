@@ -1,6 +1,6 @@
 # 🐓 Tenant Operator 101
 
-Stakater’s [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organization.  
+> Stakater's [Tenant-Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html) makes it easy to implement multi-tenancy in your organization.  
 
 OpenShift is designed to support a single tenant platform, hence making it difficult for cluster admins to host multi-tenancy in a single OpenShift cluster. If multi-tenancy is achieved by sharing a cluster, it can have many advantages, e.g. efficient resource utilization, less configuration effort and easier sharing of cluster-internal resources among different tenants.  
 
@@ -20,11 +20,11 @@ The idea of Tenant Operator is to use namespaces as independent sandboxes, where
 
 > Workshop Infra GitOps Config : https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud/stakater/workshop-infra-gitops-config
 
-   - `workshop` folder contains separate folder for separate clusters.
+   - `workshop` folder denotes the name of the cluster. 
 
    - `workshop/argocd-apps` contains `argocd-apps` for your folders e.g. `nordmart-apps-gitops-config`, `tenant-operator-config`, other operators.
 
-   - `workshop/nordmart-apps-gitops-config` contains `argocd-apps` pointing to tenants `nordmart-apps-gitops-config` and `argocd-apps` folders.
+   - `workshop/nordmart-apps-gitops-config` contains `argocd-apps` that point to each tenant's `nordmart-apps-gitops-config` project. (We will look at this later)
 
    - `workshop/tenant-operator-config` contains your cluster **tenants**.
 
@@ -50,14 +50,15 @@ We will now collaborate on [workshop-infra-gitops-config](https://gitlab.apps.de
 
 2. Use your `<TENANT_NAME>` as the group name, select `Public` for Visibility level > leave the rest of the defaults and click `Create group`.  
 
+    > Remember that `group name` should match your **tenant name**. 
+
    ![GitLab-group-create](images/gitlab-group-create.png)
 
    GitLab will redirect you to the group's home page, once the group is created.
 
-    > Remember that `group name` and should match your **tenant name**. 
 
 
-3. If you are working as a team, and you haven't already done at group creation, you can add your colleagues to this group now.   
+3. If you are working as a team, and you haven't already done that at the time of group creation, you can add your colleagues to this group now.   
 
    This will give them permissions to work on the projects created in this group. Select `Group information` > `Members` from the left panel and invite your colleagues via `Invite member` option. Make sure to choose `Maintainer` or `Owner` role permission. You can ignore this step if you are not working as a team.
 
@@ -78,9 +79,9 @@ Gitlab will prompt you and ask you if you want to fork the repo. Click `Fork Pro
 
 Gitlab will now take you to your forked repository.
 
-5. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`
+5. Click the vertical 3 dot menu next to `workshop` in the left hand navigation and select `New File`. (The dots will appear when you hover over workshop folder name.)
 
-   ![edit-fork-in-web-ide](./images/workshop-3-dots.png)
+   ![edit-fork-in-web-ide](./images/workshop-dots.png)
 
 6. Name the file using the following directory prefix `workshop/tenant-operator-config/tenants/<TENANT-NAME>.yaml`.  
    
@@ -90,6 +91,9 @@ Gitlab will now take you to your forked repository.
 
 
 7. Paste the code below to create a new tenant with a user, a list of ArgoCD “watched” repositories belonging to the tenant and its accompanying namespaces.
+
+> Replace `<TENANT_NAME>` and `<INSERT_YOUR_USER_NAME>` with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
+> Be careful of the <TENANT_NAME> in one of the sourceRepo URLs. Don't miss that one!
 
    ```yaml
    apiVersion: tenantoperator.stakater.com/v1beta1
@@ -116,7 +120,7 @@ Gitlab will now take you to your forked repository.
       - prod      
       sandbox: true
       onDelete:
-         cleanNamespaces: false
+         cleanNamespaces: true
       templateInstances:
       - spec:
             template: tenant-vault-access
@@ -127,8 +131,6 @@ Gitlab will now take you to your forked repository.
            annotations:
                openshift.io/node-selector: node-role.kubernetes.io/pipeline=
    ```
-
-   > Replace `<TENANT_NAME>` and `<INSERT_YOUR_USER_NAME>` with your preferred tenant name and list the username/s you; and if any, your colleagues registered with at the beginning.
 
 
 8. Click `Create commit...` 

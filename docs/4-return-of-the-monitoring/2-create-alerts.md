@@ -18,19 +18,21 @@
             severity: critical
   ```
 
+   You can check your prometheus rule in Openshift UI.
+
     ![Prometheus-rule](./images/review-prometheus-rule.png)
 
-    ![review-service-monitor-state-up](./images/review-service-monitor-state-up.png)
-
-
+   You can access the Prometheus web UI using Forecastle
+   ![forecastle-prometheus](./images/forecastle-promethus.png)
 
    Once the alert is in place, you can trigger it by scaling down the deployment manually.
 
-
-
    ![Prometheus-rule](./images/deployment-scale-down.png)
+
+   You can see that the alert has been triggered for the pods scaled down
+
    ![Prometheus-rule](./images/prometheus-alert-triggered.png)
-   ![Prometheus-rule](./images/alertmanager-alert-triggered.png)
+
 
 2. Let's add a new **platform type** rule to alert when the MongoDB disc gets busy / full. We can add it in the values.yaml under application.`prometheusRule`:
 
@@ -55,12 +57,16 @@
 
     This push will trigger the pipeline which updates the chart version for Nordmart Review API in `stakater-nordmart-review/deploy/`.
 
+    Head over to the Openshift Console -> Pipelines and see your pipelines against your changes
+    
+    ![Prometheus-rule](./images/prometheus-rule-pipeline.png)
+
     When the chart version is updated automatically, ArgoCD will detect your new changes and apply them to the cluster 🔥🔥🔥
 
 4. Let's test if the alert is working as we hope - we created an alert for disk usage. First, let's see if we can fill the disk to simulate the MongoDB alert.
 
     ```bash
-    oc project ${TENANT_NAME}-test
+    oc project ${TENANT_NAME}-dev
     oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TENANT_NAME}-dev`
     ```
 
@@ -81,4 +87,6 @@
 5. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `NordmartReviewApiMongoDBDiskUsage` alert as below:
 
     ![Prometheus-rule](./images/mongodb-alert-triggered.png)
+
+    
     ![Prometheus-rule](./images/mongodb-pvc.png)

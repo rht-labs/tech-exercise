@@ -1,5 +1,7 @@
 ## User Workload Monitoring
 
+> Before we move to the next section, we need to remove all tasks we added in Section 3 from our pipeline.
+
 > SAAP has monitoring capabilities built in. It deploys the Prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
 
 ### SAAP Developer view Monitoring (pods etc.)
@@ -8,11 +10,11 @@
 
 1. User Workload Monitoring is enabled by default in SAAP.
 
-    In the `OpenShift console` in `Developer` view, go to `Observe`, it should show basic health indicators
+    In the `OpenShift console` in `Developer` view, go to `Observe`, it should show basic health indicators under `<TENANT_NAME>-dev` Project
 
     ![product-review-default-metrics](images/product-review-default-metrics.png)
 
-2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `dev` namespace
+2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your `<TENANT_NAME>-dev` namespace/project
 
     ```bash
     sum(container_memory_working_set_bytes{container!='',namespace='<TENANT_NAME>-dev'}) by (pod)
@@ -22,9 +24,9 @@
 
 ### Add Grafana & Service Monitor
 
-> Let's super charge our monitoring with specific information about our cat based services ...
+> Let's super charge our monitoring with specific information about our Nordmart review service...
 
-1. Lets Enable `ServiceMonitor` in `ProductReview` apps.
+1. Lets check `ServiceMonitor` in `stakater-nordmart-review` app.
 
     SAAP gathers the base metrics to see how our pods are doing. In order to get application specific metrics (like response time or number of reviews or active users etc) alongside the base ones, we need another object: _`ServiceMonitor`_. It will let Prometheus know which endpoint the metrics are exposed so that Prometheus can scrape them. And once the Prometheus has the metrics, we can run query on them (just like we did before!) and create shiny dashboards!
 
@@ -51,9 +53,9 @@
           app: review
     ```
 
-    Now, let's create add the `ServiceMonitor` for our ProductReview apps! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
+    Now, let's check the `ServiceMonitor` for our `stakater-nordmart-review` app! Of course, we will do it through Helm and ArgoCD because this is GitOps!!
 
-    Our Helm Chart for `stakater-nordmart-review` API Open up `stakater-nordmart-review/deploy/values.yaml` file. Update `values` for `review` with adding following:
+    Open up `stakater-nordmart-review/deploy/values.yaml` file. You can see `serviceMonitor` has been enabled:
 
     ```yaml
         ## Service Monitor
@@ -72,7 +74,7 @@
    ![service-monitor](./images/review-service-monitor.png)
 
 
-2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards. SAAP monitoring stack includes Grafana installation. Add an existing dashboard to `stakater-nordmart-review` API; the dashboard can be found `stakater-nordmart-review/deploy/templates/grafana-dashboard.yaml` folder.
+2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create and watch dashboards. SAAP monitoring stack includes Grafana installation. The dashboard can be found in `stakater-nordmart-review/deploy/templates/grafana-dashboard.yaml` folder. You can see `grafanaDashboard` has been enabled in `stakater-nordmart-review/deploy/values.yaml`:
 
     ```yaml
         # Grafana Dashboard
@@ -80,16 +82,7 @@
             enabled: true
     ```
 
-3. Commit the changes to the repo as you've done before
-
-    ```bash
-    cd /projects/tech-exercise
-    git add .
-    git commit -m "📈 Grafana dashboard enabled 📈"
-    git push
-    ```
-
-4. Once this change has been synchronized (you can check this in ArgoCD), Let's login to Grafana and view the predefined dashboards for `stakater-nordmart-review` API;
+3. Let's login to Grafana and view the predefined dashboards for `stakater-nordmart-review` API;
 
     ![Forecastle-workload-Grafana](images/forecastle-workload-grafana.png)
 
@@ -97,18 +90,18 @@
 
   > In order to complete the next steps you will need the OpenShift CLI installed locally, credentials can be retrieved from the OpenShift UI
 
-5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `stakater-nordmart-review` API. In your IDE, run on your terminal:
+4. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `stakater-nordmart-review` API. In your IDE, run on your terminal:
 
     ```bash
     # Get the reviews for a specific Product (i.e. 329199)
-    curl -L $(oc get route/review ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199
+    curl -L $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199
     # Add a review for a specific Product (i.e. 329199)
     curl -L -X POST $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/329199/John/5/Great
     # Delete a review for a specific review (First get the review id from Get request)
     curl -L -X DELETE $(oc get route/review -n ${TENANT_NAME}-dev --template='{{.spec.host}}')/api/review/6323904100aeb66032db19dc
     ```
 
-6. Back in Grafana, we should see some data populated into the boards... Go to the `Manage` and then click on your `<TENANT_NAME>-dev`.
+5. Back in Grafana, we should see some data populated into the boards... Go to the `Manage` and then click on your `<TENANT_NAME>-dev`.
 
     ![Grafana-http-reqs](./images/product-review-grafana-dashboard-manage.png)
     ![Grafana-http-reqs](./images/product-review-grafana-dashboard-tanent.png)
@@ -144,3 +137,5 @@
     <p class="tip">
     🐌 THIS IS NOT GitOps - Manually configuring the dashboard is a good way to play with Grafana. See advanced exercises for creating and storing the dashboard as code 🐎
     </p>
+
+> Before we move to the next section, we need to remove all tasks we added in Section 3 from our pipeline.
