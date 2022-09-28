@@ -8,43 +8,39 @@
 
 As you see in the diagram, OpenShift can distribute the traffic that coming to Route. But how does it do it? Let’s explore route definition. This is a classic Route definition:
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      apiVersion: route.openshift.io/v1
-      kind: Route
-      metadata:
-        name: review-ui
-      spec:
-        port:
-          targetPort: http
-        to:
-          kind: Service
-          name: review-ui
-          weight: 100       <-- All of the traffic goes to `pet-battle` service
-    ...
-    </code></pre></div>
+```
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: review-ui
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: review-ui
+    weight: 100       <-- All of the traffic goes to `pet-battle` service
+```
 
-    In order to split the traffic, we introduce something called `alternateBackends`.
+In order to split the traffic, we introduce something called `alternateBackends`.
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      apiVersion: route.openshift.io/v1
-      kind: Route
-      metadata:
-        name: review-ui-ab
-      spec:
-        port:
-          targetPort: http
-        to:
-          kind: Service
-          name: review-ui-ab-a
-          weight: 80
-        alternateBackends: <-- This helps us to divide the traffic
-        - kind: Service
-          name: review-ui-ab-b
-          weight: 20       <-- based on the percentage we give
-    </code></pre></div>
-
+```
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: review-ui-ab
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: review-ui-ab-a
+    weight: 80
+  alternateBackends: <-- This helps us to divide the traffic
+  - kind: Service
+    name: review-ui-ab-b
+    weight: 20       <-- based on the percentage we give
+```
     We will deploy the route for ab deployments similarly, but before that, we need to install a helper tool.
 
 ### A/B and Analytics
