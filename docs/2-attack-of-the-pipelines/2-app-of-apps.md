@@ -155,13 +155,17 @@ spec:
 
 ![nord-apps](images/nord-apps.png)
 
-8. Now head over to ArgoCD and search for `<TENANT_NAME>-dev`.
+8. Now create a merge request to merge your fork to `stakater/workshop-infra-gitops-config`
+
+![nord-apps](images/merge-fork-gitops-infra.png)
+
+9. Now head over to ArgoCD and search for `<TENANT_NAME>-dev`.
 
 
-   ![search-ArgoCD](images/sorcerers-dev.png)
+![search-ArgoCD](images/sorcerers-dev.png)
 
 
-9. Open up the app and press `sync`. Once sync finishes, everything should have a synced, `green` status. 
+10. Open up the app and press `sync`. Once sync finishes, everything should have a synced, `green` status. 
 
 
-   ![sorceres-build](images/sorcerers-build.png)
+![sorceres-build](images/sorcerers-build.png)

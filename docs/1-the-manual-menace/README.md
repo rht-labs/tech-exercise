@@ -27,7 +27,7 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 * <span style="color:blue;">[Vault](https://www.vaultproject.io/)</span> - Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.
 * <span style="color:blue;">[External Secret](https://external-secrets.io/)</span> - Kubernetes operator that integrates external secret management systems like AWS Secrets Manager, HashiCorp Vault, Google Secrets Manager, Azure Key Vault and many more. The operator reads information from external APIs and automatically injects the values into a Kubernetes Secret.
 * <span style="color:blue;">[GitLab](https://about.gitlab.com/)</span> - GitLab helps you automate the builds, integration, and verification of your code
-* <span style="color:blue;">[Tenant Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html)</span> - uses namespaces as independent sandboxes, where tenant applications can run independently from each other
+* <span style="color:blue;">[Tenant Operator](https://docs.cloud.stakater.com/content/sre/tenant-operator/overview.html)</span> - uses namespaces as independent sandboxes, where tenant applications can run independently of each other
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/products/nexus-repository)</span> - Manage binaries and build artifacts across your
 software supply chain.
 * <span style="color:blue;">[Mattermost](https://mattermost.com/)</span> - an open source platform for developer collaboration

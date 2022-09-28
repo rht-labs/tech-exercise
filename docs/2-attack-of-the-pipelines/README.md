@@ -1,6 +1,6 @@
 # Exercise 2 - Attack of the Pipelines
 
-> The Job of a Pipeline is to prove that your code is ready for production.
+> The Job of a Pipeline is to perform certain steps/tests to prove that your code is ready for production.
 
 ## 👨‍🍳 Exercise Intro
 

@@ -23,7 +23,7 @@ In this snippet of the pipeline used in this exercise, we define:
 ### Tekton Pipeline Chart
 We will use stakater's `pipeline-charts` Helm chart to deploy the Tekton resources. The chart contains templates for all required Tekton resources such as `pipeline`, `task`, `eventlistener`, `triggers`, etc.  
 
-We will fill in the values for these resources and deploy a functioning pipeline with most of the complexity extracted away using our Tekton pipeline chart.  
+We will fill in the values for these resources and deploy a functioning pipeline with most of the complexity abstracted away using our Tekton pipeline chart.  
 
 ![pipeline-charts-structure](./images/pipeline-charts-structure.png)
 
@@ -134,9 +134,9 @@ Firstly, we will be populating the values file for the Tekton pipeline Chart to 
    dependencies:
      - name: pipeline-charts
        repository: https://stakater.github.io/stakater-charts  
-       version: 0.0.34
+       version: 0.0.35
    description: Helm chart for Tekton Pipelines
-   name: main-pr-v1
+   name: stakater-main-pr-v1
    version: 0.0.1
    ```
   > This `Chart.yaml` uses the pipeline chart as a dependency.
@@ -225,7 +225,7 @@ With our pipelines definitions synchronized to the cluster (thanks Argo CD ðŸ™ð
 
    ![add-route.png](./images/add-route.png)
 
-8. Once you have the URL, over on GitLab go to `nordmart-review` > `Settings` > `Webhook` to add the webhook:
+8. Once you have the URL, over on GitLab go to `<TENANT_NAME>/stakater-nordmart-review` > `Settings` > `Webhook` to add the webhook:
 
    * Add the URL we obtained through the last step in the URL box
    * select `Push Events`, leave the branch empty for now
@@ -240,7 +240,7 @@ With our pipelines definitions synchronized to the cluster (thanks Argo CD ðŸ™ð
 
 With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Nordmart review.
 
-10. Let's make a simple change to the application. Edit `pom.xml` by adding some new lines in the file. Commit directly to the `main` branch.
+10. Let's make a simple change to `stakater-nordmart-review`. Edit `pom.xml` by adding some new lines in the file. Commit directly to the `main` branch.
 
 11. Navigate to the OpenShift Console ...
 
@@ -262,7 +262,7 @@ With all these components in place - now it's time to trigger pipeline via webho
 
   > For pushes to `main` branch, your application is automatically updated in the `<TENANT_NAME>-dev` namespace.
 
-15. Open our `<TENANT>-stakater-nordmart-review-dev` ArgoCD application and click refresh so that our changes are applied to the cluster.
+14. Open our `<TENANT>-dev-stakater-nordmart-review` ArgoCD application and click refresh so that our changes are applied to the cluster.
     
    ![tenant-dev-Nordmart-review](images/tenant-dev-nordmart-review.png)
 

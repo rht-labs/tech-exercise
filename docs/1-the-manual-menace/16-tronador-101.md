@@ -1,6 +1,6 @@
 # 🐋 Tronador 101
 
-_**Tronador** - Environment-as-a-Service; 
+> _**Tronador** - Environment-as-a-Service;
 Dynamic test environments on Kubernetes on demand!_
 
 Traditionally, many software development projects merge changes from developers into the repository, and then identify regressions resulting from those changes, followed by more patches to fix those bugs.
@@ -11,7 +11,7 @@ Tronador provides testing environments so the changes can be tested in the same 
 
 Tronador enables teams to have separate isolated testing environments per project easily in declarative way and enables multiple teams to collaborate on complex application stacks respecting their own revisions.
 
-SAAP comes pre-configured with Trondaor to make dynamic testing easy for you!
+> SAAP comes pre-configured with Tronador to make dynamic testing easy for you!
 
 ### How it works
 Tronador provisions an environment within your cluster in a specific namespace, and then deploy your application to that namespace. This is done by deploying a HelmRelease in the namespace, which will then create a deployment that manages the application's pods. This provides a way to test the application without having to manually deploy everything by yourself, allowing the developer/tester to save valuable time.
@@ -35,7 +35,7 @@ Let's add the tronador config file that we just talked about to our repository. 
 
    ![Tronador](images/tronador2.png)
 
-Now let's reqeat the process for `stakater-nordmart-review-ui`
+Now let's repeat the process for `stakater-nordmart-review-ui`
 
 1. Head over to your  `stakater-nordmart-review-ui` repository. You will see a `.tronador.yaml` file at the repository root
 

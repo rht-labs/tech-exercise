@@ -12,9 +12,6 @@ There are lots of things we can do under the heading of `Quality Gates`, so deci
 
 ![team-kanban](images/team-kanban.png)
 
-## 🖼️ Big Picture
-
-![big-picture-pipeline-complete](images/big-picture-pipeline-complete.jpg)
 
 ## 🔮 Learning Outcomes
 
