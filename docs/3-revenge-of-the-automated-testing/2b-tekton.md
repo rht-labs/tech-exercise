@@ -158,6 +158,8 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 8. Once the task completes, head over to `allure` by opening the link found in the OpenShift console via `Networking` > `Routes` in the `TENANT_NAME-dev` namespace.
 
+Please append `/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html` to your allure route urls to see the results once the task succeeds
+
 ![allure-ui-Nordmart](./images/allure-ui-nordmart.png)
 
 CONGRATULATION!!! You have added automated testing to your pipeline.
