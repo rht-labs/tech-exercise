@@ -78,10 +78,10 @@ You will use the End-to-End systems tests task shipped with SAAP `stakater-e2e-t
         create: false
     ```
     
-4. Commit your changes. You will be able to see your newly added task from your `OpenShift Console` 
-   thanks to your GitOps workflow with ArgoCD.
 
-![e2e-test](./images/e2e-task.png)
+4. Commit your changes. You will be able to see your newly added task from your `OpenShift Console` thanks to your GitOps workflow with ArgoCD.
+
+ ![e2e-test](./images/e2e-task.png)
 
 5. Let's run end to end test on `stakater-nordmart-review-ui`. Trigger the pipeline by making a change in the `stakter-nordmart-revoew-ui` project
 

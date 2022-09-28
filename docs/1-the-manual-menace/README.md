@@ -34,7 +34,7 @@ software supply chain.
 * <span style="color:blue;">[Forecastle](https://github.com/stakater/Forecastle)</span> - Forecastle is a control panel which dynamically discovers and provides a launchpad to access applications deployed on Kubernetes
 * <span style="color:blue;">[CodeReady Workspaces](https://www.redhat.com/en/technologies/jboss-middleware/codeready-workspaces)</span> - CodeReady Workspaces provides developer workspaces with everything needed to a code, build, test, run, and debug applications
 * <span style="color:blue;">[Tronador](https://github.com/stakater/tronador)</span> - Trondador enables teams to have separate isolated testing environments per project easily in declarative way and enables multiple teams to collaborate on complex application stacks respecting their own revisions.
-## :link: Here are some useful repository links you will require for this exercise 
+## Here are some useful repository links you will require for this exercise 
 
 | Repository Name              | URL                                                                                            |
 |------------------------------|-----------------------------------------------------------------------------------------------------|
