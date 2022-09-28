@@ -5,7 +5,7 @@
 In this exercise, we will use GitOps to set up our working environment. We will create Tenants with Tenant Operator and  set up dynamic environments `dev`, `test`, `preview` and `stage` in your SAAP Instance with Tronador.  We will also explore the tools like ArgoCD, Tekton, Helm and Nexus to enable CI/CD/CT in the next exercise. We will learn how tools such as CodeReady Workspaces and Mattermost enable collaboration with developers, and how we can store our secrets safely with Vault and access them using External Secrets. In order to do all this, we'll use a popular approach called _GitOps_
 
 ## 🖼️ Big Picture
-![big-picture-Matomo](images/big-picture-matomo3.png)
+![big-picture-Matomo](images/big-picture-matomo4.png)
 
 ## 🔮 Learning Outcomes
 
