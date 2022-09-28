@@ -1,6 +1,4 @@
 # Stakater DevSecOps Workshop
-
-
 This workshop will teach you everything about DevSecOps with [SAAP](https://docs.cloud.stakater.com/content/sre/introduction/introduction.html).
 
 ## 🦆 Conventions
