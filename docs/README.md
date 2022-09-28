@@ -1,6 +1,6 @@
 # Stakater DevSecOps Workshop
 
-This workshop will teach you everything about DevSecOps.
+This workshop will teach you everything about DevSecOps with [SAAP](https://docs.cloud.stakater.com/content/sre/introduction/introduction.html).
 
 ## 🦆 Conventions
 When running through the exercise, we have put some placeholders where substitution is required. Anything inside an `<>` should be replaced. For example, if your team is called `biscuits` then in the instructions if you see `\<TENANT_NAME\>` this should be replaced with `biscuits` like so:
