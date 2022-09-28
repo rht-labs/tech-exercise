@@ -27,7 +27,7 @@ Stakater's Nordmart of Stakater's fictitious e-commerce platform that we will de
 
    > Remember we are only making public repos with no branch protection or merge approval flows for sake of simplicity during the workshop. Branch Protection and one review must be configured in production. 
 
-   ![import-Nordmart-review](images/import-nordmart-review.png)
+   ![import-Nordmart-review](images/review-imp.png)
 
 ## Importing Nordmart Review UI 
 
