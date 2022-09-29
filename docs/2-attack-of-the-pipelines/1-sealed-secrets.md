@@ -50,7 +50,7 @@ EOF
     </p>
 
     ```bash
-    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USERNAME> -p <PASSWORD>
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <TEAM_NAME> -p <PASSWORD>
     ```
 
     ```bash#test

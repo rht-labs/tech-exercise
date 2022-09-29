@@ -174,7 +174,7 @@ Lets take our code from `cluster-a` to `cluster-b`.
     export CLUSTER_DOMAIN="apps.cluster-b.com"
     export GIT_SERVER="gitlab-ce.apps.cluster-b.com"
 
-    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u mike
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <TEAM_NAME> -p <PASSWORD>
     ```
 
 8. Install ArgoCD
