@@ -61,7 +61,7 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 ```bash
 oc project ${TENANT_NAME}-dev
-echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html
+echo https://$(oc get route ${TENANT_NAME}-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html
 
 ```
 It will take you to the projects page. You should be able to see zap test results under `test`
