@@ -15,8 +15,8 @@ This is the URL for your application.
 Replace the `<TENANT_NAME>` with your tenant.
 
 ```bash
-oc project ${TENANT_NAME}-dev
- echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
+ oc project ${TENANT_NAME}-dev
+ echo https://$(oc get route ${TENANT_NAME}-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)
 ```
 Now that you have both the URLs require. Let's add our task to the pipeline.
 
