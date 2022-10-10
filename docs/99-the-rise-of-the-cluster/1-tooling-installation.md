@@ -32,11 +32,11 @@ Students do not have cluster-admin privilege. We have an OpenShift user group ca
 
 You can choose to use your own user management system and create a group called `student` to add the students to it. We use IPA for this! An IPA helm chart can be found [here](https://github.com/redhat-cop/helm-charts/tree/master/charts/ipa).
 
-If you'd like to use the same setup, here are the steps:
+If you'd like to use the same setup, steps are below. You need to pass `domain` and `sub_domain` values up front for IPA to work properly (ie: if your cluster domain is `my.sandbox.example.com` then your domain: `example.com` and sub_domain: `my.sandbox`)
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-helm upgrade --install my redhat-cop/ipa --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
+helm upgrade --install ipa . --namespace=ipa --create-namespace --set domain=<YOUR_CLUSTER_DOMAIN> --set sub_domain=<YOUR_SUB_DOMAIN> --set ocp_auth.enabled=true
 ```
 FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖, that's what i did!
 
