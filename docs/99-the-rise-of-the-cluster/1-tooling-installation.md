@@ -32,30 +32,28 @@ Students do not have cluster-admin privilege. We have an OpenShift user group ca
 
 You can choose to use your own user management system and create a group called `student` to add the students to it. We use IPA for this! An IPA helm chart can be found [here](https://github.com/redhat-cop/helm-charts/tree/master/charts/ipa).
 
-If you'd like to use the same setup, steps are below. You need to pass `domain` and `sub_domain` values up front for IPA to work properly (ie: if your cluster domain is `my.sandbox.example.com` then your domain: `example.com` and sub_domain: `my.sandbox`)
+If you'd like to use the same setup, steps are below. You need to pass cluster domain up front for IPA to work properly:
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-helm upgrade --install ipa . --namespace=ipa --create-namespace --set domain=<YOUR_CLUSTER_DOMAIN> --set sub_domain=<YOUR_SUB_DOMAIN> --set ocp_auth.enabled=true
+helm upgrade --install ipa . --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
 ```
-FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖, that's what i did!
+FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖!
 
 After the installation, you can use this trick to create users and group:
 
 ```bash
 #!/bin/bash
 
-
 IPA_NAMESPACE="${1:-ipa}"
 
 # 1. On your host - get the admin passwd and connect to IPA 
-# oc login ...
 oc project ${IPA_NAMESPACE}
 export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
 echo ${IPA_ADMIN_PASSWD}
 oc rsh `oc get po -l deploymentconfig=ipa -o name -n ${IPA_NAMESPACE}`
 
-# 2. on the container running IPA Server
+# 2. on the container running IPA Server, create `student` group and add users to it.
 echo ${IPA_ADMIN_PASSWD} | kinit admin
 export GROUP_NAME=student
 ipa group-add ${GROUP_NAME} --desc "TL500 Student Group" || true
@@ -87,6 +85,7 @@ helm dep up
 helm upgrade --install tl500-course-content . --namespace tl500 --create-namespace 
 ```
 (again. this could also take some time 🙈)
+
 ## Verify The Installation
 Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
 
