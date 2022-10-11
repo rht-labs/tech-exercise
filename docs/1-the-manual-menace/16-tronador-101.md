@@ -33,13 +33,13 @@ Let's add the tronador config file that we just talked about to our repository. 
 
 4. Replace the existing tenant named `gabbar` with your tenant name and `Commit the changes to main`.
 
-   ![Tronador](images/tronador2.png)
+   ![Tronador](images/tronado3.png)
 
 Now let's reqeat the process for `stakater-nordmart-review-ui`
 
 1. Head over to your  `stakater-nordmart-review-ui` repository. You will see a `.tronador.yaml` file at the repository root
 
-![Tronador](images/tronador-ui.png)
+![Tronador](images/tronado4.png)
 
 3. Now select the `Web IDE` option and open `.tronador.yaml` file
 
