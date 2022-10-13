@@ -166,6 +166,6 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
     Alternatively, You can get your Allure URL by running the following commands :
     ```
     TENANT_NAME=<TENANT_NAME>
-    echo https://$(oc get route $TENANT_NAME-dev-allure --template='{{ .spec.host }}' -n $TENANT_NAME-dev)/allure-docker-service/projects/default/reports/latest/index.html
+    echo https://$(oc get route ${TENANT_NAME}-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/default/reports/latest/index.html
     ```
 CONGRATULATION!!! You have added automated testing to your pipeline.
