@@ -12,7 +12,6 @@ oc project ${TENANT_NAME}-dev
 This is the URL for your application. 
 
 2. We want to be able to send result to allure. So we need to get the URL for allure as well. Run the below oc command to get allure URL.
-Replace the `<TENANT_NAME>` with your tenant.
 
 ```bash
  oc project ${TENANT_NAME}-dev
