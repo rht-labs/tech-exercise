@@ -42,8 +42,9 @@
 You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
 
 ```bash
+TENANT_NAME=<TENANT_NAME>
 oc project ${TENANT_NAME}-dev
-echo https://$(oc get route <TENANT_NAME>-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/default/reports/latest/index.html
+echo https://$(oc get route ${TENANT_NAME}-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html
 ```
 
 ### Part 2 - Testing Tasks
@@ -158,8 +159,13 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 8. Once the task completes, head over to `allure` by opening the link found in the OpenShift console via `Networking` > `Routes` in the `TENANT_NAME-dev` namespace.
 
-Please append `/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html` to your allure route urls to see the results once the task succeeds
+    Please append `/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html` to your allure route urls to see the results once the task succeeds
 
-![allure-ui-Nordmart](./images/allure-ui-nordmart.png)
+    ![allure-ui-Nordmart](./images/allure-ui-nordmart.png)
 
+    Alternatively, You can get your Allure URL by running the following commands :
+    ```
+    TENANT_NAME=<TENANT_NAME>
+    echo https://$(oc get route ${TENANT_NAME}-dev-allure --template='{{ .spec.host }}' -n ${TENANT_NAME}-dev)/allure-docker-service/projects/stakater-nordmart-review/reports/latest/index.html
+    ```
 CONGRATULATION!!! You have added automated testing to your pipeline.
