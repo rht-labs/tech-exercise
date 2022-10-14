@@ -2,6 +2,31 @@ apiVersion: 1.0.0
 metadata:
   name: workshop
   generateName: workshop-
+projects:
+  - name: stakater-nordmart-review
+    clonePath: stakater-nordmart-review
+    source:
+      type: git
+      location: 'https://github.com/stakater-lab/stakater-nordmart-review'
+      branch: 'main'
+  - name: stakater-nordmart-review-ui
+    clonePath: stakater-nordmart-review-ui
+    source:
+      type: git
+      location: 'https://github.com/stakater-lab/stakater-nordmart-review-ui'
+      branch: 'main'
+  - name: stakater-nordmart-review-e2e
+    clonePath: stakater-nordmart-review-e2e
+    source:
+      type: git
+      location: 'https://github.com/stakater-lab/stakater-nordmart-review-e2e'
+      branch: 'main'
+  - name: nordmart-apps-gitops-config
+    clonePath: nordmart-apps-gitops-config
+    source:
+      type: git
+      location: 'https://github.com/stakater-lab/nordmart-apps-gitops-config'
+      branch: 'main'  
 components:
   - type: cheEditor
     alias: theia-editor
