@@ -20,7 +20,13 @@ projects:
     source:
       type: git
       location: 'https://github.com/stakater-lab/stakater-nordmart-review-e2e'
-      branch: 'main'            
+      branch: 'main'
+  - name: nordmart-apps-gitops-config
+    clonePath: nordmart-apps-gitops-config
+    source:
+      type: git
+      location: 'https://github.com/stakater-lab/nordmart-apps-gitops-config'
+      branch: 'main'  
 components:
   - type: cheEditor
     alias: theia-editor
