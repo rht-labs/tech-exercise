@@ -97,11 +97,10 @@ Open up the console and navigate to your pipeline definition by going to `Pipeli
 
 ![sonar-running](./images/sonar-running.png)
 
-8. Once the task completes, head over to `sonarqube` by opening the following URL, and login using the SSO flow if prompted.
+8. Once the task completes, head over to `sonarqube` by going to forecastle the opening sonarqube from there. Login using the SSO flow if prompted.
 
-```
-https://sonarqube-stakater-sonarqube.apps.devtest.vxdqgl7u.kubeapp.cloud/
-```
+![sonar-running](./images/sonarqube-forecastle.png)
+
 It will take you to the projects page. You should be able to see `stakater-nordmart-review` project in the console. 
 
 ![sonar-scanned](./images/sonar-scanned.png)
