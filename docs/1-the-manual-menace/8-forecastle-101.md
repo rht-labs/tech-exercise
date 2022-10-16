@@ -23,3 +23,5 @@
 You will now be brought to the Forecastle console, where you can view all your tools and applications from an easy, accessible plane.
 
 ![Forecastle_console-page2](./images/forecastle-console.png)
+
+> Pin this tab. You will have to open it later multiple times for accessing tools.
