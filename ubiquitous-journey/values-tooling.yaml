@@ -61,6 +61,10 @@ applications:
             value: ''
           - name: GITLAB_GROUP_NAME
             value: ''
+          - name: GIT_SSL_NO_VERIFY
+            value: "true"
+          - name: JAVA_ARGS
+            value: '-Dorg.jenkinsci.plugins.gitclient.GitClient.untrustedSSL=true'
       persistence: false
       source_secrets:
         - name: nexus-password
