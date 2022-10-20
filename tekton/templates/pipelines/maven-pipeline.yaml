@@ -64,7 +64,7 @@ spec:
         - name: deleteExisting
           value: "true"
         - name: sslVerify
-          value: “false
+          value: "false"
 
 
     # Code Analysis
@@ -150,7 +150,7 @@ spec:
         - name: deleteExisting
           value: "true"
         - name: sslVerify
-          value: “false
+          value: "false"
       runAfter:
         - helm-package
 
