@@ -63,6 +63,9 @@ spec:
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
         - name: deleteExisting
           value: "true"
+        - name: sslVerify
+          value: “false
+
 
     # Code Analysis
 
@@ -146,6 +149,8 @@ spec:
           value: "tech-exercise/main"
         - name: deleteExisting
           value: "true"
+        - name: sslVerify
+          value: “false
       runAfter:
         - helm-package
 
