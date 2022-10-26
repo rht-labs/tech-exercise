@@ -43,9 +43,13 @@ spec:
          set +x
          test -f $(workspaces.sonarqube-auth.path) || export EXTRA_ARGS="-Dsonar.login=$(cat $(workspaces.sonarqube-auth.path)/username) -Dsonar.password=$(cat $(workspaces.sonarqube-auth.path)/password)"
          /usr/bin/mvn -s $(workspaces.maven-settings.path)/settings.xml $(params.GOALS) $(params.MAVEN_BUILD_OPTS) ${EXTRA_ARGS}
+      securityContext:
+        runAsUser: 0
     - name: get-app-version
       image: $(params.MAVEN_IMAGE)
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       command: ["/bin/sh", "-c"]
       args:
         - echo -n $(mvn -s $(workspaces.maven-settings.path)/settings.xml help:evaluate -Dexpression=project.version -q -DforceStdout) | xargs echo -n | tee $(results.VERSION.path)
+      securityContext:
+        runAsUser: 0
