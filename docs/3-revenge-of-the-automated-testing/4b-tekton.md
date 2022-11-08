@@ -32,6 +32,12 @@
 
 5. Open up `/project/pet-battle-api/checkstyle.xml` file and search for `EmptyCatchBlock`. Then set the severity value as **error**. You can read about <span style="color:blue;">[EmptyCatchBlock here.](https://checkstyle.sourceforge.io/config_blocks.html#EmptyCatchBlock)</span>
 
+    <p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you are using DevSpaces in OpenShift 4.11+ you may need to add the `pet-battle-api` folder to you Che Workspace to open the `checkstyle.xml`
+    </p>
+
+    ![add-folder-to-workspace](images/add-folder-to-workspace.png)
+
     ```xml
             <module name="EmptyCatchBlock">
                 <property name="severity" value="error"/>
