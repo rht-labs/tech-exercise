@@ -1,4 +1,4 @@
 {
     "devfile": "https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml",
-    "devfile411": "https://raw.githubusercontent.com/eformat/enablement-framework/ocp-4.11/codereadyworkspaces/tl500-devfile-v2.yaml"
+    "devfile411": "https://raw.githubusercontent.com/rht-labs/enablement-framework/ocp-4.11/codereadyworkspaces/tl500-devfile-v2.yaml"
 }
