@@ -97,7 +97,7 @@ pipeline {
 			    git clone ${GIT_URL} pet-battle && cd pet-battle
 			    git checkout ${BRANCH_NAME}
 			    '''
-					dir('pet-battle'){
+     			dir('pet-battle'){
                 script {
                     env.VERSION = sh(returnStdout: true, script: "npm run version --silent").trim()
                     env.PACKAGE = "${APP_NAME}-${VERSION}.tar.gz"
