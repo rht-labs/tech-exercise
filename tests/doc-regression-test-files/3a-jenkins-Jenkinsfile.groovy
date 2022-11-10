@@ -89,14 +89,14 @@ pipeline {
         // 💥🔨 PIPELINE EXERCISE GOES HERE
         stage("🧰 Build (Compile App)") {
             agent { label "jenkins-agent-npm" }
-						options {
-								skipDefaultCheckout(true)
-						}
+			options {
+					skipDefaultCheckout(true)
+			}
             steps {
-						    sh '''
-						    git clone ${GIT_URL} pet-battle && cd pet-battle
-						    git checkout ${BRANCH_NAME}
-						    '''
+			    sh '''
+			    git clone ${GIT_URL} pet-battle && cd pet-battle
+			    git checkout ${BRANCH_NAME}
+			    '''
                 script {
                     env.VERSION = sh(returnStdout: true, script: "npm run version --silent").trim()
                     env.PACKAGE = "${APP_NAME}-${VERSION}.tar.gz"
@@ -162,10 +162,10 @@ pipeline {
 					skipDefaultCheckout(true)
 			}
 			steps {
-			  sh '''
-        git clone ${GIT_URL} pet-battle && cd pet-battle
-        git checkout ${BRANCH_NAME}
-        '''
+                sh '''
+                git clone ${GIT_URL} pet-battle && cd pet-battle
+                git checkout ${BRANCH_NAME}
+                '''
 				dir('pet-battle'){
 				echo '### Lint Helm Chart ###'
 				sh 'helm lint chart '
@@ -195,7 +195,7 @@ pipeline {
 				echo '### Publish Helm Chart ###'
 				sh '''
 					# package and release helm chart - could only do this if release candidate only
-    			helm package --dependency-update chart/  --app-version ${VERSION}
+         			helm package --dependency-update chart/  --app-version ${VERSION}
 					curl -v -f -u ${NEXUS_CREDS} http://nexus:8081/repository/${NEXUS_REPO_HELM}/ --upload-file ${APP_NAME}-*.tgz
 				'''
 				}
