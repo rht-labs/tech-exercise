@@ -7,7 +7,7 @@ on:
         description: 'Team Name [a-z0-9]'
         required: false
   schedule:
-    - cron: '5 0 * * 0'  # sunday at 5 past midnight
+    - cron: '5 19 * * *'  # everyday at 5 past 7pm UTC
 jobs:
   test:
     runs-on: ubuntu-latest
