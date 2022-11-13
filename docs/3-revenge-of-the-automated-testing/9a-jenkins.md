@@ -49,7 +49,7 @@
     class getCat(HttpUser):
         @task
         def cat(self):
-            self.client.get("/home")
+            self.client.get("/home", verify=False)
 
     @events.quitting.add_listener
     def _(environment, **kw):
