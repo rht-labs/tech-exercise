@@ -46,6 +46,7 @@
           // 📰 Post steps go here
                 post {
                     always {
+                        dir('pet-battle'){
                         junit 'junit.xml'
                         publishHTML target: [
                             allowMissing: true,
@@ -55,6 +56,7 @@
                             reportFiles: 'index.html',
                             reportName: 'Web Code Coverage'
                         ]
+                        }
                     }
                 }
     ```
