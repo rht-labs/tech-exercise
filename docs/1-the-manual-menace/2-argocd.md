@@ -135,7 +135,7 @@ EOF
       * Repository URL: `https://rht-labs.com/todolist/`
       * Select `Helm` from the right drop down menu
       * Chart: `todolist`
-      * Version: `1.0.1`
+      * Version: `1.1.0`
    * On the "DESTINATION" box
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TEAM_NAME>-ci-cd`
