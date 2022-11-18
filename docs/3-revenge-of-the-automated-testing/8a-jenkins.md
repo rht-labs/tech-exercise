@@ -1,4 +1,4 @@
-## Extend Jenkins Pipeline with Image Signing
+\## Extend Jenkins Pipeline with Image Signing
 
 1. Add a new Jenkins agent with `cosign` command line in it. Open up `ubiquitous-journey/values-tooling.yaml` and under `Jenkins` add `jenkins-agent-cosign` to the list.
 
@@ -25,7 +25,10 @@
     ```groovy
             // 🔏 IMAGE SIGN EXAMPLE GOES HERE
             stage("🔏 Image Signing") {
-                agent { label "jenkins-agent-cosign" }
+                agent { label "jenkins-agent-cosign" }           
+                options {
+                        skipDefaultCheckout(true)
+                }
                 steps {
                     script {
                         sh '''

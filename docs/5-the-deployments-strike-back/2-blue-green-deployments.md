@@ -89,6 +89,9 @@
       agent {
         label "jenkins-agent-argocd"
       }
+      options {
+         skipDefaultCheckout(true)
+      }
       steps {
         echo '### set env to test against ###'
         sh '''
@@ -115,7 +118,7 @@
           #🌻 3. do some kind of verification of the deployment  
           sleep 10
           echo "🪞💨 TODO - some kinda test to validate blue or green is working as expected ... 🪞💨"
-          curl -L -f $(oc get route --no-headers ${INACTIVE//_/-} -n $DESTINATION_NAMESPACE | cut -d' ' -f 4) 
+          curl -k -L -f $(oc get route --no-headers ${INACTIVE//_/-} -n $DESTINATION_NAMESPACE | cut -d' ' -f 4) 
 
           #🌻 4. If "tests" have passed swap inactive to active to and vice versa
           yq eval -i .applications.\\"${INACTIVE}\\".values.blue_green=\\"active\\" "${ARGOCD_CONFIG_REPO_PATH}"
@@ -177,3 +180,4 @@
 
     This is a simple example to show how we can automate a blue green deployment using GitOps. However, we did not remove the
     previous deployment of pet-battle, in the real world we would do this.
+
