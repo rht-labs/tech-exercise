@@ -25,7 +25,10 @@
     ```groovy
             // 🔏 IMAGE SIGN EXAMPLE GOES HERE
             stage("🔏 Image Signing") {
-                agent { label "jenkins-agent-cosign" }
+                agent { label "jenkins-agent-cosign" }           
+                options {
+                        skipDefaultCheckout(true)
+                }
                 steps {
                     script {
                         sh '''
