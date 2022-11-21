@@ -33,7 +33,8 @@
 
 5. Push our changes to the repo to trigger a new build
 
-    ```bash
+
+    ```
     cd /projects/pet-battle
     git add .
     git commit -m "💅 ADD - linting to the pipeline 💅"

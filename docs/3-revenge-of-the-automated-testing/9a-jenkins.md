@@ -49,7 +49,7 @@
     class getCat(HttpUser):
         @task
         def cat(self):
-            self.client.get("/home")
+            self.client.get("/home", verify=False)
 
     @events.quitting.add_listener
     def _(environment, **kw):
@@ -73,12 +73,21 @@
             // 🏋🏻‍♀️ LOAD TESTING EXAMPLE GOES HERE
             stage("🏋🏻‍♀️ Load Testing") {
                 agent { label "jenkins-agent-python" }
+                options {
+                   skipDefaultCheckout(true)
+                }
                 steps {
+                    sh '''
+                    git clone ${GIT_URL} pet-battle && cd pet-battle
+                    git checkout ${BRANCH_NAME}
+                    '''
+                    dir('pet-battle'){
                     script {
                         sh '''
                         pip3 install locust
                         locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}.<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary
                         '''
+                       }
                     }
                 }
             }

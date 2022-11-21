@@ -1,6 +1,6 @@
 ### Jenkins Pipeline
 
-> Jenkins is a tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool. 
+> Jenkins is a tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool.
 
 <!---
 #### Jenkins access to GitLab
@@ -50,7 +50,7 @@ git push
     echo "https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
     ```
 
-    Once you have the URL, over on GitLab go to `pet-battle > Settings > Integrations` to add the webhook 
+    Once you have the URL, over on GitLab go to `pet-battle > Settings > Integrations` to add the webhook
     ![gitlab-webhook-trigger-fe.png](./images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
@@ -142,10 +142,19 @@ git push
 6. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
     ```groovy
-            // 💥🔨 PIPELINE EXERCISE GOES HERE 
+            // 💥🔨 PIPELINE EXERCISE GOES HERE
             stage("🧰 Build (Compile App)") {
                 agent { label "jenkins-agent-npm" }
+                options {
+                  skipDefaultCheckout(true)
+                }
                 steps {
+                    sh '''
+                    git clone ${GIT_URL} pet-battle && cd pet-battle
+                    git checkout ${BRANCH_NAME}
+                    '''
+                    dir('pet-battle'){
+
                     script {
                         env.VERSION = sh(returnStdout: true, script: "npm run version --silent").trim()
                         env.PACKAGE = "${APP_NAME}-${VERSION}.tar.gz"
@@ -164,7 +173,7 @@ git push
                     echo '### Running build ###'
                     sh 'npm run build '
 
-                    // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
+                    // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE
                     echo '### Running SonarQube ###'
 
                     echo '### Packaging App for Nexus ###'
@@ -173,6 +182,7 @@ git push
                         curl -v -f -u ${NEXUS_CREDS} --upload-file ${PACKAGE} \
                             http://nexus:8081/repository/${NEXUS_REPO_NAME}/${APP_NAME}/${PACKAGE}
                     '''
+                  }
                 }
                 // 📰 Post steps go here
             }

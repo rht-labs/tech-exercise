@@ -20,7 +20,7 @@
     class getCat(HttpUser):
         @task
         def cat(self):
-            self.client.get("/cats")
+            self.client.get("/cats", verify=False)
 
     @events.quitting.add_listener
     def _(environment, **kw):
