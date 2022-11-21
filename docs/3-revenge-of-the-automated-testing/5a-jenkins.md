@@ -97,7 +97,7 @@ Remember in our pipeline, there is a stage called `"🏗️ Deploy - Helm Packag
     You should see such output 💪💪
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
-    KubeLinter 0.2.2
+    KubeLinter 0.2.6
 
     No lint errors found!
     </code></pre></div>

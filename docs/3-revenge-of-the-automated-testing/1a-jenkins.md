@@ -34,6 +34,12 @@
 
 2. Then we need to introduce SonarQube credentials to `Jenkinsfile` - these are already being synchronized to the cluster from Git, we just have to tell our pipeline to use them. Add the followings to the list of other `CREDS` in the `environment {}` block in the `Jenkinsfile`.
 
+    <p class="warn">
+    ⛷️ <b>NOTE</b> ⛷️ - If you are using DevSpaces in OpenShift 4.11+ you may need to add the `pet-battle` folder to you Che Workspace to open the `Jenkinsfile`
+    </p>
+
+    ![add-folder-to-workspace](images/add-folder-to-workspace.png)
+
     ```groovy
             SONARQUBE_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonarqube-auth")
     ```
