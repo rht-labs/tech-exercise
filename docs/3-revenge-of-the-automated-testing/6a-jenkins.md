@@ -28,6 +28,9 @@
             // 🐝 OWASP ZAP STAGE GOES HERE
             stage('🐝 OWASP Scan') {
                 agent { label "jenkins-agent-zap" }
+                options {
+                     skipDefaultCheckout(true)
+                }
                 steps {
                 sh '''
                     /zap/zap-baseline.py -r index.html -t https://pet-battle-${TEAM_NAME}-test.<CLUSTER_DOMAIN> || return_code=$?
