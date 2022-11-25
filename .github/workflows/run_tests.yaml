@@ -50,7 +50,7 @@ jobs:
           while test 0 == $(oc -n ${repo##*/}-test get pod -l run=$podname -o name 2>/dev/null | wc -l); do sleep 5; done
           oc -n ${repo##*/}-test wait pod -l run=$podname --for=condition=Ready --timeout=200s
 
-          local i=0
+          i=0
           podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
           until [ "$podphase" == "Succeeded" ]
           do
