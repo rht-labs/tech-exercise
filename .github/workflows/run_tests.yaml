@@ -50,17 +50,19 @@ jobs:
           while test 0 == $(oc -n ${repo##*/}-test get pod -l run=$podname -o name 2>/dev/null | wc -l); do sleep 5; done
           oc -n ${repo##*/}-test wait pod -l run=$podname --for=condition=Ready --timeout=200s
 
+          local i=0
           podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
-          while [ "$podphase" != "Failed" -a "$podphase" != "Succeeded" ]; do
+          until [ "$podphase" == "Succeeded" ]
+          do
               echo "$podname phase $podphase ..."
               sleep 10
               podphase=$(oc -n ${repo##*/}-test get pods -l run=$podname -o jsonpath='{.items[*].status.phase}')
+              ((i=i+1))
+              if [ $i -gt 300 ]; then
+                  echo "🛑 tests failed, $podphase never Succeeded, exiting 🛑";
+                  exit 1
+              fi
           done
-
-          if [ "$podphase" != "Succeeded" ]; then
-              echo "🛑 test failed, exiting 🛑";
-              exit 1;
-          fi
           echo "🦕 tests ran OK 🦕";
 
       - name: Send mail
