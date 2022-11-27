@@ -26,7 +26,7 @@ jobs:
 
       - name: Run testsuite
         id: testsuite
-        shell: bash
+        shell: bash {0}
         env:
           TEAM_NAME: ${{ secrets.TEAM_NAME }}
         run: |
