@@ -7,12 +7,6 @@
     mvn formatter:format
     ```
 
-    <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you are using DevSpaces in OpenShift 4.11+ you may need to add the `pet-battle-api` folder to you Che Workspace to open a file in the next step.
-    </p>
-
-    ![add-folder-to-workspace](images/add-folder-to-workspace.png)
-
 2. Now edit a java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)

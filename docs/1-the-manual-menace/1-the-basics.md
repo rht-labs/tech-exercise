@@ -10,13 +10,11 @@
     </br>
     On CodeReady Workspaces, "Create Workspace > Custom Workspace".
     </br>
-    For OpenShift 4.9, 4.10 - Enter this URL to load the TL500 stack:</br>
+    Enter this URL to load the TL500 stack:</br>
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </br>
     On DevSpaces Workspaces, "Add Workspace > Import from Git".
     </br>
-    For OpenShift 4.11+ - Enter this URL to load the TL500 stack:</br>
-    <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
     </p>
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-tl500` from the menu.
