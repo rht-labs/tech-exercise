@@ -12,13 +12,13 @@
 
     ```bash
     cd /tmp
-    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign --allow-insecure-registry
+    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
     ```
 
     You should get an output like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    $ cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign --allow-insecure-registry
+    $ cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
     Enter password for private key:
     Enter again:
     Successfully created secret cosign in namespace <TEAM_NAME>-ci-cd
