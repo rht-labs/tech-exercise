@@ -64,16 +64,29 @@
 
 4. With the change synchronized, we should see a new object in ArgoCD and the cluster. Feel free to check those out.
 
-5. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of pet-battle. This should trigger an autoscale due to the increased load on the pods. `hey` is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
+5. Let's now test our pod autoscaler, to do this we want to fire lots of load on the API of pet-battle. This should trigger an autoscale due to the increased load on the pods. `k6` is simple load testing tool that can be run from the command line that will fire lots of load at our endpoint:
+
+    First, create the load.js javascript file that defines the load test type to run.
+
+    ```javascript
+    cat << EOF > /tmp/load.js
+    import http from 'k6/http';
+    import { sleep } from 'k6';
+    export default function () {
+      http.get('https://$(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/cats');
+    }
+    EOF
+    ```
+
+    Then, using the `k6` binary, run the load test using more than one virtual user and a defined duration.
 
     ```bash
-    hey -t 30 -c 10 -n 10000 -H "Content-Type: application/json" -m GET https://$(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/cats 
+    k6 run --insecure-skip-tls-verify --vus 100 --duration 30s /tmp/load.js 
     ```
 
     Where:
-    * -c: Number of workers to run concurrently (10)
-    * -n: Number of requests to run (10,000)
-    * -t: Timeout for each request in seconds (30)
+    * --vus: Number of virtual users (VUs) to run concurrently (100)
+    * --duration: Test duration limit (30s)
 
 6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the pet-battle-api deployment, you should see the replica count has jumped.
 
