@@ -23,6 +23,9 @@ jobs:
           openshift_username: ${{ secrets.OCP_USER }}
           openshift_password: ${{ secrets.OCP_PASSWORD }}
           insecure_skip_tls_verify: true
+          max_attempts: 5
+          retry_on: error
+          retry_wait_seconds: 600
 
       - name: Run testsuite
         id: testsuite
