@@ -23,7 +23,9 @@ git pull
 
 ### Choose your own adventure
 
-Split into 2 groups within your team. Choose your own adventure! Each group will get to perform similar tasks:
+Split into 2 groups within your team. To onboard a new group in your team, follow this [guide](98-a-new-group/README.md).
+
+Choose your own adventure! Each group will get to perform similar tasks:
 
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
