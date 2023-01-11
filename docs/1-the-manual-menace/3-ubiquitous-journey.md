@@ -66,6 +66,11 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```bash
     echo $GITLAB_PAT
     ```
+    
+    ..and lets persist it for now:
+    ```bash
+    echo $GITLAB_PAT  | tee -a ~/.bashrc -a ~/.zshrc
+    ```
 
     We can see the PAT printed out on the command line, it is also stored in an environment variable called `GITLAB_PAT`
 
