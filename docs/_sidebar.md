@@ -53,7 +53,7 @@
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
   * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md)
 * [98. A New Group](98-a-new-group/README.md)
-  * [👥 Setting A New Environment](98-a-new-group/1-tooling-installation.md)
+  * [👥 Setting A New Environment](98-a-new-group/1-create-new-group.md)
 * [99. Rise of the Cluster](99-the-rise-of-the-cluster/README.md)
   * [🐼 Tooling Installation](99-the-rise-of-the-cluster/1-tooling-installation.md)
   * [🐉 Here Be Dragons!](99-the-rise-of-the-cluster/666-here-be-dragons.md)
