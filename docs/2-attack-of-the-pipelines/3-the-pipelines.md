@@ -23,7 +23,10 @@ git pull
 
 ### Choose your own adventure
 
-Split into 2 groups within your team. Choose your own adventure! Each group will get to perform similar tasks:
+Split into 2 groups within your team. To onboard a new group in your team, follow this
+<span style="color:blue;">[guide](2-attack-of-the-pipelines/3c-create-new-group.md)</span>.
+
+Choose your own adventure! Each group will get to perform similar tasks:
 
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
@@ -35,6 +38,6 @@ Split into 2 groups within your team. Choose your own adventure! Each group will
 | <span style="color:blue;">[jenkins](2-attack-of-the-pipelines/3a-jenkins.md)</span> | <span style="color:blue;">[tekton](2-attack-of-the-pipelines/3b-tekton.md)</span> |
 
 
-🐈 <span style="color:purple;" >Expected Outcome</span>: Working pipelines that build the Pet Battle applications (front end and back) - yes .. **Cats** !! 🐈
+🐈 <span style="color:purple;">Expected Outcome</span>: Working pipelines that build the Pet Battle applications (front end and back) - yes .. **Cats** !! 🐈
 
 ![daisy-cat.png](images/daisy-cat.png)
