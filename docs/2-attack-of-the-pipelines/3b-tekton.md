@@ -29,6 +29,16 @@ In this snippet of the pipeline used in this exercise, we define:
     git branch -M main
     git push -u origin main
     ```
+    <p class="warn">
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle-api folder is not appeared on the left hand side, you need to add it to your workspace manually as follows: 
+    </p>
+
+    Click the three dots next to CHE (workspace), then 'Add Folder to Workspace..'
+    ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
+
+    Select `/` and find `pet-battle` folder under `projects`. Select `pet-battle` and click `Open`
+    ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
+
 
 3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as Helm Chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
     <div class="highlight" style="background: #f7f7f7">

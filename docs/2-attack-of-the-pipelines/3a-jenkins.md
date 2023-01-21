@@ -43,6 +43,16 @@ git push
     git branch -M main
     git push -u origin main
     ```
+    <p class="warn">
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appeared on the left hand side, you need to add it to your workspace manually as follows: 
+    </p>
+
+    Click the three dots next to CHE (workspace), then 'Add Folder to Workspace..'
+    ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
+
+    Select `/` and find `pet-battle` folder under `projects`. Select `pet-battle` and click `Open`
+    ![add-workspace-pet-battle-2](./images/add-workspace-pet-battle-2.png)
+
 
 3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 
