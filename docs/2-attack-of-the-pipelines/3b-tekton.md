@@ -36,7 +36,7 @@ In this snippet of the pipeline used in this exercise, we define:
     Click the three dots next to CHE (workspace), then 'Add Folder to Workspace..'
     ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
 
-    Select `/` and find `pet-battle` folder under `projects`. Select `pet-battle` and click `Open`
+    Select `/` and find `pet-battle` folder under `projects`. Select `pet-battle-api` and click `Open`
     ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
 
 
