@@ -51,7 +51,7 @@ Let's fill it out by setting the following:
 
    * On the **GENERAL** box
       * Application Name: `<TENANT_NAME>-argocd-nordmart-review`
-      * Project: `<TENANT_NAME>`
+      * Project: `<TENANT_NAME>` (select the project corresponding to your `<TENANT_NAME>` from the `project` dropdown)
       * Sync Policy: `Automatic`
    * On the **SOURCE** box
       * Repository URL: `https://stakater.github.io/stakater-charts`
