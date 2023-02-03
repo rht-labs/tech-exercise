@@ -1,113 +1,106 @@
-apiVersion: 1.0.0
+schemaVersion: 2.1.0
 metadata:
-  name: workshop
-  generateName: workshop-
-projects:
-  - name: stakater-nordmart-review
-    clonePath: stakater-nordmart-review
-    source:
-      type: git
-      location: 'https://github.com/stakater-lab/stakater-nordmart-review'
-      branch: 'main'
-  - name: stakater-nordmart-review-ui
-    clonePath: stakater-nordmart-review-ui
-    source:
-      type: git
-      location: 'https://github.com/stakater-lab/stakater-nordmart-review-ui'
-      branch: 'main'
-  - name: stakater-nordmart-review-e2e
-    clonePath: stakater-nordmart-review-e2e
-    source:
-      type: git
-      location: 'https://github.com/stakater-lab/stakater-nordmart-review-e2e'
-      branch: 'main'
-  - name: nordmart-apps-gitops-config
-    clonePath: nordmart-apps-gitops-config
-    source:
-      type: git
-      location: 'https://github.com/stakater-lab/nordmart-apps-gitops-config'
-      branch: 'main'  
+  name: tl500
+attributes:
+  che-theia.eclipse.org/sidecar-policy: USE_DEV_CONTAINER
+  controller.devfile.io/devworkspace-config:
+    name: devworkspace-config
+    namespace: tl500-workspaces
+  controller.devfile.io/storage-type: per-workspace
+  metadata-name-field: generateName
+  metadata-name-original-value: tl500-
 components:
-  - type: cheEditor
-    alias: theia-editor
-    id: eclipse/che-theia/latest
-    memoryLimit: 2Gi
-  - alias: exec-plugin
-    type: chePlugin
-    id: eclipse/che-machine-exec-plugin/latest
-  - alias: node-debug2
-    type: chePlugin
-    id: ms-vscode/node-debug2/latest
-  - alias: vscode-yaml
-    type: chePlugin
-    id: redhat/vscode-yaml/latest
-  - alias: typescript-language-features
-    type: chePlugin
-    id: vscode/typescript-language-features/latest
-  - type: dockerimage
-    alias: stack-tl500
-    # https://github.com/rht-labs/enablement-framework/blob/main/codereadyworkspaces/stack/Dockerfile
-    image: quay.io/rht-labs/stack-tl500:3.0.16
-    memoryLimit: 2Gi
-    mountSources: true
-    args: ['/bin/sh', '-c', 'sleep infinity']
-    volumes:
-      - name: projects
-        containerPath: /projects
-      - name: config
-        containerPath: /home/developer/.config
-      - name: npm
-        containerPath: /home/developer/.npm
-    endpoints:
-      - name: ide-8080
-        port: 8080
-        attributes:
-          discoverable: "true"
-          public: "true"
+  - container:
+      args:
+        - /bin/sh
+        - '-c'
+        - sleep infinity
+      endpoints:
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-8080
           protocol: http
-      - name: ide-9000
-        port: 9000
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 8080
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-9000
           protocol: http
-      - name: ide-3000
-        port: 3000
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 9000
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-3000
           protocol: http
-      - name: ide-4200
-        port: 4200
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 3000
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-4200
           protocol: http
-      - name: ide-4444
-        port: 4444
-        attributes:
+          targetPort: 4200
+        - attributes:
+            protocol: http
+          exposure: public
+          name: ide-4444
           protocol: http
-      - name: ide-8081
-        port: 8081
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 4444
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-8081
           protocol: http
-      - name: ide-8082
-        port: 8082
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 8081
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-8082
           protocol: http
-      - name: ide-8083
-        port: 8083
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 8082
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-8083
           protocol: http
-      - name: ide-8084
-        port: 8084
-        attributes:
-          discoverable: "true"
-          public: "true"
+          targetPort: 8083
+        - attributes:
+            discoverable: 'true'
+            protocol: http
+            public: 'true'
+          exposure: public
+          name: ide-8084
           protocol: http
+          targetPort: 8084
+      image: 'quay.io/rht-labs/stack-tl500:3.0.16'
+      memoryLimit: 2Gi
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: projects
+          path: /projects
+        - name: config
+          path: /home/developer/.config
+        - name: npm
+          path: /home/developer/.npm
+    name: stack-tl500
+  - name: projects
+    volume: {}
+  - name: config
+    volume: {}
+  - name: npm
+    volume: {}
