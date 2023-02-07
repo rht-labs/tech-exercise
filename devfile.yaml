@@ -5,7 +5,7 @@ attributes:
   che-theia.eclipse.org/sidecar-policy: USE_DEV_CONTAINER
   controller.devfile.io/devworkspace-config:
     name: devworkspace-config
-    namespace: tl500-workspaces
+    namespace: openshift-operators
   controller.devfile.io/storage-type: per-workspace
   metadata-name-field: generateName
   metadata-name-original-value: tl500-
