@@ -45,3 +45,8 @@
   * [📈 Autoscaling](5-the-deployments-strike-back/1-autoscaling.md)
   * [🔵🟩 Blue/Green Deployments](5-the-deployments-strike-back/2-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
+* [6. Secret Management](6-secret-management-in-saap/README.md)
+  * [MTO-GitLab-Vault The Trio ](6-secret-management-in-saap/1-MTO-Gitlab-and-Vault.md)
+  * [Devworkspace ](6-secret-management-in-saap/2-devworkspaces.md)
+  * [Application deployment ](6-secret-management-in-saap/3-lets-deploy.md)
+  * [ Managing secrets ](6-secret-management-in-saap/2-secret-management.md)
