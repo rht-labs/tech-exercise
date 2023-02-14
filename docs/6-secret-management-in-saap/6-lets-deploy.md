@@ -2,7 +2,7 @@
 
 _TODO_
 
-## ## Explain the application briefly and navigate to the deploy folder
+## Explain the application briefly and navigate to the deployment folder named `deploy`
 
 _TODO_
 ## Deploy Helm chart to tenant
