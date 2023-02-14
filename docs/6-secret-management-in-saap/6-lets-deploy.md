@@ -5,7 +5,7 @@ _TODO_
 ## ## Explain the application briefly and navigate to the deploy folder
 
 _TODO_
-## Deploy helm chart to tenant
+## Deploy Helm chart to tenant
 
 _TODO_
 ## Guide user to their application (UI)
