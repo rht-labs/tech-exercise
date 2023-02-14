@@ -9,7 +9,7 @@ _TODO_
 
 _TODO_
 
-## Gitlab Setup
+## GitLab Setup
 
 _TODO_
 
