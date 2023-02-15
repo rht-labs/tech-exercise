@@ -91,7 +91,7 @@ sequenceDiagram
                provider:
                  vault:
                   server: "http://vault.stakater-vault:8200"
-                  path: "{{INSERT_TENANT_NAME}}/kv"
+                  path: "sorcerers/kv"
                   version: "v2"
                   auth:
                      kubernetes:
@@ -115,7 +115,7 @@ sequenceDiagram
             -  key: stakater.com/kind
                operator: In
                values:
-                  - {{INSERT_TENANT_NAME}}
+                  - sorcerers
          sync: true
          template: tenant-vault-access-secret-store
 
@@ -152,7 +152,7 @@ sequenceDiagram
             - key: stakater.com/kind
                operator: In
                values:
-                  - {{INSERT_TENANT_NAME}}
+                  - sorcerers
          sync: true
          template: tenant-vault-access-service-account
 
