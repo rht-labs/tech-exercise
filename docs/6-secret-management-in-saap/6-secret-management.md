@@ -4,7 +4,7 @@ In this section, we will walk through secret management workflow in SAAP.
 
 ## Explain how MTO, Vault & ESO come together to serve Secrets Management (Secrets injection related setup configuration and workflow)
 
-The detailed step by step diagram of MTO integrating with Vault and ESO :
+Following is detailed step by step sequence diagram of MTO works together with Vault and ESO:
 
    ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
 
