@@ -102,7 +102,7 @@ sequenceDiagram
    More Info on Secret Store: https://external-secrets.io/v0.5.7/api-secretstore/  
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
 
-6. Admins creates a TemplateGroupInstance which deploys Template (containing SecretStore) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
+6. Admin creates a TemplateGroupInstance which deploys Template (containing SecretStore) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
@@ -139,7 +139,7 @@ sequenceDiagram
       
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
 
-9. Admins creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
+9. Admin creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
