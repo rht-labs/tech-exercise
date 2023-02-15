@@ -216,7 +216,8 @@ sequenceDiagram
               tekton.dev/git-0: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud'
       dataFrom:
         - key: gitlab-pat
-    ```
+
+   ```
 
    3. External Secrets Operator (ESO) fetches secrets from Vault using ExternalSecret CR. This CR has reference to SecretStore and secret path that is in the vault.
 
@@ -266,6 +267,10 @@ sequenceDiagram
    7. Stakater Reloader performs a rolling upgrade on Kubernetes resource(s). Application is up again with the updated secret values in no time! 
 
 ## Secrets depreciation workflow
+
+   ```mermaid
+   
+   ```
 
 
 ## 🖼️ Big Picture
