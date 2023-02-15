@@ -172,7 +172,7 @@ Introduce yourself to the group and share your animal.
 - [Parking Lot (Car Park)](https://openpracticelibrary.com/practice/parking-lot-car-park/)
 - [Quote Wall](https://openpracticelibrary.com/practice/quote-wall/)
 - [Stop the world](https://openpracticelibrary.com/practice/stop-the-world-event/)
-- Ice Breakers
+- [Ice Breakers](https://openpracticelibrary.com/practice/ice-breakers/)
 - Team Forming
 - Information Radiators
    
