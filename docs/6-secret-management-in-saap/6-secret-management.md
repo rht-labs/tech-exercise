@@ -8,9 +8,13 @@ Following is detailed step by step sequence diagram of MTO works together with V
 
    ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
 
-When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it creates group (inside vault) for tenant, policies (read and admin) and role to attach policies to group in Vault. In addition, Multi Tenant Operator (MTO) creates necessary role with tenant users against vault client in RHSSO.
+When administrator creates a Tenant on the cluster, Multi Tenant Operator (MTO) performs the following steps :
+- Enables a kv path for the Tenant (same as tenant name).
+- Creates group (inside vault) for tenant and policies with read and admin permissions. 
+- Creates role to attach policies to group in Vault. 
+- Creates necessary role with tenant users against vault client in RHSSO.
 
-All of this is Automated Thanks to MTO !!
+`All of this is Automated Thanks to MTO !!` :partying_face:
 
 1. To access Vault from  [Forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud) console, click on the `Vault` tile.
 
