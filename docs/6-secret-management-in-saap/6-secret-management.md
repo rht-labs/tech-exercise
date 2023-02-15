@@ -39,67 +39,129 @@ sequenceDiagram
     ESO->>k8s Secret: Creates a k8s Secret
 ```
 
-When administrator creates a Tenant on the cluster, Multi Tenant Operator (MTO) performs the following steps :
-- Enables a kv path for the Tenant (same as tenant name).
-- Creates group (inside vault) for tenant and policies with read and admin permissions. 
-- Creates role to attach policies to group in Vault. 
-- Creates necessary role with tenant users against vault client in RHSSO.
+### Workflow
+1. Administrator creates a Tenant on the cluster.
+2. Multi Tenant Operator (MTO) enables a kv path for the Tenant. Login to Vault to view your tenant kv.
+   - Access Vault from  [Forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud) console, click on the `Vault` tile.
+
+      ![Forecastle-Vault](./images/forecastle-vault.png)
+   - From the drop-down menu under `Method`, select `OIDC` and click on `Sign in with OIDC Provider` and select `workshop` identity Provider
+
+      ![Vault-ocic-login](./images/vault-ocic-login.png)
+
+   - You will be brought to the `Vault` console. You should see the kv path for your tenant.
+
+      ![Vault-home](./images/vault-home.png)
+
+3. Multi Tenant Operator (MTO) creates policies with read and admin permissions over the tenant kv.
+
+       // Read Policy for ServiceAccounts
+
+       path "alpha/*" {
+          capabilities = ["read"]
+       }
+          
+       // Admin Policy for Tenant Users
+
+       path "alpha/*" {
+			capabilities = ["create", "read", "update", "delete", "list"]
+        }
+       path "sys/mounts/alpha/*" {
+            capabilities = ["create", "read", "update", "delete", "list"]
+       }
+       path "managed-addons/*" {
+            capabilities = ["read", "list"]
+       }      
+4. Multi Tenant Operator (MTO) creates required Namespaces with tenant labels eg. `stakater.com/kind`.
+
+5. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API. Templates are used to share resources among namespaces.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: Template
+         metadata:
+         name: tenant-vault-access-secret-store
+         resources:
+         manifests:
+         - apiVersion: external-secrets.io/v1alpha1
+            kind: SecretStore
+            metadata:
+               name: tenant-vault-secret-store
+            spec:
+               provider:
+                 vault:
+                  server: "http://vault.stakater-vault:8200"
+                  path: "{{INSERT_TENANT_NAME}}/kv"
+                  version: "v2"
+                  auth:
+                     kubernetes:
+                       mountPath: "kubernetes"
+                       role: "${namespace}"
+                       serviceAccountRef:
+                         name: "tenant-vault-access-service-account"
+
+   More Info on Secret Store: https://external-secrets.io/v0.5.7/api-secretstore/  
+   More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
+
+6. Admins creates a TemplateGroupInstance which deploys Template (containing SecretStore) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: TemplateGroupInstance
+         metadata:
+         name: tenant-vault-access-secret-store
+         spec:
+         selector:
+            matchExpressions:
+            -  key: stakater.com/kind
+               operator: In
+               values:
+                  - {{INSERT_TENANT_NAME}}
+         sync: true
+         template: tenant-vault-access-secret-store
+
+   More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
+
+7. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
+
+8. Admin creates a Template that contains a Service Account. This service account is used by Secret Store to access Vault. Notice the label `stakater.com/vault-access: "true"`.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: Template
+         metadata:
+         name: tenant-vault-access-service-account
+         resources:
+         manifests:
+         -  kind: ServiceAccount
+            apiVersion: v1
+            metadata:
+               name: tenant-vault-access-service-account
+               labels:
+                 stakater.com/vault-access: "true"
+      
+   More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
+
+9. Admins creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: TemplateGroupInstance
+         metadata:
+         name: tenant-vault-access-service-account
+         spec:
+         selector:
+            matchExpressions:
+            - key: stakater.com/kind
+               operator: In
+               values:
+                  - {{INSERT_TENANT_NAME}}
+         sync: true
+         template: tenant-vault-access-service-account
+
+   More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
+   
+10. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
+
+11. Multi Tenant Operator (MTO) create a role in Vault with namespace. This role binds the read policy with service account on the cluster.
 
 `All of this is Automated Thanks to MTO !!` :partying_face:
-
-1. To access Vault from  [Forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud) console, click on the `Vault` tile.
-
-   ![Forecastle-Vault](./images/forecastle-vault.png)
-
-2. From the drop-down menu under `Method`, select `OIDC` and click on `Sign in with OIDC Provider` and select `workshop` identity Provider
-
-   ![workshop](./images/login.png)
-
-
-   ![Vault-ocic-login](./images/vault-ocic-login.png)
-
-3. You will be brought to the `Vault` console. Upon creation of your tenant, a Key Value path belonging to your tenant is created as well.
-
-   ![Vault-home](./images/vault-home.png)
-
-
-We define templateGroupInstances in Tenant CR, which deploy SecretStore (pointing to KV path in Vault), Service Account (used by SecretStore to communicate with Vault) in all tenant namespaces. Define `spec.templateGroupInstances` in Tenant CR.
-
-      templateGroupInstances:
-      - spec:
-            template: tenant-vault-access
-            sync: true
-
-TemplateGroupInstances deploy resources in Namespace based on selector. 
-
-The `tenant-vault-access` contains a service account and secret store. 
-
-     kind: ServiceAccount
-     apiVersion: v1
-     metadata:
-        name: tenant-vault-access
-        labels:
-           stakater.com/vault-access: "true"
-    ---
-    apiVersion: external-secrets.io/v1alpha1
-    kind: SecretStore
-    metadata:
-       name: tenant-vault-secret-store
-    spec:
-       provider:
-       vault:
-          server: "http://vault.stakater-vault:8200"
-          path: "${tenant}/kv"
-          version: "v2"
-          auth:
-             kubernetes:
-             mountPath: "kubernetes"
-             role: "${namespace}"
-             serviceAccountRef:
-                name: "tenant-vault-access"
-
-Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator (MTO) creates role inside vault binding the read policy with the service account.
-
 
 ## Secrets creation workflow
 
