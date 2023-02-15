@@ -159,7 +159,7 @@ sequenceDiagram
    
 10. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
 
-11. Multi Tenant Operator (MTO) create a role in Vault with namespace. This role binds the read policy with service account on the cluster. This allows service account used by secretstore to access tenant kv path. 
+11. Multi Tenant Operator (MTO) create a role in Vault with namespace name. This role binds the read policy with service account on the cluster. This allows service account used by secretstore to access tenant kv path. 
 
 `All of this is Automated Thanks to MTO !!` :partying_face:
 
