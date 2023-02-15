@@ -1,12 +1,12 @@
 # Exercise 6 - SECRET MANAGEMENT 
 
-In this section, we will walkthrough secret management workflow in SAAP. 
+In this section, we will walk through secret management workflow in SAAP. 
 
 ## Explain how MTO, Vault & ESO come together to serve Secrets Management (Secrets injection related setup configuration and workflow)
 
    ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
 
-When the administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it create groups, roles and policies required for tenant users inside Vault. In addition, Multi Tenant Operator (MTO) creates necessary roles with tenant users against vault client in RHSSO.
+When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it create groups, roles and policies required for tenant users inside Vault. In addition, Multi Tenant Operator (MTO) creates necessary roles with tenant users against vault client in RHSSO.
 
 All of this is Automated Thanks to MTO !!
 
