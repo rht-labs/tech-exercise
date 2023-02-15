@@ -6,7 +6,38 @@ In this section, we will walk through secret management workflow in SAAP.
 
 Following is detailed step by step sequence diagram of MTO works together with Vault and ESO:
 
-   ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User
+    actor Admin
+    participant MTO as Multi-Tenant Operator
+    participant Namespace
+    participant Vault
+    participant ESO as External Secret Operator
+    participant k8s Secret
+    Admin->>MTO: Creates a Tenant
+    MTO->>Vault: Creates Policy with Tenant name
+    Note right of MTO: policy: path "tenantName/*" {capabilities=["read"]}
+    MTO->>Namespace: Creates Namespaces with Tenant labels
+    Admin->>MTO: Creates SecretStore Template
+    Note right of Admin: SecretStore contains connection info for Vault
+    Admin->>MTO: Creates SecretStore TemplateGroupInstance [TGI]
+    Note right of Admin: TGI deploys Templates based on labels
+    MTO->>Namespace: Uses TGIs to deploy Template to all Tenant Namespaces
+    Admin->>MTO: Creates ServiceAccount Template with Vault access label
+    Note right of Admin: label: stakater.com/vault-access: 'true'
+    Admin->>MTO: Creates ServiceAccount TemplateGroupInstance
+    MTO->>Namespace: Uses TGIs to deploy Template to all Tenant Namespaces
+    MTO->>Vault: Creates Role with Namespace name
+    MTO->>Vault: Binds Policy & ServiceAccount with Role when vault-access label found
+    Note left of Vault: This provides ServiceAccount access to Vault
+    User->>Vault: Adds key/value pair secret
+    User->>ESO: Adds ExternalSecret CR
+    Note right of User: Points to namespace SecretStore & secret's path in Vault
+    Vault-->ESO: ESO fetches secret from Vault
+    ESO->>k8s Secret: Creates a k8s Secret
+```
 
 When administrator creates a Tenant on the cluster, Multi Tenant Operator (MTO) performs the following steps :
 - Enables a kv path for the Tenant (same as tenant name).
