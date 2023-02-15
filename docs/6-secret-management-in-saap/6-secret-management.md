@@ -67,7 +67,7 @@ The `tenant-vault-access` contains a service account and secret store.
              serviceAccountRef:
                 name: "tenant-vault-access"
 
-Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator (MTO) creates role inside vault binding the read policy with the service account for all tenant namespaces.
+Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator (MTO) creates role inside vault binding the read policy with the service account.
 
 
 ## Secrets creation workflow
