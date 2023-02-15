@@ -17,6 +17,7 @@ sequenceDiagram
     participant ESO as External Secret Operator
     participant k8s Secret
     Admin->>MTO: Creates a Tenant
+    MTO->>Vault: Creates a path in Vault with Tenant name to store key/value secrets
     MTO->>Vault: Creates Policy with Tenant name
     Note right of MTO: policy: path "tenantName/*" {capabilities=["read"]}
     MTO->>Namespace: Creates Namespaces with Tenant labels
@@ -24,11 +25,11 @@ sequenceDiagram
     Note right of Admin: SecretStore contains connection info for Vault
     Admin->>MTO: Creates SecretStore TemplateGroupInstance [TGI]
     Note right of Admin: TGI deploys Templates based on labels
-    MTO->>Namespace: Uses TGIs to deploy Template to all Tenant Namespaces
+    MTO->>Namespace: Uses TGIs to create SecretStore in all Tenant Namespaces
     Admin->>MTO: Creates ServiceAccount Template with Vault access label
     Note right of Admin: label: stakater.com/vault-access: 'true'
     Admin->>MTO: Creates ServiceAccount TemplateGroupInstance
-    MTO->>Namespace: Uses TGIs to deploy Template to all Tenant Namespaces
+    MTO->>Namespace: Uses TGIs to create ServiceAccount in all Tenant Namespaces
     MTO->>Vault: Creates Role with Namespace name
     MTO->>Vault: Binds Policy & ServiceAccount with Role when vault-access label found
     Note left of Vault: This provides ServiceAccount access to Vault
