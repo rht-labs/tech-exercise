@@ -80,13 +80,13 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
          metadata:
-         name: tenant-vault-access-secret-store
+         name: sorcerers-vault-secret-store
          resources:
          manifests:
          - apiVersion: external-secrets.io/v1alpha1
             kind: SecretStore
             metadata:
-               name: tenant-vault-secret-store
+               name: sorcerers-vault-secret-store
             spec:
                provider:
                  vault:
@@ -98,7 +98,7 @@ sequenceDiagram
                        mountPath: "kubernetes"
                        role: "${namespace}"
                        serviceAccountRef:
-                         name: "tenant-vault-access-service-account"
+                         name: "sorcerers-vault-service-account"
 
    More Info on Secret Store: https://external-secrets.io/v0.5.7/api-secretstore/  
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
@@ -108,7 +108,7 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
          metadata:
-         name: tenant-vault-access-secret-store
+         name: sorcerers-vault-secret-store
          spec:
          selector:
             matchExpressions:
@@ -117,7 +117,7 @@ sequenceDiagram
                values:
                   - sorcerers
          sync: true
-         template: tenant-vault-access-secret-store
+         template: sorcerers-vault-secret-store
 
    More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
 
@@ -128,13 +128,13 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
          metadata:
-         name: tenant-vault-access-service-account
+         name: sorcerers-vault-service-account
          resources:
          manifests:
          -  kind: ServiceAccount
             apiVersion: v1
             metadata:
-               name: tenant-vault-access-service-account
+               name: sorcerers-vault-service-account
                labels:
                  stakater.com/vault-access: "true"
       
@@ -145,7 +145,7 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
          metadata:
-         name: tenant-vault-access-service-account
+         name: sorcerers-vault-service-account
          spec:
          selector:
             matchExpressions:
@@ -154,7 +154,7 @@ sequenceDiagram
                values:
                   - sorcerers
          sync: true
-         template: tenant-vault-access-service-account
+         template: sorcerers-vault-service-account
 
    More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
    
