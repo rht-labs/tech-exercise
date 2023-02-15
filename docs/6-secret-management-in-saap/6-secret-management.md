@@ -8,7 +8,7 @@ Following is detailed step by step sequence diagram of MTO works together with V
 
    ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
 
-When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it create group(inside vault), policies (read and admin) and roles required for tenant users inside Vault. In addition, Multi Tenant Operator (MTO) creates necessary roles with tenant users against vault client in RHSSO.
+When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it creates group (inside vault) for tenant, policies (read and admin) and role to attach policies to group in Vault. In addition, Multi Tenant Operator (MTO) creates necessary role with tenant users against vault client in RHSSO.
 
 All of this is Automated Thanks to MTO !!
 
@@ -63,8 +63,7 @@ The `tenant-vault-access` contains a service account and secret store.
              serviceAccountRef:
                 name: "tenant-vault-access"
 
-Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator creates roles inside vault for the service account in all namespaces.
-
+Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator (MTO) creates role inside vault binding the read policy with the service account for all tenant namespaces.
 
 
 ## Secrets creation workflow
