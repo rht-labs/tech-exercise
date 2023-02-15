@@ -4,11 +4,11 @@ In this section, we will walk through secret management workflow in SAAP.
 
 ## Explain how MTO, Vault & ESO come together to serve Secrets Management (Secrets injection related setup configuration and workflow)
 
-The detailed step by step diagram of MTO integrating with Vault and ESO.
+The detailed step by step diagram of MTO integrating with Vault and ESO :
 
    ![Forecastle-Vault](./images/MTO-Vault-ESO.png)
 
-When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it create groups, roles and policies required for tenant users inside Vault. In addition, Multi Tenant Operator (MTO) creates necessary roles with tenant users against vault client in RHSSO.
+When administrator creates Tenants in openshift cluster, Multi Tenant Operator (MTO) enables a KeyValue engine for the Tenant (same as tenant name) and it create group(inside vault), policies (read and admin) and roles required for tenant users inside Vault. In addition, Multi Tenant Operator (MTO) creates necessary roles with tenant users against vault client in RHSSO.
 
 All of this is Automated Thanks to MTO !!
 
@@ -23,55 +23,51 @@ All of this is Automated Thanks to MTO !!
 
    ![Vault-ocic-login](./images/vault-ocic-login.png)
 
-> Note: It can take a few minutes for your tenants resources to be provisioned in Vault, if you have errors please inform the workshop leads. The most likely solution will be to give it some more time so lets proceed!
-
-3. You will be brought to the `Vault` console. Upon creation of your tenant, a folder belonging to your tenant for holding your secrets is created as well.
+3. You will be brought to the `Vault` console. Upon creation of your tenant, a Key Value path belonging to your tenant is created as well.
 
    ![Vault-home](./images/vault-home.png)
 
 
-Moreover, we can define templateInstance in Tenant CR, which can deploy SecretStore (pointing to KV path in Vault) in all tenant namespaces. Define `spec.templateInstances` in Tenant CR.
+We define templateGroupInstances in Tenant CR, which deploy SecretStore (pointing to KV path in Vault), Service Account (used by SecretStore to communicate with Vault) in all tenant namespaces. Define `spec.templateGroupInstances` in Tenant CR.
 
-      templateInstances:
+      templateGroupInstances:
       - spec:
             template: tenant-vault-access
             sync: true
 
-This `tenant-vault-access` deploys a service account and secret store. 
+TemplateGroupInstances deploy resources in Namespace based on selector. 
 
-      apiVersion: tenantoperator.stakater.com/v1alpha1
-      kind: Template
-      metadata:
-      name: tenant-vault-access
-      resources:
-      manifests:
-      - kind: ServiceAccount
-         apiVersion: v1
-         metadata:
-            name: tenant-vault-access
-            labels:
-               stakater.com/vault-access: "true"
-      - apiVersion: external-secrets.io/v1alpha1
-         kind: SecretStore
-         metadata:
-            name: tenant-vault-secret-store
-         spec:
-            provider:
-            vault:
-               server: "http://vault.stakater-vault:8200"
-               path: "${tenant}/kv"
-               version: "v2"
-               auth:
-                  kubernetes:
-                  mountPath: "kubernetes"
-                  role: "${namespace}"
-                  serviceAccountRef:
-                     name: "tenant-vault-access"
+The `tenant-vault-access` contains a service account and secret store. 
 
-Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator creates roles for vault for this service account.
+     kind: ServiceAccount
+     apiVersion: v1
+     metadata:
+        name: tenant-vault-access
+        labels:
+           stakater.com/vault-access: "true"
+    ---
+    apiVersion: external-secrets.io/v1alpha1
+    kind: SecretStore
+    metadata:
+       name: tenant-vault-secret-store
+    spec:
+       provider:
+       vault:
+          server: "http://vault.stakater-vault:8200"
+          path: "${tenant}/kv"
+          version: "v2"
+          auth:
+             kubernetes:
+             mountPath: "kubernetes"
+             role: "${namespace}"
+             serviceAccountRef:
+                name: "tenant-vault-access"
+
+Notice the label `stakater.com/vault-access: "true"`, Multi Tenant Operator creates roles inside vault for the service account in all namespaces.
+
+
 
 ## Secrets creation workflow
-_TODO_
 
 ## Secrets update workflow
 _TODO_
