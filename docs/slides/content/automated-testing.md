@@ -352,6 +352,7 @@ Many times people will have built cool things that they didn't have tests for. W
 
 <!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
+- [Behavior Driven Development](https://openpracticelibrary.com/practice/behavior-driven-development/)
 - [Test Driven Development](https://openpracticelibrary.com/practice/test-driven-development/)
 - [Continuous Integration](https://openpracticelibrary.com/practice/continuous-integration/)
 - [Example Mapping](https://openpracticelibrary.com/practice/example-mapping/)
