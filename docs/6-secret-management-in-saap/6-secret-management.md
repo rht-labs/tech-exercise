@@ -226,7 +226,44 @@ sequenceDiagram
 
 
 ## Secrets update workflow
-_TODO_
+
+   ```mermaid
+      sequenceDiagram
+         autonumber
+         actor User
+         participant Vault
+         participant ESO as External Secret Operator
+         participant Secret
+         participant Reloader
+         participant App as Application 
+         User->>Vault: Updates a Secret
+         ESO->>+Vault: watches for updated Secret
+         Vault-->>-ESO: Update received
+         ESO->>Secret: Updates k8s Secret
+         Reloader->>+Secret: watches for updated Secret
+         Secret-->>-Reloader: Update recieved
+         Reloader->>App: Performs rolling upgrade
+   ```
+
+   ### Workflow
+
+   1. Modify the secret in Vault UI
+
+   2. External Secrets Operator (ESO) polls the Vault API for update after a defined time interval. This time interval is defined in the ExternalSecret CR created previously. 
+
+      ```
+      refreshInterval: "1m"
+      ```
+
+   3. Update is received by External Secrets Operator (ESO).
+
+   4. External Secrets Operator (ESO) updates the values of Kubernetes Secret with the new values you just added in Vault.
+
+   5. Stakater Reloader is continously watching the Kubernetes Secret resource for change.
+
+   6. It receives the update instantly.
+
+   7. Stakater Reloader performs a rolling upgrade on Kubernetes resource(s). Application is up again with the updated secret values in no time! 
 
 ## Secrets depreciation workflow
 
