@@ -58,16 +58,16 @@ sequenceDiagram
 
        // Read Policy for ServiceAccounts
 
-       path "alpha/*" {
+       path "sorcerers/*" {
           capabilities = ["read"]
        }
           
        // Admin Policy for Tenant Users
 
-       path "alpha/*" {
+       path "sorcerers/*" {
 			capabilities = ["create", "read", "update", "delete", "list"]
         }
-       path "sys/mounts/alpha/*" {
+       path "sys/mounts/sorcerers/*" {
             capabilities = ["create", "read", "update", "delete", "list"]
        }
        path "managed-addons/*" {
