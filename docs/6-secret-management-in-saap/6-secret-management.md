@@ -166,6 +166,65 @@ sequenceDiagram
 
 ## Secrets creation workflow
 
+```mermaid 
+sequenceDiagram
+    autonumber
+    actor User
+    participant Vault
+    participant ESO as External Secret Operator
+    participant Secret
+    participant App as Application 
+    User->>Vault: Creates a Key/Value Secret
+    User->>ESO: Add ExternalSecret CR 
+    Vault-->ESO: ESO fetches secret from Vault
+    ESO->>Secret: Creates a k8s Secret
+    Secret->>App: Secret is used in App
+```
+
+   ### Workflow 
+
+   1. In the path of your tenant, Click `Create Secret`, add path of secret, and add key-value pairs.
+
+  ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
+
+   2. Add ExternalSecret CR
+
+      - Login to the `OpenShift console`.
+      - Select the `+` sign in the top right corner of the console
+
+      ![the-plus-sign](./images/the-plus-sign.png)
+      - Paste the following YAML and replace the `<TENANT_NAME>` and click `Create`
+
+   ```
+    apiVersion: external-secrets.io/v1alpha1
+    kind: ExternalSecret
+    metadata:
+      name: gitlab-pat
+      namespace: <TENANT_NAME>-build
+    spec:
+      secretStoreRef:
+        name: tenant-vault-secret-store
+        kind: SecretStore
+      refreshInterval: "1m"
+      target:
+        name: gitlab-pat
+        creationPolicy: 'Owner'
+        template:
+          type: kubernetes.io/basic-auth
+          metadata:
+            annotations:
+              tekton.dev/git-0: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud'
+      dataFrom:
+        - key: gitlab-pat
+    ```
+
+   3. External Secrets Operator (ESO) fetches secrets from Vault using ExternalSecret CR. This CR has reference to SecretStore and secret path that is in the vault.
+
+   4. External Secrets Operator (ESO) creates a Kubernetes Secret from the secret from Vault.
+
+   5. This secret is then used in the application.
+
+
 ## Secrets update workflow
 _TODO_
 
