@@ -56,13 +56,13 @@ sequenceDiagram
 
 3. Multi Tenant Operator (MTO) creates policies with read and admin permissions over the tenant kv.
 
-       // Read Policy for ServiceAccounts
+       // Read Policy for ServiceAccounts named <TENANT_NAME>-read
 
        path "<TENANT_NAME>/*" {
           capabilities = ["read"]
        }
           
-       // Admin Policy for Tenant Users
+       // Admin Policy for Tenant Users named <TENANT_NAME>-admin
 
        path "<TENANT_NAME>/*" {
 			capabilities = ["create", "read", "update", "delete", "list"]
