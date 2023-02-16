@@ -58,47 +58,47 @@ sequenceDiagram
 
        // Read Policy for ServiceAccounts
 
-       path "sorcerers/*" {
+       path "<TENANT_NAME>/*" {
           capabilities = ["read"]
        }
           
        // Admin Policy for Tenant Users
 
-       path "sorcerers/*" {
+       path "<TENANT_NAME>/*" {
 			capabilities = ["create", "read", "update", "delete", "list"]
         }
-       path "sys/mounts/sorcerers/*" {
+       path "sys/mounts/<TENANT_NAME>/*" {
             capabilities = ["create", "read", "update", "delete", "list"]
        }
        path "managed-addons/*" {
             capabilities = ["read", "list"]
        }      
-4. Multi Tenant Operator (MTO) creates required Namespaces with tenant labels eg. `stakater.com/kind`.
+4. Multi Tenant Operator (MTO) creates required Namespaces with tenant labels e.g. `stakater.com/kind`.
 
 5. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API. Templates are used to share resources among namespaces.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
          metadata:
-         name: sorcerers-vault-secret-store
+         name: <TENANT_NAME>-vault-secret-store
          resources:
          manifests:
          - apiVersion: external-secrets.io/v1alpha1
             kind: SecretStore
             metadata:
-               name: sorcerers-vault-secret-store
+               name: tenant-vault-secret-store
             spec:
                provider:
                  vault:
                   server: "http://vault.stakater-vault:8200"
-                  path: "sorcerers/kv"
+                  path: "<TENANT_NAME>/kv"
                   version: "v2"
                   auth:
                      kubernetes:
                        mountPath: "kubernetes"
                        role: "${namespace}"
                        serviceAccountRef:
-                         name: "sorcerers-vault-service-account"
+                         name: "tenant-vault-access"
 
    More Info on Secret Store: https://external-secrets.io/v0.5.7/api-secretstore/  
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
@@ -108,16 +108,16 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
          metadata:
-         name: sorcerers-vault-secret-store
+         name: <TENANT_NAME>-vault-secret-store
          spec:
          selector:
             matchExpressions:
             -  key: stakater.com/kind
                operator: In
                values:
-                  - sorcerers
+                  - <TENANT_NAME>
          sync: true
-         template: sorcerers-vault-secret-store
+         template: <TENANT_NAME>-vault-secret-store
 
    More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
 
@@ -128,16 +128,16 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
          metadata:
-         name: sorcerers-vault-service-account
+           name: <TENANT_NAME>-vault-access
          resources:
-         manifests:
-         -  kind: ServiceAccount
-            apiVersion: v1
-            metadata:
-               name: sorcerers-vault-service-account
-               labels:
-                 stakater.com/vault-access: "true"
-      
+            manifests:
+            -  kind: ServiceAccount
+               apiVersion: v1
+               metadata:
+                  name: tenant-vault-access
+                  labels:
+                    stakater.com/vault-access: "true"
+         
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
 
 9. Admin creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector.
@@ -145,16 +145,16 @@ sequenceDiagram
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
          metadata:
-         name: sorcerers-vault-service-account
+         name: <TENANT_NAME>-vault-access
          spec:
-         selector:
-            matchExpressions:
-            - key: stakater.com/kind
-               operator: In
-               values:
-                  - sorcerers
-         sync: true
-         template: sorcerers-vault-service-account
+            selector:
+               matchExpressions:
+               - key: stakater.com/kind
+                  operator: In
+                  values:
+                     - <TENANT_NAME>
+            sync: true
+            template: <TENANT_NAME>-vault-access
 
    More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
    
