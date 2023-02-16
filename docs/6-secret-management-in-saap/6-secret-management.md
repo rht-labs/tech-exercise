@@ -75,7 +75,7 @@ sequenceDiagram
        }      
 4. Multi Tenant Operator (MTO) creates required Namespaces with tenant labels e.g. `stakater.com/kind`.
 
-5. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API. Templates are used to share resources among namespaces.
+5. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API which is Vault. Templates are used to share resources among namespaces.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
