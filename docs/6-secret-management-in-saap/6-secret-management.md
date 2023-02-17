@@ -204,7 +204,7 @@ sequenceDiagram
    
       - In the path of your tenant, Click `Create Secret`, add path of secret, and add key-value pairs.
 
-  ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
+  ![create-secret](./images/create-secret.png)
 
    2. Add ExternalSecret CR
 
@@ -218,7 +218,7 @@ sequenceDiagram
     apiVersion: external-secrets.io/v1alpha1
     kind: ExternalSecret
     metadata:
-      name: gitlab-pat
+      name: review-ui-secret
       namespace: <TENANT_NAME>-build
     spec:
       secretStoreRef:
@@ -226,7 +226,7 @@ sequenceDiagram
         name: tenant-vault-secret-store
       refreshInterval: "1m"
       target:
-        name: gitlab-pat
+        name: review-ui
         creationPolicy: 'Owner'
         deletionPolicy: Retain
         template:
@@ -235,7 +235,7 @@ sequenceDiagram
             annotations:
               tekton.dev/git-0: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud'
       dataFrom:
-        - key: gitlab-pat
+        - key: nordmart-review-ui-page-title
 
    ```
    3. External Secrets Operator (ESO) watches for ExternalSecret CR creation.
