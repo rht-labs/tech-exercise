@@ -13,30 +13,39 @@ sequenceDiagram
     actor Admin
     participant MTO as Multi-Tenant Operator
     participant Namespace
+    participant SA as Service Account
+    participant SecretStore
     participant Vault
-    participant ESO as External Secret Operator
+    participant ExternalSecret
+    participant ESO as External Secret Operator 
     participant k8s Secret
+
     Admin->>MTO: Creates a Tenant
     MTO->>Vault: Creates a path in Vault with Tenant name to store key/value secrets
     MTO->>Vault: Creates Policy with Tenant name
     Note right of MTO: policy: path "tenantName/*" {capabilities=["read"]}
     MTO->>Namespace: Creates Namespaces with Tenant labels
-    Admin->>MTO: Creates SecretStore Template
-    Note right of Admin: SecretStore contains connection info for Vault
-    Admin->>MTO: Creates SecretStore TemplateGroupInstance [TGI]
-    Note right of Admin: TGI deploys Templates based on labels
-    MTO->>Namespace: Uses TGIs to create SecretStore in all Tenant Namespaces
     Admin->>MTO: Creates ServiceAccount Template with Vault access label
     Note right of Admin: label: stakater.com/vault-access: 'true'
-    Admin->>MTO: Creates ServiceAccount TemplateGroupInstance
-    MTO->>Namespace: Uses TGIs to create ServiceAccount in all Tenant Namespaces
+    Admin->>MTO: Creates ServiceAccount TemplateGroupInstance [TGI]
+    Note right of Admin: TGI deploys Templates based on labels
+    MTO->>SA: Uses TGIs to create ServiceAccount in all Tenant Namespaces
+    Admin->>MTO: Creates SecretStore Template
+    Note right of Admin: SecretStore contains connection info for Vault and
+    Note right of Admin: a reference to ServiceAccount for authentication
+    Admin->>MTO: Creates SecretStore TemplateGroupInstance
+    MTO->>SecretStore: Uses TGIs to create SecretStore in all Tenant Namespaces
     MTO->>Vault: Creates Role with Namespace name
     MTO->>Vault: Binds Policy & ServiceAccount with Role when vault-access label found
-    Note left of Vault: This provides ServiceAccount access to Vault
+    Note right of MTO: This provides ServiceAccount access to Vault
     User->>Vault: Adds key/value pair secret
-    User->>ESO: Adds ExternalSecret CR
-    Note right of User: Points to namespace SecretStore & secret's path in Vault
-    Vault-->ESO: ESO fetches secret from Vault
+    User->>ExternalSecret: Adds ExternalSecret CR
+    Note right of MTO: Points to namespace SecretStore & secret's path in Vault
+    ESO->>+ExternalSecret: watches for CR creation
+    ExternalSecret-->>-ESO: CR created, ESO to reconcile
+    ESO-->SecretStore: ESO uses defined SecretStore & instantiates Vault request using ServiceAccount for authentication
+    ESO->>+Vault: Requests to fetch secret data from path
+    Vault->>-ESO: Returns secret data
     ESO->>k8s Secret: Creates a k8s Secret
 ```
 
@@ -75,7 +84,44 @@ sequenceDiagram
        }      
 4. Multi Tenant Operator (MTO) creates required Namespaces with tenant labels e.g. `stakater.com/kind`.
 
-5. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API which is Vault. Templates are used to share resources among namespaces.
+5. Admin creates a Template that contains a Service Account. This service account is used by Secret Store to access Vault. Notice the label `stakater.com/vault-access: "true"`.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: Template
+         metadata:
+           name: <TENANT_NAME>-vault-access
+         resources:
+            manifests:
+            -  kind: ServiceAccount
+               apiVersion: v1
+               metadata:
+                  name: tenant-vault-access
+                  labels:
+                    stakater.com/vault-access: "true"
+         
+   More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
+
+6. Admin creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector. This will deploy ServiceAccount in tenant namespaces. This ServiceAccount is required by SecretStore to access Vault.
+
+         apiVersion: tenantoperator.stakater.com/v1alpha1
+         kind: TemplateGroupInstance
+         metadata:
+         name: <TENANT_NAME>-vault-access
+         spec:
+            selector:
+               matchExpressions:
+               - key: stakater.com/kind
+                  operator: In
+                  values:
+                     - <TENANT_NAME>
+            sync: true
+            template: <TENANT_NAME>-vault-access
+
+   More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
+   
+7. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
+
+8. Admin creates a Template that contains a Secret Store (external secrets custom resource). The SecretStore is namespaced and specifies how to access the external API which is Vault. Templates are used to share resources among namespaces.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: Template
@@ -103,7 +149,7 @@ sequenceDiagram
    More Info on Secret Store: https://external-secrets.io/v0.5.7/api-secretstore/  
    More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
 
-6. Admin creates a TemplateGroupInstance which deploys Template (containing SecretStore) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector. This will deploy SecretStore in tenant namespaces.
+9. Admin creates a TemplateGroupInstance which deploys Template (containing SecretStore) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector. This will deploy SecretStore in tenant namespaces.
 
          apiVersion: tenantoperator.stakater.com/v1alpha1
          kind: TemplateGroupInstance
@@ -121,46 +167,11 @@ sequenceDiagram
 
    More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
 
-7. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
-
-8. Admin creates a Template that contains a Service Account. This service account is used by Secret Store to access Vault. Notice the label `stakater.com/vault-access: "true"`.
-
-         apiVersion: tenantoperator.stakater.com/v1alpha1
-         kind: Template
-         metadata:
-           name: <TENANT_NAME>-vault-access
-         resources:
-            manifests:
-            -  kind: ServiceAccount
-               apiVersion: v1
-               metadata:
-                  name: tenant-vault-access
-                  labels:
-                    stakater.com/vault-access: "true"
-         
-   More Info on Template: https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/template.html
-
-9. Admin creates a TemplateGroupInstance which deploys Template (containing ServiceAccount) to namespaces based on selector. We specify tenant label `stakater.com/kind` in selector. This will deploy ServiceAccount in tenant namespaces. This ServiceAccount is required by SecretStore to access Vault.
-
-         apiVersion: tenantoperator.stakater.com/v1alpha1
-         kind: TemplateGroupInstance
-         metadata:
-         name: <TENANT_NAME>-vault-access
-         spec:
-            selector:
-               matchExpressions:
-               - key: stakater.com/kind
-                  operator: In
-                  values:
-                     - <TENANT_NAME>
-            sync: true
-            template: <TENANT_NAME>-vault-access
-
-   More Info on TemplateGroupInstance : https://docs.cloud.stakater.com/content/sre/multi-tenant-operator/usecases/deploying-templates.html
-   
 10. Multi Tenant Operator (MTO) deploys the Template resources to selector defined in TemplateGroupInstance.
 
-11. Multi Tenant Operator (MTO) create a role in Vault with namespace name. This role binds the read policy with service account on the cluster. This allows service account used by secretstore to access tenant kv path. 
+11. Multi Tenant Operator (MTO) creates a role in Vault with namespace name. This role binds the read policy with service account on the cluster. This allows service account used by SecretStore to access Tenant key/value secret data. 
+
+12. Multi Tenant Operator (MTO) binds Service Account (with `stakater.com/vault-access: 'true'` label) and Policy with Role. Later, External Secrets Operator uses this Service Account to instantiate request to Vault for secret data.
 
 `All of this is Automated Thanks to MTO !!` :partying_face:
 
@@ -171,19 +182,27 @@ sequenceDiagram
     autonumber
     actor User
     participant Vault
-    participant ESO as External Secret Operator
-    participant Secret
-    participant App as Application 
-    User->>Vault: Creates a Key/Value Secret
-    User->>ESO: Add ExternalSecret CR 
-    Vault-->ESO: ESO fetches secret from Vault
-    ESO->>Secret: Creates a k8s Secret
-    Secret->>App: Secret is used in App
+    participant SecretStore
+    participant ExternalSecret
+    participant ESO as External Secret Operator 
+    participant k8s Secret
+    participant app as Application
+    User->>Vault: Adds key/value pair secret
+    User->>ExternalSecret: Adds ExternalSecret CR
+    ESO->>+ExternalSecret: watches for CR creation
+    ExternalSecret-->>-ESO: CR created, ESO to reconcile
+    ESO-->SecretStore: ESO uses defined SecretStore & instanciates Vault request using ServiceAccount for authentication
+    ESO->>+Vault: Requests to fetch secret data from path
+    Vault->>-ESO: Returns secret data
+    ESO->>k8s Secret: Creates a k8s Secret
+    k8s Secret ->> app: Secret is used by Application
 ```
 
    ### Workflow 
 
-   1. In the path of your tenant, Click `Create Secret`, add path of secret, and add key-value pairs.
+   1. User adds a Key/Value pair secret data to a path in Vault.
+   
+      - In the path of your tenant, Click `Create Secret`, add path of secret, and add key-value pairs.
 
   ![GitLab-pat-secret](./images/gitlab-pat-secret.png)
 
@@ -203,12 +222,13 @@ sequenceDiagram
       namespace: <TENANT_NAME>-build
     spec:
       secretStoreRef:
-        name: tenant-vault-secret-store
         kind: SecretStore
+        name: tenant-vault-secret-store
       refreshInterval: "1m"
       target:
         name: gitlab-pat
         creationPolicy: 'Owner'
+        deletionPolicy: Retain
         template:
           type: kubernetes.io/basic-auth
           metadata:
@@ -218,12 +238,30 @@ sequenceDiagram
         - key: gitlab-pat
 
    ```
+   3. External Secrets Operator (ESO) watches for ExternalSecret CR creation.
 
-   3. External Secrets Operator (ESO) fetches secrets from Vault using ExternalSecret CR. This CR has reference to SecretStore and secret path that is in the vault.
+   4. When a new CR is created, External Secrets Operator (ESO) reconciles it from the provided spec.
 
-   4. External Secrets Operator (ESO) creates a Kubernetes Secret from the secret from Vault.
+   5. External Secrets Operator (ESO) uses the defined SecretStore from ExternalSecret CR and instantiates Vault request using ServiceAccount created, and bound to Vault role, to authenticate to Vault. 
 
-   5. This secret is then used in the application.
+      ```
+      secretStoreRef:
+         kind: SecretStore
+         name: tenant-vault-secret-store     
+      ```
+
+   6. External Secrets Operator (ESO) requests to fetch secret data from the path specified in ExternalSecret CR.
+
+      ```
+         dataFrom:
+            - key: gitlab-pat
+      ```
+
+   7. Vault returns the requested secret data to External Secrets Operator (ESO).
+
+   8. External Secrets Operator (ESO) creates a Kubernetes Secret. 
+
+   9. Kubernetes Secret is consumed by Application.
 
 
 ## Secrets update workflow
@@ -234,33 +272,33 @@ sequenceDiagram
          actor User
          participant Vault
          participant ESO as External Secret Operator
-         participant Secret
+         participant secret as k8s Secret
          participant Reloader
          participant App as Application 
-         User->>Vault: Updates a Secret
-         ESO->>+Vault: watches for updated Secret
-         Vault-->>-ESO: Update received
-         ESO->>Secret: Updates k8s Secret
-         Reloader->>+Secret: watches for updated Secret
-         Secret-->>-Reloader: Update recieved
+         User->>Vault: Updates a key/value secret
+         ESO->>+Vault: watches for updated secret data
+         Vault-->>-ESO: Receives update, reconciles
+         ESO->>secret: Updates k8s Secret
+         Reloader->>+secret: watches for updated Secret
+         secret-->>-Reloader: Receives update, reconciles
          Reloader->>App: Performs rolling upgrade
    ```
 
    ### Workflow
 
-   1. Modify the secret in Vault UI
+   1. User modifies the secret data in Vault.
 
    2. External Secrets Operator (ESO) polls the Vault API for update after a defined time interval. This time interval is defined in the ExternalSecret CR created previously. 
 
       ```
-      refreshInterval: "1m"
+         refreshInterval: "1m"
       ```
 
-   3. Update is received by External Secrets Operator (ESO).
+   3. External Secrets Operator (ESO) receives the update and starts reconciliation.
 
-   4. External Secrets Operator (ESO) updates the values of Kubernetes Secret with the new values you just added in Vault.
+   4. External Secrets Operator (ESO) updates the values of Kubernetes Secret with the new values user just added in Vault.
 
-   5. Stakater Reloader is continously watching the Kubernetes Secret resource for change.
+   5. Stakater Reloader is continously watching the Kubernetes Secret for change.
 
    6. It receives the update instantly.
 
@@ -269,8 +307,30 @@ sequenceDiagram
 ## Secrets depreciation workflow
 
    ```mermaid
-   
+      sequenceDiagram
+         autonumber
+         actor User
+         participant Vault
+         participant ESO as External Secret Operator
+         participant Secret 
+         User->>Vault: Removes a Secret
+         ESO->>+Vault: watches for updated Secret
+         Vault-->>-ESO: Update recieved
+         ESO->>Secret: Removes k8s Secret
    ```
+
+   1. User removes secret from path in Vault.
+
+   3. External Secrets Operator (ESO) receives the update and starts reconciliation.
+
+   4. External Secrets Operator (ESO) uses defined deletion policy from ExternalSecret CR to either retain or delete the Kubernetes Secret.
+
+   ```
+      deletionPolicy: Retain
+   ``` 
+
+   - If deletion policy is set to `Retain`, Kubernetes Secret will not be deleted even after secret data on the defined path is removed from Vault.
+   - If deletion policy is set to `Delete`, Kubernetes Secret will be deleted and application will fall back to using default values.  
 
 
 ## 🖼️ Big Picture
