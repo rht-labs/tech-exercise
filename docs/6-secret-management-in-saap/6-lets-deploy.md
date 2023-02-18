@@ -52,13 +52,9 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
 ## Guide user to their application (UI)
 
-6. You can view the application by Logging In to the cluster & opening `<TENANT_NAME>-dev` project from projects.
+7. Navigate to `Networking > Routes` and copy route named `review-web` and open it in your browser. Make sure the project is `<TENANT_NAME>-dev`
 
-    --Add Image--
-
-7. Navigate to `Networking > Routes` and copy route named `review-web` and open it in your browser. 
-
-    --Add Image--
+    ![console-routes](./images/console-routes.png)
 
     Alternatively, you can run the following command in your devspace terminal and open it in your browser.
 
