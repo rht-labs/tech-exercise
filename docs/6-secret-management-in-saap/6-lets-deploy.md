@@ -14,7 +14,7 @@ In this section, we will deploy the `Nordmart Review UI` Application. `Nordmart 
 
         REVIEW_API=$(oc get route review --template='{{ .spec.host }}' -n <TENANT>-dev)
 
-3. Make a curl request on the url copied in the previous step. You should recieve a similar response as below.
+3. Make a curl request on the URL copied in the previous step. You should get a similar response as below.
 
     --Add Image--
 
@@ -31,7 +31,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
     --Add Image--
 
-3. Open the deploy/values.yaml in the editor and update the `application.deployment.env.REVIEW_API` value with the url you copied above.
+3. Open the deploy/values.yaml in the editor and update the `application.deployment.env.REVIEW_API` value with the URL you copied above.
 
     --Add Image--
 
@@ -39,7 +39,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
         
         yq -i -y --arg REVIEW_API "$REVIEW_API" '.application.deployment.env.REVIEW_API.value|=$REVIEW_API' deploy/values.yaml
 
-4. Before we deploy the application, lets build dependencies of helm chart in deploy/ folder.
+4. Before we deploy the application, lets build dependencies of Helm chart in deploy/ folder.
 
         helm dependency build deploy/
 
