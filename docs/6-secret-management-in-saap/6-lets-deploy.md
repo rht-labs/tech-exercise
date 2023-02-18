@@ -67,6 +67,8 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
         echo $REVIEW_UI
 
+    ![nortmart-review-ui](./images/nordmart-review-ui.png)
+
 ## 🖼️ Big Picture
 
 Great Work, Now that we have deployed our application, we can move on to our main topic secrets management.
