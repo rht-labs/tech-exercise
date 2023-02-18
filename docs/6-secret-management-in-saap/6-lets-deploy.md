@@ -56,7 +56,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
     --Add Image--
 
-7. Navigate to routes and copy route named `review-web` and open it in your browser. 
+7. Navigate to `Networking > Routes` and copy route named `review-web` and open it in your browser. 
 
     --Add Image--
 
