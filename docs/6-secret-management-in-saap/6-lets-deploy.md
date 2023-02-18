@@ -2,10 +2,6 @@
 
 In this section, we will deploy the `Nordmart Review UI` Application. `Nordmart Review UI` is a light weight application for management of product reviews. This application also requires backend `Nordmart Review` which is already deployed in your Tenant. This application implements review functionality for the products; it provides CRUDS API for reviews.
 
-1. Open terminal on your DevSpace by pressing `` Ctrl+Shift+` `` or clicking `Options > Terminal > New Terminal` as highlighted below.
-
-    --Add Image--
-
 1. You can view the application by Logging In to the cluster & opening `<TENANT_NAME>-dev` project from projects.
 
     --Add Image--
