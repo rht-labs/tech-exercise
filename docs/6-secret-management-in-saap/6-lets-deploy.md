@@ -4,7 +4,7 @@ In this section, we will deploy the `Nordmart Review UI` Application. `Nordmart 
 
 1. You can view the application by Logging In to the cluster & opening `<TENANT_NAME>-dev` project from projects.
 
-   ![devspace-new-terminal](images/devspace-new-terminal.png)
+    --Add Image--
 
 2. Navigate to routes and copy the route. 
 
@@ -25,15 +25,13 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
 1. Open terminal on your DevSpace by pressing `` Ctrl+Shift+` `` or clicking `Options > Terminal > New Terminal` as highlighted below.
 
-    --Add Image--
+   ![devspace-new-terminal](images/devspace-new-terminal.png)
 
 2. Make you are in `/projects/stakater-nordmart-review-ui` by running `pwd` 
 
-    --Add Image--
-
 3. Open the value file `deploy/values.yaml` in the editor and update the `application.deployment.env.REVIEW_API` value with the URL you copied above.
 
-    --Add Image--
+    ![devspace-deploy-value-update-review-api](images/devspace-deploy-value-update-review-api.png)
 
     Alternatively, you can run the following command in your terminal, 
         
@@ -41,10 +39,10 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
 4. Before we deploy the application, lets build dependencies of Helm chart in deploy/ folder.
 
+        helm repo add stakater https://stakater.github.io/stakater-charts
         helm dependency build deploy/
 
-    --Add Image--
-
+    ![devspace-helm-output](images/devspace-helm-output.png)
 
 5. Lets deploy the application by running the following command. 
 
