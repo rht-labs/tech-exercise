@@ -4,7 +4,7 @@ In this section, we will deploy the `Nordmart Review UI` Application. `Nordmart 
 
 1. You can view the application by Logging In to the cluster & opening `<TENANT_NAME>-dev` project from projects.
 
-    --Add Image--
+   ![devspace-new-terminal](images/devspace-new-terminal.png)
 
 2. Navigate to routes and copy the route. 
 
