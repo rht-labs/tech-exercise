@@ -48,7 +48,6 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
         helm template deploy/ -n <TENANT>-dev | oc apply -f -
 
-    --Add Image--
     ![devspace-helm-install-oc-apply](images/devspace-helm-install-oc-apply.png)
 
 ## Guide user to their application (UI)
