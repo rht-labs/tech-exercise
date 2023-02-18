@@ -46,7 +46,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
 5. Lets deploy the application by running the following command. 
 
-        helm template deploy/ | oc apply -f - -n <TENANT>-dev
+        helm template deploy/ -n <TENANT>-dev | oc apply -f -
 
     --Add Image--
 
