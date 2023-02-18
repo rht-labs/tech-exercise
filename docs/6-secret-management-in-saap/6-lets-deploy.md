@@ -31,7 +31,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
     --Add Image--
 
-3. Open the deploy/values.yaml in the editor and update the `application.deployment.env.REVIEW_API` value with the URL you copied above.
+3. Open the value file `deploy/values.yaml` in the editor and update the `application.deployment.env.REVIEW_API` value with the URL you copied above.
 
     --Add Image--
 
