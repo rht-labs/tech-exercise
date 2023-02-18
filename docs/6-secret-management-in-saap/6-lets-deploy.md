@@ -50,7 +50,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
     ![devspace-helm-install-oc-apply](images/devspace-helm-install-oc-apply.png)
 
-## Guide user to their application (UI)
+## View the application (UI)
 
 7. Navigate to `Networking > Routes` and copy route named `review-web` and open it in your browser. Make sure the project is `<TENANT_NAME>-dev`
 
