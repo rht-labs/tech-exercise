@@ -2,7 +2,7 @@
 
 In this section, we will walk through secret management workflow in SAAP. 
 
-## Explain how MTO, Vault & ESO come together to serve Secrets Management (Secrets injection related setup configuration and workflow)
+## Configuration - The role of Multi-Tenant Operator in piecing together the components for secrets management
 
 Following is detailed step by step sequence diagram of MTO works together with Vault and ESO:
 
@@ -173,9 +173,10 @@ sequenceDiagram
 
 12. Multi Tenant Operator (MTO) binds Service Account (with `stakater.com/vault-access: 'true'` label) and Policy with Role. Later, External Secrets Operator uses this Service Account to instantiate request to Vault for secret data.
 
-`All of this is Automated Thanks to MTO !!` :partying_face:
+<b>Note</b>: Point 13 onwards are explained in next workflow.
 
-## Secrets creation workflow
+
+## Creating Secrets
 
 ```mermaid 
 sequenceDiagram
@@ -230,10 +231,7 @@ sequenceDiagram
         creationPolicy: 'Owner'
         deletionPolicy: Retain
         template:
-          type: kubernetes.io/basic-auth
-          metadata:
-            annotations:
-              tekton.dev/git-0: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud'
+          type: Opaque
       dataFrom:
         - key: nordmart-review-ui-page-title
 
@@ -254,7 +252,7 @@ sequenceDiagram
 
       ```
          dataFrom:
-            - key: gitlab-pat
+            - key: nordmart-review-ui-page-title
       ```
 
    7. Vault returns the requested secret data to External Secrets Operator (ESO).
@@ -263,8 +261,20 @@ sequenceDiagram
 
    9. Kubernetes Secret is consumed by Application.
 
+      - In your DevWorkspace, open stakater-nordmart-review-ui repository code, and navigate to deploy folder.
+      - Open and edit values.yaml
+      - Add the following yaml, and under `deployment.env`, add environment variable for the secret we added in previous step
 
-## Secrets update workflow
+      ```
+         PAGE_TITLE:
+            valueFrom:
+               secretKeyRef:
+                  name: nordmart-review-ui-page-title
+                  key: page_title
+      ```
+
+
+## Updating Secrets
 
    ```mermaid
       sequenceDiagram
@@ -304,7 +314,7 @@ sequenceDiagram
 
    7. Stakater Reloader performs a rolling upgrade on Kubernetes resource(s). Application is up again with the updated secret values in no time! 
 
-## Secrets depreciation workflow
+## Deprecating Secrets
 
    ```mermaid
       sequenceDiagram
@@ -318,6 +328,8 @@ sequenceDiagram
          Vault-->>-ESO: Update recieved
          ESO->>Secret: Removes k8s Secret
    ```
+
+   ### Workflow
 
    1. User removes secret from path in Vault.
 
