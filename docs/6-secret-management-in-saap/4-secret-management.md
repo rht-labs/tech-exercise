@@ -7,46 +7,32 @@ In this section, we will walk through secret management workflow in SAAP.
 Following is detailed step by step sequence diagram of MTO works together with Vault and ESO:
 
 ```mermaid
-sequenceDiagram
-    autonumber
-    actor User
-    actor Admin
-    participant MTO as Multi-Tenant Operator
-    participant Namespace
-    participant SA as Service Account
-    participant SecretStore
-    participant Vault
-    participant ExternalSecret
-    participant ESO as External Secret Operator 
-    participant k8s Secret
-
-    Admin->>MTO: Creates a Tenant
-    MTO->>Vault: Creates a path in Vault with Tenant name to store key/value secrets
-    MTO->>Vault: Creates Policy with Tenant name
-    Note right of MTO: policy: path "tenantName/*" {capabilities=["read"]}
-    MTO->>Namespace: Creates Namespaces with Tenant labels
-    Admin->>MTO: Creates ServiceAccount Template with Vault access label
-    Note right of Admin: label: stakater.com/vault-access: 'true'
-    Admin->>MTO: Creates ServiceAccount TemplateGroupInstance [TGI]
-    Note right of Admin: TGI deploys Templates based on labels
-    MTO->>SA: Uses TGIs to create ServiceAccount in all Tenant Namespaces
-    Admin->>MTO: Creates SecretStore Template
-    Note right of Admin: SecretStore contains connection info for Vault and
-    Note right of Admin: a reference to ServiceAccount for authentication
-    Admin->>MTO: Creates SecretStore TemplateGroupInstance
-    MTO->>SecretStore: Uses TGIs to create SecretStore in all Tenant Namespaces
-    MTO->>Vault: Creates Role with Namespace name
-    MTO->>Vault: Binds Policy & ServiceAccount with Role when vault-access label found
-    Note right of MTO: This provides ServiceAccount access to Vault
-    User->>Vault: Adds key/value pair secret
-    User->>ExternalSecret: Adds ExternalSecret CR
-    Note right of MTO: Points to namespace SecretStore & secret's path in Vault
-    ESO->>+ExternalSecret: watches for CR creation
-    ExternalSecret-->>-ESO: CR created, ESO to reconcile
-    ESO-->SecretStore: ESO uses defined SecretStore & instantiates Vault request using ServiceAccount for authentication
-    ESO->>+Vault: Requests to fetch secret data from path
-    Vault->>-ESO: Returns secret data
-    ESO->>k8s Secret: Creates a k8s Secret
+   sequenceDiagram
+      autonumber
+      actor Admin
+      participant MTO as Multi-Tenant Operator
+      participant Namespace
+      participant SA as Service Account
+      participant SecretStore
+      participant Vault
+      Admin->>MTO: Creates a Tenant
+      MTO->>Vault: Creates a path in Vault with Tenant name to store key/value secrets
+      MTO->>Vault: Creates Policy with Tenant name
+      Note right of MTO: policy: path "tenantName/*" {capabilities=["read"]}
+      MTO->>Namespace: Creates Namespaces with Tenant labels
+      Admin->>MTO: Creates ServiceAccount Template with Vault access label
+      Note right of Admin: label: stakater.com/vault-access: 'true'
+      Admin->>MTO: Creates ServiceAccount TemplateGroupInstance [TGI]
+      Note right of Admin: TGI deploys Templates based on labels
+      MTO->>SA: Uses TGIs to create ServiceAccount in all Tenant Namespaces
+      Admin->>MTO: Creates SecretStore Template
+      Note right of Admin: SecretStore contains connection info for Vault and
+      Note right of Admin: a reference to ServiceAccount for authentication
+      Admin->>MTO: Creates SecretStore TemplateGroupInstance
+      MTO->>SecretStore: Uses TGIs to create SecretStore in all Tenant Namespaces
+      MTO->>Vault: Creates Role with Namespace name
+      MTO->>Vault: Binds Policy & ServiceAccount with Role when vault-access label found
+      Note right of MTO: This provides ServiceAccount access to Vault
 ```
 
 ### Workflow
