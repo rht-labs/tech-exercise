@@ -2,7 +2,7 @@
 
 In this section, we will walk through secret management workflow in SAAP. 
 
-## Configuration - The role of Multi-Tenant Operator in piecing together the components for secrets management
+## Backstage
 
 Following is detailed step by step sequence diagram of MTO works together with Vault and ESO:
 
@@ -185,8 +185,8 @@ sequenceDiagram
     ESO-->SecretStore: ESO uses defined SecretStore & instanciates Vault request using ServiceAccount for authentication
     ESO->>+Vault: Requests to fetch secret data from path
     Vault->>-ESO: Returns secret data
-    ESO->>k8s Secret: Creates a k8s Secret
-    k8s Secret ->> app: Secret is used by Application
+    ESO->>Secret: Creates a k8s Secret
+    Secret ->> app: Secret is used by Application
 ```
 
    ### Workflow 
@@ -278,7 +278,7 @@ sequenceDiagram
          User->>Vault: Updates a key/value secret
          ESO->>+Vault: watches for updated secret data
          Vault-->>-ESO: Receives update, reconciles
-         ESO->>secret: Updates k8s Secret
+         ESO->>Secret: Updates Secret
          Reloader->>+secret: watches for updated Secret
          secret-->>-Reloader: Receives update, reconciles
          Reloader->>App: Performs rolling upgrade
