@@ -231,10 +231,7 @@ sequenceDiagram
         creationPolicy: 'Owner'
         deletionPolicy: Retain
         template:
-          type: kubernetes.io/basic-auth
-          metadata:
-            annotations:
-              tekton.dev/git-0: 'https://gitlab.apps.devtest.vxdqgl7u.kubeapp.cloud'
+          type: Opaque
       dataFrom:
         - key: nordmart-review-ui-page-title
 
