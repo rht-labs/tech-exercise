@@ -35,7 +35,7 @@ Following is detailed step by step sequence diagram of MTO works together with V
       ESO-->SecretStore: ESO uses defined SecretStore & instantiates Vault request using ServiceAccount for authentication
       ESO->>+Vault: Requests to fetch secret data from path
       Vault->>-ESO: Returns secret data
-      ESO->>k8s Secret: Creates a k8s Secret
+      ESO->>Secret: Creates a k8s Secret
 ```
 
 ### Workflow
