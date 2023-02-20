@@ -9,6 +9,7 @@ Following is detailed step by step sequence diagram of MTO works together with V
 ```mermaid
    sequenceDiagram
       autonumber
+      actor User
       actor Admin
       participant MTO as Multi-Tenant Operator
       participant Namespace
