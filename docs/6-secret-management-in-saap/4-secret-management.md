@@ -19,7 +19,6 @@ sequenceDiagram
     participant ExternalSecret
     participant ESO as External Secret Operator 
     participant k8s Secret
-
     Admin->>MTO: Creates a Tenant
     MTO->>Vault: Creates a path in Vault with Tenant name to store key/value secrets
     MTO->>Vault: Creates Policy with Tenant name
