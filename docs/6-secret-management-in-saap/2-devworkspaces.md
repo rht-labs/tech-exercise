@@ -18,13 +18,13 @@ Read More at https://access.redhat.com/products/red-hat-openshift-dev-spaces
 A devworkspace is created automatically whenever a new user signs up as discussed in the previous section. In order to access your users devworkspace, do the following steps:
 
 ### From Forecastle
-1. Search `devspaces` in search bar at top right corner, Click the URL to devspaces, If prompted Select `Login via Openshift` and Login using your username and password.
+1. Search `devspaces` in search bar at top right corner, Click the URL to devspaces, If prompted Select `Login via Openshift` and Login to cluster.
 
     ![forecastle-devspaces](images/forecastle-devspaces.png)
 
 2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Options > Open` to open the devworkspace.
 
-    ![empty](images/empty.png)
+    --- Image ---
 
 3. You will be directed to devworkspace created for your user. 
 
@@ -34,7 +34,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 1. Find the URL to openshift console via forecastle and Login to the cluster.
 
-    ![forecastle-devspaces](images/forecastle-devspaces.png)
+    ![Forecastle-OpenShift-console](images/forecastle-openshift-console.png)
 
 3. Open the search page from `Home > Search`, Click Resources and search `Devworkspace`. Select `Devworkspace` to show only `Devworkspace` resources. Make sure to change to sandbox project/namespace called `<TENANT_NAME>-<USER_NAME>-<DOMAIN_NAME>-sandbox` on the top bar e.g. if you are registered as mustafa@stakater.com, project name will be `mustafa-mustafa-stakater-sandbox`.
 
@@ -49,7 +49,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 We specified the GitLab repositories deployed for your user into our Devworkspace as projects. 
 
-You can view these projects in bottom left window named `Che (workspace)`.
+You can view these projects in bottom left window named `Che (workspace)`. Browse the content by clicking on either of folders.
 
 ![devspace-projects](images/devspace-projects.png)
 
@@ -59,7 +59,7 @@ Open terminal on your DevSpace by pressing ` Ctrl+` ` or clicking Terminal > New
 
 ![devspace-new-terminal](images/devspace-new-terminal.png)
 
-You will be prompted to `Select a container to create a new terminal`
+You will be prompted to `Select a container to create a new terminal`. Select `stack-tl500` container, then select working directory, either `stakater-nordmart-review` and `stakater-nordmart-review-ui` as working directory.
 
 ![devspace-select-container-for-terminal](images/devspace-select-container-for-terminal.png)
 
@@ -76,6 +76,7 @@ Your user is already logged to the cluster in the devworkspace. If you still hav
 
     ![console-copy-login-command](images/console-copy-login-command.png)
 
-3. Open terminal on your DevSpace by pressing ` Ctrl+` ` or clicking Options > Terminal > New Terminal as highlighted below and paste the command copied in the previous step.
+    ![console-copy-login-command-pg](images/console-copy-login-command-pg.png)
+3. Open terminal on your DevSpace by pressing `` Ctrl+` `` or clicking `Terminal > New Terminal` from top menu, Select `stack-tl500` as container, Select working directory. Paste the command copied in the previous step to login.
 
-    --- Add Image ---
+    ![terminal-oc-login](images/terminal-oc-login.png)
