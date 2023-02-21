@@ -34,7 +34,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 1. Find the URL to openshift console via forecastle and Login to the cluster.
 
-    ![forecastle-openshift-console](images/forecastle-openshift-console.png)
+    ![forecastle-devspaces](images/forecastle-devspaces.png)
 
 3. Open the search page from `Home > Search`, Click Resources and search `Devworkspace`. Select `Devworkspace` to show only `Devworkspace` resources. Make sure to change to sandbox project/namespace called `<TENANT_NAME>-<USER_NAME>-<DOMAIN_NAME>-sandbox` on the top bar e.g. if you are registered as mustafa@stakater.com, project name will be `mustafa-mustafa-stakater-sandbox`.
 
