@@ -18,7 +18,7 @@ Read More at https://access.redhat.com/products/red-hat-openshift-dev-spaces
 A devworkspace is created automatically whenever a new user signs up as discussed in the previous section. In order to access your users devworkspace, do the following steps:
 
 ### From Forecastle
-1. Search `devspaces` in search bar at top right corner, Click the URL to devspaces, If prompted Select `Login via Openshift` and Login using your username and password.
+1. Search `devspaces` in search bar at top right corner, Click the URL to devspaces, If prompted Select `Login via Openshift` and Login using your credentials.
 
     ![forecastle-devspaces](images/forecastle-devspaces.png)
 
@@ -59,7 +59,7 @@ Open terminal on your DevSpace by pressing ` Ctrl+` ` or clicking Terminal > New
 
 ![devspace-new-terminal](images/devspace-new-terminal.png)
 
-You will be prompted to `Select a container to create a new terminal`. Select `stack-tl500` container, then select working directory, either `stakater-nordmart-review` and `stakater-nordmart-review-ui`.
+You will be prompted to `Select a container to create a new terminal`. Select `stack-tl500` container, then select working directory, either `stakater-nordmart-review` and `stakater-nordmart-review-ui` as working directory.
 
 ![devspace-select-container-for-terminal](images/devspace-select-container-for-terminal.png)
 
