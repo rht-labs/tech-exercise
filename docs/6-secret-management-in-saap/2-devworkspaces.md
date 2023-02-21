@@ -22,7 +22,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
     ![forecastle-devspaces](images/forecastle-devspaces.png)
 
-2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Options > Open` to open the devworkspace.
+2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Open` to open the devworkspace.
 
     ![devspace-workspace](images/devspace-workspace-pg.png)
 
