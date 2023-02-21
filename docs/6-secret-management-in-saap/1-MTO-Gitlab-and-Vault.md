@@ -1,36 +1,43 @@
 # OUR SETUP
 
-_TODO_
 
 SAAP - Stakater App Agility Platform is Kubernetes based fully managed DevSecOps platform on cloud of your choice for teams so, they can focus on their product!
 
 SAAP enables developers to control and configure the entire cloud development loop in order to ship software faster!
 
 We will register our SAAP user in the following section.
-
+> [SAAP Login](https://dev.cloud.stakater.com/)
 # Setting up your account
 
-1. To register your user, open the SAAP login page
+1. Open up SAAP login provided above. You will see the following screen. Type in stalater-devtest in Enterprise domain.
+   ![stk-devtest](./images/stk-devtest.png)
 
-![saap-login](./images/saap-login-1.png)
+2. Now click on three dots next to 'devtest' and select forecastle from the dropdown. This will take you to Forecastle.
+   ![saap](./images/saap.png)
 
-2. Select Register User from the above menu. This will redirect you to the registration form.
 
-3. Fill in the form with required details and hit Register.
+3. Open up 'Openshift Console' from the links displayed on forecastle. You will be taken to the cluster login page.
+   ![console](./images/console.png)
+
+   ![saap-login](./images/saap-login-1.png)
+
+4. Select Register User from the above menu. This will redirect you to the registration form.
+
+5. Fill in the form with required details and hit Register.
 
    *Note* Use your professional email for registration
 
 ![registration-form](./images/registration-form.png)
 
-4. Once you hit enter, the following screen will be shown, and you will a verification email will be sent to you on the email address you used in step 3.
+6. Once you hit enter, the following screen will be shown, and you will a verification email will be sent to you on the email address you used in step 3.
 
 ![verfication](./images/verification.png)
 
-5. Use the link provided in the email to verify your user.
+7. Use the link provided in the email to verify your user.
 
 ![email](./images/email.png)
 
-6. Once you've verified your user, you will be redirected to SAAP.
+8. Once you've verified your user, you will be redirected to SAAP.
    SAAP will then configure some things for you behind the scenes. Brief explanation of these configuration are provided in the following sections.
 
 
@@ -91,20 +98,32 @@ As already mentioned, a Gitlab resource in deployed in the [ORGANIZATION]-worksh
 
 Let's view these things in action!
 
-1. To open Gitlab, head over to forecastle again and search for Gitlab.
-2. Hit the user, you will be redirected to gitlab.
-3.
-_TODO_
+1. To open Gitlab, head over to [forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud/) again and search for Gitlab.
+   ![forecastle-gitlab](./images/forecastle-gitlab.png)
+
+2. Hit the url, you will be redirected to gitlab.
+   ![gitlab-projects](./images/gitlab-projects.png)
+
+3. You will see three repositories. The nordmart-review and nordmart-review-ui and apps-gitops-config. 
+  
+
 
 ## Devworkspace Creation
 
 When you registered your user, we also configured a devworkspace for you.
+
 The devworkspace will act and as IDE for you. It provides  consistent, secure, and zero-configuration development environment. You will learn more about devworkspace in the next section.
-We have already linked the projects added in Gitlab to your devworkspace. More on this later!!!
-[add-image]
+
+We have already linked the projects added in Gitlab to your devworkspace through a devfile. More on this later!!!
+
+For now, you can check the devworkspace by opening [forecastle](https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud/)  and clicking devworkspace.
+![forecastle-devworkspace](./images/forecastle-devworkspace.png)
+
 
 
 ## Argocd Application
 
-* Apps of apps for gitops repo
-  _TODO_
+The apps-gitops-config repository we saw in your gitlab acts as a gitops repository for deploying the nordmart-review application.
+
+Behind the scene, we created an argocd application for you that point to this repository. Argocd will deploy the nordmart review app in [ORGANIZATION]-dev namespace. 
+You can check this by going to openshift console, switching the project to [ORGANIZATION]-dev and opening up the pods. You should se nordmart-review pod running
