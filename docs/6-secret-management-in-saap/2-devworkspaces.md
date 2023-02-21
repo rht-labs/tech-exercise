@@ -45,7 +45,6 @@ A devworkspace is created automatically whenever a new user signs up as discusse
     console-devworkspace-yaml
     ![console-devworkspace-yaml](images/console-devworkspace-yaml.png)
     ![devspace-homepage](images/devspace-homepage.png)
-You are now successfully logged into the cluster.
 
 ## Switch between projects
 
