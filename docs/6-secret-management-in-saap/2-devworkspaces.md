@@ -42,7 +42,6 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 4. Open the Devworkspace resource in your sandbox namespace and click on yaml. Scroll down to `status` field, Check if workspace is running, Look for `mainURL` field. This URL is the link to your provisioned Devsworkspace as part of automation discussed earlier. Open the URL and verify if the Devworkspace is accessible. 
 
-    console-devworkspace-yaml
     ![console-devworkspace-yaml](images/console-devworkspace-yaml.png)
     ![devspace-homepage](images/devspace-homepage.png)
 
