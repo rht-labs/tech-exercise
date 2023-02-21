@@ -34,7 +34,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 1. Find the URL to openshift console via forecastle and Login to the cluster.
 
-    ![forecastle-devspaces](images/forecastle-devspaces.png)
+    ![forecastle-openshift-console](images/forecastle-openshift-console.png)
 
 3. Open the search page from `Home > Search`, Click Resources and search `Devworkspace`. Select `Devworkspace` to show only `Devworkspace` resources. Make sure to change to sandbox project/namespace called `<TENANT_NAME>-<USER_NAME>-<DOMAIN_NAME>-sandbox` on the top bar e.g. if you are registered as mustafa@stakater.com, project name will be `mustafa-mustafa-stakater-sandbox`.
 
@@ -49,7 +49,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 We specified the GitLab repositories deployed for your user into our Devworkspace as projects. 
 
-You can view these projects in bottom left window named `Che (workspace)`.
+You can view these projects in bottom left window named `Che (workspace)`. Browse the content by clicking on either of folders.
 
 ![devspace-projects](images/devspace-projects.png)
 
@@ -59,7 +59,7 @@ Open terminal on your DevSpace by pressing ` Ctrl+` ` or clicking Terminal > New
 
 ![devspace-new-terminal](images/devspace-new-terminal.png)
 
-You will be prompted to `Select a container to create a new terminal`
+You will be prompted to `Select a container to create a new terminal`. Select `stack-tl500` container, then select working directory, either `stakater-nordmart-review` and `stakater-nordmart-review-ui`.
 
 ![devspace-select-container-for-terminal](images/devspace-select-container-for-terminal.png)
 
