@@ -1,5 +1,7 @@
 # Exercise 6 - SECRET MANAGEMENT 
 
+> Forecastle : https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud/
+
 In this section, we will walk through secret management workflow in SAAP. 
 
 ## Backstage
@@ -165,6 +167,7 @@ Following is detailed step by step sequence diagram of MTO works together with V
 
 <b>Note</b>: Point 13 onwards are explained in next workflow.
 
+> Forecastle : https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud/
 
 ## Creating Secrets
 
