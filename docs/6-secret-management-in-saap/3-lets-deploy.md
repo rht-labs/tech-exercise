@@ -25,9 +25,7 @@ Great Now that we know our `Nordmart Review` backend is working, lets deploy the
 
 ## Deploy Nordmart Review UI
 
-1. Open terminal on your DevSpace by pressing `` Ctrl+Shift+` `` or clicking `Options > Terminal > New Terminal` as highlighted below.
-
-   ![devspace-new-terminal](images/devspace-new-terminal.png)
+1. Open terminal on your DevSpace by pressing `` Ctrl+` `` or clicking `Terminal > New Terminal` from top menu, Select `stack-tl500` as container, Select working directory `stakater-nordmart-review-ui`.
 
 2. Make you are in `/projects/stakater-nordmart-review-ui` by running `pwd` 
 
