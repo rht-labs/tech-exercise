@@ -16,6 +16,8 @@ In this section, we will deploy the `Nordmart Review UI` Application. `Nordmart 
 
 3. Make a curl request on the URL copied in the previous step. You should get a similar response as below.
 
+        curl http://$REVIEW_API:8080/api/review/329199
+
     --Add Image--
 
 
