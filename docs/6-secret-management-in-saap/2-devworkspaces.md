@@ -24,7 +24,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
 2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Options > Open` to open the devworkspace.
 
-    --- Image ---
+    ![devspace-workspace](images/devspace-workspace-pg.png)
 
 3. You will be directed to devworkspace created for your user. 
 
