@@ -30,7 +30,7 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
       ![devspace-homepage](images/devspace-homepage.png)  
 
-### From Openshift Cluster
+### From OpenShift Cluster
 
 1. Find the URL to openshift console via forecastle and Login to the cluster.
 
@@ -49,7 +49,7 @@ You are now successfully logged into the cluster.
 
 ## Switch between projects
 
-We specified the Gitlab repositories deployed for your user into our Devworkspace as projects. 
+We specified the GitLab repositories deployed for your user into our Devworkspace as projects. 
 
 You can view these projects in bottom left window named `Che (workspace)`.
 
