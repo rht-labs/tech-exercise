@@ -13,6 +13,8 @@ Pods manage each component of a OpenShift Dev Spaces workspace. Therefore, every
 
 Read More at https://access.redhat.com/products/red-hat-openshift-dev-spaces
 
+> Forecastle : https://forecastle-stakater-forecastle.apps.devtest.vxdqgl7u.kubeapp.cloud/
+
 ## How to access
 
 A devworkspace is created automatically whenever a new user signs up as discussed in the previous section. In order to access your users devworkspace, do the following steps:
@@ -22,9 +24,9 @@ A devworkspace is created automatically whenever a new user signs up as discusse
 
     ![forecastle-devspaces](images/forecastle-devspaces.png)
 
-2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Options > Open` to open the devworkspace.
+2. Click on Workspaces from sidebar, You will see a devworkspace named `<USER_NAME>-<DOMAIN>`, Click on `Open` to open the devworkspace.
 
-    --- Image ---
+    ![devspace-workspace](images/devspace-workspace-pg.png)
 
 3. You will be directed to devworkspace created for your user. 
 
