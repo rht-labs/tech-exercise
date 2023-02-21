@@ -76,6 +76,7 @@ Your user is already logged to the cluster in the devworkspace. If you still hav
 
     ![console-copy-login-command](images/console-copy-login-command.png)
 
-3. Open terminal on your DevSpace by pressing ` Ctrl+` ` or clicking Options > Terminal > New Terminal as highlighted below and paste the command copied in the previous step.
+    ![console-copy-login-command-pg](images/console-copy-login-command-pg.png)
+3. Open terminal on your DevSpace by pressing `` Ctrl+` `` or clicking `Terminal > New Terminal` from top menu, Select `stack-tl500` as container, Select working directory. Paste the command copied in the previous step to login to the cluster.
 
-    --- Add Image ---
+    ![empty](images/empty.png)
