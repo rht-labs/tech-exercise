@@ -142,6 +142,7 @@ _"Can you give me an example of not being open?" can lead to actionable items li
 
 <!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
+* [Team Identity](https://openpracticelibrary.com/practice/team-identity/)
 * [Social Contract](https://openpracticelibrary.com/practice/social-contract/)
 * [Affinity Mapping](https://openpracticelibrary.com/practice/affinity-mapping/)
 * [Voting (fist of five, dot voting, etc.)](https://openpracticelibrary.com/practice/confidence-voting/)
