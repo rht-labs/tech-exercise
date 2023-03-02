@@ -159,7 +159,7 @@ Kanban provides you with a set of metrics to measure your process. These metrics
 ### Related & Used Practices
 - [Kanban](https://openpracticelibrary.com/practice/kanban/)
 - [Kanban Picture](https://openpracticelibrary.com/practice/kanban-picture/)
-- [Scrum](https://openpracticelibrary.com/practice/)
+- [Scrum](https://openpracticelibrary.com/practice/scrum/)
 - [Prioritisation practices](https://openpracticelibrary.com/practice/)
 - [Definition of Ready](https://openpracticelibrary.com/practice/definition-of-ready/)
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done)

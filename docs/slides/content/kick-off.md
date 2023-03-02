@@ -174,7 +174,7 @@ Introduce yourself to the group and share your animal.
 - [Stop the world](https://openpracticelibrary.com/practice/stop-the-world-event/)
 - [Ice Breakers](https://openpracticelibrary.com/practice/ice-breakers/)
 - Team Forming
-- Information Radiators
+- [Information Radiators](https://openpracticelibrary.com/practice/visualisation-of-work/)
    
 </div>
 <div class="col" data-markdown>
@@ -183,6 +183,7 @@ Introduce yourself to the group and share your animal.
 - [Work Visualization](https://openpracticelibrary.com/practice/visualisation-of-work/)
 - [Burndown](https://openpracticelibrary.com/practice/burndown/)
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done/)
+- [Team Identity](https://openpracticelibrary.com/practice/team-identity/)
 - [Team Sentiment](https://openpracticelibrary.com/practice/team-sentiment/)
 - [Real Time Retro](https://openpracticelibrary.com/practice/realtime-retrospective/)
 - [Big Picture](https://openpracticelibrary.com/practice/the-big-picture/)
