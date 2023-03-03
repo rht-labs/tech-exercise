@@ -46,7 +46,7 @@
             // Credentials bound in OpenShift
             GIT_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-git-auth")
             NEXUS_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-nexus-password")
-            SONAR_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonar-auth")
+            SONAR_CREDS = credentials("${OPENSHIFT_BUILD_NAMESPACE}-sonarqube-auth")
         // .. more stuff ...
     }
     </code></pre></div>
