@@ -36,7 +36,7 @@ If you'd like to use the same setup, steps are below. You need to pass cluster d
 
 ```bash
 helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
-helm upgrade --install ipa . --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
+helm upgrade --install ipa redhat-cop/ipa --namespace=ipa --create-namespace --set app_domain=<CLUSTER_DOMAIN> --set ocp_auth.enabled=true
 ```
 FreeIPA takes some time to configure and launch the first time so be patient - or just go off and get a 🫖!
 
@@ -103,7 +103,7 @@ The exercises start with CodeReadyWorkspace link. So here is a one liner to get 
 ```bash
 echo https://$(oc get route/codeready -n tl500-workspaces --template='{{.spec.host}}')
 ```
-## CodeReady Workspaces Setup
+## CodeReady Workspaces / DevSpaces Setup
 
 During the exercises, we use different commandlines like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
@@ -115,7 +115,7 @@ There is a `tl500-devfile.yaml` which is the _as code_ definition of our workspa
 ...
   - type: dockerimage
     alias: stack-tl500
-    image: quay.io/rht-labs/stack-tl500:3.0.10
+    image: quay.io/rht-labs/stack-tl500:3.0.16
 ...
 ```
 
@@ -123,6 +123,6 @@ We have the explanation of how to get your own CodeReady Workspaces environment 
 
 ## Red Hat Product Demo System
 
-This is currently only available to Red Hat Associates. You can order up your own TL500 environment in [RHPDS](https://rhpds.redhat.com). This will provision for you the latest OpenShift & TL500 workshop environment. You can select cluster size, number or users and region.
+This is currently only available to Red Hat Associates. You can order up your own TL500 environment in [RHPDS](https://demo.redhat.com/catalog?search=tl500). This will provision for you the latest OpenShift & TL500 workshop environment. You can select cluster size, number or users and region.
 
 ![images/tl500-order-rhpds.png](images/tl500-order-rhpds.png)
