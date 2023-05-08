@@ -63,7 +63,7 @@
           type: string
       steps:
         - name: load-testing
-          image: quay.io/centos7/python-38-centos7:latest
+          image: registry.access.redhat.com/ubi9/python-39:latest
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           script: |
             #!/usr/bin/env bash

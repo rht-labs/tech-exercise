@@ -34,7 +34,7 @@ spec:
   steps:
     - name: package-app #better name for it
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      image: quay.io/openshift/origin-cli:4.9
+      image: quay.io/openshift/origin-cli:4.12
       script: |
         #!/bin/sh
         mv Dockerfile.jvm  Dockerfile
@@ -42,14 +42,14 @@ spec:
         curl -v -f -u $(params.STATIC_REPO_USERNAME):$(params.STATIC_REPO_PASSWORD) $(params.STATIC_REPO) --upload-file $(params.APPLICATION_NAME)-$(params.VERSION).tar.gz
     - name: openshift-build
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      image: quay.io/openshift/origin-cli:4.9
+      image: quay.io/openshift/origin-cli:4.12
       script: |
         #!/bin/sh
         oc new-build --binary --name=$(params.APPLICATION_NAME) -l app=$(params.APPLICATION_NAME) -l app.kubernetes.io/name=$(params.APPLICATION_NAME) --strategy=docker || rc=$?
         oc start-build $(params.APPLICATION_NAME) --from-archive=$(params.APPLICATION_NAME)-$(params.VERSION).tar.gz --follow --wait
     - name: tag-image
       workingDir: $(workspaces.output.path)
-      image: quay.io/openshift/origin-cli:4.9
+      image: quay.io/openshift/origin-cli:4.12
       script: |
         #!/bin/sh
         oc tag $(params.TEAM_NAME)-ci-cd/$(params.APPLICATION_NAME):latest $(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
