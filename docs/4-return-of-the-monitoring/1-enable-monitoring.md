@@ -6,7 +6,7 @@
 
 > Out of the box monitoring in OpenShift - this gives us the Kubernetes metrics for our apps such as Memory usage & CPU etc.
 
-1. To enable the User Workload Monitoring, a one line change has to be made to a config map. This is cluster wide so it's already been done for you, but if you're interested how the <span style="color:blue;">[docs are here](https://docs.openshift.com/container-platform/4.9/monitoring/enabling-monitoring-for-user-defined-projects.html#enabling-monitoring-for-user-defined-projects_enabling-monitoring-for-user-defined-projects).</span>
+1. To enable the User Workload Monitoring, a one line change has to be made to a config map. This is cluster wide so it's already been done for you, but if you're interested how the <span style="color:blue;">[docs are here](https://docs.openshift.com/container-platform/4.12/monitoring/enabling-monitoring-for-user-defined-projects.html).</span>
 
     On the OpenShift UI, go to *Observe*, it should show basic health indicators
 
