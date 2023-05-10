@@ -13,7 +13,7 @@ jobs:
     env:
       context: tests/container
       image_name: tl500-tech-exercise-test
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
       - name: Get image tags
@@ -29,7 +29,7 @@ jobs:
           echo "${TAGS[*]}"
       - name: Build image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.6
+        uses: redhat-actions/buildah-build@v2
         with:
           context: ${{ env.context }}
           dockerfiles: |

@@ -10,12 +10,12 @@ jobs:
     env:
       context: docs
       image_name: tl500-tech-exercise
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
       - name: Build image
         id: build_image
-        uses: redhat-actions/buildah-build@v2.6
+        uses: redhat-actions/buildah-build@v2
         with:
           context: ${{ env.context }}
           dockerfiles: |
