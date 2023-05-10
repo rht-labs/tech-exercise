@@ -31,7 +31,7 @@ spec:
   steps:
     - name: verify
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      image: quay.io/openshift/origin-cli:4.9
+      image: quay.io/openshift/origin-cli:4.12
       script: |
         #!/bin/sh
         # verify the deployment by checking the VERSION against PREVIOUS_VERSION

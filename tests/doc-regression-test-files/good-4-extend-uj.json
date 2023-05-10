@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.10\",\"values\":{\"includeRHRepositories\": false,\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.11\",\"values\":{\"includeRHRepositories\": false,\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.10\",\"values\":{\"includeRHRepositories\": false,\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"nexus\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"nexus\",\"enabled\": true,\"source\": \"https://redhat-cop.github.io/helm-charts\",\"chart_name\": \"sonatype-nexus\",\"source_ref\": \"1.1.11\",\"values\":{\"includeRHRepositories\": false,\"service\": {\"name\": \"nexus\"}}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
                 }
             ],
             "tags": [

@@ -156,14 +156,14 @@ Let's run through a scenario where we break/fix the build with **kube-linter**.
 
     ```xml
         <artifactId>pet-battle-api</artifactId>
-        <version>1.3.1</version>
+        <version>1.3.2</version>
     ```
 
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
     cd /projects/pet-battle-api
-    mvn -ntp versions:set -DnewVersion=1.3.1
+    mvn -ntp versions:set -DnewVersion=1.3.2
     ```
 
 8. We can check the **kube-linter** command again and check these changes in:

@@ -97,15 +97,15 @@
         enabled: true
         source: https://redhat-cop.github.io/helm-charts
         chart_name: sonarqube
-        source_ref: "0.1.0"
+        source_ref: "0.1.3"
         values:
           account:
             existingSecret: sonarqube-auth
           initContainers: true
           plugins:
             install:
-              - https://github.com/checkstyle/sonar-checkstyle/releases/download/9.2/checkstyle-sonar-plugin-9.2.jar
-              - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/2.0.8/sonar-dependency-check-plugin-2.0.8.jar
+              - https://github.com/checkstyle/sonar-checkstyle/releases/download/10.9.3/checkstyle-sonar-plugin-10.9.3.jar
+              - https://github.com/dependency-check/dependency-check-sonar-plugin/releases/download/3.1.0/sonar-dependency-check-plugin-3.1.0.jar
     ```
 
 6. Git add, commit, push your changes (GITOPS WOOOO 🪄🪄). On ArgoCD you'll see it come alive.

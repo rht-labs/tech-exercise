@@ -25,13 +25,13 @@
         - name: COSIGN_VERSION
           type: string
           description: Version of cosign CLI
-          default: 1.7.2
+          default: 2.0.2
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
           type: string
       steps:
         - name: image-signing
-          image: quay.io/openshift/origin-cli:4.9
+          image: quay.io/openshift/origin-cli:4.12
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           script: |
             #!/usr/bin/env bash
@@ -39,7 +39,7 @@
             chmod -R 775 /tmp/cosign
 
             oc registry login
-            /tmp/cosign sign -key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) --allow-insecure-registry
+            /tmp/cosign sign --key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) --allow-insecure-registry
     EOF
     ```
 

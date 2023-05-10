@@ -221,7 +221,7 @@ Let's run through a scenario where we break/fix the build using a build policy v
 6. Remove the `EXPOSE 22` from the `Dockerfile.jvm` and check it in to make the build pass.
 
     ```bash
-    cd /project/pet-battle-api
+    cd /projects/pet-battle-api
     git add .
     git commit -m  "🐧 FIX - Security violation, remove port 22 exposure 🐧"
     git push

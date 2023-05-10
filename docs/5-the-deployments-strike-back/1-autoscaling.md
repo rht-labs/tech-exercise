@@ -81,12 +81,12 @@
     Then, using the `k6` binary, run the load test using more than one virtual user and a defined duration.
 
     ```bash
-    k6 run --insecure-skip-tls-verify --vus 100 --duration 30s /tmp/load.js 
+    k6 run --insecure-skip-tls-verify --vus 100 --duration 300s /tmp/load.js 
     ```
 
     Where:
     * --vus: Number of virtual users (VUs) to run concurrently (100)
-    * --duration: Test duration limit (30s)
+    * --duration: Test duration limit (300s)
 
 6. While this is running, we should see in OpenShift land the autoscaler is kickin in and spinnin gup additional pods. If you navigate to the pet-battle-api deployment, you should see the replica count has jumped.
 
