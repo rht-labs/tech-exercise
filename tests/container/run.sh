@@ -9,7 +9,7 @@ TECH_EXERCISE_BRANCH="${BRANCH:=main}"
 
 # run the test suite
 git clone "${TECH_EXERCISE_REPO}" 2>&1
-cd tech-exercise && git checkout "${TECH_EXERCISE_BRANCH} && cd tests
+cd tech-exercise && git checkout "${TECH_EXERCISE_BRANCH}" && cd tests
 
 # nuke and exit
 if [ ! -z "${NUKE_ONLY}" ]; then
