@@ -5,7 +5,7 @@ team will be easy following the next instructions.
 
 1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
 
-    ![crw](../1-the-manual-menace/images/crw.png)
+    ![devspaces](../1-the-manual-menace/images/devspaces.png)
 
     <p class="warn">
     If the workspace has not been set up for you, you can create one from this `devfile`.
@@ -21,7 +21,7 @@ team will be easy following the next instructions.
     <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
     </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting `Terminal > Open Terminal in Specific Container > stack-tl500` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu.
 
     ![new-terminal](../1-the-manual-menace/images/new-terminal.png)
 

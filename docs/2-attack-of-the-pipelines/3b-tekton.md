@@ -33,11 +33,13 @@ In this snippet of the pipeline used in this exercise, we define:
         ⛷️ <b>NOTE</b> ⛷️ - If pet-battle-api folder is not appeared on the left hand side, you need to add it to your workspace manually as follows: 
     </p>
 
-    Click the three dots next to CHE (workspace), then 'Add Folder to Workspace..'
+    Click the hamburger menu on top left, then `File > Add Folder to Workspace`
     ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
 
-    Select `/` and find `pet-battle` folder under `projects`. Select `pet-battle-api` and click `Open`
+    Select `pet-battle-api` from the list and click `OK`.
     ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
+
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu._
 
 
 3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as Helm Chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
