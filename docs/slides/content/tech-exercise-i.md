@@ -91,7 +91,7 @@ _We will set up Git projects, create dev, test, and stage projects in OpenShift,
 * In your table teams, form a **mob** to complete the exercise. Work **together as a team** to deploy your shared tooling and infrastructure!
 * You will want to rotate the `driver` at the end of each exercise section to give everyone a chance to get their hands dirty with code!
 * If you finish the exercise early, try your hand at the `🐉Here be dragons🐉 ` section.
-* Your facilitator will share links to the instructions, OpenShift Console, CRW, and GitLab server.
+* Your facilitator will share links to the instructions, OpenShift Console, DevSpaces, and GitLab server.
 
 
 
