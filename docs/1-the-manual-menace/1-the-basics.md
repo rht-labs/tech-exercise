@@ -1,7 +1,7 @@
 ## 🐌 The Basics - CRW, OCP & Helm
-## CodeReady Workspaces setup
+## DevSpaces setup
 
-1. Login to your CodeReadyWorkspace (CRW) Editor. The link to this will be provided by your instructor.
+1. Login to your Red Hat OpenShift DevSpaces Editor. The link to this will be provided by your instructor.
 
     ![devspaces](./images/devspaces.png)
 
@@ -13,7 +13,7 @@
     For OpenShift 4.9, 4.10 - Enter this URL to load the TL500 stack:</br>
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </br>
-    On DevSpaces Workspaces, "Add Workspace > Import from Git".
+    On DevSpaces,  "Quick Add > Import from Git".
     </br>
     For OpenShift 4.11+ - Enter this URL to load the TL500 stack:</br>
     <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
