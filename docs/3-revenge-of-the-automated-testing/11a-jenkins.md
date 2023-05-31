@@ -3,7 +3,7 @@
 1. Add a new stage into Jenkinsfile with SBOM steps. Copy the below block into the right placeholder:
 
     ```groovy
-            // 🔏 SBOM EXAMPLE GOES HERE
+            // 💸 SBOM EXAMPLE GOES HERE
             stage("💸 Generate and Attest SBOM") {
                 agent { label "jenkins-agent-cosign" }           
                 options {
@@ -23,7 +23,7 @@
             }
     ```
 
-3. Store the public key in `pet-battle` repo for anyone who would like to verify our images, alongside the Jenkinsfile changes. This push will trigger a Jenkins job for build as well.
+3. Store the public key in `pet-battle` repo for anyone who would like to verify our image, alongside the Jenkinsfile changes. This push will trigger a Jenkins job for build as well.
 
     ```bash
     cp /tmp/cosign.pub /projects/pet-battle/
@@ -38,7 +38,7 @@
 
     After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sbom` and `.att` which shows you that an attestation for the SBOM predicate attached. With this, the SBOM is signed (and therefore tamper-proof) as it is within an attestation, and consumers can validate its authenticity.
 
-    <insert image>
+    ![sbom-sign-pet-battle](images/sbom-sign-pet-battle.png)
 
 
 4. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.2.0` in this case)

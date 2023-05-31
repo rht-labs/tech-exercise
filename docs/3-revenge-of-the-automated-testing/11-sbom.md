@@ -1,19 +1,19 @@
 # Generate and Attest SBOMs
 
-> SBOM refers to the Software Bill of Materials. Basically it's the list of components that software contains. It allows you to keep track of the security vulnerabilities of each component of the application to make sure everything is up-to-date and secure.
+> SBOM refers to the Software Bill of Materials. An SBOM reflects what is in a particular build. It provides transparency and visibility into the produced components of the software organizations market and use. Basically it's the list of components that software contains. It allows you to keep track of the security vulnerabilities of each component of the application to make sure everything is up-to-date and secure.
 
 SBOM doesn’t hold much value without an attestation or assurance that the code you received is the code that was released. An attestation is cryptographically-signed metadata used to verify the integrity of an event or artifact, known as a predicate. In this case, the SBOM is the predicate, and the attestation is the metadata that verifies the code within an SBOM. An attestation with an SBOM should be generated as part of the build process, to assure that the SBOM hasn’t been tampered with before being attached to an image. <a href="https://next.redhat.com/2022/10/27/establishing-a-secure-pipeline/"><sup>[1]</sup></a>
 
-In this exercise, we'll use [Syft](https://github.com/anchore/syft) to generate SBOM and store the attestation in public [Rekor Server](https://rekor.sigstore.dev) _so please do not publish any personal data🫣_ 
+In this exercise, we'll use [Syft](https://github.com/anchore/syft) to generate SBOM. Then, we use `cosign` to attach the produced SBOM document to the image metadata and store the signature and certificate in  public [Rekor Server](https://rekor.sigstore.dev) transparency log _so please do not use any personal data🫣_ 
 
 ## Task
 
-<insert task & AC from Miro>
+![task-sbom](images/task-sbom.png)
 
 ## Before starting, generate your keys
 
 <p class="warn">
-⛷️ <b>NOTE</b> ⛷️ - If you've done <a href="/tech-exercise/#/3-revenge-of-the-automated-testing/8-image-signing">Image Signing</a> exercise and already generated your keys in <TEAM_NAME>-ci-cd namespace, you can skip this step. We will use the same key to attest SBOMs.
+⛷️ <b>NOTE</b> ⛷️ - If you've done <a href="/tech-exercise/#/3-revenge-of-the-automated-testing/8-image-signing">Image Signing</a> exercise and already generated your keys in <TEAM_NAME>-ci-cd namespace, you can skip the *first* step. We will use the same key to attest SBOMs.
 </p>
 
 
@@ -78,7 +78,7 @@ In this exercise, we'll use [Syft](https://github.com/anchore/syft) to generate 
     </pre></code>
     </code></pre></div>
 
-Now let's proceed to extend the pipelines with generate and sign SBOM step.
+Now let's proceed to extend the pipelines with generate and attest SBOM step.
 
 _This step makes more sense when you use an external image registry and share images across clusters or publicly._
 

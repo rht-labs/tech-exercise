@@ -202,6 +202,8 @@ spec:
      
     # Cosign Image Sign
 
+    # Generate and Attest SBOM
+
     # Pen Testing
 
     # Load Testing

@@ -1,0 +1,33 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: generate-sbom
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+    - name: TEAM_NAME
+      description: Name of the team that doing this exercise :)
+      type: string
+    - name: VERSION
+      description: Version of the application
+      type: string
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+  steps:
+    - name: generate-sbom
+      image: quay.io/openshift/origin-cli:4.12
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      script: |
+        #!/usr/bin/env bash
+        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /tmp/
+        chmod -R 775 /tmp/syft
+
+        oc registry login
+        /tmp/syft -o spdx `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) > $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom
+        cosign attach sbom --sbom $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
+        cosign attest --key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign  --predicate $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
