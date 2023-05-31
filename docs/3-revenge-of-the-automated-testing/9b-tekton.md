@@ -1,53 +1,14 @@
-## Extend Tekton Pipeline with Load Testing
+## Extend Tekton Pipeline with Generating and Attesting SBOM
 
-1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
-
-    We need to create a `locustfile.py` for testing scenario and save it in the application repository.
-
-    _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
-
-    Below scenario calls `/cats` endpoint and fails the test if:
-    - 1% of calls are not 200 (OK)
-    - Total average response time to `/cats` endpoint is more than 200 ms
-    - The max response time in 90 percentile is higher than 800 ms
-
-    ```bash
-    cat << EOF > /projects/pet-battle-api/locustfile.py
-
-    import logging
-    from locust import HttpUser, task, events
-
-    class getCat(HttpUser):
-        @task
-        def cat(self):
-            self.client.get("/cats", verify=False)
-
-    @events.quitting.add_listener
-    def _(environment, **kw):
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
-        else:
-            environment.process_exit_code = 0
-
-    EOF
-    ```
-
-2. Add a task to the tekton pipeline for running the load testing:
+1. Add a task into our codebase to generate and store SBOM.
 
     ```bash
     cd /projects/tech-exercise
-    cat <<'EOF' > tekton/templates/tasks/load-testing.yaml
+    cat <<'EOF' > tekton/templates/tasks/generate-sbom.yaml
     apiVersion: tekton.dev/v1beta1
     kind: Task
     metadata:
-      name: load-testing
+      name: generate-sbom
     spec:
       workspaces:
         - name: output
@@ -58,29 +19,44 @@
         - name: TEAM_NAME
           description: Name of the team that doing this exercise :)
           type: string
+        - name: VERSION
+          description: Version of the application
+          type: string
+        - name: COSIGN_VERSION
+          type: string
+          description: Version of cosign CLI
+          default: 2.0.2
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
           type: string
       steps:
-        - name: load-testing
-          image: registry.access.redhat.com/ubi9/python-39:latest
+        - name: generate-sbom
+          image: quay.io/openshift/origin-cli:4.12
           workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
           script: |
             #!/usr/bin/env bash
-            pip3 install locust
-            locust --headless --users 10 --spawn-rate 1 -H https://$(params.APPLICATION_NAME)-$(params.TEAM_NAME)-test.{{ .Values.cluster_domain }} --run-time 1m --loglevel INFO --only-summary 
+            curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /tmp
+            chmod -R 775 /tmp/syft
+
+            curl -skL -o /tmp/cosign https://github.com/sigstore/cosign/releases/download/v$(params.COSIGN_VERSION)/cosign-linux-amd64
+            chmod -R 775 /tmp/cosign
+
+            oc registry login
+            /tmp/syft -o spdx `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) > $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom
+            /tmp/cosign attach sbom --sbom $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
+            /tmp/cosign attest --key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign --yes --predicate $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
     EOF
     ```
 
-3. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is.
+2. Let's add this task into pipeline. Edit `tekton/templates/pipelines/maven-pipeline.yaml` and copy below yaml where the placeholder is. Make sure you update `runAfter` accordingly.
 
     ```yaml
-        # Load Testing
-        - name: load-testing
+        # Syft Sbom Generate
+        - name: generate-sbom
           runAfter:
-            - verify-deployment
+          - image-signing
           taskRef:
-            name: load-testing
+            name: generate-sbom
           workspaces:
             - name: output
               workspace: shared-workspace
@@ -89,40 +65,55 @@
               value: "$(params.APPLICATION_NAME)"
             - name: TEAM_NAME
               value: "$(params.TEAM_NAME)"
+            - name: VERSION
+              value: "$(tasks.maven.results.VERSION)"
             - name: WORK_DIRECTORY
               value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
     ```
 
-4. Remember -  if it's not in git, it's not real.
+3. We said this before; If it's not real unless it's in git ✨
 
     ```bash
-    cd /projects/tech-exercise/tekton
+    # git add, commit, push your changes..
+    cd /projects/tech-exercise
     git add .
-    git commit -m  "🌀 ADD - load testing task 🌀"
+    git commit -m  "🤑 ADD - generate and attest SBOM task 🤑"
     git push
     ```
 
-5. Now let's trigger the pet-battle-api pipeline by pushing `locustfile.py` and verify if the load testing task works as expected.
+4. Store the public key in `pet-battle-api` repository for anyone who would like to verify our images. This push will also trigger the pipeline.
+
+    ```bash
+    cp /tmp/cosign.pub /projects/pet-battle-api/
+    cd /projects/pet-battle-api
+    git add cosign.pub
+    git commit -m  "🫛 ADD - cosign public key for image verification 🫛"
+    git push
+    ```
+
+    🪄 Observe the **pet-battle-api** pipeline running with the **image-sign** task.
+
+    After the task successfully finish, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sbom` and `.att` which shows you that an attestation for the SBOM predicate attached. With this, the SBOM is signed (and therefore tamper-proof) as it is within an attestation, and consumers can validate its authenticity.
+
+    ![sbom-sign-pet-battle-api](images/sbom-sign-pet-battle-api.png)
+
+5.  Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.3.1` in this case)
 
     ```bash
     cd /projects/pet-battle-api
-    git add locustfile.py
-    git commit -m  "🌀 ADD - locustfile for load testing 🌀"
-    git push
+    oc registry login $(oc registry info) --insecure=true
+    cosign tree default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1 --allow-insecure-registry
     ```
 
-    🪄 Observe the **pet-battle-api** pipeline running with the **load-testing** task.
+    The output should be like:
 
-    If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
-
-    ```py
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
-    ```
+    <div class="slider" style="background: #f7f7f7">
+    <pre><code class="slide">
+    <pre><code class="language-bash">
+    📦 Supply Chain Security Related artifacts for an image: default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle-api:1.3.1
+    └── 💾 Attestations for an image tag: default-route-openshift-image-registry.apps.cluster-gqz4b.gqz4b.sandbox763.opentlc.com/ateam-test/pet-battle-api:sha256-927e6af9b12a04d49e9d90d914ab4c64364d1028306778b2d56c1cfea30e8e0c.att
+      └── 🍒 sha256:04b22f0cb09d322083ebe6f580b4ac4af6889734f0c5ab81a264b2c2397696b2
+    └── 📦 SBOMs for an image tag: default-route-openshift-image-registry.apps.cluster-gqz4b.gqz4b.sandbox763.opentlc.com/ateam-test/pet-battle-api:sha256-927e6af9b12a04d49e9d90d914ab4c64364d1028306778b2d56c1cfea30e8e0c.sbom
+      └── 🍒 sha256:854c9b42c8385ca83d4b715fdcdd71f2965b82e6c6b79ebc8b73189832205fca
+    </pre></code>
+    </code></pre></div>

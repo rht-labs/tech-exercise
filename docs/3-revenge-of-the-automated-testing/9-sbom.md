@@ -1,4 +1,4 @@
-# Generate and Attest SBOMs
+# Generate and Attest SBOM
 
 > SBOM refers to the Software Bill of Materials. An SBOM reflects what is in a particular build. It provides transparency and visibility into the produced components of the software organizations market and use. Basically it's the list of components that software contains. It allows you to keep track of the security vulnerabilities of each component of the application to make sure everything is up-to-date and secure.
 
@@ -21,13 +21,13 @@ In this exercise, we'll use [Syft](https://github.com/anchore/syft) to generate 
 
     ```bash
     cd /tmp
-    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
+    cosign generate-key-pair k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign 
     ```
 
     You should get an output like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    $ cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
+    $ cosign generate-key-pair k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign
     Enter password for private key:
     Enter again:
     Successfully created secret cosign in namespace <TEAM_NAME>-ci-cd

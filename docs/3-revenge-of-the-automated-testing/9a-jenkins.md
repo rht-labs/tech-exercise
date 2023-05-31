@@ -1,121 +1,63 @@
-## Extend Jenkins Pipeline with Load Testing
+## Extend Jenkins Pipeline with Generating and Attesting SBOM
 
-1. For load testing, we will use a Python-based open source tool called <span style="color:blue;">[`locust`](https://docs.locust.io/en/stable/index.html)</span>. Locust helps us to write scenario based load testing and fail the pipeline if the results don't match with our expectations (ie if average response time ratio is higher 200ms, the pipeline fails).
-
-    _You can find how to write more complex testing scenarios for your needs in <span style="color:blue;">[Locust documentation](https://docs.locust.io/en/stable/writing-a-locustfile.html)_</span>
-
-    In order to use `locust cli`, we need a Jenkins agent with python3 in it. Open up `tech-exercise/ubiquitous-journey/values-tooling.yaml` and extend jenkins-agent list with the following:
-
-    ```yaml
-            - name: jenkins-agent-python
-    ```
-
-    You should have a list similar this now:
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-            # Jenkins agents for running builds etc
-            # default names, versions, repo and paths set on the template
-            - name: jenkins-agent-npm
-            - name: jenkins-agent-mvn
-            - name: jenkins-agent-helm
-            - name: jenkins-agent-argocd
-            - name: jenkins-agent-python # add this
-    </code></pre></div>
-
-    Commit the changes to the Git repository:
-
-    ```bash
-    cd /projects/tech-exercise
-    git add ubiquitous-journey/values-tooling.yaml
-    git commit -m  "🐍 ADD - Python Jenkins Agent 🐍"
-    git push
-    ```
-
-    <p class="warn">If you get an error like <b>error: failed to push some refs to..</b>, please run <b><i>git pull</i></b>, then push your changes again by running above commands.</p>    
-
-2. We need to create a `locustfile.py` for testing scenario and save it in the application repository.
-
-    Below scenario calls `/home` endpoint and fails the test if:
-    - 1% of /cats calls are not 200 (OK)
-    - Total average response time to /cats endpoint is more than 200 ms
-    - The max response time in 90 percentile is higher than 800 ms
-
-    ```bash
-    cat << EOF > /projects/pet-battle/locustfile.py
-
-    import logging
-    from locust import HttpUser, task, events
-
-    class getCat(HttpUser):
-        @task
-        def cat(self):
-            self.client.get("/home", verify=False)
-
-    @events.quitting.add_listener
-    def _(environment, **kw):
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
-        else:
-            environment.process_exit_code = 0
-    EOF
-    ```
-
-3. Create a stage which uses `jenkins-agent-python` agent and triggers the load test. Copy the below code to the placeholder in `/project/pet-battle/Jenkinsfile`:
+1. Add a new stage into Jenkinsfile with SBOM steps. Copy the below block into the right placeholder:
 
     ```groovy
-            // 🏋🏻‍♀️ LOAD TESTING EXAMPLE GOES HERE
-            stage("🏋🏻‍♀️ Load Testing") {
-                agent { label "jenkins-agent-python" }
+            // 💸 SBOM EXAMPLE GOES HERE
+            stage("💸 Generate and Attest SBOM") {
+                agent { label "jenkins-agent-cosign" }           
                 options {
-                   skipDefaultCheckout(true)
+                        skipDefaultCheckout(true)
                 }
                 steps {
-                    sh '''
-                    git clone ${GIT_URL} pet-battle && cd pet-battle
-                    git checkout ${BRANCH_NAME}
-                    '''
-                    dir('pet-battle'){
                     script {
                         sh '''
-                        pip3 install locust
-                        locust --headless --users 10 --spawn-rate 1 -H https://${APP_NAME}-${DESTINATION_NAMESPACE}.<CLUSTER_DOMAIN> --run-time 1m --loglevel INFO --only-summary
+                        curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /tmp/
+                        oc registry login
+                        /tmp/syft -o spdx `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} > ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom
+                        cosign attach sbom --sbom ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
+                        cosign attest --key k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign --yes --predicate ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
                         '''
-                       }
                     }
                 }
             }
     ```
 
-    Above command will install locust cli and then start requests of 10 users at the same time for one minute. Then either fail or keep the pipeline going.
-
-    Now that we update the Jenkinsfile, we need to push the changes which also starts the pipeline.
+3. Store the public key in `pet-battle` repo for anyone who would like to verify our image, alongside the Jenkinsfile changes. This push will trigger a Jenkins job for build as well.
 
     ```bash
+    cp /tmp/cosign.pub /projects/pet-battle/
     cd /projects/pet-battle
-    git add Jenkinsfile locustfile.py
-    git commit -m  "🌀 ADD - load testing stage and locustfile 🌀"
+    git add cosign.pub Jenkinsfile
+    git commit -m  "⛹️ ADD - cosign public key and Jenkinsfile updated ⛹️"
     git push
     ```
 
-    🪄 Obeserve the **pet-battle** pipeline running with the **load testing** stage.
+    🪄 Observe the **pet-battle** pipeline running with the **SBOM** stage.
+    ![sbom-jenkins-pipeline](images/sbom-jenkins-pipeline.png)
 
-    If the pipeline fails due to the thresh-holds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+    After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sbom` and `.att` which shows you that an attestation for the SBOM predicate attached. With this, the SBOM is signed (and therefore tamper-proof) as it is within an attestation, and consumers can validate its authenticity.
 
-    ```py
-        if environment.stats.total.fail_ratio > 0.01:
-            logging.error("Test failed due to failure ratio > 1%")
-            environment.process_exit_code = 1
-        elif environment.stats.total.avg_response_time > 200:
-            logging.error("Test failed due to average response time ratio > 200 ms")
-            environment.process_exit_code = 1
-        elif environment.stats.total.get_response_time_percentile(0.95) > 800:
-            logging.error("Test failed due to 95th percentile response time > 800 ms")
-            environment.process_exit_code = 1
+    ![sbom-sign-pet-battle](images/sbom-sign-pet-battle.png)
+
+
+4. Let's verify the signed image with the public key. Make sure you use the right `APP VERSION` for the image. (`1.2.0` in this case)
+
+    ```bash
+    cd /projects/pet-battle
+    oc registry login $(oc registry info) --insecure=true
+    cosign tree default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.2.0 --allow-insecure-registry
     ```
+
+    The output should be like:
+
+    <div class="slider" style="background: #f7f7f7">
+    <pre><code class="slide">
+    <pre><code class="language-bash">
+    📦 Supply Chain Security Related artifacts for an image: default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:1.2.0
+    └── 💾 Attestations for an image tag: default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:sha256-2f0cf946b624325718bcfae0675b4320db638f61fef2e46ad37d10acc1ec8843.att
+        └── 🍒 sha256:cf27bc99880d1f63f3cdcebda6dc216d97ea77f4f36a20faad4a4e1494336641
+    └── 📦 SBOMs for an image tag: default-route-openshift-image-registry.<CLUSTER_DOMAIN>/<TEAM_NAME>-test/pet-battle:sha256-2f0cf946b624325718bcfae0675b4320db638f61fef2e46ad37d10acc1ec8843.sbom
+        └── 🍒 sha256:d07f074cb397727fb52798dc98da39aef43dcbb863f4e7cf8de17b39fe8ba9dd
+    </pre></code>
+    </code></pre></div>
