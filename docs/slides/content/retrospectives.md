@@ -13,13 +13,13 @@ TL500 <!-- {.element: class="title-color"} -->
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
   <h2>Retrospectives</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/retrospectives/">
   <img src="images/opl-delivery.png">
   </a>
 </div>
 <div class="fragment current-visible" data-fragment-index="1" >
   <h2>Realtime Retrospective</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/iteration-planning/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/realtime-retrospective/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
