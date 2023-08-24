@@ -13,13 +13,13 @@ TL500 <!-- {.element: class="title-color"} -->
 </div>
 <div class="fragment fade-in-then-out" data-fragment-index="1" >
   <h2>Priority Sliders</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/priority-liders/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/priority-sliders/">
   <img src="images/opl-discovery.png">
   </a>
 </div>
 <div class="fragment" data-fragment-index="2" >
   <h2>Priority Sliders</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/priority-liders/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/priority-sliders/">
   <img src="images/opl-foundation.png">
   </a>
 </div>
