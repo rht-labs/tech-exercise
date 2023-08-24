@@ -13,7 +13,7 @@ TL500 <!-- .element: class="title-color" -->
 </div>
 <div class="fragment current-visible" data-fragment-index="0" >
   <h2>🔥 Everything as Code 🦄</h2>
-  <a target="_blank" href="https://openpracticelibrary.com/practice/test-automation/">
+  <a target="_blank" href="https://openpracticelibrary.com/practice/everything-as-code">
   <img src="images/opl-foundation.png">
   </a>
 </div>
