@@ -44,8 +44,8 @@ TL500 <!-- {.element: class="title-color"} -->
 
 #### _How do we do it?_
 _Things to consider before starting_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-* First, the product backlog refinement and the sprint planning must be done.
-* Then, you pick up the user stories for the next sprint and put them into the Relative Estimation board.
+* Relative estimation is primarily used during the delivery phase after product backlog refinement and sprint planning, however, as a foundation activity in the OPL, it can be used during other phases also.
+* Then, you pick up the user stories and put them into the Relative Estimation board.
 
 
 
