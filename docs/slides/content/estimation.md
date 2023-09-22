@@ -44,8 +44,9 @@ TL500 <!-- {.element: class="title-color"} -->
 
 #### _How do we do it?_
 _Things to consider before starting_ <!--{.element: style="font-size: smaller; font-weight: 100;"} -->
-* First, the product backlog refinement and the sprint planning must be done.
-* Then, you pick up the user stories for the next sprint and put them into the Relative Estimation board.
+* Relative estimation is primarily used during delivery after product backlog refinement and sprint planning, however, as a foundation activity in the OPL, it can be used at any point in the Mobius Loop.
+* Then, you pick up the user stories and put them into the Relative Estimation board.
+* This practice is most effective after doing a few sprints as the team can use the information from previous sprints to more accurately size items for future sprints. 
 
 
 
