@@ -41,8 +41,8 @@ applications:
         # Jenkins S2I from Red Hat Labs
         - name: jenkins
           strategy_type: "Source"
-          source_repo: https://github.com/rht-labs/s2i-config-jenkins.git
-          source_repo_ref: master
+          source_repo: https://github.com/eformat/s2i-config-jenkins.git
+          source_repo_ref: feature/latest-plugins-nov23
           source_context_dir: '/'
           builder_image_kind: "DockerImage"
           builder_image_name: quay.io/openshift/origin-jenkins
