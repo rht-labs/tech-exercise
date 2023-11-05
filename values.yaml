@@ -3,6 +3,7 @@
 source: https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
 team: <TEAM_NAME>
 release: ci-cd
+targetRevision: fix-jenkins-nov23
 
 applications:
   # Tooling to support CI/CD
