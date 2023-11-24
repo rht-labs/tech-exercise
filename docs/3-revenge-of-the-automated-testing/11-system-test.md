@@ -11,7 +11,7 @@
 
 > Zalenium is a flexible and scalable container based Selenium Grid with video recording, live preview, basic auth & dashboard.
 
-1. To add Zalenium to our cluster, it's been packaged up as a helm chart. We can add this helm chart to our `values-tooling` file. Open this up in your Devspace and add the configuation for `Zalenium` so our gitops controller can pick it up and roll out the change 🐙
+1. To add Zalenium to our cluster, it's been packaged up as a helm chart. We can add this helm chart to our `values-tooling` file. Open this up in your Dev Spaces and add the configuration for `Zalenium` so our GitOps controller can pick it up and roll out the change 🐙
 
     ```yaml
       # Zalenium
@@ -46,7 +46,7 @@
 
 ### Add the System Tests to git and execute our pipeline
 
-> An existing project containing some end to end tests and a corresponding Jenkinsfile have been created for you. They use JavaScript to execute. These tests are written in a BDD style syntax and are fairly basic but ilustrative of what can be achieved with automated testing
+> An existing project containing some end to end tests and a corresponding Jenkinsfile have been created for you. They use JavaScript to execute. These tests are written in a BDD style syntax and are fairly basic but illustrative of what can be achieved with automated testing
 
 ![bdd-tests.png](images/bdd-tests.png)
 
@@ -55,7 +55,7 @@
     ![pgitlab-sys-tests](images/gitlab-sys-tests.png)
 
 
-2. In your Devspaces, fork the upstream `system-tests` project and push it to the new GitLab project.
+2. In your Dev Spaces, fork the upstream `system-tests` project and push it to the new GitLab project.
 
     ```bash#test
     cd /projects
@@ -69,7 +69,7 @@
 
     ![sys-tests-jenkins-scan](images/sys-tests-jenkins-scan.png)
 
-4. This job can be manually run - but we want to automate everything! So let's join up the Jenkins front end pipeline to this suite of tests and only then promote our application. Open the `pet-battle/Jenkinsfile` and append the following snippet ot trigger the build of the downstream job under the heading `// 🥾 Trigger System Tests` as shown below:
+4. This job can be manually run - but we want to automate everything! So let's join up the Jenkins front end pipeline to this suite of tests and only then promote our application. Open the `pet-battle/Jenkinsfile` and append the following snippet to trigger the build of the downstream job under the heading `// 🥾 Trigger System Tests` as shown below:
 
     ```groovy
             // 🥾 Trigger System Tests
@@ -89,7 +89,7 @@
             }
     ```
 
-5. With the trigger in place, let's bump our application version. Edit the `package.json` in the root of the `pet-battle` front end repository and bump the version to a new number eg `1.3.0` as per below (this might differ for your env depending on how mnay of the other modules you've done 🦆🍔)
+5. With the trigger in place, let's bump our application version. Edit the `package.json` in the root of the `pet-battle` front end repository and bump the version to a new number eg `1.3.0` as per below (this might differ for your env depending on how many of the other modules you've done 🦆🍔)
 
     ```json
     {
