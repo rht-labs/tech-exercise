@@ -46,7 +46,7 @@ applications:
           source_context_dir: '/'
           builder_image_kind: "DockerImage"
           builder_image_name: quay.io/openshift/origin-jenkins
-          builder_image_tag: "4.14"
+          builder_image_tag: "4.12"
         # Jenkins agents for running builds etc
         # default names, versions, repo and paths set on the template
         - name: jenkins-agent-npm
