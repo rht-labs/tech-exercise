@@ -61,6 +61,7 @@ spec:
         git config --global user.email "tekton@rht-labs.bot.com"
         git config --global user.name "🐈 Tekton 🐈"
         git config --global push.default simple
+        git config --global --add safe.directory '*'
         git checkout main
         git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
         git commit -m "🚀 AUTOMATED COMMIT - Deployment of $(params.APPLICATION_NAME) at version $(params.VERSION) 🚀" || rc=$?
