@@ -11,4 +11,4 @@
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * Add a load test task to our pipeline | * Add a load test task to our pipeline |
-| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/9a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/9b-tekton.md)</span> |
+| <span style="color:blue;">[jenkins](3-revenge-of-the-automated-testing/10a-jenkins.md)</span> | <span style="color:blue;">[tekton](3-revenge-of-the-automated-testing/10b-tekton.md)</span> |
