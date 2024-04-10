@@ -53,7 +53,7 @@
     🪄 Observe the **pet-battle** pipeline running with the **image-sign** stage.
     ![cosign-jenkins-pipeline](images/cosign-jenkins-pipeline.png)
 
-    After the pipeline succesfully finish, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed.
+    After the pipeline succesfully finish, in the `Administrator` view, go to OpenShift UI > Builds > ImageStreams inside `<TEAM_NAME>-test` namespace and select `pet-battle`. You'll see a tag ending with `.sig` which shows you that this is image signed.
 
     ![cosign-image-signing-pet-battle](images/cosign-image-signing-pet-battle.png)
 
