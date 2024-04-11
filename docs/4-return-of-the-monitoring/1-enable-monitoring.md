@@ -49,7 +49,7 @@
 
     Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 
-    Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
+    Our Helm Chart for pet-battle api Open up `tech-exercise/pet-battle/test/values.yaml` and `tech-exercise/pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
 
     ```yaml
           servicemonitor: true
