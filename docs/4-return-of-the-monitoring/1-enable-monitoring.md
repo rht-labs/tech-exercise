@@ -49,7 +49,7 @@
 
     Now, let's create add the `ServiceMonitor` for our PetBattle apps! Of course, we will do it through Helm and ArgoCD because this is GITOPS!!
 
-    Our Helm Chart for pet-battle api Open up `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
+    Our Helm Chart for pet-battle api Open up `tech-exercise/pet-battle/test/values.yaml` and `tech-exercise/pet-battle/stage/values.yaml` files. Update `values` for `pet-battle-api` with adding following:
 
     ```yaml
           servicemonitor: true
@@ -93,7 +93,7 @@
 
     ```bash
     # get the route and open it in your browser
-    echo https://$(oc get route grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route pb-grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
     ```
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
