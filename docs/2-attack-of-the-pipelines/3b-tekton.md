@@ -25,7 +25,7 @@ In this snippet of the pipeline used in this exercise, we define:
     ```bash#test
     cd /projects
     git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
+    git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/pet-battle-api.git
     git branch -M main
     git push -u origin main
     ```
@@ -142,7 +142,7 @@ In this snippet of the pipeline used in this exercise, we define:
 7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
 
     ```bash#test
-    echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
+    echo https://$(oc -n <TEAM_NAME>-ci-cd get route webhook --template='{{ .spec.host }}')
     ```
 _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is because the OpenShift cluster is waiting for the first consumer aka the first pipeline run to create the Persistent Volumes. The sync status will be green after the first run ☘️_
 
@@ -188,7 +188,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 ?> **TIP** You can use the **tkn** command line to observe `PipelineRun` logs as well:
 
 ```bash
-tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
+tkn -n <TEAM_NAME>-ci-cd pr logs -Lf
 ```
 
 🪄OBSERVE PIPELINE RUNNING :D - At this point check in with the other half of the group and see if you’ve managed to integrate the apps🪄

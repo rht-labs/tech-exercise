@@ -78,8 +78,8 @@
 6. Let's test if the alerts are working as we hope - we created two alerts, one for HTTP Requests and one for disk usage. First, let's see if we can fill the disk to simulate the mongodb alert.
 
     ```bash
-    oc project ${TEAM_NAME}-test
-    oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TEAM_NAME}-test`
+    oc project <TEAM_NAME>-test
+    oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n <TEAM_NAME>-test`
     ```
 
     ```bash

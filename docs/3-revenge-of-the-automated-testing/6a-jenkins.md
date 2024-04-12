@@ -33,7 +33,7 @@
                 }
                 steps {
                 sh '''
-                    /zap/zap-baseline.py -r index.html -t https://pet-battle-${TEAM_NAME}-test.<CLUSTER_DOMAIN> || return_code=$?
+                    /zap/zap-baseline.py -r index.html -t https://pet-battle-<TEAM_NAME>-test.<CLUSTER_DOMAIN> || return_code=$?
                     echo "exit value was  - " $return_code
                 ''' }
                 post {

@@ -80,7 +80,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash#test
     cd /projects/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
     ```
 
     Use the `GITLAB_PAT` from above when you are prompted for the password (this will be cached)
@@ -161,7 +161,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     Add the Secret to the cluster:
 
     ```bash#test
-    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+    cat <<EOF | oc apply -n <TEAM_NAME>-ci-cd -f -
       apiVersion: v1
       data:
         password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
@@ -170,7 +170,7 @@ All of these traits lead to one outcome - the ability to build and release quali
       type: kubernetes.io/basic-auth
       metadata:
         annotations:
-          tekton.dev/git-0: https://${GIT_SERVER}
+          tekton.dev/git-0: https://<GIT_SERVER>
           sealedsecrets.bitnami.com/managed: "true"
         labels:
           credential.sync.jenkins.openshift.io: "true"
@@ -182,7 +182,7 @@ EOF
 
     ```bash#test
     cd /projects/tech-exercise
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace <TEAM_NAME>-ci-cd .
     ```
 
     ![argocd-bootrstrap-tooling](./images/argocd-bootstrap-tooling.png)
@@ -190,11 +190,11 @@ EOF
 6. As ArgoCD sync's the resources we can see them in the cluster:
 
     ```bash#test
-    oc get projects | grep ${TEAM_NAME}
+    oc get projects | grep <TEAM_NAME>
     ```
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd
+    oc get pods -n <TEAM_NAME>-ci-cd
     ```
 
 🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄

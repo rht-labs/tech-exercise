@@ -5,8 +5,8 @@
 1. Observe logs from any given container:
 
     ```bash
-    oc project ${TEAM_NAME}-test
-    oc logs `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TEAM_NAME}-test` --since 10m
+    oc project <TEAM_NAME>-test
+    oc logs `oc get po -l app.kubernetes.io/component=mongodb -o name -n <TEAM_NAME>-test` --since 10m
     ```
 
     By default, these logs are not stored in a database, but there are a number of reasons to store them (ie troubleshooting, legal obligations..)
@@ -39,8 +39,8 @@
 8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via rsh and generate logs.
 
     ```bash
-    oc project ${TEAM_NAME}-test
-    oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n ${TEAM_NAME}-test`
+    oc project <TEAM_NAME>-test
+    oc rsh `oc get po -l app.kubernetes.io/component=mongodb -o name -n <TEAM_NAME>-test`
     ```
 
     Then inside the container you've just remote logged on to we'll add some nonsense messages to the logs:

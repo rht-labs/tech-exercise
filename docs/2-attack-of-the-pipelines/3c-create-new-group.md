@@ -67,7 +67,7 @@ team will be easy following the next instructions.
 9. Check your user permissions in OpenShift by checking your team's `ci-cd` project. 
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd
+    oc get pods -n <TEAM_NAME>-ci-cd
     ```
 
 10. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.

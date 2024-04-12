@@ -16,7 +16,7 @@
                         oc registry login
                         /tmp/syft -o spdx `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION} > ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom
                         cosign attach sbom --sbom ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
-                        cosign attest --key k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign --yes --predicate ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
+                        cosign attest --key k8s://<TEAM_NAME>-ci-cd/${TEAM_NAME}-cosign --yes --predicate ${DESTINATION_NAMESPACE}-${APP_NAME}-${VERSION}.sbom `oc registry info`/${DESTINATION_NAMESPACE}/${APP_NAME}:${VERSION}
                         '''
                     }
                 }

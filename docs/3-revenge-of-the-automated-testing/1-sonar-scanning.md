@@ -29,7 +29,7 @@
 
     ```bash
     kubeseal < /tmp/sonarqube-auth.yaml > /tmp/sealed-sonarqube-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n <TEAM_NAME>-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -122,7 +122,7 @@
 7. Connect to Sonarqube UI to verify if the installation is successful (username `admin` & password `admin123`):
 
     ```bash
-    echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)
     ```
 
     ![sonary-alive](./images/sonary-alive.png)

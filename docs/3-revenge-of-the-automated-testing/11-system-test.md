@@ -60,7 +60,7 @@
     ```bash#test
     cd /projects
     git clone https://github.com/petbattle/system-tests.git && cd system-tests
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/system-tests.git
+    git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/system-tests.git
     git branch -M main
     git push -u origin main
     ```

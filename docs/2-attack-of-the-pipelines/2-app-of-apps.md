@@ -71,7 +71,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
     ```bash#test
     cd /projects/tech-exercise
-    helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
+    helm upgrade --install uj --namespace <TEAM_NAME>-ci-cd .
     ```
 
 5. In ArgoCD at this point we should see things start to get a bit more busy:

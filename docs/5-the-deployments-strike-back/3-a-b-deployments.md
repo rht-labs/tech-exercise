@@ -76,13 +76,13 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     See Matomo is deploying:
 
     ```bash
-    oc get pod -n ${TEAM_NAME}-ci-cd -w
+    oc get pod -n <TEAM_NAME>-ci-cd -w
     ```
 
     When Matomo pods are running, get the URL and connect it:
 
     ```bash
-    echo https://$(oc get route/matomo -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
+    echo https://$(oc get route/matomo -n <TEAM_NAME>-ci-cd --template='{{.spec.host}}')
     ```
 
     - Username: `admin`
@@ -164,8 +164,8 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
 4. Verify if you have the both service definition.
 
     ```bash
-    oc get svc -l app.kubernetes.io/instance=pet-battle -n ${TEAM_NAME}-test
-    oc get svc -l app.kubernetes.io/instance=pet-battle-b -n ${TEAM_NAME}-test
+    oc get svc -l app.kubernetes.io/instance=pet-battle -n <TEAM_NAME>-test
+    oc get svc -l app.kubernetes.io/instance=pet-battle-b -n <TEAM_NAME>-test
     ```
 
 5. Before verify the traffic redirection, let's make a simple application change to make this more visual! In the frontend, we'll change the banner along the top of the app. In your IDE, open `/projects/pet-battle/src/app/shell/header/header.component.html`. Uncomment the `<nav>` HTML Tag under the `<!-- Green #009B00 -->`.
@@ -202,7 +202,7 @@ Before we jumping to A/B deployment, let's deploy Matomo through Argo CD.
     If you open up `pet-battle` in your browser, 20 percent of the traffic is going to `b`. You have a little chance to see the green banner.
 
     ```bash
-    oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
+    oc get route/pet-battle -n <TEAM_NAME>-test --template='{{.spec.host}}'
     ```
 
 9. Now let's redirect 50% of the traffic to `B`, that means that only 50% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/test/values.yaml` file.
@@ -220,7 +220,7 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
 10. Open an incognito browser and connect to the same URL. You'll have 50% chance to get a green banner.
 
     ```bash
-    oc get route/pet-battle -n ${TEAM_NAME}-test --template='{{.spec.host}}'
+    oc get route/pet-battle -n <TEAM_NAME>-test --template='{{.spec.host}}'
     ```
 
 11. Apparently people like green banner on PetBattle UI! Let's redirect all traffic to service `A`. Yes, for that we need to make weight 0 for service `B`. If you refresh the page, you should only see the green banner.

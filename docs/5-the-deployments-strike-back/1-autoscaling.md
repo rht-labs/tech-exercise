@@ -73,7 +73,7 @@
     import http from 'k6/http';
     import { sleep } from 'k6';
     export default function () {
-      http.get('https://$(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/cats');
+      http.get('https://$(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats');
     }
     EOF
     ```

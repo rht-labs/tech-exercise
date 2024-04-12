@@ -76,7 +76,7 @@ kind: Secret
 type: kubernetes.io/basic-auth
 metadata:
   annotations:
-    tekton.dev/git-0: https://${GIT_SERVER}
+    tekton.dev/git-0: https://<GIT_SERVER>
     sealedsecrets.bitnami.com/managed: "true"
   labels:
     credential.sync.jenkins.openshift.io: "true"
@@ -87,7 +87,7 @@ EOF
 Patch the repository list, be sure to use your `GITLAB_URL`
 
 ```bash
-oc -n ${TEAM_NAME}-ci-cd patch cm argocd-cm --patch "
+oc -n <TEAM_NAME>-ci-cd patch cm argocd-cm --patch "
 data:
   repositories: |
     - name: ubiquitous-journey
@@ -95,7 +95,7 @@ data:
     - name: redhat-cop
       type: helm
       url: https://redhat-cop.github.io/helm-charts
-    - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    - url: https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
       type: git
       insecure: false
       insecureIgnoreHostKey: true
@@ -122,7 +122,7 @@ export GITLAB_PAT=<your gitlab pat token>
 Lets our git creds via a secret (**UJ this**)
 
 ```bash
-cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+cat <<EOF | oc apply -n <TEAM_NAME>-ci-cd -f -
 apiVersion: v1
 data:
   password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
@@ -131,7 +131,7 @@ kind: Secret
 type: kubernetes.io/basic-auth
 metadata:
   annotations:
-    tekton.dev/git-0: https://${GIT_SERVER}
+    tekton.dev/git-0: https://<GIT_SERVER>
     sealedsecrets.bitnami.com/managed: "true"
   labels:
     credential.sync.jenkins.openshift.io: "true"
@@ -149,7 +149,7 @@ cat <<'EOF' > /tmp/initial-repos.yaml
   type: helm
   url: https://redhat-cop.github.io/helm-charts
 - name: tl500-git
-  url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+  url: https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
   type: git
   insecure: true
   insecureIgnoreHostKey: true
@@ -170,7 +170,7 @@ cat <<'EOF' > /tmp/initial-creds.yaml
     name: git-auth
     key: username
   type: git
-  url: https://${GIT_SERVER}
+  url: https://<GIT_SERVER>
 EOF
 ```
 
@@ -178,9 +178,9 @@ Reinstall ArgoCD using new initial settings:
 
 ```bash
 helm upgrade --install argocd \
-  --namespace ${TEAM_NAME}-ci-cd \
-  --set namespace=${TEAM_NAME}-ci-cd \
-  --set argocd_cr.applicationInstanceLabelKey=rht-labs.com/${TEAM_NAME} \
+  --namespace <TEAM_NAME>-ci-cd \
+  --set namespace=<TEAM_NAME>-ci-cd \
+  --set argocd_cr.applicationInstanceLabelKey=rht-labs.com/<TEAM_NAME> \
   --set argocd_cr.initialRepositories="$(cat /tmp/initial-repos.yaml)" \
   --set argocd_cr.repositoryCredentials="$(cat /tmp/initial-creds.yaml)" \
   redhat-cop/argocd-operator

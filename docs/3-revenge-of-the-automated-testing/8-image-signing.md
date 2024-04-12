@@ -12,13 +12,13 @@
 
     ```bash
     cd /tmp
-    cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
+    cosign generate-key-pair k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign 
     ```
 
     You should get an output like this:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
-    $ cosign generate-key-pair k8s://${TEAM_NAME}-ci-cd/${TEAM_NAME}-cosign 
+    $ cosign generate-key-pair k8s://<TEAM_NAME>-ci-cd/<TEAM_NAME>-cosign 
     Enter password for private key:
     Enter again:
     Successfully created secret cosign in namespace <TEAM_NAME>-ci-cd
@@ -31,6 +31,13 @@
     🐌 THIS IS NOT GITOPS - The generated private key is stored in a Kubernetes secret in you <TEAM_NAME>-ci-cd project. We'll leave it as an exercise to the reader to extract and store this as a SealedSecret instead! 🐎
     </p>
 
+    <p class="tip">
+    😱 If `cosign` command returns error, that means you logged out of the cluster so please run the below command and then run the cosign command again.
+    </p>
+
+    ```bash
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
+    ```
 
 Now let's proceed to extend the pipelines with image signing step.
 

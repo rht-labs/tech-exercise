@@ -17,7 +17,7 @@ Why create pipelines:
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
 git pull
 ```
 

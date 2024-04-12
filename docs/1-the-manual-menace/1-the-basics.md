@@ -65,7 +65,7 @@
 9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
 
     ```bash#test
-    oc new-project ${TEAM_NAME}-ci-cd || true
+    oc new-project <TEAM_NAME>-ci-cd || true
     ```
 
     ![new-project](./images/new-project.png)
@@ -95,13 +95,13 @@ Let's deploy a simple application using Helm.
     Now install the latest version. Helm likes to give each install a release, for convenience we've set ours to `my`. This will add a prefix of `my-` to all the resources that are created.
 
     ```bash#test
-    helm install my tl500/todolist --namespace ${TEAM_NAME}-ci-cd || true
+    helm install my tl500/todolist --namespace <TEAM_NAME>-ci-cd || true
     ```
 
 3. Open the application up in the browser to verify it's up and running. Here's a handy one-liner to get the address of the app
 
     ```bash#test
-    echo https://$(oc get route/my-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
+    echo https://$(oc get route/my-todolist -n <TEAM_NAME>-ci-cd --template='{{.spec.host}}')
     ```
 
     ![todolist](./images/todolist.png)
@@ -109,31 +109,31 @@ Let's deploy a simple application using Helm.
 4. You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd
+    oc get pods -n <TEAM_NAME>-ci-cd
     ```
 
     By default, we only have one replica of our application. Let's use helm to set this to 5.
 
     ```bash#test
-    helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
+    helm upgrade my tl500/todolist --set replicas=5 --namespace <TEAM_NAME>-ci-cd
     ```
 
     Verify the deployment has scaled up to 5 replicas.
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd
+    oc get pods -n <TEAM_NAME>-ci-cd
     ```
 
 5. If you're done playing with the #amazing-todolist-app then let's tidy up our work by removing the chart. To do this, run helm uninstall to remove our release of the chart.
 
     ```bash#test
-    helm uninstall my --namespace ${TEAM_NAME}-ci-cd
+    helm uninstall my --namespace <TEAM_NAME>-ci-cd
     ```
 
     Verify the clean up
 
     ```bash#test
-    oc get pods -n ${TEAM_NAME}-ci-cd | grep todolist
+    oc get pods -n <TEAM_NAME>-ci-cd | grep todolist
     ```
 
 6. For those who are really interested, this is the anatomy of our Helm chart. It can be <span style="color:blue;">[found here](https://github.com/rht-labs/todolist)</span>, but the basic structure is as follows:

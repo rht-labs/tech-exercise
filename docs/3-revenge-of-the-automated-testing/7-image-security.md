@@ -67,7 +67,7 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 
     ```bash
     kubeseal < /tmp/rox-auth.yaml > /tmp/sealed-rox-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n <TEAM_NAME>-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml

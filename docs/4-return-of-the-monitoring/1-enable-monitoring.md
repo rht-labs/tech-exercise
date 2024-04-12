@@ -67,7 +67,7 @@
     If you want to verify the object exists you can run from your terminal:
 
     ```bash
-    oc get servicemonitor -n ${TEAM_NAME}-test -o yaml
+    oc get servicemonitor -n <TEAM_NAME>-test -o yaml
     ```
 
 2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
@@ -93,7 +93,7 @@
 
     ```bash
     # get the route and open it in your browser
-    echo https://$(oc get route pb-grafana-route --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route pb-grafana-route --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)
     ```
 
     If you use `Log in with OpenShift` to login and display dashboards - you user will only have `view` role which is read-only. This is alright in most cases, but we want to be able to edit and admin the boards.
@@ -101,11 +101,11 @@
 5. The Dashboards should be showing some basic information and we can generate more data by firing some requests to the `pet-battle-api`. In your IDE, run on your terminal:
 
     ```bash
-    curl -vkL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/dogs
+    curl -vkL $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/dogs
     curl -vkL -X POST -d '{"OK":"🐈"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
-    curl -vkL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
+    curl -vkL $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/api/dogs
     curl -vkL -X POST -d '{"OK":"🦆"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
-    curl -vkL $(oc get route/pet-battle-api -n ${TEAM_NAME}-test --template='{{.spec.host}}')/api/dogs
+    curl -vkL $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/api/dogs
     curl -vkL -X POST -d '{"OK":"🐶"}' $(oc get route/pet-battle-api -n <TEAM_NAME>-test --template='{{.spec.host}}')/cats/
     ```
 
@@ -120,7 +120,7 @@
 1. OpenShift users have a read-only view on Grafana by default - get the `admin` user details from your cluster:
 
     ```bash
-    oc get secret grafana-admin-credentials -o=jsonpath='{.data.GF_SECURITY_ADMIN_PASSWORD}' -n ${TEAM_NAME}-ci-cd \
+    oc get secret grafana-admin-credentials -o=jsonpath='{.data.GF_SECURITY_ADMIN_PASSWORD}' -n <TEAM_NAME>-ci-cd \
     | base64 -d; echo -n
     ```
 
@@ -143,8 +143,8 @@
 5. With the new panel on our dashboard, let's see it in action by killing off some pods in our namespace
 
     ```bash
-    oc delete pods -l app.kubernetes.io/instance=pet-battle-api -n ${TEAM_NAME}-test
-    oc delete pods -l app.kubernetes.io/instance=pet-battle -n ${TEAM_NAME}-test
+    oc delete pods -l app.kubernetes.io/instance=pet-battle-api -n <TEAM_NAME>-test
+    oc delete pods -l app.kubernetes.io/instance=pet-battle -n <TEAM_NAME>-test
     ```
 
     <!--![grafana-less-pods](./images/grafana-less-pods.png) -->

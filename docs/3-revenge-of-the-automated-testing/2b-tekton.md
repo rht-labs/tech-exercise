@@ -22,7 +22,7 @@
 
     ```bash
     kubeseal < /tmp/allure-auth.yaml > /tmp/sealed-allure-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n <TEAM_NAME>-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -90,7 +90,7 @@
 7. You should see the Allure UI come up in a few moments after ArgoCD syncs it. You can browse the default project on Allure to verify it's up and running
 
     ```bash
-    echo https://$(oc get route allure --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/allure-docker-service/projects/default/reports/latest/index.html
+    echo https://$(oc get route allure --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)/allure-docker-service/projects/default/reports/latest/index.html
     ```
 
     ![allure-up](./images/allure-up.png)
@@ -220,7 +220,7 @@
 6. Browse to the uploaded test results from the pipeline in Allure:
 
     ```bash
-    echo https://$(oc get route allure --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
+    echo https://$(oc get route allure --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)/allure-docker-service/projects/pet-battle-api/reports/latest/index.html
     ```
 
     From here you can browse Test results + behaviours.

@@ -179,7 +179,7 @@
 8. When the pipeline has complete - we can inspect the results in Sonarqube UI. Browse to Sonarqube URL
 
     ```bash
-    echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route sonarqube --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)
     ```
 
     ![images/sonar-pb-api.png](images/sonar-pb-api.png)

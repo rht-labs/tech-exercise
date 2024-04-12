@@ -10,7 +10,7 @@ Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called 
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git
 git pull
 ```
 
@@ -35,7 +35,7 @@ git pull
     type: kubernetes.io/basic-auth
     metadata:
       annotations:
-        tekton.dev/git-0: https://${GIT_SERVER}
+        tekton.dev/git-0: https://<GIT_SERVER>
         sealedsecrets.bitnami.com/managed: "true"
       labels:
         credential.sync.jenkins.openshift.io: "true"
@@ -55,7 +55,7 @@ EOF
 
     ```bash#test
     kubeseal < /tmp/git-auth.yaml > /tmp/sealed-git-auth.yaml \
-        -n ${TEAM_NAME}-ci-cd \
+        -n <TEAM_NAME>-ci-cd \
         --controller-namespace tl500-shared \
         --controller-name sealed-secrets \
         -o yaml
@@ -151,7 +151,7 @@ EOF
 9. You can also verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view `<TEAM_NAME>-ci-cd-git-auth`
 
     ```bash#test
-    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
+    echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n <TEAM_NAME>-ci-cd)
     ```
 
     ![jenkins-sync.png](images/jenkins-sync.png)
