@@ -46,6 +46,6 @@ docsify serve ./docs
 
 ## 🎃 Contribution
 
-Pull requests welcome 🎃. Please 🙏, review 👀 the [Contribution Guide](./CONTRIBUTING.md) to became a contributor.
+Pull requests welcome 🎃. Please 🙏, review 👀 the [Contribution Guide](./CONTRIBUTING.md) to become a contributor.
 
 Changes approved and pushed to main will automatically be published to the docs site.
