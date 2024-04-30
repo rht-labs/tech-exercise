@@ -40,6 +40,15 @@ In this exercise, we'll use [Syft](https://github.com/anchore/syft) to generate 
     🐌 THIS IS NOT GITOPS - The generated private key is stored in a Kubernetes secret in you <TEAM_NAME>-ci-cd project. We'll leave it as an exercise to the reader to extract and store this as a SealedSecret instead! 🐎
     </p>
 
+    <p class="tip">
+    😱 If `cosign` command returns error, that means you logged out of the cluster so please run the below command and then run the cosign command again.
+    </p>
+
+    ```bash
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
+    ```
+
+    
 2. Let's try and see what is an SBOM:
 
     ```bash
