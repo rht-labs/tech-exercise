@@ -51,7 +51,7 @@ IPA_NAMESPACE="${1:-ipa}"
 oc project ${IPA_NAMESPACE}
 export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
 echo ${IPA_ADMIN_PASSWD}
-oc rsh `oc get po -l deploymentconfig=ipa -o name -n ${IPA_NAMESPACE}`
+oc rsh `oc get po -l app=ipa -o name -n ${IPA_NAMESPACE}`
 
 # 2. on the container running IPA Server, create `student` group and add users to it.
 echo ${IPA_ADMIN_PASSWD} | kinit admin
