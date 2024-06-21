@@ -1,6 +1,6 @@
 ## Aggregated Logging
 
-> OpenShift's built in logging .... Something something installed operator before hand. Very memory intensive, logging can be deployed to the infra plane though...
+> OpenShift's built in logging by default collects all output from all containers that are logging to system out. This means no logging needs to be configured explicitly in the application. Logs are collected using Vector collector or the legacy Fluentd collector then popped into Elastic (or LokiStack) where they are indexed in a timeseries as JSON. You can use a UI component to view a visual representation of your log data. The UI provides a graphical interface to search, query, and view stored logs. The OpenShift Container Platform web console UI is provided by enabling the OpenShift Container Platform console plugin. Or you can choose to use Kibana which the graphical tool on top of Elastic to run queries and search the logs.
 
 1. Observe logs from any given container:
 

@@ -1,6 +1,7 @@
 ## Alerting and Notifications
 
-> OpenShift's built in alerts.... blah
+> OpenShift has alerting and metric gathering built into the platform using the prometheus stack. It collects all the information from each node in the cluster to give overall health of things like memory and disk usage. To enable user workload monitoring a small change needs to be made to the operator. With this in place, app dev teams can hook into the built in monitoring stack by placing a `ServiceMonitor` Custom Resource with a reference to where the prometheus endpoints
+
 ### Platform Alerts
 
 1. The Pet Battle API and UI charts both have one basic `rule` for firing off an alert. If you open up the `/projects/pet-battle-api/chart/templates/prometheusrule.yaml` you'll see one configured to alert when a pod is not available for one minute. The alert rules are written in PromQL.
