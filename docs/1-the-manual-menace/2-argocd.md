@@ -35,7 +35,7 @@ When something is seen as not matching the required state in Git, an application
     ```bash#test
     run()
     {
-      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-gitops-operator \
+      NS=$(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')
       opp=
       if [ -z $NS ]; then
@@ -48,9 +48,9 @@ When something is seen as not matching the required state in Git, an application
         NS="${TEAM_NAME}-ci-cd,${NS}"
         opp=replace
       fi
-      oc -n openshift-gitops-operator patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \
+      oc -n openshift-operators patch subscriptions.operators.coreos.com/openshift-gitops-operator --type=json \
         -p '[{"op":"'$opp'","path":"/spec/config/env/1","value":{"name": "ARGOCD_CLUSTER_CONFIG_NAMESPACES", "value":"'${NS}'"}}]'
-      echo "EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-gitops-operator \
+      echo "EnvVar set to: $(oc get subscriptions.operators.coreos.com/openshift-gitops-operator -n openshift-operators \
         -o jsonpath='{.spec.config.env[?(@.name=="ARGOCD_CLUSTER_CONFIG_NAMESPACES")].value}')"
     }
     run
