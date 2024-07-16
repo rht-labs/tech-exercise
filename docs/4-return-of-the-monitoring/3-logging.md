@@ -1,6 +1,7 @@
 ## Aggregated Logging
 
-> OpenShift's built in logging by default collects all output from all containers that are logging to system out. This means no logging needs to be configured explicitly in the application. Logs are collected using Vector collector or the legacy Fluentd collector then popped into Elastic (or LokiStack) where they are indexed in a timeseries as JSON. You can use a UI component to view a visual representation of your log data. The UI provides a graphical interface to search, query, and view stored logs. The OpenShift Container Platform web console UI is provided by enabling the OpenShift Container Platform console plugin. Or you can choose to use Kibana which the graphical tool on top of Elastic to run queries and search the logs.
+> OpenShift's built in logging is deployed as an operator using the LokiStack. By default collects all output from all containers that are logging to system out. This means no logging needs to be configured explicitly in the application. Logs are collected using a collector running on each nodes, then popped into LokiStack where they are indexed in a timeseries as JSON. OpenShift has a built in visualisation UI, but you can also use an external Grafana as well.
+
 
 1. Observe logs from any given container:
 
@@ -11,32 +12,20 @@
 
     By default, these logs are not stored in a database, but there are a number of reasons to store them (ie troubleshooting, legal obligations..)
 
-2. OpenShift magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected by FluentD and added to Elastic Search. This makes indexing and querrying logs very easy. Kibana is added on top for easy visualisation of the data. Let's take a look at Kibana now.
+2. OpenShift magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected and added to LokiStack. This makes indexing and querrying logs very easy. Let's take a look at OpenShift Logs UI now.
+
+    ![logs-test.png](./images/logs-test.png)
+
+
+7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by adding this to the query bar. Click `Show Query`, paste the below and then hit `Run Query`. 
 
     ```bash
-    https://kibana-openshift-logging.<CLUSTER_DOMAIN>
+    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" }`
     ```
 
-3. Login using your standard credentials. On first login you'll need to `Allow selected permissions` for OpenShift to pull your permissions.
+    ![example-query](./images/example-query.png)
 
-4. Once logged in, you'll be prompted to create an `index` to search on. This is beacause there are many data sets in elastic search, so you must choose the ones you would like to search on. We'll just search on the application logs as opposted to the platform logs in this exercise. Create an index pattern of `app-*` to search across all application logs in all namespaces.
-
-    ![kibana-create-index](./images/kibana-create-index.png)
-
-5. On configure settings, select `@timestamp` to filter by and create the index.
-
-    ![kibana-create-index-timestamp](./images/kibana-create-index-timestamp.png)
-
-6. Go to the Kibana Dashboard - Hit `Discover` in the top left hand corner, we should now see all logs across all pods. It's a lot of information but we can query it easily.
-
-    ![kibana-discover](./images/kibana-discover.png)
-
-7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by adding this to the query bar:
-`kubernetes.namespace_name="<TEAM_NAME>-test" AND kubernetes.container_name=pet-battle-.*`
-
-    ![kibana-example-query](./images/kibana-example-query.png)
-
-8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI in Kibana. Connect to pod via rsh and generate logs.
+8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI. Connect to pod via rsh and generate logs.
 
     ```bash
     oc project ${TEAM_NAME}-test
@@ -58,7 +47,7 @@
 9. Back on Kibana we can filter and find these messages with another query:
 
     ```yaml
-    kubernetes.namespace_name="<TEAM_NAME>-test" AND kubernetes.container_name=mongodb AND message=🦄🦄🦄🦄
+    { log_type="application", kubernetes_pod_name=~".*mongodb.*", kubernetes_namespace_name="<TEAM_NAME>-test" } |= `🦄🦄🦄🦄` | json
     ```
 
-    ![kibana-mongodb-unicorn](./images/kibana-mongodb-unicorn.png)
+    ![mongodb-unicorn](./images/mongodb-unicorn.png)
