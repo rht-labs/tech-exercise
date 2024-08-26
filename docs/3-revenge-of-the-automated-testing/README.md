@@ -12,7 +12,7 @@ There are lots of things we can do under the heading of `Quality Gates`, so deci
 
 ![team-kanban](images/team-kanban.jpg)
 
-To onboard a new group in your team, follow this [guide](98-a-new-group/README.md).
+To onboard a new group in your team, follow this <span style="color:blue;">[guide](2-attack-of-the-pipelines/3c-create-new-group.md)</span>.
 
 ## 🖼️ Big Picture
 
