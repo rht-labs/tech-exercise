@@ -2,17 +2,17 @@
 
 > Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in popularity as it's Kubernetes Native way of running CI/CD.
 
-There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to define in YAML Pipeline and Task definitions. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
+There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to declare Pipeline and Task definitions in YAML. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
-Tekton is made up of number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline.
+Tekton is made up of a number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline.
 
 ![simple-tekkers-pipeline](./images/simple-tekkers-pipeline.png)
 
 In this snippet of the pipeline used in this exercise, we define:
 
 * `workspaces` used by the pipeline (config maps, and shared workspaces for each task to use). 
-* `params` are the inputs to the run of the `pipeline` eg the application name or the git revision to build. 
-* `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, are also supplied parameters and workspaces if required.  
+* `params` are the inputs to the run of the `Pipeline`, e.g., the application name or the git revision to build. 
+* `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, may also be supplied with parameters and workspaces if required.  
 
 #### Deploying the Tekton Objects
 
@@ -30,7 +30,7 @@ In this snippet of the pipeline used in this exercise, we define:
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle-api folder is not appeared on the left hand side, you need to add it to your workspace manually as follows: 
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle-api folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
     </p>
 
     Click the hamburger menu on top left, then `File > Add Folder to Workspace`
@@ -39,10 +39,10 @@ In this snippet of the pipeline used in this exercise, we define:
     Select `pet-battle-api` from the list and click `OK`.
     ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
 
-    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu._
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left, then select `Terminal > New Terminal` from the menu._
 
 
-3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as Helm Chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
+3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as a Helm chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
     tekton
@@ -73,13 +73,13 @@ In this snippet of the pipeline used in this exercise, we define:
 
     Some of the key things to note above are:
 
-   * `workspaces` - these yaml are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
+   * `workspaces` - these YAML are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
-   * `secrets` - secure things used by the pipeline
+   * `secrets` - secure things used by the pipeline.
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
-   * `triggers` folder stores the configuration for the webhooks. We will add WebHooks from gitlab to trigger our pipeline, using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
+   * `triggers` directory stores the configuration for the webhooks. We will add webhooks from GitLab to trigger our pipeline. Using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
-4. Seeing as Tekton pipelines are just YAML, we can have Argo CD sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions - edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
+4. Since Tekton pipelines are just YAML, we can have Argo CD to sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions, edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
 
     ```yaml
       # Tekton Pipelines
@@ -105,7 +105,7 @@ In this snippet of the pipeline used in this exercise, we define:
     fi
     ```
 
-5. Tekton will push changes to our Helm Chart to Nexus as part of the pipeline. Originally we configured our App of Apps to pull from a different chart repository so we also need to update out Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
+5. Tekton will push changes to our Helm chart to Nexus as part of the pipeline. Originally, we configured our App of Apps to pull from a different chart repository so we also need to update Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -144,12 +144,12 @@ In this snippet of the pipeline used in this exercise, we define:
     ```bash#test
     echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
     ```
-_Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is because the OpenShift cluster is waiting for the first consumer aka the first pipeline run to create the Persistent Volumes. The sync status will be green after the first run ☘️_
+_Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is because the OpenShift cluster is waiting for the first consumer, a.k.a. the first pipeline run, to create the Persistent Volumes. The sync status will be green after the first run ☘️_
 
 8. Once you have the URL, over on GitLab go to `pet-battle-api > Settings > Integrations` to add the webhook:
 
-    * select `Push Events`, leve the branch empty for now
-    * select `SSL Verification`
+    * select `Push Events`, leave the branch empty for now
+    * disable `SSL Verification`
     * Click `Add webhook` button.
 
     ![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
@@ -158,7 +158,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 
     ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
-9. With all these components in place - now it's time to trigger pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
+9. With all these components in place, now it's time to trigger the pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
     ```xml
         <artifactId>pet-battle-api</artifactId>
@@ -191,4 +191,4 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
 ```
 
-🪄OBSERVE PIPELINE RUNNING :D - At this point check in with the other half of the group and see if you’ve managed to integrate the apps🪄
+🪄OBSERVE PIPELINE RUNNING :D - At this point, check in with the other half of the group and see if you’ve managed to integrate the apps🪄

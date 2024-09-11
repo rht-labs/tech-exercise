@@ -1,6 +1,6 @@
 ## Sealed Secrets
 
-When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_ but how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
+When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_. But how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
 
 Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 
@@ -23,7 +23,7 @@ git pull
     echo ${GITLAB_PAT}
     ```
 
-2. Run this command to generate a Kubernetes secret object in `/tmp` with the right labels needed for Tekton and Jenkins later.
+2. Run this command to generate a Kubernetes secret object in `/tmp` with the right annotations and labels needed for Tekton and Jenkins later.
 
     ```bash#test
     cat << EOF > /tmp/git-auth.yaml
@@ -61,7 +61,7 @@ EOF
         -o yaml
     ```
 
-4. Verify that secret is sealed:
+4. Verify that the secret is sealed:
 
     ```bash#test
     cat /tmp/sealed-git-auth.yaml 
@@ -84,7 +84,7 @@ EOF
     ...
     </code></pre></div>
 
-5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a <span style="color:blue;">[helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets)</span> that can be used to add sealed secrets to our cluster in repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
+5. We want to grab the results of this sealing activity, in particular the `encryptedData` so we can add it to git. We have already written a <span style="color:blue;">[helper helm chart](https://github.com/redhat-cop/helm-charts/tree/master/charts/helper-sealed-secrets)</span> that can be used to add sealed secrets to our cluster in a repeatable way. We'll provide the `encryptedData` values to this chart in the next step.
 
     ```bash#test
     cat /tmp/sealed-git-auth.yaml | grep -E 'username|password'
@@ -96,7 +96,7 @@ EOF
         password: AgAj3JQj+EP23pnzu...
     </code></pre></div>
 
-6. In `ubiquitous-journey/values-tooling.yaml` add an entry for this helper chart under `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values accordingly. **Make sure you indent the data correctly**.
+6. In `ubiquitous-journey/values-tooling.yaml`, add an entry for this helper chart under `# Sealed Secrets`. Copy the output of `username` and `password` from the previous command and update the values accordingly. **Make sure you indent the data correctly**.
 
     ```yaml
       # Sealed Secrets
@@ -132,7 +132,7 @@ EOF
     fi
     ```
 
-7. Now that we update the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
+7. Now that we have updated the file, we need to push the changes to our repository for ArgoCD to detect the update. Because it is GitOps :)
 
     ```bash#test
     cd /projects/tech-exercise

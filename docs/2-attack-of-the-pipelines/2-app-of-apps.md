@@ -2,7 +2,7 @@
 
 We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
-A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with configuration per environment.
+A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with a custom configuration per environment.
 
 We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In PetBattle we generate the app-of-apps definitions using a Helm chart.
 
@@ -58,7 +58,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     fi
     ```
 
-3. Let's get this deployed of course - it's not real unless its in git!
+3. Let's get this deployed of course - it's not real unless it's in git!
 
     ```bash#test
     cd /projects/tech-exercise
@@ -121,7 +121,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml
     ```
 
-2. The front end needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the Frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, so hence we should update the values supplied to this chart as such.
+2. The frontend needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, hence we should update the values supplied to this chart as such.
 
     ```bash#test
     export JSON="'"'{
@@ -165,7 +165,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
           }'
     </code></pre></div>
 
-4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the Frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
+4. Repeat the same thing for `pet-battle/stage/values.yaml` file (update the `<TEAM_NAME>-test` to be `<TEAM_NAME>-stage` for the frontend configuration) in order to deploy the staging environment, and push your changes to the repo. _It's not real unless it's in git_
 
     ```bash#test
     cd /projects/tech-exercise
@@ -174,10 +174,10 @@ We deploy each of our applications using an Argo CD `application` definition. We
     git push 
     ```
 
-5. You should see the two Pet Battle apps for `test` and `stage` deployed in ArgoCD and if you drill into one eg `test-app-of-pb` you'll see each of the three components of PetBattle:
+5. You should see the two Pet Battle apps for `test` and `stage` deployed in ArgoCD and if you drill into one, e.g. `test-app-of-pb`, you'll see each of the three components of PetBattle:
 ![test-pet-battle-apps.png](images/test-pet-battle-apps.png)
 
-6. Finally - let's see if the whole thing in working. Some pods - like keycloak - may take a little while to become ready. Go to `OpenShift -> Developer View -> Topology` and select your `<TEAM_NAME>-test` project.
+6. Finally, let's see if the whole thing is working. Some pods, like keycloak, may take a little while to become ready. Go to `OpenShift -> Developer View -> Topology` and select your `<TEAM_NAME>-test` project.
     </br>
     🪄 🪄 You should be able to see the Pet Battle Applications running. 🪄 🪄
 

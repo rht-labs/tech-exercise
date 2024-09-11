@@ -1,6 +1,6 @@
 ## Pipelines
 
-Why create pipelines:
+Why creating pipelines:
 
 * Assurance - drive up code quality and remove the need for dedicated deployment / release management teams
 * Freedom - allow developers to take ownership of how and when code gets built and shipped
@@ -34,10 +34,10 @@ Choose your own adventure! Each group will get to perform similar tasks:
 | * Update `Jenkinsfile` task to leave out some stuff for participants | * Update Tekton task to leave out some stuff for participants |
 | * Add webhook into GitLab repositories for triggering jobs | * Add webhook into GitLab repositories for triggering jobs |
 | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) 
-| * By updating version files (pom.xml etc), kick the pipelines | * By updating version files (pom.xml etc), kick the pipelines |
+| * By updating version files (pom.xml etc), kick off the pipelines | * By updating version files (pom.xml etc), kick off the pipelines |
 | <span style="color:blue;">[jenkins](2-attack-of-the-pipelines/3a-jenkins.md)</span> | <span style="color:blue;">[tekton](2-attack-of-the-pipelines/3b-tekton.md)</span> |
 
 
-🐈 <span style="color:purple;">Expected Outcome</span>: Working pipelines that build the Pet Battle applications (front end and back) - yes .. **Cats** !! 🐈
+🐈 <span style="color:purple;">Expected Outcome</span>: Working pipelines that build the Pet Battle applications (front- and backend) - yes .. **Cats** !! 🐈
 
 ![daisy-cat.png](images/daisy-cat.png)

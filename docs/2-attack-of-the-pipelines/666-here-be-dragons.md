@@ -4,7 +4,7 @@
 
 ## Tekton Pruning
 
-We can globally configure pruning for Tekton resources by configuring the Operator *TektonConfig*. For example we can keep the last 15 *PipelineRun* resources, and prune every 15 minutes using this configuration:
+We can globally configure pruning for Tekton resources by configuring the Operator *TektonConfig*. For example, we can keep the last 15 *PipelineRun* resources, and prune every 15 minutes using this configuration:
 
 ```yaml
   pruner:
