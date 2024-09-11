@@ -15,7 +15,7 @@ From ArgoCD's website, it is described as a tool that:
     to a specific version of manifests at a Git commit.
 </pre></div>
 
-When something is seen as not matching the required state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then resync the changes to apply whatever is in Git immediately or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
+When something is seen as not matching the desired state in Git, an application becomes out of sync. Depending on how you have implemented your GitOps, ArgoCD can then immediately resync the changes to apply whatever is in git or fire a warning to initiate some other workflow. In the world of Continuous Delivery as implemented by ArgoCD, Git is the single source of truth, so we should always apply the changes as seen there.
 
 ### ArgoCD Basic Install
 > ArgoCD is one of the most popular GitOps tools. It keeps the state of our OpenShift applications synchronized with our git repos. ArgoCD is a fancy-pants controller that reconciles what is stored in our git repo (desired state) against what is live in our cluster (actual state). We can configure ArgoCD to take actions based on these differences, such as auto sync the changes from git to the cluster or fire a notification to say things have gone out of whack.
@@ -65,7 +65,7 @@ When something is seen as not matching the required state in Git, an application
 
 2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case.
 
-    We're are also going to configure ArgoCD to be allowed pull from our git repository using a secret 🔐.
+    We're are also going to configure ArgoCD to be allowed to pull from our git repository using a secret 🔐.
 
     Configure our ArgoCD instance with a secret in our <TEAM_NAME>-ci-cd namespace by creating a small bit of yaml 😋:
 
@@ -99,7 +99,7 @@ EOF
     ```
 
     <p class="tip">
-    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercise, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
+    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercises, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
     </p>
 
 3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up. To do this, we are going to run a command with a 'watch' flag to continuousy monitor pod creation.
@@ -110,7 +110,7 @@ EOF
 
     ![argocd-pods](images/argocd-pods.png)
 
-    *You must do Control+C to break the 'watch' mode to continue to the next step. Once all your pods are running*
+    *You must do Control+C to break the 'watch' mode to continue to the next step once all your pods are running.*
 
 4. When all the pods are up and running, we can login to the UI of ArgoCD. Get the route and open it in a new browser tab.
 
@@ -126,7 +126,7 @@ EOF
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `todolist` app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see see an empty form. Let's fill it out by setting the following:
+7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `todolist` app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`
@@ -157,4 +157,4 @@ EOF
     echo https://$(oc get route/our-todolist -n ${TEAM_NAME}-ci-cd --template='{{.spec.host}}')
     ```
 
-🪄🪄 Magic! You've now deployed ArgoCD and got it to manually deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄
+🪄🪄 Magic! You've now deployed ArgoCD and manually got it to deploy an application for you. Next up, we'll make ArgoCD do some *REAL* GitOps 🪄🪄

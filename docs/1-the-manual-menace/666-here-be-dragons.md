@@ -14,7 +14,7 @@ For the `todolist` application we deploy you can take a look at the file by brow
 
 ![images/helm-index.png](images/helm-index.png)
 
-This lists the versions and details that the helm repository contains. So when you `helm repo add` it adds the repo url to your operating system dependent config file. This from `man helm`:
+This lists the versions and details that the helm repository contains. So, when you `helm repo add`, it adds the repo url to your operating system dependent config file. This from `man helm`:
 
 ```bash
 | Operating System | Cache Path                | Configuration Path             | Data Path               |
@@ -26,7 +26,7 @@ This lists the versions and details that the helm repository contains. So when y
 
 In OpenShift you can create `HelmChartRepository` objects that populate the WebUI, read more about that <span style="color:blue;">[here](https://docs.openshift.com/container-platform/4.12/applications/working_with_helm_charts/configuring-custom-helm-chart-repositories.html).</span>
 
-When installing the helm chart into your namespace, the helm command line actually uploads your full chart, stores it in a secret that the Helm Controller in your OpenShift cluster can act upon.
+When installing the helm chart into your namespace, the helm command line actually uploads your full chart and stores it in a secret that the Helm Controller in your OpenShift cluster can act upon.
 
 <div class="highlight" style="background: #f7f7f7">
 <pre><code class="language-bash">

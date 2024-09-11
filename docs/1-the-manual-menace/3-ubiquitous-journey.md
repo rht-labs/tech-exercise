@@ -8,13 +8,13 @@ This repo is available on the Red Hat Labs GitHub organization – <span style="
 - **Traceable** - We can easily see where changes have occurred and most importantly trace exactly what git tag/commit is in which environment.
 - **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
 - **Auditable** - Git logs and history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
-- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. Its not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
+- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. It's not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
 - **Flexible** - Product teams often want to use both standard tools and be able to experiment with new ones. The *tool box* mentality helps a lot, so as a team you can work with the tools you are familiar with. We will see this in action with Jenkins and Tekton.
 
 All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
 
 ### Get GitLab Ready for GitOps
-> In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our gitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
+> In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our GitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
  
 1. Log into GitLab with your credentials. GitLab URL:
 
@@ -37,7 +37,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
-6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
+6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal in the CodeReady Workspace if you have not got one open and run the following commands.
 
     Export your Gitlab username.
 
@@ -101,7 +101,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 ### Deploy Ubiquitous Journey 🔥🦄
 > In this exercise, we'll create our first namespaces and tooling using a repeatable pattern - GitOps.
 
-1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in to create App of Apps in ArgoCD. Let's get right into it - in the your IDE, Open the `values.yaml` file in the root of the project. Update it to reference the git repo you just created and your team name. This values file is the default ones for the chart and will be applied to all of the instances of this chart we create. The Chart's templates are not like the previous chart we used (`services`, `deployments` & `routes`) but an ArgoCD application definition, just like the one we manually created in the previous exercise when we deployed an app in the UI of ArgoCD.
+1. The Ubiquitous Journey (🔥🦄) is just another Helm Chart with a pretty neat pattern built in to create App of Apps in ArgoCD. Let's get right into it - in your IDE, Open the `values.yaml` file in the root of the project. Update it to reference the git repo you have just created and your team name. This values file contains the default values for the chart and will be applied to all of the instances of this chart we create. The chart's templates are not like the previous chart we used (`services`, `deployments` & `routes`) but an ArgoCD application definition, just like the one we manually created in the previous exercise when we deployed an app in the UI of ArgoCD.
 
     ```yaml
     source: "https://<GIT_SERVER>/<TEAM_NAME>/tech-exercise.git"
@@ -156,9 +156,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ⛷️ <b>NOTE</b> ⛷️ - Bootstrap step also provides the necessary rolebindings. That means now the other users in the same team can access <b><TEAM_NAME></b> environments.
   </p>
 
-4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. In your terminal
-
-    Add the Secret to the cluster:
+4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. In your terminal, add the Secret to the cluster:
 
     ```bash#test
     cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
@@ -197,4 +195,4 @@ EOF
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
-🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll make extend the Ubiquitous Journey with some more tooling 🪄🪄
+🪄🪄 Magic! You've now deployed an app of apps to scaffold our tooling and projects in a repeatable and auditable way (via git!). Next up, we'll extend the Ubiquitous Journey with some more tooling 🪄🪄

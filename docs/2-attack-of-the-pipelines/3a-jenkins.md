@@ -28,13 +28,13 @@ git push
 ```
 --->
 
-#### Setup Pet Battle (front end) GitLab Project
+#### Setup Pet Battle (frontend) GitLab Project
 
 1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)
 
-2. Back in your CodeReady Workspace, we'll fork the PetBattle Frontend code to this newly created repository on git.
+2. Back in your CodeReady Workspace, we'll fork the PetBattle frontend code to this newly created repository on git.
 
     ```bash#test
     cd /projects
@@ -44,7 +44,7 @@ git push
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appeared on the left hand side, you need to add it to your workspace manually as follows: 
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
     </p>
 
     Click the hamburger menu on top left, then `File > Add Folder to Workspace`
@@ -56,19 +56,19 @@ git push
     _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu._
 
 
-3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle front end so every commit triggers it. Jenkins needs a url of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
+3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle frontend so every commit triggers it. Jenkins needs a URL of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
 
     ```bash#test
     echo "https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)/multibranch-webhook-trigger/invoke?token=pet-battle"
     ```
 
-    Once you have the URL, over on GitLab go to `pet-battle > Settings > Integrations` to add the webhook
+    Once you have the URL, over on GitLab go to `pet-battle > Settings > Integrations` to add the webhook:
     ![gitlab-webhook-trigger-fe.png](./images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
 > Jenkins is preloaded with a simple job called a `seed-multibranch-pipeline`. This is a small bit of groovy scripting that will automatically scaffold out our pipelines from each repositories `Jenkinsfile`. The logic of this script is simple; it checks a group for a given GitLab instance for any projects that contain Jenkinsfile. If it finds one, it will scaffold a pipeline from it, and if not, it will skip.
 
-1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could of course just add them to the deployment in OpenShift BUTTTTTT this is GITOPS! :muscle: :gun:
+1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could, of course, just add them to the deployment in OpenShift BUTTTTTT this is GITOPS! :muscle: :gun:
 
     Update the `ubiquitous-journey/values-tooling.yaml` Jenkins block / values to match with the following:
 
@@ -93,7 +93,7 @@ git push
     yq e '(.applications[] | (select(.name=="jenkins").values.deployment.env_vars[] | select(.name=="GITLAB_GROUP_NAME")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     ```
 
-2. Jenkins will push changes to our Helm Chart to Nexus as part of the pipeline. Previously we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
+2. Jenkins will push changes to our Helm chart to Nexus as part of the pipeline. Previously, we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -108,7 +108,7 @@ git push
         ...
     </code></pre></div>
 
-    Then do the same thing for `pet-battle/stage/values.yaml` file as well.
+    Then, do the same thing for `pet-battle/stage/values.yaml` file as well.
 
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
@@ -125,7 +125,7 @@ git push
     git push
     ```
 
-4. When this change rolls out we should see the seed job has scaffolded out a pipeline for the frontend in the Jenkins UI. It's done this by looking in the pet-battle repo where it found the `Jenkinsfile` (our pipeline definition). However it will fail on the first execution. This is expected as we're going write some stuff to fix it!
+4. When this change rolls out we should see the seed job has scaffolded out a pipeline for the frontend in the Jenkins UI. It's done this by looking in the pet-battle repo where it found the `Jenkinsfile` (our pipeline definition). However, it will fail on the first execution. This is expected and we're going to write some stuff to fix it!
 
     ```bash#test
     # to get the Jenkins route on your terminal
@@ -134,7 +134,7 @@ git push
 
     ![jenkins-ui](images/jenkins-ui.png)
 
-    <p class="warn"><b>INFO</b> - If after Jenkins restarts you do not see the job run, feel free to manually trigger it to get it going</p>
+    <p class="warn"><b>INFO</b> - If you do not see the job run after Jenkins restarts, feel free to manually trigger it to get it going.</p>
 
 
 5. With Jenkins now scanning our GitLab project for new repositories and git setup to trigger a build on Jenkins, let's explore our pipeline! A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is setup a lot like this :
@@ -143,13 +143,13 @@ git push
 
     Some of the key things to note above are:
     * `pipeline {}` is how all declarative Jenkins pipelines begin.
-    * `environment {}` defines environment variables to be used across all build stages
-    * `options {}` contains specific Job specs you want to run globally across the jobs e.g. setting the terminal colour
-    * `stage {}` all jobs must have one stage. This is the logical part of the build that will be executed e.g. `bake-image`
-    * `steps {}` each `stage` has one or more steps involved. These could be execute shell or git checkout etc.
-    * `agent {}` specifies the node the build should be run on e.g. `jenkins-agent-npm`
-    * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow
-    * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. e.g. when branch is master; deploy to `test` environment.
+    * `environment {}` defines environment variables to be used across all build stages.
+    * `options {}` contains specific Job specs you want to run globally across the jobs, e.g., setting the terminal colour.
+    * `stage {}` all jobs must have one stage. This is the logical part of the build that will be executed, e.g., `bake-image`.
+    * `steps {}` each `stage` has one or more steps involved. These could be execute shell script, git checkout, etc.
+    * `agent {}` specifies the node the build should be run on, e.g., `jenkins-agent-npm`.
+    * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow.
+    * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. For example, when branch is master, then deploy to `test` environment.
 
 6. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
@@ -219,4 +219,4 @@ git push
 
     ![jenkins-blue-ocean](./images/jenkins-blue-ocean.png)
 
-🪄OBSERVE PIPELINE RUNNING :D - At this point check in with the other half of the group and see if you've managed to integrate the apps🪄
+🪄OBSERVE PIPELINE RUNNING :D - At this point, check in with the other half of the group and see if you've managed to integrate the apps🪄

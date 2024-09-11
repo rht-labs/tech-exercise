@@ -1,7 +1,7 @@
 ## 🐌 The Basics - CRW, OCP & Helm
 ## DevSpaces setup
 
-1. Login to your Red Hat OpenShift DevSpaces Editor. The link to this will be provided by your instructor.
+1. Login to your Red Hat OpenShift DevSpaces Editor. The link to this will be provided by your instructor. Note that several authentication providers might be enabled, if that is the case, check with the instructor which provider to use.
 
     ![devspaces](./images/devspaces.png)
 
@@ -19,7 +19,7 @@
     <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
     </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left and then selecting `Terminal > New Terminal` from the menu.
 
     ![new-terminal](./images/new-terminal.png)
 
@@ -106,13 +106,13 @@ Let's deploy a simple application using Helm.
 
     ![todolist](./images/todolist.png)
 
-4. You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have 1 replica.
+4. You can overwrite the default <span style="color:blue;">[values](https://github.com/rht-labs/todolist/blob/master/chart/values.yaml)</span> in a chart from the command line. Let's upgrade our deployment to show this. We'll make a simple change to the values to scale up our app. By default, we only have one replica of our application.
 
     ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
-    By default, we only have one replica of our application. Let's use helm to set this to 5.
+    Let's use Helm to set the number of replicas to 5.
 
     ```bash#test
     helm upgrade my tl500/todolist --set replicas=5 --namespace ${TEAM_NAME}-ci-cd
@@ -154,6 +154,6 @@ Let's deploy a simple application using Helm.
     * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
     * `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can overwrite these values on the command line.
     * `templates/*.yaml` - they are our k8s resources. 
-    * `_helpers.tpl` - is a collection of reusable variables an yaml snippets that are applied across all of the k8s resources uniformly for example, labels are defined in here and included on each k8s resource file as necessary.
+    * `_helpers.tpl` - is a collection of reusable variables and YAML snippets that are applied across all of the K8s resources uniformly for example, labels are defined in here and included on each K8s resource file as necessary.
 
 🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄
