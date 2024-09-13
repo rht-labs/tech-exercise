@@ -47,23 +47,24 @@ After the installation, you can use this trick to create users and group:
 
 IPA_NAMESPACE="${1:-ipa}"
 
-# 1. On your host - get the admin passwd and connect to IPA 
+# 1. On your host, get the IPA admin password and set the students password.
 oc project ${IPA_NAMESPACE}
-export IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -D)
-echo ${IPA_ADMIN_PASSWD}
-oc rsh `oc get po -l app=ipa -o name -n ${IPA_NAMESPACE}`
+IPA_ADMIN_PASSWD=$(oc get secret ipa-password --template='{{ range .data }}{{.}}{{end}}' -n ipa | base64 -d)
+STUDENT_PASSWORD='thisisthepassword'
 
-# 2. on the container running IPA Server, create `student` group and add users to it.
+# 2. On the container running IPA Server, create `student` group and add users to it.
+oc rsh `oc get po -l app=ipa -o name -n ${IPA_NAMESPACE}` bash << EOF
 echo ${IPA_ADMIN_PASSWD} | kinit admin
 export GROUP_NAME=student
-ipa group-add ${GROUP_NAME} --desc "TL500 Student Group" || true
+ipa group-add \${GROUP_NAME} --desc "TL500 Student Group" || true
 # in a loop add random users to the group 
 for i in {1..24};do
-  export LAB_NUMBER="lab$i"
-  echo 'thisisthepassword' | ipa user-add ${LAB_NUMBER} --first=${LAB_NUMBER} --last=${LAB_NUMBER} --email=${LAB_NUMBER}@redhatlabs.dev --password
-  ipa group-add-member ${GROUP_NAME} --users=$LAB_NUMBER
-  printf "\n\n User ${LAB_NUMBER} is created"
+  export LAB_NUMBER="lab\$i"
+  echo 'thisisthepassword' | ipa user-add \${LAB_NUMBER} --first=\${LAB_NUMBER} --last=\${LAB_NUMBER} --email=\${LAB_NUMBER}@redhatlabs.dev --password
+  ipa group-add-member \${GROUP_NAME} --users=\$LAB_NUMBER
+  printf "\n\n User \${LAB_NUMBER} is created"
 done
+EOF
 ```
 ## Enablement Framework Installation
 Now let's go and install the tooling!!
