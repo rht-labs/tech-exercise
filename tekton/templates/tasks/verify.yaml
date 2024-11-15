@@ -57,7 +57,7 @@ spec:
         fi
     - name: commit-changes
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
-      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
+      image: quay.io/redhat-cop/ubi8-git:latest
       script: |
         #!/bin/sh
         source ./rollback
@@ -65,12 +65,13 @@ spec:
           git config --global user.email "tekton@rht-labs.bot.com"
           git config --global user.name "🐈 Tekton 🐈"
           git config --global push.default simple
+          git config --global --add safe.directory '*'
           git checkout main
           git add $(params.DEPLOY_ENVIRONMENT)/values.yaml
           git commit -m "😢🤦🏻‍♀️ AUTOMATED COMMIT - $(params.APPLICATION_NAME) deployment is reverted to image $(params.PREVIOUS_VERSION) & chart $(params.PREVIOUS_CHART_VERSION) 😢🤦🏻‍♀️" || rc=$?
-          git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/$(params.TEAM_NAME)/tech-exercise.git
+          git remote set-url origin $(cat $HOME/.git-credentials)/$(params.TEAM_NAME)/tech-exercise.git
           git push -u origin main
           exit $ROLLOUT_FAIL
         else
-          echo "$(params.APPLICATION_NAME) v$(params.VERSION) deployment in $(params.DEPLOY_ENVIRONMENT) is successful 🎉 �"
+          echo "$(params.APPLICATION_NAME) v$(params.VERSION) deployment in $(params.DEPLOY_ENVIRONMENT) is successful 🎉 🍪"
         fi
