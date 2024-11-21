@@ -7,13 +7,7 @@
     mvn formatter:format
     ```
 
-    <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you are using DevSpaces in OpenShift 4.11+ you may need to add the `pet-battle-api` folder to you Che Workspace to open a file in the next step.
-    </p>
-
-    ![add-folder-to-workspace](images/add-folder-to-workspace.png)
-
-2. Now edit a java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
+2. Now edit a Java class file, such as `/projects/pet-battle-api/src/test/java/app/battle/CatEndpointTest.java` and add some TAB/spaces e.g. in L19,21
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api-tab.png)
 
@@ -21,7 +15,7 @@
 
     ![images/formatting-code-pb-api.png](images/formatting-code-pb-api.png)
 
-3. Linting and Formatting using Checkstyle (`checkstyle.xml`). Unfortunately we haven't installed these in our Cloud IDE yet so you may not be able to try these directly, but we will get to use the command line equivalents in the next step. For those using VCode you can checkout these links:
+3. Linting and formatting using Checkstyle (`checkstyle.xml`) -  Unfortunately, we haven't installed these in our Cloud IDE yet so you may not be able to try these directly, but we will get to use the command line equivalents in the next step. For those using VSCode you can checkout these links:
 
     - There are some plugins to help us here. For example, if you are a user of VSCode, you can install <span style="color:blue;">[an IDE extension](https://code.visualstudio.com/docs/java/java-linting)</span> for realtime feedback.
     ![images/checkstyle-extension.png](images/checkstyle-extension.png)
@@ -97,7 +91,7 @@
     - verify: run any checks to verify the package is valid and meets quality criteria
     - test: run unit tests
 
-    We use these phases in out build pipeline. The full lifecycle reference is <span style="color:blue;">[here.](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference)</span>
+    We use these phases in our build pipeline. The full lifecycle reference is <span style="color:blue;">[here.](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html#Lifecycle_Reference)</span>
 
     **If you have done the Sonarqube item, you'll see additional information in there....** We use the checkstyle plugin in Sonarqube which is found under **Rules** - **Java** language, **Repository**
 

@@ -4,13 +4,13 @@
 
 There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to declare Pipeline and Task definitions in YAML. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
-Tekton is made up of a number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` and a Workspace to create an instance of a pipeline.
+Tekton is made up of a number of YAML files each with a different purpose such as `Task` and `Pipeline`. These are then wrapped together in another YAML file (`PipelineRun`) which represents an instance of a `Pipeline` along with its associated volumes defined by Workspaces.
 
 ![simple-tekkers-pipeline](./images/simple-tekkers-pipeline.png)
 
 In this snippet of the pipeline used in this exercise, we define:
 
-* `workspaces` used by the pipeline (config maps, and shared workspaces for each task to use). 
+* `workspaces` used by the pipeline (config maps and shared workspaces for each task to use). 
 * `params` are the inputs to the run of the `Pipeline`, e.g., the application name or the git revision to build. 
 * `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, may also be supplied with parameters and workspaces if required.  
 
@@ -76,7 +76,7 @@ In this snippet of the pipeline used in this exercise, we define:
    * `workspaces` - these YAML are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
    * `secrets` - secure things used by the pipeline.
-   * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks & secrets etc) into a useful & reusable set of activities.
+   * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks, secrets, etc) into a useful & reusable set of activities.
    * `triggers` directory stores the configuration for the webhooks. We will add webhooks from GitLab to trigger our pipeline. Using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
 4. Since Tekton pipelines are just YAML, we can have Argo CD to sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions, edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:

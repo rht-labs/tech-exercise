@@ -30,7 +30,7 @@
     </pre>
     </div>
 
-2. Our tests can be executed in our IDE (in `/projects/pet-battle`) by first installing our dependencies (`npm i`) running `npm run test` but let's jump ahead and get them going in our pipeline as it doesn't matter if they work on your machine! To do this, we're going to extend the `Build{}` stage in `Jenkinsfile`. Extend the pipeline where <span style="color:green;" >// 🃏 Jest Testing</span> placeholder is. This should happen before we run the build.
+2. Our tests can be executed in our IDE (in `/projects/pet-battle`) by first installing our dependencies (`npm i`) and then running `npm run test`. But let's jump ahead and get them going in our pipeline as it doesn't matter if they work on your machine! To do this, we're going to extend the `Build{}` stage in `Jenkinsfile`. Extend the pipeline where <span style="color:green;" >// 🃏 Jest Testing</span> placeholder is. This should happen before we run the build.
 
     ```groovy
                     // 🃏 Jest Testing
@@ -38,7 +38,7 @@
                     sh 'npm run test:ci'
     ```
 
-3. If running the tests in `ci` mode, we've set them up to output an `xml` of the scores - this is great for Jenkins as he can˙ read the results and decide to fail the build or not! Let's add the `junit` report to the `Jenkinsfile` too. When the tests execute, they also collect code coverages statistics. This is another report we can feed Jenkins with!
+3. If running the tests in `ci` mode, we've set them up to output an `xml` of the scores - this is great for Jenkins as he can read the results and decide to fail the build or not! Let's add the `junit` report to the `Jenkinsfile` too. When the tests execute, they also collect code coverages statistics. This is another report we can feed Jenkins with!
 
     `post{}` steps in a Jenkinsfile allows us to do certain activities after parts of the build finsish. There are hooks provided by Jenkins such as `always{}`, `success{}` and `failure{}` which provide us an ability to do flow control based on the result of the build such as sending a notification or calling another job. In our case, we `alwasys{}` want to report the test results. Therefore, add these `post` steps to the pipeline by the <span style="color:green;" >// 📰 Post steps go here</span> placeholder.
 

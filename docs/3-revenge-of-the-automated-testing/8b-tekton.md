@@ -88,7 +88,7 @@
 
     🪄 Observe the **pet-battle-api** pipeline running with the **image-sign** task.
 
-    After the task successfully finish, in the `Administrator` view, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sig` which shows you that this is image signed. 
+    After the task successfully finish, in the `Administrator` view, go to OpenShift UI > Builds > ImageStreams and select `pet-battle-api`. You'll see a tag ending with `.sig` which shows you that this image is signed. 
 
     ![cosign-image-signing](images/cosign-image-signing.png)
 

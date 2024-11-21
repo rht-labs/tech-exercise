@@ -1,6 +1,6 @@
 ## Extend Tekton Pipeline with Automated Testing
 
-> In this exercise we'll deploy Allure - a useful tool for managing your java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using gitOps and then add the tests to our pipeline
+> In this exercise we'll deploy Allure - a useful tool for managing your Java tests and other reports from your CI/CD server. The exercise is in two parts: first we'll deploy Allure using GitOps and then add the tests to our pipeline
 
 ### Part 1 - Allure 
 
@@ -100,7 +100,7 @@
 
 ### Part 2 - Testing Tasks
 
-1. In our IDE, let's create a tekton task to push our test scores to allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder.
+1. In our IDE, let's create a Tekton Task to push our test scores to Allure. Add the `allure-post-report.yaml` Task to the `tekton/templates/tasks/` folder.
 
     ```yaml
     cd /projects/tech-exercise
@@ -179,7 +179,7 @@
               workspace: shared-workspace
     ```
 
-3. **(Optional)** Only perform this step if you **did not** perform the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](./3-revenge-of-the-automated-testing%2F1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning). Otherwise skip this step. Open the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`) and **remove** the `skipTests` argument from the pipeline. This will ensure that our unit tests are run.
+3. If you **performed** the previous testing section [3. Revenge of the Automated Testing / Sonarqube / Tekton](./3-revenge-of-the-automated-testing%2F1b-tekton.md#extend-tekton-pipeline-with-sonar-scanning), then run the Task `save-test-results` after the Task `code-analysis` in the maven pipeline (`/projects/tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml`). **Otherwise,  remove** the `skipTests` argument from the maven pipeline. This will ensure that our unit tests are run.
 
     Change the build options from this:
     <div class="highlight" style="background: #f7f7f7">
