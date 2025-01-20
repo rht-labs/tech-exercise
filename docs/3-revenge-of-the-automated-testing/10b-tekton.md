@@ -9,7 +9,7 @@
     Below scenario calls `/cats` endpoint and fails the test if:
     - 1% of calls are not 200 (OK)
     - Total average response time to `/cats` endpoint is more than 200 ms
-    - The max response time in 90 percentile is higher than 800 ms
+    - The max response time in 95 percentile is higher than 800 ms
 
     ```bash
     cat << EOF > /projects/pet-battle-api/locustfile.py
@@ -113,7 +113,7 @@
 
     🪄 Observe the **pet-battle-api** pipeline running with the **load-testing** task.
 
-    If the pipeline fails due to the tresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
+    If the pipeline fails due to the thresholds we set, you can always adjust it by updating the `locustfile.py` with higher values.
 
     ```py
         if environment.stats.total.fail_ratio > 0.01:

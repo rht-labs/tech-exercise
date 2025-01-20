@@ -2,7 +2,7 @@
 
 Let's enable the **kube-linter** task in our pipeline.
 
-1. Kube lint has a tekton task on Tekton Hub so let's grab it and add the `Task` to our cluster. Feel free to explore what the `Task` will be doing 
+1. Kube lint has a Tekton `Task` on Tekton Hub so let's grab it and add the `Task` to our cluster. Feel free to explore what the `Task` will be doing 
 
     ```bash
     curl -sLo /projects/tech-exercise/tekton/templates/tasks/kube-linter.yaml \

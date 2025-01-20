@@ -1,6 +1,6 @@
 ## Extend Jenkins Pipeline with Code Linting Step
 
-1. JavaScript has many wonderful _quirks_ and because it's not compiled being able to ensure code is written to a specific style is very important. Enter linting the code! In a large software project ensuring consistency across all engineers can be really helpful for support. We can also enforce the rules in the build! Let's play with them locally first, in your IDE install the app dependencies and run the linter:
+1. JavaScript has many wonderful _quirks_ and, because it's not compiled, being able to ensure code is written to a specific style is very important. Enter linting the code! In a large software project ensuring consistency across all engineers can be really helpful for support. We can also enforce the rules in the build! Let's play with them locally first, in your IDE install the app dependencies and run the linter:
 
     ```bash
     cd /projects/pet-battle
@@ -8,7 +8,7 @@
     npm run lint
     ```
 
-2. Linting should show no errors (huzzah!) but let's introduce something that will break our coding standards and see what happens:
+2. Linting should show no errors (huzzah!), but let's introduce something that will break our coding standards and see what happens:
 
     ```bash
     echo 'let biscuits="something"'  >> src/app/app.component.ts 
@@ -23,7 +23,7 @@
     npm run lint:fix
     ```
 
-4. Now let's add the linter to the pipeline so on every build it checks our style, extend the `stage{ "Build" }` of the `Jenkinsfile` with the lint task.
+4. Now let's add the linter to the pipeline so on every build it checks our style. Extend the `stage{ "Build" }` of the `Jenkinsfile` with the lint task.
 
     ```groovy
                     //💅 Lint exercise here

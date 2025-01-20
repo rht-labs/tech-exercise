@@ -16,19 +16,19 @@
     ```yaml
       # Zalenium
       - name: zalenium
-          enabled: true
-          source: https://github.com/zalando/zalenium.git
-          source_path: charts/zalenium
-          source_ref: "master"
-          values:
-          hub:
-              serviceType: ClusterIP
-              openshift:
-              route:
-                  enabled: true
-              serviceAccount:
-              create: false
-              desiredContainers: 0
+        enabled: true
+        source: https://github.com/zalando/zalenium.git
+        source_path: charts/zalenium
+        source_ref: "master"
+        values:
+        hub:
+            serviceType: ClusterIP
+            openshift:
+            route:
+                enabled: true
+            serviceAccount:
+            create: false
+            desiredContainers: 0
     ```
 
 2. Commit the changes to see them reflected in ArgoCD
@@ -115,7 +115,7 @@
     ![jenkins-sys-test](images/jenkins-sys-test.png)
 
     <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you have not created definiations in your `pet-battle/stage/values.yaml` for the stage environment, the last step will fail. Have a <a href="/#/2-attack-of-the-pipelines/2-app-of-apps?id=deploying-pet-battle">look here for instructions to fix this</a> if you've skipped step 4 from exercise 2. 
+    ⛷️ <b>NOTE</b> ⛷️ - If you have not created definitions in your `pet-battle/stage/values.yaml` for the stage environment, the last step will fail. Have a <a href="/tech-exercise/#/2-attack-of-the-pipelines/2-app-of-apps?id=deploying-pet-battle">look here for instructions to fix this</a> if you've skipped step 4 from exercise 2. 
     </p>
 
 8. Once the job has executed successfully, you can show the reports of the test execution and what browswer was used etc. To view this report, you need to swap to classic jenkins view and go to `system-tests/main` job. On the left hand side you'll see the `Cucubmer Reports` on the menu. 

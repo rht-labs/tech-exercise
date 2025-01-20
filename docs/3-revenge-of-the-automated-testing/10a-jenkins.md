@@ -38,7 +38,7 @@
     Below scenario calls `/home` endpoint and fails the test if:
     - 1% of /cats calls are not 200 (OK)
     - Total average response time to /cats endpoint is more than 200 ms
-    - The max response time in 90 percentile is higher than 800 ms
+    - The max response time in 95 percentile is higher than 800 ms
 
     ```bash
     cat << EOF > /projects/pet-battle/locustfile.py

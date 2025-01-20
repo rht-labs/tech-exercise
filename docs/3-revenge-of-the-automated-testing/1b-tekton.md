@@ -1,6 +1,6 @@
 ## Extend Tekton Pipeline with Sonar Scanning
 
-> In this exercise, we're going to edit the tekton `Pipeline` to run code-analysis using sonar of the API and add an additional `Task` to analyse the results
+> In this exercise, we're going to edit the tekton `Pipeline` to run code-analysis using the sonar API and add an additional `Task` to analyse the results
 
 1. Add `code-analysis` step to our `Pipeline`. Edit `tech-exercise/tekton/templates/pipelines/maven-pipeline.yaml` file, add this step before the `maven` build step. We don't need to create a new task here, we can just supply some new parameters to the existing `maven` task giving us great reusability of Tekton components.
 
