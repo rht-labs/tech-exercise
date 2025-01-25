@@ -49,23 +49,28 @@ spec:
   tasks:
     - name: fetch-app-repository
       taskRef:
-        name: git-clone
-        kind: ClusterTask
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines 
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: url
+        - name: URL
           value: "$(params.GIT_URL)"
-        - name: revision
+        - name: REVISION
           value: "main"
-        - name: subdirectory
+        - name: SUBDIRECTORY
           value: "$(params.APPLICATION_NAME)/$(params.GIT_BRANCH)"
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: "true"
-        - name: sslVerify
+        - name: SSL_VERIFY
           value: "false"
-
 
     # Code Analysis
 
@@ -135,21 +140,27 @@ spec:
 
     - name: fetch-argocd-configuration
       taskRef:
-        name: git-clone
-        kind: ClusterTask
+        resolver: cluster
+        params:
+          - name: kind
+            value: task
+          - name: name
+            value: git-clone
+          - name: namespace
+            value: openshift-pipelines 
       workspaces:
         - name: output
           workspace: shared-workspace
       params:
-        - name: url
+        - name: URL
           value: "https://{{ .Values.git_server }}/{{ .Values.team }}/tech-exercise.git"
-        - name: revision
+        - name: REVISION
           value: "main"
-        - name: subdirectory
+        - name: SUBDIRECTORY
           value: "tech-exercise/main"
-        - name: deleteExisting
+        - name: DELETE_EXISTING
           value: "true"
-        - name: sslVerify
+        - name: SSL_VERIFY
           value: "false"
       runAfter:
         - helm-package
