@@ -16,7 +16,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 ### Get GitLab Ready for GitOps
 > In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our GitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
  
-1. Log into GitLab with your credentials. GitLab URL:
+1. Log into GitLab with your credentials (using the LDAP authentication method). GitLab URL:
 
     ```bash
     https://<GIT_SERVER>
