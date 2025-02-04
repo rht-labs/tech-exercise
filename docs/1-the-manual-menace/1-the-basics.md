@@ -8,15 +8,15 @@
     <p class="warn">
     If the workspace has not been set up for you, you can create one from this devfile.
     </br>
-    On CodeReady Workspaces, "Create Workspace > Custom Workspace".
-    </br>
-    For OpenShift 4.9, 4.10 - Enter this URL to load the TL500 stack:</br>
-    <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
-    </br>
     On DevSpaces,  "Quick Add > Import from Git".
     </br>
     For OpenShift 4.11+ - Enter this URL to load the TL500 stack:</br>
     <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
+    </br>
+    On CodeReady Workspaces, "Create Workspace > Custom Workspace".
+    </br>
+    For OpenShift 4.9, 4.10 - Enter this URL to load the TL500 stack:</br>
+    <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </p>
 
 2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left and then selecting `Terminal > New Terminal` from the menu.
