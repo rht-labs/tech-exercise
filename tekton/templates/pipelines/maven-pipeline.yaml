@@ -50,7 +50,7 @@ spec:
     - name: fetch-app-repository
       taskRef:
         name: git-clone
-        kind: ClusterTask
+        kind: Task
       workspaces:
         - name: output
           workspace: shared-workspace
@@ -136,7 +136,7 @@ spec:
     - name: fetch-argocd-configuration
       taskRef:
         name: git-clone
-        kind: ClusterTask
+        kind: Task
       workspaces:
         - name: output
           workspace: shared-workspace
