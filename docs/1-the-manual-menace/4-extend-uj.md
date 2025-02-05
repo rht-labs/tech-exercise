@@ -37,7 +37,7 @@ git pull
         enabled: true
         source: https://redhat-cop.github.io/helm-charts
         chart_name: sonatype-nexus
-        source_ref: "1.1.11"
+        source_ref: "1.1.12"
         values:
           includeRHRepositories: false
           service:
