@@ -42,7 +42,7 @@
         enabled: true
         source: http://nexus:8081/repository/helm-charts
         chart_name: pet-battle-api
-        source_ref: 1.2.1
+        source_ref: 1.5.0
         values:
           image_name: pet-battle-api
           image_version: 1.0.0
