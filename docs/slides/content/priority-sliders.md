@@ -122,6 +122,6 @@ How did you reach consensus?
 <!-- .slide: data-background-image="images/book-background.jpeg", class="black-style"  data-background-opacity="0.3" -->
 ### Related & Used Practices
 - [Priority Sliders](https://openpracticelibrary.com/practice/priority-sliders/)
-- [Voting](https://openpracticelibrary.com/practice/) - eg Dot Voting, Heat Map, etc
+- Voting - eg [Dot Voting](https://openpracticelibrary.com/practice/dot-voting/), Heat Map, etc
 - Any other prioritization tools eg Impact / Effort Matrix
 - [Sprint Planning](https://openpracticelibrary.com/practice/iteration-planning) - this practice provides a useful input in the depth of task writing and definition
