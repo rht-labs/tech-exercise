@@ -142,7 +142,7 @@ _The 3-5-3 formation represents 3 roles, 5 events (previously known as ceremonie
 - [Definition of Ready](https://openpracticelibrary.com/practice/definition-of-ready/)
 - [Definition of Done](https://openpracticelibrary.com/practice/definition-of-done)
 - [Burndown](https://openpracticelibrary.com/practice/burndown/)
-- [Burnup](https://openpracticelibrary.com/practice/)
+- [Burnup](https://openpracticelibrary.com/practice/burnup-chart/)
 - [User Stories](https://openpracticelibrary.com/practice/user-story-mapping)
 - [Story Points](https://openpracticelibrary.com/practice/)
 - [Confidence voting](https://openpracticelibrary.com/practice/confidence-voting)
