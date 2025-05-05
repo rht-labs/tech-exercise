@@ -1,4 +1,3 @@
 {
-    "devfile": "https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile.yaml",
-    "devfile411": "https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile-v2.yaml?che-editor=che-incubator/che-code/latest"
+    "devfile": "https://raw.githubusercontent.com/rht-labs/enablement-framework/main/codereadyworkspaces/tl500-devfile-v2.yaml?che-editor=che-incubator/che-code/latest"
 }
