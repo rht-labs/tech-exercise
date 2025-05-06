@@ -8,14 +8,9 @@
     <p class="warn">
     If the workspace has not been set up for you, you can create one from this devfile.
     </br>
-    On DevSpaces,  "Quick Add > Import from Git".
+    On DevSpaces,  "Create Workspace > Import from Git".
     </br>
-    For OpenShift 4.11+ - Enter this URL to load the TL500 stack:</br>
-    <span style="color:blue;"><a id=crw_dev_filelocation_4.11 href=""></a></span>
-    </br>
-    On CodeReady Workspaces, "Create Workspace > Custom Workspace".
-    </br>
-    For OpenShift 4.9, 4.10 - Enter this URL to load the TL500 stack:</br>
+    Enter this URL to load the TL500 stack:</br>
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </p>
 

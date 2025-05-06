@@ -111,8 +111,6 @@
               console.info("🥳 YAY! Found the config file 🥳", jsonData);
               document.getElementById('crw_dev_filelocation').setAttribute('href', jsonData.devfile);
               document.getElementById('crw_dev_filelocation').innerHTML = jsonData.devfile;
-              document.getElementById('crw_dev_filelocation_4.11').setAttribute('href', jsonData.devfile411);
-              document.getElementById('crw_dev_filelocation_4.11').innerHTML = jsonData.devfile411;
             }).catch(function(err) {
               console.warn("😭 Opps, Cannot find the config file 😭", err);
             })
