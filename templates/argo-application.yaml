@@ -77,6 +77,7 @@ spec:
         - /spec/replicas
         - /spec/template/spec/containers/0/image
         - /spec/template/spec/containers/1/image
+        - /spec/triggers
     - group: build.openshift.io
       kind: BuildConfig
       jsonPointers:
