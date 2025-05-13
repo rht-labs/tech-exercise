@@ -219,6 +219,8 @@ spec:
 
     # Load Testing
 
+    # System Testing
+
   results:
     - name: VERSION
       description: Version of the application
