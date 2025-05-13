@@ -184,6 +184,15 @@ We deploy each of our applications using an Argo CD `application` definition. We
     ![test-pet-battle-apps-topology.png](images/test-pet-battle-apps-topology.png)
 
     </br>
-    😻😻 Select the Pet Battle URL link highlighted above and you should see ... 😻😻
+    🔐🔐 If you have not seen the Keycloak Test dashboard, visit the following URL to test the access and accept the respective SSL certificate 🔐🔐
+
+     ```bash#test
+    https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>
+    ```   
+
+    ![test-pet-battle-apps-first.png](images/keycloak.png)
+
+    </br>
+    😻😻 Finally, select the Pet Battle URL link highlighted above and you should see ... 😻😻
 
     ![test-pet-battle-apps-first.png](images/test-pet-battle-apps-first.png)
