@@ -84,7 +84,7 @@
     ```
 
     ```bash
-    dd if=/dev/urandom of=/var/lib/mongodb/data/rando-calrissian bs=10M count=50
+    dd if=/dev/urandom of=/data/db/rando-calrissian bs=10M count=60
     ```
 
     You should see an output like this:
