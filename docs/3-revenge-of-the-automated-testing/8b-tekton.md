@@ -25,7 +25,7 @@
         - name: COSIGN_VERSION
           type: string
           description: Version of cosign CLI
-          default: 2.0.2
+          default: 2.5.0
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
           type: string
