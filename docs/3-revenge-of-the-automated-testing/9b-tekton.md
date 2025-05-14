@@ -25,7 +25,7 @@
         - name: COSIGN_VERSION
           type: string
           description: Version of cosign CLI
-          default: 2.0.2
+          default: 2.5.0
         - name: WORK_DIRECTORY
           description: Directory to start build in (handle multiple branches)
           type: string
@@ -42,9 +42,9 @@
             chmod -R 775 /tmp/cosign
 
             oc registry login
-            /tmp/syft -o spdx `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) > $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom
-            /tmp/cosign attach sbom --sbom $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
-            /tmp/cosign attest --key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign --yes --predicate $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
+            SYFT_REGISTRY_INSECURE_SKIP_TLS_VERIFY="true" /tmp/syft -o spdx `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION) > $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom
+            /tmp/cosign attach sbom --allow-insecure-registry=true --sbom $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
+            /tmp/cosign attest --allow-insecure-registry=true --key k8s://$(params.TEAM_NAME)-ci-cd/$(params.TEAM_NAME)-cosign --yes --predicate $(params.TEAM_NAME)-test-$(params.APPLICATION_NAME)-$(params.VERSION).sbom `oc registry info`/$(params.TEAM_NAME)-test/$(params.APPLICATION_NAME):$(params.VERSION)
     EOF
     ```
 
