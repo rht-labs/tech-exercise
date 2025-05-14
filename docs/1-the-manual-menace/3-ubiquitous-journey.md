@@ -80,7 +80,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash#test
     cd /projects/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
     ```
 
     Use the `GITLAB_PAT` from above when you are prompted for the password (this will be cached)
