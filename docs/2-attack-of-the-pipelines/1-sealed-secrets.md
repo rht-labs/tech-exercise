@@ -10,7 +10,7 @@ Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called 
 
 ```bash
 cd /projects/tech-exercise
-git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
 git pull
 ```
 
