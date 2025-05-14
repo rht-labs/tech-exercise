@@ -67,8 +67,9 @@ All of these traits lead to one outcome - the ability to build and release quali
     echo $GITLAB_PAT
     ```
     
-    ..and lets persist it for now:
+    ..and lets persist your Username and Token for now:
     ```bash
+    echo "export GITLAB_USER=${GITLAB_USER}"  | tee -a ~/.bashrc -a ~/.zshrc
     echo "export GITLAB_PAT=${GITLAB_PAT}"  | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
