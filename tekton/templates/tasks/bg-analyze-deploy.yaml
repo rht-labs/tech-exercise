@@ -1,0 +1,67 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: analyze-bg
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+    - name: WORK_DIRECTORY
+      description: Directory to start build in (handle multiple branches)
+      type: string
+    - name: DEPLOY_ENVIRONMENT
+      description: Environment to deploy the app
+      type: string
+    - name: PREVIOUS_VERSION
+      description: Version of the application
+      type: string
+  results:
+    - name: BG_APPLICATION_NAME
+      description: Version of currently BG application deployed
+    - name: BG_COLOR
+      description: Version of currently BG application deployed
+  steps:
+    - name: get-current-info-blue
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
+      script: |
+        BLUE_PREVIOUS_VERSION=$(yq eval .applications.blue-"$(params.APPLICATION_NAME)".values.image_version "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        BLUE_PREVIOUS_CHART_VERSION=$(yq eval .applications.blue-"$(params.APPLICATION_NAME)".source_ref "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        echo -n "APP Version in BLUE: ${BLUE_PREVIOUS_VERSION}"
+        echo -n "Chart Version in BLUE: ${BLUE_PREVIOUS_CHART_VERSION}"
+        echo "$BLUE_PREVIOUS_VERSION" > versions
+        echo "$BLUE_PREVIOUS_CHART_VERSION" >> versions
+    - name: get-current-info-green
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
+      script: |
+        GREEN_PREVIOUS_VERSION=$(yq eval .applications.green-"$(params.APPLICATION_NAME)".values.image_version "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        GREEN_PREVIOUS_CHART_VERSION=$(yq eval .applications.green-"$(params.APPLICATION_NAME)".source_ref "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
+        echo -n "APP Version in GREEN: ${GREEN_PREVIOUS_VERSION}"
+        echo -n "Chart Version in GREEN: ${GREEN_PREVIOUS_CHART_VERSION}"
+        echo "$GREEN_PREVIOUS_VERSION" >> versions
+        echo "$GREEN_PREVIOUS_CHART_VERSION" >> versions
+    - name: announce-deployment-to-modify
+      workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
+      image: quay.io/redhat-cop/tekton-task-helm:3.6.3
+      script: |
+        #!/bin/sh
+        source ./versions
+        if [[ "$(params.PREVIOUS_VERSION)" != "$BLUE_PREVIOUS_VERSION" ]]
+        then
+          echo "Deploy in GREEN!"
+          echo -n "green-$(params.APPLICATION_NAME)" | tee $(results.BG_APPLICATION_NAME.path)
+          echo -n "green" | tee $(results.BG_COLOR.path)
+        elif [[ "$(params.PREVIOUS_VERSION)" != "$GREEN_PREVIOUS_VERSION" ]]
+        then
+          echo "Deploy in BLUE!"
+          echo -n "blue-$(params.APPLICATION_NAME)" | tee $(results.BG_APPLICATION_NAME.path)
+          echo -n "blue" | tee $(results.BG_COLOR.path)
+        else
+          echo "No new deployment required 🎉🎉🎉"
+          exit 0
+        fi        
