@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: promote-image-stage
+spec:
+  workspaces:
+    - name: output
+  params:
+    - name: APPLICATION_NAME
+      description: Name of the application
+      type: string
+    - name: TEAM_NAME
+      description: Name of the team that doing this exercise :)
+      type: string
+    - name: VERSION
+      description: Version of the application
+      type: string
+  steps:
+    - name: tag-image
+      workingDir: $(workspaces.output.path)
+      image: quay.io/openshift/origin-cli:4.12
+      script: |
+        #!/bin/sh
+        oc tag $(params.TEAM_NAME)-ci-cd/$(params.APPLICATION_NAME):latest $(params.TEAM_NAME)-stage/$(params.APPLICATION_NAME):$(params.VERSION)

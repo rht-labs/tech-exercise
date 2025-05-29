@@ -219,6 +219,8 @@ spec:
 
     # Load Testing
 
+    # Blue/Green Deployment
+
   results:
     - name: VERSION
       description: Version of the application
