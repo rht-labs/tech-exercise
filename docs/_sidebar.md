@@ -54,6 +54,8 @@
 * [5. The Deployments Strike Back](5-the-deployments-strike-back/README.md)
   * [📈 Autoscaling](5-the-deployments-strike-back/1-autoscaling.md)
   * [🔵🟩 Blue/Green Deployments](5-the-deployments-strike-back/2-blue-green-deployments.md)
+    * [🌸 Jenkins](5-the-deployments-strike-back/2a-blue-green-deployments.md)
+    * [🐈 Tekton](5-the-deployments-strike-back/2b-blue-green-deployments.md)
   * [🪄 A/B Deployments](5-the-deployments-strike-back/3-a-b-deployments.md)
   * [🐉 Here Be Dragons!](5-the-deployments-strike-back/666-here-be-dragons.md) 
 * [99. Rise of the Cluster](99-the-rise-of-the-cluster/README.md)
