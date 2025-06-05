@@ -191,6 +191,13 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
     oc get route/pet-battle-api -n ${TEAM_NAME}-stage --template='{{.spec.host}}'
     ```
 
+    You can use the command line...
+
+    ```bash
+    ROUTE=$(oc get route/pet-battle-api -n ${TEAM_NAME}-stage --template='{{.spec.host}}')
+    for i in `seq 1 10`; do curl https://${ROUTE} -k -s | grep -i welcome; done
+    ```
+
 11. Now let's redirect 50% of the traffic to `B`, that means that only 50% of the traffic will go to `A`. So you need to update `weight` value in `tech-exercise/pet-battle/stage/values.yaml` file.
 And as always, push it to the Git repository - <strong>Because if it's not in Git, it's not real!</strong>
 
@@ -226,10 +233,9 @@ And as always, push it to the Git repository - <strong>Because if it's not in Gi
     oc get route/pet-battle-api -n ${TEAM_NAME}-stage --template='{{.spec.host}}'
     ```
 
-15. You can use the command line as well
+    You can use the command line...
 
     ```bash
     ROUTE=$(oc get route/pet-battle-api -n ${TEAM_NAME}-stage --template='{{.spec.host}}')
     for i in `seq 1 10`; do curl https://${ROUTE} -k -s | grep -i welcome; done
     ```
-
