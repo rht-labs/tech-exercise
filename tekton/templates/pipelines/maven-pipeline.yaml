@@ -222,6 +222,8 @@ spec:
     # System Testing
 
     # Blue/Green Deployment
+    
+    # A/B Deployment
 
   results:
     - name: VERSION
