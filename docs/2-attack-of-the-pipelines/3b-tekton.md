@@ -25,7 +25,7 @@ In this snippet of the pipeline used in this exercise, we define:
     ```bash#test
     cd /projects
     git clone https://github.com/rht-labs/pet-battle-api.git && cd pet-battle-api
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
     git branch -M main
     git push -u origin main
     ```

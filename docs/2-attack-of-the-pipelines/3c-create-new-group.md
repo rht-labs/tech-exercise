@@ -103,7 +103,7 @@ team will be easy following the next instructions.
 
     ```bash#test
     cd /projects/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
     git pull
     ```
 

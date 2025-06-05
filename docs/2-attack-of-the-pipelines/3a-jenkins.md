@@ -39,7 +39,7 @@ git push
     ```bash#test
     cd /projects
     git clone https://github.com/rht-labs/pet-battle.git && cd pet-battle
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/pet-battle.git
     git branch -M main
     git push -u origin main
     ```

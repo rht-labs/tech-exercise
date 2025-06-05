@@ -67,8 +67,9 @@ All of these traits lead to one outcome - the ability to build and release quali
     echo $GITLAB_PAT
     ```
     
-    ..and lets persist it for now:
+    ..and lets persist your Username and Token for now:
     ```bash
+    echo "export GITLAB_USER=${GITLAB_USER}"  | tee -a ~/.bashrc -a ~/.zshrc
     echo "export GITLAB_PAT=${GITLAB_PAT}"  | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
@@ -80,10 +81,8 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash#test
     cd /projects/tech-exercise
-    git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
+    git remote set-url origin https://${GITLAB_USER}:${GITLAB_PAT}@${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
     ```
-
-    Use the `GITLAB_PAT` from above when you are prompted for the password (this will be cached)
 
     ```bash#test
     cd /projects/tech-exercise
