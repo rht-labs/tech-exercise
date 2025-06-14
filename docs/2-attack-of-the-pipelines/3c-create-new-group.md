@@ -1,7 +1,6 @@
 ## Setting A New Group
 
-Splitting your team in more groups, you can accelerate your delivery life cycle for Pet Battle Industries. Onboard a new group in the
-team will be easy following the next instructions.
+By splitting your team into more groups, you can accelerate your delivery life cycle for Pet Battle Industries. Onboarding a new group in the team will be easy following the next instructions.
 
 1. Login to your Red Hat OpenShift DevSpaces Editor. The link to this will be provided by your instructor.
 
@@ -16,13 +15,13 @@ team will be easy following the next instructions.
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on the top left then select `Terminal > New Terminal` from the menu.
 
     ![new-terminal](../1-the-manual-menace/images/new-terminal.png)
 
 3. Notice the nifty default shell in the `stack-tl500` container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
+4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
     ```bash#test
     echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
@@ -52,7 +51,7 @@ team will be easy following the next instructions.
 8. Check if you can connect to OpenShift. Run the command below.
 
     <p class="tip">
-    ⛷️ <b>TIP</b> ⛷️ - Before you hit enter, make sure you change the username and password to match your team's login details. If your password includes special characters, put it in single quotes. ie: <strong>'A8y?Rpm!9+A3B/KG'</strong>
+    ⛷️ <b>TIP</b> ⛷️ - Before you hit enter, make sure you change the username and password to match your team's login details. If your password includes special characters, put it in single quotes. i.e.: <strong>'A8y?Rpm!9+A3B/KG'</strong>
     </p>
 
     ```bash
@@ -107,7 +106,7 @@ team will be easy following the next instructions.
     git pull
     ```
 
-12. And finally we could update our local environment with the latest content of Pet Battle applications:
+12. And finally, update our local environment with the latest content of Pet Battle applications:
 
     The frontend:
 

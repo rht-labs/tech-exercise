@@ -53,7 +53,7 @@ git push
     Select `pet-battle` from the list and click `OK`.
     ![add-workspace-pet-battle-2](./images/add-workspace-pet-battle-2.png)
 
-    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu._
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on the top left then select `Terminal > New Terminal` from the menu._
 
 
 3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle frontend so every commit triggers it. Jenkins needs a URL of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:

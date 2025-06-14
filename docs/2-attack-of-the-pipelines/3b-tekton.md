@@ -39,7 +39,7 @@ In this snippet of the pipeline used in this exercise, we define:
     Select `pet-battle-api` from the list and click `OK`.
     ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
 
-    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left, then select `Terminal > New Terminal` from the menu._
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on the top left, then select `Terminal > New Terminal` from the menu._
 
 
 3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as a Helm chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
