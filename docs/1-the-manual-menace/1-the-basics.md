@@ -29,12 +29,14 @@
 5. Add the `CLUSTER_DOMAIN` to the environment:
 
     ```bash#test
+    # i.e. apps.cluster-kn6sn.kn6sn.sandbox2961.opentlc.com
     echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 6. Add the `GIT_SERVER` to the environment:
 
     ```bash#test
+    # Check routes in tl500-gitlab namespace
     echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
