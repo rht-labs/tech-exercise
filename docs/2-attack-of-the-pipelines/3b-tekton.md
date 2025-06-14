@@ -1,6 +1,6 @@
 ### Tekton Pipeline
 
-> Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in popularity as it's Kubernetes Native way of running CI/CD.
+> Tekton (OpenShift Pipelines) is the new kid on the block in the CI/CD space. It's grown rapidly in popularity as it's a Kubernetes Native way of running CI/CD.
 
 There are many similarities between what Jenkins does and what Tekton does. For example, both can be used to store pipeline definitions as code in a Git repository. Tekton is deployed as an operator in our cluster and allows users to declare Pipeline and Task definitions in YAML. <span style="color:blue;">[Tekton Hub](https://hub.tekton.dev/)</span> is a repository for sharing these YAML resources among the community, giving great reusability to standard workflows.
 
@@ -16,7 +16,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
 #### Deploying the Tekton Objects
 
-1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle-api`. Make the project as **internal**.
+1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle-api`. Make the project **internal**.
 
     ![pet-battle-api-git-repo](images/pet-battle-api-git-repo.png)
 
@@ -30,16 +30,16 @@ In this snippet of the pipeline used in this exercise, we define:
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle-api folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
+        ⛷️ <b>NOTE</b> ⛷️ - If the `pet-battle-api` folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
     </p>
 
-    Click the hamburger menu on top left, then `File > Add Folder to Workspace`
+    Click the hamburger menu on the top left, then `File > Add Folder to Workspace`
     ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
 
     Select `pet-battle-api` from the list and click `OK`.
     ![add-workspace-pet-battle-api](./images/add-workspace-pet-battle-api.png)
 
-    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left, then select `Terminal > New Terminal` from the menu._
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on the top left, then select `Terminal > New Terminal` from the menu._
 
 
 3. Unlike Jenkins, our Tekton pipeline definitions are not stored with the codebase. Instead, they're wrapped as a Helm chart along with our Ubiquitous Journey project. The Tekton Pipelines chart is in the root of the `tech-exercise`:
@@ -105,7 +105,7 @@ In this snippet of the pipeline used in this exercise, we define:
     fi
     ```
 
-5. Tekton will push changes to our Helm chart to Nexus as part of the pipeline. Originally, we configured our App of Apps to pull from a different chart repository so we also need to update Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
+5. Tekton will push changes to our Helm chart to Nexus as part of the pipeline. Originally, we configured our App of Apps to pull from a different chart repository, so we also need to update Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -139,7 +139,7 @@ In this snippet of the pipeline used in this exercise, we define:
     ![uj-and-tekkers](./images/uj-and-tekkers.png)
 
 
-7. With our pipelines definitions sync'd to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
+7. With our pipelines definitions synced to the cluster (thanks Argo CD 🐙👏) and our codebase forked, we can now add the webhook to GitLab `pet-battle-api` project. First, grab the URL we're going to invoke to trigger the pipeline:
 
     ```bash#test
     echo https://$(oc -n ${TEAM_NAME}-ci-cd get route webhook --template='{{ .spec.host }}')
@@ -150,7 +150,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 
     * select `Push Events`, leave the branch empty for now
     * disable `SSL Verification`
-    * Click `Add webhook` button.
+    * Click the `Add webhook` button.
 
     ![gitlab-webhook-trigger.png](images/gitlab-webhook-trigger.png)
 
@@ -158,7 +158,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 
     ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
-9. With all these components in place, now it's time to trigger the pipeline via webhook by checking in some code for Pet Battle API. Lets make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
+9. With all these components in place, now it's time to trigger the pipeline via webhook by checking in some code for Pet Battle API. Let's make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
     ```xml
         <artifactId>pet-battle-api</artifactId>
@@ -181,7 +181,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
     git push 
     ```
 
-    🪄 Observe Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
+    🪄 Observe the Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-ci-cd` project:
 
     ![images/tekton-pipeline-running.png](images/tekton-pipeline-running.png)
 

@@ -20,7 +20,7 @@ As a **cluster-admin** patch this in using:
 oc patch tektonconfig config -p '{"spec":{"pruner":{"keep":15,"resources":["pipelinerun"],"schedule":"*/15 * * * *"}}}' --type=merge
 ```
 
-This generates a kubernetes *CronJob* in the *targetNamespace* which is:
+This generates a Kubernetes *CronJob* in the *targetNamespace* which is:
 
 ```bash
 oc get cronjob resource-pruner -n openshift-pipelines -o yaml

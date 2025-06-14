@@ -1,8 +1,8 @@
-## Extend UJ with a another tool, eg Nexus 
-Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to store and manage our artifacts. Nexus is here to help! We can use Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
+## Extend UJ with another tool, eg Nexus 
+Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to store and manage our artifacts. Nexus is here to help! We can use the Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
 <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run the commands bellow before going forward.
 </p>
 
 ```bash
@@ -15,13 +15,13 @@ git pull
 ### Add ArgoCD Webhook from GitLab
 > ArgoCD has a cycle time of about 3ish mins - this is too slow for us, so we can make ArgoCD sync our changes AS SOON AS things hit the git repo.
 
-1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get ArgoCD URL with following:
+1. Let's add a webhook to connect ArgoCD to our `ubiquitous-journey` project. Get the ArgoCD URL with following:
 
     ```bash#test
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
     ```
 
-2. Go to `tech-exercise` git repository on GitLab. From left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now, whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
+2. Go to `tech-exercise` git repository on GitLab. From the left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now, whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
 
     ![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
 
@@ -61,7 +61,7 @@ git pull
     git push 
     ```
 
-3. ArgoCD will detect the change in `ubiquitous-journey/values-tooling.yaml` and deploy Nexus on our behalf in order to match what is in git also in the cluster. You can see it also in ArgoCD UI.
+3. ArgoCD will detect the change in `ubiquitous-journey/values-tooling.yaml` and deploy Nexus on our behalf to ensure the state in the cluster matches the desired state in Git. You can see it also in the ArgoCD UI.
 ![argocd-nexus](images/argocd-nexus.png)
 
 4. With the Webhook in place, it should only take a few seconds for things to become available. But you can verify it is all working by opening the Nexus URL in a new tab (admin / admin123 is the default credential):

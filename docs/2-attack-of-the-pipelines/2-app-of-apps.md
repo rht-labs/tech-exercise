@@ -73,21 +73,21 @@ We deploy each of our applications using an Argo CD `application` definition. We
     git push 
     ```
 
-4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes to these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
+4. With the values enabled, and the first application listed in the test environment - let's tell ArgoCD to start picking up changes from these environments. To do this, simply update the helm chart we installed at the beginning of the first exercise:
 
     ```bash#test
     cd /projects/tech-exercise
     helm upgrade --install uj --namespace ${TEAM_NAME}-ci-cd .
     ```
 
-5. In ArgoCD at this point we should see things start to get a bit more busy:
+5. At this point, we should see the ArgoCD dashboard start to get a bit busier:
 ![argocd-app-of-pb.png](images/argocd-app-of-pb.png)
 
 ### Deploying Pet Battle
 
 > Now that the infra for PetBattle is up and running, let's deploy PetBattle itself. Each environment folder (test / stage) contains the configuration for the corresponding projects in OpenShift. All we need to do is extend or edit the list of `applications` for the changes to be synced to the cluster. We can also separate test environment config from staging or even prod using this method.
 
-1. In your IDE, open up the `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` file and copy the following:
+1. In your IDE, open up the `pet-battle/test/values.yaml` and `pet-battle/stage/values.yaml` files and copy the following:
 
     ```yaml
       # Pet Battle Apps
@@ -138,7 +138,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/stage/values.yaml
     ```
 
-2. The frontend needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the frontend, this means supplying the information to where the API live. We use ArgoCD to manage our application deployments, hence we should update the values supplied to this chart as such.
+2. The frontend needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the frontend, this means supplying the information about where the API live. We use ArgoCD to manage our application deployments, hence we should update the values supplied to this chart as such.
 
     ```bash#test
     export JSON="'"'{
