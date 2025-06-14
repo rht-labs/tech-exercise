@@ -16,3 +16,4 @@ In this exercise, we will use GitOps to set up our working environment. We will 
 * <span style="color:blue;">[ArgoCD](https://argoproj.github.io/argo-cd/)</span> - A controller which continuously monitors application and compare the current state against the desired state.
 * <span style="color:blue;">[Nexus](https://www.sonatype.com/nexus-repository-sonatype)</span> - Repository manager for storing lots of application types. Can also host `npm` and `Docker` registries.
 * <span style="color:blue;">[Jenkins](https://jenkins.io/)</span> - OpenSource Build automation server. Highly customisable with plugins.
+* <span style="color:blue;"> [Tekton](https://tekton.dev/)</span> - A powerful and flexible open-source framework for creating CI/CD systems, allowing developers to build, test, and deploy across cloud providers and on-premise systems
