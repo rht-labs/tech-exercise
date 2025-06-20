@@ -4,11 +4,11 @@ At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residen
 
 This repo is available on the Red Hat Labs GitHub organization – <span style="color:blue;">https://github.com/rht-labs/ubiquitous-journey.</span> Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
-- **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extended to support new tools and methodologies.
+- **Extensible** - Our codebase is a *tool box* of code that we can evolve and easily extend to support new tools and methodologies.
 - **Traceable** - We can easily see where changes have occurred and most importantly trace exactly what git tag/commit is in which environment.
-- **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how application are built, tested and deployed.
-- **Auditable** - Git logs and history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
-- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. It's not only the code however, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
+- **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how applications are built, tested and deployed.
+- **Auditable** - Git logs and the history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
+- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. However it's not only the code, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
 - **Flexible** - Product teams often want to use both standard tools and be able to experiment with new ones. The *tool box* mentality helps a lot, so as a team you can work with the tools you are familiar with. We will see this in action with Jenkins and Tekton.
 
 All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
@@ -28,10 +28,10 @@ All of these traits lead to one outcome - the ability to build and release quali
 2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
 ![gitlab-create-group](images/gitlab-create-group.png)
 
-3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if your are not working as a team.
+3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
 ![gitlab-group-add-members](images/gitlab-group-add-members.png)
 
-4. Now lets create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
+4. Now let's create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
 ![gitlab-new-project](images/gitlab-new-project.png)
 
 5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
@@ -67,7 +67,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     echo $GITLAB_PAT
     ```
     
-    ..and lets persist it for now:
+    ..and let's persist it for now:
     ```bash
     echo "export GITLAB_PAT=${GITLAB_PAT}"  | tee -a ~/.bashrc -a ~/.zshrc
     ```

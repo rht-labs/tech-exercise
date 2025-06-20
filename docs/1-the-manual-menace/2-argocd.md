@@ -26,7 +26,7 @@ When something is seen as not matching the desired state in Git, an application 
     helm repo add redhat-cop https://redhat-cop.github.io/helm-charts
     ```
 
-2. We are using the [Red Hat GitOps Operator](https://github.com/redhat-developer/gitops-operator) which was deployed as part of the cluster setup. Normally this step would be done as part of the Operator Install so its a bit more complicated than we would like. Because _we did not know_ your team names ahead of time 👻 we will need to update an environment variable on the Operator Subscription. This tells the Operator its OK to deploy a cluster scoped ArgoCD instance into your <TEAM_NAME>-ci-cd project. Run this shell script:
+2. We are using the [Red Hat GitOps Operator](https://github.com/redhat-developer/gitops-operator) which was deployed as part of the cluster setup. Normally this step would be done as part of the Operator Install so it's a bit more complicated than we would like. Because _we did not know_ your team names ahead of time 👻 we will need to update an environment variable on the Operator Subscription. This tells the Operator it's OK to deploy a cluster scoped ArgoCD instance into your <TEAM_NAME>-ci-cd project. Run this shell script:
 
     <p class="tip">
     🐌 THIS IS NOT GITOPS - Until we work out a better way to automate this. 🐎 If you see "...." in your terminal after you copy this shell script, do not worry. Hit return and it will run as designed.
@@ -65,7 +65,7 @@ When something is seen as not matching the desired state in Git, an application 
 
 2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case.
 
-    We're are also going to configure ArgoCD to be allowed to pull from our git repository using a secret 🔐.
+    We're also going to configure ArgoCD to be allowed to pull from our git repository using a secret 🔐.
 
     Configure our ArgoCD instance with a secret in our <TEAM_NAME>-ci-cd namespace by creating a small bit of yaml 😋:
 
@@ -126,7 +126,7 @@ EOF
 6. Select `Allow selected permissions` for the initial login.
 ![argocd-allow-permission](images/argocd-allow-permission.png)
 
-7. You just logged into ArgoCD 👏👏👏! Lets deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `todolist` app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see an empty form. Let's fill it out by setting the following:
+7. You just logged into ArgoCD 👏👏👏! Let's deploy a sample application through the UI. In fact, let's get ArgoCD to deploy the `todolist` app you manually deployed previously. On ArgoCD - click `CREATE APPLICATION`. You should see an empty form. Let's fill it out by setting the following:
    * On the "GENERAL" box
       * Application Name: `our-todolist`
       * Project: `default`
