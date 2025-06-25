@@ -42,7 +42,7 @@ git pull
               - name: GITLAB_GROUP_NAME
                 value: ''
               - name: BISCUITS
-                value: 'jaffa-cakes'
+                value: 'jaffa-cakes🍪'
     # more yaml ...
     </code></pre></div>
 
