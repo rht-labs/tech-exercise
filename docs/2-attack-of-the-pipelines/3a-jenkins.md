@@ -1,6 +1,6 @@
 ### Jenkins Pipeline
 
-> Jenkins is a tool that's been around for sometime but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool.
+> Jenkins is a tool that's been around for some time but it's stuck with a lot of customers. It's a build server that's pretty dumb by nature but can be enhanced with lots of plugins and agents which is why it's such a powerful tool.
 
 <!---
 #### Jenkins access to GitLab
@@ -47,13 +47,13 @@ git push
         ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
     </p>
 
-    Click the hamburger menu on top left, then `File > Add Folder to Workspace`
+    Click the hamburger menu on the top left, then `File > Add Folder to Workspace`
     ![add-workspace-pet-battle](./images/add-workspace-pet-battle.png)
 
     Select `pet-battle` from the list and click `OK`.
     ![add-workspace-pet-battle-2](./images/add-workspace-pet-battle-2.png)
 
-    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on top left then select `Terminal > New Terminal` from the menu._
+    _If the page refreshes after your selection, just reopen the terminal by hitting the hamburger menu on the top left then select `Terminal > New Terminal` from the menu._
 
 
 3. We want to be able to tell Jenkins to run a build for every code change - welcome our good ol' friend the Webhook. Just like we did with Argo CD earlier, let's add a webhook to GitLab for our Pet Battle frontend so every commit triggers it. Jenkins needs a URL of the form `<JENKINS_URL>/multibranch-webhook-trigger/invoke?token=<APP_NAME>` to trigger a build:
@@ -66,7 +66,7 @@ git push
     ![gitlab-webhook-trigger-fe.png](./images/gitlab-webhook-trigger-fe.png)
 
 #### Jenkins Pipeline
-> Jenkins is preloaded with a simple job called a `seed-multibranch-pipeline`. This is a small bit of groovy scripting that will automatically scaffold out our pipelines from each repositories `Jenkinsfile`. The logic of this script is simple; it checks a group for a given GitLab instance for any projects that contain Jenkinsfile. If it finds one, it will scaffold a pipeline from it, and if not, it will skip.
+> Jenkins is preloaded with a simple job called a `seed-multibranch-pipeline`. This is a small bit of groovy scripting that will automatically scaffold out our pipelines from each repositories `Jenkinsfile`. The logic of this script is simple; it checks a group for a given GitLab instance for any projects that contain a Jenkinsfile. If it finds one, it will scaffold a pipeline from it, and if not, it will skip.
 
 1. To get the `seed-multibranch-pipeline` job to work we simply have to connect Jenkins to GitLab by exposing some variables on the deployment for it... we could, of course, just add them to the deployment in OpenShift BUTTTTTT this is GITOPS! :muscle: :gun:
 
@@ -93,7 +93,7 @@ git push
     yq e '(.applications[] | (select(.name=="jenkins").values.deployment.env_vars[] | select(.name=="GITLAB_GROUP_NAME")).value)|=env(TEAM_NAME)' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     ```
 
-2. Jenkins will push changes to our Helm chart to Nexus as part of the pipeline. Previously, we configured our App of Apps to pull from the PetBattle public chart repository so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
+2. Jenkins will push changes to our Helm chart to Nexus as part of the pipeline. Previously, we configured our App of Apps to pull from the PetBattle public chart repository, so we also need to update it. Change the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. To do this, update the `source` as shown below for the `pet-battle`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -149,9 +149,9 @@ git push
     * `steps {}` each `stage` has one or more steps involved. These could be execute shell script, git checkout, etc.
     * `agent {}` specifies the node the build should be run on, e.g., `jenkins-agent-npm`.
     * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow.
-    * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. For example, when branch is master, then deploy to `test` environment.
+    * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. For example, when the branch is master, then deploy to `test` environment.
 
-6. Now that we've gone through what this stuff does, let's try fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
+6. Now that we've gone through what this stuff does, let's try to fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
     ```groovy
             // 💥🔨 PIPELINE EXERCISE GOES HERE
@@ -215,7 +215,7 @@ git push
     git push
     ```
 
-8. Back on Jenkins we should now see the pipeline is running. If you swap to the Blue Ocean view, you get a lovely graph of what it looks like in execution.
+8. Back in Jenkins we should now see the pipeline is running. If you swap to the Blue Ocean view, you get a lovely graph of what it looks like in execution.
 
     ![jenkins-blue-ocean](./images/jenkins-blue-ocean.png)
 

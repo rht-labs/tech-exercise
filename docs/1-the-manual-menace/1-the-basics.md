@@ -14,7 +14,7 @@
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left and then selecting `Terminal > New Terminal` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on the top left and then selecting `Terminal > New Terminal` from the menu.
 
     ![new-terminal](./images/new-terminal.png)
 

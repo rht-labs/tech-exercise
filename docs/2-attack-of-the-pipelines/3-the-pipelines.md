@@ -8,8 +8,8 @@ Why creating pipelines:
 * A pathway to production:
   * Puts the product in the hands of the customer quicker
   * Enables seamless and repeatable deploys
-  * More prod like infrastructure increases assurance
-  * “We have already done it” behavior de-risks go live
+  * More prod-like infrastructure increases assurance
+  * “We have already done it” behavior de-risks the go live
 
 <p class="warn">
     ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
@@ -32,7 +32,7 @@ Choose your own adventure! Each group will get to perform similar tasks:
 |-----------------------|----------------------------|
 | * We need to fork PetBattle (clone from GitHub and push to GitLab) | * We need to fork PetBattle API (clone from GitHub and push to GitLab) |
 | * Update `Jenkinsfile` task to leave out some stuff for participants | * Update Tekton task to leave out some stuff for participants |
-| * Add webhook into GitLab repositories for triggering jobs | * Add webhook into GitLab repositories for triggering jobs |
+| * Add a webhook into GitLab repositories for triggering jobs | * Add webhook into GitLab repositories for triggering jobs |
 | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) | * Update `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml` with services information. (That's where two teams integrate their work.) 
 | * By updating version files (pom.xml etc), kick off the pipelines | * By updating version files (pom.xml etc), kick off the pipelines |
 | <span style="color:blue;">[jenkins](2-attack-of-the-pipelines/3a-jenkins.md)</span> | <span style="color:blue;">[tekton](2-attack-of-the-pipelines/3b-tekton.md)</span> |
