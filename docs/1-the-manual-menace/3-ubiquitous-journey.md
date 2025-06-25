@@ -22,11 +22,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     https://<GIT_SERVER>
     ```
 
-    If you don't remember the GitLab URL, run the command below:
-
-    ```bash
-    oc get route -n tl500-gitlab | grep gitlab | awk '{print $2}'
-    ```
+    You can find the GitLab URL in routes under tl500-gitlab project, i.e. `gitlab-ce.apps.cluster-cskp4.cskp4.sandbox2917.opentlc.com`
 
     We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
     ![gitlab-initial-login](images/gitlab-initial-login.png)
