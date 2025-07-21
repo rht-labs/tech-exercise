@@ -122,7 +122,7 @@ As you see in the diagram, OpenShift can distribute the traffic that coming to R
 
     ```bash
     cd /projects/tech-exercise
-    git add pet-battle/stage/values.yaml
+    git add .
     git commit -m  "🍿 ADD - pet battle APIs A & B environments 🍿"
     git push
     ```
