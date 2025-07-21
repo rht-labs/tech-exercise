@@ -11,7 +11,7 @@ git remote set-url origin https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
 git pull
 ```
 
-1. In the OpenShift UI, go to your `<TEAM_NAME>-ci-cd` project. Navigate to `Workloads > DeploymentConfigs > jenkins`.
+1. In OpenShift UI, go to your `<TEAM_NAME>-ci-cd` project. Navigate to `Workloads > Deployments > jenkins`.
  
 2. On the `Environment` tab, add a new variable. For example, click `➕ Add more` and on the text box put in something new or random for example `BISCUITS` with a value of `jaffa-cakes`. Hit save!
   
@@ -26,7 +26,7 @@ git pull
 
     ```yaml
               - name: BISCUITS
-                value: 'jaffa-cakes🍪'
+                value: 'jaffa-cakes'
     ```
 
     It should look something like this now in your `ubiquitous-journey/values-tooling.yaml`
@@ -70,4 +70,4 @@ git pull
 
 </br>
 
-🪄🪄 You've just experienced how great and powerful GitOps is! Let's advance to see how we utilize it in our application development! 🪄🪄
+🪄🪄 You've just experienced how great and powerful the GitOps is! Let's advance to see how we utilize it in our application development! 🪄🪄

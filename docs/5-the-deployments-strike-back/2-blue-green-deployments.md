@@ -11,5 +11,5 @@ In your groups pick the tool you'd like to integrate the pipeline with:
 | 🐈‍⬛ **Jenkins Group** 🐈‍⬛  |  🐅 **Tekton Group** 🐅 |
 |-----------------------|----------------------------|
 | * Add Blue/Green Deployments to our pipeline | * Add Blue/Green Deployments to our pipeline |
-| <span style="color:blue;">[jenkins](5-the-deployments-strike-back/2a-blue-green-deployments.md)</span> | <span style="color:blue;">[tekton](docs/5-the-deployments-strike-back/2b-blue-green-deployments.md)</span> |
+| <span style="color:blue;">[jenkins](5-the-deployments-strike-back/2a-blue-green-deployments.md)</span> | <span style="color:blue;">[tekton](5-the-deployments-strike-back/2b-blue-green-deployments.md)</span> |
     

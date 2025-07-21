@@ -127,14 +127,7 @@ As you see in the diagram, OpenShift can distribute the traffic that coming to R
     git push
     ```
 
-5. Verify if you have the both service definition.
-
-    ```bash
-    oc get svc -l app.kubernetes.io/instance=pet-battle-api -n ${TEAM_NAME}-stage
-    oc get svc -l app.kubernetes.io/instance=ab-pet-battle-api -n ${TEAM_NAME}-stage
-    ```
-
-6. Before verify the traffic redirection, let's make a simple application change to make this more visual! Make a change un your Pet Battle API application introducing the version in the HTLM file `/projects/pet-battle-api/src/main/resources/META-INF/resources/index.html` (line 118).
+5. Before verify the traffic redirection, let's make a simple application change to make this more visual! Make a change un your Pet Battle API application introducing the version in the HTLM file `/projects/pet-battle-api/src/main/resources/META-INF/resources/index.html` (line 118).
 
    ```bash
     <div class="banner lead">
@@ -142,7 +135,7 @@ As you see in the diagram, OpenShift can distribute the traffic that coming to R
     </div>
   ```
 
-7. Bump the version of the application to trigger a new release by editing pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
+6. Bump the version of the application to trigger a new release by editing pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
     ```xml
         <artifactId>pet-battle-api</artifactId>
@@ -155,7 +148,7 @@ As you see in the diagram, OpenShift can distribute the traffic that coming to R
     cd /projects/pet-battle-api
     mvn -ntp versions:set -DnewVersion=3.0.1
     ```
-8. Commit all these changes:
+7. Commit all these changes:
 
     ```bash
     cd /projects/pet-battle-api
@@ -170,6 +163,14 @@ tkn -n ${TEAM_NAME}-ci-cd pr logs -Lf
 ```
 
 🪄OBSERVE PIPELINE RUNNING :D - At this point, check in with the other half of the group and see if you’ve managed to integrate the apps🪄
+
+8. Verify if you have the both service definition.
+
+    ```bash
+    oc get svc -l app.kubernetes.io/instance=pet-battle-api -n ${TEAM_NAME}-stage
+    oc get svc -l app.kubernetes.io/instance=ab-pet-battle-api -n ${TEAM_NAME}-stage
+    ```
+
 
 9. Now deploy the new version "manually" in stage modifying `image_version` value in `tech-exercise/pet-battle/stage/values.yaml` file.
 And as always, push it to the Git repository - <strong>Because if it's not in Git, it's not real!</strong>
