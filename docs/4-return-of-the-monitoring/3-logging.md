@@ -20,7 +20,7 @@
 7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by adding this to the query bar. Click `Show Query`, paste the below and then hit `Run Query`. 
 
     ```bash
-    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" }`
+    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" } | json
     ```
 
     ![example-query](./images/example-query.png)
