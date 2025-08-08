@@ -90,6 +90,11 @@ spec:
       kind: GrafanaDataSource
       jsonPointers:
         - /spec/datasources/0/secureJsonData/httpHeaderValue1
+    - group: image.openshift.io
+      kind: ImageStream
+      jsonPointers:
+        - /spec/tags
+        - /metadata/labels
 {{- end }}
 {{- end }}
 {{- end }}

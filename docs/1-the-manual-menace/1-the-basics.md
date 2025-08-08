@@ -14,7 +14,7 @@
     <span style="color:blue;"><a id=crw_dev_filelocation href=""></a></span>
     </p>
 
-2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on top left and then selecting `Terminal > New Terminal` from the menu.
+2. In your IDE (it may take some time to open ... ⏰☕️), open a new terminal by hitting the hamburger menu on the top left and then selecting `Terminal > New Terminal` from the menu.
 
     ![new-terminal](./images/new-terminal.png)
 
@@ -29,12 +29,14 @@
 5. Add the `CLUSTER_DOMAIN` to the environment:
 
     ```bash#test
+    # i.e. apps.cluster-kn6sn.kn6sn.sandbox2961.opentlc.com
     echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
 6. Add the `GIT_SERVER` to the environment:
 
     ```bash#test
+    # Check routes in tl500-gitlab namespace
     echo export GIT_SERVER="<GIT_SERVER>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 

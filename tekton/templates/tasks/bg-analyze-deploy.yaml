@@ -33,8 +33,8 @@ spec:
         BLUE_PREVIOUS_CHART_VERSION=$(yq eval .applications.blue-"$(params.APPLICATION_NAME)".source_ref "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
         echo -n "APP Version in BLUE: ${BLUE_PREVIOUS_VERSION}"
         echo -n "Chart Version in BLUE: ${BLUE_PREVIOUS_CHART_VERSION}"
-        echo "$BLUE_PREVIOUS_VERSION" > versions
-        echo "$BLUE_PREVIOUS_CHART_VERSION" >> versions
+        echo "BLUE_PREVIOUS_VERSION=$BLUE_PREVIOUS_VERSION" > versions
+        echo "BLUE_PREVIOUS_CHART_VERSION=$BLUE_PREVIOUS_CHART_VERSION" >> versions
     - name: get-current-info-green
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       image: quay.io/redhat-cop/tekton-task-helm:3.6.3
@@ -43,20 +43,20 @@ spec:
         GREEN_PREVIOUS_CHART_VERSION=$(yq eval .applications.green-"$(params.APPLICATION_NAME)".source_ref "$(params.DEPLOY_ENVIRONMENT)/values.yaml")
         echo -n "APP Version in GREEN: ${GREEN_PREVIOUS_VERSION}"
         echo -n "Chart Version in GREEN: ${GREEN_PREVIOUS_CHART_VERSION}"
-        echo "$GREEN_PREVIOUS_VERSION" >> versions
-        echo "$GREEN_PREVIOUS_CHART_VERSION" >> versions
+        echo "GREEN_PREVIOUS_VERSION=$GREEN_PREVIOUS_VERSION" >> versions
+        echo "GREEN_PREVIOUS_CHART_VERSION=$GREEN_PREVIOUS_CHART_VERSION" >> versions
     - name: announce-deployment-to-modify
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       image: quay.io/redhat-cop/tekton-task-helm:3.6.3
       script: |
         #!/bin/sh
         source ./versions
-        if [[ "$(params.PREVIOUS_VERSION)" != "$BLUE_PREVIOUS_VERSION" ]]
+        if [[ "$(params.PREVIOUS_VERSION)" != "$GREEN_PREVIOUS_VERSION" ]]
         then
           echo "Deploy in GREEN!"
           echo -n "green-$(params.APPLICATION_NAME)" | tee $(results.BG_APPLICATION_NAME.path)
           echo -n "green" | tee $(results.BG_COLOR.path)
-        elif [[ "$(params.PREVIOUS_VERSION)" != "$GREEN_PREVIOUS_VERSION" ]]
+        elif [[ "$(params.PREVIOUS_VERSION)" != "$BLUE_PREVIOUS_VERSION" ]]
         then
           echo "Deploy in BLUE!"
           echo -n "blue-$(params.APPLICATION_NAME)" | tee $(results.BG_APPLICATION_NAME.path)
