@@ -17,15 +17,19 @@
     ![logs-test.png](./images/logs-test.png)
 
 
-3. Let's filter the information, look for the logs specifically for pet-battle apps running in the test namespace by adding this to the query bar. Click `Show Query`, paste the below and then hit `Run Query`. 
+3. Let's filter the information, look for the logs specifically for pet-battle apps running in the test namespace by adding this to the query bar. Click `Show Query`.
+
+    ![example-query](./images/show-query.png)
+
+4. Paste the below and then hit `Run Query`. 
 
     ```bash
-    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" }`
+    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" }
     ```
 
     ![example-query](./images/example-query.png)
 
-4. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI. Connect to pod via rsh and generate logs.
+5. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI. Connect to pod via rsh and generate logs.
 
     ```bash
     oc project ${TEAM_NAME}-test
@@ -44,7 +48,7 @@
     exit
     ```
 
-5. Back on Kibana we can filter and find these messages with another query:
+6. Back on Kibana we can filter and find these messages with another query:
 
     ```yaml
     { log_type="application", kubernetes_pod_name=~".*mongodb.*", kubernetes_namespace_name="<TEAM_NAME>-test" } |= `🦄🦄🦄🦄` | json
