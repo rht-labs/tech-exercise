@@ -25,7 +25,6 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
     ```
 
     ![images/acs-dashboard.png](images/acs-dashboard.png)
-    ![images/acs-compliance-graphs.png](images/acs-compliance-graphs.png)
 
 2. An API Token was created for us as part of the install configuration. We can retrieve it using:
 
@@ -115,15 +114,15 @@ StackRox / Advanced Cluster Security (ACS) is deployed once at the cluster scope
 
     ![images/acs-clone-policy.png](images/acs-clone-policy.png)
 
-7. Click *Next* until we reach **Policy Behaviour**. Select **Inform and enforce** and configure the **Build** behaviour to **Enforce on Build**. This will fail the build if the policy conditions are matched.
-
-    ![images/acs-policy-behaviour.png](images/acs-policy-behaviour.png)
-
-8. Click *Next* until we reach **Policy Criteria**. Add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
+7. Click **Policy Definition -> Rules**. Add **22** to the regular expression for *Arguments* in the disallowed Dockerfile line.
 
     ![images/acs-policy-criteria.png](images/acs-policy-criteria.png)
 
-9. Hit *Next* and *Next* until you reach **Review Policy**, check the policy enforcement is enabled at *Build* time.
+8. Click **Policy Behaviour -> Action**. Select **Inform and enforce** and configure the **Build** behaviour to **Enforce on Build**. This will fail the build if the policy conditions are matched.
+
+    ![images/acs-policy-behaviour.png](images/acs-policy-behaviour.png)
+
+9. Hit *Next* and you reach **Review Policy**, check the policy enforcement is enabled at *Build* time.
 
     ![images/acs-policy-enforcement.png](images/acs-policy-enforcement.png)
 
