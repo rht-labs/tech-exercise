@@ -12,20 +12,24 @@
 
     By default, these logs are not stored in a database, but there are a number of reasons to store them (ie troubleshooting, legal obligations..)
 
-2. OpenShift magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected and added to LokiStack. This makes indexing and querrying logs very easy. Let's take a look at OpenShift Logs UI now.
+2. OpenShift magic provides a great way to collect logs across services, anything that's pumped to `STDOUT` or `STDERR` is collected and added to LokiStack. This makes indexing and querying logs very easy. Let's take a look at OpenShift Logs UI now.
 
     ![logs-test.png](./images/logs-test.png)
 
 
-7. Let's filter the information, look for the logs specifically for pet-battle apps running in the test nameaspace by adding this to the query bar. Click `Show Query`, paste the below and then hit `Run Query`. 
+3. Let's filter the information, look for the logs specifically for pet-battle apps running in the test namespace by adding this to the query bar. Click `Show Query`.
+
+    ![example-query](./images/show-query.png)
+
+4. Paste the below and then hit `Run Query`. 
 
     ```bash
-    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" } | json
+    { log_type="application", kubernetes_pod_name=~"pet-battle-.*", kubernetes_namespace_name="<TEAM_NAME>-test" }
     ```
 
     ![example-query](./images/example-query.png)
 
-8. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI. Connect to pod via rsh and generate logs.
+5. Container logs are ephemeral, so once they die you'd loose them unless they're aggregated and stored somewhere. Let's generate some messages and query them from the UI. Connect to pod via rsh and generate logs.
 
     ```bash
     oc project ${TEAM_NAME}-test
@@ -44,7 +48,7 @@
     exit
     ```
 
-9. Back on Kibana we can filter and find these messages with another query:
+6. Back on Kibana we can filter and find these messages with another query:
 
     ```yaml
     { log_type="application", kubernetes_pod_name=~".*mongodb.*", kubernetes_namespace_name="<TEAM_NAME>-test" } |= `🦄🦄🦄🦄` | json
