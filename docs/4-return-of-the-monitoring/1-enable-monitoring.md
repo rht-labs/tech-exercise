@@ -1,12 +1,16 @@
 ## User Workload Monitoring
 
-> OpenShift's has monitoring capabilities built in. It deploys the prometheus stack and integrates into the OpenShift UI for consuming cluster metrics.
+OpenShift Container Platform includes a preconfigured, preinstalled, and self-updating monitoring stack that provides monitoring for core platform components. A cluster administrator can configure the monitoring stack with the supported configurations. OpenShift Container Platform delivers monitoring best practices out of the box.
+
+A set of alerts are included by default that immediately notify administrators about issues with a cluster. Default dashboards in the OpenShift Container Platform web console include visual representations of cluster metrics to help you to quickly understand the state of your cluster. With the OpenShift Container Platform web console, you can access metrics and manage alerts.
+
+Additionally, it is possible also having the option to enable  **monitoring for User-Defined Projects**, also known as **User Workload Monitoring**. By using this feature, cluster administrators, developers, and other users can specify how services and pods are monitored in their own projects, collecting metrics and generating custom alerts.
+
+Please find more information about User-Defined Projects in the following <span style="color:blue;">[link](https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/monitoring/configuring-user-workload-monitoring).</span>
 
 ### OCP Developer view Monitoring (pods etc)
 
-> Out of the box monitoring in OpenShift - this gives us the Kubernetes metrics for our apps such as Memory usage & CPU etc.
-
-1. To enable the User Workload Monitoring, a one line change has to be made to a config map. This is cluster wide so it's already been done for you, but if you're interested how the <span style="color:blue;">[docs are here](https://docs.openshift.com/container-platform/4.12/monitoring/enabling-monitoring-for-user-defined-projects.html).</span>
+1. To enable the User Workload Monitoring, a one line change has to be made to a config map and it's already been done for you.
 
     On the OpenShift UI, go to *Observe*, it should show basic health indicators
 
@@ -117,18 +121,7 @@
 
 > Let's extend the Pet Battle Dashboard with a new `panel` to capture some metrics in a visual way for us. Configuring dashboards is easy through the Grafana UI. Then Dashboards are easily shared as they can be exported as a `JSON` document.
 
-1. OpenShift users have a read-only view on Grafana by default - get the `admin` user details from your cluster:
-
-    ```bash
-    oc get secret grafana-admin-credentials -o=jsonpath='{.data.GF_SECURITY_ADMIN_PASSWORD}' -n ${TEAM_NAME}-ci-cd \
-    | base64 -d; echo -n
-    ```
-
-2. Back on Grafana, `login` with these creds after you've signed in using the OpenShift Auth (yes we know this is silly but so are Operators):
-
-    ![grafana-login-admin](./images/grafana-login-admin.png)
-
-3. Once you've signed in, add a new panel:
+1. Once you've signed in, add a new panel:
 
     ![grafana-add-panel](./images/grafana-add-panel.png)
 
