@@ -16,13 +16,14 @@ Please find more information about User-Defined Projects in the following <span 
 
     ![petbattle-default-metrics](images/petbattle-default-metrics.png)
 
-2. You can run queries across the namesapce easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your test namespace
+2. You can run queries across the namespace easily with `promql`, a query language for Prometheus. Run a `promql` query to get some info about the memory consumed by the pods in your test namespace
 
     ```bash
     sum(container_memory_working_set_bytes{container!='',namespace='<TEAM_NAME>-test'}) by (pod)
     ```
 
-    ![petbattle-promql](images/petbattle-promql.png)
+    ![petbattle-promql](images/petbattle-promql-I.png)
+    ![petbattle-promql](images/petbattle-promql-II.png)
 
 ### Add Grafana & Service Monitor
 
@@ -74,6 +75,14 @@ Please find more information about User-Defined Projects in the following <span 
     oc get servicemonitor -n ${TEAM_NAME}-test -o yaml
     ```
 
+    Additionally, after some seconds you will be able to run queries using the new metrics scraped by Prometheus:
+
+    ```$bash
+    jvm_buffer_count_buffers{id="direct"}
+    ```
+
+    ![petbattle-promql](images/petbattle-promql-III.png)
+
 2. We can create our own application specific dashboards to display live data for ops use or efficiency or A/B test results. We will use Grafana to create dashboards and since it will be another tool, we need to install it through `ubiquitous-journey/values-tooling.yaml`
 
     ```yaml
@@ -121,17 +130,25 @@ Please find more information about User-Defined Projects in the following <span 
 
 > Let's extend the Pet Battle Dashboard with a new `panel` to capture some metrics in a visual way for us. Configuring dashboards is easy through the Grafana UI. Then Dashboards are easily shared as they can be exported as a `JSON` document.
 
-1. Once you've signed in, add a new panel:
+1. Once you've signed in, add a new panel clicking in **Edit**:
 
-    ![grafana-add-panel](./images/grafana-add-panel.png)
+    ![grafana-edit](./images/grafana-add-panel.png)
 
-4. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Panel settings, set the title to something sensible and add the query below. Hit save!
+2. Once you are able to edit the dashboard, add a new panel clicking in **Add -> Visualisation**:
+
+    ![grafana-add-panel](./images/grafana-add-panel-I.png)
+
+3. On the new panel, let's configure it to query for some information about our projects. We're going to use a very simple query to count the number of pods running in the namespace (feel free to use any other query). On the Panel settings, set the title to something sensible and add the query below. Hit save!
 
     ```bash
     sum(kube_pod_status_ready{namespace="<TEAM_NAME>-test",condition="true"})
     ```
 
     ![new-panel](./images/new-panel.png)
+
+4. Hit save! and review the final dashboard
+
+    ![final-dashboard](./images/final-dashboard.png)
 
 5. With the new panel on our dashboard, let's see it in action by killing off some pods in our namespace
 
