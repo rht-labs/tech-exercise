@@ -10,9 +10,9 @@ Tekton is made up of a number of YAML files each with a different purpose such a
 
 In this snippet of the pipeline used in this exercise, we define:
 
-* `workspaces` used by the pipeline (config maps and shared workspaces for each task to use). 
-* `params` are the inputs to the run of the `Pipeline`, e.g., the application name or the git revision to build. 
-* `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, may also be supplied with parameters and workspaces if required.  
+* `workspaces` used by the pipeline (config maps and shared workspaces for each task to use).
+* `params` are the inputs to the run of the `Pipeline`, e.g., the application name or the git revision to build.
+* `tasks` is where we define the meat of the pipeline, the actions that happen at each step of our pipeline. Tasks can be `ClusterTasks` or `Tasks`. `ClusterTasks` are just global tasks shared across all projects. `Tasks`, much like `Pipelines`, may also be supplied with parameters and workspaces if required.
 
 #### Deploying the Tekton Objects
 
@@ -20,7 +20,7 @@ In this snippet of the pipeline used in this exercise, we define:
 
     ![pet-battle-api-git-repo](images/pet-battle-api-git-repo.png)
 
-2. Back in your CodeReady Workspace, we'll fork the PetBattle API code to this newly created repository on git.
+2. Back in your Dev Spaces Workspace, we'll fork the PetBattle API code to this newly created repository on git.
 
     ```bash#test
     cd /projects
@@ -30,7 +30,7 @@ In this snippet of the pipeline used in this exercise, we define:
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If the `pet-battle-api` folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
+        ⛷️ <b>NOTE</b> ⛷️ - If the `pet-battle-api` folder is not appearing on the left hand side, you need to add it to your workspace manually as follows:
     </p>
 
     Click the hamburger menu on the top left, then `File > Add Folder to Workspace`
@@ -74,7 +74,7 @@ In this snippet of the pipeline used in this exercise, we define:
     Some of the key things to note above are:
 
    * `workspaces` - these YAML are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
-   * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks. 
+   * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
    * `secrets` - secure things used by the pipeline.
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks, secrets, etc) into a useful & reusable set of activities.
    * `triggers` directory stores the configuration for the webhooks. We will add webhooks from GitLab to trigger our pipeline. Using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
@@ -100,8 +100,8 @@ In this snippet of the pipeline used in this exercise, we define:
     if [[ $(yq e '.applications[] | select(.name=="tekton-pipeline") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then
         yq e '.applications += {"name": "tekton-pipeline","enabled": true,"source": "https://GIT_SERVER/TEAM_NAME/tech-exercise.git","source_ref": "main","source_path": "tekton","values": {"team": "TEAM_NAME","cluster_domain": "CLUSTER_DOMAIN","git_server": "GIT_SERVER"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
         sed -i "s|GIT_SERVER|$GIT_SERVER|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
-        sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    
-        sed -i "s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    
+        sed -i "s|TEAM_NAME|$TEAM_NAME|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
+        sed -i "s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml
     fi
     ```
 
@@ -133,7 +133,7 @@ In this snippet of the pipeline used in this exercise, we define:
     cd /projects/tech-exercise
     git add .
     git commit -m  "🍕 ADD - tekton pipelines config 🍕"
-    git push 
+    git push
     ```
 
     ![uj-and-tekkers](./images/uj-and-tekkers.png)
@@ -171,14 +171,14 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
     cd /projects/pet-battle-api
     mvn -ntp versions:set -DnewVersion=1.3.1
     ```
- 
+
 10.  As always, push the code to git ...
 
     ```bash#test
     cd /projects/pet-battle-api
     git add .
     git commit -m  "🍕 UPDATED - pet-battle-version to 1.3.1 🍕"
-    git push 
+    git push
     ```
 
     🪄 Observe the Pipeline running by browsing to OpenShift UI -> Pipelines from left pane -> Pipelines in your `<TEAM_NAME>-ci-cd` project:

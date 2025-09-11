@@ -2,7 +2,7 @@
 
 > In this exercise, we'll connect our code base to Sonar for quality metrics
 
-1. Open the CodeReadyWorkspace and create a sonar file in the root of the `pet-battle` project. This file contains the information of Sonarqube instance and other properties for the scanner to use while assessing the code base.
+1. Open the Dev Spaces Workspace and create a sonar file in the root of the `pet-battle` project. This file contains the information of Sonarqube instance and other properties for the scanner to use while assessing the code base.
 
     ```javascript
     cd /projects/pet-battle
@@ -54,7 +54,7 @@
 3. And add a shell step in to `stage("🧰 Build (Compile App)")` stage of the pipeline we added previously where `// SONARQUBE SCANNING` placeholder is. This needs to be happen before the build.
 
     ```bash
-                    // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE 
+                    // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE
                     echo '### Running SonarQube ###'
                     sh '''
                       export SONARQUBE_USERNAME=${SONARQUBE_CREDS_USR}

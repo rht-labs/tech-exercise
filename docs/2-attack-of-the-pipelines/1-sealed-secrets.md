@@ -5,7 +5,7 @@ When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_. But how are we
 Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 
 <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run below commands before going forward.
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different Dev Spaces Workspaces environment, please run below commands before going forward.
 </p>
 
 ```bash
@@ -46,7 +46,7 @@ EOF
 3. Use the `kubeseal` command line to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
 
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If you get an error "Error: cannot get sealed secret service: Unauthorized" from running the Kubeseal command, just re-login to OpenShift and run the command again. 
+        ⛷️ <b>NOTE</b> ⛷️ - If you get an error "Error: cannot get sealed secret service: Unauthorized" from running the Kubeseal command, just re-login to OpenShift and run the command again.
     </p>
 
     ```bash
@@ -64,7 +64,7 @@ EOF
 4. Verify that the secret is sealed:
 
     ```bash#test
-    cat /tmp/sealed-git-auth.yaml 
+    cat /tmp/sealed-git-auth.yaml
     ```
 
     We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
