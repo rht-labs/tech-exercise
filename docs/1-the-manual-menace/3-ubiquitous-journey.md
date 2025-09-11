@@ -15,7 +15,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
 ### Get GitLab Ready for GitOps
 > In this exercise we'll setup our git project to store our code and configuration. We will then connect ArgoCD (our GitOps controller) to this git repository to enable the GitOps workflow. Tooling will be shared by all members of your team, so do this exercise as a mob please!
- 
+
 1. Log into GitLab with your credentials (using the LDAP authentication method). GitLab URL:
 
     ```bash
@@ -39,7 +39,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
 ![gitlab-new-project](images/gitlab-new-project-2.png)
 
-6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal in the CodeReady Workspace if you have not got one open and run the following commands.
+6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal in the Dev Spaces Workspace if you have not got one open and run the following commands.
 
     Export your Gitlab username.
 
@@ -68,7 +68,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```bash
     echo $GITLAB_PAT
     ```
-    
+
     ..and let's persist it for now:
     ```bash
     echo "export GITLAB_PAT=${GITLAB_PAT}"  | tee -a ~/.bashrc -a ~/.zshrc
@@ -78,7 +78,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ![gitlab-pat](images/gitlab-pat.png)
 
-7. Let's push our code to the GitLab server. Back in your CodeReady Workspace from the terminal
+7. Let's push our code to the GitLab server. Back in your Dev Spaces Workspace from the terminal
 
     ```bash#test
     cd /projects/tech-exercise
@@ -158,7 +158,7 @@ All of these traits lead to one outcome - the ability to build and release quali
     ⛷️ <b>NOTE</b> ⛷️ - Bootstrap step also provides the necessary rolebindings. That means now the other users in the same team can access <b><TEAM_NAME></b> environments.
   </p>
 
-4. In order for ArgoCD to sync the changes from our git repository, we need to provide access  to it. We'll deploy a secret to cluster, for now *not done as code* but in the next lab we'll add the secret as code and store it encrypted in Git. In your terminal, add the Secret to the cluster:
+4. In order for ArgoCD to sync the changes from our git repository, we need to provide access to it. We'll deploy secrets to cluster, for now *not done as code* but in the next lab we'll add the secrets as code and store it encrypted in Git. In your terminal, add the Secrets to the cluster:
 
     ```bash#test
     cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
@@ -175,7 +175,24 @@ All of these traits lead to one outcome - the ability to build and release quali
         labels:
           credential.sync.jenkins.openshift.io: "true"
         name: git-auth
-EOF
+    EOF
+    ```
+
+    ```bash#test
+    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: ${TEAM_NAME}-tech-exercises-repo
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      stringData:
+        url: "https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git"
+        password: "${GITLAB_PAT}"
+        username: "${GITLAB_USER}"
+        project: "default"
+        insecure: "true"
+    EOF
     ```
 
 5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!

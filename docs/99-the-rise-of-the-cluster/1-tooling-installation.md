@@ -8,15 +8,15 @@ Just like we practice throughout the course, we keep the cluster configuration a
 
 This repository has two parts:
 - Helm charts to deploy some cluster-wide toolings to run the exercises
-- Red Hat CodeReady Workspaces setup
+- Red Hat Dev Spaces Workspaces setup
 
 ## Helm Charts for Toolings
 
 Here is the list of the tools and objects we deploy on OpenShift for TL500 setup:
 
-* Red Hat CodeReady Workspaces - developer environment
+* Red Hat Dev Spaces Workspaces - developer environment
 * GitLab - as Git server
-* SealedSecrets - for encrypting and safely storing secrets on (public) repositories 
+* SealedSecrets - for encrypting and safely storing secrets on (public) repositories
 * StackRox - for image security exercises
 * User Workload Monitoring - to enable application metrics gathering. It is needed for `Return of the Monitoring` section.
 * Logging stack - it is not enabled by default in OpenShift. We enable it for `Return of the Monitoring` section.
@@ -57,7 +57,7 @@ oc rsh `oc get po -l app=ipa -o name -n ${IPA_NAMESPACE}` bash << EOF
 echo ${IPA_ADMIN_PASSWD} | kinit admin
 export GROUP_NAME=student
 ipa group-add \${GROUP_NAME} --desc "TL500 Student Group" || true
-# in a loop add random users to the group 
+# in a loop add random users to the group
 for i in {1..24};do
   export LAB_NUMBER="lab\$i"
   echo ${STUDENT_PASSWORD} | ipa user-add \${LAB_NUMBER} --first=\${LAB_NUMBER} --last=\${LAB_NUMBER} --email=\${LAB_NUMBER}@redhatlabs.dev --password
@@ -83,12 +83,12 @@ When the above is successfull (which might take time up to 15 mins), you can run
 ```bash
 cd ../tl500-course-content
 helm dep up
-helm upgrade --install tl500-course-content . --namespace tl500 --create-namespace 
+helm upgrade --install tl500-course-content . --namespace tl500 --create-namespace
 ```
 Again, this could also take some time 🙈
 
 ## Verify The Installation
-Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces. 
+Log in to the cluster via UI and use `LDAP` login with your student username and password. You should only see `tl500-*` namespaces.
 
 We also have a tool called `tl500-teamster` to run exercises automatically for you to verify the installation. It is already bundled inside the installation of the toolings. Get the URL from the following command:
 
@@ -99,17 +99,17 @@ echo https://$(oc get route/tl500-base-tl500-teamsters -n tl500 --template='{{.s
 ..and follow the [README](https://github.com/rht-labs/tl500-teamsters) to see how to use it.
 
 ## Getting the Necessary Links
-The exercises start with CodeReadyWorkspace link. So here is a one liner to get it:
+The exercises start with Dev Spaces Workspace link. So here is a one liner to get it:
 
 ```bash
 echo https://$(oc get route/devspaces -n tl500-workspaces --template='{{.spec.host}}')
 ```
 
-## CodeReady Workspaces / DevSpaces Setup
+## Dev Spaces Workspaces / DevSpaces Setup
 
 During the exercises, we use different CLIs like `oc`, `mvn`, `kube-linter` and many others. We have a container image that has all these necessary CLIs and, the configuration (Dockerfile) is under `codereadyworkspaces/stack/` folder.
 
-We utilize GitHub Actions in order to build and store this image publicly. 
+We utilize GitHub Actions in order to build and store this image publicly.
 
 There is a `tl500-devfile.yaml` which is the _as code_ definition of our workspace. We refer to the container image inside the [devfile](https://github.com/rht-labs/enablement-framework/blob/main/codereadyworkspaces/tl500-devfile.yaml#L29):
 
@@ -121,7 +121,7 @@ There is a `tl500-devfile.yaml` which is the _as code_ definition of our workspa
 ...
 ```
 
-We have the explanation of how to get your own CodeReady Workspaces environment in the [first chapter](1-the-manual-menace/1-the-basics).
+We have the explanation of how to get your own Dev Spaces Workspaces environment in the [first chapter](1-the-manual-menace/1-the-basics).
 
 ## Red Hat Product Demo System
 

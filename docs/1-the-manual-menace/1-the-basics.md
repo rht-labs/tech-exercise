@@ -20,16 +20,15 @@
 
 3. Notice the nifty default shell in the stack-tl500 container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
+4. Setup your `TEAM_NAME` name in the environment of the Dev Spaces Workspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
     ```bash#test
     echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
-5. Add the `CLUSTER_DOMAIN` to the environment:
+5. Add the `CLUSTER_DOMAIN` (i.e. `apps.cluster-kn6sn.kn6sn.sandbox2961.opentlc.com`) to the environment:
 
     ```bash#test
-    # i.e. apps.cluster-kn6sn.kn6sn.sandbox2961.opentlc.com
     echo export CLUSTER_DOMAIN="<CLUSTER_DOMAIN>" | tee -a ~/.bashrc -a ~/.zshrc
     ```
 
@@ -59,7 +58,7 @@
     oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
     ```
 
-9. Check your user permissions in OpenShift by creating your team's `ci-cd` project. 
+9. Check your user permissions in OpenShift by creating your team's `ci-cd` project.
 
     ```bash#test
     oc new-project ${TEAM_NAME}-ci-cd || true
@@ -73,7 +72,7 @@
 
 ### Helm 101
 
-> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`. 
+> Helm is the package manager for Kubernetes. It provides a way to create templates for the Kubernetes YAML that defines our application. The Kubernetes resources such as `DeploymentConfig`, `Route` & `Service` can be processed by supplying `values` to the templates. In Helm land, there are a few ways to do this. A package containing the templates and their default values is called a `chart`.
 
 Let's deploy a simple application using Helm.
 
@@ -150,7 +149,7 @@ Let's deploy a simple application using Helm.
     where:
     * `Chart.yaml` - is the manifest of the chart. It defines the name, version and dependencies for our chart.
     * `values.yaml` - is the sensible defaults for our chart to work, it contains the variables that are passed to the templates. We can overwrite these values on the command line.
-    * `templates/*.yaml` - they are our k8s resources. 
+    * `templates/*.yaml` - they are our k8s resources.
     * `_helpers.tpl` - is a collection of reusable variables and YAML snippets that are applied across all of the K8s resources uniformly for example, labels are defined in here and included on each K8s resource file as necessary.
 
 🪄🪄 Now, let's continue with even more exciting tools... !🪄🪄

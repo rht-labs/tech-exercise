@@ -21,7 +21,7 @@ By splitting your team into more groups, you can accelerate your delivery life c
 
 3. Notice the nifty default shell in the `stack-tl500` container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the CodeReadyWorkspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
+4. Setup your `TEAM_NAME` name in the environment of the Dev Spaces Workspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
 
     ```bash#test
     echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
@@ -58,7 +58,7 @@ By splitting your team into more groups, you can accelerate your delivery life c
     oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
     ```
 
-9. Check your user permissions in OpenShift by checking your team's `ci-cd` project. 
+9. Check your user permissions in OpenShift by checking your team's `ci-cd` project.
 
     ```bash#test
     oc get pods -n ${TEAM_NAME}-ci-cd
@@ -119,7 +119,7 @@ By splitting your team into more groups, you can accelerate your delivery life c
 
     ```bash#test
     cd /projects
-    git clone https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git    
+    git clone https://${GIT_SERVER}/${TEAM_NAME}/pet-battle-api.git
     ```
 
 🪄🪄 Now, our group is ready to continue with the ongoing tasks... !🪄🪄

@@ -34,7 +34,7 @@ git push
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)
 
-2. Back in your CodeReady Workspace, we'll fork the PetBattle frontend code to this newly created repository on git.
+2. Back in your Dev Spaces Workspace, we'll fork the PetBattle frontend code to this newly created repository on git.
 
     ```bash#test
     cd /projects
@@ -44,7 +44,7 @@ git push
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left hand side, you need to add it to your workspace manually as follows: 
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left hand side, you need to add it to your workspace manually as follows:
     </p>
 
     Click the hamburger menu on the top left, then `File > Add Folder to Workspace`

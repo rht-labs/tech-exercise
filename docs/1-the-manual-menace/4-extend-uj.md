@@ -1,8 +1,8 @@
-## Extend UJ with another tool, eg Nexus 
+## Extend UJ with another tool, eg Nexus
 Now, we have our projects, necessary rolebindings and Jenkins up and running. We also need a repository to store and manage our artifacts. Nexus is here to help! We can use the Nexus helm chart to deploy it. And since this is GitOps, all we need to do is extend UJ! Because if it is not in Git, it's not REAL! ;)
 
 <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different CodeReady Workspaces environment, please run the commands bellow before going forward.
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different Dev Spaces Workspace environment, please run the commands bellow before going forward.
 </p>
 
 ```bash
@@ -58,7 +58,7 @@ git pull
     cd /projects/tech-exercise
     git add .
     git commit -m  "🦘 ADD - nexus repo manager 🦘"
-    git push 
+    git push
     ```
 
 3. ArgoCD will detect the change in `ubiquitous-journey/values-tooling.yaml` and deploy Nexus on our behalf to ensure the state in the cluster matches the desired state in Git. You can see it also in the ArgoCD UI.
