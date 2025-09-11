@@ -86,7 +86,7 @@ When something is seen as not matching the desired state in Git, an application 
             key: username
             name: git-auth
           insecure: true
-EOF
+    EOF
     ```
 
     Then, deploy ArgoCD using helm and this piece of yaml:
