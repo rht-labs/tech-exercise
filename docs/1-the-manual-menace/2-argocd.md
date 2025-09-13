@@ -65,27 +65,12 @@ When something is seen as not matching the desired state in Git, an application 
 
 2. Let's perform a basic install of ArgoCD. Using most of the defaults defined on the chart is sufficient for our use case.
 
-    We're also going to configure ArgoCD to be allowed to pull from our git repository using a secret 🔐.
-
-    Configure our ArgoCD instance with a secret in our <TEAM_NAME>-ci-cd namespace by creating a small bit of yaml 😋:
-
     ```bash#test
     cat << EOF > /projects/tech-exercise/argocd-values.yaml
     ignoreHelmHooks: true
     operator: []
     namespaces:
       - ${TEAM_NAME}-ci-cd
-    argocd_cr:
-      initialRepositories: |
-        - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git
-          type: git
-          passwordSecret:
-            key: password
-            name: git-auth
-          usernameSecret:
-            key: username
-            name: git-auth
-          insecure: true
     EOF
     ```
 

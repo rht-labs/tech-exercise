@@ -176,9 +176,7 @@ All of these traits lead to one outcome - the ability to build and release quali
           credential.sync.jenkins.openshift.io: "true"
         name: git-auth
     EOF
-    ```
 
-    ```bash#test
     cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
       apiVersion: v1
       kind: Secret
