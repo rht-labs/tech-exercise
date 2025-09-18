@@ -45,9 +45,11 @@
 3. Once Zalenium is installed, then create a route to access the Zalenium Dashboard:
 
     ```bash#test
-    oc expose svc/zalenium -n <TEAM_NAME>-ci-cd
+    oc create route edge --service=svc/zalenium -n <TEAM_NAME>-ci-cd 
+    oc label route zalenium rht-gitops.com/<TEAM_NAME>-ci-cd- -n <TEAM_NAME>-ci-cd
     oc get route/zalenium --template='{{.spec.host}}' -n <TEAM_NAME>-ci-cd
     ```
+> The reason of running `oc label` is that when you create an OpenShift route using the `oc create route edge --service=<service-name>` command, it automatically inherits the labels from the specified service. This means that it adds the `rht-gitops.com/<TEAM_NAME>-ci-cd` label. This label makes ArgoCD to manage the resource and it gets deleted because is not part of the zalenium Helm chart.
 
 ### Add the System Tests to git and execute our pipeline
 
