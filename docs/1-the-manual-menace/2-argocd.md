@@ -84,7 +84,7 @@ When something is seen as not matching the desired state in Git, an application 
     ```
 
     <p class="tip">
-    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercises, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
+    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercises, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/tech-exercise/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
     </p>
 
 3. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up. To do this, we are going to run a command with a 'watch' flag to continuousy monitor pod creation.
@@ -120,7 +120,7 @@ When something is seen as not matching the desired state in Git, an application 
       * Repository URL: `https://rht-labs.com/todolist/`
       * Select `Helm` from the right drop down menu
       * Chart: `todolist`
-      * Version: `1.1.0`
+      * Version: `1.2.0`
    * On the "DESTINATION" box
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<TEAM_NAME>-ci-cd`
