@@ -79,7 +79,7 @@
     git stash
     ```
 
-9. In our CICD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
+9. In our CI/CD pipeline, these checks are run as part of the `mvn test` lifecycle phase.
 
     A Maven phase represents a stage in the Maven build lifecycle. Each phase is responsible for a specific task.
 

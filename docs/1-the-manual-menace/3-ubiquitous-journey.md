@@ -1,6 +1,6 @@
 ## 🔥🦄 Ubiquitous Journey
 
-At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CICD tooling to accelerate setup and onboarding. The code repository is called **Ubiquitous Journey** (🔥🦄). We have created a lite version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
+At Red Hat Open Innovation Labs, we have automated the bootstrap of Labs Residency CI/CD tooling to accelerate setup and onboarding. The code repository is called **Ubiquitous Journey** (🔥🦄). We have created a lite version of Ubiquitous Journey here and we will explore this repository and set up our technical foundation using it.
 
 This repo is available on the Red Hat Labs GitHub organization – <span style="color:blue;">https://github.com/rht-labs/ubiquitous-journey.</span> Ubiquitous Journey allows us to plumb all of the pieces together in a developer friendly manner.
 
@@ -8,7 +8,7 @@ This repo is available on the Red Hat Labs GitHub organization – <span style="
 - **Traceable** - We can easily see where changes have occurred and most importantly trace exactly what git tag/commit is in which environment.
 - **Discoverable** - By making the source code easy to follow, with supporting and inline documentation, new team members can easily discover how applications are built, tested and deployed.
 - **Auditable** - Git logs and the history are the single source of truth for building our software. We can create compliance reports and easily enhance the toolset to support more advanced techniques such as code signing and attestations for all our pipeline steps if needed.
-- **Reusable** - Many parts of CICD are reusable. A good example are the reusable pipelines and tasks. However it's not only the code, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
+- **Reusable** - Many parts of CI/CD are reusable. A good example are the reusable pipelines and tasks. However it's not only the code, solid foundational practices such as build once, tag and promote code through a lifecycle can be codified.
 - **Flexible** - Product teams often want to use both standard tools and be able to experiment with new ones. The *tool box* mentality helps a lot, so as a team you can work with the tools you are familiar with. We will see this in action with Jenkins and Tekton.
 
 All of these traits lead to one outcome - the ability to build and release quality code into multiple environments whenever we need to.
