@@ -2,10 +2,10 @@
 
 When we say GitOps, we say _"if it's not in Git, it's NOT REAL"_. But how are we going to store our sensitive data like credentials in Git repositories, where many people can access?! Sure, Kubernetes provides a way to manage secrets, but the problem is that it stores the sensitive information as a base64 string - anyone can decode the base64 string! Therefore, we cannot store `Secret` manifest files openly. We use an open-source tool called Sealed Secrets to address this problem.
 
-Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
+Sealed Secrets allows us to _seal_ Kubernetes secrets by using a utility called `kubeseal`. The `SealedSecrets` are Kubernetes resources that contain an encrypted `Secret` object that only the controller can decrypt. Therefore, a `SealedSecret` is safe to store even in a public repository.
 
 <p class="warn">
-    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different Dev Spaces Workspaces environment, please run below commands before going forward.
+    ⛷️ <b>NOTE</b> ⛷️ - If you switch to a different Dev Spaces Workspace environment, please run below commands before going forward.
 </p>
 
 ```bash
@@ -16,7 +16,7 @@ git pull
 
 ### Sealed Secrets in action
 
-1. The observant among you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git...😳 Let's start by fixing this and sealing our Git credentials so they can be safely checked in to the code. First, we'll create the secret in a tmp directory. Make sure you have your gitlab user and PAT from the previous exercise set in your environment
+1. The observant among you will have noticed that in the previous exercise we created a secret for git and added it to the cluster WITHOUT putting it in git...😳 Let's start by fixing this and sealing our Git credentials so they can be safely checked into the code. First, we'll create the secret in a tmp directory. Make sure you have your gitlab user and PAT from the previous exercise set in your environment
 
     ```bash
     echo ${GITLAB_USER}
@@ -67,7 +67,7 @@ EOF
     cat /tmp/sealed-git-auth.yaml
     ```
 
-    We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
+    We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something like this, but with longer password and username output.
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -107,7 +107,7 @@ EOF
         source_ref: "1.0.3"
         values:
           secrets:
-            # Additional secrets will be added to this list along the exercises.
+            # Additional secrets will be added to this list throughout the exercises.
             - name: git-auth
               type: kubernetes.io/basic-auth
               annotations:
@@ -148,7 +148,7 @@ EOF
 
     ![argocd-git-auth-synced.png](images/argocd-git-auth-synced.png)
 
-9. You can also verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Manage Credentials` to view the `<TEAM_NAME>-ci-cd-git-auth` credential
+9. You can also verify it's been synced to Jenkins now by opening `Jenkins -> Manage Jenkins -> Credentials` to view the `<TEAM_NAME>-ci-cd-git-auth` credential
 
     ```bash#test
     echo https://$(oc get route jenkins --template='{{ .spec.host }}' -n ${TEAM_NAME}-ci-cd)
