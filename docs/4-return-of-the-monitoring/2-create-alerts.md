@@ -1,6 +1,6 @@
 ## Alerting and Notifications
 
-> OpenShift has alerting and metric gathering built into the platform using the prometheus stack. It collects all the information from each node in the cluster to give overall health of things like memory and disk usage. To enable user workload monitoring a small change needs to be made to the operator. With this in place, app dev teams can hook into the built in monitoring stack by placing a `ServiceMonitor` Custom Resource with a reference to where the prometheus endpoints
+> OpenShift has alerting and metric gathering built into the platform using the prometheus stack. It collects all the information from each node in the cluster to give overall health of things like memory and disk usage. To enable user workload monitoring a small change needs to be made to the operator. With this in place, app dev teams can hook into the built in monitoring stack by placing a `ServiceMonitor` Custom Resource with a reference to where the prometheus endpoints are located.
 
 ### Platform Alerts
 
@@ -14,7 +14,7 @@
         rules:
         - alert: PetBattleApiNotAvailable
           annotations:
-            message: 'Pet Battle API in namespace {{ .Release.Namespace }} is not available for the last 1 minutes.'
+            message: 'Pet Battle API in namespace {{ .Release.Namespace }} is not available for the last 1 minute.'
           expr: (1 - absent(kube_pod_status_ready{condition="true",namespace="{{ .Release.Namespace }}"} * 
                 on(pod) group_left(label_app_kubernetes_io_component) 
                 kube_pod_labels{label_app_kubernetes_io_component="pet-battle-api",namespace="{{ .Release.Namespace }}"})) == 0
@@ -23,7 +23,7 @@
             severity: {{ .Values.prometheusrules.severity | default "critical" }}
     </code></pre></div>
 
-2. Add a new platform type rule to alert when the MongoDB disc gets busy / full
+2. Add a new platform type rule to alert when the MongoDB disk gets busy / full
 
     ```bash
     cat << EOF >> /projects/pet-battle-api/chart/templates/prometheusrule.yaml
@@ -36,13 +36,13 @@
     EOF
     ```
 
-3. Let's add a workload monitoring type rule to alert us when the API request are under load.
+3. Let's add a workload monitoring type rule to alert us when the API requests are under load.
 
     ```bash
     cat << EOF >> /projects/pet-battle-api/chart/templates/prometheusrule.yaml
         - alert: PetBattleApiMaxHttpRequestTime
           annotations:
-            message: 'Pet Battle Api max http request time over last 5 min in namespace {{ .Release.Namespace }} exceeds 1.5 sec.'
+            message: 'Pet Battle API max http request time over last 5 min in namespace {{ .Release.Namespace }} exceeds 1.5 sec.'
           expr: max_over_time(http_server_requests_seconds_max{service="pet-battle-api",namespace="{{ .Release.Namespace }}"}[5m]) > 1.5
           labels:
             severity: {{ .Values.prometheusrules.severity | default "warning" }}
@@ -97,6 +97,6 @@
     524288000 bytes (524 MB) copied, 11.2603 s, 46.6 MB/s
     </code></pre></div>
 
-7. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see ` PetBattleMongoDBDiskUsage` alert as below:
+7. Observe the alert is firing on OpenShift UI. In Developer view, go to Observe > Alerts. Make sure you select the right project from the drop down menu. You should see `PetBattleMongoDBDiskUsage` alert as below:
 
     ![alert-mongodb](./images/alert-mongodb.png)
