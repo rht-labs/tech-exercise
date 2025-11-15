@@ -4,10 +4,10 @@
 
 <!---
 #### Jenkins access to GitLab
-Jenkins needs to access repositories to see Jenkinsfile. There are multiple options to use ie username/password, SSH Keys and token (which we will going to use)
+Jenkins needs to access repositories to see Jenkinsfile. There are multiple options to use i.e., username/password, SSH Keys and token (which we will use)
 
 1. Login to GitLab and click on your avatar from upper left corner > Settings.
-![gitlab-settings](images/gitlav-settings.png)
+![gitlab-settings](images/gitlab-settings.png)
 2. Click on Access Token and generate one.
 ![gitlab-access-token](images/gitlab-access-token.png)
 3. Copy the newly generated token and update `ubiquitous-journey/values-tooling.yaml`
@@ -30,11 +30,11 @@ git push
 
 #### Setup Pet Battle (frontend) GitLab Project
 
-1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project as **public**.
+1. Open the GitLab UI. Create a Project in GitLab under `<TEAM_NAME>` group called `pet-battle`. Make the project **public**.
 
     ![pet-battle-git-repo](images/pet-battle-git-repo.png)
 
-2. Back in your Dev Spaces Workspace, we'll fork the PetBattle frontend code to this newly created repository on git.
+2. Back in your Dev Spaces Workspace, we'll fork the PetBattle frontend code to this newly created Git repository.
 
     ```bash#test
     cd /projects
@@ -44,7 +44,7 @@ git push
     git push -u origin main
     ```
     <p class="warn">
-        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left hand side, you need to add it to your workspace manually as follows:
+        ⛷️ <b>NOTE</b> ⛷️ - If pet-battle folder is not appearing on the left-hand side, you need to add it to your workspace manually as follows:
     </p>
 
     Click the hamburger menu on the top left, then `File > Add Folder to Workspace`
@@ -108,13 +108,13 @@ git push
         ...
     </code></pre></div>
 
-    Then, do the same thing for `pet-battle/stage/values.yaml` file as well.
-
     You can also run this bit of code to do the replacement if you are feeling uber lazy!
 
     ```bash#test
     yq e '.applications.pet-battle.source |="http://nexus:8081/repository/helm-charts"' -i /projects/tech-exercise/pet-battle/test/values.yaml
     ```
+
+    Then, run the same code for `pet-battle/stage/values.yaml` file as well.
 
 3. Commit these changes to git so Argo CD can sync them.
 
@@ -137,21 +137,21 @@ git push
     <p class="warn"><b>INFO</b> - If you do not see the job run after Jenkins restarts, feel free to manually trigger it to get it going.</p>
 
 
-5. With Jenkins now scanning our GitLab project for new repositories and git setup to trigger a build on Jenkins, let's explore our pipeline! A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is setup a lot like this :
+5. With Jenkins now scanning our GitLab project for new repositories and git setup to trigger a build on Jenkins, let's explore our pipeline! A `Jenkinsfile` uses a DSL (Jenkins language) to declaratively describe the pipeline in a series of blocks. Ours is set up a lot like this :
 
     ![jenkins-pipe](images/jenkins-pipe.png)
 
     Some of the key things to note above are:
     * `pipeline {}` is how all declarative Jenkins pipelines begin.
     * `environment {}` defines environment variables to be used across all build stages.
-    * `options {}` contains specific Job specs you want to run globally across the jobs, e.g., setting the terminal colour.
+    * `options {}` contains specific Job specs you want to run globally across the jobs, e.g., setting the terminal color.
     * `stage {}` all jobs must have one stage. This is the logical part of the build that will be executed, e.g., `bake-image`.
     * `steps {}` each `stage` has one or more steps involved. These could be execute shell script, git checkout, etc.
     * `agent {}` specifies the node the build should be run on, e.g., `jenkins-agent-npm`.
     * `post {}` hook is used to specify the post-build-actions. Jenkins declarative pipeline syntax provides very useful callbacks for `success`, `failure` and `always` which are useful for controlling the job flow.
     * `when {}` is used for flow control. It can be used at the stage level and be used to stop pipeline entering that stage. For example, when the branch is master, then deploy to `test` environment.
 
-6. Now that we've gone through what this stuff does, let's try to fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following below to the  `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
+6. Now that we've gone through what this stuff does, let's try to fix the failing build. If you look at the output of the Jenkins job, you'll see it's not able to find anything in Nexus to put in a container. To fix this, update the `Jenkinsfile` by adding a new `stage` which will run app compilation, producing the artifact in Nexus for us. Add the following under the `// 💥🔨 PIPELINE EXERCISE GOES HERE ` comment:
 
     ```groovy
             // 💥🔨 PIPELINE EXERCISE GOES HERE
@@ -183,7 +183,7 @@ git push
                     echo '### Running Jest Testing ###'
 
                     echo '### Running build ###'
-                    sh 'npm run build '
+                    sh 'npm run build'
 
                     // 🌞 SONARQUBE SCANNING EXERCISE GOES HERE
                     echo '### Running SonarQube ###'

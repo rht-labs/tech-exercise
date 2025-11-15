@@ -2,15 +2,15 @@
 
 We need a way to bundle up all of our applications and deploy them into each environment. Each PetBattle application has its own Git repository and Helm chart, making it easier to code and deploy independently from other apps.
 
-A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a useability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with a custom configuration per environment.
+A developer can get the same experience and end result installing an application chart using `helm install` as our fully automated pipeline. This is important from a usability perspective. Argo CD has great support for all sorts of packaging formats that suit Kubernetes deployments, `Kustomize`, `Helm`, as well as just raw YAML files. Because Helm is a template language, we can mutate the Helm chart templates and their generated Kubernetes objects with various values allowing us to configure them with a custom configuration per environment.
 
-We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app of apps pattern` to bundle all of these all up; some might call this an application suite or a system! In PetBattle we generate the app-of-apps definitions using a Helm chart.
+We deploy each of our applications using an Argo CD `application` definition. We use one Argo CD `application` definition for every environment in which we wish to deploy the application. We make use of Argo CD `app-of-apps pattern` to bundle all of these up; some might call this an application suite or a system! In Pet Battle we generate the app-of-apps definitions using a Helm chart.
 
 ### Deploying Pet Battle - Keycloak
 
 > In this exercise we'll deploy PetBattle and a supporting piece of tech it uses (Keycloak) using the same pattern. We'll deploy PetBattle to two environments - `test` and `stage` by configuring the values files in `pet-battle/stage/values.yaml` && `pet-battle/test/values.yaml`
 
-1. In your IDE - open `tech-exercises/values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
+1. In your IDE - open `tech-exercise/values.yaml` file at the root of this project and **swap** `enabled: false` to `enabled: true` as shown below for each of the app-of-pb definitions:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -102,6 +102,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
           image_version: latest # container image version
           hpa:
             enabled: false
+          servicemonitor: false
 
       pet-battle:
         name: pet-battle
@@ -118,7 +119,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     ```bash#test
     # test
     if [[ $(yq e '.applications[] | select(.name=="pet-battle-api") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
-        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.5.0","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
+        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.5.0","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}, "servicemonitor": false }' -i /projects/tech-exercise/pet-battle/test/values.yaml
     fi
     if [[ $(yq e '.applications[] | select(.name=="pet-battle") | length' /projects/tech-exercise/pet-battle/test/values.yaml) < 1 ]]; then
         yq e '.applications.pet-battle = {"name": "pet-battle","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle","source_ref": "1.0.6","values": {"image_version": "latest"}}' -i /projects/tech-exercise/pet-battle/test/values.yaml
@@ -128,7 +129,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/test/values.yaml
     # stage
     if [[ $(yq e '.applications[] | select(.name=="pet-battle-api") | length' /projects/tech-exercise/pet-battle/stage/values.yaml) < 1 ]]; then
-        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.5.0","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}}' -i /projects/tech-exercise/pet-battle/stage/values.yaml
+        yq e '.applications.pet-battle-api = {"name": "pet-battle-api","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle-api","source_ref": "1.5.0","values": {"image_name": "pet-battle-api","image_version": "latest", "hpa": {"enabled": false}}, "servicemonitor": false }' -i /projects/tech-exercise/pet-battle/stage/values.yaml
     fi
     if [[ $(yq e '.applications[] | select(.name=="pet-battle") | length' /projects/tech-exercise/pet-battle/stage/values.yaml) < 1 ]]; then
         yq e '.applications.pet-battle = {"name": "pet-battle","enabled": true,"source": "https://petbattle.github.io/helm-charts","chart_name": "pet-battle","source_ref": "1.0.6","values": {"image_version": "latest"}}' -i /projects/tech-exercise/pet-battle/stage/values.yaml
@@ -138,7 +139,7 @@ We deploy each of our applications using an Argo CD `application` definition. We
     sed -i '/^# Pet Battle Apps/d' /projects/tech-exercise/pet-battle/stage/values.yaml
     ```
 
-2. The frontend needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the frontend, this means supplying the information about where the API live. We use ArgoCD to manage our application deployments, hence we should update the values supplied to this chart as such.
+2. The frontend needs to have some configuration applied to it. This could be packaged up in the helm chart or baked into the image - BUT we should really apply configuration as *code*. We should build our apps once so they can be initialized in many environments with configuration supplied at runtime. For the frontend, this means supplying the information about where the API lives. We use ArgoCD to manage our application deployments, hence we should update the values supplied to this chart as such.
 
     ```bash#test
     export JSON="'"'{
@@ -239,30 +240,28 @@ We deploy each of our applications using an Argo CD `application` definition. We
 
     ![test-pet-battle-apps-topology.png](images/test-pet-battle-apps-topology.png)
 
-    </br>
-    🔐🔐 If you have not seen the Keycloak Test or Stage dashboard, visit the following URL to test the access and accept the respective SSL certificate 🔐🔐
+### Accessing the Pet Battle Application
 
-     ```bash#test
-    https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth
-    https://keycloak-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>/auth
-    ```   
+As we saw when configuring the `pet-battle` application in the `values.yaml` file, it consists of three components:
 
+* **Pet Battle API**: API that serves the Pet Battle application.
+* **Pet Battle**: Frontend application.
+* **Keycloak**: Serves the authentication and authorization for the Pet Battle application.
+
+Let's see how to access each of these components:
+
+1. 🔐🔐 **Keycloak** 🔐🔐
+    * https://keycloak-<TEAM_NAME>-test.<CLUSTER_DOMAIN>/auth
+    * https://keycloak-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>/auth
+  
     ![test-pet-battle-apps-first.png](images/keycloak.png)
 
-    </br>
-    🔐🔐 If you have not seen the Pet Battle API service, visit the following URL to test the access and accept the respective SSL certificate 🔐🔐
+2. 🔗🔗 **Pet Battle API** 🔗🔗
+    * https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>
+    * https://pet-battle-api-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>
 
-     ```bash#test
-    https://pet-battle-api-<TEAM_NAME>-test.<CLUSTER_DOMAIN>
-    https://pet-battle-api-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>
-    ```   
-
-    </br>
-    😻😻 Finally, select the Pet Battle URL link highlighted above and you should see ... 😻😻
-
-     ```bash#test
-    https://pet-battle-<TEAM_NAME>-test.<CLUSTER_DOMAIN>
-    https://pet-battle-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>
-    ```   
+3. 😻😻 **Pet Battle** 😻😻 
+    * https://pet-battle-<TEAM_NAME>-test.<CLUSTER_DOMAIN>
+    * https://pet-battle-<TEAM_NAME>-stage.<CLUSTER_DOMAIN>
 
     ![test-pet-battle-apps-first.png](images/test-pet-battle-apps-first.png)

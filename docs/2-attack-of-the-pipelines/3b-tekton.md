@@ -73,13 +73,13 @@ In this snippet of the pipeline used in this exercise, we define:
 
     Some of the key things to note above are:
 
-   * `workspaces` - these YAML are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
+   * `workspaces` - these YAML files are the volumes to use across each of the `tasks` in the pipeline. ConfigMaps and other resources that are fixed but can be loaded into the pipeline are stored here.
    * `tasks` - these are the building blocks of Tekton. They are the custom resources that take parameters and run steps on the shell of a provided image. They can produce results and share workspaces with other tasks.
    * `secrets` - secure things used by the pipeline.
    * `pipelines` -  this is the pipeline definition, it wires together all the items above (workspaces, tasks, secrets, etc) into a useful & reusable set of activities.
    * `triggers` directory stores the configuration for the webhooks. We will add webhooks from GitLab to trigger our pipeline. Using the resources in this directory we expose the webhook endpoint (`gitlab-event-listener.yaml`) and parse the data from it (`gitlab-trigger-binding.yaml`) to trigger a PipelineRun (`gitlab-trigger-template.yaml`)
 
-4. Since Tekton pipelines are just YAML, we can have Argo CD to sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions, edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
+4. Since Tekton pipelines are just YAML, we can have Argo CD sync the pipelines to the cluster so our code can use them. To deploy the pipeline definitions, edit `ubiquitous-journey/values-tooling.yaml`. Add the reference to the tekton chart we explored by adding the chart to our ArgoCD applications list:
 
     ```yaml
       # Tekton Pipelines
@@ -105,7 +105,7 @@ In this snippet of the pipeline used in this exercise, we define:
     fi
     ```
 
-5. Tekton will push changes to our Helm chart to Nexus as part of the pipeline. Originally, we configured our App of Apps to pull from a different chart repository, so we also need to update Pet Battle `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
+5. Tekton will push changes to our Helm chart to Nexus as part of the pipeline. Originally, we configured our App of Apps to pull from a different chart repository, so we also need to update the `pet-battle/test/values.yaml` file to point to the Nexus chart repository deployed in OpenShift. Update the `source` as shown below for the `pet-battle-api`:
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -158,7 +158,7 @@ _Note: If you are seeing PVCs are still in Progressing status on Argo CD, it is 
 
     ![gitlab-test-webhook.png](images/gitlab-test-webhook.png)
 
-9. With all these components in place, now it's time to trigger the pipeline via webhook by checking in some code for Pet Battle API. Let's make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
+9. With all these components in place, now it's time to trigger the pipeline via webhook by committing some code for Pet Battle API. Let's make a simple change to the application version. Edit pet-battle-api `pom.xml` found in the root of the `pet-battle-api` project and update the `version` number. The pipeline will update the `chart/Chart.yaml` with these versions for us.
 
     ```xml
         <artifactId>pet-battle-api</artifactId>

@@ -21,7 +21,7 @@ By splitting your team into more groups, you can accelerate your delivery life c
 
 3. Notice the nifty default shell in the `stack-tl500` container is `zsh` which rhymes with swish. It also has neat shortcuts and plugins - plus all the cool kids are using it 😎! We will be setting our environment variables in both `~/.zshrc` and `~/.bashrc` in case you want to switch to `bash`.
 
-4. Setup your `TEAM_NAME` name in the environment of the Dev Spaces Workspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc.)**
+4. Setup your `TEAM_NAME` in the environment of the Dev Spaces Workspace by running the command below. We will use the `TEAM_NAME` variable throughout the exercises so having it stored in our session means less changing of this variable throughout the exercises 💪. **Ensure your `TEAM_NAME` consists of only lowercase alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc').**
 
     ```bash#test
     echo export TEAM_NAME="<TEAM_NAME>" | tee -a ~/.bashrc -a ~/.zshrc
@@ -64,19 +64,19 @@ By splitting your team into more groups, you can accelerate your delivery life c
     oc get pods -n ${TEAM_NAME}-ci-cd
     ```
 
-10. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
+10. We are going to create a GitLab Personal Access Token (PAT). The token is a more secure and reliable method for accessing GitLab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in GitLab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal if you have not got one open and run the following commands.
 
     <p class="tip">
-    The Gitlab user must be the same used to create the <b>team group</b>, and the <b>tech-exercise</b> project. Currently, only the owners are allowed to commit changes.
+    The GitLab user must be the same used to create the <b>team group</b>, and the <b>tech-exercise</b> project. Currently, only the owners are allowed to commit changes.
     </p>
 
-    Export your Gitlab username.
+    Export your GitLab username.
 
     ```bash
     export GITLAB_USER=<YOUR_GITLAB_USER>
     ```
 
-    Export your Gitlab password.
+    Export your GitLab password.
 
     ```bash
     export GITLAB_PASSWORD=<YOUR_GITLAB_PASSWORD>
@@ -98,7 +98,7 @@ By splitting your team into more groups, you can accelerate your delivery life c
     echo $GITLAB_PAT
     ```
 
-11. We could update our local `tech-exercise` project with the latest content:
+11. We can update our local `tech-exercise` project with the latest content:
 
     ```bash#test
     cd /projects/tech-exercise
