@@ -52,6 +52,7 @@ spec:
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_repository=\"$(params.REPOSITORY)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_version=\"$(params.VERSION)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
         yq eval -i .applications."$(params.APPLICATION_NAME)".values.image_namespace=\"$(params.TEAM_NAME)-$(params.DEPLOY_ENVIRONMENT)\" "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
+        yq eval -i .applications."$(params.APPLICATION_NAME)".values.istag.enabled=false "$(params.DEPLOY_ENVIRONMENT)/values.yaml"
     - name: commit-changes
       workingDir: $(workspaces.output.path)/$(params.WORK_DIRECTORY)
       image: quay.io/redhat-cop/ubi8-git:latest
