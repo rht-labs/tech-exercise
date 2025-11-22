@@ -21,7 +21,7 @@ git pull
     echo https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook  -n ${TEAM_NAME}-ci-cd)
     ```
 
-2. Go to `tech-exercise` git repository on GitLab. From the left panel, go to `Settings > Integrations` and add the URL you just copied from your terminal to enable the WebHook. Now, whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add webhook`.
+2. Go to `tech-exercise` git repository on GitLab. From the left panel, go to `Settings > Webhooks`. Then, click on "Add new webhook" button and add the URL you just copied from your terminal to enable the WebHook. Now, whenever a change is made in Git, ArgoCD will instantly reconcile and apply the differences between the current state in the cluster and the desired state in git 🪄. Click `Add new webhook`.
 
     ![gitlab-argocd-webhook](images/gitlab-argocd-webhook.png)
 

@@ -23,23 +23,30 @@ All of these traits lead to one outcome - the ability to build and release quali
     ```
 
     You can find the GitLab URL in routes under tl500-gitlab project, i.e. `gitlab-ce.apps.cluster-cskp4.cskp4.sandbox2917.opentlc.com`
+    
 
-    We need to create a group in GitLab as <TEAM_NAME>.  Click "Create a group" on the screen:
+    We need to create a group in GitLab as <TEAM_NAME>. First, click on the **+** symbol on the top left corner and then **New Group**.
     ![gitlab-initial-login](images/gitlab-initial-login.png)
 
+    Now, click on "Create group" on the screen:
+    ![gitlab-create-group-1](images/gitlab-create-group-1.png)
+
 2. Put your TEAM_NAME (`<TEAM_NAME>`) as the group name, select **Public** for Visibility level, and hit Create group. This is so we can easily share code and view other teams' activity.
-![gitlab-create-group](images/gitlab-create-group.png)
+![gitlab-create-group-2](images/gitlab-create-group-2.png)
 
-3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel and invite your team members via "Invite member" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
-![gitlab-group-add-members](images/gitlab-group-add-members.png)
+3. If you are working as a team, you must add your team members to this group. This will give them permissions to work on the projects created in this group. Select "Members" from the left panel:
+![gitlab-group-add-members-1](images/gitlab-group-add-members-1.png)
+Then, click on "Invite members" option. Make sure to choose "Maintainer" or "Owner" role permission. You can ignore this step if you are not working as a team.
+![gitlab-group-add-members-2](images/gitlab-group-add-members-2.png)
 
-4. Now let's create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side
-![gitlab-new-project](images/gitlab-new-project.png)
+4. Now let's create the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. The `tech-exercise` will serve as a mono-repo holding both our tooling configuration and the application definitions and some other stuff. In the real world, you may want to separate these into different repos! Anyways, hit `New project` button on the right hand side:
+![gitlab-new-project-1](images/gitlab-new-project-1.png)
+Then, click on "Create blank project" button:
+![gitlab-new-project-2](images/gitlab-new-project-2.png)
+5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, and **unselect** the "Initialize repository with a README" checkbox, then hit Create project. Make sure the project is in the group you created previously and not the username's.
+![gitlab-new-project-3](images/gitlab-new-project-3.png)
 
-5. On the new view, use `tech-exercise` as Project Name, select **Internal** for Visibility level, then hit Create project. Make sure the project is in the group you created previously and not the username's.
-![gitlab-new-project](images/gitlab-new-project-2.png)
-
-6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under User > Settings > Access Tokens in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal in the Dev Spaces Workspace if you have not got one open and run the following commands.
+6. We are going to create a Gitlab Personal Access Token (PAT). The token is a more secure and reliable method for accessing Gitlab from our scripts later on. Note, that for reference's sake, you can also generate a PAT in Gitlab under `User > Preferences (Or Settings) > Personal Access Tokens` in the Web UI. We use a helper script here to help automate that process. To generate the token, open a terminal in the Dev Spaces Workspace if you have not got one open and run the following commands.
 
     Export your Gitlab username.
 
