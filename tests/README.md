@@ -87,15 +87,20 @@ podman run \
 To run testing locally for development:
 
 ```bash
-podman pull quay.io/rht-labs/stack-tl500:3.0.16
-podman run -d --name stack quay.io/rht-labs/stack-tl500:3.0.16 zsh -c 'sleep infinity'
+podman pull quay.io/rht-labs/stack-tl500:3.0.20
+podman run -d --name stack quay.io/rht-labs/stack-tl500:3.0.20 zsh -c 'sleep infinity'
 podman exec -it stack zsh
 
 git clone https://github.com/rht-labs/tech-exercise.git
-cd tech-exercise && cd tests
+cd tech-exercise/tests
 
 # Run the test suite
 ./regression.sh
+```
+
+[NOTE] You can also copy new files with the podman cp command:
+```bash
+podman cp ./tech-exercise/tests/regression.sh stack:/projects/tech-exercise/tests/regression.sh
 ```
 
 ### TO BE DONE

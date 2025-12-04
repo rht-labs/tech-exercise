@@ -42,50 +42,6 @@ sanitize_env_vars() {
     sed -i -e "s|${GIT_SERVER}|<GIT_SERVER>|" $file_path
 }
 
-git_checkout() {
-    cd /projects/tech-exercise && git checkout main
-}
-
-source_shell() {
-    # source env (we are not a login shell)
-    source /etc/bashrc
-}
-
-setup_python() {
-    if [ -d "env" ]; then
-        source env/bin/activate
-        return
-    fi
-    pip3 install virtualenv --user
-    ~/.local/bin/virtualenv -p python3 env
-    source env/bin/activate
-    pip install rundoc
-}
-
-source_python() {
-    source env/bin/activate
-}
-
-patch_rundoc() {
-    # cater for upto 4 spaces at start of code block in markdown
-    sed -i -e "s|P<fence>^(|P<fence>^\\\s{0,4}(|" /projects/tech-exercise/tests/doc-regression-test-files/env/lib/python3.9/site-packages/markdown_rundoc/rundoc_code.py
-}
-
-perform_logins() {
-    oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 --insecure-skip-tls-verify #> /dev/null 2>&1
-    if [ "$?" != 0 ]; then
-        echo -e "${RED}Failed to login to OpenShift${NC}"
-        exit 1
-    fi
-    if [ ! -f "~/.netrc" ]; then
-    cat <<EOF > ~/.netrc
-    machine ${GIT_SERVER}
-       login ${GITLAB_USER}
-       password ${GITLAB_PASSWORD}
-EOF
-    fi
-}
-
 perform_admin_logins() {
     oc login -u ${OCP_ADMIN_USER} -p ${OCP_ADMIN_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 --insecure-skip-tls-verify #> /dev/null 2>&1
     if [ "$?" != 0 ]; then
@@ -94,57 +50,62 @@ perform_admin_logins() {
     fi
 }
 
-gitlab_personal_access_token() {
-    if [ ! -z "${personal_access_token}" ]; then return; fi
+
+gitlab_pat() {
+    # checks
+    [ -z "$GIT_SERVER" ] && echo "Warning: must supply GIT_SERVER in env" && return
+    [ -z "$GITLAB_USER" ] && echo "Warning: must supply GITLAB_USER in env" && return
+    [ -z "$GITLAB_PASSWORD" ] && echo "Warning: must supply GITLAB_PASSWORD in env" && return
     gitlabEncodedPassword=$(echo ${GITLAB_PASSWORD} | perl -MURI::Escape -ne 'chomp;print uri_escape($_)')
     # get csrf from login page
     gitlab_basic_auth_string="Basic $(echo -n ${GITLAB_USER}:${gitlabEncodedPassword} | base64)"
     body_header=$(curl -k -L -s -H "Authorization: ${gitlab_basic_auth_string}" -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/sign_in")
-    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /new_user.*?authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /name="authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
     # login
     curl -k -s -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt -c /tmp/cookies.txt -i "https://${GIT_SERVER}/users/auth/ldapmain/callback" \
                         --data "username=${GITLAB_USER}&password=${gitlabEncodedPassword}" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
                         > /dev/null
     # generate personal access token form
-    body_header=$(curl -k -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/profile/personal_access_tokens" -s)
-    csrf_token=$(echo $body_header | perl -ne 'print "$1\n" if /authenticity_token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
-    # revoke them all 💀 !!
-    revoke=$(echo $body_header | perl -nle 'print join " ", m/personal_access_tokens\/(\d+)/g;')
-    if [ ! -z "$revoke" ]; then
-        for x in $revoke; do
-            echo "💀 Revoking $x ..."
-            curl -k -s -o /dev/null -L -b /tmp/cookies.txt -X POST "https://${GIT_SERVER}/profile/personal_access_tokens/$x/revoke" --data-urlencode "authenticity_token=${csrf_token}" --data-urlencode "_method=put"
-        done
-    fi
-    # scrape the personal access token from the response
-    body_header=$(curl -k -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/profile/personal_access_tokens" \
+    body_header=$(curl -k -L -H "Authorization: ${gitlab_basic_auth_string}" -H 'user-agent: curl' -b /tmp/cookies.txt -i "https://${GIT_SERVER}/-/user_settings/personal_access_tokens" -s)
+    csrf_token=$(echo "$body_header" | perl -ne 'print "$1\n" if /csrf-token"[[:blank:]]content="(.+?)"/' | sed -n 1p)
+    # create personal access token
+    body_header=$(curl -k -s -L -H "Authorization: ${gitlab_basic_auth_string}" -b /tmp/cookies.txt "https://${GIT_SERVER}/-/user_settings/personal_access_tokens" \
                         --data-urlencode "authenticity_token=${csrf_token}" \
-                        --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api')
-    personal_access_token=$(echo $body_header | perl -ne 'print "$1\n" if /created-personal-access-token"[[:blank:]]value="(.+?)"/' | sed -n 1p)
+                        --data 'personal_access_token[name]='"${GITLAB_USER}"'&personal_access_token[expires_at]=&personal_access_token[scopes][]=api' \
+                        -w "\nHTTP_STATUS:%{http_code}")
+    http_status=$(echo "$body_header" | grep "HTTP_STATUS" | cut -d: -f2)
+    body_header=$(echo "$body_header" | sed '/HTTP_STATUS/d')
+    # Extract token from JSON response (GitLab 18 returns JSON) - tokens can contain dots
+    GITLAB_PAT=$(echo "$body_header" | perl -ne 'if (/"token"[[:blank:]]*:[[:blank:]]*"([^"]+)"/) { print "$1\n"; exit; }' | sed -n 1p)
+    export GITLAB_PAT
+    echo $GITLAB_PAT
 }
 
 gitlab_setup() {
     echo "🍓 Setting up Gitlab ..."
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    echo "group_id: $group_id"
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        echo "group_id: $group_id"
     fi
+    echo "gitlab_recreate_project tech-exercise"
     gitlab_recreate_project "tech-exercise"
 }
 
 gitlab_create_argo_webhook() {
     echo "🌶️ Create ArgoCD Gitlab Webhook ..."
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Ftech-exercise" | jq -c '.[] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Ftech-exercise" | jq -c '.id' 2>/dev/null)
     if [ ! -z "$project_id" ]; then
-        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
+        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
             argocd_url=https://$(oc get route argocd-server --template='{{ .spec.host }}'/api/webhook -n ${TEAM_NAME}-ci-cd)
-            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
+            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$argocd_url" > /dev/null 2>&1
         fi
     else
         echo -e "${RED}No project ${TEAM_NAME}%2Ftech-exercise found ?, bailing out.${NC}"
@@ -154,14 +115,14 @@ gitlab_create_argo_webhook() {
 
 gitlab_create_jenkins_webhook() {
     echo "🍅 Create Jenkins Gitlab Webhook ..."
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle&sort=asc" | jq -c '.[0] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle" | jq -c '.id' 2>/dev/null)
     if [ ! -z "$project_id" ]; then
-        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
+        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
             jenkins_url=https://$(oc get route jenkins --template='{{ .spec.host }}'/multibranch-webhook-trigger/invoke%3Ftoken=pet-battle -n ${TEAM_NAME}-ci-cd)
-            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
+            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$jenkins_url" > /dev/null 2>&1
         fi
     else
         echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle found ?, bailing out.${NC}"
@@ -171,14 +132,14 @@ gitlab_create_jenkins_webhook() {
 
 gitlab_create_tekton_webhook() {
     echo "🍎 Create Tekton Gitlab Webhook ..."
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create webhook
-    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects?search=${TEAM_NAME}%2Fpet-battle-api" | jq -c '.[] | .id')
+    project_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2Fpet-battle-api" | jq -c '.id' 2>/dev/null)
     if [ ! -z "$project_id" ]; then
-        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
+        hook_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" | jq -c '.[] | .id')
         if [ -z "$hook_id" ]; then
             tekton_url=https://webhook-${TEAM_NAME}-ci-cd.${CLUSTER_DOMAIN}
-            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
+            curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/projects/$project_id/hooks" --data "id=1&url=$tekton_url" > /dev/null 2>&1
         fi
     else
         echo -e "${RED}No project ${TEAM_NAME}%2Fpet-battle-api found ?, bailing out.${NC}"
@@ -187,7 +148,7 @@ gitlab_create_tekton_webhook() {
 }
 
 gitlab_delete_group() {
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
         echo "⚠️ No group ${TEAM_NAME} found for this user, returning."
         return;
@@ -195,7 +156,7 @@ gitlab_delete_group() {
     ret=1; i=0
     until [ $ret = "202" ]
     do
-        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X DELETE "https://${GIT_SERVER}/api/v4/groups/${group_id}")
         echo "🧁 Waiting for 202 response to delete group ${TEAM_NAME}"
         sleep 5
         ((i=i+1))
@@ -209,18 +170,19 @@ gitlab_delete_group() {
 gitlab_recreate_project() {
     projectname=${1}
     local i=0
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete project
+    echo "   → Deleting project ${projectname}..."
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
-        echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        echo "🧁 Waiting for 202 or 404 response to delete ${projectname} (current: $ret)"
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
@@ -228,12 +190,19 @@ gitlab_recreate_project() {
             exit 1
         fi
     done
+    if [ $ret = "202" ]; then
+        echo -e "${GREEN}   ✓ Project ${projectname} successfully deleted (202 - deletion in progress)${NC}"
+    elif [ $ret = "404" ]; then
+        echo -e "${GREEN}   ✓ Project ${projectname} not found (404 - already deleted or doesn't exist)${NC}"
+    fi
+    
     # create project
+    echo "   → Creating project ${projectname}..."
     ret=1; i=0
     until [ $ret = "201" ]
     do
-        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
-        echo "🍻 Waiting for 201 response to create ${projectname}"
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/projects" --data "name=${projectname}&visibility=public&namespace_id=${group_id}")
+        echo "🍻 Waiting for 201 response to create ${projectname} (current: $ret)"
         sleep 5
         ((i=i+1))
         if [ $i -gt 5 ]; then
@@ -241,22 +210,23 @@ gitlab_recreate_project() {
             exit 1
         fi
     done
+    echo -e "${GREEN}   ✓ Project ${projectname} successfully created (201)${NC}"
 }
 
 gitlab_delete_project() {
     projectname=${1}
     local i=0
-    gitlab_personal_access_token
+    gitlab_pat
     # get or create group id
-    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
+    group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X GET "https://${GIT_SERVER}/api/v4/groups?search=${TEAM_NAME}" | jq -c '.[] | .id')
     if [ -z "$group_id" ]; then
-        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${personal_access_token}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
+        group_id=$(curl -s -k -L -H "Accept: application/json" -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X POST "https://${GIT_SERVER}/api/v4/groups" --data "name=${TEAM_NAME}&path=${TEAM_NAME}&visibility=public" | jq -c '.id')
     fi
     # delete project
     ret=1; i=0
     until [ $ret = "202" -o $ret = "404" ]
     do
-        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${personal_access_token}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
+        ret=$(curl -k -s -o /dev/null -w %{http_code} -k -H "PRIVATE-TOKEN: ${GITLAB_PAT}" -X DELETE "https://${GIT_SERVER}/api/v4/projects/${TEAM_NAME}%2F${projectname}")
         echo "🧁 Waiting for 202 or 404 response to delete ${projectname}"
         sleep 5
         ((i=i+1))
@@ -313,6 +283,7 @@ test_file() {
 
 setup_test() {
     local testDir=$1
+    echo "Begin the section for $testDir"
     cd $testDir
     ls -L1 *.md
     echo "----------"
@@ -363,6 +334,7 @@ cleanup() {
 }
 
 wait_for_argocd_server() {
+    echo "🍞 Waiting for pod argocd-server ready condition to be True"
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
@@ -374,11 +346,13 @@ wait_for_argocd_server() {
             exit 1
         fi
     done
+    echo "   → Pod argocd-server ready condition is True"
 }
 
 wait_for_jenkins_server() {
+    echo "🥕 Waiting for pod jenkins ready condition to be True"
     local i=0
-    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l deploymentconfig=jenkins,name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
+    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=jenkins -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
         echo "🥕 Waiting for pod jenkins ready condition to be True"
         sleep 10
@@ -388,9 +362,11 @@ wait_for_jenkins_server() {
             exit 1
         fi
     done
+    echo "   → Pod jenkins ready condition is True"
 }
 
 wait_for_nexus_server() {
+    echo "🥗 Waiting for pod nexus ready condition to be True"
     local i=0
     until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app=sonatype-nexus -o jsonpath='{.items[0].status.conditions[?(@.type=="Ready")].status}' | grep -c "True") -eq 1 ]
     do
@@ -402,9 +378,11 @@ wait_for_nexus_server() {
             exit 1
         fi
     done
+    echo "   → Pod nexus ready condition is True"
 }
 
 wait_for_pet_battle_api() {
+    echo "🥯 Waiting for pet-battle-api route to be ready"
     local i=0
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle-api --template='{{ .spec.host }}')
     until [ $(curl -k -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
@@ -418,9 +396,11 @@ wait_for_pet_battle_api() {
             exit 1
         fi
     done
+    echo "   → Pet-battle-api route is ready"
 }
 
 wait_for_pet_battle() {
+    echo "🧅 Waiting for pet-battle route to be ready"
     local i=0
     HOST=https://$(oc -n ${TEAM_NAME}-test get route pet-battle --template='{{ .spec.host }}')
     until [ $(curl -k -s -o /dev/null -w %{http_code} ${HOST}) = "200" ]
@@ -434,6 +414,7 @@ wait_for_pet_battle() {
             exit 1
         fi
     done
+    echo "   → Pet-battle route is ready"
 }
 
 wait_for_the_manual_menace() {
@@ -456,11 +437,64 @@ setup_tests() {
     =================================
     "
 
-    source_shell
-    setup_python
-    patch_rundoc
-    git_checkout
-    perform_logins
+    # Step 1: Source shell environment (we are not a login shell)
+    echo "🔧 Step 1: Sourcing shell environment..."
+    source /etc/bashrc
+
+    # Step 2: Setup Python virtual environment and install rundoc
+    echo "🐍 Step 2: Setting up Python virtual environment..."
+    cd $runDir
+    # Always use HOME directory for virtual environment since /projects may be owned by root
+    VENV_PATH="$HOME/.tech-exercise-env"
+    if [ -d "$VENV_PATH" ] && [ -f "$VENV_PATH/bin/activate" ]; then
+        echo "   ✓ Virtual environment already exists, activating..."
+        source "$VENV_PATH/bin/activate"
+    else
+        echo "   → Creating new virtual environment in HOME directory..."
+        python3 -m venv "$VENV_PATH"
+        source "$VENV_PATH/bin/activate"
+        echo "   → Upgrading pip and installing wheel..."
+        pip install --quiet --upgrade pip wheel
+        echo "   → Installing rundoc..."
+        pip install --quiet rundoc
+    fi
+    echo "   ✓ Python version: $(python3 --version)"
+
+    # Step 3: Patch rundoc to cater for up to 4 spaces at start of code block in markdown
+    echo "🔨 Step 3: Patching rundoc for markdown code block formatting..."
+    RUNDOC_CODE_FILE=$(find "$VENV_PATH" -path "*/markdown_rundoc/rundoc_code.py" 2>/dev/null | head -1)
+    if [ -n "$RUNDOC_CODE_FILE" ] && [ -f "$RUNDOC_CODE_FILE" ]; then
+        sed -i -e "s|P<fence>^(|P<fence>^\\\s{0,4}(|" "$RUNDOC_CODE_FILE"
+    else
+        echo "   ⚠ Warning: Could not find rundoc_code.py to patch"
+    fi
+
+    # Step 4: Checkout main branch in tech-exercise repository
+    echo "📦 Step 4: Checking out main branch in tech-exercise repository..."
+    cd /projects/tech-exercise && git checkout main
+
+    # Step 5: Login to OpenShift and configure Git credentials
+    echo "🔐 Step 5: Logging in to OpenShift and configuring Git credentials..."
+    oc login -u ${OCP_USER} -p ${OCP_PASSWORD} --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 --insecure-skip-tls-verify
+    if [ "$?" != 0 ]; then
+        echo -e "${RED}Failed to login to OpenShift${NC}"
+        exit 1
+    fi
+    # Create .netrc file for automatic Git authentication if it doesn't exist
+    if [ ! -f "$HOME/.netrc" ]; then
+        echo "   → Creating .netrc file for Git authentication..."
+        cat <<EOF > $HOME/.netrc
+machine ${GIT_SERVER}
+   login ${GITLAB_USER}
+   password ${GITLAB_PASSWORD}
+EOF
+        chmod 600 $HOME/.netrc
+    else
+        echo "   ✓ .netrc file already exists"
+    fi
+
+    # Step 6: Set up Gitlab project if needed
+    echo "🔗 Step 6: Setting up Gitlab project if needed..."
     if [[ ! -z "${GITSETUP}" && -z "${skipgitlab}" ]]; then
         gitlab_setup
     fi
@@ -482,7 +516,7 @@ test_the_manual_menance() {
 test_attack-of-the-pipelines() {
     # 2-attack-of-the-pipelines
     setup_test /projects/tech-exercise/docs/2-attack-of-the-pipelines
-
+    gitlab_pat
     test_file 1-sealed-secrets.md "-T bash#test"
     test_file 2-app-of-apps.md "-T bash#test"
     wait_for_pet_battle_apps

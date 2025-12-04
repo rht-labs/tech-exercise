@@ -25,23 +25,23 @@ git pull
 
 2. Run this command to generate a Kubernetes secret object in `/tmp` with the right annotations and labels needed for Tekton and Jenkins later.
 
-    ```bash#test
-    cat << EOF > /tmp/git-auth.yaml
-    kind: Secret
-    apiVersion: v1
-    data:
-      username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
-      password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
-    type: kubernetes.io/basic-auth
-    metadata:
-      annotations:
-        tekton.dev/git-0: https://${GIT_SERVER}
-        sealedsecrets.bitnami.com/managed: "true"
-      labels:
-        credential.sync.jenkins.openshift.io: "true"
-      name: git-auth
+```bash#test
+cat << EOF > /tmp/git-auth.yaml
+kind: Secret
+apiVersion: v1
+data:
+  username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
+  password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
+type: kubernetes.io/basic-auth
+metadata:
+  annotations:
+    tekton.dev/git-0: https://${GIT_SERVER}
+    sealedsecrets.bitnami.com/managed: "true"
+  labels:
+    credential.sync.jenkins.openshift.io: "true"
+  name: git-auth
 EOF
-    ```
+```
 
 3. Use the `kubeseal` command line to seal the secret definition. This will encrypt it using a certificate stored in the controller running inside the cluster. This has already been deployed for you as only one instance can exist per cluster.
 

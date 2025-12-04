@@ -167,38 +167,38 @@ Then, click on "Create blank project" button:
 
 4. In order for ArgoCD to sync the changes from our git repository, we need to provide access to it. We'll deploy secrets to cluster, for now *not done as code* but in the next lab we'll add the secrets as code and store it encrypted in Git. In your terminal, add the Secrets to the cluster:
 
-    ```bash#test
-    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
-      apiVersion: v1
-      data:
-        password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
-        username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
-      kind: Secret
-      type: kubernetes.io/basic-auth
-      metadata:
-        annotations:
-          tekton.dev/git-0: https://${GIT_SERVER}
-          sealedsecrets.bitnami.com/managed: "true"
-        labels:
-          credential.sync.jenkins.openshift.io: "true"
-        name: git-auth
-    EOF
+```bash#test
+cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+  apiVersion: v1
+  data:
+    password: "$(echo -n ${GITLAB_PAT} | base64 -w0)"
+    username: "$(echo -n ${GITLAB_USER} | base64 -w0)"
+  kind: Secret
+  type: kubernetes.io/basic-auth
+  metadata:
+    annotations:
+      tekton.dev/git-0: https://${GIT_SERVER}
+      sealedsecrets.bitnami.com/managed: "true"
+    labels:
+      credential.sync.jenkins.openshift.io: "true"
+    name: git-auth
+EOF
 
-    cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: ${TEAM_NAME}-tech-exercises-repo
-        labels:
-          argocd.argoproj.io/secret-type: repository
-      stringData:
-        url: "https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git"
-        password: "${GITLAB_PAT}"
-        username: "${GITLAB_USER}"
-        project: "default"
-        insecure: "true"
-    EOF
-    ```
+cat <<EOF | oc apply -n ${TEAM_NAME}-ci-cd -f -
+  apiVersion: v1
+  kind: Secret
+  metadata:
+    name: ${TEAM_NAME}-tech-exercises-repo
+    labels:
+      argocd.argoproj.io/secret-type: repository
+  stringData:
+    url: "https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git"
+    password: "${GITLAB_PAT}"
+    username: "${GITLAB_USER}"
+    project: "default"
+    insecure: "true"
+EOF
+```
 
 5. Install the tooling in Ubiquitous Journey (only bootstrap, and Jenkins at this stage..). Once the command is run, open the ArgoCD UI to show the resources being created. We've just deployed our first AppOfApps!
 

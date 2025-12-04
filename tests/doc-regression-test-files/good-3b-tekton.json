@@ -15,12 +15,12 @@
             ]
         },
         {
-            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n",
+            "code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml    \n    fi\n"
+                    "user_code": "    if [[ $(yq e '.applications[] | select(.name==\"tekton-pipeline\") | length' /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml) < 1 ]]; then\n        yq e '.applications += {\"name\": \"tekton-pipeline\",\"enabled\": true,\"source\": \"https://GIT_SERVER/TEAM_NAME/tech-exercise.git\",\"source_ref\": \"main\",\"source_path\": \"tekton\",\"values\": {\"team\": \"TEAM_NAME\",\"cluster_domain\": \"CLUSTER_DOMAIN\",\"git_server\": \"GIT_SERVER\"}}' -i /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|GIT_SERVER|$GIT_SERVER|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|TEAM_NAME|$TEAM_NAME|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n        sed -i \"s|CLUSTER_DOMAIN|$CLUSTER_DOMAIN|\" /projects/tech-exercise/ubiquitous-journey/values-tooling.yaml\n    fi\n"
                 }
             ],
             "tags": [
@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - tekton pipelines config \ud83c\udf55\"\n    git push \n",
+            "code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - tekton pipelines config \ud83c\udf55\"\n    git push\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - tekton pipelines config \ud83c\udf55\"\n    git push \n"
+                    "user_code": "    cd /projects/tech-exercise\n    git add .\n    git commit -m  \"\ud83c\udf55 ADD - tekton pipelines config \ud83c\udf55\"\n    git push\n"
                 }
             ],
             "tags": [
@@ -85,12 +85,12 @@
             ]
         },
         {
-            "code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push \n",
+            "code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push \n"
+                    "user_code": "    cd /projects/pet-battle-api\n    git add .\n    git commit -m  \"\ud83c\udf55 UPDATED - pet-battle-version to 1.3.1 \ud83c\udf55\"\n    git push\n"
                 }
             ],
             "tags": [
