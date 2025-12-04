@@ -43,12 +43,12 @@
             ]
         },
         {
-            "code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n",
+            "code": "helm upgrade --install argocd \\\n  --namespace ${TEAM_NAME}-ci-cd \\\n  -f /projects/tech-exercise/argocd-values.yaml \\\n  redhat-cop/gitops-operator\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n"
+                    "user_code": "helm upgrade --install argocd \\\n  --namespace ${TEAM_NAME}-ci-cd \\\n  -f /projects/tech-exercise/argocd-values.yaml \\\n  redhat-cop/gitops-operator\n"
                 }
             ],
             "tags": [
