@@ -98,7 +98,7 @@ cd tech-exercise/tests
 ./regression.sh
 ```
 
-[NOTE] You can also copy new files with the podman cp command:
+[NOTE] You can also copy new files with the `podman cp` command:
 ```bash
 podman cp ./tech-exercise/tests/regression.sh stack:/projects/tech-exercise/tests/regression.sh
 ```
