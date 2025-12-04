@@ -74,18 +74,18 @@ namespaces:
 EOF
 ```
 
-    Then, deploy ArgoCD using helm and this piece of yaml:
+Then, deploy ArgoCD using helm and this piece of yaml:
 
-    ```bash#test
-    helm upgrade --install argocd \
-      --namespace ${TEAM_NAME}-ci-cd \
-      -f /projects/tech-exercise/argocd-values.yaml \
-      redhat-cop/gitops-operator
-    ```
+```bash#test
+helm upgrade --install argocd \
+  --namespace ${TEAM_NAME}-ci-cd \
+  -f /projects/tech-exercise/argocd-values.yaml \
+  redhat-cop/gitops-operator
+```
 
-    <p class="tip">
-    ⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercises, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/tech-exercise/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
-    </p>
+<p class="tip">
+⛷️ <b>NOTE</b> ⛷️ - It's also worth noting we're allowing ArgoCD to run in a fairly permissive mode for these exercises, it can pull charts from anywhere. If you're interested in securing ArgoCD a bit more, checkout the <span style="color:blue;"><a href="/tech-exercise/#/1-the-manual-menace/666-here-be-dragons?id=here-be-dragons">here-be-dragons</a></span> exercise at the end of this lab.
+</p>
 
 4. If we check in OpenShift we should see the Operator pod coming to life and (eventually) the argocd-server, dex and other pods spin up. To do this, we are going to run a command with a 'watch' flag to continuously monitor pod creation.
 
