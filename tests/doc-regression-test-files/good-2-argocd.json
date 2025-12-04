@@ -29,12 +29,12 @@
             ]
         },
         {
-            "code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      initialRepositories: |\n        - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\n          insecure: true\nEOF\n",
+            "code": "cat << EOF > /projects/tech-exercise/argocd-values.yaml\nignoreHelmHooks: true\noperator: []\nnamespaces:\n  - ${TEAM_NAME}-ci-cd\nEOF\n",
             "interpreter": "bash",
             "runs": [
                 {
                     "retcode": 0,
-                    "user_code": "    cat << EOF > /projects/tech-exercise/argocd-values.yaml\n    ignoreHelmHooks: true\n    operator: []\n    namespaces:\n      - ${TEAM_NAME}-ci-cd\n    argocd_cr:\n      initialRepositories: |\n        - url: https://${GIT_SERVER}/${TEAM_NAME}/tech-exercise.git\n          type: git\n          passwordSecret:\n            key: password\n            name: git-auth\n          usernameSecret:\n            key: username\n            name: git-auth\n          insecure: true\nEOF\n"
+                    "user_code": "cat << EOF > /projects/tech-exercise/argocd-values.yaml\nignoreHelmHooks: true\noperator: []\nnamespaces:\n  - ${TEAM_NAME}-ci-cd\nEOF\n"
                 }
             ],
             "tags": [
@@ -49,6 +49,20 @@
                 {
                     "retcode": 0,
                     "user_code": "    helm upgrade --install argocd \\\n      --namespace ${TEAM_NAME}-ci-cd \\\n      -f /projects/tech-exercise/argocd-values.yaml \\\n      redhat-cop/gitops-operator\n"
+                }
+            ],
+            "tags": [
+                "bash",
+                "test"
+            ]
+        },
+        {
+            "code": "    i=0\n    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type==\"Ready\")].status}' 2>/dev/null | grep -c \"True\") -eq 1 ]\n    do\n      echo \"\ud83c\udf5e Waiting for argocd-server pod to be ready...\"\n      sleep 10\n      ((i=i+1))\n      if [ $i -gt 15 ]; then\n        echo \"Failed - argocd-server pod never ready\"\n        exit 1\n      fi\n    done\n",
+            "interpreter": "bash",
+            "runs": [
+                {
+                    "retcode": 0,
+                    "user_code": "    i=0\n    until [ $(oc -n ${TEAM_NAME}-ci-cd get pod -l app.kubernetes.io/name=argocd-server -o jsonpath='{.items[0].status.conditions[?(@.type==\"Ready\")].status}' 2>/dev/null | grep -c \"True\") -eq 1 ]\n    do\n      echo \"\ud83c\udf5e Waiting for argocd-server pod to be ready...\"\n      sleep 10\n      ((i=i+1))\n      if [ $i -gt 15 ]; then\n        echo \"Failed - argocd-server pod never ready\"\n        exit 1\n      fi\n    done\n"
                 }
             ],
             "tags": [
