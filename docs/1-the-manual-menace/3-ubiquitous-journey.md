@@ -69,6 +69,7 @@ All of these traits lead to one outcome - the ability to build and release quali
 
     ```bash
     source /usr/local/bin/user-functions.sh
+    gitlab_pat
     ```
 
     Echo the `GITLAB_PAT` environment variable.
