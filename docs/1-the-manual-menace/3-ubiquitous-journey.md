@@ -63,6 +63,14 @@ All of these traits lead to one outcome - the ability to build and release quali
     gitlab_pat
     ```
 
+    <p class="tip">
+    😱 <b>IMPORTANT</b> 😱 - In the event that the <strong>bash: gitlab_pat command not found</strong> error is encountered while attempting to run gitlab_pat, please proceed with the following command:
+    </p>
+
+    ```bash
+    source /usr/local/bin/user-functions.sh
+    ```
+
     Echo the `GITLAB_PAT` environment variable.
 
     ```bash
