@@ -70,6 +70,15 @@ Then, click on "Create blank project" button:
     gitlab_pat
     ```
 
+    <p class="tip">
+    😱 <b>IMPORTANT</b> 😱 - In the event that the <strong>bash: gitlab_pat command not found</strong> error is encountered while attempting to run gitlab_pat, please proceed with the following command:
+    </p>
+
+    ```bash
+    source /usr/local/bin/user-functions.sh
+    gitlab_pat
+    ```
+
     Echo the `GITLAB_PAT` environment variable.
 
     ```bash
